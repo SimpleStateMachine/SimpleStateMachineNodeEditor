@@ -1,0 +1,80 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:local="clr-namespace:StateMachineNodeEditorNerCore.Styles">
+    
+    
+    <!--#region     Node-->
+    
+    <!--#endregion  Node-->
+
+
+
+    <!--<SolidColorBrush x:Key="ColorMenuBackground" Color="#1b1b1b" />
+    <SolidColorBrush x:Key="ColorMenuBorder" Color="#FF2D2D30" />-->
+
+    <SolidColorBrush x:Key="ColorTabItemText" Color="White" />
+    <SolidColorBrush x:Key="ColorTabItemIsMouseOver" Color="#1c97ea"/>
+    <SolidColorBrush x:Key="ColorTabItemIsSelected"  Color="#007acc"/>
+
+
+
+
+    <SolidColorBrush x:Key="ColorMenuBackground" Color="#FF2D2D30" />
+    <SolidColorBrush x:Key="ColorMenuBorder" Color="#FF2D2D30" />
+
+    <SolidColorBrush x:Key="ColorMenuItemBackground" Color="#1b1b1b" />
+    <SolidColorBrush x:Key="ColorMenuItemBorder" Color="#FF2D2D30" />
+    <SolidColorBrush x:Key="ColorMenuItemSelect" Color="#FF2D2D30" />
+    <SolidColorBrush x:Key="ColorMenuItemBorderSelect" Color="#FF2D2D30" />
+    <SolidColorBrush x:Key="ColorMenuItemTextEnable" Color="#FF707070" />
+
+
+
+    <SolidColorBrush x:Key="ColorContextMenuBackground" Color="#1b1b1b" />
+    <SolidColorBrush x:Key="ColorContextMenuBorder" Color="#FF2D2D30" />
+
+    <SolidColorBrush x:Key="ColorContextMenuItemBackground" Color="#1b1b1b" />
+    <SolidColorBrush x:Key="ColorContextMenuItemBorder" Color="#FF2D2D30" />
+    <SolidColorBrush x:Key="ColorContextMenuItemSelect" Color="#FF2D2D30" />
+    <SolidColorBrush x:Key="ColorContextMenuItemBorderSelect" Color="Yellow" />
+    <SolidColorBrush x:Key="ColorContextMenuItemTextEnable" Color="#FF707070" />
+    <SolidColorBrush x:Key="ColorContextMenuText" Color="White" />
+    <SolidColorBrush x:Key="ColorContextMenuText2" Color="Green" />
+    <SolidColorBrush x:Key="ColorContextMenuText3" Color="Red" />
+    
+    
+    <!--#region    Window-->
+    
+    <!--#region    HeaderButton-->
+
+    <!--#region     ButtonClose-->
+    
+    <SolidColorBrush x:Key="ColorButtonClose"  Color="LightGray"/>
+    <SolidColorBrush x:Key="ColorButtonCloseIsPressed"  Color="#a3232d"/>
+    <SolidColorBrush x:Key="ColorButtonCloseIsMouseOver" Color="#e81123"/>
+    
+    <!--#endregion  ButtonClose-->
+
+    <!--#region ButtonMax-->
+    
+    <SolidColorBrush x:Key="ColorButtonMax"  Color="LightGray"/>
+    <SolidColorBrush x:Key="ColorButtonMaxIsPressed"  Color="#007acc"/>
+    <SolidColorBrush x:Key="ColorButtonMaxIsMouseOver" Color="#444549" />
+
+    <!--#endregion  ButtonMax-->
+
+    <!--#region     ButtonMin-->
+    
+    <SolidColorBrush x:Key="ColorButtonMin"  Color="LightGray"/>
+    <SolidColorBrush x:Key="ColorButtonMinIsPressed"  Color="#007acc"/>
+    <SolidColorBrush x:Key="ColorButtonMinIsMouseOver"  Color="#444549"/>
+    <!--#endregion  ButtonMin-->
+    
+    <!--#endregion  HeaderButtom-->
+     
+    <SolidColorBrush x:Key="ColorWindowBackground" Color="#FF212121"/>
+    <SolidColorBrush x:Key="ColorWindowBorder" Color="#FF797979"/>
+    <SolidColorBrush x:Key="ColorWindowHeader" Color="#FF2D2D30"/>
+    <!--#endregion  Window-->
+    
+</ResourceDictionary>

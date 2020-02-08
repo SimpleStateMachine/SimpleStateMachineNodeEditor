@@ -1,0 +1,16 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.WindowsDesktop">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <UseWPF>true</UseWPF>
+    <StartupObject>StateMachineNodeEditorNerCore.App</StartupObject>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Folder Include="Helper\" />
+    <Folder Include="ViewModel\" />
+    <Folder Include="View\" />
+  </ItemGroup>
+
+</Project>

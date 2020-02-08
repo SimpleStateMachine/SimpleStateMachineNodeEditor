@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29728.190
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StateMachineNodeEditorNerCore", "StateMachineNodeEditorNerCore\StateMachineNodeEditorNerCore.csproj", "{FD501A1B-8BF4-4FF7-9750-7B2F9D8C1FD6}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{FD501A1B-8BF4-4FF7-9750-7B2F9D8C1FD6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FD501A1B-8BF4-4FF7-9750-7B2F9D8C1FD6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FD501A1B-8BF4-4FF7-9750-7B2F9D8C1FD6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FD501A1B-8BF4-4FF7-9750-7B2F9D8C1FD6}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {EDBB0752-6D34-465F-901F-878040936ED6}
+	EndGlobalSection
+EndGlobal

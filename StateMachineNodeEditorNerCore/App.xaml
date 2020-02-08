@@ -1,0 +1,24 @@
+﻿<Application x:Class="StateMachineNodeEditorNerCore.App"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:local="clr-namespace:StateMachineNodeEditorNerCore"
+             StartupUri="MainWindow.xaml">
+    <Application.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="Styles/Colors.xaml"/>
+                <ResourceDictionary Source="Styles/CustomWindowTemplate.xaml"/>
+                <ResourceDictionary Source="Styles/HeaderButtonTemplate.xaml"/>
+                <ResourceDictionary Source="Styles/MenuTemplate.xaml"/>
+                <ResourceDictionary Source="Styles/MenuItemTemplate.xaml"/>
+                <ResourceDictionary Source="Styles/ContextMenuTemplate.xaml"/>
+                <ResourceDictionary Source="Styles/ContextMenuItemTemplate.xaml"/>
+                <ResourceDictionary Source="Styles/TabItemTemplate.xaml"/>
+                <ResourceDictionary Source="Styles/HeaderDockPanelTemplate.xaml"/>
+
+
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+            
+    </Application.Resources>
+</Application>

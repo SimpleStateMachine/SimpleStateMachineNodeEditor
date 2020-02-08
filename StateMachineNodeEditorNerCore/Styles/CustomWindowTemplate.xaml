@@ -1,0 +1,62 @@
+﻿<ResourceDictionary 
+     x:Class="StateMachineNodeEditorNerCore.Styles.CustomWindowTemplate"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="clr-namespace:StateMachineNodeEditorNerCore.Styles">
+
+    <ControlTemplate x:Key="CustomWindowTemplate" TargetType="{x:Type Window}">
+        <Border BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Background="{TemplateBinding Background}">
+            <Grid >
+                <Border Padding="{TemplateBinding Padding}">
+                    <AdornerDecorator>
+                    <ContentPresenter/>
+                </AdornerDecorator>
+                </Border>
+             
+
+                <Line MouseDown="OnSizeNorth" Name="lnSizeNorth" Stroke="Transparent"  Cursor="SizeNS" X1="10" X2="{TemplateBinding ActualWidth}" Y1="1" Y2="1" StrokeThickness="5" />
+                <Line MouseDown="OnSizeSouth" Name="lnSizeSouth" Stroke="Transparent" VerticalAlignment="Bottom" Cursor="SizeNS" X1="1" X2="{TemplateBinding ActualWidth}" Y1="{TemplateBinding ActualHeight}" Y2="{TemplateBinding ActualHeight}" StrokeThickness="5" />
+                <Line MouseDown="OnSizeWest" Name="lnSizeWest" Stroke="Transparent" Cursor="SizeWE" X1="1" X2="1" Y1="1" Y2="{TemplateBinding ActualHeight}"  StrokeThickness="5" />
+                <Line MouseDown="OnSizeEast" Name="lnSizeEast" Stroke="Transparent" HorizontalAlignment="Right" Cursor="SizeWE" X1="{TemplateBinding ActualWidth}"  X2="{TemplateBinding ActualWidth}" Y1="1" Y2="{TemplateBinding ActualHeight}"  StrokeThickness="5" />
+
+                <Rectangle MouseDown="OnSizeNorthWest" Name="rectSizeNorthWest" Cursor="SizeNWSE" Fill="Transparent" Width="5" Height="5" VerticalAlignment="Top" HorizontalAlignment="Left" />
+                <Rectangle MouseDown="OnSizeNorthEast" Name="rectSizeNorthEast" Cursor="SizeNESW" Fill="Transparent" Width="5" Height="5" VerticalAlignment="Top" HorizontalAlignment="Right" />
+                <Rectangle MouseDown="OnSizeSouthWest" Name="rectSizeSouthWest" Cursor="SizeNESW" Fill="Transparent" Width="5" Height="5" VerticalAlignment="Bottom" HorizontalAlignment="Left" />
+                <!--<Rectangle MouseDown="OnSizeSouthEast" Name="rectSizeSouthEast" Cursor="SizeNWSE" Fill="Transparent" Width="5" Height="5" VerticalAlignment="Bottom" HorizontalAlignment="Right" />-->
+
+
+                <ResizeGrip x:Name="WindowResizeGrip" HorizontalAlignment="Right" IsTabStop="false" Visibility="Collapsed" VerticalAlignment="Bottom"/>
+            </Grid>
+        </Border>
+        <ControlTemplate.Triggers>
+            <MultiTrigger>
+                <MultiTrigger.Conditions>
+                    <Condition Property="ResizeMode" Value="CanResizeWithGrip"/>
+                    <Condition Property="WindowState" Value="Normal"/>
+                </MultiTrigger.Conditions>
+                <Setter Property="Visibility" TargetName="WindowResizeGrip" Value="Visible"/>
+            </MultiTrigger>
+        </ControlTemplate.Triggers>
+    </ControlTemplate>
+    <Style x:Key="CustomWindowStyle" TargetType="{x:Type Window}">
+        <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.WindowTextBrushKey}}"/>
+        <Setter Property="Background" Value="{DynamicResource {x:Static SystemColors.WindowBrushKey}}"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type Window}">
+                    <Border BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Background="{TemplateBinding Background}">
+                        <AdornerDecorator>
+                            <ContentPresenter/>
+                        </AdornerDecorator>
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+        <Style.Triggers>
+            <Trigger Property="ResizeMode" Value="CanResizeWithGrip">
+                <Setter Property="Template" Value="{StaticResource CustomWindowTemplate}"/>
+            </Trigger>
+        </Style.Triggers>
+    </Style>
+
+</ResourceDictionary>
