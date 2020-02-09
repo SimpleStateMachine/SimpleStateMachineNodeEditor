@@ -16,23 +16,21 @@
         </Grid.RowDefinitions>
         <DockPanel x:Name="Header" Grid.Row="0" Background="{StaticResource ColorWindowHeader}" LastChildFill="False">
             <!--Ещё настроить цвет при наведении (Background и Foreground) и  Foreground for NotEnable-->
-            <Menu Background="#1b1b1c" Foreground="White" BorderBrush="#333337" Template="{DynamicResource MenuTemplate}" BorderThickness="1" HorizontalAlignment="Left" VerticalAlignment="Center">
+            <Menu Background="#1b1b1c" OpacityMask="#3e3e40"  Foreground="White" BorderBrush="#333337" Template="{DynamicResource MenuTemplate}" BorderThickness="1" HorizontalAlignment="Left" VerticalAlignment="Center">
                 <MenuItem Header="File" Style="{DynamicResource MenuItemStyle}">
-                    <MenuItem Header="New"   Style="{DynamicResource MenuItemStyle}">
-                        <MenuItem Header="Edit"  Style="{DynamicResource MenuItemStyle}">
-                            <MenuItem Header="Undo"  Style="{DynamicResource MenuItemStyle}"/>
-                            <MenuItem Header="Redo"  Style="{DynamicResource MenuItemStyle}"/>
-                            <MenuItem Header="Cut"  Style="{DynamicResource MenuItemStyle}"/>
-                            <MenuItem Header="Copy"  Style="{DynamicResource MenuItemStyle}"/>
-                            <MenuItem Header="Paste" Style="{DynamicResource MenuItemStyle}"/>
-                        </MenuItem>
-                    </MenuItem>
                     <MenuItem Header="Open"  Style="{DynamicResource MenuItemStyle}"/>
                     <MenuItem Header="Save"  Style="{DynamicResource MenuItemStyle}"/>
                     <MenuItem Header="SaveAs..." Style="{DynamicResource MenuItemStyle}"/>
                     <MenuItem Header="Exit"  Style="{DynamicResource MenuItemStyle}"/>
                 </MenuItem>
-             
+                <MenuItem Header="Edit"  Style="{DynamicResource MenuItemStyle}">
+                        <MenuItem Header="Undo"  Style="{DynamicResource MenuItemStyle}"/>
+                        <MenuItem Header="Redo"  Style="{DynamicResource MenuItemStyle}"/>
+                        <MenuItem Header="Cut"  Style="{DynamicResource MenuItemStyle}"/>
+                        <MenuItem Header="Copy"  Style="{DynamicResource MenuItemStyle}"/>
+                    <MenuItem Header="Paste" Style="{DynamicResource MenuItemStyle}"/>
+                </MenuItem>
+
             </Menu>
 
 
