@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -7,7 +9,10 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
 using System.Windows.Documents;
+
+
 using System.Windows.Input;
+using System.Windows.Markup;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
@@ -24,10 +29,20 @@ namespace StateMachineNodeEditorNerCore
         {
 
             InitializeComponent();
+
+
+
             Header.PreviewMouseLeftButtonDown += HeaderClick;
             ButtonClose.Click += ButtonCloseClick;
             ButtonMin.Click += ButtonMinClick;
             ButtonMax.Click += ButtonMaxClick;
+
+
+            //var str = new StringBuilder();
+            //using (var writer = new StringWriter(str))
+            //    XamlWriter.Save(MI1.Template, writer);
+            //Debug.Write(str);
+
         }
         void StateNormalMaximaze()
         {

@@ -15,7 +15,6 @@
             <RowDefinition Height="auto"></RowDefinition>
         </Grid.RowDefinitions>
         <DockPanel x:Name="Header" Grid.Row="0" Background="{StaticResource ColorWindowHeader}" LastChildFill="False">
-            <!--Ещё настроить цвет при наведении (Background и Foreground) и  Foreground for NotEnable-->
             <Menu Background="#1b1b1c" OpacityMask="#3e3e40"  Foreground="White" BorderBrush="#333337" Template="{DynamicResource MenuTemplate}" BorderThickness="1" HorizontalAlignment="Left" VerticalAlignment="Center">
                 <MenuItem Header="File" Style="{DynamicResource MenuItemStyle}">
                     <MenuItem Header="Open"  Style="{DynamicResource MenuItemStyle}"/>
@@ -24,21 +23,19 @@
                     <MenuItem Header="Exit"  Style="{DynamicResource MenuItemStyle}"/>
                 </MenuItem>
                 <MenuItem Header="Edit"  Style="{DynamicResource MenuItemStyle}">
-                        <MenuItem Header="Undo"  Style="{DynamicResource MenuItemStyle}"/>
-                        <MenuItem Header="Redo"  Style="{DynamicResource MenuItemStyle}"/>
-                        <MenuItem Header="Cut"  Style="{DynamicResource MenuItemStyle}"/>
-                        <MenuItem Header="Copy"  Style="{DynamicResource MenuItemStyle}"/>
+                    <MenuItem Header="Undo"  Style="{DynamicResource MenuItemStyle}"/>
+                    <MenuItem Header="Redo"  Style="{DynamicResource MenuItemStyle}"/>
+                    <MenuItem Header="Cut"  Style="{DynamicResource MenuItemStyle}"/>
+                    <MenuItem Header="Copy"  Style="{DynamicResource MenuItemStyle}"/>
                     <MenuItem Header="Paste" Style="{DynamicResource MenuItemStyle}"/>
                 </MenuItem>
-
             </Menu>
 
-
-
+           
 
             <!--BorderBrush - it's color on IsMouseOver, Foreground - it's color on IsPressed-->
             <Button DockPanel.Dock="Right" x:Name="ButtonClose" Style="{DynamicResource HeaderButtonTemplate}" Background="{StaticResource ColorWindowHeader}" BorderBrush="{DynamicResource ColorButtonCloseIsMouseOver}" Foreground="{DynamicResource ColorButtonCloseIsPressed}"  Padding="7" Grid.IsSharedSizeScope="True" Margin="0,0,-7,0">
-                    <Path x:Name="ButtonClosePath"
+                <Path x:Name="ButtonClosePath"
                       Stroke="{DynamicResource ColorButtonClose}" 
                       StrokeThickness="1.1" 
                       Stretch="None" 
@@ -54,13 +51,23 @@
                     </Path>
                 </Button>
                 <Button DockPanel.Dock="Right" x:Name="ButtonMin" Style="{DynamicResource HeaderButtonTemplate}" Background="{StaticResource ColorWindowHeader}" BorderBrush="{DynamicResource ColorButtonMinIsMouseOver}" Foreground="{DynamicResource ColorButtonMinIsPressed}" >
-                    <Path x:Name="ButtonMinPath"
+                <Button.ContextMenu>
+                    <ContextMenu x:Name="Cxm" Template="{DynamicResource ContextMenuTemplate}">
+                        <MenuItem Header="1"  x:Name="MI1" Template="{DynamicResource ContextMenuItemTemplate}">
+                            <MenuItem Header="1.1"/>
+                            <MenuItem Header="1.2"  />
+                        </MenuItem>
+                        <MenuItem Header="2"  />
+                    </ContextMenu>
+                </Button.ContextMenu>
+                <Path x:Name="ButtonMinPath"
                       Stroke="{DynamicResource ColorButtonMin}" 
                       StrokeThickness="1.2" 
                       Stretch="None" 
                       Data="M0,0 H11">
                     </Path>
-                </Button>
+
+            </Button>
                 <Button DockPanel.Dock="Right" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="{x:Null}" />
             </DockPanel>
             <ToolBarTray Grid.Row="1" Visibility="Hidden">
