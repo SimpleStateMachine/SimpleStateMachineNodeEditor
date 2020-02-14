@@ -52,12 +52,12 @@
                 </Button>
                 <Button DockPanel.Dock="Right" x:Name="ButtonMin" Style="{DynamicResource HeaderButtonTemplate}" Background="{StaticResource ColorWindowHeader}" BorderBrush="{DynamicResource ColorButtonMinIsMouseOver}" Foreground="{DynamicResource ColorButtonMinIsPressed}" >
                 <Button.ContextMenu>
-                    <ContextMenu x:Name="Cxm" Template="{DynamicResource ContextMenuTemplate}">
-                        <MenuItem Header="1"  x:Name="MI1" Template="{DynamicResource ContextMenuItemTemplate}">
-                            <MenuItem Header="1.1"/>
-                            <MenuItem Header="1.2"  />
+                    <ContextMenu x:Name="Cxm"  Background="#1b1b1c" Template="{DynamicResource ContextMenuTemplate}" OpacityMask="#3e3e40"  Foreground="White" BorderBrush="#333337" BorderThickness="1" HorizontalAlignment="Left" VerticalAlignment="Center">
+                        <MenuItem Header="1"  x:Name="MI1" Style="{DynamicResource ContextMenuItemStyle}">
+                            <MenuItem Header="1.1" Style="{DynamicResource ContextMenuItemStyle}"/>
+                            <MenuItem Header="1.2"  Style="{DynamicResource ContextMenuItemStyle}"/>
                         </MenuItem>
-                        <MenuItem Header="2"  />
+                        <MenuItem Header="2" Style="{DynamicResource ContextMenuItemStyle}" />
                     </ContextMenu>
                 </Button.ContextMenu>
                 <Path x:Name="ButtonMinPath"

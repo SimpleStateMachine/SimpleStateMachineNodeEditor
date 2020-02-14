@@ -71,6 +71,55 @@
                 </Trigger.Value>
             </Trigger>
         </ControlTemplate.Triggers>
-    </ControlTemplate> 
-
+    </ControlTemplate>
+    
+    <!--<ControlTemplate x:Key="ContextMenuTemplate" TargetType="{x:Type ContextMenu}">
+        <mwt:SystemDropShadowChrome  Name="Shdw" SnapsToDevicePixels="True">
+            <Border  Name="ContextMenuBorder" >
+                <ScrollViewer Style="{DynamicResource {ComponentResourceKey TypeInTargetAssembly=FrameworkElement, ResourceId=MenuScrollViewer}}" Name="ContextMenuScrollViewer" Margin="1,0,1,0" Grid.ColumnSpan="2">
+                    <Grid RenderOptions.ClearTypeHint="Enabled">
+                        <Canvas Width="0" Height="0" HorizontalAlignment="Left" VerticalAlignment="Top">
+                            <Rectangle Fill="{x:Null}" Name="OpaqueRect" Width="Auto" Height="Auto" />
+                        </Canvas>
+                        <Rectangle RadiusX="2" RadiusY="2"  Width="28" Margin="1,2,1,2" HorizontalAlignment="Left" />
+                        <Rectangle  Width="1" Margin="29,2,0,2" HorizontalAlignment="Left" />
+                        <Rectangle Width="1" Margin="30,2,0,2" HorizontalAlignment="Left" />
+                        <ItemsPresenter Name="ItemsPresenter"  KeyboardNavigation.DirectionalNavigation="Cycle" />
+                    </Grid>
+                </ScrollViewer>
+            </Border>
+        </mwt:SystemDropShadowChrome>
+        <ControlTemplate.Triggers>
+            <Trigger Property="ContextMenuService.HasDropShadow">
+                <Setter Property="FrameworkElement.Margin" TargetName="Shdw">
+                    <Setter.Value>
+                        <Thickness>0,0,5,5</Thickness>
+                    </Setter.Value>
+                </Setter>
+                --><!--<Setter Property="mwt:SystemDropShadowChrome.Color" TargetName="Shdw">
+                    <Setter.Value>
+                        <Color>#71000000</Color>
+                    </Setter.Value>
+                </Setter>--><!--
+                <Trigger.Value>
+                    <s1:Boolean>True</s1:Boolean>
+                </Trigger.Value>
+            </Trigger>
+            <Trigger Property="ScrollViewer.CanContentScroll" SourceName="ContextMenuScrollViewer">
+                <Setter Property="Canvas.Top" TargetName="OpaqueRect">
+                    <Setter.Value>
+                        <Binding Path="VerticalOffset" ElementName="ContextMenuScrollViewer" />
+                    </Setter.Value>
+                </Setter>
+                <Setter Property="Canvas.Left" TargetName="OpaqueRect">
+                    <Setter.Value>
+                        <Binding Path="HorizontalOffset" ElementName="ContextMenuScrollViewer" />
+                    </Setter.Value>
+                </Setter>
+                <Trigger.Value>
+                    <s1:Boolean>False</s1:Boolean>
+                </Trigger.Value>
+            </Trigger>
+        </ControlTemplate.Triggers>
+    </ControlTemplate>-->
 </ResourceDictionary>
