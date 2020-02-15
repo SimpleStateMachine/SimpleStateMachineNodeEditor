@@ -31,8 +31,6 @@
                 </MenuItem>
             </Menu>
 
-           
-
             <!--BorderBrush - it's color on IsMouseOver, Foreground - it's color on IsPressed-->
             <Button DockPanel.Dock="Right" x:Name="ButtonClose" Style="{DynamicResource HeaderButtonTemplate}" Background="{StaticResource ColorWindowHeader}" BorderBrush="{DynamicResource ColorButtonCloseIsMouseOver}" Foreground="{DynamicResource ColorButtonCloseIsPressed}"  Padding="7" Grid.IsSharedSizeScope="True" Margin="0,0,-7,0">
                 <Path x:Name="ButtonClosePath"
@@ -51,15 +49,7 @@
                     </Path>
                 </Button>
                 <Button DockPanel.Dock="Right" x:Name="ButtonMin" Style="{DynamicResource HeaderButtonTemplate}" Background="{StaticResource ColorWindowHeader}" BorderBrush="{DynamicResource ColorButtonMinIsMouseOver}" Foreground="{DynamicResource ColorButtonMinIsPressed}" >
-                <Button.ContextMenu>
-                    <ContextMenu x:Name="Cxm"  Background="#1b1b1c" Template="{DynamicResource ContextMenuTemplate}" OpacityMask="#3e3e40"  Foreground="White" BorderBrush="#333337" BorderThickness="1" HorizontalAlignment="Left" VerticalAlignment="Center">
-                        <MenuItem Header="1"  x:Name="MI1" Style="{DynamicResource ContextMenuItemStyle}">
-                            <MenuItem Header="1.1" Style="{DynamicResource ContextMenuItemStyle}"/>
-                            <MenuItem Header="1.2"  Style="{DynamicResource ContextMenuItemStyle}"/>
-                        </MenuItem>
-                        <MenuItem Header="2" Style="{DynamicResource ContextMenuItemStyle}" />
-                    </ContextMenu>
-                </Button.ContextMenu>
+
                 <Path x:Name="ButtonMinPath"
                       Stroke="{DynamicResource ColorButtonMin}" 
                       StrokeThickness="1.2" 
@@ -79,5 +69,18 @@
                 <TabItem  Header="Node editor"  Style="{DynamicResource TabItemTemplate}" Background="{DynamicResource ColorWindowHeader}" Foreground="{DynamicResource ColorTabItemText}"  BorderBrush="{DynamicResource ColorTabItemIsMouseOver}" OpacityMask="{DynamicResource ColorTabItemIsSelected}"/>
                 <TabItem Header="Transitions table"  Style="{DynamicResource TabItemTemplate}" Background="{DynamicResource ColorWindowHeader}" Foreground="{DynamicResource ColorTabItemText}" BorderBrush="{DynamicResource ColorTabItemIsMouseOver}"   OpacityMask="{DynamicResource ColorTabItemIsSelected}"/>
             </TabControl>
+        
         </Grid>
+    <!--<Window.ContextMenu>
+        <ContextMenu x:Name="Cxm"  Background="#1b1b1c" OpacityMask="#3e3e40"  Foreground="White" BorderBrush="#333337" BorderThickness="1" Template="{DynamicResource ContextMenuTemplate}" >
+            <MenuItem Header="1" Style="{DynamicResource ContextMenuItemStyle}">
+                <MenuItem Header="1.1" Style="{DynamicResource ContextMenuItemStyle}">
+                    <MenuItem Header="1.1.1" Style="{DynamicResource ContextMenuItemStyle}"/>
+                    <MenuItem Header="1.1.2" Style="{DynamicResource ContextMenuItemStyle}"/>
+                </MenuItem>
+                <MenuItem Header="1.2" Style="{DynamicResource ContextMenuItemStyle}"/>
+            </MenuItem>
+            <MenuItem Header="2" Style="{DynamicResource ContextMenuItemStyle}"/>
+        </ContextMenu>
+    </Window.ContextMenu>-->
 </Window>

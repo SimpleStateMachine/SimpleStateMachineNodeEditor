@@ -3,9 +3,8 @@
                     xmlns:local="clr-namespace:StateMachineNodeEditorNerCore.Styles">
 
     <ControlTemplate x:Key="MenuTemplate" TargetType="{x:Type Menu}">
-        <!--<Border Background="{TemplateBinding Background}" BorderThickness="{TemplateBinding BorderThickness}" BorderBrush="{TemplateBinding BorderBrush}" Padding="{TemplateBinding Padding}" SnapsToDevicePixels="true">-->
-        <Border  Padding="{TemplateBinding Padding}" SnapsToDevicePixels="true">
-            <ItemsPresenter SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"/>
+        <Border SnapsToDevicePixels="true">
+            <ItemsPresenter SnapsToDevicePixels="true"/>
         </Border>
     </ControlTemplate>
     
