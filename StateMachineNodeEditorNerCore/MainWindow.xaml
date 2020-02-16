@@ -5,6 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:StateMachineNodeEditorNerCore"
         xmlns:styles="clr-namespace:StateMachineNodeEditorNerCore.Styles"
+    xmlns:view="clr-namespace:StateMachineNodeEditorNerCore.View"
     x:Class="StateMachineNodeEditorNerCore.MainWindow"
         mc:Ignorable="d"
         Title="MainWindow"  d:DesignWidth="808.96" Height="738.592" BorderThickness="1" Padding="7,0,7,7" ResizeMode="CanResizeWithGrip" BorderBrush="{DynamicResource ColorWindowBorder}" Background="{DynamicResource ColorWindowHeader}" Foreground="{x:Null}" WindowStyle="None" AllowsTransparency="True" Style="{DynamicResource CustomWindowStyle}">
@@ -66,7 +67,9 @@
 
             <!--BorderBrush - it's color on IsMouseOver, OpacityMask - it's color on IsPressed-->
             <TabControl  Grid.Row="2" Background="{x:Null}" BorderBrush="{x:Null}" TabStripPlacement="Top">
-                <TabItem  Header="Node editor"  Style="{DynamicResource TabItemTemplate}" Background="{DynamicResource ColorWindowHeader}" Foreground="{DynamicResource ColorTabItemText}"  BorderBrush="{DynamicResource ColorTabItemIsMouseOver}" OpacityMask="{DynamicResource ColorTabItemIsSelected}"/>
+                <TabItem  Header="Node editor"  Style="{DynamicResource TabItemTemplate}" Background="{DynamicResource ColorWindowHeader}" Foreground="{DynamicResource ColorTabItemText}"  BorderBrush="{DynamicResource ColorTabItemIsMouseOver}" OpacityMask="{DynamicResource ColorTabItemIsSelected}">
+                <!--<view:ViewLeftConnector/>-->
+            </TabItem>
                 <TabItem Header="Transitions table"  Style="{DynamicResource TabItemTemplate}" Background="{DynamicResource ColorWindowHeader}" Foreground="{DynamicResource ColorTabItemText}" BorderBrush="{DynamicResource ColorTabItemIsMouseOver}"   OpacityMask="{DynamicResource ColorTabItemIsSelected}"/>
             </TabControl>
         

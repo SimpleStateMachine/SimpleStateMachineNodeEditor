@@ -1,8 +1,7 @@
 ﻿<ResourceDictionary 
      x:Class="StateMachineNodeEditorNerCore.Styles.CustomWindowTemplate"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:local="clr-namespace:StateMachineNodeEditorNerCore.Styles">
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
 
     <ControlTemplate x:Key="CustomWindowTemplate" TargetType="{x:Type Window}">
         <Border BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Background="{TemplateBinding Background}">

@@ -1,15 +1,13 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-                    xmlns:local="clr-namespace:StateMachineNodeEditorNerCore.Styles"
-                     xmlns:Themes1="clr-namespace:Microsoft.Windows.Themes;assembly=PresentationFramework.Aero">
-    
-    <Style x:Key="MenuItemStyle" TargetType="{x:Type MenuItem}">
-        <Setter Property="Foreground" Value="{Binding Path=Foreground, RelativeSource={RelativeSource AncestorType={x:Type Menu}}}" />
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+    <Style x:Key="ContextMenuItemStyle" TargetType="{x:Type MenuItem}">
+        <Setter Property="Foreground" Value="{Binding Path=Foreground, RelativeSource={RelativeSource AncestorType={x:Type ContextMenu}}}" />
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate  TargetType="{x:Type MenuItem}">
-                    <Border x:Name="Border" Background="{TemplateBinding Background}"  BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}">
-                        <Grid>                          
+                    <Border x:Name="Border" Background="{TemplateBinding Background}" Margin="{TemplateBinding Margin}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}">
+                        <Grid>
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition x:Name="Col0" MinWidth="17" Width="Auto" SharedSizeGroup="MenuItemIconColumnGroup"/>
                                 <ColumnDefinition Width="Auto" SharedSizeGroup="MenuTextColumnGroup"/>
@@ -20,25 +18,25 @@
                             <!-- Icon -->
                             <ContentPresenter Grid.Column="0" x:Name="Icon" Margin="4,0,6,0"  VerticalAlignment="Center" ContentSource="Icon" Visibility="Visible"/>
 
-                             <!--Сheckmark --> 
+                            <!--Сheckmark -->
                             <Grid Grid.Column="0" Visibility="Hidden" Margin="4,0,6,0" x:Name="GlyphPanel" VerticalAlignment="Center">
                                 <Path x:Name="GlyphPanelpath" VerticalAlignment="Center" Fill="{TemplateBinding Foreground}" Data="M0,2 L0,4.8 L2.5,7.4 L7.1,2.8 L7.1,0 L2.5,4.6 z" FlowDirection="LeftToRight"/>
                             </Grid>
-                                                     
-                             <!-- Text -->
+
+                            <!-- Text -->
                             <ContentPresenter Grid.Column="1" x:Name="Header" Margin="{TemplateBinding Padding}"  RecognizesAccessKey="True" ContentSource="Header" Visibility="Visible"/>
 
-                             <!-- InputGestureText -->
+                            <!-- InputGestureText -->
                             <ContentPresenter Grid.Column="2" x:Name="InputGestureText" Margin="8,1,8,1"  ContentSource="InputGestureText" VerticalAlignment="Center" Visibility="Visible"/>
 
                             <!-- Arrow drawn for next level menu -->
                             <Grid Grid.Column="3" Margin="4,0,6,0" x:Name="ArrowPanel" VerticalAlignment="Center">
                                 <Path x:Name="ArrowPanelPath" HorizontalAlignment="Right" VerticalAlignment="Center" Fill="{TemplateBinding Foreground}" Data="M0,0 L0,8 L4,4 z"/>
                             </Grid>
-                        
+
                             <!-- Next level menu -->
                             <Popup  AllowsTransparency="True" IsOpen="{Binding Path=IsSubmenuOpen, RelativeSource={RelativeSource TemplatedParent}}" Placement="Right" x:Name="SubMenuPopup" Focusable="false" PopupAnimation="{DynamicResource {x:Static SystemParameters.MenuPopupAnimationKey}}">
-                                <Border x:Name="SubMenuBorder" Margin="0,0,5,5" Background="{Binding Path=Background, RelativeSource={RelativeSource AncestorType={x:Type Menu}}}" BorderBrush="{Binding Path=BorderBrush, RelativeSource={RelativeSource AncestorType={x:Type Menu}}}" BorderThickness="{Binding Path=BorderThickness, RelativeSource={RelativeSource AncestorType={x:Type Menu}}}">
+                                <Border x:Name="SubMenuBorder" Margin="0,0,5,5" Background="{Binding Path=Background, RelativeSource={RelativeSource AncestorType={x:Type ContextMenu}}}" BorderBrush="{Binding Path=BorderBrush, RelativeSource={RelativeSource AncestorType={x:Type ContextMenu}}}" BorderThickness="{Binding Path=BorderThickness, RelativeSource={RelativeSource AncestorType={x:Type ContextMenu}}}">
                                     <Border.Effect>
                                         <DropShadowEffect BlurRadius="5" Opacity="0.4"/>
                                     </Border.Effect>
@@ -47,11 +45,18 @@
                                     </Grid>
                                 </Border>
                             </Popup>
-                          
+
                         </Grid>
                     </Border>
 
                     <ControlTemplate.Triggers>
+
+                        <!--<Trigger Property="Margin" Value="0">
+                            <Setter Property="BlurRadius" Value="0" TargetName="BorderDropShadowEffect"/>
+                            <Setter Property="Opacity" Value="0" TargetName="BorderDropShadowEffect"/>
+                            --><!--<Setter Property="Foreground" Value="Black"/>--><!--
+                        </Trigger>-->
+
 
                         <!-- Role = TopLevelHeader : this is the root menu item in a menu; the Popup expands down -->
                         <Trigger Property="Role" Value="TopLevelHeader">
@@ -83,7 +88,7 @@
                         <Trigger Property="IsSuspendingPopupAnimation" Value="true">
                             <Setter Property="PopupAnimation" Value="None" TargetName="SubMenuPopup"/>
                         </Trigger>
-                        
+
                         <Trigger Property="Icon" Value="{x:Null}">
                             <Setter Property="Visibility" Value="Collapsed" TargetName="Icon"/>
                         </Trigger>
@@ -92,7 +97,7 @@
                             <Setter Property="Visibility" Value="Collapsed" TargetName="InputGestureText"/>
                         </Trigger>
 
-                      <!-- The GlyphPanel contains the CheckMark -->
+                        <!-- The GlyphPanel contains the CheckMark -->
                         <Trigger Property="IsChecked" Value="true">
                             <Setter Property="Visibility" Value="Visible" TargetName="GlyphPanel"/>
                             <Setter Property="Visibility" Value="Collapsed" TargetName="Icon"/>
@@ -100,9 +105,10 @@
 
                         <!-- Using the system colors for the Menu Highlight and IsEnabled-->
                         <Trigger Property="IsHighlighted" Value="true">
-                            <Setter Property="Background" Value="{Binding Path=OpacityMask, RelativeSource={RelativeSource AncestorType={x:Type Menu}}}" TargetName="Border"/>
+                            <Setter Property="Background" Value="{Binding Path=OpacityMask, RelativeSource={RelativeSource AncestorType={x:Type ContextMenu}}}" TargetName="Border"/>
                             <!--<Setter Property="Foreground" Value="Black"/>-->
                         </Trigger>
+                        
 
                         <Trigger Property="IsEnabled" Value="false">
                             <Setter Property="Foreground" Value="LightGray"/>
@@ -112,4 +118,5 @@
             </Setter.Value>
         </Setter>
     </Style>
+
 </ResourceDictionary>

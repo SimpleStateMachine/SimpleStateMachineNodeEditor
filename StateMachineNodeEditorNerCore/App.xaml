@@ -7,14 +7,87 @@
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="Styles/Colors.xaml"/>
-                <ResourceDictionary Source="Styles/CustomWindowTemplate.xaml"/>
-                <ResourceDictionary Source="Styles/HeaderButtonTemplate.xaml"/>
-                <ResourceDictionary Source="Styles/MenuTemplate.xaml"/>
-                <ResourceDictionary Source="Styles/MenuItemTemplate.xaml"/>
-                <ResourceDictionary Source="Styles/ContextMenuTemplate.xaml"/>
-                <ResourceDictionary Source="Styles/ContextMenuItemTemplate.xaml"/>
-                <ResourceDictionary Source="Styles/TabItemTemplate.xaml"/>
-                <ResourceDictionary Source="Styles/HeaderDockPanelTemplate.xaml"/>
+                
+                <!--#region         Test-->
+                
+                <!--#endregion      Test-->
+
+
+                <!--#region         Selector-->
+                
+                <ResourceDictionary Source="Styles\SelectorStyle.xaml"/>
+
+                <!--#endregion      Selector-->
+
+                <!--#region         Node-->
+
+                    <!--#region         LeftConnector-->
+
+                        <!--#region         LeftConnectorTextBox-->
+
+                            <ResourceDictionary Source="Styles\Node\LeftConnector\LeftConnectorTextBox.xaml"/>
+
+                        <!--#endregion      LeftConnectorTextBox-->
+
+                        <!--#region         LeftConnectorEllipse-->
+
+                            <ResourceDictionary Source="Styles\Node\LeftConnector\LeftConnectorEllipseStyle.xaml"/>
+
+                        <!--#endregion      LeftConnectorEllipse-->
+
+                    <!--#endregion      LeftConnector-->
+
+                    <!--#region         RightConnector-->
+
+                        <!--#region         RightConnectorTextBox-->
+
+                            <ResourceDictionary Source="Styles\Node\RightConnector\RightConnectorTextBox.xaml"/>
+
+                        <!--#endregion      RightConnectorTextBox-->
+
+                        <!--#region         RightConnectorEllipse-->
+
+                            <ResourceDictionary Source="Styles\Node\RightConnector\RightConnectorEllipseStyle.xaml"/>
+
+                        <!--#endregion      RightConnectorEllipse-->
+
+                    <!--#endregion      RightConnector-->
+
+                <!--#endregion      Node-->
+
+
+
+                <!--#region      MainWindow-->
+                
+                <ResourceDictionary Source="Styles/MainWindow/CustomWindowTemplate.xaml"/>
+                
+                    <!--#region      Header-->
+                
+                    <ResourceDictionary Source="Styles/MainWindow/Header/HeaderButtonTemplate.xaml"/>
+                
+                    <!--#endregion   Header-->
+                
+                <!--#endregion   MainWindow-->
+
+                <!--#region         Menu-->
+
+                <ResourceDictionary Source="Styles/Menu/MenuTemplate.xaml"/>
+                <ResourceDictionary Source="Styles/Menu/MenuItemStyle.xaml"/>
+
+                <!--#endregion      Menu-->
+
+                <!--#region         ContextMenu-->
+
+                <ResourceDictionary Source="Styles/ContextMenu/ContextMenuTemplate.xaml"/>
+                <ResourceDictionary Source="Styles/ContextMenu/ContextMenuItemStyle.xaml"/>
+
+                <!--#endregion      ContextMenu-->
+
+                <!--#region         Tabs-->
+
+                <ResourceDictionary Source="Styles/Tabs/TabItemTemplate.xaml"/>
+
+                <!--#endregion      Tabs-->
 
 
             </ResourceDictionary.MergedDictionaries>
