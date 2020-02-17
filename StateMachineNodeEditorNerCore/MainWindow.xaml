@@ -39,51 +39,39 @@
                       StrokeThickness="1.1" 
                       Stretch="None" 
                       Data="M2,2 L13,13 M13,2 L2,13">
-                    </Path>
-                </Button>
-                <Button DockPanel.Dock="Right" x:Name="ButtonMax" Style="{DynamicResource HeaderButtonTemplate}" Background="{StaticResource ColorWindowHeader}" BorderBrush="{DynamicResource ColorButtonMaxIsMouseOver}" Foreground="{DynamicResource ColorButtonMaxIsPressed}">
-                    <Path x:Name="MaxButtonPath"
+                </Path>
+            </Button>
+            <Button DockPanel.Dock="Right" x:Name="ButtonMax" Style="{DynamicResource HeaderButtonTemplate}" Background="{StaticResource ColorWindowHeader}" BorderBrush="{DynamicResource ColorButtonMaxIsMouseOver}" Foreground="{DynamicResource ColorButtonMaxIsPressed}">
+                <Path x:Name="MaxButtonPath"
                       StrokeThickness="1"
                       Stroke="{DynamicResource ColorButtonMax}"
                       Stretch="None" 
                       Data="M0.5,0 V9.5 H13.5 V0 H0.5 V1 H13 V0 H0.5 V2 H13 " >
-                    </Path>
-                </Button>
-                <Button DockPanel.Dock="Right" x:Name="ButtonMin" Style="{DynamicResource HeaderButtonTemplate}" Background="{StaticResource ColorWindowHeader}" BorderBrush="{DynamicResource ColorButtonMinIsMouseOver}" Foreground="{DynamicResource ColorButtonMinIsPressed}" >
+                </Path>
+            </Button>
+            <Button DockPanel.Dock="Right" x:Name="ButtonMin" Style="{DynamicResource HeaderButtonTemplate}" Background="{StaticResource ColorWindowHeader}" BorderBrush="{DynamicResource ColorButtonMinIsMouseOver}" Foreground="{DynamicResource ColorButtonMinIsPressed}" >
 
                 <Path x:Name="ButtonMinPath"
                       Stroke="{DynamicResource ColorButtonMin}" 
                       StrokeThickness="1.2" 
                       Stretch="None" 
                       Data="M0,0 H11">
-                    </Path>
+                </Path>
 
             </Button>
-                <Button DockPanel.Dock="Right" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="{x:Null}" />
-            </DockPanel>
-            <ToolBarTray Grid.Row="1" Visibility="Hidden">
+            <Button DockPanel.Dock="Right" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="{x:Null}" />
+        </DockPanel>
+        <ToolBarTray Grid.Row="1" Visibility="Hidden">
 
-            </ToolBarTray>
+        </ToolBarTray>
 
-            <!--BorderBrush - it's color on IsMouseOver, OpacityMask - it's color on IsPressed-->
-            <TabControl  Grid.Row="2" Background="{x:Null}" BorderBrush="{x:Null}" TabStripPlacement="Top">
-                <TabItem  Header="Node editor"  Style="{DynamicResource TabItemTemplate}" Background="{DynamicResource ColorWindowHeader}" Foreground="{DynamicResource ColorTabItemText}"  BorderBrush="{DynamicResource ColorTabItemIsMouseOver}" OpacityMask="{DynamicResource ColorTabItemIsSelected}">
+        <!--BorderBrush - it's color on IsMouseOver, OpacityMask - it's color on IsPressed-->
+        <TabControl  Grid.Row="2" Background="{x:Null}" BorderBrush="{x:Null}" TabStripPlacement="Top">
+            <TabItem  Header="Node editor"  Style="{DynamicResource TabItemTemplate}" Background="{DynamicResource ColorWindowHeader}" Foreground="{DynamicResource ColorTabItemText}"  BorderBrush="{DynamicResource ColorTabItemIsMouseOver}" OpacityMask="{DynamicResource ColorTabItemIsSelected}">
                 <!--<view:ViewLeftConnector/>-->
             </TabItem>
-                <TabItem Header="Transitions table"  Style="{DynamicResource TabItemTemplate}" Background="{DynamicResource ColorWindowHeader}" Foreground="{DynamicResource ColorTabItemText}" BorderBrush="{DynamicResource ColorTabItemIsMouseOver}"   OpacityMask="{DynamicResource ColorTabItemIsSelected}"/>
-            </TabControl>
-        
-        </Grid>
-    <!--<Window.ContextMenu>
-        <ContextMenu x:Name="Cxm"  Background="#1b1b1c" OpacityMask="#3e3e40"  Foreground="White" BorderBrush="#333337" BorderThickness="1" Template="{DynamicResource ContextMenuTemplate}" >
-            <MenuItem Header="1" Style="{DynamicResource ContextMenuItemStyle}">
-                <MenuItem Header="1.1" Style="{DynamicResource ContextMenuItemStyle}">
-                    <MenuItem Header="1.1.1" Style="{DynamicResource ContextMenuItemStyle}"/>
-                    <MenuItem Header="1.1.2" Style="{DynamicResource ContextMenuItemStyle}"/>
-                </MenuItem>
-                <MenuItem Header="1.2" Style="{DynamicResource ContextMenuItemStyle}"/>
-            </MenuItem>
-            <MenuItem Header="2" Style="{DynamicResource ContextMenuItemStyle}"/>
-        </ContextMenu>
-    </Window.ContextMenu>-->
+            <TabItem Header="Transitions table"  Style="{DynamicResource TabItemTemplate}" Background="{DynamicResource ColorWindowHeader}" Foreground="{DynamicResource ColorTabItemText}" BorderBrush="{DynamicResource ColorTabItemIsMouseOver}"   OpacityMask="{DynamicResource ColorTabItemIsSelected}"/>
+        </TabControl>
+
+    </Grid>
 </Window>

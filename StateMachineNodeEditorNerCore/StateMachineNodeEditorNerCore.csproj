@@ -16,13 +16,14 @@
     <PackageReference Include="ReactiveUI.Events.WPF" Version="11.1.23" />
     <PackageReference Include="ReactiveUI.Fody" Version="11.1.23" />
     <PackageReference Include="ReactiveUI.Validation" Version="1.4.10" />
+    <PackageReference Include="ReactiveUI.WPF" Version="11.1.23" />
   </ItemGroup>
 
   <ItemGroup>
     <Page Update="Styles\Node\RightConnector\RightConnectorEllipseStyle.xaml">
       <SubType>Designer</SubType>
     </Page>
-    <Page Update="Styles\Node\RightConnector\RightConnectorTextBox.xaml">
+    <Page Update="Styles\Node\RightConnector\RightConnectorTextBoxStyle.xaml">
       <SubType>Designer</SubType>
     </Page>
   </ItemGroup>

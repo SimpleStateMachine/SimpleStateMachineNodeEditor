@@ -1,0 +1,31 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:local="clr-namespace:StateMachineNodeEditorNerCore.Styles.Node">
+    
+
+
+    <Storyboard x:Key="MouseEnterStoryboard">
+        <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="BorderBrush">
+            <DiscreteObjectKeyFrame KeyTime="0:0:0" Value="{DynamicResource ColorNodeBorderMouseEnterBorder}" />
+        </ObjectAnimationUsingKeyFrames>
+        <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Background">
+            <DiscreteObjectKeyFrame KeyTime="0:0:0" Value="{DynamicResource ColorNodeBorderMouseEnterBackground}" />
+        </ObjectAnimationUsingKeyFrames>
+    </Storyboard>
+
+    <Storyboard x:Key="MouseLeaveStoryboard">
+        <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="BorderBrush">
+            <DiscreteObjectKeyFrame KeyTime="0:0:0" Value="{DynamicResource ColorNodeBorderMouseLeaveBorder}" />
+        </ObjectAnimationUsingKeyFrames>
+        <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Background">
+            <DiscreteObjectKeyFrame KeyTime="0:0:0" Value="{DynamicResource ColorNodeBorderMouseLeaveBackground}" />
+        </ObjectAnimationUsingKeyFrames>
+    </Storyboard>
+    <Style x:Key="NodeBorder" TargetType="{x:Type Border}">
+        <Style.Setters>
+            <Setter Property="BorderBrush" Value="{DynamicResource ColorNodeBorderStaticBorder}"/>
+            <Setter Property="Background"  Value="{DynamicResource ColorNodeBorderStaticBackground}"/>
+            
+        </Style.Setters>
+    </Style>
+</ResourceDictionary>

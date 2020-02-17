@@ -13,6 +13,7 @@
                 <!--#endregion      Test-->
 
 
+
                 <!--#region         Selector-->
                 
                 <ResourceDictionary Source="Styles\SelectorStyle.xaml"/>
@@ -25,7 +26,7 @@
 
                         <!--#region         LeftConnectorTextBox-->
 
-                            <ResourceDictionary Source="Styles\Node\LeftConnector\LeftConnectorTextBox.xaml"/>
+                            <ResourceDictionary Source="Styles\Node\LeftConnector\LeftConnectorTextBoxStyle.xaml"/>
 
                         <!--#endregion      LeftConnectorTextBox-->
 
@@ -41,7 +42,7 @@
 
                         <!--#region         RightConnectorTextBox-->
 
-                            <ResourceDictionary Source="Styles\Node\RightConnector\RightConnectorTextBox.xaml"/>
+                            <ResourceDictionary Source="Styles\Node\RightConnector\RightConnectorTextBoxStyle.xaml"/>
 
                         <!--#endregion      RightConnectorTextBox-->
 
@@ -52,6 +53,11 @@
                         <!--#endregion      RightConnectorEllipse-->
 
                     <!--#endregion      RightConnector-->
+
+
+                    <ResourceDictionary Source="Styles\Node\NodeBorderStyle.xaml"/>
+                    <ResourceDictionary Source="Styles\Node\NodeButtonRollUpStyle.xaml"/>
+                    <ResourceDictionary Source="Styles\Node\NodeHeaderStyle.xaml"/>
 
                 <!--#endregion      Node-->
 

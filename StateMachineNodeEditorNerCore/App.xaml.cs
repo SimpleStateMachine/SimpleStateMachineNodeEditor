@@ -1,10 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Configuration;
-using System.Data;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.Reflection;
 using System.Windows;
+using ReactiveUI;
+using Splat;
+using StateMachineNodeEditorNerCore.Helpers;
+using StateMachineNodeEditorNerCore.Helpers.Converters;
 
 namespace StateMachineNodeEditorNerCore
 {
@@ -13,5 +12,11 @@ namespace StateMachineNodeEditorNerCore
     /// </summary>
     public partial class App : Application
     {
+        public App()
+        {
+            Locator.CurrentMutable.RegisterViewsForViewModels(Assembly.GetCallingAssembly());
+            Locator.CurrentMutable.RegisterConstant(new ConverterBoolAndVisibility(), typeof(IBindingTypeConverter));
+        }
+
     }
 }

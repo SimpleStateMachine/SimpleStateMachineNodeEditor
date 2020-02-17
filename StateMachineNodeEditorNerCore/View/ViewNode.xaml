@@ -1,0 +1,59 @@
+﻿<UserControl x:Class="StateMachineNodeEditorNerCore.View.ViewNode"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:StateMachineNodeEditorNerCore.View"
+             mc:Ignorable="d" Focusable="True" AllowDrop="True" Visibility="Visible"> 
+    
+    <Border x:Name="Border" CornerRadius="5,5,5,5" BorderThickness="1,1,1,1"   HorizontalAlignment="Left" VerticalAlignment="Top" MinWidth="80" Background="{DynamicResource ColorNodeBody}" >
+        <StackPanel Margin="0,0,0,5">
+            <TextBox Name="Header" VerticalAlignment="Top" VerticalContentAlignment="Center" Style="{DynamicResource NodeHeaderStyle}" BorderBrush="{x:Null}"  HorizontalContentAlignment="Center" BorderThickness="0" Padding="10,2" Foreground="{DynamicResource ColorNodeText}" />
+            <Grid x:Name="MainPanel"  MinWidth="80" MinHeight="40" >
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition />
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition />
+                    <RowDefinition />
+                </Grid.RowDefinitions>
+
+
+                <local:ViewLeftConnector x:Name="Input" Grid.Row="0" Grid.Column="0" />
+                <local:ViewRightConnector x:Name="Output" Grid.Row="1" Grid.Column="1"/>
+
+                <Button Name ="ButtonCollapse" Margin="0,20,0,0" Grid.Row="2" Grid.Column="0" Content="Button" VerticalAlignment="Bottom"  Padding="0" Style="{DynamicResource NodeButtonRollUpStyle}" HorizontalAlignment="Left"  FlowDirection="RightToLeft" VerticalContentAlignment="Center">
+                    <Button.RenderTransform>
+                        <TransformGroup>
+                            <RotateTransform x:Name="Rotate" Angle="0" CenterX="9" CenterY="3.2"/>
+                        </TransformGroup>
+                    </Button.RenderTransform>
+                </Button>
+
+            </Grid>
+            <ItemsControl x:Name="Transitions">
+                <ItemsControl.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <StackPanel Name="Transitions" Margin="0,5,0,0" UseLayoutRounding="False" ScrollViewer.CanContentScroll="True"  AllowDrop="True"/>
+                    </ItemsPanelTemplate>
+                </ItemsControl.ItemsPanel>
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+                        <local:ViewRightConnector ViewModel="{Binding}"/>
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>
+        </StackPanel>
+    </Border>
+    <UserControl.RenderTransform>
+        <TransformGroup x:Name="TransformGroup">
+            <ScaleTransform x:Name="Scale" ScaleX="1" ScaleY="1" />
+            <SkewTransform/>
+            <RotateTransform Angle="0" />
+            <TranslateTransform x:Name="Translate"/>
+        </TransformGroup>
+    </UserControl.RenderTransform>
+    <UserControl.InputBindings>
+        <MouseBinding x:Name="BindingSelect" Gesture="Ctrl+LeftClick" />
+    </UserControl.InputBindings>
+</UserControl>

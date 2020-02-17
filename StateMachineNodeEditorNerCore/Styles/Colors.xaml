@@ -2,6 +2,10 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
     
     
+    <!--#region -->
+    <!--#endregion-->
+    <SolidColorBrush x:Key="ColorConnector" Color="White"/>
+    
     <!--#region     Node-->
     
         <!--#region     LeftConnector-->
@@ -74,16 +78,61 @@
 
         <!--#endregion  RightConnector-->
 
+        <!--#region         Border-->
+    
+        <SolidColorBrush x:Key="ColorNodeBorderStaticBackground" Color="#FF2D2D2D"/>
+        <SolidColorBrush x:Key="ColorNodeBorderStaticBorder" Color="DarkGray"/>
+        <SolidColorBrush x:Key="ColorNodeBorderMouseOverBackground" Color="#FF2D2D2D"/>
+        <SolidColorBrush x:Key="ColorNodeBorderMouseOverBorder" Color="DarkGray"/>
+        <SolidColorBrush x:Key="ColorNodeBorderMouseEnterBackground" Color="#FF2D2D2D"/>
+        <SolidColorBrush x:Key="ColorNodeBorderMouseEnterBorder" Color="Red"/>
+        <SolidColorBrush x:Key="ColorNodeBorderMouseLeaveBackground" Color="#FF2D2D2D"/>
+        <SolidColorBrush x:Key="ColorNodeBorderMouseLeaveBorder" Color="DarkGray"/>
+    
+        <!--#endregion      Border-->
+    
+        <!--#region         ButtonRollUp-->
+    
+        <SolidColorBrush x:Key="ColorNodeButtonRollUpStaticBackground" Color="Black"/>
+        <SolidColorBrush x:Key="ColorNodeButtonRollStaticBorder" Color="Black"/>
+        <SolidColorBrush x:Key="ColorNodeButtonRollUpMouseOverBackground" Color="Black"/>
+        <SolidColorBrush x:Key="ColorNodeButtonRollUpMouseOverBorder" Color="White"/>
+        <SolidColorBrush x:Key="ColorNodeButtonRollUpPressedBackground" Color="Black"/>
+        <SolidColorBrush x:Key="ColorNodeButtonRollUpPressedBorder" Color="Black"/>
+        <SolidColorBrush x:Key="ColorNodeButtonRollUpDisabledBackground" Color="Black"/>
+        <SolidColorBrush x:Key="ColorNodeButtonRollUpDisabledBorder" Color="Black"/>
+    
+        <!--#endregion      ButtonRollUp-->
+
+        <!--#region         Header-->
+
+        <SolidColorBrush x:Key="ColorNodeHeaderStaticBackground" Color="#FF123D6A"/>
+        <SolidColorBrush x:Key="ColorNodeHeaderStaticBorder" Color="#FFABAdB3"/>
+        <SolidColorBrush x:Key="ColorNodeHeaderMouseOverBorder" Color="#FF7EB4EA"/>
+        <SolidColorBrush x:Key="ColorNodeHeaderFocusBorder" Color="#FF569DE5"/>
+
+        <!--#endregion      Header-->
+
+        <SolidColorBrush x:Key="ColorNodeBody" Color="#FF2D2D2D"/>
+        <SolidColorBrush x:Key="ColorNodeText" Color="White"/>
+
+
+        <SolidColorBrush x:Key="ColorNodeBorder" Color="LightGray"/>
+        <SolidColorBrush x:Key="ColorNodeSelectedBorder" Color="Red"/>
+
     <!--#endregion  Node-->
 
     <!--#region         Selector-->
 
     <SolidColorBrush x:Key="ColorSelectorFill" Color="#aaccee" />
     <SolidColorBrush x:Key="ColorSelectorStroke" Color="#0078d7"/>
-    
+
+
     <!--#endregion      Selector-->
 
-
+    <!--#region         NodesCanvas-->
+    <SolidColorBrush x:Key="ColorNodesCanvasBackground" Color="#1e1e1e"/>
+    <!--#endregion      NodesCanvas-->
 
     <!--<SolidColorBrush x:Key="ColorMenuBackground" Color="#1b1b1b" />
     <SolidColorBrush x:Key="ColorMenuBorder" Color="#FF2D2D30" />-->

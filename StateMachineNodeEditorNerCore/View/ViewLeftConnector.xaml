@@ -3,7 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:local="clr-namespace:StateMachineNodeEditorNerCore.View"       
+             xmlns:local="clr-namespace:StateMachineNodeEditorNerCore.View"
              x:Name="LeftConnector" HorizontalAlignment="Stretch" VerticalAlignment="Top"  AllowDrop="True" >
 
     <Grid x:Name="grid" Background="{DynamicResource ColorLeftConnectorBackground}">
@@ -14,7 +14,7 @@
         <Grid.RowDefinitions>
             <RowDefinition />
         </Grid.RowDefinitions>
-        <TextBox Grid.Row="0"   Grid.Column="1" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="5,0,5,3" Name="Text"  TextWrapping="NoWrap"  BorderThickness="0,0,0,0"  Background="{x:Null}" BorderBrush="{x:Null}" Foreground="{DynamicResource ColorLeftConnectorText}" Style="{DynamicResource LeftConnectorTextBox}"/>
+        <TextBox Grid.Row="0"   Grid.Column="1" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="5,0,5,3" Name="Text"  TextWrapping="NoWrap"  BorderThickness="0,0,0,0"  Background="{x:Null}" BorderBrush="{x:Null}" Foreground="{DynamicResource ColorLeftConnectorText}" Style="{DynamicResource LeftConnectorTextBoxStyle}"/>
         <Ellipse Grid.Row="0"  Grid.Column="0"  HorizontalAlignment="Left"  VerticalAlignment="Center"  Margin="-7,0,0,0"  Name="Form" Height="12" Width="12"   AllowDrop="True" StrokeThickness="1" Style="{DynamicResource LeftConnectorEllipseStyle}" />
     </Grid>
     

@@ -6,10 +6,12 @@
              xmlns:local="clr-namespace:StateMachineNodeEditorNerCore.View"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
-    <!--<Canvas x:Name="Grid" Background="{StaticResource ColorNodesCanvasBackground}" >
+    <Canvas x:Name="Grid" Background="{StaticResource ColorNodesCanvasBackground}" >
+        
         <local:ViewSelector x:Name="Selector"  Panel.ZIndex="999"/>
         <local:ViewCutter x:Name="Cutter"  Panel.ZIndex="999"/>
         <local:ViewRightConnector x:Name="Connector"/>
+        
         <ItemsControl x:Name="Nodes" >
             <ItemsControl.RenderTransform>
                 <TransformGroup x:Name="TransformGroup">
@@ -46,19 +48,20 @@
             </ItemsControl.ItemTemplate>
         </ItemsControl>
 
-    </Canvas>-->
-    <!--<UserControl.ContextMenu >
-        <ContextMenu Template="{DynamicResource ContextMenu}"  >
-            <MenuItem Header="Add" x:Name="ItemAddNode" InputGestureText="Ctrl + N" Template="{DynamicResource ContextMenuItem}" />
-            <MenuItem Header="Delete" x:Name="ItemDeleteNode" InputGestureText="Delete" Template="{DynamicResource ContextMenuItem}"/>
+    </Canvas>
+    <UserControl.ContextMenu >
+        <ContextMenu Template="{DynamicResource ContextMenuTemplate}"  >
+            <MenuItem Header="Add" x:Name="ItemAddNode" InputGestureText="Ctrl + N" Style="{DynamicResource ContextMenuItemStyle}"  />
+            <MenuItem Header="Delete" x:Name="ItemDeleteNode" InputGestureText="Delete" Style="{DynamicResource ContextMenuItemStyle}"/>
         </ContextMenu>
-    </UserControl.ContextMenu>-->
-    <!--<UserControl.CommandBindings>
-        --><!--<CommandBinding Command="Zoom" Executed="Zoom" />--><!--
+    </UserControl.ContextMenu>
+    
+    <UserControl.CommandBindings>
+        <!--<CommandBinding Command="Zoom" Executed="Zoom" />-->
         <CommandBinding Command="Redo" x:Name="RedoCommand"/>
 
-    </UserControl.CommandBindings>-->
-    <!--<UserControl.InputBindings>
+    </UserControl.CommandBindings>
+    <UserControl.InputBindings>
         <KeyBinding x:Name="BindingUndo" Key="Z" Modifiers="Control" />
         <KeyBinding x:Name="BindingRedo" Key="Y" Modifiers="Control" />
         <KeyBinding x:Name="BindingSelectAll" Key="A" Modifiers="Control" />
@@ -66,6 +69,6 @@
         <KeyBinding x:Name="BindingDeleteNode" Key="Delete"  />
         <MouseBinding x:Name="BindingSelect" Gesture="Ctrl+LeftClick" />
         <MouseBinding x:Name="BindingCut" Gesture="Alt+LeftClick" />
-        --><!--<MouseBinding x:Name="BindingZoom" Gesture="WheelClick"/>--><!--
-    </UserControl.InputBindings>-->
+        <MouseBinding x:Name="BindingZoom" Gesture="WheelClick"/>
+    </UserControl.InputBindings>
 </UserControl>

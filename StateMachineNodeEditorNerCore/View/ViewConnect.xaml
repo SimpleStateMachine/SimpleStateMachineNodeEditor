@@ -1,0 +1,28 @@
+﻿<UserControl x:Class="StateMachineNodeEditorNerCore.View.ViewConnect"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:StateMachineNodeEditorNerCore.View"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800">
+    <UserControl.RenderTransform>
+        <TransformGroup>
+            <ScaleTransform x:Name="Scale" ScaleX="1" ScaleY="1"/>
+            <SkewTransform/>
+            <RotateTransform/>
+            <TranslateTransform/>
+        </TransformGroup>
+    </UserControl.RenderTransform>
+    <Grid>
+        <Path x:Name="Path" StrokeDashCap="Round" StrokeLineJoin="Round" Stroke="{StaticResource ColorConnector}">
+            <Path.Data>
+                <PathGeometry  x:Name="PathGeometry" >
+                    <PathFigure x:Name="PathFigure"  IsClosed="False">
+                        <BezierSegment  x:Name="BezierSegment"/>
+                    </PathFigure>
+                </PathGeometry>
+            </Path.Data>
+        </Path>
+    </Grid>
+</UserControl>
