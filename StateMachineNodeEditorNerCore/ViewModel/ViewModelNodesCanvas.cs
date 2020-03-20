@@ -39,6 +39,7 @@ namespace StateMachineNodeEditorNerCore.ViewModel
             SetupCommands();
             SetupNodes();
         }
+
         #region Setup Nodes
         private void SetupNodes()
         {
@@ -54,19 +55,20 @@ namespace StateMachineNodeEditorNerCore.ViewModel
 
             Nodes.Add(start);
 
-            ViewModelNode end = new ViewModelNode(this)
-            {
-                Name = "End",
-                NameEnable = false,
-                CanBeDelete = false,
-                Point1 = new MyPoint(100, 100)
-            };
-            end.TransitionsVisible = null;
-            end.RollUpVisible = null;
-            Nodes.Add(end);
+            //ViewModelNode end = new ViewModelNode(this)
+            //{
+            //    Name = "End",
+            //    NameEnable = false,
+            //    CanBeDelete = false,
+            //    Point1 = new MyPoint(100, 100)
+            //};
+            //end.TransitionsVisible = null;
+            //end.RollUpVisible = null;
+            //Nodes.Add(end);
         }
 
         #endregion Setup Nodes
+
         #region Setup Commands
         public SimpleCommand CommandRedo { get; set; }
         public SimpleCommand CommandUndo { get; set; }

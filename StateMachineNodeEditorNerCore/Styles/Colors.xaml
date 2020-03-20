@@ -47,7 +47,7 @@
 
             <SolidColorBrush x:Key="ColorRightConnectorBackground" Color="#FF2D2D2D"/>
             <SolidColorBrush x:Key="ColorRightConnectorEllipse" Color="#FF2D2D2D"/>
-            <SolidColorBrush x:Key="ColorRightConnectorText" Color="#FF2D2D2D"/>
+            <SolidColorBrush x:Key="ColorRightConnectorText" Color="White"/>
     
             <!--#region     RightConnectorEllipse-->
 

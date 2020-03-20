@@ -69,19 +69,19 @@ namespace StateMachineNodeEditorNerCore.View
         {
             this.WhenActivated(disposable =>
             {
-                this.OneWayBind(this.ViewModel, x => x.Nodes, x => x.Nodes.ItemsSource);
-                this.OneWayBind(this.ViewModel, x => x.Connects, x => x.Connects.ItemsSource);
-                this.OneWayBind(this.ViewModel, x => x.DraggedConnector, x => x.Connector.ViewModel);
+                this.OneWayBind(this.ViewModel, x => x.Nodes, x => x.Nodes.ItemsSource).DisposeWith(disposable);
+                this.OneWayBind(this.ViewModel, x => x.Connects, x => x.Connects.ItemsSource).DisposeWith(disposable);
+                this.OneWayBind(this.ViewModel, x => x.DraggedConnector, x => x.Connector.ViewModel).DisposeWith(disposable);
 
                 //Масштаб по оси X
-                this.OneWayBind(this.ViewModel, x => x.Scale.Scales.Value.X, x => x.Scale.ScaleX);
+                this.OneWayBind(this.ViewModel, x => x.Scale.Scales.Value.X, x => x.Scale.ScaleX).DisposeWith(disposable);
 
                 //Масштаб по оси Y
-                this.OneWayBind(this.ViewModel, x => x.Scale.Scales.Value.Y, x => x.Scale.ScaleY);
+                this.OneWayBind(this.ViewModel, x => x.Scale.Scales.Value.Y, x => x.Scale.ScaleY).DisposeWith(disposable);
 
-                this.OneWayBind(this.ViewModel, x => x.Selector, x => x.Selector.ViewModel);
+                this.OneWayBind(this.ViewModel, x => x.Selector, x => x.Selector.ViewModel).DisposeWith(disposable);
 
-                this.OneWayBind(this.ViewModel, x => x.Cutter, x => x.Cutter.ViewModel);
+                this.OneWayBind(this.ViewModel, x => x.Cutter, x => x.Cutter.ViewModel).DisposeWith(disposable);
             });
         }
         #endregion Setup Binding

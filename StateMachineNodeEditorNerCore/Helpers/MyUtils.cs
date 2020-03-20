@@ -53,6 +53,7 @@ namespace StateMachineNodeEditorNerCore.Helpers
 
             } while ((parent1 == default(TParent1)) || (parent2 == default(TParent2)));
         }
+
         public static bool Intersect(MyPoint a1, MyPoint b1, MyPoint a2, MyPoint b2)
         {
             bool par1 = a1.X > b2.X; //второй перед первым

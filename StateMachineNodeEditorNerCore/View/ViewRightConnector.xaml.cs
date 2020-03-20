@@ -44,6 +44,7 @@ namespace StateMachineNodeEditorNerCore.View
             InitializeComponent();
             SetupBinding();
             SetupEvents();
+
         }
 
 
@@ -83,7 +84,9 @@ namespace StateMachineNodeEditorNerCore.View
                 // При изменении размера, позиции или zoom узла
                 this.WhenAnyValue(x => x.ViewModel.Node.Size, x => x.ViewModel.Node.Point1.Value, x => x.ViewModel.Node.NodesCanvas.Scale.Scales.Value, x => x.ViewModel.Position).
                 Subscribe(_ => { UpdatePositionConnectPoin(); }).DisposeWith(disposable);
-                this.WhenAnyValue(x => x.ViewModel.Node.Size).Subscribe(_ => { UpdatePosition(); }).DisposeWith(disposable);
+
+                //this.WhenAnyValue(x => x.ViewModel.Node.Size).Subscribe(_ => { UpdatePosition(); }).DisposeWith(disposable);
+
             });
         }
         #endregion SetupBinding
@@ -120,6 +123,7 @@ namespace StateMachineNodeEditorNerCore.View
 
         private void ConnectDrag(MouseButtonEventArgs e)
         {
+
             this.ViewModel.CommandConnectPointDrag.Execute();
             DataObject data = new DataObject();
             data.SetData("Node", this.ViewModel.Node);
@@ -133,21 +137,25 @@ namespace StateMachineNodeEditorNerCore.View
             ConnectorDrag(e);
             e.Handled = true;
         }
+
         private void TextDragOver(DragEventArgs e)
         {
             ConnectorDragOver(e);
             e.Handled = true;
         }
+
         private void TextDragEnter(DragEventArgs e)
         {
             ConnectorDragEnter(e);
             e.Handled = true;
         }
+
         private void TextDragLeave(DragEventArgs e)
         {
             ConnectorDragLeave(e);
             e.Handled = true;
         }
+
         private void TextDrop(DragEventArgs e)
         {
             ConnectorDrop(e);
@@ -169,21 +177,26 @@ namespace StateMachineNodeEditorNerCore.View
 
             e.Handled = true;
         }
+
         private void ConnectorDragOver(DragEventArgs e)
         {
+            e.Handled = true;
+
             if (this.ViewModel.NodesCanvas.ConnectorPreviewForDrop != this.ViewModel)
             {
                 this.ViewModel.Node.Point1 += 0.0001;
                 return;
             }
+
             this.UpdatePosition();
 
             this.ViewModel.CommandConnectorDragOver.Execute();
 
-            e.Handled = true;
+            
 
             return;
         }
+
         private void ConnectorDragEnter(DragEventArgs e)
         {
 
@@ -191,22 +204,33 @@ namespace StateMachineNodeEditorNerCore.View
                 return;
 
             if (this.ViewModel.NodesCanvas.DraggedConnector == this.ViewModel)
+            {
+                this.UpdatePosition();
                 return;
-
+            }
+              
             if (this.ViewModel.NodesCanvas.ConnectorPreviewForDrop == this.ViewModel)
+            {
+                this.UpdatePosition();
                 return;
-
+            }
+            //this.UpdatePosition();
             this.ViewModel.CommandConnectorDragEnter.Execute();
 
             e.Handled = true;
         }
+
         private void ConnectorDragLeave(DragEventArgs e)
         {
             if (this.ViewModel.NodesCanvas.ConnectorPreviewForDrop == null)
                 return;
 
             if (this.ViewModel.NodesCanvas.ConnectorPreviewForDrop == this.ViewModel)
+            {
+                //this.UpdatePosition();
                 return;
+            }
+
 
             this.ViewModel.CommandConnectorDragLeave.Execute();
 
@@ -257,18 +281,17 @@ namespace StateMachineNodeEditorNerCore.View
 
         void UpdatePosition()
         {
+            if (!this.IsVisible)
+                return;
+
             Point position = new Point();
 
-            //Если отображается
-            if (this.IsVisible)
-            {
-                //Ищем Canvas
-                ViewNodesCanvas NodesCanvas = MyUtils.FindParent<ViewNodesCanvas>(this);
+            //Ищем Canvas
+            ViewNodesCanvas NodesCanvas = MyUtils.FindParent<ViewNodesCanvas>(this);
 
-                position = this.TransformToAncestor(NodesCanvas).Transform(position);
+            position = this.TransformToAncestor(NodesCanvas).Transform(position);
 
-                this.ViewModel.Position.Set(position);
-            }
+            this.ViewModel.Position.Set(position);
         }
     }
 }

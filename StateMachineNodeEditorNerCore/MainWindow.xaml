@@ -13,7 +13,7 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="auto"></RowDefinition>
             <RowDefinition Height="auto"></RowDefinition>
-            <RowDefinition Height="auto"></RowDefinition>
+            <RowDefinition ></RowDefinition>
         </Grid.RowDefinitions>
         <DockPanel x:Name="Header" Grid.Row="0" Background="{StaticResource ColorWindowHeader}" LastChildFill="False">
             <Menu Background="#1b1b1c" OpacityMask="#3e3e40"  Foreground="White" BorderBrush="#333337" Template="{DynamicResource MenuTemplate}" BorderThickness="1" HorizontalAlignment="Left" VerticalAlignment="Center">
@@ -66,9 +66,10 @@
         </ToolBarTray>
 
         <!--BorderBrush - it's color on IsMouseOver, OpacityMask - it's color on IsPressed-->
-        <TabControl  Grid.Row="2" Background="{x:Null}" BorderBrush="{x:Null}" TabStripPlacement="Top">
+        <TabControl  Grid.Row="2" Background="{x:Null}" BorderBrush="{x:Null}" TabStripPlacement="Top" >
             <TabItem  Header="Node editor"  Style="{DynamicResource TabItemTemplate}" Background="{DynamicResource ColorWindowHeader}" Foreground="{DynamicResource ColorTabItemText}"  BorderBrush="{DynamicResource ColorTabItemIsMouseOver}" OpacityMask="{DynamicResource ColorTabItemIsSelected}">
                 <!--<view:ViewLeftConnector/>-->
+                <view:ViewNodesCanvas/>
             </TabItem>
             <TabItem Header="Transitions table"  Style="{DynamicResource TabItemTemplate}" Background="{DynamicResource ColorWindowHeader}" Foreground="{DynamicResource ColorTabItemText}" BorderBrush="{DynamicResource ColorTabItemIsMouseOver}"   OpacityMask="{DynamicResource ColorTabItemIsSelected}"/>
         </TabControl>

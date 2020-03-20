@@ -73,7 +73,7 @@ namespace StateMachineNodeEditorNerCore.View
 
                 //Отображается ли кнопка свернуть
                 this.OneWayBind(this.ViewModel, x => x.RollUpVisible, x => x.ButtonCollapse.Visibility).DisposeWith(disposable);
-
+       
                 //Размеры
                 this.WhenAnyValue(v => v.Border.ActualWidth, v => v.Border.ActualHeight, (width, height) => new Size(width, height))
                      .BindTo(this, v => v.ViewModel.Size).DisposeWith(disposable);

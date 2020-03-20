@@ -161,6 +161,10 @@ namespace StateMachineNodeEditorNerCore.ViewModel
             {
                 Node.NodesCanvas.DraggedConnect.ToConnector = this;
             }
+            else
+            {
+
+            }
         }
         private void CheckConnectPointDrop()
         {
@@ -182,24 +186,6 @@ namespace StateMachineNodeEditorNerCore.ViewModel
         }
         private void ConnectorDragEnter()
         {
-            //if (this.NodesCanvas.DraggedConnector == null)
-            //    return;
-
-            //if (this.NodesCanvas.DraggedConnector == this)
-            //    return;
-
-            //if (this.NodesCanvas.ConnectorPreviewForDrop == this)
-            //    return;
-
-            //if (this.ViewModel.NodesCanvas.DraggedConnector == null)
-            //    return;
-
-            //if (this.ViewModel.NodesCanvas.DraggedConnector == this.ViewModel)
-            //    return;
-
-            //if (this.ViewModel.NodesCanvas.ConnectorPreviewForDrop == this.ViewModel)
-            //    return;
-
             int index = this.Node.Transitions.IndexOf(this);
             if (index == -1)
                 index = 0;

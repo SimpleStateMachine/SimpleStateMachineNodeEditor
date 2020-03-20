@@ -60,11 +60,12 @@ namespace StateMachineNodeEditorNerCore.ViewModel
 
         public ViewModelConnect(ViewModelConnector fromConnector)
         {
-            this.WhenAnyValue(x => x.FromConnector.PositionConnectPoint.Value).Subscribe(value => StartPoint.Set(value));
-            this.WhenAnyValue(x => x.StartPoint.Value, x => x.EndPoint.Value).Subscribe(_ => UpdateMedium());
+            this.WhenAnyValue(x => x.FromConnector.PositionConnectPoint.Value).Subscribe(value => StartPoint.Set(value));           
             this.WhenAnyValue(x => x.ToConnector.PositionConnectPoint.Value).Subscribe(value => EndPoint.Set(value));
+            this.WhenAnyValue(x => x.StartPoint.Value, x => x.EndPoint.Value).Subscribe(_ => UpdateMedium());
             this.WhenAnyValue(x => x.FromConnector).Where(x => x != null).Subscribe(_ => FromConnectChanged());
             this.WhenAnyValue(x => x.ToConnector).Where(x => x != null).Subscribe(_ => ToConnectChanged());
+
             this.WhenAnyValue(x => x.FromConnector.Node.NodesCanvas.Scale.Value).Subscribe(value => StrokeThickness = value);
             this.WhenAnyValue(x => x.Selected).Subscribe(value => { this.StrokeDashArray = value ? new DoubleCollection() { 10, 3 } : null; });
 
@@ -85,7 +86,7 @@ namespace StateMachineNodeEditorNerCore.ViewModel
         private void FromConnectChanged()
         {
             StartPoint.Set(FromConnector.PositionConnectPoint);
-
+            EndPoint.Set(FromConnector.PositionConnectPoint);
         }
         private void ToConnectChanged()
         {
