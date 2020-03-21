@@ -7,10 +7,10 @@ using System.Reactive.Linq;
 using ReactiveUI;
 using ReactiveUI.Fody.Helpers;
 
-using StateMachineNodeEditorNerCore.Helpers;
+using SimpleStateMachineNodeEditor.Helpers;
 
 
-namespace StateMachineNodeEditorNerCore.ViewModel
+namespace SimpleStateMachineNodeEditor.ViewModel
 {
     public class ViewModelConnect : ReactiveObject
     {

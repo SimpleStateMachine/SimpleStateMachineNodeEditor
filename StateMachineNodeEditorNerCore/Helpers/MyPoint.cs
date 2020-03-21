@@ -2,7 +2,7 @@
 using ReactiveUI.Fody.Helpers;
 using System.Windows;
 
-namespace StateMachineNodeEditorNerCore.Helpers
+namespace SimpleStateMachineNodeEditor.Helpers
 {
     /// <summary>
     /// Класс точки

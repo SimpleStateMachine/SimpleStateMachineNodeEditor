@@ -3,7 +3,7 @@ using System.Windows.Media;
 using System;
 using System.Collections.Generic;
 
-namespace StateMachineNodeEditorNerCore.Helpers
+namespace SimpleStateMachineNodeEditor.Helpers
 {
     public static class MyUtils
     {

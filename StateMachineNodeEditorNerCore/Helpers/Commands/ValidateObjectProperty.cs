@@ -1,4 +1,4 @@
-﻿namespace StateMachineNodeEditorNerCore.Helpers.Commands
+﻿namespace SimpleStateMachineNodeEditor.Helpers.Commands
 {
     public class ValidateObjectProperty<TObject, TProperty> where TObject : class where TProperty : class
     {

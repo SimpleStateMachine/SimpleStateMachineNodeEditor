@@ -1,10 +1,10 @@
 ﻿using ReactiveUI;
 using ReactiveUI.Fody.Helpers;
 
-using StateMachineNodeEditorNerCore.Helpers;
-using StateMachineNodeEditorNerCore.Helpers.Commands;
+using SimpleStateMachineNodeEditor.Helpers;
+using SimpleStateMachineNodeEditor.Helpers.Commands;
 
-namespace StateMachineNodeEditorNerCore.ViewModel
+namespace SimpleStateMachineNodeEditor.ViewModel
 {
     public class ViewModelCutter : ReactiveObject
     {

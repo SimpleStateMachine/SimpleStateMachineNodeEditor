@@ -1,18 +1,15 @@
-﻿<UserControl x:Class="StateMachineNodeEditorNerCore.View.ViewNodesCanvas"
+﻿<UserControl x:Class="SimpleStateMachineNodeEditor.View.ViewNodesCanvas"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:local="clr-namespace:StateMachineNodeEditorNerCore.View"
+             xmlns:local="clr-namespace:SimpleStateMachineNodeEditor.View"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800" Focusable="True" AllowDrop="True" ClipToBounds="True">
     <Canvas x:Name="Grid" Background="{StaticResource ColorNodesCanvasBackground}" >
 
         <local:ViewSelector x:Name="Selector"  Panel.ZIndex="999"/>
         <local:ViewCutter x:Name="Cutter"  Panel.ZIndex="999"/>
-        <TextBox x:Name="TestBox"></TextBox>
-        <Button x:Name="CLearB" AutomationProperties.Name="CLeards" Canvas.Left="770" Height="30" Width="30"/>
-        <!--<local:ViewRightConnector x:Name="Connector"/>-->
 
         <ItemsControl x:Name="Nodes" >
             <ItemsControl.RenderTransform>

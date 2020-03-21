@@ -2,10 +2,10 @@
 using System.Windows;
 using ReactiveUI;
 using Splat;
-using StateMachineNodeEditorNerCore.Helpers;
-using StateMachineNodeEditorNerCore.Helpers.Converters;
+using SimpleStateMachineNodeEditor.Helpers;
+using SimpleStateMachineNodeEditor.Helpers.Converters;
 
-namespace StateMachineNodeEditorNerCore
+namespace SimpleStateMachineNodeEditor
 {
     /// <summary>
     /// Interaction logic for App.xaml

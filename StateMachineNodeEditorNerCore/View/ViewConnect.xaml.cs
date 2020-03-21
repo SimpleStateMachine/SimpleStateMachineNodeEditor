@@ -4,9 +4,9 @@ using System.Windows.Controls;
 
 using ReactiveUI;
 
-using StateMachineNodeEditorNerCore.ViewModel;
+using SimpleStateMachineNodeEditor.ViewModel;
 
-namespace StateMachineNodeEditorNerCore.View
+namespace SimpleStateMachineNodeEditor.View
 {
     /// <summary>
     /// Interaction logic for ViewConnect.xaml

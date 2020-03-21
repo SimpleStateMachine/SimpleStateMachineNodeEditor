@@ -4,11 +4,11 @@ using System.Windows;
 using ReactiveUI.Fody.Helpers;
 using ReactiveUI;
 
-using StateMachineNodeEditorNerCore.Helpers;
-using StateMachineNodeEditorNerCore.Helpers.Commands;
+using SimpleStateMachineNodeEditor.Helpers;
+using SimpleStateMachineNodeEditor.Helpers.Commands;
 using System;
 
-namespace StateMachineNodeEditorNerCore.ViewModel
+namespace SimpleStateMachineNodeEditor.ViewModel
 {
     public class ViewModelConnector : ReactiveObject
     {

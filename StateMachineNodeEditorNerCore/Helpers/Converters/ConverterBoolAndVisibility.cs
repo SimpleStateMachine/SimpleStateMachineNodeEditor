@@ -2,7 +2,7 @@
 using System.Windows;
 using ReactiveUI;
 
-namespace StateMachineNodeEditorNerCore.Helpers.Converters
+namespace SimpleStateMachineNodeEditor.Helpers.Converters
 {
     public class ConverterBoolAndVisibility : IBindingTypeConverter
     {

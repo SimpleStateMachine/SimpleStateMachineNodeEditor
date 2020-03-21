@@ -3,10 +3,10 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:StateMachineNodeEditorNerCore"
-        xmlns:styles="clr-namespace:StateMachineNodeEditorNerCore.Styles"
-    xmlns:view="clr-namespace:StateMachineNodeEditorNerCore.View"
-    x:Class="StateMachineNodeEditorNerCore.MainWindow"
+        xmlns:local="clr-namespace:SimpleStateMachineNodeEditor"
+        xmlns:styles="clr-namespace:SimpleStateMachineNodeEditor.Styles"
+    xmlns:view="clr-namespace:SimpleStateMachineNodeEditor.View"
+    x:Class="SimpleStateMachineNodeEditor.MainWindow"
         mc:Ignorable="d"
         Title="MainWindow"  d:DesignWidth="808.96" Height="738.592" BorderThickness="1" Padding="7,0,7,7" ResizeMode="CanResizeWithGrip" BorderBrush="{DynamicResource ColorWindowBorder}" Background="{DynamicResource ColorWindowHeader}" Foreground="{x:Null}" WindowStyle="None" AllowsTransparency="True" Style="{DynamicResource CustomWindowStyle}">
     <Grid Background="{DynamicResource ColorWindowHeader}">
@@ -71,7 +71,7 @@
                 <!--<view:ViewLeftConnector/>-->
                 <view:ViewNodesCanvas/>
             </TabItem>
-            <TabItem Header="Transitions table"  Style="{DynamicResource TabItemTemplate}" Background="{DynamicResource ColorWindowHeader}" Foreground="{DynamicResource ColorTabItemText}" BorderBrush="{DynamicResource ColorTabItemIsMouseOver}"   OpacityMask="{DynamicResource ColorTabItemIsSelected}"/>
+            <!--<TabItem Header="Transitions table"  Style="{DynamicResource TabItemTemplate}" Background="{DynamicResource ColorWindowHeader}" Foreground="{DynamicResource ColorTabItemText}" BorderBrush="{DynamicResource ColorTabItemIsMouseOver}"   OpacityMask="{DynamicResource ColorTabItemIsSelected}"/>-->
         </TabControl>
 
     </Grid>

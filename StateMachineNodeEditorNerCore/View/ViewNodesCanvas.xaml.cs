@@ -13,11 +13,11 @@ using System.Reactive.Disposables;
 
 using ReactiveUI;
 
-using StateMachineNodeEditorNerCore.Helpers;
-using StateMachineNodeEditorNerCore.ViewModel;
-using StateMachineNodeEditorNerCore.Helpers.Transformations;
+using SimpleStateMachineNodeEditor.Helpers;
+using SimpleStateMachineNodeEditor.ViewModel;
+using SimpleStateMachineNodeEditor.Helpers.Transformations;
 
-namespace StateMachineNodeEditorNerCore.View
+namespace SimpleStateMachineNodeEditor.View
 {
     /// <summary>
     /// Interaction logic for ViewNodesCanvas.xaml
@@ -30,7 +30,6 @@ namespace StateMachineNodeEditorNerCore.View
             MoveAll,
             MoveSelected
         }
-        MyPoint test;
         #region ViewModel
         public static readonly DependencyProperty ViewModelProperty = DependencyProperty.Register(nameof(ViewModel),
             typeof(ViewModelNodesCanvas), typeof(ViewNodesCanvas), new PropertyMetadata(null));
@@ -109,9 +108,6 @@ namespace StateMachineNodeEditorNerCore.View
                 this.WhenAnyValue(x => x.ViewModel.Selector.Size).InvokeCommand(ViewModel.CommandSelectorIntersect).DisposeWith(disposable);
                 this.WhenAnyValue(x => x.ViewModel.Cutter.EndPoint.Value).InvokeCommand(ViewModel.CommandCutterIntersect).DisposeWith(disposable);
 
-
-                this.OneWayBind(this.ViewModel, x => x.Text, x => x.TestBox.Text).DisposeWith(disposable);
-
             });
         }
         #endregion Setup Commands
@@ -135,13 +131,8 @@ namespace StateMachineNodeEditorNerCore.View
                 //Эти события срабатывают раньше команд
                 this.Events().PreviewMouseLeftButtonDown.Subscribe(e => OnEventPreviewMouseLeftButtonDown(e)).DisposeWith(disposable);
                 this.Events().PreviewMouseRightButtonDown.Subscribe(e => OnEventPreviewMouseRightButtonDown(e)).DisposeWith(disposable);
-                this.CLearB.Events().MouseDown.Subscribe(_ => Cleater()).DisposeWith(disposable);
                 this.WhenAnyValue(x => x.ViewModel.Scale.Value).Subscribe(value => { this.Grid.Height /= value; this.Grid.Width /= value; }).DisposeWith(disposable);
             });
-        }
-        private void Cleater()
-        {
-            this.ViewModel.Text = "";
         }
         private void OnEventMouseLeftDown(MouseButtonEventArgs e)
         {
@@ -224,21 +215,7 @@ namespace StateMachineNodeEditorNerCore.View
         }
         private void OnEventDragEnter(DragEventArgs e)
         {
-            //if(this.ViewModel.ConnectorPreviewForDrop!=null)
-            //{
 
-            //    this.ViewModel.ConnectorPreviewForDrop.DeleteFromNodeTransition();
-
-            //    this.ViewModel.DraggedConnector = this.ViewModel.ConnectorPreviewForDrop;
-                
-            //    this.ViewModel.ConnectorPreviewForDrop = null;
-
-            //    this.ViewModel.DraggedConnector.NeedUpdatePosition = true;
-
-            //    test = this.ViewModel.DraggedConnector.Position;
-            //    ViewModel.Text = test.ToString();
-            //}
-       
         }
         private void OnEventDragOver(DragEventArgs e)
         {
@@ -248,22 +225,10 @@ namespace StateMachineNodeEditorNerCore.View
                 point -= 2;
                 this.ViewModel.DraggedConnect.EndPoint.Set(point);
             }
-            //else if (this.ViewModel.DraggedConnector != null)
-            //{
-            //    this.ViewModel.DraggedConnector.Position = point;
-            //}
         }
         private void OnEventDragLeave(DragEventArgs e)
         {
-            //if (this.ViewModel.DraggedConnector != null)
-            //{
-            //    this.ViewModel.ConnectorPreviewForDrop = this.ViewModel.DraggedConnector;
-            //    this.ViewModel.DraggedConnector = null;
-            //    //this.ViewModel.DraggedConnector.NeedUpdatePosition = true;
 
-            //    //test = this.ViewModel.DraggedConnector.Position;
-            //    //ViewModel.Text = test.ToString();
-            //}
         }
         private void OnEventPreviewMouseLeftButtonDown(MouseButtonEventArgs e)
         {

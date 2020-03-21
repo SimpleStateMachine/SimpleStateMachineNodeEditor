@@ -1,4 +1,4 @@
-﻿namespace StateMachineNodeEditorNerCore.Helpers.Transformations
+﻿namespace SimpleStateMachineNodeEditor.Helpers.Transformations
 {
     public interface CanBeMove
     {

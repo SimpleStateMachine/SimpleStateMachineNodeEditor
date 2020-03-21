@@ -13,11 +13,11 @@ using System.Reactive.Linq;
 
 using ReactiveUI;
 
-using StateMachineNodeEditorNerCore.Helpers;
-using StateMachineNodeEditorNerCore.ViewModel;
-using StateMachineNodeEditorNerCore.Helpers.Transformations;
+using SimpleStateMachineNodeEditor.Helpers;
+using SimpleStateMachineNodeEditor.ViewModel;
+using SimpleStateMachineNodeEditor.Helpers.Transformations;
 
-namespace StateMachineNodeEditorNerCore.View
+namespace SimpleStateMachineNodeEditor.View
 {
     /// <summary>
     /// Interaction logic for ViewConnector.xaml

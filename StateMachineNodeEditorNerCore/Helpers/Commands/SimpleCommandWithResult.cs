@@ -2,7 +2,7 @@
 using System.Windows.Input;
 
 
-namespace StateMachineNodeEditorNerCore.Helpers.Commands
+namespace SimpleStateMachineNodeEditor.Helpers.Commands
 {
     public class SimpleCommandWithResul<TResult> : ICommand
     {

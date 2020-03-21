@@ -12,11 +12,11 @@ using System.Reactive.Disposables;
 
 using ReactiveUI;
 
-using StateMachineNodeEditorNerCore.Helpers;
-using StateMachineNodeEditorNerCore.ViewModel;
+using SimpleStateMachineNodeEditor.Helpers;
+using SimpleStateMachineNodeEditor.ViewModel;
 
 
-namespace StateMachineNodeEditorNerCore.View
+namespace SimpleStateMachineNodeEditor.View
 {
     /// <summary>
     /// Interaction logic for ViewCutter.xaml

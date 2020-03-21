@@ -1,9 +1,9 @@
-﻿<UserControl x:Class="StateMachineNodeEditorNerCore.View.ViewNode"
+﻿<UserControl x:Class="SimpleStateMachineNodeEditor.View.ViewNode"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:local="clr-namespace:StateMachineNodeEditorNerCore.View"
+             xmlns:local="clr-namespace:SimpleStateMachineNodeEditor.View"
              mc:Ignorable="d" Focusable="True" AllowDrop="True" Visibility="Visible"> 
     
     <Border x:Name="Border" CornerRadius="5,5,5,5" BorderThickness="1,1,1,1"   HorizontalAlignment="Left" VerticalAlignment="Top" MinWidth="80" Background="{DynamicResource ColorNodeBody}" >

@@ -4,7 +4,7 @@ using System.Windows.Interop;
 using System.Runtime.InteropServices;
 using System.Windows.Input;
 
-namespace StateMachineNodeEditorNerCore.Styles
+namespace SimpleStateMachineNodeEditor.Styles
 {
     public partial class CustomWindowTemplate
     {

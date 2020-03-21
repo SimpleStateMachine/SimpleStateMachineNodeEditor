@@ -9,11 +9,11 @@ using ReactiveUI.Fody.Helpers;
 using DynamicData;
 using DynamicData.Binding;
 
-using StateMachineNodeEditorNerCore.Helpers;
-using StateMachineNodeEditorNerCore.Helpers.Commands;
-using StateMachineNodeEditorNerCore.Helpers.Transformations;
+using SimpleStateMachineNodeEditor.Helpers;
+using SimpleStateMachineNodeEditor.Helpers.Commands;
+using SimpleStateMachineNodeEditor.Helpers.Transformations;
 
-namespace StateMachineNodeEditorNerCore.ViewModel
+namespace SimpleStateMachineNodeEditor.ViewModel
 {
     public class ViewModelNodesCanvas : ReactiveObject
     {
@@ -24,9 +24,6 @@ namespace StateMachineNodeEditorNerCore.ViewModel
         [Reactive] public ViewModelConnect DraggedConnect { get; set; }
         [Reactive] public ViewModelConnector ConnectorPreviewForDrop { get; set; }
         [Reactive] public ViewModelNode CurrentNode { get; set; }
-
-
-        [Reactive] public string Text { get; set; }
 
         /// <summary>
         /// Масштаб 

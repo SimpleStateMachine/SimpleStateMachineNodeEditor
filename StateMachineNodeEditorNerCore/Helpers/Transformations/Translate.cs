@@ -1,7 +1,7 @@
 ﻿using ReactiveUI;
 using ReactiveUI.Fody.Helpers;
 
-namespace StateMachineNodeEditorNerCore.Helpers.Transformations
+namespace SimpleStateMachineNodeEditor.Helpers.Transformations
 {
     public class Translate : ReactiveObject
     {

@@ -3,7 +3,7 @@ using ReactiveUI.Fody.Helpers;
 using System;
 using System.Reactive.Linq;
 
-namespace StateMachineNodeEditorNerCore.Helpers.Transformations
+namespace SimpleStateMachineNodeEditor.Helpers.Transformations
 {
     public class Scale : ReactiveObject
     {

@@ -5,11 +5,11 @@ using System.Reactive.Linq;
 using ReactiveUI;
 using ReactiveUI.Fody.Helpers;
 
-using StateMachineNodeEditorNerCore.Helpers;
-using StateMachineNodeEditorNerCore.Helpers.Commands;
-using StateMachineNodeEditorNerCore.Helpers.Transformations;
+using SimpleStateMachineNodeEditor.Helpers;
+using SimpleStateMachineNodeEditor.Helpers.Commands;
+using SimpleStateMachineNodeEditor.Helpers.Transformations;
 
-namespace StateMachineNodeEditorNerCore.ViewModel
+namespace SimpleStateMachineNodeEditor.ViewModel
 {
     public class ViewModelSelector : ReactiveObject
     {

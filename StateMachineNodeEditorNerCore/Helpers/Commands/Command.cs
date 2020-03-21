@@ -2,7 +2,7 @@
 using System;
 using System.Windows.Input;
 
-namespace StateMachineNodeEditorNerCore.Helpers.Commands
+namespace SimpleStateMachineNodeEditor.Helpers.Commands
 {
     /// <summary>
     /// Команда с Undo/Redo

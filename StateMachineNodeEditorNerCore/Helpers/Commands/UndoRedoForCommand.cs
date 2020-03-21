@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 
 
-namespace StateMachineNodeEditorNerCore.Helpers.Commands
+namespace SimpleStateMachineNodeEditor.Helpers.Commands
 {
     public abstract class CommandUndoRedo
     {

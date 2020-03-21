@@ -15,11 +15,11 @@ using ReactiveUI;
 
 using DynamicData;
 
-using StateMachineNodeEditorNerCore.ViewModel;
-using StateMachineNodeEditorNerCore.Helpers;
-using StateMachineNodeEditorNerCore.Helpers.Transformations;
+using SimpleStateMachineNodeEditor.ViewModel;
+using SimpleStateMachineNodeEditor.Helpers;
+using SimpleStateMachineNodeEditor.Helpers.Transformations;
 
-namespace StateMachineNodeEditorNerCore.View
+namespace SimpleStateMachineNodeEditor.View
 {
     /// <summary>
     /// Interaction logic for ViewNode.xaml
