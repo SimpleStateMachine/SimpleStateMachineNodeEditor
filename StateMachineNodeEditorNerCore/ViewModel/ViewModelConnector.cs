@@ -6,6 +6,7 @@ using ReactiveUI;
 
 using StateMachineNodeEditorNerCore.Helpers;
 using StateMachineNodeEditorNerCore.Helpers.Commands;
+using System;
 
 namespace StateMachineNodeEditorNerCore.ViewModel
 {
@@ -165,30 +166,45 @@ namespace StateMachineNodeEditorNerCore.ViewModel
         }
 
         private void ConnectorDrag()
-        {
-            
-            //this.NodesCanvas.DraggedConnector = this;
+        {            
             this.NodesCanvas.ConnectorPreviewForDrop = this;
         }
         private void ConnectorDragEnter()
         {
+            if (this.Node != this.NodesCanvas.ConnectorPreviewForDrop.Node)
+                return;
+
+            int indexTo = this.Node.Transitions.IndexOf(this);
+            if (indexTo == 0)
+                return;
+
             int count = this.Node.Transitions.Count;
             int indexFrom = this.Node.Transitions.IndexOf(this.NodesCanvas.ConnectorPreviewForDrop);
-            int indexTo = this.Node.Transitions.IndexOf(this);
-
+            
             if ((indexFrom > -1) && (indexTo > -1) && (indexFrom < count) && (indexTo < count))
             {
-                if(indexTo==count-1)
+                MyPoint positionTo = this.Node.Transitions[indexTo].PositionConnectPoint;
+                MyPoint position;
+                //shift down
+                if (indexTo > indexFrom)
                 {
-                    this.Node.Transitions.RemoveAt(indexFrom);
-                    this.Node.Transitions.Add(this.NodesCanvas.ConnectorPreviewForDrop);
+                    for (int i = indexTo ; i >= indexFrom + 1; i--)
+                    {
+                        position = this.Node.Transitions[i -1].PositionConnectPoint;
+                        this.Node.Transitions[i].PositionConnectPoint.Set(position);
+                    }
                 }
-                else
+                //shift up
+                else if ( indexFrom > indexTo)
                 {
-                    var t = this.Node.Transitions[indexFrom].PositionConnectPoint.Value;
-                    this.Node.Transitions.Move(indexFrom, indexTo + 1);
-                    this.Node.Transitions[indexFrom].PositionConnectPoint.Set(t);
+                    for (int i = indexTo; i <= indexFrom - 1; i++)
+                    {
+                        position = this.Node.Transitions[i + 1].PositionConnectPoint;
+                        this.Node.Transitions[i].PositionConnectPoint.Set(position);
+                    }
                 }
+                this.Node.Transitions[indexFrom].PositionConnectPoint.Set(positionTo);
+                this.Node.Transitions.Move(indexFrom, indexTo);
             }
         }
         private void ConnectorDragLeave()

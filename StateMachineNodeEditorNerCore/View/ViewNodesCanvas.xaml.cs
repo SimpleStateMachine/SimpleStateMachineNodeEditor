@@ -135,9 +135,13 @@ namespace StateMachineNodeEditorNerCore.View
                 //Эти события срабатывают раньше команд
                 this.Events().PreviewMouseLeftButtonDown.Subscribe(e => OnEventPreviewMouseLeftButtonDown(e)).DisposeWith(disposable);
                 this.Events().PreviewMouseRightButtonDown.Subscribe(e => OnEventPreviewMouseRightButtonDown(e)).DisposeWith(disposable);
-
+                this.CLearB.Events().MouseDown.Subscribe(_ => Cleater()).DisposeWith(disposable);
                 this.WhenAnyValue(x => x.ViewModel.Scale.Value).Subscribe(value => { this.Grid.Height /= value; this.Grid.Width /= value; }).DisposeWith(disposable);
             });
+        }
+        private void Cleater()
+        {
+            this.ViewModel.Text = "";
         }
         private void OnEventMouseLeftDown(MouseButtonEventArgs e)
         {

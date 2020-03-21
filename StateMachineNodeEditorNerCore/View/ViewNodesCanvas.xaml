@@ -7,12 +7,13 @@
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800" Focusable="True" AllowDrop="True" ClipToBounds="True">
     <Canvas x:Name="Grid" Background="{StaticResource ColorNodesCanvasBackground}" >
-        
+
         <local:ViewSelector x:Name="Selector"  Panel.ZIndex="999"/>
         <local:ViewCutter x:Name="Cutter"  Panel.ZIndex="999"/>
         <TextBox x:Name="TestBox"></TextBox>
+        <Button x:Name="CLearB" AutomationProperties.Name="CLeards" Canvas.Left="770" Height="30" Width="30"/>
         <!--<local:ViewRightConnector x:Name="Connector"/>-->
-        
+
         <ItemsControl x:Name="Nodes" >
             <ItemsControl.RenderTransform>
                 <TransformGroup x:Name="TransformGroup">
@@ -56,7 +57,7 @@
             <MenuItem Header="Delete" x:Name="ItemDeleteNode" InputGestureText="Delete" Style="{DynamicResource ContextMenuItemStyle}"/>
         </ContextMenu>
     </UserControl.ContextMenu>
-    
+
     <UserControl.CommandBindings>
         <!--<CommandBinding Command="Zoom" Executed="Zoom" />-->
         <CommandBinding Command="Redo" x:Name="RedoCommand"/>

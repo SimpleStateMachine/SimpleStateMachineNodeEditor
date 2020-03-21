@@ -65,12 +65,6 @@ namespace StateMachineNodeEditorNerCore.View
                 // Цвет рамки, вокруг перехода
                 this.OneWayBind(this.ViewModel, x => x.FormStroke, x => x.Form.Stroke).DisposeWith(disposable);
 
-                ////Позиция X от левого верхнего угла
-                //this.OneWayBind(this.ViewModel, x => x.Position.X, x => x.Translate.X).DisposeWith(disposable);
-
-                ////Позиция Y от левого верхнего угла
-                //this.OneWayBind(this.ViewModel, x => x.Position.Y, x => x.Translate.Y).DisposeWith(disposable);
-
                 //Размеры
                 this.WhenAnyValue(v => v.Grid.ActualWidth, v => v.Grid.ActualHeight, (width, height) => new Size(width, height))
                      .BindTo(this, v => v.ViewModel.Size).DisposeWith(disposable);
@@ -81,15 +75,9 @@ namespace StateMachineNodeEditorNerCore.View
                 // Отображается ли переход
                 this.OneWayBind(this.ViewModel, x => x.Visible, x => x.RightConnector.Visibility).DisposeWith(disposable);
 
-                // При изменении размера, позиции или zoom узла
+                // При изменении размера, позиции или масштаба узла
                 this.WhenAnyValue(x => x.ViewModel.Node.Size, x => x.ViewModel.Node.Point1.Value, x => x.ViewModel.Node.NodesCanvas.Scale.Scales.Value)
                 .Subscribe(_ => { UpdatePositionConnectPoin(); }).DisposeWith(disposable);
-
-                this.WhenAnyValue(x => x.ViewModel.Node.Size).Subscribe(_ => { Test(); }).DisposeWith(disposable);
-                //// При изменении размера, позиции или zoom узла
-                //this.WhenAnyValue(x => x.ViewModel.Node.Size, x => x.ViewModel.Node.Point1.Value, x => x.ViewModel.Node.NodesCanvas.Scale.Scales.Value, x => x.ViewModel.Position).
-                //Subscribe(_ => { UpdatePositionConnectPoin(); }).DisposeWith(disposable);
-                //this.WhenAnyValue(x=>x.ViewModel.Node.Transitions.Count).Subscribe(_ => { Test(); }).DisposeWith(disposable);
 
             });
         }
@@ -128,7 +116,6 @@ namespace StateMachineNodeEditorNerCore.View
 
         private void ConnectDrag(MouseButtonEventArgs e)
         {
-
             this.ViewModel.CommandConnectPointDrag.Execute();
             DataObject data = new DataObject();
             data.SetData("Node", this.ViewModel.Node);
@@ -167,7 +154,6 @@ namespace StateMachineNodeEditorNerCore.View
             e.Handled = true;
         }
 
-
         private void ConnectorDrag(MouseButtonEventArgs e)
         {
             if (!this.ViewModel.TextEnable)
@@ -180,10 +166,7 @@ namespace StateMachineNodeEditorNerCore.View
             this.ViewModel?.CommandCheckConnectorDrop.Execute();
             e.Handled = true;
         }
-        private void Test()
-        {
-            UpdatePositionConnectPoin();
-        }
+
         private void ConnectorDragOver(DragEventArgs e)
         {
             
@@ -210,19 +193,22 @@ namespace StateMachineNodeEditorNerCore.View
             if (this.ViewModel.NodesCanvas.ConnectorPreviewForDrop == null)
                 return;
 
+            if (this.ViewModel.NodesCanvas.ConnectorPreviewForDrop == this.ViewModel)
+                return;
+
             this.ViewModel.CommandConnectorDragEnter.Execute();
+
+            e.Handled = true;
         }
 
         private void ConnectorDragLeave(DragEventArgs e)
         {
-
             if (this.ViewModel.NodesCanvas.ConnectorPreviewForDrop != null)
                 return;
-                this.ViewModel.CommandConnectorDragLeave.Execute();
+
+            this.ViewModel.CommandConnectorDragLeave.Execute();
 
             e.Handled = true;
-
-            return;
         }
 
         private void ConnectorDrop(DragEventArgs e)
@@ -231,6 +217,7 @@ namespace StateMachineNodeEditorNerCore.View
                 return;
            
             this.ViewModel.CommandConnectorDrop.Execute();
+
             e.Handled = true;
         }
 
