@@ -109,11 +109,6 @@ namespace SimpleStateMachineNodeEditor.View
 
                 this.ButtonCollapse.Events().Click.Subscribe(_ => OnEventCollapse()).DisposeWith(disposable);
                 this.Header.Events().LostFocus.Subscribe(e => Validate(e)).DisposeWith(disposable);
-
-
-                //this.Border.Events().DragLeave()
-
-
             });
         }
 
@@ -154,9 +149,7 @@ namespace SimpleStateMachineNodeEditor.View
         {
             this.ReleaseMouseCapture();
         }
-        //private void OnEventMouseMove(MouseButtonEventArgs e)
-        //{
-        //}
+
         private void OnEventMouseEnter(MouseEventArgs e)
         {
             if (this.ViewModel.Selected != true)
