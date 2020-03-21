@@ -146,9 +146,6 @@ namespace SimpleStateMachineNodeEditor.View
 
                 this.ViewModel.CommandUnSelectAll.Execute();
             }
-
-            //if (this.IsMouseCaptured)
-            //    ViewModelNodesCanvas.CommandUnSelectAll.Execute(null);
         }
         private void UpdateConnector()
         {
