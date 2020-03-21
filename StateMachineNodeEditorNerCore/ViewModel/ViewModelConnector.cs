@@ -178,13 +178,18 @@ namespace StateMachineNodeEditorNerCore.ViewModel
 
             if ((indexFrom > -1) && (indexTo > -1) && (indexFrom < count) && (indexTo < count))
             {
-                this.Node.Transitions.RemoveAt(indexFrom);              
-                this.Node.Transitions.Insert(indexTo + 1, this.NodesCanvas.ConnectorPreviewForDrop);                
+                if(indexTo==count-1)
+                {
+                    this.Node.Transitions.RemoveAt(indexFrom);
+                    this.Node.Transitions.Add(this.NodesCanvas.ConnectorPreviewForDrop);
+                }
+                else
+                {
+                    var t = this.Node.Transitions[indexFrom].PositionConnectPoint.Value;
+                    this.Node.Transitions.Move(indexFrom, indexTo + 1);
+                    this.Node.Transitions[indexFrom].PositionConnectPoint.Set(t);
+                }
             }
-            
-            //this.Node.Transitions.Move(indexFrom, indexTo+1);
-
-            //this.Node.Point1 += 0.0001;
         }
         private void ConnectorDragLeave()
         {

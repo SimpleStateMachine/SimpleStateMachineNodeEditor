@@ -108,7 +108,6 @@ namespace StateMachineNodeEditorNerCore.View
                 this.BindCommand(this.ViewModel, x => x.CommandAddNode, x => x.ItemAddNode, positionRightClickObservable).DisposeWith(disposable);
                 this.WhenAnyValue(x => x.ViewModel.Selector.Size).InvokeCommand(ViewModel.CommandSelectorIntersect).DisposeWith(disposable);
                 this.WhenAnyValue(x => x.ViewModel.Cutter.EndPoint.Value).InvokeCommand(ViewModel.CommandCutterIntersect).DisposeWith(disposable);
-                this.WhenAnyValue(x => x.ViewModel.DraggedConnector).Subscribe(_ => UpdateConnector()).DisposeWith(disposable);
 
 
                 this.OneWayBind(this.ViewModel, x => x.Text, x => x.TestBox.Text).DisposeWith(disposable);
@@ -177,7 +176,7 @@ namespace StateMachineNodeEditorNerCore.View
         private void OnEventMouseRightDown(MouseButtonEventArgs e)
         {
             Keyboard.Focus(this);
-            this.ViewModel.Text = new MyPoint(e.GetPosition(this)).ToString();
+
         }
         private void OnEventMouseRightUp(MouseButtonEventArgs e)
         {

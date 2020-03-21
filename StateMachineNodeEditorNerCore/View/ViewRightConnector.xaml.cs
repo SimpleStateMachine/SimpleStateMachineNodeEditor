@@ -85,7 +85,7 @@ namespace StateMachineNodeEditorNerCore.View
                 this.WhenAnyValue(x => x.ViewModel.Node.Size, x => x.ViewModel.Node.Point1.Value, x => x.ViewModel.Node.NodesCanvas.Scale.Scales.Value)
                 .Subscribe(_ => { UpdatePositionConnectPoin(); }).DisposeWith(disposable);
 
-
+                this.WhenAnyValue(x => x.ViewModel.Node.Size).Subscribe(_ => { Test(); }).DisposeWith(disposable);
                 //// При изменении размера, позиции или zoom узла
                 //this.WhenAnyValue(x => x.ViewModel.Node.Size, x => x.ViewModel.Node.Point1.Value, x => x.ViewModel.Node.NodesCanvas.Scale.Scales.Value, x => x.ViewModel.Position).
                 //Subscribe(_ => { UpdatePositionConnectPoin(); }).DisposeWith(disposable);
@@ -178,16 +178,11 @@ namespace StateMachineNodeEditorNerCore.View
             data.SetData("Connector", this.ViewModel);
             DragDrop.DoDragDrop(this, data, DragDropEffects.Link);
             this.ViewModel?.CommandCheckConnectorDrop.Execute();
-
-            //this.UpdatePosition();
-            //e.Handled = true;
+            e.Handled = true;
         }
         private void Test()
         {
-            //if(this.ViewModel ==this.ViewModel.NodesCanvas.DraggedConnector)
-            //{
-            //    UpdatePosition();
-            //}
+            UpdatePositionConnectPoin();
         }
         private void ConnectorDragOver(DragEventArgs e)
         {
@@ -214,41 +209,16 @@ namespace StateMachineNodeEditorNerCore.View
         {
             if (this.ViewModel.NodesCanvas.ConnectorPreviewForDrop == null)
                 return;
-            if (this.ViewModel.NodesCanvas.ConnectorPreviewForDrop == this.ViewModel)
-                return;
 
             this.ViewModel.CommandConnectorDragEnter.Execute();
-            this.ViewModel.Node.Point1 += 0.001;
-
-            e.Handled = true;
         }
 
         private void ConnectorDragLeave(DragEventArgs e)
         {
 
-            //new
-            if (this.ViewModel.NodesCanvas.DraggedConnector == null)
-                return;
-            //new
             if (this.ViewModel.NodesCanvas.ConnectorPreviewForDrop != null)
                 return;
-
-            //if (this.ViewModel.NodesCanvas.DraggedConnector.Name == this.ViewModel.Name)
-            //{
-            //    this.UpdatePosition();
-            //    e.Handled = true;
-            //    return;
-            //}
-            //else
-            //{
                 this.ViewModel.CommandConnectorDragLeave.Execute();
-            //}
-
-
-           
-
-            //if (this.ViewModel.NodesCanvas.ConnectorPreviewForDrop == null)
-            //    return;
 
             e.Handled = true;
 
@@ -259,10 +229,9 @@ namespace StateMachineNodeEditorNerCore.View
         {
             if (this.ViewModel.NodesCanvas.ConnectorPreviewForDrop == null)
                 return;
-
+           
             this.ViewModel.CommandConnectorDrop.Execute();
-
-            //e.Handled = true;
+            e.Handled = true;
         }
 
         #endregion SetupEvents

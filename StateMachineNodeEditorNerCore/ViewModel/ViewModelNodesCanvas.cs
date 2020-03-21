@@ -22,7 +22,6 @@ namespace StateMachineNodeEditorNerCore.ViewModel
         [Reactive] public ViewModelSelector Selector { get; set; } = new ViewModelSelector();
         [Reactive] public ViewModelCutter Cutter { get; set; } = new ViewModelCutter();
         [Reactive] public ViewModelConnect DraggedConnect { get; set; }
-        [Reactive] public ViewModelConnector DraggedConnector { get; set; }
         [Reactive] public ViewModelConnector ConnectorPreviewForDrop { get; set; }
         [Reactive] public ViewModelNode CurrentNode { get; set; }
 
@@ -166,11 +165,6 @@ namespace StateMachineNodeEditorNerCore.ViewModel
         {
             foreach (var node in Nodes)
             { node.Selected = false; }
-        }
-
-        public bool HasConnectorDrag()
-        {
-            return ((DraggedConnector != null) || (ConnectorPreviewForDrop != null));
         }
         private List<ViewModelNode> FullMoveAllNode(MyPoint delta, List<ViewModelNode> nodes = null)
         {
