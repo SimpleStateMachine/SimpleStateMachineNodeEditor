@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.29728.190
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SimpleStateMachineNodeEditor", "StateMachineNodeEditorNerCore\SimpleStateMachineNodeEditor.csproj", "{FD501A1B-8BF4-4FF7-9750-7B2F9D8C1FD6}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SimpleStateMachineNodeEditor", "SimpleStateMachineNodeEditor\SimpleStateMachineNodeEditor.csproj", "{F405DC54-B579-44A4-B414-3925A236A98D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -11,10 +11,10 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{FD501A1B-8BF4-4FF7-9750-7B2F9D8C1FD6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{FD501A1B-8BF4-4FF7-9750-7B2F9D8C1FD6}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{FD501A1B-8BF4-4FF7-9750-7B2F9D8C1FD6}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{FD501A1B-8BF4-4FF7-9750-7B2F9D8C1FD6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F405DC54-B579-44A4-B414-3925A236A98D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F405DC54-B579-44A4-B414-3925A236A98D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F405DC54-B579-44A4-B414-3925A236A98D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F405DC54-B579-44A4-B414-3925A236A98D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
