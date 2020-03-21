@@ -10,8 +10,8 @@
         
         <local:ViewSelector x:Name="Selector"  Panel.ZIndex="999"/>
         <local:ViewCutter x:Name="Cutter"  Panel.ZIndex="999"/>
-        
-        <local:ViewRightConnector x:Name="Connector"/>
+        <TextBox x:Name="TestBox"></TextBox>
+        <!--<local:ViewRightConnector x:Name="Connector"/>-->
         
         <ItemsControl x:Name="Nodes" >
             <ItemsControl.RenderTransform>

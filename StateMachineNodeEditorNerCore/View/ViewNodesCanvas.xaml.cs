@@ -30,7 +30,7 @@ namespace StateMachineNodeEditorNerCore.View
             MoveAll,
             MoveSelected
         }
-
+        MyPoint test;
         #region ViewModel
         public static readonly DependencyProperty ViewModelProperty = DependencyProperty.Register(nameof(ViewModel),
             typeof(ViewModelNodesCanvas), typeof(ViewNodesCanvas), new PropertyMetadata(null));
@@ -71,7 +71,7 @@ namespace StateMachineNodeEditorNerCore.View
             {
                 this.OneWayBind(this.ViewModel, x => x.Nodes, x => x.Nodes.ItemsSource).DisposeWith(disposable);
                 this.OneWayBind(this.ViewModel, x => x.Connects, x => x.Connects.ItemsSource).DisposeWith(disposable);
-                this.OneWayBind(this.ViewModel, x => x.DraggedConnector, x => x.Connector.ViewModel).DisposeWith(disposable);
+                //this.OneWayBind(this.ViewModel, x => x.DraggedConnector, x => x.Connector.ViewModel).DisposeWith(disposable);
 
                 //Масштаб по оси X
                 this.OneWayBind(this.ViewModel, x => x.Scale.Scales.Value.X, x => x.Scale.ScaleX).DisposeWith(disposable);
@@ -110,6 +110,9 @@ namespace StateMachineNodeEditorNerCore.View
                 this.WhenAnyValue(x => x.ViewModel.Cutter.EndPoint.Value).InvokeCommand(ViewModel.CommandCutterIntersect).DisposeWith(disposable);
                 this.WhenAnyValue(x => x.ViewModel.DraggedConnector).Subscribe(_ => UpdateConnector()).DisposeWith(disposable);
 
+
+                this.OneWayBind(this.ViewModel, x => x.Text, x => x.TestBox.Text).DisposeWith(disposable);
+
             });
         }
         #endregion Setup Commands
@@ -129,7 +132,7 @@ namespace StateMachineNodeEditorNerCore.View
                 this.Events().MouseWheel.Subscribe(e => OnEventMouseWheel(e)).DisposeWith(disposable);
                 this.Events().DragOver.Subscribe(e => OnEventDragOver(e)).DisposeWith(disposable);
                 this.Events().DragEnter.Subscribe(e => OnEventDragEnter(e)).DisposeWith(disposable);
-
+                this.Events().DragLeave.Subscribe(e => OnEventDragLeave(e)).DisposeWith(disposable);
                 //Эти события срабатывают раньше команд
                 this.Events().PreviewMouseLeftButtonDown.Subscribe(e => OnEventPreviewMouseLeftButtonDown(e)).DisposeWith(disposable);
                 this.Events().PreviewMouseRightButtonDown.Subscribe(e => OnEventPreviewMouseRightButtonDown(e)).DisposeWith(disposable);
@@ -155,7 +158,8 @@ namespace StateMachineNodeEditorNerCore.View
         }
         private void UpdateConnector()
         {
-            this.Connector.Visibility = (this.ViewModel.DraggedConnector == null) ? Visibility.Collapsed : Visibility.Visible;
+            //this.Connector.Visibility = (this.ViewModel.DraggedConnector == null) ? Visibility.Collapsed : Visibility.Visible;
+
         }
         private void OnEventMouseLeftUp(MouseButtonEventArgs e)
         {
@@ -173,6 +177,7 @@ namespace StateMachineNodeEditorNerCore.View
         private void OnEventMouseRightDown(MouseButtonEventArgs e)
         {
             Keyboard.Focus(this);
+            this.ViewModel.Text = new MyPoint(e.GetPosition(this)).ToString();
         }
         private void OnEventMouseRightUp(MouseButtonEventArgs e)
         {
@@ -216,7 +221,21 @@ namespace StateMachineNodeEditorNerCore.View
         }
         private void OnEventDragEnter(DragEventArgs e)
         {
+            //if(this.ViewModel.ConnectorPreviewForDrop!=null)
+            //{
 
+            //    this.ViewModel.ConnectorPreviewForDrop.DeleteFromNodeTransition();
+
+            //    this.ViewModel.DraggedConnector = this.ViewModel.ConnectorPreviewForDrop;
+                
+            //    this.ViewModel.ConnectorPreviewForDrop = null;
+
+            //    this.ViewModel.DraggedConnector.NeedUpdatePosition = true;
+
+            //    test = this.ViewModel.DraggedConnector.Position;
+            //    ViewModel.Text = test.ToString();
+            //}
+       
         }
         private void OnEventDragOver(DragEventArgs e)
         {
@@ -226,12 +245,23 @@ namespace StateMachineNodeEditorNerCore.View
                 point -= 2;
                 this.ViewModel.DraggedConnect.EndPoint.Set(point);
             }
-            else if (this.ViewModel.DraggedConnector != null)
-            {
-                this.ViewModel.DraggedConnector.Position = point;
-            }
+            //else if (this.ViewModel.DraggedConnector != null)
+            //{
+            //    this.ViewModel.DraggedConnector.Position = point;
+            //}
         }
+        private void OnEventDragLeave(DragEventArgs e)
+        {
+            //if (this.ViewModel.DraggedConnector != null)
+            //{
+            //    this.ViewModel.ConnectorPreviewForDrop = this.ViewModel.DraggedConnector;
+            //    this.ViewModel.DraggedConnector = null;
+            //    //this.ViewModel.DraggedConnector.NeedUpdatePosition = true;
 
+            //    //test = this.ViewModel.DraggedConnector.Position;
+            //    //ViewModel.Text = test.ToString();
+            //}
+        }
         private void OnEventPreviewMouseLeftButtonDown(MouseButtonEventArgs e)
         {
             PositionLeftClick.Set(e.GetPosition(this.Grid));

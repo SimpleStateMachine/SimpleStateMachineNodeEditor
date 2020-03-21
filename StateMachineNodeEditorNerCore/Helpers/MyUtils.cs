@@ -13,7 +13,7 @@ namespace StateMachineNodeEditorNerCore.Helpers
             TParent result = default(TParent);
             do
             {
-                foundObject = VisualTreeHelper.GetParent(foundObject);
+                   foundObject = VisualTreeHelper.GetParent(foundObject);
 
                 if (foundObject == default(DependencyObject))
                     break;

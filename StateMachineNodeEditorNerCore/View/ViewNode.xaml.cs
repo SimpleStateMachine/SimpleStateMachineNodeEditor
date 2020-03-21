@@ -86,6 +86,9 @@ namespace StateMachineNodeEditorNerCore.View
 
                 //Переходы
                 this.OneWayBind(this.ViewModel, x => x.Transitions, x => x.Transitions.ItemsSource).DisposeWith(disposable);
+
+
+                
             });
         }
         #endregion Setup Binding
@@ -106,6 +109,9 @@ namespace StateMachineNodeEditorNerCore.View
 
                 this.ButtonCollapse.Events().Click.Subscribe(_ => OnEventCollapse()).DisposeWith(disposable);
                 this.Header.Events().LostFocus.Subscribe(e => Validate(e)).DisposeWith(disposable);
+
+
+                //this.Border.Events().DragLeave()
 
 
             });

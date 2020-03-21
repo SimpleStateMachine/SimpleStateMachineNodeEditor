@@ -27,7 +27,7 @@ namespace StateMachineNodeEditorNerCore.ViewModel
         [Reactive] public ViewModelNode CurrentNode { get; set; }
 
 
-
+        [Reactive] public string Text { get; set; }
 
         /// <summary>
         /// Масштаб 

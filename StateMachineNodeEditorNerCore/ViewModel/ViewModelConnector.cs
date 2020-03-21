@@ -11,11 +11,11 @@ namespace StateMachineNodeEditorNerCore.ViewModel
 {
     public class ViewModelConnector : ReactiveObject
     {
-        /// <summary>
-        /// Координата самого коннектора
-        /// </summary>
-        [Reactive]
-        public MyPoint Position { get; set; } = new MyPoint();
+        ///// <summary>
+        ///// Координата самого коннектора
+        ///// </summary>
+        //[Reactive]
+        //public MyPoint Position { get; set; } = new MyPoint();
 
         /// <summary>
         /// Координата перехода ( нужна для создания соединения )
@@ -97,11 +97,7 @@ namespace StateMachineNodeEditorNerCore.ViewModel
 
         public SimpleCommand CommandAdd { get; set; }
         public SimpleCommand CommandDelete { get; set; }
-
-
-
         public SimpleCommandWithParameter<string> CommandValidateName { get; set; }
-        public SimpleCommandWithParameter<MyPoint> CommandMove { get; set; }
 
         private void SetupCommands()
         {
@@ -119,14 +115,8 @@ namespace StateMachineNodeEditorNerCore.ViewModel
             CommandConnectorDrop = new SimpleCommand(this, ConnectorDrop);
             CommandCheckConnectorDrop = new SimpleCommand(this, CheckConnectorDrop);
 
-
-
-
-
-
             CommandAdd = new SimpleCommand(this, Add);
             CommandDelete = new SimpleCommand(this, Delete);
-            CommandMove = new SimpleCommandWithParameter<MyPoint>(this, Move);
             CommandValidateName = new SimpleCommandWithParameter<string>(this, ValidateName);
 
 
@@ -151,21 +141,15 @@ namespace StateMachineNodeEditorNerCore.ViewModel
         {
 
         }
-        private void Move(MyPoint delta)
-        {
-            Position += delta / NodesCanvas.Scale.Value;
-        }
+
         private void ConnectPointDrop()
         {
             if (Node.NodesCanvas.DraggedConnect.FromConnector.Node != this.Node)
             {
                 Node.NodesCanvas.DraggedConnect.ToConnector = this;
             }
-            else
-            {
-
-            }
         }
+
         private void CheckConnectPointDrop()
         {
             if (Node.NodesCanvas.DraggedConnect.ToConnector == null)
@@ -182,39 +166,33 @@ namespace StateMachineNodeEditorNerCore.ViewModel
 
         private void ConnectorDrag()
         {
+            
+            //this.NodesCanvas.DraggedConnector = this;
             this.NodesCanvas.ConnectorPreviewForDrop = this;
         }
         private void ConnectorDragEnter()
         {
-            int index = this.Node.Transitions.IndexOf(this);
-            if (index == -1)
-                index = 0;
+            int count = this.Node.Transitions.Count;
+            int indexFrom = this.Node.Transitions.IndexOf(this.NodesCanvas.ConnectorPreviewForDrop);
+            int indexTo = this.Node.Transitions.IndexOf(this);
 
-            this.NodesCanvas.ConnectorPreviewForDrop = this.NodesCanvas.DraggedConnector;
-            this.NodesCanvas.DraggedConnector = null;
+            if ((indexFrom > -1) && (indexTo > -1) && (indexFrom < count) && (indexTo < count))
+            {
+                this.Node.Transitions.RemoveAt(indexFrom);              
+                this.Node.Transitions.Insert(indexTo + 1, this.NodesCanvas.ConnectorPreviewForDrop);                
+            }
+            
+            //this.Node.Transitions.Move(indexFrom, indexTo+1);
 
-            this.Node.Transitions.Insert(index + 1, this.NodesCanvas.ConnectorPreviewForDrop);
-            this.NodesCanvas.ConnectorPreviewForDrop.Position.Clear();
-            this.NodesCanvas.ConnectorPreviewForDrop.Node = this.Node;
+            //this.Node.Point1 += 0.0001;
         }
         private void ConnectorDragLeave()
         {
-            this.Node.Transitions.Remove(this.NodesCanvas.ConnectorPreviewForDrop);
-            this.NodesCanvas.DraggedConnector = this.NodesCanvas.ConnectorPreviewForDrop;
-            this.NodesCanvas.ConnectorPreviewForDrop = null;
 
         }
         private void ConnectorDragOver()
         {
-            //if (this.NodesCanvas.ConnectorPreviewForDrop != this)
-            //{
-            //    this.Node.Point1 += 0.0001;
-            //    return;
-            //}
-            this.Node.Transitions.Remove(this.NodesCanvas.ConnectorPreviewForDrop);
-            this.NodesCanvas.DraggedConnector = this.NodesCanvas.ConnectorPreviewForDrop;
-            this.NodesCanvas.ConnectorPreviewForDrop = null;
-            return;
+
         }
         private void ConnectorDrop()
         {
