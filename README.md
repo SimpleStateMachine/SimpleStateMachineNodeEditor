@@ -4,6 +4,10 @@
  ## Give a Star! :star:
 If you like or are using this project please give it a star. Thanks!
 
+## Сontent
+1. [Features](#Features)
+2. [License](#License)
+
 ## Features
 ### Adding nodes and connections
 ![](https://github.com/SimpleStateMachine/SimpleStateMachineNodeEditor/blob/gh-pages/img/adding.gif)
