@@ -54,12 +54,12 @@ namespace SimpleStateMachineNodeEditor.Helpers
             } while ((parent1 == default(TParent1)) || (parent2 == default(TParent2)));
         }
 
-        public static bool Intersect(MyPoint a1, MyPoint b1, MyPoint a2, MyPoint b2)
+        public static bool Intersect(MyPoint a1, MyPoint a2, MyPoint b1, MyPoint b2)
         {
             bool par1 = a1.X > b2.X; //второй перед первым
-            bool par2 = a2.X > b1.X; //первый перед вторым
+            bool par2 = b1.X > a2.X; //первый перед вторым
             bool par3 = a1.Y > b2.Y; //первый под вторым
-            bool par4 = a2.Y > b1.Y; //второй под первым
+            bool par4 = b1.Y > a2.Y; //второй под первым
             //если хоть одно условие выполняется - прямоугольники не пересекаются
             return !(par1 || par2 || par3 || par4);
         }
@@ -73,7 +73,17 @@ namespace SimpleStateMachineNodeEditor.Helpers
             return new MyPoint(Math.Max(a1.X, b1.X), Math.Max(a1.Y, b1.Y));
         }
 
-        //пока что не ясно
+        #region Check on intersections curve Bezier and line
+        // based on https://www.particleincell.com/2013/cubic-line-intersection/
+        /*
+         You can read more:
+         https://github.com/w8r/bezier-intersect/blob/master/dist/bezier-intersect.js
+         https://math.stackexchange.com/questions/2347733/intersections-between-a-cubic-b%C3%A9zier-curve-and-a-line
+         https://math.stackexchange.com/questions/1337440/cubic-bezier-curve-and-a-straight-line-intersection/
+         */
+
+
+        //Gets coefficients of curve Bezier 
         private static Point[] bezierCoeffs(MyPoint bezierStartPoint, MyPoint bezierPoint1, MyPoint bezierPoint2, MyPoint bezierEndPoint)
         {
             Point[] coeffs = new Point[4];
@@ -97,7 +107,8 @@ namespace SimpleStateMachineNodeEditor.Helpers
 
             return coeffs;
         }
-        //Поиск корней
+
+        //Find cubic roots
         private static double[] cubicRoots(double a, double b, double c, double d)
         {
             double A = b / a;
@@ -114,15 +125,21 @@ namespace SimpleStateMachineNodeEditor.Helpers
 
             if (D >= 0)
             {
-                double sqrtD = Math.Sqrt(D);//Это выражение используется несколько раз. Небольшая оптимизация
-                double _AD3 = -A / 3.0;//Это выражение используется несколько раз. Небольшая оптимизация
-                double RAsqrtD = R + sqrtD;//Это выражение используется несколько раз. Небольшая оптимизация
-                double RSsqrtD = R - sqrtD;//Это выражение используется несколько раз. Небольшая оптимизация
-                double D13 = (1.0 / 3.0);//Это выражение используется несколько раз. Небольшая оптимизация
+                #region some optimization
+
+                double sqrtD = Math.Sqrt(D);
+                double _AD3 = -A / 3.0;
+                double RAsqrtD = R + sqrtD;
+                double RSsqrtD = R - sqrtD;
+                double D13 = (1.0 / 3.0);
+
+                #endregion some optimization
+
                 S = Math.Sign(RAsqrtD) * Math.Pow(Math.Abs(RAsqrtD), D13);
                 T = Math.Sign(RSsqrtD) * Math.Pow(Math.Abs(RSsqrtD), D13);
 
-                double SST = (S + T);//Это выражение используется несколько раз. Небольшая оптимизация
+                //some optimization
+                double SST = (S + T);
 
                 t[0] = _AD3 + SST;
                 t[1] = _AD3 - SST / 2.0;
@@ -137,12 +154,15 @@ namespace SimpleStateMachineNodeEditor.Helpers
             }
             else
             {
-                double th = Math.Acos(R / Math.Sqrt(-Math.Pow(Q, 3.0)));
-                double sqrt_QM2 = 2.0 * Math.Sqrt(-Q);//Это выражение используется несколько раз. Небольшая оптимизация
-                double AD3 = A / 3.0; //Это выражение используется несколько раз. Небольшая оптимизация
 
-                double thD3 = (th / 3.0); //Это выражение используется несколько раз. Небольшая оптимизация
-                double PIM2D3 = (Math.PI * 2.0) / 3.0; //Это выражение используется несколько раз. Небольшая оптимизация
+                #region some optimization
+                double th = Math.Acos(R / Math.Sqrt(-Math.Pow(Q, 3.0)));
+                double sqrt_QM2 = 2.0 * Math.Sqrt(-Q);
+                double AD3 = A / 3.0; 
+
+                double thD3 = (th / 3.0);
+                double PIM2D3 = (Math.PI * 2.0) / 3.0;
+                #endregion some optimization
 
                 t[0] = sqrt_QM2 * Math.Cos(thD3) - AD3;
                 t[1] = sqrt_QM2 * Math.Cos(thD3 + PIM2D3) - AD3;
@@ -178,22 +198,27 @@ namespace SimpleStateMachineNodeEditor.Helpers
             return sortSpecial(t);
         }
 
-        //основная функция
+        //Check on intersections curve Bezier and line
         public static bool ComputeIntersections(MyPoint bezierStartPoint, MyPoint bezierPoint1, MyPoint bezierPoint2, MyPoint bezierEndPoint, MyPoint lineStartPoint, MyPoint lineEndPoint)
         {
+
+            // coefficients of line
             double A = lineEndPoint.Y - lineStartPoint.Y;// A = y2 - y1
             double B = lineStartPoint.X - lineEndPoint.X;// B = x1 - x2
             double C = -lineStartPoint.X * A - lineStartPoint.Y * B;//C=x1*(y1-y2)+y1*(x2-x1) = x1*(-A)+y1*(-B)=-x1*(A)-y1*(B)
 
+            // coefficients of curve Bezier 
             var coeffs = bezierCoeffs(bezierStartPoint, bezierPoint1, bezierPoint2, bezierEndPoint);
 
             double[] P = new double[4];
 
+            // Transform cubic coefficients to line's coordinate system
             P[0] = A * coeffs[0].X + B * coeffs[0].Y;// t^3
             P[1] = A * coeffs[1].X + B * coeffs[1].Y;// t^2
             P[2] = A * coeffs[2].X + B * coeffs[2].Y;// t
             P[3] = A * coeffs[3].X + B * coeffs[3].Y + C;
 
+            //find roots of cubic
             var r = cubicRoots(P[0], P[1], P[2], P[3]);
 
             List<MyPoint> X = new List<MyPoint>();
@@ -205,19 +230,24 @@ namespace SimpleStateMachineNodeEditor.Helpers
             for (int i = 0; i < 3; i++)
             {
                 t = r[i];
-                tMt = t * t; //Это выражение используется несколько раз. Небольшая оптимизация
-                tMtMt = tMt * t; //Это выражение используется несколько раз. Небольшая оптимизация
+                #region some optimization
+
+                tMt = t * t; 
+                tMtMt = tMt * t; 
+
+                #endregion some optimization
                 p = new MyPoint
                 (
                    coeffs[0].X * tMtMt + coeffs[1].X * tMt + coeffs[2].X * t + coeffs[3].X,
                    coeffs[0].Y * tMtMt + coeffs[1].Y * tMt + coeffs[2].Y * t + coeffs[3].Y
                );
 
-                if ((lineEndPoint.X - lineStartPoint.X) != 0)
+                if ((lineEndPoint.X - lineStartPoint.X) != 0) // if not vertical line
                     s = (p.X - lineStartPoint.X) / (lineEndPoint.X - lineStartPoint.X);
                 else
                     s = (p.Y - lineStartPoint.Y) / (lineEndPoint.Y - lineStartPoint.Y);
 
+                //check point in bounds
                 if (t < 0 || t > 1.0 || s < 0 || s > 1.0)
                 {
                     continue;
@@ -227,5 +257,6 @@ namespace SimpleStateMachineNodeEditor.Helpers
             }
             return X.Count > 0;
         }
+        #endregion Check on intersections curve Bezier and line
     }
 }

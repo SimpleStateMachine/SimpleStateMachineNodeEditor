@@ -132,6 +132,7 @@
 
     <!--#region         NodesCanvas-->
     <SolidColorBrush x:Key="ColorNodesCanvasBackground" Color="#1e1e1e"/>
+    <!--<SolidColorBrush x:Key="ColorNodesCanvasBackground" Color="White"/>-->
     <!--#endregion      NodesCanvas-->
 
     <!--<SolidColorBrush x:Key="ColorMenuBackground" Color="#1b1b1b" />

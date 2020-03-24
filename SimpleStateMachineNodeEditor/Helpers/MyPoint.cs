@@ -4,9 +4,7 @@ using System.Windows;
 
 namespace SimpleStateMachineNodeEditor.Helpers
 {
-    /// <summary>
-    /// Класс точки
-    /// </summary>
+
     public class MyPoint : ReactiveObject
     {
         /// <summary>
