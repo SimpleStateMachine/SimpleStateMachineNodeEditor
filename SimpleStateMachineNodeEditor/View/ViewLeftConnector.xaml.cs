@@ -94,7 +94,7 @@ namespace SimpleStateMachineNodeEditor.View
         void UpdatePosition()
         {
             // Координата центра
-            Point InputCenter = Form.TranslatePoint(new Point(Form.Width / 2, Form.Height / 2), this);
+            Point InputCenter = Form.TranslatePoint(new Point(1, Form.Height / 2), this);
 
             //Ищем Canvas
             ViewNodesCanvas NodesCanvas = MyUtils.FindParent<ViewNodesCanvas>(this);

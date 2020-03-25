@@ -53,17 +53,26 @@
 
             <SolidColorBrush x:Key="ColorRightConnectorEllipseStaticBackground" Color="#FFF4F4F5"/>
             <SolidColorBrush x:Key="ColorRightConnectorEllipseStaticBorder" Color="Black"/>
-            <SolidColorBrush x:Key="ColorRightConnectorEllipseMouseOverBackground" Color="#FFF4F4F5"/>
+            <!--<SolidColorBrush x:Key="ColorRightConnectorEllipseMouseOverBackground" Color="#FFF4F4F5"/>
             <SolidColorBrush x:Key="ColorRightConnectorEllipseMouseOverBorder" Color="#FFF4F4F5"/>
 
             <SolidColorBrush x:Key="ColorRightConnectorEllipseMouseEnterBackground" Color="#FFF4F4F5"/>
             <SolidColorBrush x:Key="ColorRightConnectorEllipseMouseEnterBorder" Color="#FFF4F4F5"/>
-            <SolidColorBrush x:Key="ColorRightConnectorEllipseMouseLeaveBackground" Color="#FFF4F4F5"/>
+            <SolidColorBrush x:Key="ColorRightConnectorEllipseMouseLeaveBackground" Color="#FFF4F4F5"/>-->
+
+            <SolidColorBrush x:Key="ColorRightConnectorEllipseMouseOverBackground" Color="Red"/>
+            <SolidColorBrush x:Key="ColorRightConnectorEllipseMouseOverBorder" Color="Red"/>
+            <SolidColorBrush x:Key="ColorRightConnectorEllipseMouseEnterBackground" Color="Red"/>
+            <SolidColorBrush x:Key="ColorRightConnectorEllipseMouseEnterBorder" Color="Red"/>
+            <SolidColorBrush x:Key="ColorRightConnectorEllipseMouseLeaveBackground" Color="Red"/>
             <SolidColorBrush x:Key="ColorRightConnectorEllipseMouseLeaveBorder" Color="Black"/>
-            <SolidColorBrush x:Key="ColorRightConnectorEllipseDropEnterBackground" Color="#FFF4F4F5"/>
+            <!--<SolidColorBrush x:Key="ColorRightConnectorEllipseDropEnterBackground" Color="#FFF4F4F5"/>
             <SolidColorBrush x:Key="ColorRightConnectorEllipseDropEnterBorder" Color="#FFF4F4F5"/>
-            <SolidColorBrush x:Key="ColorRightConnectorEllipseDropLeaveBackground" Color="#FFF4F4F5"/>
-            <SolidColorBrush x:Key="ColorRightConnectorEllipseDropLeaveBorder" Color="Black"/>
+            <SolidColorBrush x:Key="ColorRightConnectorEllipseDropLeaveBackground" Color="#FFF4F4F5"/>-->
+    <SolidColorBrush x:Key="ColorRightConnectorEllipseDropEnterBackground" Color="Red"/>
+            <SolidColorBrush x:Key="ColorRightConnectorEllipseDropEnterBorder" Color="Red"/>
+            <SolidColorBrush x:Key="ColorRightConnectorEllipseDropLeaveBackground" Color="Red"/>
+    <SolidColorBrush x:Key="ColorRightConnectorEllipseDropLeaveBorder" Color="Black"/>
 
             <!--#endregion  RightConnectorEllipse-->
 

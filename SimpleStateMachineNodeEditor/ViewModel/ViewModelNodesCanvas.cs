@@ -12,6 +12,7 @@ using DynamicData.Binding;
 using SimpleStateMachineNodeEditor.Helpers;
 using SimpleStateMachineNodeEditor.Helpers.Commands;
 using SimpleStateMachineNodeEditor.Helpers.Transformations;
+using System.IO;
 
 namespace SimpleStateMachineNodeEditor.ViewModel
 {
@@ -20,7 +21,7 @@ namespace SimpleStateMachineNodeEditor.ViewModel
         public IObservableCollection<ViewModelConnect> Connects = new ObservableCollectionExtended<ViewModelConnect>();
         public IObservableCollection<ViewModelNode> Nodes = new ObservableCollectionExtended<ViewModelNode>();
         [Reactive] public ViewModelSelector Selector { get; set; } = new ViewModelSelector();
-        [Reactive] public ViewModelCutter Cutter { get; set; } = new ViewModelCutter();
+        [Reactive] public ViewModelCutter Cutter { get; set; }
         [Reactive] public ViewModelConnect DraggedConnect { get; set; }
         [Reactive] public ViewModelConnector ConnectorPreviewForDrop { get; set; }
         [Reactive] public ViewModelNode CurrentNode { get; set; }
@@ -34,6 +35,8 @@ namespace SimpleStateMachineNodeEditor.ViewModel
         {
             SetupCommands();
             SetupNodes();
+
+            Cutter = new ViewModelCutter(this);
         }
 
         #region Setup Nodes
@@ -243,10 +246,14 @@ namespace SimpleStateMachineNodeEditor.ViewModel
         }
         private void CutterIntersect()
         {
-            MyPoint cutterStartPointDiagonal = MyUtils.GetStartPointDiagonal(Cutter.StartPoint, Cutter.EndPoint) / Scale.Value;
-            MyPoint cutterEndPointDiagonal = MyUtils.GetEndPointDiagonal(Cutter.StartPoint, Cutter.EndPoint) / Scale.Value;
+            //MyPoint cutterStartPoint = Cutter.StartPoint / Scale.Value;
+            //MyPoint cutterEndPoint = Cutter.EndPoint / Scale.Value;
+            MyPoint cutterStartPoint = Cutter.StartPoint;
+            MyPoint cutterEndPoint = Cutter.EndPoint;
+            //some optimizations
             var connects = Connects.Where(x => MyUtils.Intersect(MyUtils.GetStartPointDiagonal(x.StartPoint, x.EndPoint), MyUtils.GetEndPointDiagonal(x.StartPoint, x.EndPoint),
-                                                        cutterStartPointDiagonal, cutterEndPointDiagonal));
+                                               MyUtils.GetStartPointDiagonal(Cutter.StartPoint, Cutter.EndPoint), MyUtils.GetEndPointDiagonal(Cutter.StartPoint, Cutter.EndPoint)));
+            //var connects = Connects;
             foreach (var connect in Connects)
             {
                 connect.Selected = false;

@@ -61,6 +61,8 @@ namespace SimpleStateMachineNodeEditor.View
                 // Точка в которую приходит линия среза
                 this.OneWayBind(this.ViewModel, x => x.EndPoint.Value.Y, x => x.Line.Y2).DisposeWith(disposable);
 
+                this.OneWayBind(this.ViewModel, x => x.StrokeThickness, x => x.Line.StrokeThickness).DisposeWith(disposable);
+
                 this.WhenAnyValue(x => x.Visibility).Subscribe(_ => Update()).DisposeWith(disposable);
 
             });
@@ -92,7 +94,7 @@ namespace SimpleStateMachineNodeEditor.View
         {
             //Ищем Canvas
             ViewNodesCanvas NodesCanvas = MyUtils.FindParent<ViewNodesCanvas>(this);
-            ViewModel.EndPoint.Set(e.GetPosition(NodesCanvas));
+            ViewModel.EndPoint.Set(e.GetPosition(NodesCanvas.Grid));
             e.Handled = true;
 
         }

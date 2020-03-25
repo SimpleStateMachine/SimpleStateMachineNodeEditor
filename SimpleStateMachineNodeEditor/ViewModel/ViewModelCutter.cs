@@ -1,6 +1,10 @@
 ﻿using ReactiveUI;
 using ReactiveUI.Fody.Helpers;
 
+
+using System;
+using System.Reactive.Linq;
+
 using SimpleStateMachineNodeEditor.Helpers;
 using SimpleStateMachineNodeEditor.Helpers.Commands;
 
@@ -23,9 +27,17 @@ namespace SimpleStateMachineNodeEditor.ViewModel
         /// </summary>
         [Reactive] public MyPoint EndPoint { get; set; } = new MyPoint();
 
-        public ViewModelCutter()
+        [Reactive] public ViewModelNodesCanvas NodesCanvas { get; set; }
+
+        [Reactive] public double StrokeThickness { get; set; } = 1;
+
+        public ViewModelCutter(ViewModelNodesCanvas nodesCanvas)
         {
             SetupCommands();
+
+            this.WhenAnyValue(x => x.NodesCanvas.Scale.Value).Subscribe(value => StrokeThickness = value);
+
+            NodesCanvas = nodesCanvas;
         }
         #region Setup Commands
         public SimpleCommandWithParameter<MyPoint> CommandStartCut { get; set; }

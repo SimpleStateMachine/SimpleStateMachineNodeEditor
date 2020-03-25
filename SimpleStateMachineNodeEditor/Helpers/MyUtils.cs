@@ -201,7 +201,6 @@ namespace SimpleStateMachineNodeEditor.Helpers
         //Check on intersections curve Bezier and line
         public static bool ComputeIntersections(MyPoint bezierStartPoint, MyPoint bezierPoint1, MyPoint bezierPoint2, MyPoint bezierEndPoint, MyPoint lineStartPoint, MyPoint lineEndPoint)
         {
-
             // coefficients of line
             double A = lineEndPoint.Y - lineStartPoint.Y;// A = y2 - y1
             double B = lineStartPoint.X - lineEndPoint.X;// B = x1 - x2
@@ -251,6 +250,7 @@ namespace SimpleStateMachineNodeEditor.Helpers
                 if (t < 0 || t > 1.0 || s < 0 || s > 1.0)
                 {
                     continue;
+                  
                 }
 
                 X.Add(p);

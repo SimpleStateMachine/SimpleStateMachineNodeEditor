@@ -51,6 +51,7 @@ namespace SimpleStateMachineNodeEditor.View
                 this.OneWayBind(this.ViewModel, x => x.StrokeDashArray, x => x.Path.StrokeDashArray).DisposeWith(disposable);
 
                 this.OneWayBind(this.ViewModel, x => x.StrokeThickness, x => x.Path.StrokeThickness).DisposeWith(disposable);
+
             });
         }
     }

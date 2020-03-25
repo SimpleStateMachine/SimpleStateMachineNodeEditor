@@ -234,7 +234,7 @@ namespace SimpleStateMachineNodeEditor.View
             if (this.IsVisible)
             {
                 // Координата центра
-                positionConnectPoint = Form.TranslatePoint(new Point(Form.Width / 2, Form.Height / 2), this);
+                positionConnectPoint = Form.TranslatePoint(new Point(Form.Width-1, Form.Height/2), this);
 
                 //Ищем Canvas
                 ViewNodesCanvas NodesCanvas = MyUtils.FindParent<ViewNodesCanvas>(this);
