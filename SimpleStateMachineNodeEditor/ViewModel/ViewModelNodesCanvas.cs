@@ -333,5 +333,6 @@ namespace SimpleStateMachineNodeEditor.ViewModel
                 }
             }
         }
+
     }
 }

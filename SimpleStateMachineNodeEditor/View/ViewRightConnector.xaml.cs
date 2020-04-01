@@ -44,7 +44,7 @@ namespace SimpleStateMachineNodeEditor.View
             InitializeComponent();
             SetupBinding();
             SetupEvents();
-
+           
         }
 
 
@@ -53,6 +53,10 @@ namespace SimpleStateMachineNodeEditor.View
         {
             this.WhenActivated(disposable =>
             {
+
+                this.ViewModel.FormFill = Application.Current.Resources["ColorRightConnectorEllipseEnableBackground"] as SolidColorBrush;
+                this.ViewModel.FormStroke = Application.Current.Resources["ColorRightConnectorEllipseEnableBorder"] as SolidColorBrush;
+
                 // Имя перехода ( вводится в узле)
                 this.OneWayBind(this.ViewModel, x => x.Name, x => x.Text.Text).DisposeWith(disposable);
 
@@ -70,7 +74,7 @@ namespace SimpleStateMachineNodeEditor.View
                      .BindTo(this, v => v.ViewModel.Size).DisposeWith(disposable);
 
                 // Цвет перехода
-                this.OneWayBind(this.ViewModel, x => x.FormFill, x => x.Form.Fill).DisposeWith(disposable);
+                this.Bind(this.ViewModel, x => x.FormFill, x => x.Form.Fill).DisposeWith(disposable);
 
                 // Отображается ли переход
                 this.OneWayBind(this.ViewModel, x => x.Visible, x => x.RightConnector.Visibility).DisposeWith(disposable);
@@ -78,7 +82,6 @@ namespace SimpleStateMachineNodeEditor.View
                 // При изменении размера, позиции или масштаба узла
                 this.WhenAnyValue(x => x.ViewModel.Node.Size, x => x.ViewModel.Node.Point1.Value, x => x.ViewModel.Node.NodesCanvas.Scale.Scales.Value)
                 .Subscribe(_ => { UpdatePositionConnectPoin(); }).DisposeWith(disposable);
-
             });
         }
         #endregion SetupBinding

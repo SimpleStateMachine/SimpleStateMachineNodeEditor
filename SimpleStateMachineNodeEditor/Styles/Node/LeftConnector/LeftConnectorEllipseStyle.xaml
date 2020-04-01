@@ -38,8 +38,8 @@
 
     <Style x:Key="LeftConnectorEllipseStyle" TargetType="{x:Type Ellipse}">
         <Style.Setters>
-            <Setter Property="Stroke" Value="{StaticResource ColorLeftConnectorEllipseStaticBorder}"/>
-            <Setter Property="Fill"  Value="{StaticResource ColorLeftConnectorEllipseStaticBackground}"/>
+            <Setter Property="Stroke" Value="{StaticResource ColorLeftConnectorEllipseEnableBorder}"/>
+            <Setter Property="Fill"  Value="{StaticResource ColorLeftConnectorEllipseEnableBackground}"/>
         </Style.Setters>
 
         <Style.Triggers>

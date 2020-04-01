@@ -52,12 +52,12 @@ namespace SimpleStateMachineNodeEditor.ViewModel
         /// <summary>
         /// Цвет рамки, вокруг перехода
         /// </summary>
-        [Reactive] public Brush FormStroke { get; set; } = Brushes.Black;
+        [Reactive] public Brush FormStroke { get; set; }
 
         /// <summary>
         /// Цвет перехода
         /// </summary>
-        [Reactive] public Brush FormFill { get; set; } = Brushes.DarkGray;
+        [Reactive] public Brush FormFill { get; set; }
 
         /// <summary>
         /// Узел, которому принадлежит переход

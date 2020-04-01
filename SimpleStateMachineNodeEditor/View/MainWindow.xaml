@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:SimpleStateMachineNodeEditor"
         xmlns:styles="clr-namespace:SimpleStateMachineNodeEditor.Styles"
     xmlns:view="clr-namespace:SimpleStateMachineNodeEditor.View"
-    x:Class="SimpleStateMachineNodeEditor.MainWindow"
+    x:Class="SimpleStateMachineNodeEditor.View.MainWindow"
         mc:Ignorable="d"
         Title="MainWindow"  d:DesignWidth="808.96" Height="738.592" BorderThickness="1" Padding="7,0,7,7" ResizeMode="CanResizeWithGrip" BorderBrush="{DynamicResource ColorWindowBorder}" Background="{DynamicResource ColorWindowHeader}" Foreground="{x:Null}" WindowStyle="None" AllowsTransparency="True" Style="{DynamicResource CustomWindowStyle}">
     <Grid Background="{DynamicResource ColorWindowHeader}">
@@ -17,18 +17,21 @@
         </Grid.RowDefinitions>
         <DockPanel x:Name="Header" Grid.Row="0" Background="{StaticResource ColorWindowHeader}" LastChildFill="False">
             <Menu Background="#1b1b1c" OpacityMask="#3e3e40"  Foreground="White" BorderBrush="#333337" Template="{DynamicResource MenuTemplate}" BorderThickness="1" HorizontalAlignment="Left" VerticalAlignment="Center">
-                <MenuItem Header="File" Style="{DynamicResource MenuItemStyle}">
-                    <MenuItem Header="Open"  Style="{DynamicResource MenuItemStyle}"/>
-                    <MenuItem Header="Save"  Style="{DynamicResource MenuItemStyle}"/>
-                    <MenuItem Header="SaveAs..." Style="{DynamicResource MenuItemStyle}"/>
-                    <MenuItem Header="Exit"  Style="{DynamicResource MenuItemStyle}"/>
+                <MenuItem Header="File" x:Name="Item" Style="{DynamicResource MenuItemStyle}">
+                    <MenuItem Header="Open" x:Name="ItemOpen" Style="{DynamicResource MenuItemStyle}"/>
+                    <MenuItem Header="Save" x:Name="ItemSave" Style="{DynamicResource MenuItemStyle}"/>
+                    <MenuItem Header="SaveAs..." x:Name="ItemSaveAs" Style="{DynamicResource MenuItemStyle}">
+                        <MenuItem Header="PNG" x:Name="ItemSaveAsPNG" Style="{DynamicResource MenuItemStyle}"/>
+                        <MenuItem Header="JPEG" x:Name="ItemSaveAsJPEG" Style="{DynamicResource MenuItemStyle}"/>
+                    </MenuItem>
+                    <MenuItem Header="Exit"  x:Name="ItemExit" Style="{DynamicResource MenuItemStyle}"/>
                 </MenuItem>
-                <MenuItem Header="Edit"  Style="{DynamicResource MenuItemStyle}">
-                    <MenuItem Header="Undo"  Style="{DynamicResource MenuItemStyle}"/>
-                    <MenuItem Header="Redo"  Style="{DynamicResource MenuItemStyle}"/>
-                    <MenuItem Header="Cut"  Style="{DynamicResource MenuItemStyle}"/>
-                    <MenuItem Header="Copy"  Style="{DynamicResource MenuItemStyle}"/>
-                    <MenuItem Header="Paste" Style="{DynamicResource MenuItemStyle}"/>
+                <MenuItem Header="Edit"  x:Name="ItemEdit" Style="{DynamicResource MenuItemStyle}">
+                    <MenuItem Header="Undo"  x:Name="ItemUndo" Style="{DynamicResource MenuItemStyle}"/>
+                    <MenuItem Header="Redo"  x:Name="ItemRedo" Style="{DynamicResource MenuItemStyle}"/>
+                    <MenuItem Header="Cut"  x:Name="ItemCut" Style="{DynamicResource MenuItemStyle}"/>
+                    <MenuItem Header="Copy"  x:Name="ItemCopy" Style="{DynamicResource MenuItemStyle}"/>
+                    <MenuItem Header="Paste" x:Name="ItemPaste" Style="{DynamicResource MenuItemStyle}"/>
                 </MenuItem>
             </Menu>
 
@@ -69,7 +72,7 @@
         <TabControl  Grid.Row="2" Background="{x:Null}" BorderBrush="{x:Null}" TabStripPlacement="Top" >
             <TabItem  Header="Node editor"  Style="{DynamicResource TabItemTemplate}" Background="{DynamicResource ColorWindowHeader}" Foreground="{DynamicResource ColorTabItemText}"  BorderBrush="{DynamicResource ColorTabItemIsMouseOver}" OpacityMask="{DynamicResource ColorTabItemIsSelected}">
                 <!--<view:ViewLeftConnector/>-->
-                <view:ViewNodesCanvas/>
+                <view:ViewNodesCanvas x:Name="NodesCanvas"/>
             </TabItem>
             <!--<TabItem Header="Transitions table"  Style="{DynamicResource TabItemTemplate}" Background="{DynamicResource ColorWindowHeader}" Foreground="{DynamicResource ColorTabItemText}" BorderBrush="{DynamicResource ColorTabItemIsMouseOver}"   OpacityMask="{DynamicResource ColorTabItemIsSelected}"/>-->
         </TabControl>

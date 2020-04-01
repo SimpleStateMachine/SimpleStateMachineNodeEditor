@@ -50,6 +50,10 @@ namespace SimpleStateMachineNodeEditor.View
         {
             this.WhenActivated(disposable =>
             {
+
+                this.ViewModel.FormFill = Application.Current.Resources["ColorLeftConnectorEllipseEnableBackground"] as SolidColorBrush;
+                this.ViewModel.FormStroke = Application.Current.Resources["ColorLeftConnectorEllipseEnableBorder"] as SolidColorBrush;
+
                 // Имя перехода ( вводится в узле)
                 this.OneWayBind(this.ViewModel, x => x.Name, x => x.Text.Text).DisposeWith(disposable);
 
@@ -70,7 +74,9 @@ namespace SimpleStateMachineNodeEditor.View
                 this.OneWayBind(this.ViewModel, x => x.Visible, x => x.LeftConnector.Visibility).DisposeWith(disposable);
 
                 // При изменении размера, позиции или zoom узла
-                this.WhenAnyValue(x => x.ViewModel.Node.Size, x => x.ViewModel.Node.Point1.Value, x => x.ViewModel.Node.NodesCanvas.Scale.Scales.Value).Subscribe(_ => UpdatePosition()).DisposeWith(disposable);
+                this.WhenAnyValue(x => x.ViewModel.Node.Size, x => x.ViewModel.Node.Point1.Value, x => x.ViewModel.Node.NodesCanvas.Scale.Scales.Value)
+                .Subscribe(_ => UpdatePosition()).DisposeWith(disposable);
+
 
             });
         }

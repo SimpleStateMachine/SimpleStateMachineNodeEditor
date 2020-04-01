@@ -16,6 +16,8 @@ using ReactiveUI;
 using SimpleStateMachineNodeEditor.Helpers;
 using SimpleStateMachineNodeEditor.ViewModel;
 using SimpleStateMachineNodeEditor.Helpers.Transformations;
+using System.IO;
+using SimpleStateMachineNodeEditor.Helpers.Enums;
 
 namespace SimpleStateMachineNodeEditor.View
 {
@@ -61,7 +63,7 @@ namespace SimpleStateMachineNodeEditor.View
             ViewModel = new ViewModelNodesCanvas();
             SetupBinding();
             SetupEvents();
-            BindingCommands();
+            SetupCommands();
         }
         #region Setup Binding
         private void SetupBinding()
@@ -86,7 +88,7 @@ namespace SimpleStateMachineNodeEditor.View
         #endregion Setup Binding
 
         #region Setup Commands
-        private void BindingCommands()
+        private void SetupCommands()
         {
             this.WhenActivated(disposable =>
             {
@@ -131,12 +133,12 @@ namespace SimpleStateMachineNodeEditor.View
                 //Эти события срабатывают раньше команд
                 this.Events().PreviewMouseLeftButtonDown.Subscribe(e => OnEventPreviewMouseLeftButtonDown(e)).DisposeWith(disposable);
                 this.Events().PreviewMouseRightButtonDown.Subscribe(e => OnEventPreviewMouseRightButtonDown(e)).DisposeWith(disposable);
-                this.WhenAnyValue(x => x.ViewModel.Scale.Value).Subscribe(value => { this.Grid.Height /= value; this.Grid.Width /= value; }).DisposeWith(disposable);
+                this.WhenAnyValue(x => x.ViewModel.Scale.Value).Subscribe(value => { this.Canvas.Height /= value; this.Canvas.Width /= value; }).DisposeWith(disposable);
             });
         }
         private void OnEventMouseLeftDown(MouseButtonEventArgs e)
         {
-            PositionMove = new MyPoint(Mouse.GetPosition(this.Grid));
+            PositionMove = new MyPoint(Mouse.GetPosition(this.Canvas));
 
             if (Mouse.Captured == null)
             {
@@ -229,17 +231,17 @@ namespace SimpleStateMachineNodeEditor.View
         }
         private void OnEventPreviewMouseLeftButtonDown(MouseButtonEventArgs e)
         {
-            PositionLeftClick.Set(e.GetPosition(this.Grid));
+            PositionLeftClick.Set(e.GetPosition(this.Canvas));
         }
         private void OnEventPreviewMouseRightButtonDown(MouseButtonEventArgs e)
         {
-            PositionRightClick.Set(e.GetPosition(this.Grid));
+            PositionRightClick.Set(e.GetPosition(this.Canvas));
         }
 
         #endregion Setup Events
         private MyPoint GetDeltaMove()
         {
-            MyPoint CurrentPosition = new MyPoint(Mouse.GetPosition(this.Grid));
+            MyPoint CurrentPosition = new MyPoint(Mouse.GetPosition(this.Canvas));
             MyPoint result = new MyPoint();
 
             if (!PositionMove.IsClear)
@@ -264,5 +266,30 @@ namespace SimpleStateMachineNodeEditor.View
 
             return result;
         }
+
+
+        public void SaveCanvasToImage(string filename, ImageFormats format)
+        {
+            RenderTargetBitmap renderBitmap = new RenderTargetBitmap((int)this.Canvas.Width, (int)this.Canvas.Height, 96d, 96d, PixelFormats.Pbgra32);
+            // needed otherwise the image output is black
+            this.Canvas.Measure(new Size((int)this.Canvas.Width, (int)this.Canvas.Height));
+            this.Canvas.Arrange(new Rect(new Size((int)this.Canvas.Width, (int)this.Canvas.Height)));
+
+            renderBitmap.Render(this.Canvas);
+            BitmapEncoder encoder;
+
+            if (format == ImageFormats.JPEG)
+                encoder = new JpegBitmapEncoder();
+            else
+                encoder = new PngBitmapEncoder();
+
+            encoder.Frames.Add(BitmapFrame.Create(renderBitmap));
+
+            using (FileStream file = File.Create(filename))
+            {
+                encoder.Save(file);
+            }
+        }
+
     }
 }

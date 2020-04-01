@@ -37,10 +37,10 @@
     </Storyboard>
 
     <Style x:Key="RightConnectorEllipseStyle" TargetType="{x:Type Ellipse}">
-        <Style.Setters>
-            <Setter Property="Stroke" Value="{StaticResource ColorRightConnectorEllipseStaticBorder}"/>
-            <Setter Property="Fill"  Value="{StaticResource ColorRightConnectorEllipseStaticBackground}"/>
-        </Style.Setters>
+        <!--<Style.Setters>
+            <Setter Property="Stroke" Value="{StaticResource ColorRightConnectorEllipseEnableBorder}"/>
+            <Setter Property="Fill"  Value="{StaticResource ColorRightConnectorEllipseEnableBackground}"/>
+        </Style.Setters>-->
 
         <Style.Triggers>
             <!--<Trigger Property="IsMouseOver" Value="true">
@@ -48,6 +48,16 @@
                 -->
             <!--<Setter Property="Fill"  Value="{StaticResource MouseOver.Background}"/>-->
             <!--
+            </Trigger>-->
+            <!--<MultiTrigger>
+                <MultiTrigger.Conditions>
+                    <Condition Property="IsEnabled" Value="false"/>
+                </MultiTrigger.Conditions>
+                <Setter Property="Fill" Value="Orange"/>
+            </MultiTrigger>-->
+            <!--<Trigger Property="Ellipse.IsEnabled" Value="false" >
+                <Setter Property="Fill" Value="Orange" />
+                <Setter Property="Stroke" Value="Orange" />
             </Trigger>-->
             <EventTrigger RoutedEvent="Ellipse.MouseEnter">
                 <BeginStoryboard Storyboard="{StaticResource MouseEnterStoryboard}" />
