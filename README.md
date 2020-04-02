@@ -25,7 +25,7 @@ If you like or are using this project please give it a star. Thanks!
 ![](https://github.com/SimpleStateMachine/SimpleStateMachineNodeEditor/blob/gh-pages/img/naming%20for%20states%20and%20transitions.gif)
 ### Moving transitions
 ![](https://github.com/SimpleStateMachine/SimpleStateMachineNodeEditor/blob/gh-pages/img/moving%20transitions.gif)
-### Save work space as Png/JPEG
+* ### Save work space as Png/JPEG
 ## License
 
 Copyright (c) SimpleStateMachine
