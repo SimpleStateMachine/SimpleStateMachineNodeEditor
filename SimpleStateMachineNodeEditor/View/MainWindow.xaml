@@ -20,9 +20,10 @@
                 <MenuItem Header="File" x:Name="Item" Style="{DynamicResource MenuItemStyle}">
                     <MenuItem Header="Open" x:Name="ItemOpen" Style="{DynamicResource MenuItemStyle}"/>
                     <MenuItem Header="Save" x:Name="ItemSave" Style="{DynamicResource MenuItemStyle}"/>
-                    <MenuItem Header="SaveAs..." x:Name="ItemSaveAs" Style="{DynamicResource MenuItemStyle}">
-                        <MenuItem Header="PNG" x:Name="ItemSaveAsPNG" Style="{DynamicResource MenuItemStyle}"/>
-                        <MenuItem Header="JPEG" x:Name="ItemSaveAsJPEG" Style="{DynamicResource MenuItemStyle}"/>
+                    <MenuItem Header="SaveAs..." x:Name="ItemSaveAs" Style="{DynamicResource MenuItemStyle}"/>
+                    <MenuItem Header="Export" x:Name="ItemExport" Style="{DynamicResource MenuItemStyle}">
+                        <MenuItem Header="Export to PNG" x:Name="ItemExportToPNG" Style="{DynamicResource MenuItemStyle}"/>
+                        <MenuItem Header="Export to JPEG" x:Name="ItemExportToJPEG" Style="{DynamicResource MenuItemStyle}"/>
                     </MenuItem>
                     <MenuItem Header="Exit"  x:Name="ItemExit" Style="{DynamicResource MenuItemStyle}"/>
                 </MenuItem>

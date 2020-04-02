@@ -270,10 +270,13 @@ namespace SimpleStateMachineNodeEditor.View
 
         public void SaveCanvasToImage(string filename, ImageFormats format)
         {
-            RenderTargetBitmap renderBitmap = new RenderTargetBitmap((int)this.Canvas.Width, (int)this.Canvas.Height, 96d, 96d, PixelFormats.Pbgra32);
+            int width = (int)this.Canvas.ActualWidth;
+            int height = (int)this.Canvas.ActualHeight;
+
+            RenderTargetBitmap renderBitmap = new RenderTargetBitmap(width, height, 96d, 96d, PixelFormats.Pbgra32);
             // needed otherwise the image output is black
-            this.Canvas.Measure(new Size((int)this.Canvas.Width, (int)this.Canvas.Height));
-            this.Canvas.Arrange(new Rect(new Size((int)this.Canvas.Width, (int)this.Canvas.Height)));
+            this.Canvas.Measure(new Size(width, height));
+            this.Canvas.Arrange(new Rect(new Size(width, height)));
 
             renderBitmap.Render(this.Canvas);
             BitmapEncoder encoder;

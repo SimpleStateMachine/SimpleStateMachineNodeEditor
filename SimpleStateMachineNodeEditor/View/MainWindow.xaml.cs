@@ -76,7 +76,8 @@ namespace SimpleStateMachineNodeEditor.View
                 this.ButtonClose.Events().Click.Subscribe(e => ButtonCloseClick(e)).DisposeWith(disposable);
                 this.ButtonMin.Events().Click.Subscribe(e => ButtonMinClick(e)).DisposeWith(disposable);
                 this.ButtonMax.Events().Click.Subscribe(e => ButtonMaxClick(e)).DisposeWith(disposable);
-                this.ItemSaveAsPNG.Events().Click.Subscribe(_ => SaveAsPNG()).DisposeWith(disposable);
+                this.ItemExportToJPEG.Events().Click.Subscribe(_ => SaveAsPNG(ImageFormats.PNG)).DisposeWith(disposable);
+                this.ItemExportToPNG.Events().Click.Subscribe(_ => SaveAsPNG(ImageFormats.JPEG)).DisposeWith(disposable);
             });
         }
 
@@ -129,18 +130,17 @@ namespace SimpleStateMachineNodeEditor.View
             }
         }
 
-        void SaveAsPNG()
+        void SaveAsPNG(ImageFormats format)
         {
-            //// Configure open file dialog box
-            //OpenFileDialog dlg = new OpenFileDialog();
-            //dlg.FileName = "Document"; // Default file name
-            //dlg.DefaultExt = ".png"; // Default file extension
-            ////dlg.Filter = Filter
+            SaveFileDialog dlg = new SaveFileDialog();
+            dlg.FileName = "SimpleStateMachine"; 
+            dlg.Filter = (format == ImageFormats.JPEG)? "JPEG Image (.jpeg)|*.jpeg":"Png Image (.png)|*.png";
 
-            //// Show open file dialog box
-            //DialogResult dialogResult = dlg.ShowDialog();
-            //var t = 5;
-            //this.NodesCanvas.SaveCanvasToImage()ж
+            DialogResult dialogResult = dlg.ShowDialog();
+            if(dialogResult==System.Windows.Forms.DialogResult.OK)
+            {
+                this.NodesCanvas.SaveCanvasToImage(dlg.FileName, format);
+            }              
         }
 
         #endregion SetupEvents
