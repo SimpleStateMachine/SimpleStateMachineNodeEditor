@@ -92,19 +92,9 @@ namespace SimpleStateMachineNodeEditor.View
             this.WhenActivated(disposable =>
             {
                 this.Form.Events().MouseLeftButtonDown.Subscribe(e => ConnectDrag(e)).DisposeWith(disposable);
-
                 this.Text.Events().LostFocus.Subscribe(e => Validate(e)).DisposeWith(disposable);
-
-                this.Text.Events().PreviewMouseLeftButtonDown.Subscribe(e => TextDrag(e)).DisposeWith(disposable);
-                this.Text.Events().PreviewDrop.Subscribe(e => TextDrop(e)).DisposeWith(disposable);
-                this.Text.Events().PreviewDragOver.Subscribe(e => TextDragOver(e)).DisposeWith(disposable);
-                this.Text.Events().PreviewDragEnter.Subscribe(e => TextDragEnter(e)).DisposeWith(disposable);
-                this.Text.Events().PreviewDragLeave.Subscribe(e => TextDragLeave(e)).DisposeWith(disposable);
-
                 this.Grid.Events().PreviewMouseLeftButtonDown.Subscribe(e => ConnectorDrag(e)).DisposeWith(disposable);
                 this.Grid.Events().PreviewDragEnter.Subscribe(e => ConnectorDragEnter(e)).DisposeWith(disposable);
-                this.Grid.Events().PreviewDragOver.Subscribe(e => ConnectorDragOver(e)).DisposeWith(disposable);
-                this.Grid.Events().PreviewDragLeave.Subscribe(e => ConnectorDragLeave(e)).DisposeWith(disposable);
                 this.Grid.Events().PreviewDrop.Subscribe(e => ConnectorDrop(e)).DisposeWith(disposable);
                
 
@@ -118,7 +108,7 @@ namespace SimpleStateMachineNodeEditor.View
         }
 
         private void ConnectDrag(MouseButtonEventArgs e)
-        {
+        {          
             this.ViewModel.CommandConnectPointDrag.Execute();
             DataObject data = new DataObject();
             data.SetData("Node", this.ViewModel.Node);
@@ -127,68 +117,18 @@ namespace SimpleStateMachineNodeEditor.View
             e.Handled = true;
         }
 
-        private void TextDrag(MouseButtonEventArgs e)
-        {
-            ConnectorDrag(e);
-            e.Handled = true;
-        }
-
-        private void TextDragOver(DragEventArgs e)
-        {
-            ConnectorDragOver(e);
-            e.Handled = true;
-        }
-
-        private void TextDragEnter(DragEventArgs e)
-        {
-            ConnectorDragEnter(e);
-            e.Handled = true;
-        }
-
-        private void TextDragLeave(DragEventArgs e)
-        {
-            ConnectorDragLeave(e);
-            e.Handled = true;
-        }
-
-        private void TextDrop(DragEventArgs e)
-        {
-            ConnectorDrop(e);
-            e.Handled = true;
-        }
-
         private void ConnectorDrag(MouseButtonEventArgs e)
         {
+            
             if (!this.ViewModel.TextEnable)
                 return;
-
+            if (!Keyboard.IsKeyDown(Key.LeftShift))
+                return;
             this.ViewModel.CommandConnectorDrag.Execute();
             DataObject data = new DataObject();
             data.SetData("Connector", this.ViewModel);
             DragDrop.DoDragDrop(this, data, DragDropEffects.Link);
-            this.ViewModel?.CommandCheckConnectorDrop.Execute();
             e.Handled = true;
-        }
-
-        private void ConnectorDragOver(DragEventArgs e)
-        {
-            
-
-            //if (this.ViewModel.NodesCanvas.ConnectorPreviewForDrop != this.ViewModel)
-            //{
-            //    this.ViewModel.Node.Point1 += 0.0001;
-
-               
-            //    return;
-            //}
-            //e.Handled = true;
-            //this.UpdatePosition();
-
-            //this.ViewModel.CommandConnectorDragOver.Execute();
-
-            
-
-            return;
         }
 
         private void ConnectorDragEnter(DragEventArgs e)
@@ -203,17 +143,6 @@ namespace SimpleStateMachineNodeEditor.View
 
             e.Handled = true;
         }
-
-        private void ConnectorDragLeave(DragEventArgs e)
-        {
-            if (this.ViewModel.NodesCanvas.ConnectorPreviewForDrop != null)
-                return;
-
-            this.ViewModel.CommandConnectorDragLeave.Execute();
-
-            e.Handled = true;
-        }
-
         private void ConnectorDrop(DragEventArgs e)
         {
             if (this.ViewModel.NodesCanvas.ConnectorPreviewForDrop == null)
@@ -237,7 +166,7 @@ namespace SimpleStateMachineNodeEditor.View
             if (this.IsVisible)
             {
                 // Координата центра
-                positionConnectPoint = Form.TranslatePoint(new Point(Form.Width-1, Form.Height/2), this);
+                positionConnectPoint = Form.TranslatePoint(new Point(Form.Width/2, Form.Height / 2), this);
 
                 //Ищем Canvas
                 ViewNodesCanvas NodesCanvas = MyUtils.FindParent<ViewNodesCanvas>(this);

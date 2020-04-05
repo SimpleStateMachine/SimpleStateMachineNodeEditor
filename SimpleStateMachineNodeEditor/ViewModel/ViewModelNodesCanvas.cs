@@ -89,18 +89,6 @@ namespace SimpleStateMachineNodeEditor.ViewModel
         public SimpleCommandWithParameter<ViewModelConnector> CommandAddFreeConnect { get; set; }
         public Command<ViewModelConnect, ViewModelConnect> CommandAddConnect { get; set; }
 
-
-        //public Command CommandCopy { get; set; }
-        //public Command CommandPaste { get; set; }
-        //public Command CommandCut { get; set; }
-
-        //public Command CommandMoveDown { get; set; }
-        //public Command CommandMoveLeft { get; set; }
-        //public Command CommandMoveRight { get; set; }
-        //public Command CommandMoveUp { get; set; }
-
-
-
         public Command<MyPoint, List<ViewModelNode>> CommandFullMoveAllNode { get; set; }
         public Command<MyPoint, List<ViewModelNode>> CommandFullMoveAllSelectedNode { get; set; }
         public Command<MyPoint, ViewModelNode> CommandAddNode { get; set; }
@@ -122,8 +110,8 @@ namespace SimpleStateMachineNodeEditor.ViewModel
             CommandUndo = new SimpleCommand(this, CommandUndoRedo.Undo);
             CommandSelectAll = new SimpleCommand(this, SelectedAll);
             CommandUnSelectAll = new SimpleCommand(this, UnSelectedAll);
-            CommandSelectorIntersect = new SimpleCommand(this, SelectorIntersect);
-            CommandCutterIntersect = new SimpleCommand(this, CutterIntersect);
+            CommandSelectorIntersect = new SimpleCommand(this, SelectNodes);
+            CommandCutterIntersect = new SimpleCommand(this, SelectConnects);
             CommandValidateNodeName = new SimpleCommandWithParameter<ValidateObjectProperty<ViewModelNode, string>>(this, ValidateNodeName);
             CommandValidateConnectName = new SimpleCommandWithParameter<ValidateObjectProperty<ViewModelConnector, string>>(this, ValidateConnectName);
 
@@ -244,14 +232,14 @@ namespace SimpleStateMachineNodeEditor.ViewModel
 
             Scale.Value += (Delta > 0) ? Scales : -Scales;
         }
-        private void CutterIntersect()
+        private void SelectConnects()
         {
             //MyPoint cutterStartPoint = Cutter.StartPoint / Scale.Value;
             //MyPoint cutterEndPoint = Cutter.EndPoint / Scale.Value;
             MyPoint cutterStartPoint = Cutter.StartPoint;
             MyPoint cutterEndPoint = Cutter.EndPoint;
             //some optimizations
-            var connects = Connects.Where(x => MyUtils.Intersect(MyUtils.GetStartPointDiagonal(x.StartPoint, x.EndPoint), MyUtils.GetEndPointDiagonal(x.StartPoint, x.EndPoint),
+            var connects = Connects.Where(x => MyUtils.CheckIntersectTwoRectangles(MyUtils.GetStartPointDiagonal(x.StartPoint, x.EndPoint), MyUtils.GetEndPointDiagonal(x.StartPoint, x.EndPoint),
                                                MyUtils.GetStartPointDiagonal(Cutter.StartPoint, Cutter.EndPoint), MyUtils.GetEndPointDiagonal(Cutter.StartPoint, Cutter.EndPoint)));
             //var connects = Connects;
             foreach (var connect in Connects)
@@ -261,18 +249,18 @@ namespace SimpleStateMachineNodeEditor.ViewModel
 
             foreach (var connect in connects)
             {
-                connect.Selected = MyUtils.ComputeIntersections(connect.StartPoint, connect.Point1, connect.Point2, connect.EndPoint, Cutter.StartPoint, Cutter.EndPoint);
+                connect.Selected = MyUtils.CheckIntersectCubicBezierCurveAndLine(connect.StartPoint, connect.Point1, connect.Point2, connect.EndPoint, Cutter.StartPoint, Cutter.EndPoint);
             }
 
         }
-        private void SelectorIntersect()
+        private void SelectNodes()
         {
             MyPoint selectorPoint1 = Selector.Point1WithScale / Scale.Value;
             MyPoint selectorPoint2 = Selector.Point2WithScale / Scale.Value;
 
             foreach (ViewModelNode node in Nodes)
             {
-                node.Selected = MyUtils.Intersect(node.Point1, node.Point2, selectorPoint1, selectorPoint2);
+                node.Selected = MyUtils.CheckIntersectTwoRectangles(node.Point1, node.Point2, selectorPoint1, selectorPoint2);
             }
         }
 

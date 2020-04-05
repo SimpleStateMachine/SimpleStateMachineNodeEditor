@@ -72,6 +72,7 @@ namespace SimpleStateMachineNodeEditor.ViewModel
             //this.WhenAnyValue(x => x.FromConnector).Where(x => x == null).Subscribe(_ => { StartPoint.Clear(); });
             //this.WhenAnyValue(x => x.ToConnector).Where(x => x == null).Subscribe(_ => { EndPoint.Clear(); SetupCommands(); });
             FromConnector = fromConnector;
+            FromConnector.Connect = this;
             //SetupCommands();
         }
         #region Setup Commands

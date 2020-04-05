@@ -12,15 +12,7 @@ using System.Reactive.Disposables;
 using System.Reactive.Linq;
 
 using ReactiveUI;
-
-using ReactiveUI;
-
-using System.Windows.Input;
 using System.Windows.Markup;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 using SimpleStateMachineNodeEditor.ViewModel;
 using SimpleStateMachineNodeEditor.Helpers.Enums;
 using System.Windows.Forms;

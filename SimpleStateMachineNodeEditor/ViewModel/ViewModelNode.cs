@@ -217,8 +217,9 @@ namespace SimpleStateMachineNodeEditor.ViewModel
             {
                 CurrentConnector.TextEnable = true;
                 CurrentConnector.FormEnable = false;
-        
-                CurrentConnector.Name = "Transition_" + NodesCanvas.Connects.Count.ToString();
+
+                //CurrentConnector.Name = "Transition_" + NodesCanvas.Connects.Count.ToString();
+                CurrentConnector.Name = "T" + NodesCanvas.Connects.Count.ToString();
             }
             CurrentConnector = new ViewModelConnector(NodesCanvas, this)
             {

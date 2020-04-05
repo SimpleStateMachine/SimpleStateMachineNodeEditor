@@ -1,10 +1,19 @@
 ﻿using System.Reactive.Disposables;
 using System.Windows;
 using System.Windows.Controls;
-
+using System.Windows.Input;
 using ReactiveUI;
-
+using System;
+using System.Windows.Data;
+using System.Windows.Documents;
+using System.Windows.Media;
+using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
+using System.Windows.Controls.Primitives;
+using System.Reactive.Linq;
+using System.Windows.Markup;
 using SimpleStateMachineNodeEditor.ViewModel;
+using SimpleStateMachineNodeEditor.Helpers;
 
 namespace SimpleStateMachineNodeEditor.View
 {
@@ -31,6 +40,13 @@ namespace SimpleStateMachineNodeEditor.View
         public ViewConnect()
         {
             InitializeComponent();
+            SetupBinding();
+            SetupEvents();
+        }
+
+        #region SetupBinding
+        private void SetupBinding()
+        {
             this.WhenActivated(disposable =>
             {
                 // Цвет линии
@@ -54,5 +70,17 @@ namespace SimpleStateMachineNodeEditor.View
 
             });
         }
+        #endregion SetupBinding
+
+        #region SetupEvents
+        private void SetupEvents()
+        {
+            this.WhenActivated(disposable =>
+            {
+
+            });
+        }
+
+        #endregion SetupEvents
     }
 }

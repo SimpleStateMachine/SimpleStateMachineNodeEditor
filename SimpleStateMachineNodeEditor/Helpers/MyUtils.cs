@@ -54,7 +54,7 @@ namespace SimpleStateMachineNodeEditor.Helpers
             } while ((parent1 == default(TParent1)) || (parent2 == default(TParent2)));
         }
 
-        public static bool Intersect(MyPoint a1, MyPoint a2, MyPoint b1, MyPoint b2)
+        public static bool CheckIntersectTwoRectangles(MyPoint a1, MyPoint a2, MyPoint b1, MyPoint b2)
         {
             bool par1 = a1.X > b2.X; //второй перед первым
             bool par2 = b1.X > a2.X; //первый перед вторым
@@ -199,7 +199,7 @@ namespace SimpleStateMachineNodeEditor.Helpers
         }
 
         //Check on intersections curve Bezier and line
-        public static bool ComputeIntersections(MyPoint bezierStartPoint, MyPoint bezierPoint1, MyPoint bezierPoint2, MyPoint bezierEndPoint, MyPoint lineStartPoint, MyPoint lineEndPoint)
+        public static bool CheckIntersectCubicBezierCurveAndLine(MyPoint bezierStartPoint, MyPoint bezierPoint1, MyPoint bezierPoint2, MyPoint bezierEndPoint, MyPoint lineStartPoint, MyPoint lineEndPoint)
         {
             // coefficients of line
             double A = lineEndPoint.Y - lineStartPoint.Y;// A = y2 - y1

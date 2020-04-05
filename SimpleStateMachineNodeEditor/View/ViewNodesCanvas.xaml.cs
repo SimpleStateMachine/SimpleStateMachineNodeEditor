@@ -100,6 +100,7 @@ namespace SimpleStateMachineNodeEditor.View
                 this.BindCommand(this.ViewModel, x => x.CommandSelectAll, x => x.BindingSelectAll).DisposeWith(disposable);
                 this.BindCommand(this.ViewModel, x => x.CommandDeleteSelectedNodes, x => x.BindingDeleteNode).DisposeWith(disposable);
 
+
                 this.BindCommand(this.ViewModel, x => x.CommandSelect, x => x.BindingSelect, positionLeftClickObservable).DisposeWith(disposable);
                 this.BindCommand(this.ViewModel, x => x.CommandCut, x => x.BindingCut, positionLeftClickObservable).DisposeWith(disposable);
 

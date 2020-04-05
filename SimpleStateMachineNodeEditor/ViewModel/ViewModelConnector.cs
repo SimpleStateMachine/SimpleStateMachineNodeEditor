@@ -89,11 +89,8 @@ namespace SimpleStateMachineNodeEditor.ViewModel
 
         public SimpleCommand CommandConnectorDrag { get; set; }
         public SimpleCommand CommandConnectorDragEnter { get; set; }
-        public SimpleCommand CommandConnectorDragOver { get; set; }
-        public SimpleCommand CommandConnectorDragLeave { get; set; }
         public SimpleCommand CommandConnectorDrop { get; set; }
 
-        public SimpleCommand CommandCheckConnectorDrop { get; set; }
 
 
         public SimpleCommand CommandAdd { get; set; }
@@ -110,11 +107,7 @@ namespace SimpleStateMachineNodeEditor.ViewModel
 
             CommandConnectorDrag = new SimpleCommand(this, ConnectorDrag);
             CommandConnectorDragEnter = new SimpleCommand(this, ConnectorDragEnter);
-            CommandConnectorDragOver = new SimpleCommand(this, ConnectorDragOver);
-            CommandConnectorDragLeave = new SimpleCommand(this, ConnectorDragLeave);
-
             CommandConnectorDrop = new SimpleCommand(this, ConnectorDrop);
-            CommandCheckConnectorDrop = new SimpleCommand(this, CheckConnectorDrop);
 
             CommandAdd = new SimpleCommand(this, Add);
             CommandDelete = new SimpleCommand(this, Delete);
@@ -145,10 +138,10 @@ namespace SimpleStateMachineNodeEditor.ViewModel
 
         private void ConnectPointDrop()
         {
-            if (Node.NodesCanvas.DraggedConnect.FromConnector.Node != this.Node)
-            {
+            //if (Node.NodesCanvas.DraggedConnect.FromConnector.Node != this.Node)
+            //{
                 Node.NodesCanvas.DraggedConnect.ToConnector = this;
-            }
+            //}
         }
 
         private void CheckConnectPointDrop()
@@ -207,30 +200,9 @@ namespace SimpleStateMachineNodeEditor.ViewModel
                 this.Node.Transitions.Move(indexFrom, indexTo);
             }
         }
-        private void ConnectorDragLeave()
-        {
-
-        }
-        private void ConnectorDragOver()
-        {
-
-        }
         private void ConnectorDrop()
         {
             this.NodesCanvas.ConnectorPreviewForDrop = null;
-        }
-        private void CheckConnectorDrop()
-        {
-            //if (Node.NodesCanvas.CurrentConnect.ToConnector == null)
-            //{
-            //    Node.NodesCanvas.CommandDeleteFreeConnect.Execute();
-            //}
-            //else
-            //{
-            //    Node.CommandAddEmptyConnector.Execute();
-            //    Node.NodesCanvas.CommandAddConnect.Execute(Node.NodesCanvas.CurrentConnect);
-            //    Node.NodesCanvas.CurrentConnect = null;
-            //}
         }
         private void ValidateName(string newName)
         {
