@@ -7,9 +7,9 @@
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800" IsHitTestVisible="False">
     <Grid>
-        <Path x:Name="Path" StrokeDashCap="Round" StrokeLineJoin="Round" Stroke="{StaticResource ColorConnector}">
+        <Path x:Name="Path" StrokeDashCap="Round" StrokeLineJoin="Round" Stroke="{StaticResource ColorConnector}" StrokeEndLineCap="Round" StrokeStartLineCap="Round">
             <Path.Data>
-                <PathGeometry  x:Name="PathGeometry" >
+                <PathGeometry  x:Name="PathGeometry">
                     <PathFigure x:Name="PathFigure"  IsClosed="False">
                         <BezierSegment  x:Name="BezierSegment"/>
                     </PathFigure>

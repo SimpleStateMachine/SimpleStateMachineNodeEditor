@@ -54,7 +54,7 @@ namespace SimpleStateMachineNodeEditor.View
         {
             this.WhenActivated(disposable =>
             {
-                Canvas.SetZIndex((UIElement)this.VisualParent,this.ViewModel.NodesCanvas.Nodes.Count);
+                Canvas.SetZIndex((UIElement)this.VisualParent,this.ViewModel.Zindex);
 
                 //BorderBrush (Рамка вокруг узла)
                 this.OneWayBind(this.ViewModel, x => x.BorderBrush, x => x.Border.BorderBrush).DisposeWith(disposable);

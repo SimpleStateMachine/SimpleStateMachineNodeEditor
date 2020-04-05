@@ -4,8 +4,8 @@
     
     <!--#region -->
     <!--#endregion-->
-    <!--white-->
-    <SolidColorBrush x:Key="ColorConnector" Color="White"/> 
+    <!--White-->
+    <SolidColorBrush x:Key="ColorConnector" Color="Red"/> 
     
     <!--#region     Node-->
     

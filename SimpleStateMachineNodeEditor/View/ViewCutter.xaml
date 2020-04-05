@@ -14,5 +14,5 @@
             <TranslateTransform x:Name="Translate"/>
         </TransformGroup>
     </UserControl.RenderTransform>
-    <Line x:Name="Line" Fill="White" Stroke="Red"  HorizontalAlignment="Left" VerticalAlignment="Top" StrokeDashArray="10, 3" StrokeDashCap="Round"/>
+    <Line x:Name="Line" Fill="White" Stroke="Red"  HorizontalAlignment="Left" VerticalAlignment="Top" StrokeDashArray="10, 3" StrokeDashCap="Round" StrokeEndLineCap="Round" StrokeStartLineCap="Round"/>
 </UserControl>

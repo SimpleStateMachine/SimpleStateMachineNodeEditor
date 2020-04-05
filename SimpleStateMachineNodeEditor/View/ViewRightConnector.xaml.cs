@@ -53,6 +53,7 @@ namespace SimpleStateMachineNodeEditor.View
         {
             this.WhenActivated(disposable =>
             {
+                Canvas.SetZIndex((UIElement)this.VisualParent, this.ViewModel.Node.Zindex+2);
 
                 this.ViewModel.FormFill = Application.Current.Resources["ColorRightConnectorEllipseEnableBackground"] as SolidColorBrush;
                 this.ViewModel.FormStroke = Application.Current.Resources["ColorRightConnectorEllipseEnableBorder"] as SolidColorBrush;
@@ -162,6 +163,7 @@ namespace SimpleStateMachineNodeEditor.View
         {
 
             Point positionConnectPoint;
+            MyPoint Position;
             //Если отображается
             if (this.IsVisible)
             {
@@ -174,16 +176,20 @@ namespace SimpleStateMachineNodeEditor.View
                 //Получаем позицию центру на канвасе
                 positionConnectPoint = this.TransformToAncestor(NodesCanvas).Transform(positionConnectPoint);
 
+                Position  = MyPoint.CreateFromPoint(positionConnectPoint) / this.ViewModel.NodesCanvas.Scale.Value;
+
             }
             else
             {
                 //Позиция выхода
                 positionConnectPoint = this.ViewModel.Node.Output.PositionConnectPoint.Value;
+
+                Position = MyPoint.CreateFromPoint(positionConnectPoint);
             }
 
 
-            MyPoint Position = MyPoint.CreateFromPoint(positionConnectPoint);
-            this.ViewModel.PositionConnectPoint.Set(Position / this.ViewModel.NodesCanvas.Scale.Value);
+           
+            this.ViewModel.PositionConnectPoint.Set(Position);
         }
 
         //void UpdatePosition()

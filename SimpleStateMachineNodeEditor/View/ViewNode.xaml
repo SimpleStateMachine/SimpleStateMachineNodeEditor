@@ -4,8 +4,8 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:SimpleStateMachineNodeEditor.View"
-             mc:Ignorable="d" Focusable="True" AllowDrop="True" Visibility="Visible"> 
-    
+             mc:Ignorable="d" Focusable="True" AllowDrop="True" Visibility="Visible">
+
     <Border x:Name="Border" CornerRadius="5,5,5,5" BorderThickness="1,1,1,1"   HorizontalAlignment="Left" VerticalAlignment="Top" MinWidth="80" Background="{DynamicResource ColorNodeBody}" >
         <StackPanel Margin="0,0,0,5">
             <TextBox Name="Header" VerticalAlignment="Top" VerticalContentAlignment="Center" Style="{DynamicResource NodeHeaderStyle}" BorderBrush="{x:Null}"  HorizontalContentAlignment="Center" BorderThickness="0" Padding="10,2" Foreground="{DynamicResource ColorNodeText}" />

@@ -91,7 +91,7 @@ namespace SimpleStateMachineNodeEditor.ViewModel
         /// </summary>
         [Reactive] public ViewModelNodesCanvas NodesCanvas { get; set; }
 
-        [Reactive] public int Zindex { get; set; }
+        public int Zindex { get; private set; }
 
         /// <summary>
         /// Список переходов
@@ -106,7 +106,7 @@ namespace SimpleStateMachineNodeEditor.ViewModel
             //this.WhenAnyValue(x=>x.Name).Subscribe()
             this.WhenAnyValue(x => x.Selected).Subscribe(value => { this.BorderBrush = value ? Brushes.Red : Brushes.LightGray; });
             this.WhenAnyValue(x => x.Point1.Value, x => x.Size).Subscribe(_ => UpdatePoint2());
-
+            Zindex = nodesCanvas.Nodes.Count;
             SetupConnectors();
             SetupCommands();
         }

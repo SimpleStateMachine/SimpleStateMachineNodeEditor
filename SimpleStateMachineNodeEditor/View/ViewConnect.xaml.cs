@@ -49,7 +49,7 @@ namespace SimpleStateMachineNodeEditor.View
         {
             this.WhenActivated(disposable =>
             {
-                Canvas.SetZIndex((UIElement)this.VisualParent, this.ViewModel.FromConnector.NodesCanvas.Nodes.Count);
+
                 // Цвет линии
                 this.OneWayBind(this.ViewModel, x => x.Stroke, x => x.Path.Stroke).DisposeWith(disposable);
 
@@ -69,6 +69,8 @@ namespace SimpleStateMachineNodeEditor.View
 
                 this.OneWayBind(this.ViewModel, x => x.StrokeThickness, x => x.Path.StrokeThickness).DisposeWith(disposable);
 
+                this.WhenAnyValue(x => x.ViewModel.ToConnector).Where(x=>x!=null).Subscribe(_ => UpdateZindex()).DisposeWith(disposable);
+
             });
         }
         #endregion SetupBinding
@@ -80,6 +82,10 @@ namespace SimpleStateMachineNodeEditor.View
             {
 
             });
+        }
+        private void UpdateZindex()
+        {
+            Canvas.SetZIndex((UIElement)this.VisualParent, this.ViewModel.ToConnector.Node.Zindex);
         }
 
         #endregion SetupEvents

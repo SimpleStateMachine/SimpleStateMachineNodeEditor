@@ -33,7 +33,7 @@
                 <DataTemplate DataType="{x:Type ViewModel:ViewModelConnect}">
                     <View:ViewConnect ViewModel="{Binding}"/>
                 </DataTemplate>
-                <DataTemplate   DataType="{x:Type ViewModel:ViewModelNode}">
+                <DataTemplate DataType="{x:Type ViewModel:ViewModelNode}">
                     <View:ViewNode ViewModel="{Binding}" />
                 </DataTemplate>
             </ItemsControl.Resources>
