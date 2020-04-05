@@ -13,6 +13,7 @@ using SimpleStateMachineNodeEditor.Helpers;
 using SimpleStateMachineNodeEditor.Helpers.Commands;
 using SimpleStateMachineNodeEditor.Helpers.Transformations;
 using System.IO;
+using System.Windows.Data;
 
 namespace SimpleStateMachineNodeEditor.ViewModel
 {
@@ -20,11 +21,12 @@ namespace SimpleStateMachineNodeEditor.ViewModel
     {
         public IObservableCollection<ViewModelConnect> Connects = new ObservableCollectionExtended<ViewModelConnect>();
         public IObservableCollection<ViewModelNode> Nodes = new ObservableCollectionExtended<ViewModelNode>();
+        public IObservableCollection<Object> Elements = new ObservableCollectionExtended<Object>();
+        public CompositeCollection elements = new CompositeCollection();
         [Reactive] public ViewModelSelector Selector { get; set; } = new ViewModelSelector();
         [Reactive] public ViewModelCutter Cutter { get; set; }
         [Reactive] public ViewModelConnect DraggedConnect { get; set; }
         [Reactive] public ViewModelConnector ConnectorPreviewForDrop { get; set; }
-        [Reactive] public ViewModelNode CurrentNode { get; set; }
 
         /// <summary>
         /// Масштаб 
@@ -35,7 +37,6 @@ namespace SimpleStateMachineNodeEditor.ViewModel
         {
             SetupCommands();
             SetupNodes();
-
             Cutter = new ViewModelCutter(this);
         }
 
@@ -51,9 +52,8 @@ namespace SimpleStateMachineNodeEditor.ViewModel
 
             };
             start.Input.Visible = null;
-
+            elements.Add(start);
             Nodes.Add(start);
-
             //ViewModelNode end = new ViewModelNode(this)
             //{
             //    Name = "End",
@@ -267,7 +267,10 @@ namespace SimpleStateMachineNodeEditor.ViewModel
         private void AddFreeConnect(ViewModelConnector fromConnector)
         {
             DraggedConnect = new ViewModelConnect(fromConnector);
+           
             Connects.Add(DraggedConnect);
+
+            Elements.Add(DraggedConnect);
         }
         private ViewModelConnect AddConnect(ViewModelConnect parameter, ViewModelConnect result)
         {
@@ -299,6 +302,7 @@ namespace SimpleStateMachineNodeEditor.ViewModel
         private List<ViewModelNode> UnDeleteSelectedNode(List<ViewModelNode> parameter, List<ViewModelNode> result)
         {
             Nodes.Add(result);
+            Elements.Add(result);
             return result;
         }
         private void ValidateNodeName(ValidateObjectProperty<ViewModelNode, string> obj)

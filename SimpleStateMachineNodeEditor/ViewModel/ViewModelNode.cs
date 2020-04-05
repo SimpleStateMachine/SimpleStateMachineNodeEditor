@@ -91,6 +91,8 @@ namespace SimpleStateMachineNodeEditor.ViewModel
         /// </summary>
         [Reactive] public ViewModelNodesCanvas NodesCanvas { get; set; }
 
+        [Reactive] public int Zindex { get; set; }
+
         /// <summary>
         /// Список переходов
         /// </summary>
@@ -218,8 +220,7 @@ namespace SimpleStateMachineNodeEditor.ViewModel
                 CurrentConnector.TextEnable = true;
                 CurrentConnector.FormEnable = false;
 
-                //CurrentConnector.Name = "Transition_" + NodesCanvas.Connects.Count.ToString();
-                CurrentConnector.Name = "T" + NodesCanvas.Connects.Count.ToString();
+                CurrentConnector.Name = "Transition_" + NodesCanvas.Connects.Count.ToString();
             }
             CurrentConnector = new ViewModelConnector(NodesCanvas, this)
             {

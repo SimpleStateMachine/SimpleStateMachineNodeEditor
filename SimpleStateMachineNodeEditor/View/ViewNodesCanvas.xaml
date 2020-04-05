@@ -4,14 +4,49 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:SimpleStateMachineNodeEditor.View"
+             xmlns:View="clr-namespace:SimpleStateMachineNodeEditor.View"
+             xmlns:ViewModel="clr-namespace:SimpleStateMachineNodeEditor.ViewModel"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800" Focusable="True" AllowDrop="True" ClipToBounds="True">
+
     <Canvas x:Name="Canvas" Background="{StaticResource ColorNodesCanvasBackground}" >
 
         <local:ViewSelector x:Name="Selector"  Panel.ZIndex="999"/>
         <local:ViewCutter x:Name="Cutter"  Panel.ZIndex="999"/>
-
-        <ItemsControl x:Name="Nodes" >
+        
+        <ItemsControl  Panel.ZIndex="0">
+            <ItemsControl.RenderTransform>
+                <TransformGroup x:Name="TransformGroup">
+                    <ScaleTransform x:Name="Scale" ScaleX="1" ScaleY="1" />
+                    <SkewTransform/>
+                    <RotateTransform Angle="0" />
+                    <TranslateTransform x:Name="Translate"/>
+                </TransformGroup>
+            </ItemsControl.RenderTransform>
+            <ItemsControl.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <Grid Background="{x:Null}">
+                    </Grid>
+                </ItemsPanelTemplate>
+            </ItemsControl.ItemsPanel>
+            <ItemsControl.Resources >
+                <DataTemplate DataType="{x:Type ViewModel:ViewModelConnect}">
+                    <View:ViewConnect ViewModel="{Binding}"/>
+                </DataTemplate>
+                <DataTemplate   DataType="{x:Type ViewModel:ViewModelNode}">
+                    <View:ViewNode ViewModel="{Binding}" />
+                </DataTemplate>
+            </ItemsControl.Resources>
+            <ItemsControl.ItemsSource>
+                <CompositeCollection>
+                    <CollectionContainer  x:Name="Connects" />
+                    <CollectionContainer x:Name="Nodes"/>
+                </CompositeCollection>
+            </ItemsControl.ItemsSource>
+        </ItemsControl>
+        
+        
+        <!--<ItemsControl x:Name="Nodes" >
             <ItemsControl.RenderTransform>
                 <TransformGroup x:Name="TransformGroup">
                     <ScaleTransform x:Name="Scale" ScaleX="1" ScaleY="1" />
@@ -28,11 +63,13 @@
             </ItemsControl.ItemsPanel>
             <ItemsControl.ItemTemplate>
                 <DataTemplate>
-                    <local:ViewNode ViewModel="{Binding}" />
+                    <View:ViewNode ViewModel="{Binding}" />
                 </DataTemplate>
             </ItemsControl.ItemTemplate>
         </ItemsControl>
 
+        
+       
         <ItemsControl x:Name="Connects" >
             <ItemsControl.ItemsPanel>
                 <ItemsPanelTemplate>
@@ -42,10 +79,10 @@
             </ItemsControl.ItemsPanel>
             <ItemsControl.ItemTemplate>
                 <DataTemplate>
-                    <local:ViewConnect ViewModel="{Binding}"/>
+                    <View:ViewConnect ViewModel="{Binding}"/>
                 </DataTemplate>
             </ItemsControl.ItemTemplate>
-        </ItemsControl>
+        </ItemsControl>-->
 
     </Canvas>
     <UserControl.ContextMenu >

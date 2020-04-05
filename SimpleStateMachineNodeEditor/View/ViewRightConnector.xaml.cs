@@ -181,7 +181,9 @@ namespace SimpleStateMachineNodeEditor.View
                 positionConnectPoint = this.ViewModel.Node.Output.PositionConnectPoint.Value;
             }
 
-            this.ViewModel.PositionConnectPoint.Set(positionConnectPoint);
+
+            MyPoint Position = MyPoint.CreateFromPoint(positionConnectPoint);
+            this.ViewModel.PositionConnectPoint.Set(Position / this.ViewModel.NodesCanvas.Scale.Value);
         }
 
         //void UpdatePosition()

@@ -49,6 +49,7 @@ namespace SimpleStateMachineNodeEditor.View
         {
             this.WhenActivated(disposable =>
             {
+                Canvas.SetZIndex((UIElement)this.VisualParent, this.ViewModel.FromConnector.NodesCanvas.Nodes.Count);
                 // Цвет линии
                 this.OneWayBind(this.ViewModel, x => x.Stroke, x => x.Path.Stroke).DisposeWith(disposable);
 

@@ -47,12 +47,15 @@ namespace SimpleStateMachineNodeEditor.View
             SetupBinding();
             SetupEvents();
             SetupCommands();
+         
         }
         #region Setup Binding
         private void SetupBinding()
         {
             this.WhenActivated(disposable =>
             {
+                Canvas.SetZIndex((UIElement)this.VisualParent,this.ViewModel.NodesCanvas.Nodes.Count);
+
                 //BorderBrush (Рамка вокруг узла)
                 this.OneWayBind(this.ViewModel, x => x.BorderBrush, x => x.Border.BorderBrush).DisposeWith(disposable);
 

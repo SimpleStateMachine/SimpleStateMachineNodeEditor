@@ -108,9 +108,9 @@ namespace SimpleStateMachineNodeEditor.View
             if (NodesCanvas == null)
                 return;
             //Получаем позицию центру на канвасе
-            Point Position = this.TransformToAncestor(NodesCanvas).Transform(InputCenter);
+            MyPoint Position = MyPoint.CreateFromPoint(this.TransformToAncestor(NodesCanvas).Transform(InputCenter));
 
-            this.ViewModel.PositionConnectPoint.Set(Position);
+            this.ViewModel.PositionConnectPoint.Set(Position/this.ViewModel.NodesCanvas.Scale.Value);
         }
     }
 }

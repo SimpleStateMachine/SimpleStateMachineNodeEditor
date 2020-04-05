@@ -139,7 +139,7 @@ namespace SimpleStateMachineNodeEditor.Helpers
         /// <returns>Точка Point</returns>
         public Point ToPoint()
         {
-            return MyPoint.MyPointToPoint(this);
+            return MyPoint.ToPoint(this);
         }
 
         /// <summary>
@@ -174,7 +174,7 @@ namespace SimpleStateMachineNodeEditor.Helpers
         /// </summary>
         /// <param name="point">Точка MyPoint</param>
         /// <returns>Точка Point</returns>
-        public static Point MyPointToPoint(MyPoint point)
+        public static Point ToPoint(MyPoint point)
         {
             return (point != null) ? new Point(point.X, point.Y) : new Point();
         }
@@ -184,7 +184,7 @@ namespace SimpleStateMachineNodeEditor.Helpers
         /// </summary>
         /// <param name="point">ТОчка Point</param>
         /// <returns>Точка MyPoint</returns>
-        public static MyPoint MyPointFromPoint(Point point)
+        public static MyPoint CreateFromPoint(Point point)
         {
             return (point != null) ? new MyPoint(point.X, point.Y) : new MyPoint();
         }

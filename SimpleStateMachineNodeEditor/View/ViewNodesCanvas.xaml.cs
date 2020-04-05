@@ -70,11 +70,14 @@ namespace SimpleStateMachineNodeEditor.View
         {
             this.WhenActivated(disposable =>
             {
-                this.OneWayBind(this.ViewModel, x => x.Nodes, x => x.Nodes.ItemsSource).DisposeWith(disposable);
-                this.OneWayBind(this.ViewModel, x => x.Connects, x => x.Connects.ItemsSource).DisposeWith(disposable);
-                //this.OneWayBind(this.ViewModel, x => x.DraggedConnector, x => x.Connector.ViewModel).DisposeWith(disposable);
 
-                //Масштаб по оси X
+                this.OneWayBind(this.ViewModel, x => x.Nodes, x => x.Nodes.Collection).DisposeWith(disposable);
+                this.OneWayBind(this.ViewModel, x => x.Connects, x => x.Connects.Collection).DisposeWith(disposable);
+
+
+                //this.OneWayBind(this.ViewModel, x => x.Nodes, x => x.Nodes.ItemsSource).DisposeWith(disposable);
+                //this.OneWayBind(this.ViewModel, x => x.Connects, x => x.Connects.ItemsSource).DisposeWith(disposable);
+
                 this.OneWayBind(this.ViewModel, x => x.Scale.Scales.Value.X, x => x.Scale.ScaleX).DisposeWith(disposable);
 
                 //Масштаб по оси Y
@@ -223,7 +226,7 @@ namespace SimpleStateMachineNodeEditor.View
             if (this.ViewModel.DraggedConnect != null)
             {
                 point -= 2;
-                this.ViewModel.DraggedConnect.EndPoint.Set(point);
+                this.ViewModel.DraggedConnect.EndPoint.Set(point / this.ViewModel.Scale.Value);
             }
         }
         private void OnEventDragLeave(DragEventArgs e)
