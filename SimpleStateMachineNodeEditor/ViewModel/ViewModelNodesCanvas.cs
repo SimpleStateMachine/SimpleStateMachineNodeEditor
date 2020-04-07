@@ -51,7 +51,7 @@ namespace SimpleStateMachineNodeEditor.ViewModel
 
 
             };
-            start.Input.Visible = null;
+            start.Input.Visible = false;
             elements.Add(start);
             Nodes.Add(start);
             //ViewModelNode end = new ViewModelNode(this)
@@ -234,13 +234,14 @@ namespace SimpleStateMachineNodeEditor.ViewModel
         }
         private void SelectConnects()
         {
-            //MyPoint cutterStartPoint = Cutter.StartPoint / Scale.Value;
-            //MyPoint cutterEndPoint = Cutter.EndPoint / Scale.Value;
-            MyPoint cutterStartPoint = Cutter.StartPoint;
-            MyPoint cutterEndPoint = Cutter.EndPoint;
+            MyPoint cutterStartPoint = Cutter.StartPoint / Scale.Value;
+            MyPoint cutterEndPoint = Cutter.EndPoint / Scale.Value;
+
+            //MyPoint cutterStartPoint = Cutter.StartPoint;
+            //MyPoint cutterEndPoint = Cutter.EndPoint;
             //some optimizations
             var connects = Connects.Where(x => MyUtils.CheckIntersectTwoRectangles(MyUtils.GetStartPointDiagonal(x.StartPoint, x.EndPoint), MyUtils.GetEndPointDiagonal(x.StartPoint, x.EndPoint),
-                                               MyUtils.GetStartPointDiagonal(Cutter.StartPoint, Cutter.EndPoint), MyUtils.GetEndPointDiagonal(Cutter.StartPoint, Cutter.EndPoint)));
+                                               MyUtils.GetStartPointDiagonal(cutterStartPoint, cutterEndPoint), MyUtils.GetEndPointDiagonal(cutterStartPoint, cutterEndPoint)));
             //var connects = Connects;
             foreach (var connect in Connects)
             {
@@ -249,7 +250,7 @@ namespace SimpleStateMachineNodeEditor.ViewModel
 
             foreach (var connect in connects)
             {
-                connect.Selected = MyUtils.CheckIntersectCubicBezierCurveAndLine(connect.StartPoint, connect.Point1, connect.Point2, connect.EndPoint, Cutter.StartPoint, Cutter.EndPoint);
+                connect.Selected = MyUtils.CheckIntersectCubicBezierCurveAndLine(connect.StartPoint, connect.Point1, connect.Point2, connect.EndPoint, cutterStartPoint, cutterEndPoint);
             }
 
         }

@@ -8,7 +8,7 @@ using ReactiveUI;
 using ReactiveUI.Fody.Helpers;
 
 using SimpleStateMachineNodeEditor.Helpers;
-
+using SimpleStateMachineNodeEditor.Helpers.Enums;
 
 namespace SimpleStateMachineNodeEditor.ViewModel
 {
@@ -58,23 +58,74 @@ namespace SimpleStateMachineNodeEditor.ViewModel
 
         [Reactive] public double StrokeThickness { get; set; } = 1;
 
+        [Reactive] public ConnectType Type { get; set; } = ConnectType.Simple;
+
         public ViewModelConnect(ViewModelConnector fromConnector)
         {
-            this.WhenAnyValue(x => x.FromConnector.PositionConnectPoint.Value).Subscribe(value => StartPoint.Set(value));           
-            this.WhenAnyValue(x => x.ToConnector.PositionConnectPoint.Value).Subscribe(value => EndPoint.Set(value));
+
+            SetupSubscriptions();
+            SetupCommands();
+
+            FromConnector = fromConnector;
+            FromConnector.Connect = this;
+            //SetupCommands();
+        }
+        #region Setup Subscriptions
+
+        private void SetupSubscriptions()
+        {
+            this.WhenAnyValue(x => x.FromConnector.PositionConnectPoint.Value).Subscribe(value => StartPointUpdate(value));
+            this.WhenAnyValue(x => x.ToConnector.PositionConnectPoint.Value).Subscribe(value => EndPointUpdate(value));
             this.WhenAnyValue(x => x.StartPoint.Value, x => x.EndPoint.Value).Subscribe(_ => UpdateMedium());
             this.WhenAnyValue(x => x.FromConnector).Where(x => x != null).Subscribe(_ => FromConnectChanged());
             this.WhenAnyValue(x => x.ToConnector).Where(x => x != null).Subscribe(_ => ToConnectChanged());
 
             this.WhenAnyValue(x => x.FromConnector.Node.NodesCanvas.Scale.Value).Subscribe(value => StrokeThickness = value);
             this.WhenAnyValue(x => x.Selected).Subscribe(value => { this.StrokeDashArray = value ? new DoubleCollection() { 10, 3 } : null; });
-
-            //this.WhenAnyValue(x => x.FromConnector).Where(x => x == null).Subscribe(_ => { StartPoint.Clear(); });
-            //this.WhenAnyValue(x => x.ToConnector).Where(x => x == null).Subscribe(_ => { EndPoint.Clear(); SetupCommands(); });
-            FromConnector = fromConnector;
-            FromConnector.Connect = this;
-            //SetupCommands();
         }
+
+        private void FromConnectChanged()
+        {
+            StartPointUpdate(FromConnector.PositionConnectPoint.ToPoint());
+            
+        }
+        private void ToConnectChanged()
+        {
+            EndPointUpdate(ToConnector.PositionConnectPoint.ToPoint());
+            Selected = false;
+        }
+        private void StartPointUpdate(Point point)
+        {
+            StartPoint.Set(point);
+        }
+        private void EndPointUpdate(Point point)
+        {
+            if (Type == ConnectType.Simple)
+            {
+                EndPoint.Set(point);
+            }
+            else if (Type == ConnectType.Loop)
+            {
+                EndPoint.Set(StartPoint);
+            }
+        }
+        private void UpdateMedium()
+        {
+            if (Type == ConnectType.Simple)
+            {
+                MyPoint different = EndPoint - StartPoint;
+                Point1.Set(StartPoint.X + 3 * different.X / 8, StartPoint.Y + 1 * different.Y / 8);
+                Point2.Set(StartPoint.X + 5 * different.X / 8, StartPoint.Y + 7 * different.Y / 8);
+            }
+            else if (Type == ConnectType.Loop)
+            {
+                Point1.Set(StartPoint.X + 20, StartPoint.Y - 20);
+                Point2.Set(StartPoint.X + 20, StartPoint.Y + 20);
+            }
+        }
+
+        #endregion Setup Subscriptions
+
         #region Setup Commands
 
         private void SetupCommands()
@@ -84,21 +135,5 @@ namespace SimpleStateMachineNodeEditor.ViewModel
 
         #endregion Setup Commands
 
-        private void FromConnectChanged()
-        {
-            StartPoint.Set(FromConnector.PositionConnectPoint);
-            EndPoint.Set(FromConnector.PositionConnectPoint);
-        }
-        private void ToConnectChanged()
-        {
-            EndPoint.Set(ToConnector.PositionConnectPoint);
-            Selected = false;
-        }
-        private void UpdateMedium()
-        {
-            MyPoint different = EndPoint - StartPoint;
-            Point1.Set(StartPoint.X + 3 * different.X / 8, StartPoint.Y + 1 * different.Y / 8);
-            Point2.Set(StartPoint.X + 5 * different.X / 8, StartPoint.Y + 7 * different.Y / 8);
-        }
     }
 }

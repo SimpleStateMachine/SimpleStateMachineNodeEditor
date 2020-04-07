@@ -60,10 +60,10 @@ namespace SimpleStateMachineNodeEditor.View
                 this.OneWayBind(this.ViewModel, x => x.BorderBrush, x => x.Border.BorderBrush).DisposeWith(disposable);
 
                 //Name (заголовок узла)
-                this.OneWayBind(this.ViewModel, x => x.Name, x => x.Header.Text).DisposeWith(disposable);
+                this.OneWayBind(this.ViewModel, x => x.Name, x => x.Header.TextBox.Text).DisposeWith(disposable);
 
                 //Можно ли менять заголовок
-                this.Bind(this.ViewModel, x => x.NameEnable, x => x.Header.IsEnabled).DisposeWith(disposable);
+                this.Bind(this.ViewModel, x => x.NameEnable, x => x.Header.TextBox.IsEnabled).DisposeWith(disposable);
 
                 //Позиция X от левого верхнего угла
                 this.OneWayBind(this.ViewModel, x => x.Point1.X, x => x.Translate.X).DisposeWith(disposable);
@@ -74,9 +74,9 @@ namespace SimpleStateMachineNodeEditor.View
                 //Отображаются ли переходы
                 this.OneWayBind(this.ViewModel, x => x.TransitionsVisible, x => x.Transitions.Visibility).DisposeWith(disposable);
 
-                //Отображается ли кнопка свернуть
-                this.OneWayBind(this.ViewModel, x => x.RollUpVisible, x => x.ButtonCollapse.Visibility).DisposeWith(disposable);
-       
+                ////Отображается ли кнопка свернуть
+                this.OneWayBind(this.ViewModel, x => x.RollUpVisible, x => x.Header.ButtonCollapse.Visibility).DisposeWith(disposable);
+
                 //Размеры
                 this.WhenAnyValue(v => v.Border.ActualWidth, v => v.Border.ActualHeight, (width, height) => new Size(width, height))
                      .BindTo(this, v => v.ViewModel.Size).DisposeWith(disposable);
@@ -110,7 +110,7 @@ namespace SimpleStateMachineNodeEditor.View
                 this.Events().MouseEnter.Subscribe(e => OnEventMouseEnter(e)).DisposeWith(disposable);
                 this.Events().MouseLeave.Subscribe(e => OnEventMouseMouseLeave(e)).DisposeWith(disposable);
 
-                this.ButtonCollapse.Events().Click.Subscribe(_ => OnEventCollapse()).DisposeWith(disposable);
+                this.Header.ButtonCollapse.Events().Click.Subscribe(_ => OnEventCollapse()).DisposeWith(disposable);
                 this.Header.Events().LostFocus.Subscribe(e => Validate(e)).DisposeWith(disposable);
             });
         }
@@ -122,9 +122,9 @@ namespace SimpleStateMachineNodeEditor.View
         }
         private void Validate(RoutedEventArgs e)
         {
-            ViewModel.CommandValidateName.Execute(Header.Text);
-            if (Header.Text != ViewModel.Name)
-                Header.Text = ViewModel.Name;
+            ViewModel.CommandValidateName.Execute(Header.TextBox.Text);
+            if (Header.TextBox.Text != ViewModel.Name)
+                Header.TextBox.Text = ViewModel.Name;
         }
 
         private void OnEventMouseLeftUp(MouseButtonEventArgs e)
@@ -167,8 +167,8 @@ namespace SimpleStateMachineNodeEditor.View
 
         private void OnEventCollapse()
         {
-            bool visible = (this.Rotate.Angle != 0);
-            this.Rotate.Angle = visible ? 0 : 180;
+            bool visible = (this.Header.ButtonRotate.Angle != 0);
+            this.Header.ButtonRotate.Angle = visible ? 0 : 180;
             ViewModel.CommandCollapse.Execute(visible);
         }
         #endregion Setup Events

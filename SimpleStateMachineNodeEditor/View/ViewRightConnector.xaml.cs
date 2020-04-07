@@ -75,7 +75,7 @@ namespace SimpleStateMachineNodeEditor.View
                      .BindTo(this, v => v.ViewModel.Size).DisposeWith(disposable);
 
                 // Цвет перехода
-                this.Bind(this.ViewModel, x => x.FormFill, x => x.Form.Fill).DisposeWith(disposable);
+                //this.Bind(this.ViewModel, x => x.FormFill, x => x.Form.Fill).DisposeWith(disposable);
 
                 // Отображается ли переход
                 this.OneWayBind(this.ViewModel, x => x.Visible, x => x.RightConnector.Visibility).DisposeWith(disposable);

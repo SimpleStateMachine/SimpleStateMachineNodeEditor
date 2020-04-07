@@ -71,6 +71,8 @@ namespace SimpleStateMachineNodeEditor.View
 
                 this.WhenAnyValue(x => x.ViewModel.ToConnector).Where(x=>x!=null).Subscribe(_ => UpdateZindex()).DisposeWith(disposable);
 
+                Canvas.SetZIndex((UIElement)this.VisualParent, this.ViewModel.FromConnector.Node.Zindex+1);
+
             });
         }
         #endregion SetupBinding
@@ -85,7 +87,8 @@ namespace SimpleStateMachineNodeEditor.View
         }
         private void UpdateZindex()
         {
-            Canvas.SetZIndex((UIElement)this.VisualParent, this.ViewModel.ToConnector.Node.Zindex);
+            if(this.ViewModel.FromConnector.Node!=this.ViewModel.ToConnector.Node)
+                Canvas.SetZIndex((UIElement)this.VisualParent, this.ViewModel.ToConnector.Node.Zindex);
         }
 
         #endregion SetupEvents

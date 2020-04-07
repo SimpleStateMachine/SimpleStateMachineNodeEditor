@@ -1,0 +1,30 @@
+﻿<UserControl x:Class="SimpleStateMachineNodeEditor.Styles.Node.NodeHeader"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:SimpleStateMachineNodeEditor.Styles.Node"
+             mc:Ignorable="d" 
+            >
+    <Border CornerRadius="5,5,0,0" VerticalAlignment="Stretch"  Background="{DynamicResource ColorNodeHeaderStaticBackground}" >
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition />
+            </Grid.RowDefinitions>
+            <!--<TextBox Name="Header"  Text="State 1" VerticalAlignment="Top" VerticalContentAlignment="Center" Style="{DynamicResource NodeHeaderStyle}" BorderBrush="{x:Null}"  HorizontalContentAlignment="Center" BorderThickness="0" Padding="10,2" Foreground="{DynamicResource ColorNodeText}" />-->
+            <TextBox Name="TextBox"  Grid.Column="0" Text="State 1" VerticalAlignment="Center" VerticalContentAlignment="Center" Style="{DynamicResource NodeHeaderStyle}" HorizontalContentAlignment="Center" BorderThickness="0,0,0,0"  Background="{x:Null}" BorderBrush="{x:Null}" Foreground="{DynamicResource ColorNodeText}"  Padding="10,2,0,2" ScrollViewer.CanContentScroll="True" HorizontalAlignment="Center" />
+            <!--<Path Name="border" Grid.Column="2"   Stroke="White" Fill="White"  HorizontalAlignment="Left" VerticalAlignment="Center"  Data="M0,3 L3,0 L6,3 Z" Margin="5" />-->
+            <Button Name ="ButtonCollapse" Grid.Column="1"  Style="{DynamicResource NodeButtonRollUpStyle}"  HorizontalAlignment="Center" VerticalAlignment="Center" Margin="5">
+                <Button.RenderTransform>
+                    <TransformGroup>
+                        <RotateTransform x:Name="ButtonRotate" Angle="0" CenterX="4" CenterY="2" />
+                    </TransformGroup>
+                </Button.RenderTransform>
+            </Button>
+        </Grid>
+    </Border>
+</UserControl>

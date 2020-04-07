@@ -6,6 +6,8 @@
     <Application.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
+                
+                
                 <ResourceDictionary Source="Styles/Colors.xaml"/>
                 
                 <!--#region         Test-->

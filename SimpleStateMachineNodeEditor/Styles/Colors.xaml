@@ -5,7 +5,7 @@
     <!--#region -->
     <!--#endregion-->
     <!--White-->
-    <SolidColorBrush x:Key="ColorConnector" Color="Red"/> 
+    <SolidColorBrush x:Key="ColorConnector" Color="White"/> 
     
     <!--#region     Node-->
     
@@ -13,7 +13,7 @@
     
             <SolidColorBrush x:Key="ColorLeftConnectorBackground" Color="#FF2D2D2D"/>
             <SolidColorBrush x:Key="ColorLeftConnectorEllipse" Color="#FF2D2D2D"/>
-            <SolidColorBrush x:Key="ColorLeftConnectorText" Color="#FF2D2D2D"/>
+            <SolidColorBrush x:Key="ColorLeftConnectorText" Color="White"/>
     
             <!--#region     LeftConnectorEllipse-->
 
@@ -106,14 +106,14 @@
     
         <!--#region         ButtonRollUp-->
     
-        <SolidColorBrush x:Key="ColorNodeButtonRollUpStaticBackground" Color="Black"/>
-        <SolidColorBrush x:Key="ColorNodeButtonRollStaticBorder" Color="Black"/>
-        <SolidColorBrush x:Key="ColorNodeButtonRollUpMouseOverBackground" Color="Black"/>
+        <SolidColorBrush x:Key="ColorNodeButtonRollUpStaticBackground" Color="White"/>
+        <SolidColorBrush x:Key="ColorNodeButtonRollStaticBorder" Color="White"/>
+        <SolidColorBrush x:Key="ColorNodeButtonRollUpMouseOverBackground" Color="White"/>
         <SolidColorBrush x:Key="ColorNodeButtonRollUpMouseOverBorder" Color="White"/>
-        <SolidColorBrush x:Key="ColorNodeButtonRollUpPressedBackground" Color="Black"/>
-        <SolidColorBrush x:Key="ColorNodeButtonRollUpPressedBorder" Color="Black"/>
-        <SolidColorBrush x:Key="ColorNodeButtonRollUpDisabledBackground" Color="Black"/>
-        <SolidColorBrush x:Key="ColorNodeButtonRollUpDisabledBorder" Color="Black"/>
+        <SolidColorBrush x:Key="ColorNodeButtonRollUpPressedBackground" Color="White"/>
+        <SolidColorBrush x:Key="ColorNodeButtonRollUpPressedBorder" Color="White"/>
+        <SolidColorBrush x:Key="ColorNodeButtonRollUpDisabledBackground" Color="White"/>
+        <SolidColorBrush x:Key="ColorNodeButtonRollUpDisabledBorder" Color="White"/>
     
         <!--#endregion      ButtonRollUp-->
 

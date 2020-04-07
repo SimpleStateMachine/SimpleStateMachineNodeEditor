@@ -138,9 +138,17 @@ namespace SimpleStateMachineNodeEditor.ViewModel
 
         private void ConnectPointDrop()
         {
-            //if (Node.NodesCanvas.DraggedConnect.FromConnector.Node != this.Node)
-            //{
-                Node.NodesCanvas.DraggedConnect.ToConnector = this;
+            var connect = Node.NodesCanvas.DraggedConnect;
+
+            if (Node.NodesCanvas.DraggedConnect.FromConnector.Node == this.Node)
+            {
+                connect.Type = Helpers.Enums.ConnectType.Loop;
+                connect.StartPoint.Set(this.PositionConnectPoint);
+            }
+            connect.ToConnector = this;
+            //MyPoint different = EndPoint - StartPoint;
+            //Point1.Set(StartPoint.X + 3 * different.X / 8, StartPoint.Y + 1 * different.Y / 8);
+            //Point2.Set(StartPoint.X + 5 * different.X / 8, StartPoint.Y + 7 * different.Y / 8);
             //}
         }
 

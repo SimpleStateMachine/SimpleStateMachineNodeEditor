@@ -5,35 +5,35 @@
         <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Stroke">
             <DiscreteObjectKeyFrame KeyTime="0:0:0" Value="{StaticResource ColorRightConnectorEllipseMouseEnterBorder}" />
         </ObjectAnimationUsingKeyFrames>
-        <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Fill">
+        <!--<ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Fill">
             <DiscreteObjectKeyFrame KeyTime="0:0:0" Value="{StaticResource ColorRightConnectorEllipseMouseEnterBackground}" />
-        </ObjectAnimationUsingKeyFrames>
+        </ObjectAnimationUsingKeyFrames>-->
     </Storyboard>
 
     <Storyboard x:Key="MouseLeaveStoryboard">
         <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Stroke">
             <DiscreteObjectKeyFrame KeyTime="0:0:0" Value="{StaticResource ColorRightConnectorEllipseMouseLeaveBorder}" />
         </ObjectAnimationUsingKeyFrames>
-        <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Fill">
+        <!--<ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Fill">
             <DiscreteObjectKeyFrame KeyTime="0:0:0" Value="{StaticResource ColorRightConnectorEllipseMouseLeaveBackground}" />
-        </ObjectAnimationUsingKeyFrames>
+        </ObjectAnimationUsingKeyFrames>-->
     </Storyboard>
 
     <Storyboard x:Key="DragEnterStoryboard">
         <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Stroke">
             <DiscreteObjectKeyFrame KeyTime="0:0:0" Value="{StaticResource ColorRightConnectorEllipseDropEnterBorder}" />
         </ObjectAnimationUsingKeyFrames>
-        <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Fill">
+        <!--<ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Fill">
             <DiscreteObjectKeyFrame KeyTime="0:0:0" Value="{StaticResource ColorRightConnectorEllipseDropEnterBackground}" />
-        </ObjectAnimationUsingKeyFrames>
+        </ObjectAnimationUsingKeyFrames>-->
     </Storyboard>
     <Storyboard x:Key="DragLeaveStoryboard">
         <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Stroke">
             <DiscreteObjectKeyFrame KeyTime="0:0:0" Value="{StaticResource ColorRightConnectorEllipseDropLeaveBorder}" />
         </ObjectAnimationUsingKeyFrames>
-        <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Fill">
+        <!--<ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Fill">
             <DiscreteObjectKeyFrame KeyTime="0:0:0" Value="{StaticResource ColorRightConnectorEllipseDropLeaveBackground}" />
-        </ObjectAnimationUsingKeyFrames>
+        </ObjectAnimationUsingKeyFrames>-->
     </Storyboard>
 
     <Style x:Key="RightConnectorEllipseStyle" TargetType="{x:Type Ellipse}">

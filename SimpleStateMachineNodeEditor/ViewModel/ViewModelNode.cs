@@ -103,10 +103,11 @@ namespace SimpleStateMachineNodeEditor.ViewModel
         public ViewModelNode(ViewModelNodesCanvas nodesCanvas)
         {
             NodesCanvas = nodesCanvas;
+            Zindex = nodesCanvas.Nodes.Count;
             //this.WhenAnyValue(x=>x.Name).Subscribe()
             this.WhenAnyValue(x => x.Selected).Subscribe(value => { this.BorderBrush = value ? Brushes.Red : Brushes.LightGray; });
             this.WhenAnyValue(x => x.Point1.Value, x => x.Size).Subscribe(_ => UpdatePoint2());
-            Zindex = nodesCanvas.Nodes.Count;
+            
             SetupConnectors();
             SetupCommands();
         }
@@ -173,11 +174,17 @@ namespace SimpleStateMachineNodeEditor.ViewModel
         private void Collapse(object obj)
         {
             bool value = (bool)obj;
-            Output.Visible = !value;
+
             if (value)
+            {
                 TransitionsVisible = value;
+                Output.Visible = null;
+            }
             else
+            {
                 TransitionsVisible = null;
+                Output.Visible = true;
+            }
 
         }
         private void AddConnector(ViewModelConnector connector)
