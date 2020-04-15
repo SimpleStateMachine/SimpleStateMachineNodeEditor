@@ -11,7 +11,7 @@ using DynamicData.Binding;
 
 using SimpleStateMachineNodeEditor.Helpers;
 using SimpleStateMachineNodeEditor.Helpers.Commands;
-
+using System.Linq;
 
 namespace SimpleStateMachineNodeEditor.ViewModel
 {
@@ -138,7 +138,7 @@ namespace SimpleStateMachineNodeEditor.ViewModel
         public SimpleCommandWithParameter<string> CommandValidateName { get; set; }
 
         public SimpleCommand CommandAddEmptyConnector { get; set; }
-
+       
 
         //public SimpleCommand CommandTransitionsDragLeave { get; set; }
 
@@ -156,7 +156,7 @@ namespace SimpleStateMachineNodeEditor.ViewModel
             CommandMove = new SimpleCommandWithParameter<MyPoint>(this, Move);
             CommandCollapse = new SimpleCommandWithParameter<object>(this, Collapse);
             CommandAddEmptyConnector = new SimpleCommand(this, AddEmptyConnector);
-
+            
             //CommandTransitionsDragLeave = new SimpleCommand(this, TransitionsDragLeave);
             //CommandTransitionsDragEnter = new SimpleCommand(this, TransitionsDragEnter);
             //CommandTransitionsDrop = new SimpleCommand(this, TransitionsDrop);
@@ -225,9 +225,8 @@ namespace SimpleStateMachineNodeEditor.ViewModel
             if (CurrentConnector != null)
             {
                 CurrentConnector.TextEnable = true;
-                CurrentConnector.FormEnable = false;
-
-                CurrentConnector.Name = "Transition_" + NodesCanvas.Connects.Count.ToString();
+                CurrentConnector.FormEnable = false;         
+                CurrentConnector.Name = "Transition " + NodesCanvas.Nodes.Sum(x => x.Transitions.Count - 1).ToString();
             }
             CurrentConnector = new ViewModelConnector(NodesCanvas, this)
             {

@@ -16,6 +16,7 @@ using System.Windows.Markup;
 using SimpleStateMachineNodeEditor.ViewModel;
 using SimpleStateMachineNodeEditor.Helpers.Enums;
 using System.Windows.Forms;
+using System.IO;
 
 namespace SimpleStateMachineNodeEditor.View
 {
@@ -42,7 +43,6 @@ namespace SimpleStateMachineNodeEditor.View
 
         public MainWindow()
         {
-
             InitializeComponent();
             SetupBinding();
             SetupEvents();

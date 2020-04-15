@@ -6,8 +6,7 @@
     <Application.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
-                
-                
+                <ResourceDictionary Source="Images.xaml"/>
                 <ResourceDictionary Source="Styles/Colors.xaml"/>
                 
                 <!--#region         Test-->
@@ -63,14 +62,14 @@
 
                 <!--#endregion      Node-->
 
-
-
                 <!--#region      MainWindow-->
-                
+
+               
                 <ResourceDictionary Source="Styles/MainWindow/CustomWindowTemplate.xaml"/>
                 
                     <!--#region      Header-->
-                
+                    <ResourceDictionary Source="Styles/MainWindow/ToolBar/ToolButtonTemplate.xaml"/>
+                    <ResourceDictionary Source="Styles/MainWindow/ToolBarTemplate.xaml"/>
                     <ResourceDictionary Source="Styles/MainWindow/Header/HeaderButtonTemplate.xaml"/>
                 
                     <!--#endregion   Header-->

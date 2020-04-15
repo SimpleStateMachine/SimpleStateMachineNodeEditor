@@ -28,6 +28,7 @@ namespace SimpleStateMachineNodeEditor.ViewModel
         [Reactive] public ViewModelConnect DraggedConnect { get; set; }
         [Reactive] public ViewModelConnector ConnectorPreviewForDrop { get; set; }
 
+
         /// <summary>
         /// Масштаб 
         /// </summary>
@@ -320,7 +321,7 @@ namespace SimpleStateMachineNodeEditor.ViewModel
         {
             if (!String.IsNullOrWhiteSpace(obj.Property))
             {
-                if (!Connects.Any(x => x.FromConnector.Name == obj.Property))
+                if (!this.Nodes.Where(x=>x.Transitions.Any(x=>x.Name == obj.Property)).Any())
                 {
                     obj.Obj.Name = obj.Property;
                 }

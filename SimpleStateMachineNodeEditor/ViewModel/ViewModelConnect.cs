@@ -58,8 +58,6 @@ namespace SimpleStateMachineNodeEditor.ViewModel
 
         [Reactive] public double StrokeThickness { get; set; } = 1;
 
-        [Reactive] public ConnectType Type { get; set; } = ConnectType.Simple;
-
         public ViewModelConnect(ViewModelConnector fromConnector)
         {
 
@@ -100,28 +98,13 @@ namespace SimpleStateMachineNodeEditor.ViewModel
         }
         private void EndPointUpdate(Point point)
         {
-            if (Type == ConnectType.Simple)
-            {
-                EndPoint.Set(point);
-            }
-            else if (Type == ConnectType.Loop)
-            {
-                EndPoint.Set(StartPoint);
-            }
+            EndPoint.Set(point);
         }
         private void UpdateMedium()
         {
-            if (Type == ConnectType.Simple)
-            {
-                MyPoint different = EndPoint - StartPoint;
-                Point1.Set(StartPoint.X + 3 * different.X / 8, StartPoint.Y + 1 * different.Y / 8);
-                Point2.Set(StartPoint.X + 5 * different.X / 8, StartPoint.Y + 7 * different.Y / 8);
-            }
-            else if (Type == ConnectType.Loop)
-            {
-                Point1.Set(StartPoint.X + 20, StartPoint.Y - 20);
-                Point2.Set(StartPoint.X + 20, StartPoint.Y + 20);
-            }
+            MyPoint different = EndPoint - StartPoint;
+            Point1.Set(StartPoint.X + 3 * different.X / 8, StartPoint.Y + 1 * different.Y / 8);
+            Point2.Set(StartPoint.X + 5 * different.X / 8, StartPoint.Y + 7 * different.Y / 8);
         }
 
         #endregion Setup Subscriptions

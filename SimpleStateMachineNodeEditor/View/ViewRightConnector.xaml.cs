@@ -70,12 +70,14 @@ namespace SimpleStateMachineNodeEditor.View
                 // Цвет рамки, вокруг перехода
                 this.OneWayBind(this.ViewModel, x => x.FormStroke, x => x.Form.Stroke).DisposeWith(disposable);
 
+                this.OneWayBind(this.ViewModel, x => x.FormStrokeThickness, x => x.Form.StrokeThickness).DisposeWith(disposable);
+
                 //Размеры
                 this.WhenAnyValue(v => v.Grid.ActualWidth, v => v.Grid.ActualHeight, (width, height) => new Size(width, height))
                      .BindTo(this, v => v.ViewModel.Size).DisposeWith(disposable);
 
                 // Цвет перехода
-                //this.Bind(this.ViewModel, x => x.FormFill, x => x.Form.Fill).DisposeWith(disposable);
+                this.Bind(this.ViewModel, x => x.FormFill, x => x.Form.Fill).DisposeWith(disposable);
 
                 // Отображается ли переход
                 this.OneWayBind(this.ViewModel, x => x.Visible, x => x.RightConnector.Visibility).DisposeWith(disposable);
@@ -101,6 +103,7 @@ namespace SimpleStateMachineNodeEditor.View
 
             });
         }
+
         private void Validate(RoutedEventArgs e)
         {
             ViewModel.CommandValidateName.Execute(Text.Text);
@@ -109,27 +112,34 @@ namespace SimpleStateMachineNodeEditor.View
         }
 
         private void ConnectDrag(MouseButtonEventArgs e)
-        {          
-            this.ViewModel.CommandConnectPointDrag.Execute();
-            DataObject data = new DataObject();
-            data.SetData("Node", this.ViewModel.Node);
-            DragDrop.DoDragDrop(this, data, DragDropEffects.Link);
-            this.ViewModel.CommandCheckConnectPointDrop.Execute();
-            e.Handled = true;
+        {
+            if (e.ClickCount == 1)
+            {
+                this.ViewModel.CommandConnectPointDrag.Execute();
+                DataObject data = new DataObject();
+                data.SetData("Node", this.ViewModel.Node);
+                DragDrop.DoDragDrop(this, data, DragDropEffects.Link);
+                this.ViewModel.CommandCheckConnectPointDrop.Execute();
+                e.Handled = true;
+            }
+            else if (e.ClickCount == 2)
+            {
+                this.ViewModel.CommandSetAsLoop.Execute();
+            }
         }
 
         private void ConnectorDrag(MouseButtonEventArgs e)
-        {
-            
-            if (!this.ViewModel.TextEnable)
-                return;
-            if (!Keyboard.IsKeyDown(Key.LeftShift))
-                return;
-            this.ViewModel.CommandConnectorDrag.Execute();
-            DataObject data = new DataObject();
-            data.SetData("Connector", this.ViewModel);
-            DragDrop.DoDragDrop(this, data, DragDropEffects.Link);
-            e.Handled = true;
+        {        
+                if (!this.ViewModel.TextEnable)
+                    return;
+                if (!Keyboard.IsKeyDown(Key.LeftShift))
+                    return;
+                this.ViewModel.CommandConnectorDrag.Execute();
+                DataObject data = new DataObject();
+                data.SetData("Connector", this.ViewModel);
+                DragDrop.DoDragDrop(this, data, DragDropEffects.Link);
+                e.Handled = true;
+           
         }
 
         private void ConnectorDragEnter(DragEventArgs e)

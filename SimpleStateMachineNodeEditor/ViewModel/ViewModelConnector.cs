@@ -59,6 +59,8 @@ namespace SimpleStateMachineNodeEditor.ViewModel
         /// </summary>
         [Reactive] public Brush FormFill { get; set; }
 
+        [Reactive] public double FormStrokeThickness { get; set; } = 1;
+
         /// <summary>
         /// Узел, которому принадлежит переход
         /// </summary>
@@ -68,6 +70,8 @@ namespace SimpleStateMachineNodeEditor.ViewModel
         /// Соединение, которое связанно с этим переходом
         /// </summary>
         [Reactive] public ViewModelConnect Connect { get; set; }
+
+        [Reactive] public bool ItsLoop { get; set; } = false;
 
         /// <summary>
         /// Канвас, которому принадлежит соединение
@@ -90,7 +94,7 @@ namespace SimpleStateMachineNodeEditor.ViewModel
         public SimpleCommand CommandConnectorDrag { get; set; }
         public SimpleCommand CommandConnectorDragEnter { get; set; }
         public SimpleCommand CommandConnectorDrop { get; set; }
-
+        public SimpleCommand CommandSetAsLoop { get; set; }
 
 
         public SimpleCommand CommandAdd { get; set; }
@@ -102,7 +106,7 @@ namespace SimpleStateMachineNodeEditor.ViewModel
 
             CommandConnectPointDrag = new SimpleCommand(this, ConnectPointDrag);
             CommandConnectPointDrop = new SimpleCommand(this, ConnectPointDrop);
-
+            CommandSetAsLoop = new SimpleCommand(this, SetAsLoop);
             CommandCheckConnectPointDrop = new SimpleCommand(this, CheckConnectPointDrop);
 
             CommandConnectorDrag = new SimpleCommand(this, ConnectorDrag);
@@ -117,7 +121,14 @@ namespace SimpleStateMachineNodeEditor.ViewModel
             //SimpleCommandWithResult<bool, Func<bool>> t = new SimpleCommandWithResult<bool, Func<bool>>()
         }
         #endregion Commands
-
+        private void SetAsLoop()
+        {
+            if (this == Node.Output)
+                return;
+            this.FormStrokeThickness = 0;
+            this.FormFill = Application.Current.Resources["ColorRightConnectorEllipseLoop"] as DrawingBrush;
+            Node.CommandAddEmptyConnector.Execute();
+        }
         private void Add()
         {
 
@@ -138,18 +149,13 @@ namespace SimpleStateMachineNodeEditor.ViewModel
 
         private void ConnectPointDrop()
         {
-            var connect = Node.NodesCanvas.DraggedConnect;
-
-            if (Node.NodesCanvas.DraggedConnect.FromConnector.Node == this.Node)
+           
+            if (Node.NodesCanvas.DraggedConnect.FromConnector.Node != this.Node)
             {
-                connect.Type = Helpers.Enums.ConnectType.Loop;
-                connect.StartPoint.Set(this.PositionConnectPoint);
+                var connect = Node.NodesCanvas.DraggedConnect;
+                connect.ToConnector = this;
             }
-            connect.ToConnector = this;
-            //MyPoint different = EndPoint - StartPoint;
-            //Point1.Set(StartPoint.X + 3 * different.X / 8, StartPoint.Y + 1 * different.Y / 8);
-            //Point2.Set(StartPoint.X + 5 * different.X / 8, StartPoint.Y + 7 * different.Y / 8);
-            //}
+
         }
 
         private void CheckConnectPointDrop()
