@@ -46,7 +46,6 @@ namespace SimpleStateMachineNodeEditor.Helpers
             this.Set(point);
         }
 
-
         /// <summary>
         /// Точка находится в начале координат (0,0)
         /// </summary>
@@ -152,7 +151,7 @@ namespace SimpleStateMachineNodeEditor.Helpers
             Set(point);
             return this;
         }
-
+        
         /// <summary>
         /// Возаращает копию текущего объекта
         /// </summary>
@@ -164,7 +163,8 @@ namespace SimpleStateMachineNodeEditor.Helpers
 
         public override string ToString()
         {
-            return Value.ToString();
+            return string.Format("{0}, {1}", this.Value.X.ToString(System.Globalization.CultureInfo.InvariantCulture), this.Value.Y.ToString(System.Globalization.CultureInfo.InvariantCulture));
+            //return Value.ToString();
         }
 
         #region Static Methods
@@ -301,6 +301,12 @@ namespace SimpleStateMachineNodeEditor.Helpers
             return new MyPoint(point1.X * number, point1.Y * number);
         }
 
+
+        public static MyPoint Parse(string str)
+        {
+            string[] parts = str.Split(",");
+            return new MyPoint(double.Parse(parts[0], System.Globalization.CultureInfo.InvariantCulture), double.Parse(parts[1], System.Globalization.CultureInfo.InvariantCulture));
+        }
 
 
         #endregion Static Methods

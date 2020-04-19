@@ -12,6 +12,7 @@ using DynamicData.Binding;
 using SimpleStateMachineNodeEditor.Helpers;
 using SimpleStateMachineNodeEditor.Helpers.Commands;
 using System.Linq;
+using System.Xml.Linq;
 
 namespace SimpleStateMachineNodeEditor.ViewModel
 {
@@ -93,6 +94,8 @@ namespace SimpleStateMachineNodeEditor.ViewModel
 
         public int Zindex { get; private set; }
 
+
+
         /// <summary>
         /// Список переходов
         /// </summary>
@@ -107,7 +110,6 @@ namespace SimpleStateMachineNodeEditor.ViewModel
             //this.WhenAnyValue(x=>x.Name).Subscribe()
             this.WhenAnyValue(x => x.Selected).Subscribe(value => { this.BorderBrush = value ? Brushes.Red : Brushes.LightGray; });
             this.WhenAnyValue(x => x.Point1.Value, x => x.Size).Subscribe(_ => UpdatePoint2());
-            
             SetupConnectors();
             SetupCommands();
         }
@@ -154,9 +156,8 @@ namespace SimpleStateMachineNodeEditor.ViewModel
         {
             CommandSelect = new SimpleCommandWithParameter<object>(this, Select);
             CommandMove = new SimpleCommandWithParameter<MyPoint>(this, Move);
-            CommandCollapse = new SimpleCommandWithParameter<object>(this, Collapse);
             CommandAddEmptyConnector = new SimpleCommand(this, AddEmptyConnector);
-            
+            CommandCollapse = new SimpleCommandWithParameter<object>(this, Collapse);
             //CommandTransitionsDragLeave = new SimpleCommand(this, TransitionsDragLeave);
             //CommandTransitionsDragEnter = new SimpleCommand(this, TransitionsDragEnter);
             //CommandTransitionsDrop = new SimpleCommand(this, TransitionsDrop);
@@ -185,7 +186,6 @@ namespace SimpleStateMachineNodeEditor.ViewModel
                 TransitionsVisible = null;
                 Output.Visible = true;
             }
-
         }
         private void AddConnector(ViewModelConnector connector)
         {
@@ -233,6 +233,33 @@ namespace SimpleStateMachineNodeEditor.ViewModel
                 TextEnable = false
             };
             Transitions.Insert(0, CurrentConnector);
+        }
+
+        public XElement ToXElement()
+        {
+            XElement element = new XElement("State");
+            element.Add(new XAttribute("Name", Name));
+            element.Add(new XAttribute("Position", Point1.ToString()));
+            element.Add(new XAttribute("IsCollapse", (TransitionsVisible!=true).ToString()));
+            return element;
+        }
+
+        public static ViewModelNode FromXElement(ViewModelNodesCanvas nodesCanvas, XElement node)
+        {
+            ViewModelNode viewModelNode = new ViewModelNode(nodesCanvas);
+            string name = node.Attribute("Name")?.Value;
+            if (name != null)
+                viewModelNode.Name = name;
+
+            var position = node.Attribute("Position")?.Value;
+            if(position!=null)
+                viewModelNode.Point1 = MyPoint.Parse(position);
+
+            var isCollapse = node.Attribute("IsCollapse")?.Value;
+            if (isCollapse != null)
+                viewModelNode.Collapse(!bool.Parse(isCollapse));
+      
+            return viewModelNode;
         }
     }
 }

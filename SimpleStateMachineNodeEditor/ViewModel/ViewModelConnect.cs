@@ -9,6 +9,7 @@ using ReactiveUI.Fody.Helpers;
 
 using SimpleStateMachineNodeEditor.Helpers;
 using SimpleStateMachineNodeEditor.Helpers.Enums;
+using System.Xml.Linq;
 
 namespace SimpleStateMachineNodeEditor.ViewModel
 {
@@ -85,7 +86,7 @@ namespace SimpleStateMachineNodeEditor.ViewModel
         private void FromConnectChanged()
         {
             StartPointUpdate(FromConnector.PositionConnectPoint.ToPoint());
-            
+
         }
         private void ToConnectChanged()
         {
@@ -118,5 +119,30 @@ namespace SimpleStateMachineNodeEditor.ViewModel
 
         #endregion Setup Commands
 
+        public XElement ToXElement()
+        {
+            XElement element = new XElement("Transition");
+            element.Add(new XAttribute("Name", FromConnector.Name));
+            element.Add(new XAttribute("From", FromConnector.Node.Name));
+            element.Add(new XAttribute("To", ToConnector.Node.Name));
+
+            return element;
+        }
+
+        public static ViewModelConnect FromXElement(ViewModelNodesCanvas nodesCanvas, XElement node)
+        {
+            string name = node.Attribute("Name")?.Value;
+            string from = node.Attribute("From")?.Value;
+            string to = node.Attribute("To")?.Value;
+            ViewModelNode nodeFrom = nodesCanvas.Nodes.Single(x => x.Name == from);
+            ViewModelNode nodeTo = nodesCanvas.Nodes.Single(x => x.Name == to);
+
+            nodeFrom.CurrentConnector.Name = name;
+            ViewModelConnect viewModelConnect = new ViewModelConnect(nodeFrom.CurrentConnector);
+            viewModelConnect.ToConnector = nodeTo.Input;
+            nodeFrom.CommandAddEmptyConnector.Execute();
+
+            return viewModelConnect;
+        }
     }
 }

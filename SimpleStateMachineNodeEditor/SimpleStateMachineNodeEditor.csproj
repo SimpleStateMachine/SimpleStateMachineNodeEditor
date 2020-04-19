@@ -9,11 +9,41 @@
 
   <ItemGroup>
     <None Remove="Images\ApplicationConnectionDiagram_16x.png" />
-    <None Remove="View\SaveAs_16x.png" />
-    <None Remove="View\Save_16x.svg" />
+    <None Remove="Images\ApplicationConnectionDiagram_16x.svg" />
+    <None Remove="Images\CollapseUp_16x.png" />
+    <None Remove="Images\CollapseUp_16x.svg" />
+    <None Remove="Images\DeleteRelationship_16x.png" />
+    <None Remove="Images\DeleteRelationship_16x.svg" />
+    <None Remove="Images\ExpandDown_lg_16x.png" />
+    <None Remove="Images\ExpandDown_lg_16x.svg" />
+    <None Remove="Images\NewDiagram_16x.png" />
+    <None Remove="Images\NewDiagram_16x.svg" />
+    <None Remove="Images\NewRelationshipMenu_16x.png" />
+    <None Remove="Images\NewRelationshipMenu_16x.svg" />
+    <None Remove="Images\Redo_16x.png" />
+    <None Remove="Images\Redo_16x.svg" />
+    <None Remove="Images\Relationship_16x.svg" />
+    <None Remove="Images\SaveAs_16x.png" />
+    <None Remove="Images\SaveAs_16x.svg" />
+    <None Remove="Images\Save_16x.png" />
+    <None Remove="Images\Save_16x.svg" />
+    <None Remove="Images\Undo_16x.png" />
+    <None Remove="Images\Undo_16x.svg" />
+    <None Remove="Images\ZoomIn_16x.png" />
+    <None Remove="Images\ZoomIn_16x.svg" />
+    <None Remove="Images\ZoomOriginalSize_16x.png" />
+    <None Remove="Images\ZoomOriginalSize_16x.svg" />
+    <None Remove="Images\ZoomOut_16x.png" />
+    <None Remove="Images\ZoomOut_16x.svg" />
   </ItemGroup>
 
   <ItemGroup>
+    <Page Remove="Images\Relationship_16x.xaml" />
+    <Page Remove="Images\SaveAs_16x.xaml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Newtonsoft.Json" Version="12.0.3" />
     <PackageReference Include="ReactiveUI" Version="11.2.3" />
     <PackageReference Include="ReactiveUI.Events.WPF" Version="11.2.3" />
     <PackageReference Include="ReactiveUI.Fody" Version="11.2.3" />
@@ -24,23 +54,16 @@
   </ItemGroup>
 
   <ItemGroup>
-    <EmbeddedResource Include="Images\ApplicationConnectionDiagram_16x.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </EmbeddedResource>
-  </ItemGroup>
-
-  <ItemGroup>
-    <Resource Include="View\SaveAs_16x.png" />
-    <Resource Include="View\Save_16x.svg" />
-  </ItemGroup>
-
-  <ItemGroup>
     <Page Update="Styles\Node\RightConnector\RightConnectorEllipseStyle.xaml">
       <SubType>Designer</SubType>
     </Page>
     <Page Update="Styles\Node\RightConnector\RightConnectorTextBoxStyle.xaml">
       <SubType>Designer</SubType>
     </Page>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Images\" />
   </ItemGroup>
 
 </Project>

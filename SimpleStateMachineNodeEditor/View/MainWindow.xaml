@@ -19,7 +19,10 @@
         <DockPanel x:Name="Header" Grid.Row="0" Background="{StaticResource ColorWindowHeader}" LastChildFill="False">
             <Menu Background="{DynamicResource ColorMenuBaground}"  Foreground="White" BorderBrush="{DynamicResource ColorMenuBorder}" OpacityMask="{DynamicResource ColorHeaderButtonIsMouseOver}"  Template="{DynamicResource MenuTemplate}" BorderThickness="1" HorizontalAlignment="Left" VerticalAlignment="Center">
                 <MenuItem Header="File" x:Name="Item" Style="{DynamicResource MenuItemStyle}">
-                    <MenuItem Header="Open" x:Name="ItemOpen" Style="{DynamicResource MenuItemStyle}"/>
+                    <MenuItem Header="Open" x:Name="ItemOpen" Style="{DynamicResource MenuItemStyle}" />
+                    <!--<MenuItem.Icon>
+                            <Path></Path>
+                        </MenuItem.Icon>-->
                     <MenuItem Header="Save" x:Name="ItemSave" Style="{DynamicResource MenuItemStyle}"/>
                     <MenuItem Header="SaveAs..." x:Name="ItemSaveAs" Style="{DynamicResource MenuItemStyle}"/>
                     <MenuItem Header="Export" x:Name="ItemExport" Style="{DynamicResource MenuItemStyle}">
@@ -55,199 +58,21 @@
                 </Path>
             </Button>
             <Button DockPanel.Dock="Right" x:Name="ButtonMin" Style="{DynamicResource HeaderButtonTemplate}" Background="{StaticResource ColorWindowHeader}" BorderBrush="{DynamicResource ColorHeaderButtonIsMouseOver}" Foreground="{DynamicResource ColorHeaderButtonIsPressed}" >
-
                 <Path x:Name="ButtonMinPath"
                       Stroke="{DynamicResource ColorHeaderButton}" 
                       StrokeThickness="1.2" 
                       Stretch="None" 
                       Data="M0,0 H11">
                 </Path>
-
             </Button>
             <Button DockPanel.Dock="Right" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="{x:Null}" />
         </DockPanel>
         <ToolBarTray Grid.Row="1" IsLocked="True"  Background="{x:Null}">
             <ToolBar Style="{DynamicResource ToolBarTemplate}" Background="{x:Null}" Foreground="{x:Null}" >
-                <Button Background="{StaticResource ColorWindowHeader}" BorderBrush="{DynamicResource ColorButtonMaxIsMouseOver}" Foreground="{DynamicResource ColorHeaderButtonIsPressed}" Height="16" Width="16" Style="{DynamicResource HeaderButtonTemplate}">
+                <!--<Button Background="{StaticResource ColorWindowHeader}" BorderBrush="{DynamicResource ColorButtonMaxIsMouseOver}" Foreground="{DynamicResource ColorHeaderButtonIsPressed}" Height="16" Width="16" Style="{DynamicResource HeaderButtonTemplate}">
                     <Image Source="/View/SaveAs_16x.png"  Height="16"/>
-                </Button>
-                <Button>
-                    <Image Source="/View/SaveAs_16x.png"  Height="16"/>
-                </Button>
-                <Button>
-                    <Image Source="/View/SaveAs_16x.png"  Height="16"/>
-                </Button>
-                <Button>
-                    <Image Source="/View/SaveAs_16x.png"  Height="16"/>
-                </Button>
-                <Button>
-                    <Image Source="/View/SaveAs_16x.png"  Height="16"/>
-                </Button>
-                <Button>
-                    <Image Source="/View/SaveAs_16x.png"  Height="16"/>
-                </Button>
-                <Button>
-                    <Image Source="/View/SaveAs_16x.png"  Height="16"/>
-                </Button>
-                <Button>
-                    <Image Source="/View/SaveAs_16x.png"  Height="16"/>
-                </Button>
-                <Button>
-                    <Image Source="/View/SaveAs_16x.png"  Height="16"/>
-                </Button>
-                <Button>
-                    <Image Source="/View/SaveAs_16x.png"  Height="16"/>
-                </Button>
-                <Button>
-                    <Image Source="/View/SaveAs_16x.png"  Height="16"/>
-                </Button>
-                <Button>
-                    <Image Source="/View/SaveAs_16x.png"  Height="16"/>
-                </Button>
-                <Button>
-                    <Image Source="/View/SaveAs_16x.png"  Height="16"/>
-                </Button>
-                <Button>
-                    <Image Source="/View/SaveAs_16x.png"  Height="16"/>
-                </Button>
-                <Button>
-                    <Image Source="/View/SaveAs_16x.png"  Height="16"/>
-                </Button>
-                <Button>
-                    <Image Source="/View/SaveAs_16x.png"  Height="16"/>
-                </Button>
-                <Button>
-                    <Image Source="/View/SaveAs_16x.png"  Height="16"/>
-                </Button>
-                <Button>
-                    <Image Source="/View/SaveAs_16x.png"  Height="16"/>
-                </Button>
-                <Button>
-                    <Image Source="/View/SaveAs_16x.png"  Height="16"/>
-                </Button>
-                <Button>
-                    <Image Source="/View/SaveAs_16x.png"  Height="16"/>
-                </Button>
-                <Button>
-                    <Image Source="/View/SaveAs_16x.png"  Height="16"/>
-                </Button>
-                <Button>
-                    <Image Source="/View/SaveAs_16x.png"  Height="16"/>
-                </Button>
-                <Button>
-                    <Image Source="/View/SaveAs_16x.png"  Height="16"/>
-                </Button>
-                <Button>
-                    <Image Source="/View/SaveAs_16x.png"  Height="16"/>
-                </Button>
-                <Button>
-                    <Image Source="/View/SaveAs_16x.png"  Height="16"/>
-                </Button>
-                <Button>
-                    <Image Source="/View/SaveAs_16x.png"  Height="16"/>
-                </Button>
-                <Button>
-                    <Image Source="/View/SaveAs_16x.png"  Height="16"/>
-                </Button>
-                <Button>
-                    <Image Source="/View/SaveAs_16x.png"  Height="16"/>
-                </Button>
-                <Button>
-                    <Image Source="/View/SaveAs_16x.png"  Height="16"/>
-                </Button>
-                <Button>
-                    <Image Source="/View/SaveAs_16x.png"  Height="16"/>
-                </Button>
-                <Button>
-                    <Image Source="/View/SaveAs_16x.png"  Height="16"/>
-                </Button>
-                <Button>
-                    <Image Source="/View/SaveAs_16x.png"  Height="16"/>
-                </Button>
-                <Button>
-                    <Image Source="/View/SaveAs_16x.png"  Height="16"/>
-                </Button>
-                <Button>
-                    <Image Source="/View/SaveAs_16x.png"  Height="16"/>
-                </Button>
-                <Button>
-                    <Image Source="/View/SaveAs_16x.png"  Height="16"/>
-                </Button>
-                <Button>
-                    <Image Source="/View/SaveAs_16x.png"  Height="16"/>
-                </Button>
-                <Button>
-                    <Image Source="/View/SaveAs_16x.png"  Height="16"/>
-                </Button>
-                <Button>
-                    <Image Source="/View/SaveAs_16x.png"  Height="16"/>
-                </Button>
-                <Button>
-                    <Image Source="/View/SaveAs_16x.png"  Height="16"/>
-                </Button>
-                <Button>
-                    <Image Source="/View/SaveAs_16x.png"  Height="16"/>
-                </Button>
-                <Button>
-                    <Image Source="/View/SaveAs_16x.png"  Height="16"/>
-                </Button>
-                <Button>
-                    <Image Source="/View/SaveAs_16x.png"  Height="16"/>
-                </Button>
-                <Button>
-                    <Image Source="/View/SaveAs_16x.png"  Height="16"/>
-                </Button>
-                <Button>
-                    <Image Source="/View/SaveAs_16x.png"  Height="16"/>
-                </Button>
-                <Button>
-                    <Image Source="/View/SaveAs_16x.png"  Height="16"/>
-                </Button>
-                <Button>
-                    <Image Source="/View/SaveAs_16x.png"  Height="16"/>
-                </Button>
-                <Button>
-                    <Image Source="/View/SaveAs_16x.png"  Height="16"/>
-                </Button>
-                <Button>
-                    <Image Source="/View/SaveAs_16x.png"  Height="16"/>
-                </Button>
-                <Button>
-                    <Image Source="/View/SaveAs_16x.png"  Height="16"/>
-                </Button>
-                <Button>
-                    <Image Source="/View/SaveAs_16x.png"  Height="16"/>
-                </Button>
-                <Button>
-                    <Image Source="/View/SaveAs_16x.png"  Height="16"/>
-                </Button>
-                <Button>
-                    <Image Source="/View/SaveAs_16x.png"  Height="16"/>
-                </Button>
-                <Button>
-                    <Image Source="/View/SaveAs_16x.png"  Height="16"/>
-                </Button>
-                <Button>
-                    <Image Source="/View/SaveAs_16x.png"  Height="16"/>
-                </Button>
-                <Button>
-                    <Image Source="/View/SaveAs_16x.png"  Height="16"/>
-                </Button>
-                <Button>
-                    <Image Source="/View/SaveAs_16x.png"  Height="16"/>
-                </Button>
-                <Button>
-                    <Image Source="/View/SaveAs_16x.png"  Height="16"/>
-                </Button>
-                <Button>
-                    <Image Source="/View/SaveAs_16x.png"  Height="16"/>
-                </Button>
-                <Button>
-                    <Image Source="/View/SaveAs_16x.png"  Height="16"/>
-                </Button>
-                <Button>
-                    <Image Source="/View/SaveAs_16x.png"  Height="16"/>
-                </Button>
+                </Button>-->
+                
             </ToolBar>
 
             <!--<Separator />

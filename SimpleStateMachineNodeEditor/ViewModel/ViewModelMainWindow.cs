@@ -7,5 +7,6 @@ namespace SimpleStateMachineNodeEditor.ViewModel
 {
     public class ViewModelMainWindow: ReactiveObject
     {
+        string Path { get;  set; }
     }
 }

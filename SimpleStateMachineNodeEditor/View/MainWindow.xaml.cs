@@ -17,6 +17,8 @@ using SimpleStateMachineNodeEditor.ViewModel;
 using SimpleStateMachineNodeEditor.Helpers.Enums;
 using System.Windows.Forms;
 using System.IO;
+using SimpleStateMachineNodeEditor.Helpers;
+using Newtonsoft.Json;
 
 namespace SimpleStateMachineNodeEditor.View
 {
@@ -69,8 +71,12 @@ namespace SimpleStateMachineNodeEditor.View
                 this.ButtonClose.Events().Click.Subscribe(e => ButtonCloseClick(e)).DisposeWith(disposable);
                 this.ButtonMin.Events().Click.Subscribe(e => ButtonMinClick(e)).DisposeWith(disposable);
                 this.ButtonMax.Events().Click.Subscribe(e => ButtonMaxClick(e)).DisposeWith(disposable);
-                this.ItemExportToJPEG.Events().Click.Subscribe(_ => SaveAsPNG(ImageFormats.PNG)).DisposeWith(disposable);
-                this.ItemExportToPNG.Events().Click.Subscribe(_ => SaveAsPNG(ImageFormats.JPEG)).DisposeWith(disposable);
+                this.ItemExportToJPEG.Events().Click.Subscribe(_ => ExportToImage(ImageFormats.JPEG)).DisposeWith(disposable);
+                this.ItemExportToPNG.Events().Click.Subscribe(_ => ExportToImage(ImageFormats.PNG)).DisposeWith(disposable);
+                this.ItemSave.Events().Click.Subscribe(_=> Save()).DisposeWith(disposable);
+                this.ItemSaveAs.Events().Click.Subscribe(_ => SaveAs()).DisposeWith(disposable);
+                this.ItemOpen.Events().Click.Subscribe(_ => Open()).DisposeWith(disposable);
+
             });
         }
 
@@ -123,7 +129,7 @@ namespace SimpleStateMachineNodeEditor.View
             }
         }
 
-        void SaveAsPNG(ImageFormats format)
+        void ExportToImage(ImageFormats format)
         {
             SaveFileDialog dlg = new SaveFileDialog();
             dlg.FileName = "SimpleStateMachine"; 
@@ -136,6 +142,35 @@ namespace SimpleStateMachineNodeEditor.View
             }              
         }
 
+        void Save()
+        {
+
+        }
+        void SaveAs()
+        {
+            SaveFileDialog dlg = new SaveFileDialog();
+            dlg.FileName = "SimpleStateMachine";
+            dlg.Filter = "XML-File | *.xml";
+
+            DialogResult dialogResult = dlg.ShowDialog();
+            if (dialogResult == System.Windows.Forms.DialogResult.OK)
+            {
+                this.NodesCanvas.ViewModel.CommandSave.Execute(dlg.FileName);
+            }
+        }
+
+        void Open()
+        {
+            OpenFileDialog dlg = new OpenFileDialog();
+            dlg.FileName = "SimpleStateMachine";
+            dlg.Filter = "XML-File | *.xml";
+
+            DialogResult dialogResult = dlg.ShowDialog();
+            if (dialogResult == System.Windows.Forms.DialogResult.OK)
+            {
+                this.NodesCanvas.ViewModel.CommandOpen.Execute(dlg.FileName);
+            }
+        }
         #endregion SetupEvents
 
         #region Setup Commands

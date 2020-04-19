@@ -170,6 +170,7 @@ namespace SimpleStateMachineNodeEditor.View
             bool visible = (this.Header.ButtonRotate.Angle != 0);
             this.Header.ButtonRotate.Angle = visible ? 0 : 180;
             ViewModel.CommandCollapse.Execute(visible);
+            
         }
         #endregion Setup Events
         #region Setup Commands

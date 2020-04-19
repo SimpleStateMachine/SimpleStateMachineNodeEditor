@@ -271,16 +271,22 @@ namespace SimpleStateMachineNodeEditor.View
             return result;
         }
 
-
         public void SaveCanvasToImage(string filename, ImageFormats format)
         {
             int width = (int)this.Canvas.ActualWidth;
             int height = (int)this.Canvas.ActualHeight;
 
-            RenderTargetBitmap renderBitmap = new RenderTargetBitmap(width, height, 96d, 96d, PixelFormats.Pbgra32);
+            var pSource = PresentationSource.FromVisual(Application.Current.MainWindow);
+            Matrix m = pSource.CompositionTarget.TransformToDevice;
+            double dpiX = m.M11 * 96;
+            double dpiY = m.M22 * 96;
+
+            RenderTargetBitmap renderBitmap = new RenderTargetBitmap(width, height, dpiX, dpiY, PixelFormats.Default);
+
+            //var crop = new CroppedBitmap(renderBitmap, new Int32Rect(50, 50, 250, 250));
             // needed otherwise the image output is black
-            this.Canvas.Measure(new Size(width, height));
-            this.Canvas.Arrange(new Rect(new Size(width, height)));
+            //this.Canvas.Measure(new Size(width, height));
+            //this.Canvas.Arrange(new Rect(new Size(width, height)));
 
             renderBitmap.Render(this.Canvas);
             BitmapEncoder encoder;
@@ -295,6 +301,8 @@ namespace SimpleStateMachineNodeEditor.View
             using (FileStream file = File.Create(filename))
             {
                 encoder.Save(file);
+                file.Flush();
+                file.Close();
             }
         }
 
