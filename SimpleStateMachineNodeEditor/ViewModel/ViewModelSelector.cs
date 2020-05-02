@@ -13,30 +13,12 @@ namespace SimpleStateMachineNodeEditor.ViewModel
 {
     public class ViewModelSelector : ReactiveObject
     {
-        /// <summary>
-        /// Размер Селектора
-        /// </summary>
         [Reactive] public Size Size { get; set; }
-
-        /// <summary>
-        /// Отображается ли выделение
-        /// </summary>
         [Reactive] public bool? Visible { get; set; } = false;
-
-        /// <summary>
-        /// Точка левого верхнего угла без учета отражений
-        /// </summary>
         [Reactive] public MyPoint Point1 { get; set; } = new MyPoint();
-
-        /// <summary>
-        /// Точка нижнего правого угла без учета отражений
-        /// </summary>
         [Reactive] public MyPoint Point2 { get; set; } = new MyPoint();
+        [Reactive] public Scale Scale { get; set; } = new Scale();
 
-
-        /// <summary>
-        /// Точка левого верхнего угла c учетом отражений
-        /// </summary>
         public MyPoint Point1WithScale
         {
             get
@@ -52,10 +34,6 @@ namespace SimpleStateMachineNodeEditor.ViewModel
                 return new MyPoint(X, Y);
             }
         }
-
-        /// <summary>
-        /// Точка левого верхнего угла c учетом отражений
-        /// </summary>
         public MyPoint Point2WithScale
         {
             get
@@ -72,10 +50,7 @@ namespace SimpleStateMachineNodeEditor.ViewModel
             }
         }
 
-        /// <summary>
-        /// Масштаб
-        /// </summary>
-        [Reactive] public Scale Scale { get; set; } = new Scale();
+
 
         public ViewModelSelector()
         {

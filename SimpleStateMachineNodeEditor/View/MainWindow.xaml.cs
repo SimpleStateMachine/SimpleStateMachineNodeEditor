@@ -48,7 +48,7 @@ namespace SimpleStateMachineNodeEditor.View
         public MainWindow()
         {
             InitializeComponent();
-            ViewModel = new ViewModelMainWindow();
+            ViewModel = new ViewModelMainWindow();         
             SetupBinding();
             SetupEvents();
             SetupCommands();
@@ -60,9 +60,12 @@ namespace SimpleStateMachineNodeEditor.View
         {
             this.WhenActivated(disposable =>
             {
-                var SelectedItem = this.ObservableForProperty(x => x.ErrorList.SelectedItem).Select(x => x.Value);
+                this.ViewModel.NodesCanvas = this.NodesCanvas.ViewModel;
+                var SelectedItem = this.ObservableForProperty(x => x.MessageList.SelectedItem).Select(x=>(x.Value as ViewModelMessage)?.Text);
                 this.BindCommand(this.ViewModel,x=>x.CommandCopyError, x=>x.BindingCopyError, SelectedItem).DisposeWith(disposable);
                 this.BindCommand(this.ViewModel, x => x.CommandCopyError, x => x.ItemCopyError, SelectedItem).DisposeWith(disposable);
+
+                this.OneWayBind(this.ViewModel, x=>x.Messages, x=>x.MessageList.ItemsSource).DisposeWith(disposable);
             });
         }
         #endregion SetupBinding
@@ -109,12 +112,8 @@ namespace SimpleStateMachineNodeEditor.View
         void ErrorListExpanded()
         {
             this.ErrorListSplitter.IsEnabled = true;
-            double maxHeight = 150;
-            if(this.ErrorList.Items.Count>5)
-                this.Fotter.Height = new GridLength(maxHeight);
-            //if (this.ErrorList.ExtentHeight > maxHeight)
-            //    this.Fotter.Height = new GridLength(maxHeight);
-            //this.NodesCanvas.ViewModel.Errors.Add("Add line " + this.NodesCanvas.ViewModel.Errors.Count.ToString());
+            if(this.MessageList.Items.Count>this.ViewModel.CountShowingMessage)
+                this.Fotter.Height = new GridLength(this.ViewModel.MaxHeightMessagePanel);
         }
         void StateNormalMaximaze()
         {

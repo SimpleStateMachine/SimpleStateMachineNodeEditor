@@ -28,7 +28,7 @@ namespace SimpleStateMachineNodeEditor.ViewModel
         [Reactive] public ViewModelConnector ConnectorPreviewForDrop { get; set; }
         [Reactive] public ViewModelNode StartState { get; set; }
 
-        public IObservableCollection<string> Errors { get; set; } = new ObservableCollectionExtended<string>();
+        public IObservableCollection<ViewModelMessage> Messages { get; set; } = new ObservableCollectionExtended<ViewModelMessage>();
 
         /// <summary>
         /// Масштаб 
@@ -40,6 +40,17 @@ namespace SimpleStateMachineNodeEditor.ViewModel
             SetupCommands();
             SetupStartState();
             Cutter = new ViewModelCutter(this);
+
+            Messages.Add(new ViewModelMessage("Error text Message 1 "));
+            Messages.Add(new ViewModelMessage("Error text Message 2 "));
+            Messages.Add(new ViewModelMessage("Error text Message 3 "));
+            Messages.Add(new ViewModelMessage("Error text Message 4 "));
+            Messages.Add(new ViewModelMessage("Error text Message 5 "));
+            Messages.Add(new ViewModelMessage("Error text Message 6 "));
+            Messages.Add(new ViewModelMessage("Error text Message 7 "));
+            Messages.Add(new ViewModelMessage("Error text Message 8 "));
+            Messages.Add(new ViewModelMessage("Error text Message 9 "));
+            Messages.Add(new ViewModelMessage("Error text Message 10 "));
         }
 
         #region Setup Nodes
