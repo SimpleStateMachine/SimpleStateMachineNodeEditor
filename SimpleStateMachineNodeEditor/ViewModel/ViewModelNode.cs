@@ -16,89 +16,38 @@ using System.Xml.Linq;
 
 namespace SimpleStateMachineNodeEditor.ViewModel
 {
-    /// <summary>
-    /// Отображение для узла
-    /// </summary>
     public class ViewModelNode : ReactiveValidationObject<ViewModelNode>
     {
-        /// <summary>
-        /// Точка левого верхнего угла
-        /// </summary>
         [Reactive] public MyPoint Point1 { get; set; } = new MyPoint();
 
-        /// <summary>
-        /// Точка нижнего правого угла
-        /// </summary>
         [Reactive] public MyPoint Point2 { get; set; } = new MyPoint();
 
-        /// <summary>
-        /// Размер узла
-        /// </summary>
         [Reactive] public Size Size { get; set; }
 
-        /// <summary>
-        /// Название узла (Указано в шапке)
-        /// </summary>
         [Reactive] public string Name { get; set; }
 
-        /// <summary>
-        /// Допен ли заголовок для редактирования
-        /// </summary>
         [Reactive] public bool NameEnable { get; set; } = true;
 
-
-        /// <summary>
-        /// Флаг того, что узел выбран
-        /// </summary>
         [Reactive] public bool Selected { get; set; }
 
-        /// <summary>
-        /// Цвет рамки вокруг узла
-        /// </summary>
         [Reactive] public Brush BorderBrush { get; set; } = Application.Current.Resources["ColorNodeBorder"] as SolidColorBrush;
 
-        /// <summary>
-        /// Отображаются ли переходы
-        /// </summary>
         [Reactive] public bool? TransitionsVisible { get; set; } = true;
 
-        /// <summary>
-        /// Отображаются ли переходы
-        /// </summary>
         [Reactive] public bool? RollUpVisible { get; set; } = true;
 
-        /// <summary>
-        /// Может ли быть удален
-        /// </summary>
         [Reactive] public bool CanBeDelete { get; set; } = true;
 
-        /// <summary>
-        /// Вход для соединения с этим узлом
-        /// </summary>
         [Reactive] public ViewModelConnector Input { get; set; }
 
-        /// <summary>
-        /// Выход ( используется, когда список переходов свернут )
-        /// </summary>
         [Reactive] public ViewModelConnector Output { get; set; }
 
-        /// <summary>
-        /// Текущий переход, из которого можно создать соединение
-        /// </summary>
         [Reactive] public ViewModelConnector CurrentConnector { get; set; }
 
-        /// <summary>
-        /// Канвас, которому принадлежит узел
-        /// </summary>
         [Reactive] public ViewModelNodesCanvas NodesCanvas { get; set; }
 
         public int Zindex { get; private set; }
 
-
-
-        /// <summary>
-        /// Список переходов
-        /// </summary>
         public IObservableCollection<ViewModelConnector> Transitions { get; set; } = new ObservableCollectionExtended<ViewModelConnector>();
 
 

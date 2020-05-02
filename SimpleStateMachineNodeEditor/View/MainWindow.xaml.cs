@@ -19,6 +19,8 @@ using System.Windows.Forms;
 using System.IO;
 using SimpleStateMachineNodeEditor.Helpers;
 using Newtonsoft.Json;
+using System.Linq;
+using SimpleStateMachineNodeEditor.Helpers.Commands;
 
 namespace SimpleStateMachineNodeEditor.View
 {
@@ -46,27 +48,41 @@ namespace SimpleStateMachineNodeEditor.View
         public MainWindow()
         {
             InitializeComponent();
+            ViewModel = new ViewModelMainWindow();
             SetupBinding();
             SetupEvents();
             SetupCommands();
         }
 
         #region SetupBinding
+         
         private void SetupBinding()
         {
             this.WhenActivated(disposable =>
             {
-
+                var SelectedItem = this.ObservableForProperty(x => x.ErrorList.SelectedItem).Select(x => x.Value);
+                this.BindCommand(this.ViewModel,x=>x.CommandCopyError, x=>x.BindingCopyError, SelectedItem).DisposeWith(disposable);
+                this.BindCommand(this.ViewModel, x => x.CommandCopyError, x => x.ItemCopyError, SelectedItem).DisposeWith(disposable);
             });
         }
         #endregion SetupBinding
-       
+
+        #region Setup Commands
+        private void SetupCommands()
+        {
+            this.WhenActivated(disposable =>
+            {
+                this.Events().KeyUp.Where(x => x.Key == Key.S && (Keyboard.IsKeyDown(Key.LeftCtrl) || Keyboard.IsKeyDown(Key.RightCtrl))).Subscribe(_ => Save()).DisposeWith(disposable);
+                this.Events().KeyUp.Where(x => x.Key == Key.F4 && (Keyboard.IsKeyDown(Key.LeftAlt) || Keyboard.IsKeyDown(Key.RightAlt))).Subscribe(_ => Close()).DisposeWith(disposable);
+            });
+        }
+        #endregion Setup Commands
+
         #region SetupEvents
         private void SetupEvents()
         {
             this.WhenActivated(disposable =>
             {
-
                 this.Header.Events().PreviewMouseLeftButtonDown.Subscribe(e => HeaderClick(e)).DisposeWith(disposable);
                 this.ButtonClose.Events().Click.Subscribe(e => ButtonCloseClick(e)).DisposeWith(disposable);
                 this.ButtonMin.Events().Click.Subscribe(e => ButtonMinClick(e)).DisposeWith(disposable);
@@ -76,10 +92,30 @@ namespace SimpleStateMachineNodeEditor.View
                 this.ItemSave.Events().Click.Subscribe(_=> Save()).DisposeWith(disposable);
                 this.ItemSaveAs.Events().Click.Subscribe(_ => SaveAs()).DisposeWith(disposable);
                 this.ItemOpen.Events().Click.Subscribe(_ => Open()).DisposeWith(disposable);
-
+                this.ItemExit.Events().Click.Subscribe(_=>Close()).DisposeWith(disposable);
+                this.ItemNew.Events().Click.Subscribe(_ => New()).DisposeWith(disposable);
+                this.ItemUndo.Events().Click.Subscribe(_=>this.NodesCanvas.ViewModel.CommandUndo.Execute()).DisposeWith(disposable);
+                this.ItemRedo.Events().Click.Subscribe(_ => this.NodesCanvas.ViewModel.CommandRedo.Execute()).DisposeWith(disposable);
+                this.ErrorListExpander.Events().Collapsed.Subscribe(_=> ErrorListCollapse()).DisposeWith(disposable);
+                this.ErrorListExpander.Events().Expanded.Subscribe(_ => ErrorListExpanded()).DisposeWith(disposable);
+                //this.ErrorListExpander.Events().Expanded.Subscribe(_ => ErrorListExpanded()).DisposeWith(disposable);
             });
         }
-
+        void ErrorListCollapse()
+        {
+            this.ErrorListSplitter.IsEnabled = false;
+            this.Fotter.Height = new GridLength();
+        }
+        void ErrorListExpanded()
+        {
+            this.ErrorListSplitter.IsEnabled = true;
+            double maxHeight = 150;
+            if(this.ErrorList.Items.Count>5)
+                this.Fotter.Height = new GridLength(maxHeight);
+            //if (this.ErrorList.ExtentHeight > maxHeight)
+            //    this.Fotter.Height = new GridLength(maxHeight);
+            //this.NodesCanvas.ViewModel.Errors.Add("Add line " + this.NodesCanvas.ViewModel.Errors.Count.ToString());
+        }
         void StateNormalMaximaze()
         {
             this.WindowState = this.WindowState == WindowState.Normal ? WindowState.Maximized : WindowState.Normal;
@@ -141,21 +177,33 @@ namespace SimpleStateMachineNodeEditor.View
                 this.NodesCanvas.SaveCanvasToImage(dlg.FileName, format);
             }              
         }
+        void New()
+        {
+            this.NodesCanvas.ViewModel.CommandNew.Execute();
+        }
 
         void Save()
         {
-
+            if (string.IsNullOrEmpty(this.ViewModel.Path))
+            {
+                SaveAs();
+            }
+            else
+            {
+                this.NodesCanvas.ViewModel.CommandSave.Execute(this.ViewModel.Path);
+            }
         }
         void SaveAs()
         {
             SaveFileDialog dlg = new SaveFileDialog();
             dlg.FileName = "SimpleStateMachine";
             dlg.Filter = "XML-File | *.xml";
-
+            
             DialogResult dialogResult = dlg.ShowDialog();
             if (dialogResult == System.Windows.Forms.DialogResult.OK)
             {
                 this.NodesCanvas.ViewModel.CommandSave.Execute(dlg.FileName);
+                this.ViewModel.Path = dlg.FileName;
             }
         }
 
@@ -173,11 +221,6 @@ namespace SimpleStateMachineNodeEditor.View
         }
         #endregion SetupEvents
 
-        #region Setup Commands
-        private void SetupCommands()
-        {          
 
-        }
-        #endregion Setup Commands
     }
 }

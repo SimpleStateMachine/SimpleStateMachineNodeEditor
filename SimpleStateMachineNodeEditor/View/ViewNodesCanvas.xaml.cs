@@ -102,15 +102,11 @@ namespace SimpleStateMachineNodeEditor.View
                 this.BindCommand(this.ViewModel, x => x.CommandUndo, x => x.BindingUndo).DisposeWith(disposable);
                 this.BindCommand(this.ViewModel, x => x.CommandSelectAll, x => x.BindingSelectAll).DisposeWith(disposable);
                 this.BindCommand(this.ViewModel, x => x.CommandDeleteSelectedNodes, x => x.BindingDeleteNode).DisposeWith(disposable);
-
-
                 this.BindCommand(this.ViewModel, x => x.CommandSelect, x => x.BindingSelect, positionLeftClickObservable).DisposeWith(disposable);
                 this.BindCommand(this.ViewModel, x => x.CommandCut, x => x.BindingCut, positionLeftClickObservable).DisposeWith(disposable);
-
-
-
                 this.BindCommand(this.ViewModel, x => x.CommandAddNode, x => x.BindingAddNode, positionLeftClickObservable).DisposeWith(disposable);
                 this.BindCommand(this.ViewModel, x => x.CommandAddNode, x => x.ItemAddNode, positionRightClickObservable).DisposeWith(disposable);
+
                 this.WhenAnyValue(x => x.ViewModel.Selector.Size).InvokeCommand(ViewModel.CommandSelectorIntersect).DisposeWith(disposable);
                 this.WhenAnyValue(x => x.ViewModel.Cutter.EndPoint.Value).InvokeCommand(ViewModel.CommandCutterIntersect).DisposeWith(disposable);
 

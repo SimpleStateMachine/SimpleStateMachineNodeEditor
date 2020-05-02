@@ -5,8 +5,9 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:SimpleStateMachineNodeEditor"
         xmlns:styles="clr-namespace:SimpleStateMachineNodeEditor.Styles"
+         xmlns:sys="clr-namespace:System;assembly=mscorlib"
     
-    xmlns:view="clr-namespace:SimpleStateMachineNodeEditor.View"
+    xmlns:view="clr-namespace:SimpleStateMachineNodeEditor.View" xmlns:sys1="clr-namespace:System;assembly=System.Runtime"
     x:Class="SimpleStateMachineNodeEditor.View.MainWindow"
         mc:Ignorable="d"
         Title="MainWindow"  d:DesignWidth="808.96" Height="738.592" BorderThickness="1" Padding="7,0,7,7" ResizeMode="CanResizeWithGrip" BorderBrush="{DynamicResource ColorWindowBorder}" Background="{DynamicResource ColorWindowHeader}" Foreground="{x:Null}" WindowStyle="None" AllowsTransparency="True" Style="{DynamicResource CustomWindowStyle}">
@@ -14,26 +15,29 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="auto"></RowDefinition>
             <RowDefinition Height="auto"></RowDefinition>
-            <RowDefinition ></RowDefinition>
+            <RowDefinition></RowDefinition>
+            <RowDefinition  Height="auto"></RowDefinition>
+            <RowDefinition  Height="auto" x:Name="Fotter" MinHeight="18"></RowDefinition>
         </Grid.RowDefinitions>
         <DockPanel x:Name="Header" Grid.Row="0" Background="{StaticResource ColorWindowHeader}" LastChildFill="False">
             <Menu Background="{DynamicResource ColorMenuBaground}"  Foreground="White" BorderBrush="{DynamicResource ColorMenuBorder}" OpacityMask="{DynamicResource ColorHeaderButtonIsMouseOver}"  Template="{DynamicResource MenuTemplate}" BorderThickness="1" HorizontalAlignment="Left" VerticalAlignment="Center">
                 <MenuItem Header="File" x:Name="Item" Style="{DynamicResource MenuItemStyle}">
+                    <MenuItem Header="New" x:Name="ItemNew" Style="{DynamicResource MenuItemStyle}" />
                     <MenuItem Header="Open" x:Name="ItemOpen" Style="{DynamicResource MenuItemStyle}" />
                     <!--<MenuItem.Icon>
                             <Path></Path>
                         </MenuItem.Icon>-->
-                    <MenuItem Header="Save" x:Name="ItemSave" Style="{DynamicResource MenuItemStyle}"/>
+                    <MenuItem Header="Save" InputGestureText="Ctrl + S" x:Name="ItemSave" Style="{DynamicResource MenuItemStyle}"/>
                     <MenuItem Header="SaveAs..." x:Name="ItemSaveAs" Style="{DynamicResource MenuItemStyle}"/>
                     <MenuItem Header="Export" x:Name="ItemExport" Style="{DynamicResource MenuItemStyle}">
                         <MenuItem Header="Export to PNG" x:Name="ItemExportToPNG" Style="{DynamicResource MenuItemStyle}"/>
                         <MenuItem Header="Export to JPEG" x:Name="ItemExportToJPEG" Style="{DynamicResource MenuItemStyle}"/>
                     </MenuItem>
-                    <MenuItem Header="Exit"  x:Name="ItemExit" Style="{DynamicResource MenuItemStyle}"/>
+                    <MenuItem Header="Exit"  x:Name="ItemExit" InputGestureText="Alt + F4"   Style="{DynamicResource MenuItemStyle}"/>
                 </MenuItem>
                 <MenuItem Header="Edit"  x:Name="ItemEdit" Style="{DynamicResource MenuItemStyle}">
-                    <MenuItem Header="Undo"  x:Name="ItemUndo" Style="{DynamicResource MenuItemStyle}"/>
-                    <MenuItem Header="Redo"  x:Name="ItemRedo" Style="{DynamicResource MenuItemStyle}"/>
+                    <MenuItem Header="Undo"  x:Name="ItemUndo" InputGestureText="Ctrl + Z"  Style="{DynamicResource MenuItemStyle}"/>
+                    <MenuItem Header="Redo"  x:Name="ItemRedo" InputGestureText="Ctrl + Y" Style="{DynamicResource MenuItemStyle}"/>
                     <MenuItem Header="Cut"  x:Name="ItemCut" Style="{DynamicResource MenuItemStyle}"/>
                     <MenuItem Header="Copy"  x:Name="ItemCopy" Style="{DynamicResource MenuItemStyle}"/>
                     <MenuItem Header="Paste" x:Name="ItemPaste" Style="{DynamicResource MenuItemStyle}"/>
@@ -72,7 +76,7 @@
                 <!--<Button Background="{StaticResource ColorWindowHeader}" BorderBrush="{DynamicResource ColorButtonMaxIsMouseOver}" Foreground="{DynamicResource ColorHeaderButtonIsPressed}" Height="16" Width="16" Style="{DynamicResource HeaderButtonTemplate}">
                     <Image Source="/View/SaveAs_16x.png"  Height="16"/>
                 </Button>-->
-                
+
             </ToolBar>
 
             <!--<Separator />
@@ -85,15 +89,51 @@
             </Button>
             <TextBox Foreground="LightGray" Width="100">Поиск...</TextBox>-->
         </ToolBarTray>
-
         <!--BorderBrush - it's color on IsMouseOver, OpacityMask - it's color on IsPressed-->
-        <TabControl  Grid.Row="2" Background="{x:Null}" BorderBrush="{x:Null}" TabStripPlacement="Top" >
-            <TabItem  Header="Node editor"  Style="{DynamicResource TabItemTemplate}" Background="{DynamicResource ColorWindowHeader}" Foreground="{DynamicResource ColorTabItemText}"  BorderBrush="{DynamicResource ColorTabItemIsMouseOver}" OpacityMask="{DynamicResource ColorHeaderElementBlue}">
-                <!--<view:ViewLeftConnector/>-->
-                <view:ViewNodesCanvas x:Name="NodesCanvas"/>
+        <TabControl  Grid.Row="2" Background="{x:Null}" BorderBrush="{x:Null}" TabStripPlacement="Top" Padding="2,2,2,0" >
+            <TabItem  Header="Node editor"  Style="{DynamicResource TabItemTemplate}" Background="{DynamicResource ColorWindowHeader}" Foreground="{DynamicResource ColorTabItemText}"  BorderBrush="{DynamicResource ColorTabItemIsMouseOver}" OpacityMask="{DynamicResource ColorHeaderButtonIsPressed}">
+                <view:ViewNodesCanvas x:Name="NodesCanvas" />
             </TabItem>
             <!--<TabItem Header="Transitions table"  Style="{DynamicResource TabItemTemplate}" Background="{DynamicResource ColorWindowHeader}" Foreground="{DynamicResource ColorTabItemText}" BorderBrush="{DynamicResource ColorTabItemIsMouseOver}"   OpacityMask="{DynamicResource ColorTabItemIsSelected}"/>-->
         </TabControl>
+        <GridSplitter  Grid.Row="3" x:Name="ErrorListSplitter" HorizontalAlignment="Stretch" Background="{DynamicResource ColorWindowHeader}" Height="3"  ShowsPreview="False" IsEnabled="False"/>
+        <Expander Style="{DynamicResource ExpanderTemplate}"  x:Name="ErrorListExpander" Grid.Row="4"  HorizontalContentAlignment="Stretch" ExpandDirection="Up" OpacityMask="#FFB34F4F" Margin="3,0,0,0" >
+            <Expander.Header>
+                <TextBlock HorizontalAlignment="Left" VerticalAlignment="Top" Foreground="White" >Error List</TextBlock>
+            </Expander.Header>
+            <Expander.Content>
+                <ListBox x:Name="ErrorList" Template="{DynamicResource ListBoxTemplate}" Style="{DynamicResource ListBoxStyle}">
+                    <ListBox.InputBindings>
+                        <KeyBinding x:Name="BindingCopyError" Key="C" Modifiers="Control" />
+                    </ListBox.InputBindings>
+                    <ListBox.ContextMenu>
+                    <ContextMenu Template="{DynamicResource ContextMenuTemplate}" Background="#1b1b1c" OpacityMask="#3e3e40"  Foreground="White" BorderBrush="#333337" BorderThickness="1" HorizontalAlignment="Left" VerticalAlignment="Center" >
+                            <MenuItem Header="Copy" x:Name="ItemCopyError" InputGestureText="Ctrl + C" Style="{DynamicResource ContextMenuItemStyle}"  />
+                        </ContextMenu>
+                     </ListBox.ContextMenu>
+                     <sys1:String>Lumia 950</sys1:String>
+                    <sys1:String>iPhone 6S Plus</sys1:String>
+                    <sys1:String>Xiaomi Mi5</sys1:String>
+                    <sys1:String>Nexus 5X</sys1:String>
+                    <sys1:String>Lumia 950</sys1:String>
+                    <sys1:String>iPhone 6S Plus</sys1:String>
+                    <sys1:String>Xiaomi Mi5</sys1:String>
+                    <sys1:String>Nexus 5X</sys1:String>
+                    <sys1:String>Lumia 950</sys1:String>
+                    <sys1:String>iPhone 6S Plus</sys1:String>
+                    <sys1:String>Xiaomi Mi5</sys1:String>
+                    <sys1:String>Nexus 5X</sys1:String>
+                    <sys1:String>Lumia 950</sys1:String>
+                    <sys1:String>iPhone 6S Plus</sys1:String>
+                    <sys1:String>Xiaomi Mi5</sys1:String>
+                    <sys1:String>Nexus 5X</sys1:String>
+                </ListBox>
+                <!--<TextBox x:Name="ErrorList" Style="{DynamicResource TextBoxTemplate}" BorderBrush="{DynamicResource ColorMenuBorder}"
+                         IsReadOnly="True" TextWrapping="NoWrap" Background="#2a2a2c"
+                         Foreground="White" AcceptsReturn="True" OpacityMask="{DynamicResource ColorMenuBorder}"
+                         BorderThickness="1" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto"/>-->
+            </Expander.Content>
+        </Expander>
 
     </Grid>
 </Window>

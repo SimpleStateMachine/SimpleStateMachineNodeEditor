@@ -28,6 +28,8 @@ namespace SimpleStateMachineNodeEditor.ViewModel
         [Reactive] public ViewModelConnector ConnectorPreviewForDrop { get; set; }
         [Reactive] public ViewModelNode StartState { get; set; }
 
+        public IObservableCollection<string> Errors { get; set; } = new ObservableCollectionExtended<string>();
+
         /// <summary>
         /// Масштаб 
         /// </summary>
@@ -36,22 +38,19 @@ namespace SimpleStateMachineNodeEditor.ViewModel
         public ViewModelNodesCanvas()
         {
             SetupCommands();
-            SetupNodes();
+            SetupStartState();
             Cutter = new ViewModelCutter(this);
         }
 
         #region Setup Nodes
-        private void SetupNodes()
+        private void SetupStartState()
         {
+            string name = Nodes.Any(x => x.Name == "Start")? GetNameForNewNode() : "Start";
             StartState = new ViewModelNode(this)
             {
-                Name = "Start",
-                //NameEnable = false,
-                CanBeDelete = false
-
-
+                Name = name
             };
-            StartState.Input.Visible = false;
+            SetAsStart(StartState);
             Nodes.Add(StartState);
             //ViewModelNode end = new ViewModelNode(this)
             //{
@@ -64,10 +63,16 @@ namespace SimpleStateMachineNodeEditor.ViewModel
             //end.RollUpVisible = null;
             //Nodes.Add(end);
         }
+        private void SetAsStart(ViewModelNode node)
+        {
+            node.Input.Visible = false;
+            node.CanBeDelete = false;
+        }
 
         #endregion Setup Nodes
 
         #region Setup Commands
+        public SimpleCommand CommandNew { get; set; }
         public SimpleCommand CommandRedo { get; set; }
         public SimpleCommand CommandUndo { get; set; }
         public SimpleCommand CommandSelectAll { get; set; }
@@ -109,6 +114,9 @@ namespace SimpleStateMachineNodeEditor.ViewModel
         private void SetupCommands()
         {
             CommandRedo = new SimpleCommand(this, CommandUndoRedo.Redo);
+
+           
+            CommandRedo = new SimpleCommand(this, CommandUndoRedo.Redo);
             CommandUndo = new SimpleCommand(this, CommandUndoRedo.Undo);
             CommandSelectAll = new SimpleCommand(this, SelectedAll);
             CommandUnSelectAll = new SimpleCommand(this, UnSelectedAll);
@@ -138,6 +146,7 @@ namespace SimpleStateMachineNodeEditor.ViewModel
 
             CommandSave = new SimpleCommandWithParameter<string>(this, Save);
             CommandOpen = new SimpleCommandWithParameter<string>(this, Open);
+            CommandNew = new SimpleCommand(this, New);
         }
 
         #endregion Setup Commands
@@ -206,6 +215,10 @@ namespace SimpleStateMachineNodeEditor.ViewModel
             foreach (var node in Nodes.Where(x => x.Selected))
             { node.CommandMove.Execute(delta); }
         }
+        private string GetNameForNewNode()
+        {
+            return "State " + Nodes.Count.ToString();
+        }
         private ViewModelNode AddNode(MyPoint parameter, ViewModelNode result)
         {
             ViewModelNode newNode = result;
@@ -215,7 +228,7 @@ namespace SimpleStateMachineNodeEditor.ViewModel
                 myPoint /= Scale.Value;
                 newNode = new ViewModelNode(this)
                 {
-                    Name = "State " + Nodes.Count.ToString(),
+                    Name = GetNameForNewNode(),
                     Point1 = new MyPoint(myPoint)
                 };
             }
@@ -331,7 +344,12 @@ namespace SimpleStateMachineNodeEditor.ViewModel
                 }
             }
         }
-
+        private void New()
+        {
+            this.Nodes.Clear();
+            this.Connects.Clear();
+            this.SetupStartState();
+        }
         private void Open(string fileName)
         {
             this.Nodes.Clear();
@@ -340,15 +358,16 @@ namespace SimpleStateMachineNodeEditor.ViewModel
             XElement stateMachineXElement = xDocument.Element("StateMachine");
             var States = stateMachineXElement.Element("States")?.Elements()?.ToList();
             States?.ForEach(x => this.Nodes.Add(ViewModelNode.FromXElement(this, x)));
-            //var startState = stateMachineXElement.Element("StartState");
-            //string nameStartState = startState?.Attribute("Name").Value;
-            //if (!string.IsNullOrEmpty(nameStartState))
-            //    stateMachine.SetStartState(nameStartState);
+            var startState = stateMachineXElement.Element("StartState")?.Attribute("Name")?.Value;
 
+            if (string.IsNullOrEmpty(startState))
+                this.SetupStartState();
+            else
+                this.SetAsStart(this.Nodes.Single(x => x.Name == startState));
+          
             var Transitions = stateMachineXElement.Element("Transitions")?.Elements()?.ToList();
             Transitions?.ForEach(x => this.Connects.Add(ViewModelConnect.FromXElement(this, x)));
 
-            //return stateMachine;
         }
         private void Save(string fileName)
         {
@@ -361,7 +380,6 @@ namespace SimpleStateMachineNodeEditor.ViewModel
             {
                 states.Add(state.ToXElement());
             }
-
 
             XElement startState = new XElement("StartState");
             stateMachineXElement.Add(startState);

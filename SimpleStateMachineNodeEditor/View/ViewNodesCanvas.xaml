@@ -100,6 +100,7 @@
     <UserControl.InputBindings>
         <KeyBinding x:Name="BindingUndo" Key="Z" Modifiers="Control" />
         <KeyBinding x:Name="BindingRedo" Key="Y" Modifiers="Control" />
+        <KeyBinding x:Name="BindingSave" Key="S" Modifiers="Control" />
         <KeyBinding x:Name="BindingSelectAll" Key="A" Modifiers="Control" />
         <KeyBinding x:Name="BindingAddNode" Key="N" Modifiers="Control" />
         <KeyBinding x:Name="BindingDeleteNode" Key="Delete"  />
