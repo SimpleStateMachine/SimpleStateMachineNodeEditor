@@ -54,12 +54,12 @@ namespace SimpleStateMachineNodeEditor.ViewModel
         /// <summary>
         /// Цвет рамки, вокруг перехода
         /// </summary>
-        [Reactive] public Brush FormStroke { get; set; } = Application.Current.Resources["ColorRightConnectorEllipseEnableBorder"] as SolidColorBrush;
+        [Reactive] public Brush FormStroke { get; set; } = Application.Current.Resources["ColorConnectorEllipseEnableBorder"] as SolidColorBrush;
 
         /// <summary>
         /// Цвет перехода
         /// </summary>
-        [Reactive] public Brush FormFill { get; set; } = Application.Current.Resources["ColorRightConnectorEllipseEnableBackground"] as SolidColorBrush;
+        [Reactive] public Brush FormFill { get; set; } = Application.Current.Resources["ColorConnectorEllipseEnableBackground"] as SolidColorBrush;
 
         [Reactive] public double FormStrokeThickness { get; set; } = 1;
 
@@ -242,17 +242,43 @@ namespace SimpleStateMachineNodeEditor.ViewModel
             return element;
         }
 
-        public static ViewModelConnect FromXElement(ViewModelNodesCanvas nodesCanvas, XElement node)
+        public static ViewModelConnect FromXElement(ViewModelNodesCanvas nodesCanvas, XElement node, out string errorMessage, Func<string, bool> actionForCheck)
         {
+            ViewModelConnect viewModelConnect = null;
+
+            errorMessage = null;
             string name = node.Attribute("Name")?.Value;
             string from = node.Attribute("From")?.Value;
             string to = node.Attribute("To")?.Value;
+
+            if (string.IsNullOrEmpty(name))
+            {
+                errorMessage = "Connect without name";
+                return viewModelConnect;
+            }
+            if (string.IsNullOrEmpty(from))
+            {
+                errorMessage = "Connect without from point";
+                return viewModelConnect;
+            }
+            if (string.IsNullOrEmpty(to))
+            {
+                errorMessage = "Connect without to point";
+                return viewModelConnect;
+            }
+            if (actionForCheck(name))
+            {
+                errorMessage = String.Format("Contains more than one connect with name \"{0}\"", name);
+                return viewModelConnect;
+            }
+
             ViewModelNode nodeFrom = nodesCanvas.Nodes.Single(x => x.Name == from);
             ViewModelNode nodeTo = nodesCanvas.Nodes.Single(x => x.Name == to);
-            ViewModelConnect viewModelConnect = null;
+          
             nodeFrom.CurrentConnector.Name = name;
-            
-            if(nodeFrom == nodeTo)
+
+
+            if (nodeFrom == nodeTo)
             {
                 nodeFrom.CurrentConnector.CommandSetAsLoop.Execute();
             }

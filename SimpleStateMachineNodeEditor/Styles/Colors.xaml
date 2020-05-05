@@ -19,7 +19,11 @@
     <!--#region -->
     <!--#endregion-->
     <!--White-->
-    <SolidColorBrush x:Key="ColorConnector" Color="White"/> 
+    <SolidColorBrush x:Key="ColorConnector" Color="White"/>
+
+
+    <SolidColorBrush x:Key="ColorConnectorEllipseEnableBackground" Color="#FFF4F4F5"/>
+    <SolidColorBrush x:Key="ColorConnectorEllipseEnableBorder" Color="Black"/>
     
     <!--#region     Node-->
     

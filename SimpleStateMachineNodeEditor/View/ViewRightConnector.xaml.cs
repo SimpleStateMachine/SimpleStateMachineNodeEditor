@@ -55,9 +55,6 @@ namespace SimpleStateMachineNodeEditor.View
             {
                 Canvas.SetZIndex((UIElement)this.VisualParent, this.ViewModel.Node.Zindex+2);
 
-                //this.ViewModel.FormFill = Application.Current.Resources["ColorRightConnectorEllipseEnableBackground"] as SolidColorBrush;
-                //this.ViewModel.FormStroke = Application.Current.Resources["ColorRightConnectorEllipseEnableBorder"] as SolidColorBrush;
-
                 // Имя перехода ( вводится в узле)
                 this.OneWayBind(this.ViewModel, x => x.Name, x => x.Text.Text).DisposeWith(disposable);
 
@@ -107,8 +104,6 @@ namespace SimpleStateMachineNodeEditor.View
                 this.Grid.Events().PreviewMouseLeftButtonDown.Subscribe(e => ConnectorDrag(e)).DisposeWith(disposable);
                 this.Grid.Events().PreviewDragEnter.Subscribe(e => ConnectorDragEnter(e)).DisposeWith(disposable);
                 this.Grid.Events().PreviewDrop.Subscribe(e => ConnectorDrop(e)).DisposeWith(disposable);
-               
-
             });
         }
 

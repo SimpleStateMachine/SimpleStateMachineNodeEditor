@@ -99,6 +99,10 @@ namespace SimpleStateMachineNodeEditor.ViewModel
         public SimpleCommandWithParameter<MyPoint> CommandSelect { get; set; }
         public SimpleCommandWithParameter<MyPoint> CommandCut { get; set; }
         public SimpleCommandWithParameter<MyPoint> CommandPartMoveAllNode { get; set; }
+        public SimpleCommandWithParameter<string> CommandLogDebug { get; set; }
+        public SimpleCommandWithParameter<string> CommandLogError { get; set; }
+        public SimpleCommandWithParameter<string> CommandLogInformation { get; set; }
+        public SimpleCommandWithParameter<string> CommandLogWarning { get; set; }
         public SimpleCommandWithParameter<MyPoint> CommandPartMoveAllSelectedNode { get; set; }
 
         public SimpleCommandWithParameter<ViewModelConnector> CommandAddFreeConnect { get; set; }
@@ -137,6 +141,11 @@ namespace SimpleStateMachineNodeEditor.ViewModel
             CommandPartMoveAllNode = new SimpleCommandWithParameter<MyPoint>(PartMoveAllNode);
             CommandPartMoveAllSelectedNode = new SimpleCommandWithParameter<MyPoint>(PartMoveAllSelectedNode);
             CommandZoom = new SimpleCommandWithParameter<object>(Zoom);
+
+            CommandLogDebug = new SimpleCommandWithParameter<string>(LogDebug);
+            CommandLogError = new SimpleCommandWithParameter<string>(LogError);
+            CommandLogInformation = new SimpleCommandWithParameter<string>(LogInformation);
+            CommandLogWarning = new SimpleCommandWithParameter<string>(LogWarning);
 
             //CommandAddConnect = new Command<ViewModelConnect, ViewModelConnect>(this, AddConnect, DeleteConnect);
             //CommandDeleteNode = new Command<MyPoint, ViewModelNode>(this, DeleteNode,);
@@ -360,7 +369,7 @@ namespace SimpleStateMachineNodeEditor.ViewModel
         {
             if (!String.IsNullOrWhiteSpace(obj.Property))
             {
-                if (!Nodes.Any(x => x.Name == obj.Property))
+                if (!NodeExist(obj.Property))
                 {
                     obj.Obj.Name = obj.Property;
                 }
@@ -370,12 +379,23 @@ namespace SimpleStateMachineNodeEditor.ViewModel
         {
             if (!String.IsNullOrWhiteSpace(obj.Property))
             {
-                if (!this.Nodes.Where(x=>x.Transitions.Any(x=>x.Name == obj.Property)).Any())
+                if (!ConnectExist(obj.Property))
                 {
                     obj.Obj.Name = obj.Property;
                 }
             }
         }
+        private bool ConnectExist(string nameConnect)
+        {
+            var t = this.Nodes.SelectMany(x => x.Transitions);
+            return this.Nodes.SelectMany(x=>x.Transitions).Any(x=>x.Name == nameConnect);
+        }
+
+        private bool NodeExist(string nameNode)
+        {
+            return Nodes.Any(x => x.Name == nameNode);
+        }
+
         private void New()
         {
             this.Nodes.Clear();
@@ -384,39 +404,73 @@ namespace SimpleStateMachineNodeEditor.ViewModel
             this.SetupStartState();
         }
         private void Open(string fileName)
-        {
+        {        
             this.Nodes.Clear();
             this.Connects.Clear();
+
             XDocument xDocument = XDocument.Load(fileName);
             XElement stateMachineXElement = xDocument.Element("StateMachine");
             if(stateMachineXElement==null)
             {
-                LogError("File is not correct");
-                SetupStartState();
+                Error("not contanins StateMachine");
                 return;
             }
-            var States = stateMachineXElement.Element("States")?.Elements()?.ToList();
-            States?.ForEach(x => this.Nodes.Add(ViewModelNode.FromXElement(this, x)));
-            var startState = stateMachineXElement.Element("StartState")?.Attribute("Name")?.Value;
+            #region setup states/nodes
 
-            if (string.IsNullOrEmpty(startState))
-                this.SetupStartState();
-            else
-                this.SetAsStart(this.Nodes.Single(x => x.Name == startState));
-          
-            var Transitions = stateMachineXElement.Element("Transitions")?.Elements()?.ToList();
+            var States = stateMachineXElement.Element("States")?.Elements()?.ToList() ?? new List<XElement>();
+            ViewModelNode viewModelNode = null;
+            foreach (var state in States)
+            {
+                viewModelNode = ViewModelNode.FromXElement(this, state, out string errorMesage, NodeExist);
+                if (WithError(errorMesage, x => Nodes.Add(x), viewModelNode))
+                    return;
+            }
+
+                #region setup start state
+
+                var startState = stateMachineXElement.Element("StartState")?.Attribute("Name")?.Value;
+
+                if (string.IsNullOrEmpty(startState))
+                    this.SetupStartState();
+                else
+                    this.SetAsStart(this.Nodes.Single(x => x.Name == startState));
+
+                #endregion  setup start state
+
+            #endregion  setup states/nodes
+
+            #region setup Transitions/connects
+
+            var Transitions = stateMachineXElement.Element("Transitions")?.Elements()?.ToList()??new List<XElement>();
             ViewModelConnect viewModelConnect;
             foreach (var transition in Transitions)
             {
-
-                viewModelConnect = ViewModelConnector.FromXElement(this, transition);
-                if (viewModelConnect != null)
-                {
-                    this.Connects.Add(viewModelConnect);
-                }
+                viewModelConnect = ViewModelConnector.FromXElement(this, transition, out string errorMesage, ConnectExist);
+                if (WithError(errorMesage, x => Connects.Add(x), viewModelConnect))
+                    return;
             }
-            //Transitions?.ForEach(x => this.Connects.Add(ViewModelConnect.FromXElement(this, x)));
 
+            #endregion  setup Transitions/connects
+
+            bool WithError<T>(string errorMessage, Action<T> action, T obj)
+            {
+                if(string.IsNullOrEmpty(errorMessage))
+                {
+                    if(!object.Equals(obj,default(T)))
+                        action.Invoke(obj);
+                }
+                else
+                {
+                    Error(errorMessage);
+                    return true;
+                }
+                return false;
+            }
+            void Error(string errorMessage)
+            {               
+                LogError("File is not valid: " + errorMessage);
+                SetupStartState();
+            }
         }
         private void Save(string fileName)
         {

@@ -51,9 +51,6 @@ namespace SimpleStateMachineNodeEditor.View
             this.WhenActivated(disposable =>
             {
 
-                this.ViewModel.FormFill = Application.Current.Resources["ColorLeftConnectorEllipseEnableBackground"] as SolidColorBrush;
-                this.ViewModel.FormStroke = Application.Current.Resources["ColorLeftConnectorEllipseEnableBorder"] as SolidColorBrush;
-
                 // Имя перехода ( вводится в узле)
                 this.OneWayBind(this.ViewModel, x => x.Name, x => x.Text.Text).DisposeWith(disposable);
 

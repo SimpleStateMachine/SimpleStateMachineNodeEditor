@@ -197,12 +197,26 @@ namespace SimpleStateMachineNodeEditor.ViewModel
             return element;
         }
 
-        public static ViewModelNode FromXElement(ViewModelNodesCanvas nodesCanvas, XElement node)
+        public static ViewModelNode FromXElement(ViewModelNodesCanvas nodesCanvas, XElement node, out string errorMessage, Func<string, bool> actionForCheck)
         {
-            ViewModelNode viewModelNode = new ViewModelNode(nodesCanvas);
+            errorMessage = null;
+            ViewModelNode viewModelNode = null;
             string name = node.Attribute("Name")?.Value;
-            if (name != null)
-                viewModelNode.Name = name;
+
+            if (string.IsNullOrEmpty(name))
+            {
+                errorMessage = "Node without name";
+                return viewModelNode;
+            }
+
+            if (actionForCheck(name))
+            {
+                errorMessage = String.Format("Contains more than one node with name \"{0}\"", name);
+                return viewModelNode;
+            }
+
+            viewModelNode = new ViewModelNode(nodesCanvas);
+            viewModelNode.Name = name;
 
             var position = node.Attribute("Position")?.Value;
             if(position!=null)
