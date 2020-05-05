@@ -70,8 +70,8 @@ namespace SimpleStateMachineNodeEditor.ViewModel
 
         private void SetupCommands()
         {
-            CommandStartSelect = new SimpleCommandWithParameter<MyPoint>(this, StartSelect);
-            CommandEndSelect = new SimpleCommand(this, EndSelect);
+            CommandStartSelect = new SimpleCommandWithParameter<MyPoint>(StartSelect);
+            CommandEndSelect = new SimpleCommand(EndSelect);
         }
 
         private void StartSelect(MyPoint point)

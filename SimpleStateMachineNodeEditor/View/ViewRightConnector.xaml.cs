@@ -55,8 +55,8 @@ namespace SimpleStateMachineNodeEditor.View
             {
                 Canvas.SetZIndex((UIElement)this.VisualParent, this.ViewModel.Node.Zindex+2);
 
-                this.ViewModel.FormFill = Application.Current.Resources["ColorRightConnectorEllipseEnableBackground"] as SolidColorBrush;
-                this.ViewModel.FormStroke = Application.Current.Resources["ColorRightConnectorEllipseEnableBorder"] as SolidColorBrush;
+                //this.ViewModel.FormFill = Application.Current.Resources["ColorRightConnectorEllipseEnableBackground"] as SolidColorBrush;
+                //this.ViewModel.FormStroke = Application.Current.Resources["ColorRightConnectorEllipseEnableBorder"] as SolidColorBrush;
 
                 // Имя перехода ( вводится в узле)
                 this.OneWayBind(this.ViewModel, x => x.Name, x => x.Text.Text).DisposeWith(disposable);
@@ -67,7 +67,7 @@ namespace SimpleStateMachineNodeEditor.View
                 // Доступен ли переход для создания соединия
                 this.OneWayBind(this.ViewModel, x => x.FormEnable, x => x.Form.IsEnabled).DisposeWith(disposable);
 
-                // Цвет рамки, вокруг перехода
+
                 this.OneWayBind(this.ViewModel, x => x.FormStroke, x => x.Form.Stroke).DisposeWith(disposable);
 
                 this.OneWayBind(this.ViewModel, x => x.FormStrokeThickness, x => x.Form.StrokeThickness).DisposeWith(disposable);
@@ -76,7 +76,7 @@ namespace SimpleStateMachineNodeEditor.View
                 this.WhenAnyValue(v => v.Grid.ActualWidth, v => v.Grid.ActualHeight, (width, height) => new Size(width, height))
                      .BindTo(this, v => v.ViewModel.Size).DisposeWith(disposable);
 
-                // Цвет перехода
+
                 this.Bind(this.ViewModel, x => x.FormFill, x => x.Form.Fill).DisposeWith(disposable);
 
                 // Отображается ли переход
@@ -85,11 +85,19 @@ namespace SimpleStateMachineNodeEditor.View
                 // При изменении размера, позиции или масштаба узла
                 this.WhenAnyValue(x => x.ViewModel.Node.Size, x => x.ViewModel.Node.Point1.Value, x => x.ViewModel.Node.NodesCanvas.Scale.Scales.Value)
                 .Subscribe(_ => { UpdatePositionConnectPoin(); }).DisposeWith(disposable);
+
+                this.WhenAnyValue(x =>x.ViewModel.ItsLoop).Subscribe(value=> test(value)).DisposeWith(disposable);
             });
         }
         #endregion SetupBinding
 
         #region SetupEvents
+
+        private void test(bool value)
+        {
+            if (value)
+                this.ViewModel.CommandSetAsLoop.Execute();
+        }
         private void SetupEvents()
         {
             this.WhenActivated(disposable =>

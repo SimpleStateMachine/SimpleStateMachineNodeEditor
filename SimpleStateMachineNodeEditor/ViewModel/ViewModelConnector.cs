@@ -7,6 +7,8 @@ using ReactiveUI;
 using SimpleStateMachineNodeEditor.Helpers;
 using SimpleStateMachineNodeEditor.Helpers.Commands;
 using System;
+using System.Xml.Linq;
+using System.Linq;
 
 namespace SimpleStateMachineNodeEditor.ViewModel
 {
@@ -52,12 +54,12 @@ namespace SimpleStateMachineNodeEditor.ViewModel
         /// <summary>
         /// Цвет рамки, вокруг перехода
         /// </summary>
-        [Reactive] public Brush FormStroke { get; set; }
+        [Reactive] public Brush FormStroke { get; set; } = Application.Current.Resources["ColorRightConnectorEllipseEnableBorder"] as SolidColorBrush;
 
         /// <summary>
         /// Цвет перехода
         /// </summary>
-        [Reactive] public Brush FormFill { get; set; }
+        [Reactive] public Brush FormFill { get; set; } = Application.Current.Resources["ColorRightConnectorEllipseEnableBackground"] as SolidColorBrush;
 
         [Reactive] public double FormStrokeThickness { get; set; } = 1;
 
@@ -104,21 +106,26 @@ namespace SimpleStateMachineNodeEditor.ViewModel
         private void SetupCommands()
         {
 
-            CommandConnectPointDrag = new SimpleCommand(this, ConnectPointDrag);
-            CommandConnectPointDrop = new SimpleCommand(this, ConnectPointDrop);
-            CommandSetAsLoop = new SimpleCommand(this, SetAsLoop);
-            CommandCheckConnectPointDrop = new SimpleCommand(this, CheckConnectPointDrop);
+            CommandConnectPointDrag = new SimpleCommand(ConnectPointDrag);
+            CommandConnectPointDrop = new SimpleCommand(ConnectPointDrop);
+            CommandSetAsLoop = new SimpleCommand(SetAsLoop, NotSaved);
+            CommandCheckConnectPointDrop = new SimpleCommand(CheckConnectPointDrop);
 
-            CommandConnectorDrag = new SimpleCommand(this, ConnectorDrag);
-            CommandConnectorDragEnter = new SimpleCommand(this, ConnectorDragEnter);
-            CommandConnectorDrop = new SimpleCommand(this, ConnectorDrop);
+            CommandConnectorDrag = new SimpleCommand(ConnectorDrag);
+            CommandConnectorDragEnter = new SimpleCommand(ConnectorDragEnter);
+            CommandConnectorDrop = new SimpleCommand(ConnectorDrop);
 
-            CommandAdd = new SimpleCommand(this, Add);
-            CommandDelete = new SimpleCommand(this, Delete);
-            CommandValidateName = new SimpleCommandWithParameter<string>(this, ValidateName);
+            CommandAdd = new SimpleCommand(Add);
+            CommandDelete = new SimpleCommand(Delete);
+            CommandValidateName = new SimpleCommandWithParameter<string>(ValidateName, NotSaved);
 
 
             //SimpleCommandWithResult<bool, Func<bool>> t = new SimpleCommandWithResult<bool, Func<bool>>()
+        }
+
+        private void NotSaved()
+        {
+            NodesCanvas.ItSaved = false;
         }
         #endregion Commands
         private void SetAsLoop()
@@ -127,6 +134,7 @@ namespace SimpleStateMachineNodeEditor.ViewModel
                 return;
             this.FormStrokeThickness = 0;
             this.FormFill = Application.Current.Resources["ColorRightConnectorEllipseLoop"] as DrawingBrush;
+
             Node.CommandAddEmptyConnector.Execute();
         }
         private void Add()
@@ -221,6 +229,41 @@ namespace SimpleStateMachineNodeEditor.ViewModel
         private void ValidateName(string newName)
         {
             NodesCanvas.CommandValidateConnectName.Execute(new ValidateObjectProperty<ViewModelConnector, string>(this, newName));
+        }
+
+        public XElement ToXElement()
+        {
+            XElement element = new XElement("Transition");
+            element.Add(new XAttribute("Name", Name));
+            element.Add(new XAttribute("From", Node.Name));
+            var ToConnectorName = this.Connect?.ToConnector?.Node.Name;
+            element.Add(new XAttribute("To", ToConnectorName?? Node.Name));
+
+            return element;
+        }
+
+        public static ViewModelConnect FromXElement(ViewModelNodesCanvas nodesCanvas, XElement node)
+        {
+            string name = node.Attribute("Name")?.Value;
+            string from = node.Attribute("From")?.Value;
+            string to = node.Attribute("To")?.Value;
+            ViewModelNode nodeFrom = nodesCanvas.Nodes.Single(x => x.Name == from);
+            ViewModelNode nodeTo = nodesCanvas.Nodes.Single(x => x.Name == to);
+            ViewModelConnect viewModelConnect = null;
+            nodeFrom.CurrentConnector.Name = name;
+            
+            if(nodeFrom == nodeTo)
+            {
+                nodeFrom.CurrentConnector.CommandSetAsLoop.Execute();
+            }
+            else
+            {
+                viewModelConnect = new ViewModelConnect(nodeFrom.CurrentConnector);
+                viewModelConnect.ToConnector = nodeTo.Input;
+                nodeFrom.CommandAddEmptyConnector.Execute();
+            }     
+
+            return viewModelConnect;
         }
     }
 

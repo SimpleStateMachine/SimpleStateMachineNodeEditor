@@ -33,7 +33,7 @@ namespace SimpleStateMachineNodeEditor.ViewModel
 
         private void SetupCommands()
         {
-            CommandCopyError = new SimpleCommandWithParameter<string>(this, CopyError);
+            CommandCopyError = new SimpleCommandWithParameter<string>(CopyError);
         }
 
         private void CopyError(string errrorText)

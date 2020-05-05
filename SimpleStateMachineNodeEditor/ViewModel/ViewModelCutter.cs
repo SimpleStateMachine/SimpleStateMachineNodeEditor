@@ -45,8 +45,8 @@ namespace SimpleStateMachineNodeEditor.ViewModel
 
         private void SetupCommands()
         {
-            CommandStartCut = new SimpleCommandWithParameter<MyPoint>(this, StartCut);
-            CommandEndCut = new SimpleCommand(this, EndCut);
+            CommandStartCut = new SimpleCommandWithParameter<MyPoint>(StartCut);
+            CommandEndCut = new SimpleCommand(EndCut);
         }
 
         private void StartCut(MyPoint point)

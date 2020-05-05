@@ -14,10 +14,7 @@ namespace SimpleStateMachineNodeEditor.Helpers.Commands
         /// </summary>
         private Action<TParameter> _execute;
 
-        /// <summary>
-        /// Объкт, которому принадлежит команда
-        /// </summary>
-        public object Owner { get; protected set; }
+        public Action OnExecute { get; set; }
 
         /// <summary>
         /// Требуется  интерфейсом ICloneable, не используется
@@ -45,6 +42,7 @@ namespace SimpleStateMachineNodeEditor.Helpers.Commands
         public void Execute(object parameter)
         {
             this._execute(parameter as TParameter);
+            OnExecute?.Invoke();
         }
 
         /// <summary>
@@ -52,10 +50,10 @@ namespace SimpleStateMachineNodeEditor.Helpers.Commands
         /// </summary>
         /// <param name="owner">Объкт, которому принадлежит команда</param>
         /// <param name="execute">Функция, которая будет вызвана при выполнении команды</param>
-        public SimpleCommandWithParameter(object owner, Action<TParameter> execute)
+        public SimpleCommandWithParameter(Action<TParameter> execute, Action onExecute = null)
         {
-            Owner = owner;
             _execute = execute;
+            OnExecute += onExecute;
         }
     }
 }

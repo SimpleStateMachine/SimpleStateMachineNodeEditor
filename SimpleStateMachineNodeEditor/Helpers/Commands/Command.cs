@@ -22,6 +22,8 @@ namespace SimpleStateMachineNodeEditor.Helpers.Commands
         /// </summary>
         private readonly Func<TParameter, TResult, TResult> _unExecute;
 
+        public Action OnExecute { get; set; }
+
         /// <summary>
         /// Параметр, который был передан в команду при выполнении
         /// </summary>
@@ -32,11 +34,6 @@ namespace SimpleStateMachineNodeEditor.Helpers.Commands
         /// </summary>
         /// Например здесь может храниться список объектов, которые были изменены
         public TResult Result { get; set; }
-
-        /// <summary>
-        /// Объкт, которому принадлежит команда
-        /// </summary>
-        public object Owner { get; protected set; }
 
         /// <summary>
         /// Флаг того, является ли команда отменяемой 
@@ -52,7 +49,7 @@ namespace SimpleStateMachineNodeEditor.Helpers.Commands
         /// <returns></returns>
         public object Clone()
         {
-            return new Command<TParameter, TResult>(Owner, _execute, _unExecute)
+            return new Command<TParameter, TResult>(_execute, _unExecute, OnExecute)
             {
                 Parameters = this.Parameters,
                 Result = this.Result
@@ -106,6 +103,8 @@ namespace SimpleStateMachineNodeEditor.Helpers.Commands
 
             //Очищаем параметр ( чтобы не передавать его при повторном выполнении)
             Parameters = null;
+
+            OnExecute?.Invoke();
         }
 
         /// <summary>
@@ -137,10 +136,11 @@ namespace SimpleStateMachineNodeEditor.Helpers.Commands
         /// </summary>
         /// <param name="owner">Объкт, которому принадлежит команда</param>
         /// <param name="action">Функция, которая будет вызвана при выполнении команды</param>
-        private Command(object owner, Func<TParameter, TResult, TResult> execute)
+        private Command(Func<TParameter, TResult, TResult> execute, Action onExecute = null)
         {
-            Owner = owner;
             _execute = execute;
+
+            OnExecute += onExecute;
         }
 
         /// <summary>
@@ -149,7 +149,7 @@ namespace SimpleStateMachineNodeEditor.Helpers.Commands
         /// <param name="owner">Объкт, которому принадлежит команда</param>
         /// <param name="execute">Функция, которая будет вызвана при выполнении команды</param>
         /// <param name="unExecute">Функция, которая будет вызвана при отмене команды</param>
-        public Command(object owner, Func<TParameter, TResult, TResult> execute, Func<TParameter, TResult, TResult> unExecute) : this(owner, execute)
+        public Command(Func<TParameter, TResult, TResult> execute, Func<TParameter, TResult, TResult> unExecute, Action onExecute = null) : this(execute, onExecute)
         {
             _unExecute = unExecute;
         }

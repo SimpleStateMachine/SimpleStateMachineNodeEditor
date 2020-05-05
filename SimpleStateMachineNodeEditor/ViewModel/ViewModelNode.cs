@@ -103,23 +103,26 @@ namespace SimpleStateMachineNodeEditor.ViewModel
 
         private void SetupCommands()
         {
-            CommandSelect = new SimpleCommandWithParameter<object>(this, Select);
-            CommandMove = new SimpleCommandWithParameter<MyPoint>(this, Move);
-            CommandAddEmptyConnector = new SimpleCommand(this, AddEmptyConnector);
-            CommandCollapse = new SimpleCommandWithParameter<object>(this, Collapse);
-            //CommandTransitionsDragLeave = new SimpleCommand(this, TransitionsDragLeave);
-            //CommandTransitionsDragEnter = new SimpleCommand(this, TransitionsDragEnter);
-            //CommandTransitionsDrop = new SimpleCommand(this, TransitionsDrop);
-            //CommandTransitionsDragOver = new SimpleCommand(this, TransitionsDragOver);
+            CommandSelect = new SimpleCommandWithParameter<object>(Select);
+            CommandMove = new SimpleCommandWithParameter<MyPoint>(Move, NotSaved);
+            CommandAddEmptyConnector = new SimpleCommand(AddEmptyConnector);
+            CommandCollapse = new SimpleCommandWithParameter<object>(Collapse, NotSaved);
+            //CommandTransitionsDragLeave = new SimpleCommand(TransitionsDragLeave);
+            //CommandTransitionsDragEnter = new SimpleCommand(TransitionsDragEnter);
+            //CommandTransitionsDrop = new SimpleCommand(TransitionsDrop);
+            //CommandTransitionsDragOver = new SimpleCommand(TransitionsDragOver);
             //CommandConnectorDrag = new SimpleCommandWithParameter<ViewModelConnector>(this, ConnectorDrag);
 
-            CommandAddConnector = new SimpleCommandWithParameter<ViewModelConnector>(this, AddConnector);
-            CommandDeleteConnector = new SimpleCommandWithParameter<ViewModelConnector>(this, DeleteConnector);
-            CommandValidateName = new SimpleCommandWithParameter<string>(this, ValidateName);
+            CommandAddConnector = new SimpleCommandWithParameter<ViewModelConnector>(AddConnector, NotSaved);
+            CommandDeleteConnector = new SimpleCommandWithParameter<ViewModelConnector>(DeleteConnector, NotSaved);
+            CommandValidateName = new SimpleCommandWithParameter<string>(ValidateName, NotSaved);
 
 
         }
-
+        private void NotSaved()
+        {
+            NodesCanvas.ItSaved = false;
+        }
         #endregion Commands
         private void Collapse(object obj)
         {
@@ -174,8 +177,9 @@ namespace SimpleStateMachineNodeEditor.ViewModel
             if (CurrentConnector != null)
             {
                 CurrentConnector.TextEnable = true;
-                CurrentConnector.FormEnable = false;         
-                CurrentConnector.Name = "Transition " + NodesCanvas.Nodes.Sum(x => x.Transitions.Count - 1).ToString();
+                CurrentConnector.FormEnable = false;    
+                if(string.IsNullOrEmpty(CurrentConnector.Name))
+                    CurrentConnector.Name = "Transition " + NodesCanvas.Nodes.Sum(x => x.Transitions.Count - 1).ToString();
             }
             CurrentConnector = new ViewModelConnector(NodesCanvas, this)
             {

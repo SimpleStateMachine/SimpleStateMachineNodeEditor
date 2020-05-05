@@ -15,6 +15,9 @@ using SimpleStateMachineNodeEditor.Helpers.Transformations;
 using System.IO;
 using System.Windows.Data;
 using System.Xml.Linq;
+using SimpleStateMachineNodeEditor.Helpers.Enums;
+using System.Windows.Media;
+using System.Windows;
 
 namespace SimpleStateMachineNodeEditor.ViewModel
 {
@@ -28,6 +31,8 @@ namespace SimpleStateMachineNodeEditor.ViewModel
         [Reactive] public ViewModelConnector ConnectorPreviewForDrop { get; set; }
         [Reactive] public ViewModelNode StartState { get; set; }
 
+        [Reactive] public bool ItSaved { get; set; } = true;
+
         public IObservableCollection<ViewModelMessage> Messages { get; set; } = new ObservableCollectionExtended<ViewModelMessage>();
 
         /// <summary>
@@ -40,17 +45,11 @@ namespace SimpleStateMachineNodeEditor.ViewModel
             SetupCommands();
             SetupStartState();
             Cutter = new ViewModelCutter(this);
+            //for (int i = 1; i <=10; i++)
+            //{
+            //    LogError("Message "+i.ToString());
+            //}
 
-            Messages.Add(new ViewModelMessage("Error text Message 1 "));
-            Messages.Add(new ViewModelMessage("Error text Message 2 "));
-            Messages.Add(new ViewModelMessage("Error text Message 3 "));
-            Messages.Add(new ViewModelMessage("Error text Message 4 "));
-            Messages.Add(new ViewModelMessage("Error text Message 5 "));
-            Messages.Add(new ViewModelMessage("Error text Message 6 "));
-            Messages.Add(new ViewModelMessage("Error text Message 7 "));
-            Messages.Add(new ViewModelMessage("Error text Message 8 "));
-            Messages.Add(new ViewModelMessage("Error text Message 9 "));
-            Messages.Add(new ViewModelMessage("Error text Message 10 "));
         }
 
         #region Setup Nodes
@@ -63,6 +62,7 @@ namespace SimpleStateMachineNodeEditor.ViewModel
             };
             SetAsStart(StartState);
             Nodes.Add(StartState);
+            this.ItSaved = true;
             //ViewModelNode end = new ViewModelNode(this)
             //{
             //    Name = "End",
@@ -124,44 +124,65 @@ namespace SimpleStateMachineNodeEditor.ViewModel
 
         private void SetupCommands()
         {
-            CommandRedo = new SimpleCommand(this, CommandUndoRedo.Redo);
-
            
-            CommandRedo = new SimpleCommand(this, CommandUndoRedo.Redo);
-            CommandUndo = new SimpleCommand(this, CommandUndoRedo.Undo);
-            CommandSelectAll = new SimpleCommand(this, SelectedAll);
-            CommandUnSelectAll = new SimpleCommand(this, UnSelectedAll);
-            CommandSelectorIntersect = new SimpleCommand(this, SelectNodes);
-            CommandCutterIntersect = new SimpleCommand(this, SelectConnects);
-            CommandValidateNodeName = new SimpleCommandWithParameter<ValidateObjectProperty<ViewModelNode, string>>(this, ValidateNodeName);
-            CommandValidateConnectName = new SimpleCommandWithParameter<ValidateObjectProperty<ViewModelConnector, string>>(this, ValidateConnectName);
+            CommandRedo = new SimpleCommand(CommandUndoRedo.Redo, NotSaved);
+            CommandUndo = new SimpleCommand(CommandUndoRedo.Undo, NotSaved);
+            CommandSelectAll = new SimpleCommand(SelectedAll);
+            CommandUnSelectAll = new SimpleCommand(UnSelectedAll);
+            CommandSelectorIntersect = new SimpleCommand(SelectNodes);
+            CommandCutterIntersect = new SimpleCommand(SelectConnects);
+            CommandValidateNodeName = new SimpleCommandWithParameter<ValidateObjectProperty<ViewModelNode, string>>(ValidateNodeName);
+            CommandValidateConnectName = new SimpleCommandWithParameter<ValidateObjectProperty<ViewModelConnector, string>>(ValidateConnectName);
 
-            CommandPartMoveAllNode = new SimpleCommandWithParameter<MyPoint>(this, PartMoveAllNode);
-            CommandPartMoveAllSelectedNode = new SimpleCommandWithParameter<MyPoint>(this, PartMoveAllSelectedNode);
-            CommandZoom = new SimpleCommandWithParameter<object>(this, Zoom);
+            CommandPartMoveAllNode = new SimpleCommandWithParameter<MyPoint>(PartMoveAllNode);
+            CommandPartMoveAllSelectedNode = new SimpleCommandWithParameter<MyPoint>(PartMoveAllSelectedNode);
+            CommandZoom = new SimpleCommandWithParameter<object>(Zoom);
 
             //CommandAddConnect = new Command<ViewModelConnect, ViewModelConnect>(this, AddConnect, DeleteConnect);
             //CommandDeleteNode = new Command<MyPoint, ViewModelNode>(this, DeleteNode,);
-            CommandSelect = new SimpleCommandWithParameter<MyPoint>(this, StartSelect);
-            CommandCut = new SimpleCommandWithParameter<MyPoint>(this, StartCut);
+            CommandSelect = new SimpleCommandWithParameter<MyPoint>(StartSelect);
+            CommandCut = new SimpleCommandWithParameter<MyPoint>(StartCut);
 
-            CommandAddFreeConnect = new SimpleCommandWithParameter<ViewModelConnector>(this, AddFreeConnect);
+            CommandAddFreeConnect = new SimpleCommandWithParameter<ViewModelConnector>(AddFreeConnect);
 
-            CommandDeleteFreeConnect = new SimpleCommand(this, DeleteFreeConnect);
-            CommandFullMoveAllNode = new Command<MyPoint, List<ViewModelNode>>(this, FullMoveAllNode, UnFullMoveAllNode);
-            CommandFullMoveAllSelectedNode = new Command<MyPoint, List<ViewModelNode>>(this, FullMoveAllSelectedNode, UnFullMoveAllSelectedNode);
-            CommandAddNode = new Command<MyPoint, ViewModelNode>(this, AddNode, DeleteNode);
-            CommandAddConnect = new Command<ViewModelConnect, ViewModelConnect>(this, AddConnect, DeleteConnect);
-            CommandDeleteSelectedNodes = new Command<List<ViewModelNode>, List<ViewModelNode>>(this, DeleteSelectedNode, UnDeleteSelectedNode);
+            CommandDeleteFreeConnect = new SimpleCommand(DeleteFreeConnect);
+            CommandFullMoveAllNode = new Command<MyPoint, List<ViewModelNode>>(FullMoveAllNode, UnFullMoveAllNode, NotSaved);
+            CommandFullMoveAllSelectedNode = new Command<MyPoint, List<ViewModelNode>>(FullMoveAllSelectedNode, UnFullMoveAllSelectedNode, NotSaved);
+            CommandAddNode = new Command<MyPoint, ViewModelNode>(AddNode, DeleteNode, NotSaved);
+            CommandAddConnect = new Command<ViewModelConnect, ViewModelConnect>(AddConnect, DeleteConnect, NotSaved);
+            CommandDeleteSelectedNodes = new Command<List<ViewModelNode>, List<ViewModelNode>>(DeleteSelectedNode, UnDeleteSelectedNode, NotSaved);
 
 
-            CommandSave = new SimpleCommandWithParameter<string>(this, Save);
-            CommandOpen = new SimpleCommandWithParameter<string>(this, Open);
-            CommandNew = new SimpleCommand(this, New);
+            CommandSave = new SimpleCommandWithParameter<string>(Save);
+            CommandOpen = new SimpleCommandWithParameter<string>(Open);
+            CommandNew = new SimpleCommand(New);
         }
-
+        private void NotSaved()
+        {
+            ItSaved = false;
+        }
         #endregion Setup Commands
 
+        #region Logging
+
+        public void LogDebug(string message)
+        {
+            Messages.Add(new ViewModelMessage(TypeMessage.Debug, message));
+        }
+        public void LogError(string message)
+        {
+            Messages.Add(new ViewModelMessage(TypeMessage.Error, message));
+        }
+        public void LogInformation(string message)
+        {
+            Messages.Add(new ViewModelMessage(TypeMessage.Information, message));
+        }
+        public void LogWarning(string message)
+        {
+            Messages.Add(new ViewModelMessage(TypeMessage.Warning, message));
+        }
+
+        #endregion Logging
         private void StartSelect(MyPoint point)
         {
             Selector.CommandStartSelect.Execute(point);
@@ -359,6 +380,7 @@ namespace SimpleStateMachineNodeEditor.ViewModel
         {
             this.Nodes.Clear();
             this.Connects.Clear();
+            
             this.SetupStartState();
         }
         private void Open(string fileName)
@@ -367,6 +389,12 @@ namespace SimpleStateMachineNodeEditor.ViewModel
             this.Connects.Clear();
             XDocument xDocument = XDocument.Load(fileName);
             XElement stateMachineXElement = xDocument.Element("StateMachine");
+            if(stateMachineXElement==null)
+            {
+                LogError("File is not correct");
+                SetupStartState();
+                return;
+            }
             var States = stateMachineXElement.Element("States")?.Elements()?.ToList();
             States?.ForEach(x => this.Nodes.Add(ViewModelNode.FromXElement(this, x)));
             var startState = stateMachineXElement.Element("StartState")?.Attribute("Name")?.Value;
@@ -377,7 +405,17 @@ namespace SimpleStateMachineNodeEditor.ViewModel
                 this.SetAsStart(this.Nodes.Single(x => x.Name == startState));
           
             var Transitions = stateMachineXElement.Element("Transitions")?.Elements()?.ToList();
-            Transitions?.ForEach(x => this.Connects.Add(ViewModelConnect.FromXElement(this, x)));
+            ViewModelConnect viewModelConnect;
+            foreach (var transition in Transitions)
+            {
+
+                viewModelConnect = ViewModelConnector.FromXElement(this, transition);
+                if (viewModelConnect != null)
+                {
+                    this.Connects.Add(viewModelConnect);
+                }
+            }
+            //Transitions?.ForEach(x => this.Connects.Add(ViewModelConnect.FromXElement(this, x)));
 
         }
         private void Save(string fileName)
@@ -399,13 +437,19 @@ namespace SimpleStateMachineNodeEditor.ViewModel
 
             XElement transitions = new XElement("Transitions");
             stateMachineXElement.Add(transitions);
+            //List<ViewModelConnector> connectors = new List<ViewModelConnector>():
+            
 
-            foreach (var transition in Connects)
+
+            //Nodes.Select(x => x.Transitions.Where(y => !string.IsNullOrEmpty(y.Name))).SelectMany(list => list
+            foreach (var transition in Nodes.SelectMany(x => x.Transitions.Where(y => !string.IsNullOrEmpty(y.Name))).Reverse())
             {
+
                 transitions.Add(transition.ToXElement());
             }
 
             xDocument.Save(fileName);
+            ItSaved = true;
         }
     }
 }

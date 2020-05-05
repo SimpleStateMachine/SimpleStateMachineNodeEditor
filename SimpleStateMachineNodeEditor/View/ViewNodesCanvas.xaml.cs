@@ -180,7 +180,11 @@ namespace SimpleStateMachineNodeEditor.View
         }
         private void OnEventMouseWheel(MouseWheelEventArgs e)
         {
+            //var position = e.GetPosition(this.Canvas);
+            //this.Scale.CenterX = position.X / this.ViewModel.Scale.Value;
+            //this.Scale.CenterY = position.Y / this.ViewModel.Scale.Value;
             this.ViewModel.CommandZoom.Execute(e.Delta);
+
         }
         private void OnEventMouseUp(MouseButtonEventArgs e)
         {

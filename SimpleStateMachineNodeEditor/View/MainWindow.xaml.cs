@@ -87,16 +87,16 @@ namespace SimpleStateMachineNodeEditor.View
             this.WhenActivated(disposable =>
             {
                 this.Header.Events().PreviewMouseLeftButtonDown.Subscribe(e => HeaderClick(e)).DisposeWith(disposable);
-                this.ButtonClose.Events().Click.Subscribe(e => ButtonCloseClick(e)).DisposeWith(disposable);
+                this.ButtonClose.Events().Click.Subscribe(_ => WithoutSaving(ButtonCloseClick)).DisposeWith(disposable);
                 this.ButtonMin.Events().Click.Subscribe(e => ButtonMinClick(e)).DisposeWith(disposable);
                 this.ButtonMax.Events().Click.Subscribe(e => ButtonMaxClick(e)).DisposeWith(disposable);
                 this.ItemExportToJPEG.Events().Click.Subscribe(_ => ExportToImage(ImageFormats.JPEG)).DisposeWith(disposable);
                 this.ItemExportToPNG.Events().Click.Subscribe(_ => ExportToImage(ImageFormats.PNG)).DisposeWith(disposable);
                 this.ItemSave.Events().Click.Subscribe(_=> Save()).DisposeWith(disposable);
                 this.ItemSaveAs.Events().Click.Subscribe(_ => SaveAs()).DisposeWith(disposable);
-                this.ItemOpen.Events().Click.Subscribe(_ => Open()).DisposeWith(disposable);
-                this.ItemExit.Events().Click.Subscribe(_=>Close()).DisposeWith(disposable);
-                this.ItemNew.Events().Click.Subscribe(_ => New()).DisposeWith(disposable);
+                this.ItemOpen.Events().Click.Subscribe(_ => WithoutSaving(Open)).DisposeWith(disposable);
+                this.ItemExit.Events().Click.Subscribe(_=> WithoutSaving(ButtonCloseClick)).DisposeWith(disposable);
+                this.ItemNew.Events().Click.Subscribe(_ => WithoutSaving(New)).DisposeWith(disposable);
                 this.ItemUndo.Events().Click.Subscribe(_=>this.NodesCanvas.ViewModel.CommandUndo.Execute()).DisposeWith(disposable);
                 this.ItemRedo.Events().Click.Subscribe(_ => this.NodesCanvas.ViewModel.CommandRedo.Execute()).DisposeWith(disposable);
                 this.ErrorListExpander.Events().Collapsed.Subscribe(_=> ErrorListCollapse()).DisposeWith(disposable);
@@ -112,14 +112,14 @@ namespace SimpleStateMachineNodeEditor.View
         void ErrorListExpanded()
         {
             this.ErrorListSplitter.IsEnabled = true;
-            if(this.MessageList.Items.Count>this.ViewModel.CountShowingMessage)
+            //if(this.MessageList.Items.Count>this.ViewModel.CountShowingMessage)
                 this.Fotter.Height = new GridLength(this.ViewModel.MaxHeightMessagePanel);
         }
         void StateNormalMaximaze()
         {
             this.WindowState = this.WindowState == WindowState.Normal ? WindowState.Maximized : WindowState.Normal;
         }
-        void ButtonCloseClick(RoutedEventArgs e)
+        void ButtonCloseClick()
         {
             this.Close();
         }
@@ -180,6 +180,17 @@ namespace SimpleStateMachineNodeEditor.View
         {
             this.NodesCanvas.ViewModel.CommandNew.Execute();
         }
+        void WithoutSaving(Action action)
+        {
+            var result = MessageBoxResult.Yes;
+            if (!this.NodesCanvas.ViewModel.ItSaved)
+            {
+                result = System.Windows.MessageBox.Show("Exit without saving ?", "Test", MessageBoxButton.YesNo);
+            }
+
+            if (result == MessageBoxResult.Yes)
+                action.Invoke();
+        }
 
         void Save()
         {
@@ -217,6 +228,7 @@ namespace SimpleStateMachineNodeEditor.View
             {
                 this.NodesCanvas.ViewModel.CommandOpen.Execute(dlg.FileName);
             }
+       
         }
         #endregion SetupEvents
 
