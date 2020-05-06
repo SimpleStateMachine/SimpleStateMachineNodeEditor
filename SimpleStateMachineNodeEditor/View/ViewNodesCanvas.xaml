@@ -86,9 +86,9 @@
 
     </Canvas>
     <UserControl.ContextMenu >
-        <ContextMenu Template="{DynamicResource ContextMenuTemplate}" Background="#1b1b1c" OpacityMask="#3e3e40"  Foreground="White" BorderBrush="#333337" BorderThickness="1" HorizontalAlignment="Left" VerticalAlignment="Center" >
-            <MenuItem Header="Add" x:Name="ItemAddNode" InputGestureText="Ctrl + N" Style="{DynamicResource ContextMenuItemStyle}"  />
-            <MenuItem Header="Delete" x:Name="ItemDeleteNode" InputGestureText="Delete" Style="{DynamicResource ContextMenuItemStyle}"/>
+        <ContextMenu Template="{StaticResource ContextMenuTemplate}" Background="#1b1b1c" OpacityMask="#3e3e40"  Foreground="White" BorderBrush="#333337" BorderThickness="1" HorizontalAlignment="Left" VerticalAlignment="Center" >
+            <MenuItem Header="Add" x:Name="ItemAddNode" InputGestureText="Ctrl + N" Style="{StaticResource ContextMenuItemStyle}"  />
+            <MenuItem Header="Delete" x:Name="ItemDeleteNode" InputGestureText="Delete" Style="{StaticResource ContextMenuItemStyle}"/>
         </ContextMenu>
     </UserControl.ContextMenu>
 

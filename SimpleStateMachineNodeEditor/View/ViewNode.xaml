@@ -8,7 +8,7 @@
              xmlns:View="clr-namespace:SimpleStateMachineNodeEditor.View"
              mc:Ignorable="d" Focusable="True" AllowDrop="True" Visibility="Visible">
 
-    <Border x:Name="BorderElement" CornerRadius="5,5,5,5" BorderThickness="1,1,1,1"   HorizontalAlignment="Left" VerticalAlignment="Top" MinWidth="80" Background="{DynamicResource ColorNodeBody}" >
+    <Border x:Name="BorderElement" CornerRadius="5,5,5,5" BorderThickness="1,1,1,1"   HorizontalAlignment="Left" VerticalAlignment="Top" MinWidth="80" Background="{StaticResource ColorNodeBody}" >
         <StackPanel Margin="0,0,0,5">
             <NodeStyles:NodeHeader x:Name="NodeHeaderElement" />
             <!--Grid For Input and Output-->

@@ -13,8 +13,8 @@
                 <ResourceDictionary Source="Styles/ErrorList/ScrollViewerTemplate.xaml"/>
                 <ResourceDictionary Source="Styles/ErrorList/ScrollBarTemplate.xaml"/>
                 <ResourceDictionary Source="Styles/ErrorList/ListBoxTemplate.xaml"/>
-                <ResourceDictionary Source="Styles/ErrorList/ListBoxItemTemplate.xaml"/>
                 <ResourceDictionary Source="Styles/ErrorList/LabelTemplate.xaml"/>
+                <ResourceDictionary Source="Styles/ErrorList/ListBoxItemTemplate.xaml"/>
                 <!--#region         Test-->
                 
                 <!--#endregion      Test-->

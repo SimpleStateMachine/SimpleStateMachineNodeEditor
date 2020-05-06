@@ -10,8 +10,8 @@
     xmlns:view="clr-namespace:SimpleStateMachineNodeEditor.View" xmlns:sys1="clr-namespace:System;assembly=System.Runtime"
     x:Class="SimpleStateMachineNodeEditor.View.MainWindow"
         mc:Ignorable="d"
-        Title="MainWindow"  d:DesignWidth="808.96" Height="738.592" BorderThickness="1" Padding="7,0,7,7" ResizeMode="CanResizeWithGrip" BorderBrush="{DynamicResource ColorWindowBorder}" Background="{DynamicResource ColorWindowHeader}" Foreground="{x:Null}" WindowStyle="None" AllowsTransparency="True" Style="{DynamicResource CustomWindowStyle}">
-    <Grid Background="{DynamicResource ColorWindowHeader}">
+        Title="MainWindow"  d:DesignWidth="808.96" Height="738.592" BorderThickness="1" Padding="7,0,7,7" ResizeMode="CanResizeWithGrip" BorderBrush="{StaticResource ColorWindowBorder}" Background="{StaticResource ColorWindowHeader}" Foreground="{x:Null}" WindowStyle="None" AllowsTransparency="True" Style="{StaticResource CustomWindowStyle}">
+    <Grid Background="{StaticResource ColorWindowHeader}">
         <Grid.RowDefinitions>
             <RowDefinition Height="auto"></RowDefinition>
             <RowDefinition Height="auto"></RowDefinition>
@@ -20,50 +20,50 @@
             <RowDefinition  Height="auto" x:Name="Fotter" MinHeight="18"></RowDefinition>
         </Grid.RowDefinitions>
         <DockPanel x:Name="Header" Grid.Row="0" Background="{StaticResource ColorWindowHeader}" LastChildFill="False">
-            <Menu Background="{DynamicResource ColorMenuBaground}"  Foreground="White" BorderBrush="{DynamicResource ColorMenuBorder}" OpacityMask="{DynamicResource ColorHeaderButtonIsMouseOver}"  Template="{DynamicResource MenuTemplate}" BorderThickness="1" HorizontalAlignment="Left" VerticalAlignment="Center">
-                <MenuItem Header="File" x:Name="Item" Style="{DynamicResource MenuItemStyle}">
-                    <MenuItem Header="New" x:Name="ItemNew" Style="{DynamicResource MenuItemStyle}" />
-                    <MenuItem Header="Open" x:Name="ItemOpen" Style="{DynamicResource MenuItemStyle}" />
+            <Menu Background="{StaticResource ColorMenuBaground}"  Foreground="White" BorderBrush="{StaticResource ColorMenuBorder}" OpacityMask="{StaticResource ColorHeaderButtonIsMouseOver}"  Template="{StaticResource MenuTemplate}" BorderThickness="1" HorizontalAlignment="Left" VerticalAlignment="Center">
+                <MenuItem Header="File" x:Name="Item" Style="{StaticResource MenuItemStyle}">
+                    <MenuItem Header="New" x:Name="ItemNew" Style="{StaticResource MenuItemStyle}" />
+                    <MenuItem Header="Open" x:Name="ItemOpen" Style="{StaticResource MenuItemStyle}" />
                     <!--<MenuItem.Icon>
                             <Path></Path>
                         </MenuItem.Icon>-->
-                    <MenuItem Header="Save" InputGestureText="Ctrl + S" x:Name="ItemSave" Style="{DynamicResource MenuItemStyle}"/>
-                    <MenuItem Header="SaveAs..." x:Name="ItemSaveAs" Style="{DynamicResource MenuItemStyle}"/>
-                    <MenuItem Header="Export" x:Name="ItemExport" Style="{DynamicResource MenuItemStyle}">
-                        <MenuItem Header="Export to PNG" x:Name="ItemExportToPNG" Style="{DynamicResource MenuItemStyle}"/>
-                        <MenuItem Header="Export to JPEG" x:Name="ItemExportToJPEG" Style="{DynamicResource MenuItemStyle}"/>
+                    <MenuItem Header="Save" InputGestureText="Ctrl + S" x:Name="ItemSave" Style="{StaticResource MenuItemStyle}"/>
+                    <MenuItem Header="SaveAs..." x:Name="ItemSaveAs" Style="{StaticResource MenuItemStyle}"/>
+                    <MenuItem Header="Export" x:Name="ItemExport" Style="{StaticResource MenuItemStyle}">
+                        <MenuItem Header="Export to PNG" x:Name="ItemExportToPNG" Style="{StaticResource MenuItemStyle}"/>
+                        <MenuItem Header="Export to JPEG" x:Name="ItemExportToJPEG" Style="{StaticResource MenuItemStyle}"/>
                     </MenuItem>
-                    <MenuItem Header="Exit"  x:Name="ItemExit" InputGestureText="Alt + F4"   Style="{DynamicResource MenuItemStyle}"/>
+                    <MenuItem Header="Exit"  x:Name="ItemExit" InputGestureText="Alt + F4"   Style="{StaticResource MenuItemStyle}"/>
                 </MenuItem>
-                <MenuItem Header="Edit"  x:Name="ItemEdit" Style="{DynamicResource MenuItemStyle}">
-                    <MenuItem Header="Undo"  x:Name="ItemUndo" InputGestureText="Ctrl + Z"  Style="{DynamicResource MenuItemStyle}"/>
-                    <MenuItem Header="Redo"  x:Name="ItemRedo" InputGestureText="Ctrl + Y" Style="{DynamicResource MenuItemStyle}"/>
-                    <MenuItem Header="Cut"  x:Name="ItemCut" Style="{DynamicResource MenuItemStyle}"/>
-                    <MenuItem Header="Copy"  x:Name="ItemCopy" Style="{DynamicResource MenuItemStyle}"/>
-                    <MenuItem Header="Paste" x:Name="ItemPaste" Style="{DynamicResource MenuItemStyle}"/>
+                <MenuItem Header="Edit"  x:Name="ItemEdit" Style="{StaticResource MenuItemStyle}">
+                    <MenuItem Header="Undo"  x:Name="ItemUndo" InputGestureText="Ctrl + Z"  Style="{StaticResource MenuItemStyle}"/>
+                    <MenuItem Header="Redo"  x:Name="ItemRedo" InputGestureText="Ctrl + Y" Style="{StaticResource MenuItemStyle}"/>
+                    <MenuItem Header="Cut"  x:Name="ItemCut" Style="{StaticResource MenuItemStyle}"/>
+                    <MenuItem Header="Copy"  x:Name="ItemCopy" Style="{StaticResource MenuItemStyle}"/>
+                    <MenuItem Header="Paste" x:Name="ItemPaste" Style="{StaticResource MenuItemStyle}"/>
                 </MenuItem>
             </Menu>
 
             <!--BorderBrush - it's color on IsMouseOver, Foreground - it's color on IsPressed-->
-            <Button DockPanel.Dock="Right" x:Name="ButtonClose" Style="{DynamicResource HeaderButtonTemplate}" Background="{StaticResource ColorWindowHeader}" BorderBrush="{DynamicResource ColorButtonCloseIsMouseOver}" Foreground="{DynamicResource ColorButtonCloseIsPressed}"  Padding="7" Grid.IsSharedSizeScope="True" Margin="0,0,-7,0">
+            <Button DockPanel.Dock="Right" x:Name="ButtonClose" Style="{StaticResource HeaderButtonTemplate}" Background="{StaticResource ColorWindowHeader}" BorderBrush="{StaticResource ColorButtonCloseIsMouseOver}" Foreground="{StaticResource ColorButtonCloseIsPressed}"  Padding="7" Grid.IsSharedSizeScope="True" Margin="0,0,-7,0">
                 <Path x:Name="ButtonClosePath"
-                      Stroke="{DynamicResource ColorHeaderButton}" 
+                      Stroke="{StaticResource ColorHeaderButton}" 
                       StrokeThickness="1.1" 
                       Stretch="None" 
                       Data="M2,2 L13,13 M13,2 L2,13">
                 </Path>
             </Button>
-            <Button DockPanel.Dock="Right" x:Name="ButtonMax" Style="{DynamicResource HeaderButtonTemplate}" Background="{StaticResource ColorWindowHeader}" BorderBrush="{DynamicResource ColorHeaderButtonIsMouseOver}" Foreground="{DynamicResource ColorHeaderButtonIsPressed}">
+            <Button DockPanel.Dock="Right" x:Name="ButtonMax" Style="{StaticResource HeaderButtonTemplate}" Background="{StaticResource ColorWindowHeader}" BorderBrush="{StaticResource ColorHeaderButtonIsMouseOver}" Foreground="{StaticResource ColorHeaderButtonIsPressed}">
                 <Path x:Name="MaxButtonPath"
                       StrokeThickness="1"
-                      Stroke="{DynamicResource ColorHeaderButton}"
+                      Stroke="{StaticResource ColorHeaderButton}"
                       Stretch="None" 
                       Data="M0.5,0 V9.5 H13.5 V0 H0.5 V1 H13 V0 H0.5 V2 H13 " >
                 </Path>
             </Button>
-            <Button DockPanel.Dock="Right" x:Name="ButtonMin" Style="{DynamicResource HeaderButtonTemplate}" Background="{StaticResource ColorWindowHeader}" BorderBrush="{DynamicResource ColorHeaderButtonIsMouseOver}" Foreground="{DynamicResource ColorHeaderButtonIsPressed}" >
+            <Button DockPanel.Dock="Right" x:Name="ButtonMin" Style="{StaticResource HeaderButtonTemplate}" Background="{StaticResource ColorWindowHeader}" BorderBrush="{StaticResource ColorHeaderButtonIsMouseOver}" Foreground="{StaticResource ColorHeaderButtonIsPressed}" >
                 <Path x:Name="ButtonMinPath"
-                      Stroke="{DynamicResource ColorHeaderButton}" 
+                      Stroke="{StaticResource ColorHeaderButton}" 
                       StrokeThickness="1.2" 
                       Stretch="None" 
                       Data="M0,0 H11">
@@ -72,7 +72,7 @@
             <Button DockPanel.Dock="Right" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="{x:Null}" />
         </DockPanel>
         <ToolBarTray Grid.Row="1" IsLocked="True"  Background="{x:Null}">
-            <ToolBar Style="{DynamicResource ToolBarTemplate}" Background="{x:Null}" Foreground="{x:Null}" >
+            <ToolBar Style="{StaticResource ToolBarTemplate}" Background="{x:Null}" Foreground="{x:Null}" >
                 <!--<Button Background="{StaticResource ColorWindowHeader}" BorderBrush="{DynamicResource ColorButtonMaxIsMouseOver}" Foreground="{DynamicResource ColorHeaderButtonIsPressed}" Height="16" Width="16" Style="{DynamicResource HeaderButtonTemplate}">
                     <Image Source="/View/SaveAs_16x.png"  Height="16"/>
                 </Button>-->
@@ -91,25 +91,25 @@
         </ToolBarTray>
         <!--BorderBrush - it's color on IsMouseOver, OpacityMask - it's color on IsPressed-->
         <TabControl  Grid.Row="2" Background="{x:Null}" BorderBrush="{x:Null}" TabStripPlacement="Top" Padding="2,2,2,0" >
-            <TabItem  Header="Node editor"  Style="{DynamicResource TabItemTemplate}" Background="{DynamicResource ColorWindowHeader}" Foreground="{DynamicResource ColorTabItemText}"  BorderBrush="{DynamicResource ColorTabItemIsMouseOver}" OpacityMask="{DynamicResource ColorHeaderButtonIsPressed}">
+            <TabItem  Header="Node editor"  Style="{StaticResource TabItemTemplate}" Background="{StaticResource ColorWindowHeader}" Foreground="{StaticResource ColorTabItemText}"  BorderBrush="{StaticResource ColorTabItemIsMouseOver}" OpacityMask="{StaticResource ColorHeaderButtonIsPressed}">
                 <view:ViewNodesCanvas x:Name="NodesCanvas" />
             </TabItem>
             <!--<TabItem Header="Transitions table"  Style="{DynamicResource TabItemTemplate}" Background="{DynamicResource ColorWindowHeader}" Foreground="{DynamicResource ColorTabItemText}" BorderBrush="{DynamicResource ColorTabItemIsMouseOver}"   OpacityMask="{DynamicResource ColorTabItemIsSelected}"/>-->
         </TabControl>
-        <GridSplitter  Grid.Row="3" x:Name="ErrorListSplitter" HorizontalAlignment="Stretch" Background="{DynamicResource ColorWindowHeader}" Height="3"  ShowsPreview="False" IsEnabled="False"/>
-        <Expander Style="{DynamicResource ExpanderTemplate}"  x:Name="ErrorListExpander" Grid.Row="4"  HorizontalContentAlignment="Stretch" ExpandDirection="Up" OpacityMask="#FFB34F4F" Margin="3,0,0,0" >
+        <GridSplitter  Grid.Row="3" x:Name="ErrorListSplitter" HorizontalAlignment="Stretch" Background="{StaticResource ColorWindowHeader}" Height="3"  ShowsPreview="False" IsEnabled="False"/>
+        <Expander Style="{StaticResource ExpanderTemplate}"  x:Name="ErrorListExpander" Grid.Row="4"  HorizontalContentAlignment="Stretch" ExpandDirection="Up" OpacityMask="#FFB34F4F" Margin="3,0,0,0" >
             <Expander.Header>
                 <!--<TextBlock HorizontalAlignment="Left" VerticalAlignment="Top" Foreground="White" >Error List</TextBlock>-->
-                <Label Style="{DynamicResource LabelTemplate}" HorizontalAlignment="Left" VerticalAlignment="Top">Error List</Label>
+                <Label Style="{StaticResource LabelTemplate}" HorizontalAlignment="Left" VerticalAlignment="Top">Error List</Label>
             </Expander.Header>
             <Expander.Content>
-                <ListBox x:Name="MessageList" Template="{DynamicResource ListBoxTemplate}" Style="{DynamicResource ListBoxStyle}" Background="#2a2a2c" BorderBrush="{DynamicResource ColorMenuBorder}" Foreground="AliceBlue" ItemContainerStyle="{DynamicResource _ListBoxItemStyle}">
+                <ListBox x:Name="MessageList" Template="{StaticResource ListBoxTemplate}" Background="#2a2a2c" BorderBrush="{StaticResource ColorMenuBorder}" Foreground="AliceBlue" ItemContainerStyle="{StaticResource ListBoxItemStyle}">
                     <ListBox.InputBindings>
                         <KeyBinding x:Name="BindingCopyError" Key="C" Modifiers="Control" />
                     </ListBox.InputBindings>
                     <ListBox.ContextMenu>
-                    <ContextMenu Template="{DynamicResource ContextMenuTemplate}" Background="#1b1b1c" OpacityMask="#3e3e40"  Foreground="White" BorderBrush="#333337" BorderThickness="1" HorizontalAlignment="Left" VerticalAlignment="Center" >
-                            <MenuItem Header="Copy" x:Name="ItemCopyError" InputGestureText="Ctrl + C" Style="{DynamicResource ContextMenuItemStyle}"  />
+                        <ContextMenu Template="{StaticResource ContextMenuTemplate}" Background="#1b1b1c" OpacityMask="#3e3e40"  Foreground="White" BorderBrush="#333337" BorderThickness="1" HorizontalAlignment="Left" VerticalAlignment="Center" >
+                            <MenuItem Header="Copy" x:Name="ItemCopyError" InputGestureText="Ctrl + C" Style="{StaticResource ContextMenuItemStyle}"  />
                         </ContextMenu>
                      </ListBox.ContextMenu>
                     <ListBox.ItemTemplate>
