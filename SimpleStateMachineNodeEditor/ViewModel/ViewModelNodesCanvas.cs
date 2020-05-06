@@ -387,7 +387,6 @@ namespace SimpleStateMachineNodeEditor.ViewModel
         }
         private bool ConnectExist(string nameConnect)
         {
-            var t = this.Nodes.SelectMany(x => x.Transitions);
             return this.Nodes.SelectMany(x=>x.Transitions).Any(x=>x.Name == nameConnect);
         }
 
@@ -469,7 +468,7 @@ namespace SimpleStateMachineNodeEditor.ViewModel
             void Error(string errorMessage)
             {               
                 LogError("File is not valid: " + errorMessage);
-                SetupStartState();
+                New();
             }
         }
         private void Save(string fileName)
@@ -491,14 +490,8 @@ namespace SimpleStateMachineNodeEditor.ViewModel
 
             XElement transitions = new XElement("Transitions");
             stateMachineXElement.Add(transitions);
-            //List<ViewModelConnector> connectors = new List<ViewModelConnector>():
-            
-
-
-            //Nodes.Select(x => x.Transitions.Where(y => !string.IsNullOrEmpty(y.Name))).SelectMany(list => list
             foreach (var transition in Nodes.SelectMany(x => x.Transitions.Where(y => !string.IsNullOrEmpty(y.Name))).Reverse())
             {
-
                 transitions.Add(transition.ToXElement());
             }
 
