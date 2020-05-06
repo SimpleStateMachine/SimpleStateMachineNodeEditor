@@ -14,7 +14,7 @@ using ReactiveUI;
 
 using SimpleStateMachineNodeEditor.Helpers;
 using SimpleStateMachineNodeEditor.ViewModel;
-
+using System.Windows.Shapes;
 
 namespace SimpleStateMachineNodeEditor.View
 {
@@ -51,21 +51,18 @@ namespace SimpleStateMachineNodeEditor.View
             this.WhenActivated(disposable =>
             {
 
-                // Имя перехода ( вводится в узле)
-                this.OneWayBind(this.ViewModel, x => x.Name, x => x.Text.Text).DisposeWith(disposable);
+                this.OneWayBind(this.ViewModel, x => x.Name, x => x.TextBoxElement.Text).DisposeWith(disposable);
 
-
-                // Доступно ли имя перехода для редактирования
-                this.OneWayBind(this.ViewModel, x => x.TextEnable, x => x.Text.IsEnabled).DisposeWith(disposable);
+                this.OneWayBind(this.ViewModel, x => x.TextEnable, x => x.TextBoxElement.IsEnabled).DisposeWith(disposable);
 
                 // Доступен ли переход для создания соединия
-                this.OneWayBind(this.ViewModel, x => x.FormEnable, x => x.Form.IsEnabled).DisposeWith(disposable);
+                this.OneWayBind(this.ViewModel, x => x.FormEnable, x => x.EllipseElement.IsEnabled).DisposeWith(disposable);
 
                 // Цвет рамки, вокруг перехода
-                this.OneWayBind(this.ViewModel, x => x.FormStroke, x => x.Form.Stroke).DisposeWith(disposable);
+                this.OneWayBind(this.ViewModel, x => x.FormStroke, x => x.EllipseElement.Stroke).DisposeWith(disposable);
 
                 // Цвет перехода
-                this.OneWayBind(this.ViewModel, x => x.FormFill, x => x.Form.Fill).DisposeWith(disposable);
+                this.OneWayBind(this.ViewModel, x => x.FormFill, x => x.EllipseElement.Fill).DisposeWith(disposable);
 
                 // Отображается ли переход
                 this.OneWayBind(this.ViewModel, x => x.Visible, x => x.LeftConnector.Visibility).DisposeWith(disposable);
@@ -83,8 +80,8 @@ namespace SimpleStateMachineNodeEditor.View
         private void SetupEvents()
         {
             this.WhenActivated(disposable =>
-            {
-                this.Form.Events().Drop.Subscribe(e => OnEventDrop(e)).DisposeWith(disposable);
+            {               
+                this.EllipseElement.Events().Drop.Subscribe(e => OnEventDrop(e)).DisposeWith(disposable);
             });
         }
 
@@ -98,7 +95,7 @@ namespace SimpleStateMachineNodeEditor.View
         void UpdatePosition()
         {
             // Координата центра
-            Point InputCenter = Form.TranslatePoint(new Point(Form.Width/2, Form.Height / 2), this);
+            Point InputCenter = EllipseElement.TranslatePoint(new Point(EllipseElement.Width/2, EllipseElement.Height / 2), this);
 
             //Ищем Canvas
             ViewNodesCanvas NodesCanvas = MyUtils.FindParent<ViewNodesCanvas>(this);

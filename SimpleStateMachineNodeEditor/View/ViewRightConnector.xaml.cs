@@ -47,7 +47,6 @@ namespace SimpleStateMachineNodeEditor.View
            
         }
 
-
         #region SetupBinding
         private void SetupBinding()
         {
@@ -55,31 +54,21 @@ namespace SimpleStateMachineNodeEditor.View
             {
                 Canvas.SetZIndex((UIElement)this.VisualParent, this.ViewModel.Node.Zindex+2);
 
-                // Имя перехода ( вводится в узле)
-                this.OneWayBind(this.ViewModel, x => x.Name, x => x.Text.Text).DisposeWith(disposable);
+                this.OneWayBind(this.ViewModel, x => x.Name, x => x.TextBoxElement.Text).DisposeWith(disposable);
 
-                // Доступно ли имя перехода для редактирования
-                this.OneWayBind(this.ViewModel, x => x.TextEnable, x => x.Text.IsEnabled).DisposeWith(disposable);
+                this.OneWayBind(this.ViewModel, x => x.TextEnable, x => x.TextBoxElement.IsEnabled).DisposeWith(disposable);
 
-                // Доступен ли переход для создания соединия
-                this.OneWayBind(this.ViewModel, x => x.FormEnable, x => x.Form.IsEnabled).DisposeWith(disposable);
+                this.OneWayBind(this.ViewModel, x => x.FormEnable, x => x.EllipseElement.IsEnabled).DisposeWith(disposable);
 
 
-                this.OneWayBind(this.ViewModel, x => x.FormStroke, x => x.Form.Stroke).DisposeWith(disposable);
+                this.OneWayBind(this.ViewModel, x => x.FormStroke, x => x.EllipseElement.Stroke).DisposeWith(disposable);
 
-                this.OneWayBind(this.ViewModel, x => x.FormStrokeThickness, x => x.Form.StrokeThickness).DisposeWith(disposable);
+                this.OneWayBind(this.ViewModel, x => x.FormStrokeThickness, x => x.EllipseElement.StrokeThickness).DisposeWith(disposable);
 
-                //Размеры
-                this.WhenAnyValue(v => v.Grid.ActualWidth, v => v.Grid.ActualHeight, (width, height) => new Size(width, height))
-                     .BindTo(this, v => v.ViewModel.Size).DisposeWith(disposable);
+                this.Bind(this.ViewModel, x => x.FormFill, x => x.EllipseElement.Fill).DisposeWith(disposable);
 
-
-                this.Bind(this.ViewModel, x => x.FormFill, x => x.Form.Fill).DisposeWith(disposable);
-
-                // Отображается ли переход
                 this.OneWayBind(this.ViewModel, x => x.Visible, x => x.RightConnector.Visibility).DisposeWith(disposable);
 
-                // При изменении размера, позиции или масштаба узла
                 this.WhenAnyValue(x => x.ViewModel.Node.Size, x => x.ViewModel.Node.Point1.Value, x => x.ViewModel.Node.NodesCanvas.Scale.Scales.Value)
                 .Subscribe(_ => { UpdatePositionConnectPoin(); }).DisposeWith(disposable);
 
@@ -99,19 +88,19 @@ namespace SimpleStateMachineNodeEditor.View
         {
             this.WhenActivated(disposable =>
             {
-                this.Form.Events().MouseLeftButtonDown.Subscribe(e => ConnectDrag(e)).DisposeWith(disposable);
-                this.Text.Events().LostFocus.Subscribe(e => Validate(e)).DisposeWith(disposable);
-                this.Grid.Events().PreviewMouseLeftButtonDown.Subscribe(e => ConnectorDrag(e)).DisposeWith(disposable);
-                this.Grid.Events().PreviewDragEnter.Subscribe(e => ConnectorDragEnter(e)).DisposeWith(disposable);
-                this.Grid.Events().PreviewDrop.Subscribe(e => ConnectorDrop(e)).DisposeWith(disposable);
+                this.EllipseElement.Events().MouseLeftButtonDown.Subscribe(e => ConnectDrag(e)).DisposeWith(disposable);
+                this.TextBoxElement.Events().LostFocus.Subscribe(e => Validate(e)).DisposeWith(disposable);
+                this.BorderElement.Events().PreviewMouseLeftButtonDown.Subscribe(e => ConnectorDrag(e)).DisposeWith(disposable);
+                this.BorderElement.Events().PreviewDragEnter.Subscribe(e => ConnectorDragEnter(e)).DisposeWith(disposable);
+                this.BorderElement.Events().PreviewDrop.Subscribe(e => ConnectorDrop(e)).DisposeWith(disposable);
             });
         }
 
         private void Validate(RoutedEventArgs e)
         {
-            ViewModel.CommandValidateName.Execute(Text.Text);
-            if (Text.Text != ViewModel.Name)
-                Text.Text = ViewModel.Name;
+            ViewModel.CommandValidateName.Execute(TextBoxElement.Text);
+            if (TextBoxElement.Text != ViewModel.Name)
+                TextBoxElement.Text = ViewModel.Name;
         }
 
         private void ConnectDrag(MouseButtonEventArgs e)
@@ -181,7 +170,7 @@ namespace SimpleStateMachineNodeEditor.View
             if (this.IsVisible)
             {
                 // Координата центра
-                positionConnectPoint = Form.TranslatePoint(new Point(Form.Width/2, Form.Height / 2), this);
+                positionConnectPoint = EllipseElement.TranslatePoint(new Point(EllipseElement.Width/2, EllipseElement.Height / 2), this);
 
                 //Ищем Canvas
                 ViewNodesCanvas NodesCanvas = MyUtils.FindParent<ViewNodesCanvas>(this);

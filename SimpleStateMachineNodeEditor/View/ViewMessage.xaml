@@ -6,7 +6,7 @@
              xmlns:local="clr-namespace:SimpleStateMachineNodeEditor.View"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
-    <TextBlock x:Name="TextBlock" Height="auto" VerticalAlignment="Top" TextWrapping="Wrap" Foreground="White"  />
+    <TextBlock x:Name="TextBlockElement" Height="auto" VerticalAlignment="Top" TextWrapping="Wrap" Foreground="White"  />
 
 
 </UserControl>

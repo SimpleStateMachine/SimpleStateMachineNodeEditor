@@ -51,23 +51,23 @@ namespace SimpleStateMachineNodeEditor.View
             {
 
                 // Цвет линии
-                this.OneWayBind(this.ViewModel, x => x.Stroke, x => x.Path.Stroke).DisposeWith(disposable);
+                this.OneWayBind(this.ViewModel, x => x.Stroke, x => x.PathElement.Stroke).DisposeWith(disposable);
 
                 // Точка, из которой выходит линия
-                this.OneWayBind(this.ViewModel, x => x.StartPoint.Value, x => x.PathFigure.StartPoint).DisposeWith(disposable);
+                this.OneWayBind(this.ViewModel, x => x.StartPoint.Value, x => x.PathFigureElement.StartPoint).DisposeWith(disposable);
 
                 // Первая промежуточная точка линии 
-                this.OneWayBind(this.ViewModel, x => x.Point1.Value, x => x.BezierSegment.Point1).DisposeWith(disposable);
+                this.OneWayBind(this.ViewModel, x => x.Point1.Value, x => x.BezierSegmentElement.Point1).DisposeWith(disposable);
 
                 // Вторая промежуточная точка линии
-                this.OneWayBind(this.ViewModel, x => x.Point2.Value, x => x.BezierSegment.Point2).DisposeWith(disposable);
+                this.OneWayBind(this.ViewModel, x => x.Point2.Value, x => x.BezierSegmentElement.Point2).DisposeWith(disposable);
 
                 // Точка, в которую приходит линия
-                this.OneWayBind(this.ViewModel, x => x.EndPoint.Value, x => x.BezierSegment.Point3).DisposeWith(disposable);
+                this.OneWayBind(this.ViewModel, x => x.EndPoint.Value, x => x.BezierSegmentElement.Point3).DisposeWith(disposable);
 
-                this.OneWayBind(this.ViewModel, x => x.StrokeDashArray, x => x.Path.StrokeDashArray).DisposeWith(disposable);
+                this.OneWayBind(this.ViewModel, x => x.StrokeDashArray, x => x.PathElement.StrokeDashArray).DisposeWith(disposable);
 
-                this.OneWayBind(this.ViewModel, x => x.StrokeThickness, x => x.Path.StrokeThickness).DisposeWith(disposable);
+                this.OneWayBind(this.ViewModel, x => x.StrokeThickness, x => x.PathElement.StrokeThickness).DisposeWith(disposable);
 
                 this.WhenAnyValue(x => x.ViewModel.ToConnector).Where(x=>x!=null).Subscribe(_ => UpdateZindex()).DisposeWith(disposable);
 

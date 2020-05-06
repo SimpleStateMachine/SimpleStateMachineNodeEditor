@@ -4,17 +4,10 @@ using System.Windows.Input;
 
 namespace SimpleStateMachineNodeEditor.Helpers.Commands
 {
-    /// <summary>
-    /// Команда с Undo/Redo
-    /// </summary>
-    /// <typeparam name="TParameter">Тип параметра, передаваемого для выполнения</typeparam>
-    /// <typeparam name="TResult">Тип результата выполнения</typeparam>
+
     public class Command<TParameter, TResult> : CommandUndoRedo, ICommand, ICloneable where TParameter : class where TResult : class
     {
 
-        /// <summary>
-        /// Функция, которая будет вызвана при выполнении команды
-        /// </summary>
         private readonly Func<TParameter, TResult, TResult> _execute;
 
         /// <summary>

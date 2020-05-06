@@ -56,11 +56,12 @@ namespace SimpleStateMachineNodeEditor.Helpers
 
         public static bool CheckIntersectTwoRectangles(MyPoint a1, MyPoint a2, MyPoint b1, MyPoint b2)
         {
-            bool par1 = a1.X > b2.X; //второй перед первым
-            bool par2 = b1.X > a2.X; //первый перед вторым
-            bool par3 = a1.Y > b2.Y; //первый под вторым
-            bool par4 = b1.Y > a2.Y; //второй под первым
-            //если хоть одно условие выполняется - прямоугольники не пересекаются
+            bool par1 = a1.X > b2.X; //second before first
+            bool par2 = b1.X > a2.X; //first before second
+            bool par3 = a1.Y > b2.Y; //first over second
+            bool par4 = b1.Y > a2.Y; //second over first
+
+            //if one true  - it's not intersect
             return !(par1 || par2 || par3 || par4);
         }
 

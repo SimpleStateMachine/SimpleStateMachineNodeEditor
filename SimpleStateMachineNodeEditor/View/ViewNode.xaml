@@ -8,11 +8,11 @@
              xmlns:View="clr-namespace:SimpleStateMachineNodeEditor.View"
              mc:Ignorable="d" Focusable="True" AllowDrop="True" Visibility="Visible">
 
-    <Border x:Name="Border" CornerRadius="5,5,5,5" BorderThickness="1,1,1,1"   HorizontalAlignment="Left" VerticalAlignment="Top" MinWidth="80" Background="{DynamicResource ColorNodeBody}" >
+    <Border x:Name="BorderElement" CornerRadius="5,5,5,5" BorderThickness="1,1,1,1"   HorizontalAlignment="Left" VerticalAlignment="Top" MinWidth="80" Background="{DynamicResource ColorNodeBody}" >
         <StackPanel Margin="0,0,0,5">
-            <NodeStyles:NodeHeader x:Name="Header" />
+            <NodeStyles:NodeHeader x:Name="NodeHeaderElement" />
             <!--Grid For Input and Output-->
-            <Grid x:Name="MainPanel"  MinWidth="60" >
+            <Grid x:Name="GridElement"  MinWidth="60" >
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition />
                 </Grid.ColumnDefinitions>
@@ -24,10 +24,10 @@
                 <local:ViewRightConnector x:Name="Output" Grid.Row="1" Grid.Column="1"/>
             </Grid>
             <!--Control for Transactions-->
-            <ItemsControl x:Name="Transitions">
+            <ItemsControl x:Name="ItemsControlTransitions">
                 <ItemsControl.ItemsPanel>
                     <ItemsPanelTemplate>
-                        <StackPanel Name="Transitions" UseLayoutRounding="False" ScrollViewer.CanContentScroll="True"  AllowDrop="True"/>
+                        <StackPanel UseLayoutRounding="False" ScrollViewer.CanContentScroll="True"  AllowDrop="True"/>
                     </ItemsPanelTemplate>
                 </ItemsControl.ItemsPanel>
                 <ItemsControl.ItemTemplate>
@@ -40,10 +40,10 @@
     </Border>
     <UserControl.RenderTransform>
         <TransformGroup x:Name="TransformGroup">
-            <ScaleTransform x:Name="Scale" ScaleX="1" ScaleY="1" />
+            <ScaleTransform x:Name="ScaleTransformElement" ScaleX="1" ScaleY="1" />
             <SkewTransform/>
             <RotateTransform Angle="0" />
-            <TranslateTransform x:Name="Translate"/>
+            <TranslateTransform x:Name="TranslateTransformElement"/>
         </TransformGroup>
     </UserControl.RenderTransform>
     <UserControl.InputBindings>

@@ -47,7 +47,7 @@ namespace SimpleStateMachineNodeEditor.View
         {
             this.WhenActivated(disposable =>
             {
-                this.OneWayBind(this.ViewModel, x => x.Text, x => x.TextBlock.Text).DisposeWith(disposable);
+                this.OneWayBind(this.ViewModel, x => x.Text, x => x.TextBlockElement.Text).DisposeWith(disposable);
             });
         }
         #endregion SetupBinding

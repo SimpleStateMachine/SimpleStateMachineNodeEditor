@@ -14,12 +14,6 @@ namespace SimpleStateMachineNodeEditor.ViewModel
 {
     public class ViewModelConnector : ReactiveObject
     {
-        ///// <summary>
-        ///// Координата самого коннектора
-        ///// </summary>
-        //[Reactive]
-        //public MyPoint Position { get; set; } = new MyPoint();
-
         /// <summary>
         /// Координата перехода ( нужна для создания соединения )
         /// </summary>
@@ -29,7 +23,6 @@ namespace SimpleStateMachineNodeEditor.ViewModel
         /// Имя перехода ( вводится в узле)
         /// </summary>
         [Reactive] public string Name { get; set; }
-
 
         /// <summary>
         /// Доступно ли имя перехода для редактирования
@@ -42,22 +35,17 @@ namespace SimpleStateMachineNodeEditor.ViewModel
         [Reactive] public bool? Visible { get; set; } = true;
 
         /// <summary>
-        /// Размер узла
-        /// </summary>
-        [Reactive] public Size Size { get; set; }
-
-        /// <summary>
-        /// Доступен ли переход для создания соединия
+        /// Ellipse enable
         /// </summary>
         [Reactive] public bool FormEnable { get; set; } = true;
 
         /// <summary>
-        /// Цвет рамки, вокруг перехода
+        /// Ellipse stroke color
         /// </summary>
         [Reactive] public Brush FormStroke { get; set; } = Application.Current.Resources["ColorConnectorEllipseEnableBorder"] as SolidColorBrush;
 
         /// <summary>
-        /// Цвет перехода
+        /// Ellipse fill color
         /// </summary>
         [Reactive] public Brush FormFill { get; set; } = Application.Current.Resources["ColorConnectorEllipseEnableBackground"] as SolidColorBrush;
 
@@ -75,9 +63,6 @@ namespace SimpleStateMachineNodeEditor.ViewModel
 
         [Reactive] public bool ItsLoop { get; set; } = false;
 
-        /// <summary>
-        /// Канвас, которому принадлежит соединение
-        /// </summary>
         [Reactive] public ViewModelNodesCanvas NodesCanvas { get; set; }
 
         public ViewModelConnector(ViewModelNodesCanvas nodesCanvas, ViewModelNode viewModelNode)
@@ -91,14 +76,10 @@ namespace SimpleStateMachineNodeEditor.ViewModel
         public SimpleCommand CommandConnectPointDrag { get; set; }
         public SimpleCommand CommandConnectPointDrop { get; set; }
         public SimpleCommand CommandCheckConnectPointDrop { get; set; }
-
-
         public SimpleCommand CommandConnectorDrag { get; set; }
         public SimpleCommand CommandConnectorDragEnter { get; set; }
         public SimpleCommand CommandConnectorDrop { get; set; }
         public SimpleCommand CommandSetAsLoop { get; set; }
-
-
         public SimpleCommand CommandAdd { get; set; }
         public SimpleCommand CommandDelete { get; set; }
         public SimpleCommandWithParameter<string> CommandValidateName { get; set; }
