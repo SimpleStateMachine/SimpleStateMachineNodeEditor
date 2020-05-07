@@ -16,7 +16,7 @@
                     </Border>
                     <ControlTemplate.Triggers>
                         <Trigger Property="IsMouseOver" Value="true">
-                            <Setter Property="Foreground" Value="{DynamicResource ColorHeaderButtonIsPressed}"/>
+                            <Setter Property="Foreground" Value="{StaticResource ColorHeaderButtonIsPressed}"/>
                         </Trigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>

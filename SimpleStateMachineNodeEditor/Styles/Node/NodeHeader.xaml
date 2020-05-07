@@ -6,7 +6,7 @@
              xmlns:local="clr-namespace:SimpleStateMachineNodeEditor.Styles.Node"
              mc:Ignorable="d" 
             >
-    <Border CornerRadius="5,5,0,0" VerticalAlignment="Stretch"  Background="{DynamicResource ColorNodeHeaderStaticBackground}" >
+    <Border CornerRadius="5,5,0,0" VerticalAlignment="Stretch"  Background="{StaticResource ColorNodeHeaderStaticBackground}" >
         <Grid>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*" />
@@ -15,8 +15,8 @@
             <Grid.RowDefinitions>
                 <RowDefinition />
             </Grid.RowDefinitions>
-            <TextBox Name="TextBox"  Grid.Column="0" Text="State 1" VerticalAlignment="Center" VerticalContentAlignment="Center" Style="{DynamicResource NodeHeaderStyle}" HorizontalContentAlignment="Center" BorderThickness="0,0,0,0"  Background="{x:Null}" BorderBrush="{x:Null}" Foreground="{DynamicResource ColorNodeText}"  Padding="10,2,0,2" ScrollViewer.CanContentScroll="True" HorizontalAlignment="Center" />
-            <Button Name ="ButtonCollapse" Grid.Column="1"  Style="{DynamicResource NodeButtonRollUpStyle}"  HorizontalAlignment="Center" VerticalAlignment="Center" Margin="5">
+            <TextBox Name="TextBox"  Grid.Column="0" Text="State 1" VerticalAlignment="Center" VerticalContentAlignment="Center" Style="{StaticResource NodeHeaderStyle}" HorizontalContentAlignment="Center" BorderThickness="0,0,0,0"  Background="{x:Null}" BorderBrush="{x:Null}" Foreground="{StaticResource ColorNodeText}"  Padding="10,2,0,2" ScrollViewer.CanContentScroll="True" HorizontalAlignment="Center" />
+            <Button Name ="ButtonCollapse" Grid.Column="1"  Style="{StaticResource NodeButtonRollUpStyle}"  HorizontalAlignment="Center" VerticalAlignment="Center" Margin="5">
                 <Button.RenderTransform>
                     <TransformGroup>
                         <RotateTransform x:Name="ButtonRotate" Angle="0" CenterX="4" CenterY="2" />

@@ -73,7 +73,7 @@
         </DockPanel>
         <ToolBarTray Grid.Row="1" IsLocked="True"  Background="{x:Null}">
             <ToolBar Style="{StaticResource ToolBarTemplate}" Background="{x:Null}" Foreground="{x:Null}" >
-                <!--<Button Background="{StaticResource ColorWindowHeader}" BorderBrush="{DynamicResource ColorButtonMaxIsMouseOver}" Foreground="{DynamicResource ColorHeaderButtonIsPressed}" Height="16" Width="16" Style="{DynamicResource HeaderButtonTemplate}">
+                <!--<Button Background="{StaticResource ColorWindowHeader}" BorderBrush="{StaticResource ColorButtonMaxIsMouseOver}" Foreground="{StaticResource ColorHeaderButtonIsPressed}" Height="16" Width="16" Style="{StaticResource HeaderButtonTemplate}">
                     <Image Source="/View/SaveAs_16x.png"  Height="16"/>
                 </Button>-->
 
@@ -94,7 +94,7 @@
             <TabItem  Header="Node editor"  Style="{StaticResource TabItemTemplate}" Background="{StaticResource ColorWindowHeader}" Foreground="{StaticResource ColorTabItemText}"  BorderBrush="{StaticResource ColorTabItemIsMouseOver}" OpacityMask="{StaticResource ColorHeaderButtonIsPressed}">
                 <view:ViewNodesCanvas x:Name="NodesCanvas" />
             </TabItem>
-            <!--<TabItem Header="Transitions table"  Style="{DynamicResource TabItemTemplate}" Background="{DynamicResource ColorWindowHeader}" Foreground="{DynamicResource ColorTabItemText}" BorderBrush="{DynamicResource ColorTabItemIsMouseOver}"   OpacityMask="{DynamicResource ColorTabItemIsSelected}"/>-->
+            <!--<TabItem Header="Transitions table"  Style="{StaticResource TabItemTemplate}" Background="{StaticResource ColorWindowHeader}" Foreground="{StaticResource ColorTabItemText}" BorderBrush="{StaticResource ColorTabItemIsMouseOver}"   OpacityMask="{StaticResource ColorTabItemIsSelected}"/>-->
         </TabControl>
         <GridSplitter  Grid.Row="3" x:Name="ErrorListSplitter" HorizontalAlignment="Stretch" Background="{StaticResource ColorWindowHeader}" Height="3"  ShowsPreview="False" IsEnabled="False"/>
         <Expander Style="{StaticResource ExpanderTemplate}"  x:Name="ErrorListExpander" Grid.Row="4"  HorizontalContentAlignment="Stretch" ExpandDirection="Up" OpacityMask="#FFB34F4F" Margin="3,0,0,0" >
@@ -103,7 +103,13 @@
                 <Label Style="{StaticResource LabelTemplate}" HorizontalAlignment="Left" VerticalAlignment="Top">Error List</Label>
             </Expander.Header>
             <Expander.Content>
-                <ListBox x:Name="MessageList" Template="{StaticResource ListBoxTemplate}" Background="#2a2a2c" BorderBrush="{StaticResource ColorMenuBorder}" Foreground="AliceBlue" ItemContainerStyle="{StaticResource ListBoxItemStyle}">
+                <ListBox x:Name="MessageList" Template="{StaticResource ListBoxTemplate}" Background="#2a2a2c" BorderBrush="{StaticResource ColorMenuBorder}" Foreground="AliceBlue" ItemContainerStyle="{StaticResource ListBoxItemStyle}" 
+                         VirtualizingStackPanel.IsVirtualizing="True" 
+                          VirtualizingStackPanel.VirtualizationMode="Recycling" 
+                          VirtualizingStackPanel.CacheLength="1" 
+                          VirtualizingStackPanel.CacheLengthUnit="Page" 
+                          ScrollViewer.IsDeferredScrollingEnabled="True" 
+                          VirtualizingStackPanel.ScrollUnit="Pixel">
                     <ListBox.InputBindings>
                         <KeyBinding x:Name="BindingCopyError" Key="C" Modifiers="Control" />
                     </ListBox.InputBindings>
@@ -118,9 +124,9 @@
                         </DataTemplate>
                     </ListBox.ItemTemplate>
                 </ListBox>
-                <!--<TextBox x:Name="ErrorList" Style="{DynamicResource TextBoxTemplate}" BorderBrush="{DynamicResource ColorMenuBorder}"
+                <!--<TextBox x:Name="ErrorList" Style="{StaticResource TextBoxTemplate}" BorderBrush="{StaticResource ColorMenuBorder}"
                          IsReadOnly="True" TextWrapping="NoWrap" Background="#2a2a2c"
-                         Foreground="White" AcceptsReturn="True" OpacityMask="{DynamicResource ColorMenuBorder}"
+                         Foreground="White" AcceptsReturn="True" OpacityMask="{StaticResource ColorMenuBorder}"
                          BorderThickness="1" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto"/>-->
             </Expander.Content>
         </Expander>

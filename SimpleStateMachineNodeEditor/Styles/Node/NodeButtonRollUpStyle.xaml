@@ -5,7 +5,7 @@
         <Setter Property="Control.Template">
             <Setter.Value>
                 <ControlTemplate>
-                    <Path Stroke="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}" StrokeThickness="1" StrokeDashArray="1 2" Data="M0,6 L5,0 L10,6 Z" />
+                    <Path Stroke="{StaticResource {x:Static SystemColors.ControlTextBrushKey}}" StrokeThickness="1" StrokeDashArray="1 2" Data="M0,6 L5,0 L10,6 Z" />
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
@@ -13,8 +13,8 @@
 
     <Style x:Key="NodeButtonRollUpStyle" TargetType="{x:Type Button}">
         <Setter Property="FocusVisualStyle" Value="{StaticResource FocusVisual}"/>
-        <Setter Property="Background" Value="{DynamicResource ColorNodeButtonRollUpStaticBackground}"/>
-        <Setter Property="BorderBrush" Value="{DynamicResource ColorNodeButtonRollUpStaticBackground}"/>
+        <Setter Property="Background" Value="{StaticResource ColorNodeButtonRollUpStaticBackground}"/>
+        <Setter Property="BorderBrush" Value="{StaticResource ColorNodeButtonRollUpStaticBackground}"/>
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type Button}">
@@ -23,19 +23,19 @@
                     
                     <ControlTemplate.Triggers>
                         <Trigger Property="IsDefaulted" Value="true">
-                            <Setter Property="Stroke" TargetName="border" Value="{DynamicResource {x:Static SystemColors.HighlightBrushKey}}"/>
+                            <Setter Property="Stroke" TargetName="border" Value="{StaticResource {x:Static SystemColors.HighlightBrushKey}}"/>
                         </Trigger>
                         <Trigger Property="IsMouseOver" Value="true">
-                            <Setter Property="Fill" TargetName="border" Value="{DynamicResource ColorNodeButtonRollUpMouseOverBackground}"/>
-                            <Setter Property="Stroke" TargetName="border" Value="{DynamicResource  ColorNodeButtonRollUpMouseOverBorder}"/>
+                            <Setter Property="Fill" TargetName="border" Value="{StaticResource ColorNodeButtonRollUpMouseOverBackground}"/>
+                            <Setter Property="Stroke" TargetName="border" Value="{StaticResource  ColorNodeButtonRollUpMouseOverBorder}"/>
                         </Trigger>
                         <Trigger Property="IsPressed" Value="true">
-                            <Setter Property="Fill" TargetName="border" Value="{DynamicResource ColorNodeButtonRollUpPressedBackground}"/>
-                            <Setter Property="Stroke" TargetName="border" Value="{DynamicResource ColorNodeButtonRollUpPressedBorder}"/>
+                            <Setter Property="Fill" TargetName="border" Value="{StaticResource ColorNodeButtonRollUpPressedBackground}"/>
+                            <Setter Property="Stroke" TargetName="border" Value="{StaticResource ColorNodeButtonRollUpPressedBorder}"/>
                         </Trigger>
                         <Trigger Property="IsEnabled" Value="false">
-                            <Setter Property="Fill" TargetName="border" Value="{DynamicResource ColorNodeButtonRollUpDisabledBackground}"/>
-                            <Setter Property="Stroke" TargetName="border" Value="{DynamicResource ColorNodeButtonRollUpDisabledBorder}"/>
+                            <Setter Property="Fill" TargetName="border" Value="{StaticResource ColorNodeButtonRollUpDisabledBackground}"/>
+                            <Setter Property="Stroke" TargetName="border" Value="{StaticResource ColorNodeButtonRollUpDisabledBorder}"/>
                         </Trigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>

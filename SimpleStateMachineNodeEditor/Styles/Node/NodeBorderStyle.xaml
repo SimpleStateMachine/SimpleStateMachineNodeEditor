@@ -6,25 +6,25 @@
 
     <Storyboard x:Key="MouseEnterStoryboard">
         <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="BorderBrush">
-            <DiscreteObjectKeyFrame KeyTime="0:0:0" Value="{DynamicResource ColorNodeBorderMouseEnterBorder}" />
+            <DiscreteObjectKeyFrame KeyTime="0:0:0" Value="{StaticResource ColorNodeBorderMouseEnterBorder}" />
         </ObjectAnimationUsingKeyFrames>
         <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Background">
-            <DiscreteObjectKeyFrame KeyTime="0:0:0" Value="{DynamicResource ColorNodeBorderMouseEnterBackground}" />
+            <DiscreteObjectKeyFrame KeyTime="0:0:0" Value="{StaticResource ColorNodeBorderMouseEnterBackground}" />
         </ObjectAnimationUsingKeyFrames>
     </Storyboard>
 
     <Storyboard x:Key="MouseLeaveStoryboard">
         <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="BorderBrush">
-            <DiscreteObjectKeyFrame KeyTime="0:0:0" Value="{DynamicResource ColorNodeBorderMouseLeaveBorder}" />
+            <DiscreteObjectKeyFrame KeyTime="0:0:0" Value="{StaticResource ColorNodeBorderMouseLeaveBorder}" />
         </ObjectAnimationUsingKeyFrames>
         <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Background">
-            <DiscreteObjectKeyFrame KeyTime="0:0:0" Value="{DynamicResource ColorNodeBorderMouseLeaveBackground}" />
+            <DiscreteObjectKeyFrame KeyTime="0:0:0" Value="{StaticResource ColorNodeBorderMouseLeaveBackground}" />
         </ObjectAnimationUsingKeyFrames>
     </Storyboard>
     <Style x:Key="NodeBorder" TargetType="{x:Type Border}">
         <Style.Setters>
-            <Setter Property="BorderBrush" Value="{DynamicResource ColorNodeBorderStaticBorder}"/>
-            <Setter Property="Background"  Value="{DynamicResource ColorNodeBorderStaticBackground}"/>
+            <Setter Property="BorderBrush" Value="{StaticResource ColorNodeBorderStaticBorder}"/>
+            <Setter Property="Background"  Value="{StaticResource ColorNodeBorderStaticBackground}"/>
             
         </Style.Setters>
     </Style>

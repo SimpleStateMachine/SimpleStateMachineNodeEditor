@@ -63,22 +63,22 @@
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type ToggleButton}">
-                    <Border x:Name="Bd" Background="{DynamicResource ColorWindowHeader}" SnapsToDevicePixels="true">
+                    <Border x:Name="Bd" Background="{StaticResource ColorWindowHeader}" SnapsToDevicePixels="true">
                         <Canvas HorizontalAlignment="Right" Height="7" Margin="3,2,2,2" SnapsToDevicePixels="true" VerticalAlignment="Bottom" Width="6">
-                            <Path x:Name="BdLine" Data="M -1 -1 L 6 -1" Stroke="{DynamicResource ColorHeaderButton}" StrokeThickness="1.5"/>
-                            <Path x:Name="BdArrow" Data="M -1 1 L 6 1 L 2.5 5 Z" Fill="{DynamicResource ColorHeaderButton}" StrokeThickness="1.5"/>
+                            <Path x:Name="BdLine" Data="M -1 -1 L 6 -1" Stroke="{StaticResource ColorHeaderButton}" StrokeThickness="1.5"/>
+                            <Path x:Name="BdArrow" Data="M -1 1 L 6 1 L 2.5 5 Z" Fill="{StaticResource ColorHeaderButton}" StrokeThickness="1.5"/>
                         </Canvas>
                     </Border>
                     <ControlTemplate.Triggers>
                         <Trigger Property="IsMouseOver" Value="true">
-                            <Setter Property="Background" TargetName="Bd" Value="{DynamicResource ColorHeaderButtonIsMouseOver}"/>
-                            <Setter Property="Stroke" TargetName="BdLine" Value="{DynamicResource ColorHeaderButtonIsPressed}"/>
-                            <Setter Property="Fill" TargetName="BdArrow" Value="{DynamicResource ColorHeaderButtonIsPressed}"/>
+                            <Setter Property="Background" TargetName="Bd" Value="{StaticResource ColorHeaderButtonIsMouseOver}"/>
+                            <Setter Property="Stroke" TargetName="BdLine" Value="{StaticResource ColorHeaderButtonIsPressed}"/>
+                            <Setter Property="Fill" TargetName="BdArrow" Value="{StaticResource ColorHeaderButtonIsPressed}"/>
                         </Trigger>
                         <Trigger Property="IsKeyboardFocused" Value="true">
-                            <Setter Property="Background" TargetName="Bd" Value="{DynamicResource ColorHeaderButtonIsMouseOver}"/>
-                            <Setter Property="Stroke" TargetName="BdLine" Value="{DynamicResource ColorHeaderButtonIsPressed}"/>
-                            <Setter Property="Fill" TargetName="BdArrow" Value="{DynamicResource ColorHeaderButtonIsPressed}"/>
+                            <Setter Property="Background" TargetName="Bd" Value="{StaticResource ColorHeaderButtonIsMouseOver}"/>
+                            <Setter Property="Stroke" TargetName="BdLine" Value="{StaticResource ColorHeaderButtonIsPressed}"/>
+                            <Setter Property="Fill" TargetName="BdArrow" Value="{StaticResource ColorHeaderButtonIsPressed}"/>
                         </Trigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>
@@ -86,7 +86,7 @@
         </Setter>
         <!--<Style.Triggers>
             <DataTrigger Binding="{Binding Source={x:Static SystemParameters.HighContrast}}" Value="true">
-                <Setter Property="Background" Value="{DynamicResource {x:Static SystemColors.ControlBrushKey}}"/>
+                <Setter Property="Background" Value="{StaticResource {x:Static SystemColors.ControlBrushKey}}"/>
             </DataTrigger>
         </Style.Triggers>-->
     </Style>
@@ -121,7 +121,7 @@
         </Setter>
         <!--<Style.Triggers>
             <DataTrigger Binding="{Binding Source={x:Static SystemParameters.HighContrast}}" Value="true">
-                <Setter Property="Background" Value="{DynamicResource {x:Static SystemColors.ControlBrushKey}}"/>
+                <Setter Property="Background" Value="{StaticResource {x:Static SystemColors.ControlBrushKey}}"/>
             </DataTrigger>
         </Style.Triggers>-->
     </Style>
@@ -133,9 +133,9 @@
                     <Grid x:Name="Grid" Margin="3,1,1,1" SnapsToDevicePixels="true">
                         <Grid x:Name="OverflowGrid" HorizontalAlignment="Right">
                             <ToggleButton x:Name="OverflowButton" ClickMode="Press" FocusVisualStyle="{x:Null}" IsEnabled="{TemplateBinding HasOverflowItems}" IsChecked="{Binding IsOverflowOpen, Mode=TwoWay, RelativeSource={RelativeSource TemplatedParent}}" Style="{StaticResource ToolBarHorizontalOverflowButtonStyle}"/>
-                            <Popup Visibility="Hidden" x:Name="OverflowPopup" AllowsTransparency="true" Focusable="false" IsOpen="{Binding IsOverflowOpen, RelativeSource={RelativeSource TemplatedParent}}" Placement="Bottom" PopupAnimation="{DynamicResource {x:Static SystemParameters.ComboBoxPopupAnimationKey}}" StaysOpen="false">
+                            <Popup Visibility="Hidden" x:Name="OverflowPopup" AllowsTransparency="true" Focusable="false" IsOpen="{Binding IsOverflowOpen, RelativeSource={RelativeSource TemplatedParent}}" Placement="Bottom" PopupAnimation="{StaticResource {x:Static SystemParameters.ComboBoxPopupAnimationKey}}" StaysOpen="false">
                                 <theme:SystemDropShadowChrome x:Name="Shdw" Color="Transparent">
-                                    <Border x:Name="ToolBarSubMenuBorder" Background="{DynamicResource ColorMenuBaground}" BorderThickness="1" BorderBrush="{DynamicResource ColorMenuBorder}" RenderOptions.ClearTypeHint="Enabled">
+                                    <Border x:Name="ToolBarSubMenuBorder" Background="{StaticResource ColorMenuBaground}" BorderThickness="1" BorderBrush="{StaticResource ColorMenuBorder}" RenderOptions.ClearTypeHint="Enabled">
                                         <ToolBarOverflowPanel x:Name="PART_ToolBarOverflowPanel" KeyboardNavigation.DirectionalNavigation="Cycle" Focusable="true" FocusVisualStyle="{x:Null}" Margin="2" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" KeyboardNavigation.TabNavigation="Cycle" WrapWidth="200"/>
                                     </Border>
                                 </theme:SystemDropShadowChrome>
@@ -182,7 +182,7 @@
                             <!--<Setter Property="Background" Value="{StaticResource ToolBarVerticalBackground}"/>-->
                         </Trigger>
                         <!--<Trigger Property="IsEnabled" Value="false">
-                            <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.GrayTextBrushKey}}"/>
+                            <Setter Property="Foreground" Value="{StaticResource {x:Static SystemColors.GrayTextBrushKey}}"/>
                         </Trigger>-->
                     </ControlTemplate.Triggers>
                 </ControlTemplate>
@@ -190,7 +190,7 @@
         </Setter>
         <!--<Style.Triggers>
             <DataTrigger Binding="{Binding Source={x:Static SystemParameters.HighContrast}}" Value="true">
-                <Setter Property="Background" Value="{DynamicResource {x:Static SystemColors.ControlBrushKey}}"/>
+                <Setter Property="Background" Value="{StaticResource {x:Static SystemColors.ControlBrushKey}}"/>
             </DataTrigger>
         </Style.Triggers>-->
     </Style>

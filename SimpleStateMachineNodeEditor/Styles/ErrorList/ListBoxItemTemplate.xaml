@@ -10,7 +10,7 @@
                     </Border>
                     <ControlTemplate.Triggers>
                         <Trigger Property="IsSelected" Value="true">
-                            <Setter TargetName="Border" Property="Background" Value="{DynamicResource ColorHeaderButtonIsPressed}"/>
+                            <Setter TargetName="Border" Property="Background" Value="{StaticResource ColorHeaderButtonIsPressed}"/>
                         </Trigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>

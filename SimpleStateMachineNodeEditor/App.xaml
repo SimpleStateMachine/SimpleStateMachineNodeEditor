@@ -10,8 +10,9 @@
                 <ResourceDictionary Source="Styles/Colors.xaml"/>
                 <ResourceDictionary Source="Styles/ErrorList/ExpanderTemplate.xaml"/>
                 <ResourceDictionary Source="Styles/ErrorList/TextBoxTemplate.xaml"/>
-                <ResourceDictionary Source="Styles/ErrorList/ScrollViewerTemplate.xaml"/>
                 <ResourceDictionary Source="Styles/ErrorList/ScrollBarTemplate.xaml"/>
+                <ResourceDictionary Source="Styles/ErrorList/ScrollViewerTemplate.xaml"/>
+                
                 <ResourceDictionary Source="Styles/ErrorList/ListBoxTemplate.xaml"/>
                 <ResourceDictionary Source="Styles/ErrorList/LabelTemplate.xaml"/>
                 <ResourceDictionary Source="Styles/ErrorList/ListBoxItemTemplate.xaml"/>

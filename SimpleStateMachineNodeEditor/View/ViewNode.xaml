@@ -24,7 +24,14 @@
                 <local:ViewRightConnector x:Name="Output" Grid.Row="1" Grid.Column="1"/>
             </Grid>
             <!--Control for Transactions-->
-            <ItemsControl x:Name="ItemsControlTransitions">
+            <ItemsControl x:Name="ItemsControlTransitions" 
+                          VirtualizingStackPanel.IsVirtualizing="True" 
+                          VirtualizingStackPanel.VirtualizationMode="Recycling" 
+                          VirtualizingStackPanel.CacheLength="1" 
+                          VirtualizingStackPanel.CacheLengthUnit="Page" 
+                          ScrollViewer.IsDeferredScrollingEnabled="True" 
+                          VirtualizingStackPanel.ScrollUnit="Pixel">
+                
                 <ItemsControl.ItemsPanel>
                     <ItemsPanelTemplate>
                         <StackPanel UseLayoutRounding="False" ScrollViewer.CanContentScroll="True"  AllowDrop="True"/>
