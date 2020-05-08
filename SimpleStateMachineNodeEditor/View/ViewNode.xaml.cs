@@ -18,6 +18,7 @@ using DynamicData;
 using SimpleStateMachineNodeEditor.ViewModel;
 using SimpleStateMachineNodeEditor.Helpers;
 using SimpleStateMachineNodeEditor.Helpers.Transformations;
+using SimpleStateMachineNodeEditor.Helpers.Enums;
 
 namespace SimpleStateMachineNodeEditor.View
 {
@@ -40,7 +41,6 @@ namespace SimpleStateMachineNodeEditor.View
             set { ViewModel = (ViewModelNode)value; }
         }
         #endregion ViewModel
-
         public ViewNode()
         {
             InitializeComponent();
@@ -49,6 +49,7 @@ namespace SimpleStateMachineNodeEditor.View
             SetupCommands();
          
         }
+
         #region Setup Binding
         private void SetupBinding()
         {
@@ -84,6 +85,15 @@ namespace SimpleStateMachineNodeEditor.View
             });
         }
         #endregion Setup Binding
+        #region Setup Commands
+        private void SetupCommands()
+        {
+            this.WhenActivated(disposable =>
+            {
+                this.BindCommand(this.ViewModel, x => x.CommandSelect, x => x.BindingSelect).DisposeWith(disposable);
+            });
+        }
+        #endregion Setup Commands
         #region Setup Events
         private void SetupEvents()
         {
@@ -107,7 +117,7 @@ namespace SimpleStateMachineNodeEditor.View
         private void OnEventMouseLeftDowns(MouseButtonEventArgs e)
         {
             Keyboard.Focus(this);
-            this.ViewModel.CommandSelect.Execute(true);
+            this.ViewModel.CommandSelect.Execute(SelectMode.Click);
         }
         private void Validate(RoutedEventArgs e)
         {
@@ -162,14 +172,6 @@ namespace SimpleStateMachineNodeEditor.View
             
         }
         #endregion Setup Events
-        #region Setup Commands
-        private void SetupCommands()
-        {
-            this.WhenActivated(disposable =>
-            {
-                this.BindCommand(this.ViewModel, x => x.CommandSelect, x => x.BindingSelect);
-            });
-        }
-        #endregion Setup Commands
+
     }
 }

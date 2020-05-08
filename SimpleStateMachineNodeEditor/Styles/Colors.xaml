@@ -13,6 +13,9 @@
     <SolidColorBrush x:Key="ColorMenuBorder"  Color="#333337"/>
     <SolidColorBrush x:Key="ColorMenuBaground"  Color="#1b1b1c"/>
 
+    <SolidColorBrush x:Key="ColorForeground"  Color="White"/>
+
+    <SolidColorBrush x:Key="ColorSelectedElement"  Color="Red"/>
     <!--#endregion Theme-->
 
 

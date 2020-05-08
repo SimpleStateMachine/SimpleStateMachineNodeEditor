@@ -9,6 +9,7 @@ using SimpleStateMachineNodeEditor.Helpers.Commands;
 using System;
 using System.Xml.Linq;
 using System.Linq;
+using SimpleStateMachineNodeEditor.Helpers.Enums;
 
 namespace SimpleStateMachineNodeEditor.ViewModel
 {
@@ -49,6 +50,8 @@ namespace SimpleStateMachineNodeEditor.ViewModel
         /// </summary>
         [Reactive] public Brush FormFill { get; set; } = Application.Current.Resources["ColorConnectorEllipseEnableBackground"] as SolidColorBrush;
 
+        [Reactive] public Brush Foreground { get; set; } = Application.Current.Resources["ColorForeground"] as SolidColorBrush;
+
         [Reactive] public double FormStrokeThickness { get; set; } = 1;
 
         /// <summary>
@@ -65,12 +68,23 @@ namespace SimpleStateMachineNodeEditor.ViewModel
 
         [Reactive] public ViewModelNodesCanvas NodesCanvas { get; set; }
 
+        [Reactive] public bool Selected { get; set; }
+
         public ViewModelConnector(ViewModelNodesCanvas nodesCanvas, ViewModelNode viewModelNode)
         {
             Node = viewModelNode;
             NodesCanvas = nodesCanvas;
             SetupCommands();
+            SetupBinding();
         }
+
+        #region SetupBinding
+        private void SetupBinding()
+        {
+            this.WhenAnyValue(x => x.Selected).Subscribe(value => { this.Foreground = value ? Application.Current.Resources["ColorSelectedElement"] as SolidColorBrush : Application.Current.Resources["ColorForeground"] as SolidColorBrush; });
+        }
+        #endregion SetupBinding
+
         #region Commands
 
         public SimpleCommand CommandConnectPointDrag { get; set; }
@@ -82,11 +96,12 @@ namespace SimpleStateMachineNodeEditor.ViewModel
         public SimpleCommand CommandSetAsLoop { get; set; }
         public SimpleCommand CommandAdd { get; set; }
         public SimpleCommand CommandDelete { get; set; }
+        public SimpleCommandWithParameter<bool> CommandSelect { get; set; }
         public SimpleCommandWithParameter<string> CommandValidateName { get; set; }
 
         private void SetupCommands()
         {
-
+            
             CommandConnectPointDrag = new SimpleCommand(ConnectPointDrag);
             CommandConnectPointDrop = new SimpleCommand(ConnectPointDrop);
             CommandSetAsLoop = new SimpleCommand(SetAsLoop, NotSaved);
@@ -100,8 +115,37 @@ namespace SimpleStateMachineNodeEditor.ViewModel
             CommandDelete = new SimpleCommand(Delete);
             CommandValidateName = new SimpleCommandWithParameter<string>(ValidateName, NotSaved);
 
+            CommandSelect = new SimpleCommandWithParameter<bool>(Select);
+
 
             //SimpleCommandWithResult<bool, Func<bool>> t = new SimpleCommandWithResult<bool, Func<bool>>()
+        }
+
+        private void Select(bool obj)
+        {
+            //SelectMode selectMode = (SelectMode)obj;
+            //ViewModelConnect viewModelConnect;
+            ////if (obj?.GetType() == typeof(ViewModelConnect))\
+            //if (obj is SelectMode)
+            //{
+            //   viewModelConnect = (ViewModelConnect)obj;
+            //}
+            //else
+            //{
+            //    viewModelConnect = default(ViewModelConnect);
+            //}
+          
+
+            //if (selectMode==SelectMode.Click)
+            //{
+            //    this.Selected = !this.Selected;
+            //    return;
+            //}
+            //else
+            //{
+            //    this.Selected = (bool)obj;
+            //}
+            
         }
 
         private void NotSaved()

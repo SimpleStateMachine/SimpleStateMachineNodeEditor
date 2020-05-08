@@ -111,7 +111,7 @@
         <KeyBinding x:Name="BindingSelectAll" Key="A" Modifiers="Control" />
         <KeyBinding x:Name="BindingAddNode" Key="N" Modifiers="Control" />
         <KeyBinding x:Name="BindingDeleteNode" Key="Delete"  />
-        <MouseBinding x:Name="BindingSelect" Gesture="Ctrl+LeftClick" />
+        <MouseBinding x:Name="BindingSelect" Gesture="Ctrl+LeftClick"/>
         <MouseBinding x:Name="BindingCut" Gesture="Alt+LeftClick" />
         <MouseBinding x:Name="BindingZoom" Gesture="WheelClick"/>
     </UserControl.InputBindings>

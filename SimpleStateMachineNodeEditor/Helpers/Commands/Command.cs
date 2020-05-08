@@ -1,11 +1,12 @@
 ﻿
+using SimpleStateMachineNodeEditor.Helpers.Extensions;
 using System;
 using System.Windows.Input;
 
 namespace SimpleStateMachineNodeEditor.Helpers.Commands
 {
 
-    public class Command<TParameter, TResult> : CommandUndoRedo, ICommand, ICloneable where TParameter : class where TResult : class
+    public class Command<TParameter, TResult> : CommandUndoRedo, ICommand, ICloneable 
     {
 
         private readonly Func<TParameter, TResult, TResult> _execute;
@@ -74,12 +75,11 @@ namespace SimpleStateMachineNodeEditor.Helpers.Commands
         /// <param name="parameter"> Параметр команды </param>
         public void Execute(object parameter)
         {
-
             //Запоминаем параметр ( чтобы можно было егоже передать в отмену)
-            Parameters = (parameter as TParameter);
+            Parameters = parameter.Cast<TParameter>();
 
             //Выполняем команду и запоминаем результат ( чтобы можно было выполнить отмену именно для этого результата)
-            Result = this._execute(Parameters, Result) as TResult;
+            Result = this._execute(Parameters, Result).Cast<TResult>();
 
             //Если команду можно отменить
             if (CanUnExecute)
@@ -92,10 +92,10 @@ namespace SimpleStateMachineNodeEditor.Helpers.Commands
             }
 
             //Очищаем результат ( чтобы не передавать его при повторном выполнении)
-            Result = null;
+            Result = default(TResult);
 
             //Очищаем параметр ( чтобы не передавать его при повторном выполнении)
-            Parameters = null;
+            Parameters = default(TParameter);
 
             OnExecute?.Invoke();
         }

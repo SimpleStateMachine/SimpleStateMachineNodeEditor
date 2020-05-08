@@ -1,4 +1,5 @@
-﻿using System;
+﻿using SimpleStateMachineNodeEditor.Helpers.Extensions;
+using System;
 using System.Windows.Input;
 
 namespace SimpleStateMachineNodeEditor.Helpers.Commands
@@ -7,7 +8,7 @@ namespace SimpleStateMachineNodeEditor.Helpers.Commands
     /// Команда без Undo/Redo
     /// </summary>
     /// <typeparam name="TParameter"></typeparam>
-    public class SimpleCommandWithParameter<TParameter> : ICommand where TParameter : class
+    public class SimpleCommandWithParameter<TParameter> : ICommand
     {
         /// <summary>
         /// Функция с параметром, которая будет вызвана при выполнении команды
@@ -41,7 +42,9 @@ namespace SimpleStateMachineNodeEditor.Helpers.Commands
         /// <param name="parameter"> Параметр команды </param>
         public void Execute(object parameter)
         {
-            this._execute(parameter as TParameter);
+
+            this._execute(parameter.Cast<TParameter>());
+
             OnExecute?.Invoke();
         }
 

@@ -13,6 +13,7 @@ using SimpleStateMachineNodeEditor.Helpers;
 using SimpleStateMachineNodeEditor.Helpers.Commands;
 using System.Linq;
 using System.Xml.Linq;
+using SimpleStateMachineNodeEditor.Helpers.Enums;
 
 namespace SimpleStateMachineNodeEditor.ViewModel
 {
@@ -56,12 +57,19 @@ namespace SimpleStateMachineNodeEditor.ViewModel
         {
             NodesCanvas = nodesCanvas;
             Zindex = nodesCanvas.Nodes.Count;
-            //this.WhenAnyValue(x=>x.Name).Subscribe()
-            this.WhenAnyValue(x => x.Selected).Subscribe(value => { this.BorderBrush = value ? Brushes.Red : Brushes.LightGray; });
-            this.WhenAnyValue(x => x.Point1.Value, x => x.Size).Subscribe(_ => UpdatePoint2());
+
+            SetupBinding();
             SetupConnectors();
             SetupCommands();
         }
+
+        #region SetupBinding
+        private void SetupBinding()
+        {
+            this.WhenAnyValue(x => x.Selected).Subscribe(value => { this.BorderBrush = value ? Brushes.Red : Brushes.LightGray; });
+            this.WhenAnyValue(x => x.Point1.Value, x => x.Size).Subscribe(_ => UpdatePoint2());
+        }
+        #endregion SetupBinding
 
         #region Connectors
         private void SetupConnectors()
@@ -80,9 +88,9 @@ namespace SimpleStateMachineNodeEditor.ViewModel
         #endregion Connectors
 
         #region Commands
-        public SimpleCommandWithParameter<object> CommandSelect { get; set; }
+        public SimpleCommandWithParameter<SelectMode> CommandSelect { get; set; }
         public SimpleCommandWithParameter<MyPoint> CommandMove { get; set; }
-        public SimpleCommandWithParameter<object> CommandCollapse { get; set; }
+        public SimpleCommandWithParameter<bool> CommandCollapse { get; set; }
         public SimpleCommandWithParameter<ViewModelConnector> CommandAddConnector { get; set; }
         public SimpleCommandWithParameter<ViewModelConnector> CommandDeleteConnector { get; set; }
 
@@ -103,10 +111,10 @@ namespace SimpleStateMachineNodeEditor.ViewModel
 
         private void SetupCommands()
         {
-            CommandSelect = new SimpleCommandWithParameter<object>(Select);
+            CommandSelect = new SimpleCommandWithParameter<SelectMode>(Select);
             CommandMove = new SimpleCommandWithParameter<MyPoint>(Move, NotSaved);
             CommandAddEmptyConnector = new SimpleCommand(AddEmptyConnector);
-            CommandCollapse = new SimpleCommandWithParameter<object>(Collapse, NotSaved);
+            CommandCollapse = new SimpleCommandWithParameter<bool>(Collapse, NotSaved);
             //CommandTransitionsDragLeave = new SimpleCommand(TransitionsDragLeave);
             //CommandTransitionsDragEnter = new SimpleCommand(TransitionsDragEnter);
             //CommandTransitionsDrop = new SimpleCommand(TransitionsDrop);
@@ -124,10 +132,9 @@ namespace SimpleStateMachineNodeEditor.ViewModel
             NodesCanvas.ItSaved = false;
         }
         #endregion Commands
-        private void Collapse(object obj)
-        {
-            bool value = (bool)obj;
 
+        private void Collapse(bool value)
+        {
             if (value)
             {
                 TransitionsVisible = value;
@@ -147,14 +154,14 @@ namespace SimpleStateMachineNodeEditor.ViewModel
         {
             Transitions.Remove(connector);
         }
-        private void Select(object obj = null)
+        private void Select(SelectMode selectMode)
         {
-            if (obj == null)
+            if (selectMode == SelectMode.ClickWithCtrl)
             {
                 this.Selected = !this.Selected;
                 return;
             }
-            if (Selected != true)
+            else if((selectMode == SelectMode.Click)&&(!Selected))
             {
                 NodesCanvas.CommandUnSelectAll.Execute();
                 this.Selected = true;
@@ -166,12 +173,13 @@ namespace SimpleStateMachineNodeEditor.ViewModel
         }
         private void ValidateName(string newName)
         {
-            NodesCanvas.CommandValidateNodeName.Execute(new ValidateObjectProperty<ViewModelNode, string>(this, newName));
+            NodesCanvas.CommandValidateNodeName.Execute((this, newName));
         }
         private void UpdatePoint2()
         {
             Point2.Set(Point1.X + Size.Width, Point1.Y + Size.Height);
         }
+
         private void AddEmptyConnector()
         {
             if (CurrentConnector != null)
