@@ -43,9 +43,9 @@ namespace SimpleStateMachineNodeEditor.View
         public ViewRightConnector()
         {
             InitializeComponent();
+            SetupCommands();
             SetupBinding();
-            SetupEvents();
-           
+            SetupEvents();          
         }
 
         #region SetupBinding
@@ -78,7 +78,16 @@ namespace SimpleStateMachineNodeEditor.View
             });
         }
         #endregion SetupBinding
-
+        #region Setup Commands
+        private void SetupCommands()
+        {
+            this.WhenActivated(disposable =>
+            {
+                //this.BindCommand(this.ViewModel, x => x.CommandSelect, x => x.BindingSelectWithCtrl).DisposeWith(disposable);
+                //this.BindCommand(this.ViewModel, x => x.CommandSelect, x => x.BindingSelectWithShift).DisposeWith(disposable);
+            });
+        }
+        #endregion Setup Commands
         #region SetupEvents
 
         private void test(bool value)
@@ -90,7 +99,7 @@ namespace SimpleStateMachineNodeEditor.View
         {
             this.WhenActivated(disposable =>
             {
-                this.EllipseElement.Events().MouseLeftButtonDown.Subscribe(e => ConnectDrag(e)).DisposeWith(disposable);
+                this.EllipseElement.Events().PreviewMouseLeftButtonDown.Subscribe(e => ConnectDrag(e)).DisposeWith(disposable);
                 this.TextBoxElement.Events().LostFocus.Subscribe(e => Validate(e)).DisposeWith(disposable);
                 this.BorderElement.Events().PreviewMouseLeftButtonDown.Subscribe(e => ConnectorDrag(e)).DisposeWith(disposable);
                 this.BorderElement.Events().PreviewDragEnter.Subscribe(e => ConnectorDragEnter(e)).DisposeWith(disposable);
@@ -132,17 +141,20 @@ namespace SimpleStateMachineNodeEditor.View
                 DataObject data = new DataObject();
                 data.SetData("Connector", this.ViewModel);
                 DragDrop.DoDragDrop(this, data, DragDropEffects.Link);
-                e.Handled = true;
             }
-            else if (Keyboard.IsKeyDown(Key.LeftAlt))
+            else if (Keyboard.IsKeyDown(Key.LeftShift))
             {
-
+                this.ViewModel.CommandSelect.Execute(SelectMode.ClickWithShift);
+            }
+            else if (Keyboard.IsKeyDown(Key.LeftCtrl))
+            {
+                this.ViewModel.CommandSelect.Execute(SelectMode.ClickWithCtrl);
             }
             else
             {
                 this.ViewModel.CommandSelect.Execute(SelectMode.Click);
             }
-           
+            e.Handled = true;
         }
 
         private void ConnectorDragEnter(DragEventArgs e)

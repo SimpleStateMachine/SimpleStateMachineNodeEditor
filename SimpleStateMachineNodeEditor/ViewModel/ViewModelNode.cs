@@ -14,6 +14,7 @@ using SimpleStateMachineNodeEditor.Helpers.Commands;
 using System.Linq;
 using System.Xml.Linq;
 using SimpleStateMachineNodeEditor.Helpers.Enums;
+using DynamicData;
 
 namespace SimpleStateMachineNodeEditor.ViewModel
 {
@@ -96,8 +97,10 @@ namespace SimpleStateMachineNodeEditor.ViewModel
 
         public SimpleCommandWithParameter<string> CommandValidateName { get; set; }
 
+        public SimpleCommandWithParameter<ViewModelConnector> CommandSelectWithShiftForConnectors { get; set; }
+        public SimpleCommand CommandUnSelectedAllConnectors { get; set; }
         public SimpleCommand CommandAddEmptyConnector { get; set; }
-       
+
 
         //public SimpleCommand CommandTransitionsDragLeave { get; set; }
 
@@ -115,6 +118,8 @@ namespace SimpleStateMachineNodeEditor.ViewModel
             CommandMove = new SimpleCommandWithParameter<MyPoint>(Move, NotSaved);
             CommandAddEmptyConnector = new SimpleCommand(AddEmptyConnector);
             CommandCollapse = new SimpleCommandWithParameter<bool>(Collapse, NotSaved);
+            CommandSelectWithShiftForConnectors = new SimpleCommandWithParameter<ViewModelConnector>(SelectWithShiftForConnectors);
+            CommandUnSelectedAllConnectors = new SimpleCommand(UnSelectedAllConnectors);
             //CommandTransitionsDragLeave = new SimpleCommand(TransitionsDragLeave);
             //CommandTransitionsDragEnter = new SimpleCommand(TransitionsDragEnter);
             //CommandTransitionsDrop = new SimpleCommand(TransitionsDrop);
@@ -161,7 +166,7 @@ namespace SimpleStateMachineNodeEditor.ViewModel
                 this.Selected = !this.Selected;
                 return;
             }
-            else if((selectMode == SelectMode.Click)&&(!Selected))
+            else if ((selectMode == SelectMode.Click) && (!Selected))
             {
                 NodesCanvas.CommandUnSelectAll.Execute();
                 this.Selected = true;
@@ -185,8 +190,8 @@ namespace SimpleStateMachineNodeEditor.ViewModel
             if (CurrentConnector != null)
             {
                 CurrentConnector.TextEnable = true;
-                CurrentConnector.FormEnable = false;    
-                if(string.IsNullOrEmpty(CurrentConnector.Name))
+                CurrentConnector.FormEnable = false;
+                if (string.IsNullOrEmpty(CurrentConnector.Name))
                     CurrentConnector.Name = "Transition " + NodesCanvas.Nodes.Sum(x => x.Transitions.Count - 1).ToString();
             }
             CurrentConnector = new ViewModelConnector(NodesCanvas, this)
@@ -195,7 +200,42 @@ namespace SimpleStateMachineNodeEditor.ViewModel
             };
             Transitions.Insert(0, CurrentConnector);
         }
+        private void UnSelectedAllConnectors()
+        {
+           foreach(var transition in Transitions)
+            {
+                transition.Selected = false;
+            }
+        }
+        private void SelectWithShiftForConnectors(ViewModelConnector viewModelConnector)
+        {
+            if (viewModelConnector == null)
+                return;
 
+            var transitions = this.Transitions.Skip(1);
+
+            int index = transitions.IndexOf(viewModelConnector);
+
+            if ((!transitions.First().Selected) &&(transitions.Last().Selected))
+            {
+                UnSelectedAllConnectors();
+                foreach (var transition in transitions.TakeLast(transitions.Count() - index))
+                {
+                    transition.Selected = true;
+                }
+                return;
+            }
+            else
+            {
+                UnSelectedAllConnectors();
+                //var t = transitions.Take(index);
+                foreach (var transition in transitions.Take(index + 1))
+                {
+                    transition.Selected = true;
+                }
+                return;
+            }
+        }
         public XElement ToXElement()
         {
             XElement element = new XElement("State");

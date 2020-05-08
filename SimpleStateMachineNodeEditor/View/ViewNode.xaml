@@ -5,7 +5,8 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:SimpleStateMachineNodeEditor.View"
              xmlns:NodeStyles="clr-namespace:SimpleStateMachineNodeEditor.Styles.Node"
-             xmlns:View="clr-namespace:SimpleStateMachineNodeEditor.View" xmlns:enums="clr-namespace:SimpleStateMachineNodeEditor.Helpers.Enums"
+             xmlns:View="clr-namespace:SimpleStateMachineNodeEditor.View" 
+             xmlns:enums="clr-namespace:SimpleStateMachineNodeEditor.Helpers.Enums"
              mc:Ignorable="d" Focusable="True" AllowDrop="True" Visibility="Visible">
 
     <Border x:Name="BorderElement" CornerRadius="5,5,5,5" BorderThickness="1,1,1,1"   HorizontalAlignment="Left" VerticalAlignment="Top" MinWidth="80" Background="{StaticResource ColorNodeBody}" >

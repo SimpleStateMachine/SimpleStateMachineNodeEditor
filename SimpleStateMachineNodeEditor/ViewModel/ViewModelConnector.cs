@@ -96,7 +96,7 @@ namespace SimpleStateMachineNodeEditor.ViewModel
         public SimpleCommand CommandSetAsLoop { get; set; }
         public SimpleCommand CommandAdd { get; set; }
         public SimpleCommand CommandDelete { get; set; }
-        public SimpleCommandWithParameter<bool> CommandSelect { get; set; }
+        public SimpleCommandWithParameter<SelectMode> CommandSelect { get; set; }
         public SimpleCommandWithParameter<string> CommandValidateName { get; set; }
 
         private void SetupCommands()
@@ -115,39 +115,40 @@ namespace SimpleStateMachineNodeEditor.ViewModel
             CommandDelete = new SimpleCommand(Delete);
             CommandValidateName = new SimpleCommandWithParameter<string>(ValidateName, NotSaved);
 
-            CommandSelect = new SimpleCommandWithParameter<bool>(Select);
+            CommandSelect = new SimpleCommandWithParameter<SelectMode>(Select);
 
 
             //SimpleCommandWithResult<bool, Func<bool>> t = new SimpleCommandWithResult<bool, Func<bool>>()
         }
 
-        private void Select(bool obj)
+        private void Select(SelectMode selectMode)
         {
-            //SelectMode selectMode = (SelectMode)obj;
-            //ViewModelConnect viewModelConnect;
-            ////if (obj?.GetType() == typeof(ViewModelConnect))\
-            //if (obj is SelectMode)
-            //{
-            //   viewModelConnect = (ViewModelConnect)obj;
-            //}
-            //else
-            //{
-            //    viewModelConnect = default(ViewModelConnect);
-            //}
-          
+            switch(selectMode)
+            {
+                case SelectMode.Click:
+                    {
+                        if(!this.Selected)
+                        {
+                            this.Node.CommandUnSelectedAllConnectors.Execute();
+                            this.Selected = true;                            
+                        }
+                        
+                        break;
+                    }
+                case SelectMode.ClickWithCtrl:
+                    {
+                        this.Selected = !this.Selected;
+                        break;
+                    }
+                case SelectMode.ClickWithShift:
+                    {
+                        this.Node.CommandSelectWithShiftForConnectors.Execute(this);
+                        break;
+                    }
+            }
 
-            //if (selectMode==SelectMode.Click)
-            //{
-            //    this.Selected = !this.Selected;
-            //    return;
-            //}
-            //else
-            //{
-            //    this.Selected = (bool)obj;
-            //}
             
         }
-
         private void NotSaved()
         {
             NodesCanvas.ItSaved = false;
