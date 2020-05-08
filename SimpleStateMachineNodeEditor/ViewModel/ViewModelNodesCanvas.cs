@@ -208,7 +208,10 @@ namespace SimpleStateMachineNodeEditor.ViewModel
         private void UnSelectedAll()
         {
             foreach (var node in Nodes)
-            { node.Selected = false; }
+            {
+                node.Selected = false;
+                node.CommandUnSelectedAllConnectors.Execute();
+            }
         }
         private List<ViewModelNode> FullMoveAllNode(MyPoint delta, List<ViewModelNode> nodes = null)
         {

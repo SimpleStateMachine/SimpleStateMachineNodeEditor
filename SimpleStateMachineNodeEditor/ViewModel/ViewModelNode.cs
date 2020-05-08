@@ -50,6 +50,7 @@ namespace SimpleStateMachineNodeEditor.ViewModel
 
         public int Zindex { get; private set; }
 
+        [Reactive] public int IndexStartSelectConnectors { get; set; } = 0;
         public IObservableCollection<ViewModelConnector> Transitions { get; set; } = new ObservableCollectionExtended<ViewModelConnector>();
 
 
@@ -98,6 +99,7 @@ namespace SimpleStateMachineNodeEditor.ViewModel
         public SimpleCommandWithParameter<string> CommandValidateName { get; set; }
 
         public SimpleCommandWithParameter<ViewModelConnector> CommandSelectWithShiftForConnectors { get; set; }
+        public SimpleCommandWithParameter<ViewModelConnector> CommandSetConnectorAsStartSelect { get; set; }
         public SimpleCommand CommandUnSelectedAllConnectors { get; set; }
         public SimpleCommand CommandAddEmptyConnector { get; set; }
 
@@ -119,6 +121,7 @@ namespace SimpleStateMachineNodeEditor.ViewModel
             CommandAddEmptyConnector = new SimpleCommand(AddEmptyConnector);
             CommandCollapse = new SimpleCommandWithParameter<bool>(Collapse, NotSaved);
             CommandSelectWithShiftForConnectors = new SimpleCommandWithParameter<ViewModelConnector>(SelectWithShiftForConnectors);
+            CommandSetConnectorAsStartSelect = new SimpleCommandWithParameter<ViewModelConnector>(SetConnectorAsStartSelect);
             CommandUnSelectedAllConnectors = new SimpleCommand(UnSelectedAllConnectors);
             //CommandTransitionsDragLeave = new SimpleCommand(TransitionsDragLeave);
             //CommandTransitionsDragEnter = new SimpleCommand(TransitionsDragEnter);
@@ -132,6 +135,7 @@ namespace SimpleStateMachineNodeEditor.ViewModel
 
 
         }
+
         private void NotSaved()
         {
             NodesCanvas.ItSaved = false;
@@ -206,6 +210,12 @@ namespace SimpleStateMachineNodeEditor.ViewModel
             {
                 transition.Selected = false;
             }
+
+            IndexStartSelectConnectors = 0;
+        }
+        private void SetConnectorAsStartSelect(ViewModelConnector viewModelConnector)
+        {
+            IndexStartSelectConnectors = Transitions.IndexOf(viewModelConnector) - 1;
         }
         private void SelectWithShiftForConnectors(ViewModelConnector viewModelConnector)
         {
@@ -213,27 +223,14 @@ namespace SimpleStateMachineNodeEditor.ViewModel
                 return;
 
             var transitions = this.Transitions.Skip(1);
-
-            int index = transitions.IndexOf(viewModelConnector);
-
-            if ((!transitions.First().Selected) &&(transitions.Last().Selected))
+            int indexCurrent = transitions.IndexOf(viewModelConnector);
+            int indexStart = IndexStartSelectConnectors;
+            UnSelectedAllConnectors();
+            IndexStartSelectConnectors = indexStart;
+            transitions = transitions.Skip(Math.Min(indexCurrent, indexStart)).SkipLast(Transitions.Count() - Math.Max(indexCurrent, indexStart) - 2);
+            foreach (var transition in transitions)
             {
-                UnSelectedAllConnectors();
-                foreach (var transition in transitions.TakeLast(transitions.Count() - index))
-                {
-                    transition.Selected = true;
-                }
-                return;
-            }
-            else
-            {
-                UnSelectedAllConnectors();
-                //var t = transitions.Take(index);
-                foreach (var transition in transitions.Take(index + 1))
-                {
-                    transition.Selected = true;
-                }
-                return;
+                transition.Selected = true;
             }
         }
         public XElement ToXElement()
