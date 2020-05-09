@@ -148,11 +148,12 @@ namespace SimpleStateMachineNodeEditor.View
             }
             else if (Keyboard.IsKeyDown(Key.LeftCtrl))
             {
-                this.ViewModel.CommandSelect.Execute(SelectMode.ClickWithCtrl);
+                this.ViewModel.CommandSelect.Execute(SelectMode.ClickWithCtrl);              
             }
             else
             {
                 this.ViewModel.CommandSelect.Execute(SelectMode.Click);
+                return;
             }
             e.Handled = true;
         }

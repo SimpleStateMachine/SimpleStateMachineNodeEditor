@@ -129,10 +129,9 @@ namespace SimpleStateMachineNodeEditor.ViewModel
                     {
                         if(!this.Selected)
                         {
-                            this.Node.CommandUnSelectedAllConnectors.Execute();
+                            //this.Node.CommandUnSelectedAllConnectors.Execute();
                             this.Node.CommandSetConnectorAsStartSelect.Execute(this);
-                            this.Selected = true;         
-                            
+                            //this.Selected = true;                                     
                         }
                         
                         break;
