@@ -16,9 +16,9 @@ namespace SimpleStateMachineNodeEditor.Styles.Node
     /// <summary>
     /// Interaction logic for NodeHeader.xaml
     /// </summary>
-    public partial class NodeHeader : UserControl
+    public partial class ElementNodeHeader : UserControl
     {
-        public NodeHeader()
+        public ElementNodeHeader()
         {
             InitializeComponent();
         }

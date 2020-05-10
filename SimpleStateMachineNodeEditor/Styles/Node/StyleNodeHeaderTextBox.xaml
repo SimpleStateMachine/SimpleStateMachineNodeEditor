@@ -3,7 +3,7 @@
                     xmlns:local="clr-namespace:SimpleStateMachineNodeEditor.Styles.Node">
 
 
-    <Style x:Key="NodeHeaderStyle" TargetType="{x:Type TextBox}">
+    <Style x:Key="StyleNodeHeaderTextBox" TargetType="{x:Type TextBox}">
         <Setter Property="KeyboardNavigation.TabNavigation" Value="None"/>
         <Setter Property="HorizontalContentAlignment" Value="Left"/>
         <Setter Property="FocusVisualStyle" Value="{x:Null}"/>

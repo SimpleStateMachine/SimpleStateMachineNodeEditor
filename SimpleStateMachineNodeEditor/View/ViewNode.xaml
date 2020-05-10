@@ -11,7 +11,7 @@
 
     <Border x:Name="BorderElement" CornerRadius="5,5,5,5" BorderThickness="1,1,1,1"   HorizontalAlignment="Left" VerticalAlignment="Top" MinWidth="80" Background="{StaticResource ColorNodeBody}" >
         <StackPanel Margin="0,0,0,5">
-            <NodeStyles:NodeHeader x:Name="NodeHeaderElement" />
+            <NodeStyles:ElementNodeHeader x:Name="NodeHeaderElement" />
             <!--Grid For Input and Output-->
             <Grid x:Name="GridElement"  MinWidth="60" >
                 <Grid.ColumnDefinitions>
