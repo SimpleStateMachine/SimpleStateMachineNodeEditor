@@ -2,21 +2,49 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:local="clr-namespace:SimpleStateMachineNodeEditor.Styles">
 
-    <SolidColorBrush x:Key="ColorNodeBackground"  Color="#FF2D2D2D"/>
-    <SolidColorBrush x:Key="ColorNodeBorderBrush"  Color="LightGray"/>
-    <SolidColorBrush x:Key="ColorNodeHeader" Color="#FF123D6A"/>
-
+    <SolidColorBrush x:Key="ColorForeground" Color="White"/>
 
     <SolidColorBrush x:Key="ColorScrollBarBackground"  Color="#3e3e42"/>
     <SolidColorBrush x:Key="ColorScrollBarThumb"  Color="#1e1e1e"/>
 
     <SolidColorBrush x:Key="ColorElementMouseOver"  Color="#007acc"/>
-    
-    
-    
+
+
+    <SolidColorBrush x:Key="ColorButtonCloseBackgroundPressed"  Color="#a3232d"/>
+    <SolidColorBrush x:Key="ColorButtonCloseBackgroundMouseOver" Color="#e81123"/>
+
+    <SolidColorBrush x:Key="ColorHeaderButtonBackgroundPressed"  Color="#007acc"/>
+    <SolidColorBrush x:Key="ColorHeaderButtonBackgroundMouseOver" Color="#444549"/>
+
+    <SolidColorBrush x:Key="ColorConnect" Color="White"/>
+
+    <SolidColorBrush x:Key="ColorCutter" Color="White"/>
+
+    <SolidColorBrush x:Key="ColorButtonStroke" Color="LightGray"/>
+
+    <SolidColorBrush x:Key="ColorNodesCanvasBackground" Color="#1e1e1e"/>
+
+    <SolidColorBrush x:Key="ColorSelectorFill" Color="#aaccee" />
+    <SolidColorBrush x:Key="ColorSelectorStroke" Color="#0078d7"/>
+
+
+    <SolidColorBrush x:Key="ColorMessagesBackground" Color="#2a2a2c"/>
+    <SolidColorBrush x:Key="ColorMessagesBorder" Color="#333337"/>
 
 
 
+    <SolidColorBrush x:Key="ColorWindowBackground" Color="#FF212121"/>
+    <SolidColorBrush x:Key="ColorWindowBorder" Color="#FF797979"/>
+    <SolidColorBrush x:Key="ColorWindowHeader" Color="#FF2D2D30"/>
+
+
+    <SolidColorBrush x:Key="ColorMenuBorder"  Color="#333337"/>
+    <SolidColorBrush x:Key="ColorMenuBackground"  Color="#1b1b1c"/>
+
+
+    <SolidColorBrush x:Key="ColorNodeBackground"  Color="#FF2D2D2D"/>
+    <SolidColorBrush x:Key="ColorNodeBorderBrush"  Color="LightGray"/>
+    <SolidColorBrush x:Key="ColorNodeHeader" Color="#FF123D6A"/>
 
     <SolidColorBrush x:Key="ColorNodeCollapseButtonBackground"  Color="White"/>
     <SolidColorBrush x:Key="ColorNodeCollapseButtonBorderBrush"  Color="White"/>

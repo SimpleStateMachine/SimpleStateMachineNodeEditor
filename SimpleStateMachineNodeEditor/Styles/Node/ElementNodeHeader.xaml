@@ -6,7 +6,7 @@
              xmlns:local="clr-namespace:SimpleStateMachineNodeEditor.Styles.Node"
              mc:Ignorable="d" 
             >
-    <Border CornerRadius="5,5,0,0" VerticalAlignment="Stretch"  Background="{StaticResource ColorNodeHeader}" >
+    <Border CornerRadius="5,5,0,0" VerticalAlignment="Stretch"  Background="{StaticResource ColorNodeHeader}" 
         <Grid>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*" />

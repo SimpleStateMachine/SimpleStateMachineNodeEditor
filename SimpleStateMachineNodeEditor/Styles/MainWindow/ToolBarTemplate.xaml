@@ -71,14 +71,14 @@
                     </Border>
                     <ControlTemplate.Triggers>
                         <Trigger Property="IsMouseOver" Value="true">
-                            <Setter Property="Background" TargetName="Bd" Value="{StaticResource ColorHeaderButtonIsMouseOver}"/>
-                            <Setter Property="Stroke" TargetName="BdLine" Value="{StaticResource ColorHeaderButtonIsPressed}"/>
-                            <Setter Property="Fill" TargetName="BdArrow" Value="{StaticResource ColorHeaderButtonIsPressed}"/>
+                            <Setter Property="Background" TargetName="Bd" Value="{StaticResource ColorHeaderButtonBackgroundMouseOver}"/>
+                            <Setter Property="Stroke" TargetName="BdLine" Value="{StaticResource ColorHeaderButtonBackgroundPressed}"/>
+                            <Setter Property="Fill" TargetName="BdArrow" Value="{StaticResource ColorHeaderButtonBackgroundPressed}"/>
                         </Trigger>
                         <Trigger Property="IsKeyboardFocused" Value="true">
-                            <Setter Property="Background" TargetName="Bd" Value="{StaticResource ColorHeaderButtonIsMouseOver}"/>
-                            <Setter Property="Stroke" TargetName="BdLine" Value="{StaticResource ColorHeaderButtonIsPressed}"/>
-                            <Setter Property="Fill" TargetName="BdArrow" Value="{StaticResource ColorHeaderButtonIsPressed}"/>
+                            <Setter Property="Background" TargetName="Bd" Value="{StaticResource ColorHeaderButtonBackgroundMouseOver}"/>
+                            <Setter Property="Stroke" TargetName="BdLine" Value="{StaticResource ColorHeaderButtonBackgroundPressed}"/>
+                            <Setter Property="Fill" TargetName="BdArrow" Value="{StaticResource ColorHeaderButtonBackgroundPressed}"/>
                         </Trigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>

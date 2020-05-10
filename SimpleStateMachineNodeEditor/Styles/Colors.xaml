@@ -20,17 +20,16 @@
     <!--#region Theme-->
 
 
-    <SolidColorBrush x:Key="ColorHeaderButtonIsPressed"  Color="#007acc"/>
-    <SolidColorBrush x:Key="ColorHeaderButtonIsMouseOver" Color="#444549"/>
+    <SolidColorBrush x:Key="ColorHeaderButtonBackgroundPressed"  Color="#007acc"/>
+    <SolidColorBrush x:Key="ColorHeaderButtonBackgroundMouseOver" Color="#444549"/>
 
-    <SolidColorBrush x:Key="ColorMenuBorder"  Color="#333337"/>
-    <SolidColorBrush x:Key="ColorMenuBackground"  Color="#1b1b1c"/>
+
 
     <SolidColorBrush x:Key="ColorForeground"  Color="{Binding Path=Color, Source={StaticResource ColorThemeForeground}}"/>
 
     <SolidColorBrush x:Key="ColorSelectedElement"  Color="#D23030"/>
 
-    <!--#endregion Theme-->
+    <!--#endregion Theme--> <!--007acc-->
 
 
     <!--#region -->
@@ -228,14 +227,13 @@
 
     <!--#region         Selector-->
 
-    <SolidColorBrush x:Key="ColorSelectorFill" Color="#aaccee" />
-    <SolidColorBrush x:Key="ColorSelectorStroke" Color="#0078d7"/>
+
 
 
     <!--#endregion      Selector-->
 
     <!--#region         NodesCanvas-->
-    <SolidColorBrush x:Key="ColorNodesCanvasBackground" Color="#1e1e1e"/>
+
     <!--<SolidColorBrush x:Key="ColorNodesCanvasBackground" Color="White"/>-->
     <!--#endregion      NodesCanvas-->
 
@@ -284,16 +282,13 @@
 
     <!--#region     ButtonClose-->
     
-    <SolidColorBrush x:Key="ColorButtonCloseIsPressed"  Color="#a3232d"/>
-    <SolidColorBrush x:Key="ColorButtonCloseIsMouseOver" Color="#e81123"/>
+
     
     <!--#endregion  ButtonClose-->
     
     <!--#endregion  HeaderButtom-->
      
-    <SolidColorBrush x:Key="ColorWindowBackground" Color="#FF212121"/>
-    <SolidColorBrush x:Key="ColorWindowBorder" Color="#FF797979"/>
-    <SolidColorBrush x:Key="ColorWindowHeader" Color="#FF2D2D30"/>
+
     
     <!--#endregion  MainWindow-->
     
