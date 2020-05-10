@@ -20,7 +20,7 @@
             <RowDefinition  Height="auto" x:Name="Fotter" MinHeight="18"></RowDefinition>
         </Grid.RowDefinitions>
         <DockPanel x:Name="Header" Grid.Row="0" Background="{StaticResource ColorWindowHeader}" LastChildFill="False">
-            <Menu Background="{StaticResource ColorMenuBaground}"  Foreground="White" BorderBrush="{StaticResource ColorMenuBorder}" OpacityMask="{StaticResource ColorHeaderButtonIsMouseOver}"  Template="{StaticResource MenuTemplate}" BorderThickness="1" HorizontalAlignment="Left" VerticalAlignment="Center">
+            <Menu Background="{StaticResource ColorMenuBackground}"  Foreground="White" BorderBrush="{StaticResource ColorMenuBorder}" OpacityMask="{StaticResource ColorHeaderButtonIsMouseOver}"  Template="{StaticResource MenuTemplate}" BorderThickness="1" HorizontalAlignment="Left" VerticalAlignment="Center">
                 <MenuItem Header="File" x:Name="Item" Style="{StaticResource MenuItemStyle}">
                     <MenuItem Header="New" x:Name="ItemNew" Style="{StaticResource MenuItemStyle}" />
                     <MenuItem Header="Open" x:Name="ItemOpen" Style="{StaticResource MenuItemStyle}" />

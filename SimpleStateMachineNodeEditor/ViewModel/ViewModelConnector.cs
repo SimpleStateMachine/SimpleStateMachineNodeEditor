@@ -81,7 +81,7 @@ namespace SimpleStateMachineNodeEditor.ViewModel
         #region SetupBinding
         private void SetupBinding()
         {
-            this.WhenAnyValue(x => x.Selected).Subscribe(value => { this.Foreground = value ? Application.Current.Resources["ColorSelectedElement"] as SolidColorBrush : Application.Current.Resources["ColorForeground"] as SolidColorBrush; });
+            this.WhenAnyValue(x => x.Selected).Subscribe(value => Select(value));
         }
         #endregion SetupBinding
 
@@ -121,6 +121,12 @@ namespace SimpleStateMachineNodeEditor.ViewModel
             //SimpleCommandWithResult<bool, Func<bool>> t = new SimpleCommandWithResult<bool, Func<bool>>()
         }
 
+        private void Select(bool value)
+        {
+
+            this.Foreground = value ? Application.Current.Resources["ColorSelectedElement"] as SolidColorBrush : Application.Current.Resources["ColorForeground"] as SolidColorBrush;
+            this.FormFill = value ? Application.Current.Resources["ColorSelectedElement"] as SolidColorBrush : Application.Current.Resources["ColorConnectorEllipseEnableBackground"] as SolidColorBrush;
+        }
         private void Select(SelectMode selectMode)
         {
             switch(selectMode)

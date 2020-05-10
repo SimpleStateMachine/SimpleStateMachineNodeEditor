@@ -10,6 +10,7 @@ using ReactiveUI.Fody.Helpers;
 using SimpleStateMachineNodeEditor.Helpers;
 using SimpleStateMachineNodeEditor.Helpers.Enums;
 using System.Xml.Linq;
+using SimpleStateMachineNodeEditor.Helpers.Extensions;
 
 namespace SimpleStateMachineNodeEditor.ViewModel
 {
@@ -40,10 +41,10 @@ namespace SimpleStateMachineNodeEditor.ViewModel
         /// </summary>
         [Reactive] public Brush Stroke { get; set; } = Application.Current.Resources["ColorConnector"] as SolidColorBrush;
 
-        /// <summary>
-        /// Флаг того, что соединение выбрано
-        /// </summary>
-        [Reactive] public bool Selected { get; set; } = true;
+        ///// <summary>
+        ///// Флаг того, что соединение выбрано
+        ///// </summary>
+        //[Reactive] public bool Selected { get; set; } = true;
 
         /// <summary>
         /// Элемент, из которого выходит линия
@@ -66,7 +67,7 @@ namespace SimpleStateMachineNodeEditor.ViewModel
             SetupCommands();
 
             FromConnector = fromConnector;
-            FromConnector.Connect = this;
+            FromConnector.Connect = this;           
             //SetupCommands();
         }
         #region Setup Subscriptions
@@ -78,20 +79,25 @@ namespace SimpleStateMachineNodeEditor.ViewModel
             this.WhenAnyValue(x => x.StartPoint.Value, x => x.EndPoint.Value).Subscribe(_ => UpdateMedium());
             this.WhenAnyValue(x => x.FromConnector).Where(x => x != null).Subscribe(_ => FromConnectChanged());
             this.WhenAnyValue(x => x.ToConnector).Where(x => x != null).Subscribe(_ => ToConnectChanged());
-
             this.WhenAnyValue(x => x.FromConnector.Node.NodesCanvas.Scale.Value).Subscribe(value => StrokeThickness = value);
-            this.WhenAnyValue(x => x.Selected).Subscribe(value => { this.StrokeDashArray = value ? new DoubleCollection() { 10, 3 } : null; });
+
+           
         }
 
+        private void Select(bool value)
+        {
+            //this.StrokeDashArray = value ? new DoubleCollection() { 10, 3 } : null;
+            this.Stroke = value ? Application.Current.Resources["ColorSelectedElement"].Cast<SolidColorBrush>(): Application.Current.Resources["ColorConnector"].Cast<SolidColorBrush>();
+        }
         private void FromConnectChanged()
         {
-            StartPointUpdate(FromConnector.PositionConnectPoint.ToPoint());
-
+            StartPointUpdate(FromConnector.PositionConnectPoint.ToPoint()); 
+            this.WhenAnyValue(x => x.FromConnector.Selected).Subscribe(value => Select(value));
+            //this.FromConnector.WhenAnyValue(x => x.Selected).Subscribe(value => Selected = value);
         }
         private void ToConnectChanged()
         {
             EndPointUpdate(ToConnector.PositionConnectPoint.ToPoint());
-            Selected = false;
         }
         private void StartPointUpdate(Point point)
         {

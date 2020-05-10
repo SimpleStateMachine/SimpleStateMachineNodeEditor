@@ -25,7 +25,6 @@
         <Style.Setters>
             <Setter Property="BorderBrush" Value="{StaticResource ColorNodeBorderStaticBorder}"/>
             <Setter Property="Background"  Value="{StaticResource ColorNodeBorderStaticBackground}"/>
-            
         </Style.Setters>
     </Style>
 </ResourceDictionary>

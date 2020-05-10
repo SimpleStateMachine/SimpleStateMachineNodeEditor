@@ -307,12 +307,12 @@ namespace SimpleStateMachineNodeEditor.ViewModel
             //var connects = Connects;
             foreach (var connect in Connects)
             {
-                connect.Selected = false;
+                connect.FromConnector.Selected = false;
             }
 
             foreach (var connect in connects)
             {
-                connect.Selected = MyUtils.CheckIntersectCubicBezierCurveAndLine(connect.StartPoint, connect.Point1, connect.Point2, connect.EndPoint, cutterStartPoint, cutterEndPoint);
+                connect.FromConnector.Selected = MyUtils.CheckIntersectCubicBezierCurveAndLine(connect.StartPoint, connect.Point1, connect.Point2, connect.EndPoint, cutterStartPoint, cutterEndPoint);
             }
 
         }

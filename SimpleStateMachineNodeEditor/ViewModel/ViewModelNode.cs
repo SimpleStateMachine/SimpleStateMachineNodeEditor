@@ -68,7 +68,7 @@ namespace SimpleStateMachineNodeEditor.ViewModel
         #region SetupBinding
         private void SetupBinding()
         {
-            this.WhenAnyValue(x => x.Selected).Subscribe(value => { this.BorderBrush = value ? Brushes.Red : Brushes.LightGray; });
+            this.WhenAnyValue(x => x.Selected).Subscribe(value => { this.BorderBrush = value ? Application.Current.Resources["ColorSelectedElement"] as SolidColorBrush : Brushes.LightGray; });
             this.WhenAnyValue(x => x.Point1.Value, x => x.Size).Subscribe(_ => UpdatePoint2());
         }
         #endregion SetupBinding
@@ -153,6 +153,7 @@ namespace SimpleStateMachineNodeEditor.ViewModel
             {
                 TransitionsVisible = null;
                 Output.Visible = true;
+                UnSelectedAllConnectors();
             }
         }
         private void AddConnector(ViewModelConnector connector)

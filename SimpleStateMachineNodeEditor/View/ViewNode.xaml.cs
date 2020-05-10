@@ -155,7 +155,7 @@ namespace SimpleStateMachineNodeEditor.View
         private void OnEventMouseEnter(MouseEventArgs e)
         {
             if (this.ViewModel.Selected != true)
-                this.ViewModel.BorderBrush = Application.Current.Resources["ColorNodeSelectedBorder"] as SolidColorBrush;
+                this.ViewModel.BorderBrush = Application.Current.Resources["ColorSelectedElement"] as SolidColorBrush;
         }
         private void OnEventMouseMouseLeave(MouseEventArgs e)
         {

@@ -47,17 +47,17 @@
                 <Setter Property="Stroke" Value="{StaticResource MouseOver.Border}"/>
                 -->
             <!--<Setter Property="Fill"  Value="{StaticResource MouseOver.Background}"/>-->
-            <!--
-            </Trigger>-->
+            
+            <!--</Trigger>-->
             <EventTrigger RoutedEvent="Ellipse.MouseEnter">
                 <BeginStoryboard Storyboard="{StaticResource MouseEnterStoryboard}" />
             </EventTrigger>
             <EventTrigger RoutedEvent="Ellipse.MouseLeave">
                 <BeginStoryboard Storyboard="{StaticResource MouseLeaveStoryboard}" />
             </EventTrigger>
-            <!--<EventTrigger RoutedEvent="Ellipse.DragOver">
+            <EventTrigger RoutedEvent="Ellipse.DragOver">
                 <BeginStoryboard Storyboard="{StaticResource DragEnterStoryboard}" />
-            </EventTrigger>-->
+            </EventTrigger>
             <EventTrigger RoutedEvent="Ellipse.DragEnter">
                 <BeginStoryboard Storyboard="{StaticResource DragEnterStoryboard}" />
             </EventTrigger>

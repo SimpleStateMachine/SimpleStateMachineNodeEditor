@@ -135,7 +135,7 @@
                             <ToggleButton x:Name="OverflowButton" ClickMode="Press" FocusVisualStyle="{x:Null}" IsEnabled="{TemplateBinding HasOverflowItems}" IsChecked="{Binding IsOverflowOpen, Mode=TwoWay, RelativeSource={RelativeSource TemplatedParent}}" Style="{StaticResource ToolBarHorizontalOverflowButtonStyle}"/>
                             <Popup Visibility="Hidden" x:Name="OverflowPopup" AllowsTransparency="true" Focusable="false" IsOpen="{Binding IsOverflowOpen, RelativeSource={RelativeSource TemplatedParent}}" Placement="Bottom" PopupAnimation="{StaticResource {x:Static SystemParameters.ComboBoxPopupAnimationKey}}" StaysOpen="false">
                                 <theme:SystemDropShadowChrome x:Name="Shdw" Color="Transparent">
-                                    <Border x:Name="ToolBarSubMenuBorder" Background="{StaticResource ColorMenuBaground}" BorderThickness="1" BorderBrush="{StaticResource ColorMenuBorder}" RenderOptions.ClearTypeHint="Enabled">
+                                    <Border x:Name="ToolBarSubMenuBorder" Background="{StaticResource ColorMenuBackground}" BorderThickness="1" BorderBrush="{StaticResource ColorMenuBorder}" RenderOptions.ClearTypeHint="Enabled">
                                         <ToolBarOverflowPanel x:Name="PART_ToolBarOverflowPanel" KeyboardNavigation.DirectionalNavigation="Cycle" Focusable="true" FocusVisualStyle="{x:Null}" Margin="2" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" KeyboardNavigation.TabNavigation="Cycle" WrapWidth="200"/>
                                     </Border>
                                 </theme:SystemDropShadowChrome>
