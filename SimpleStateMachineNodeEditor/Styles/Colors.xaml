@@ -9,7 +9,7 @@
     <SolidColorBrush x:Shared="False" x:Key="ColorElement" Color="White"/>
 
 
-    
+    <SolidColorBrush x:Key="ColorHeaderButton"  Color="LightGray"/>
 
     <!--#endregion Main-->
     
@@ -213,7 +213,7 @@
         <SolidColorBrush x:Key="ColorNodeHeaderStaticBackground" Color="#FF123D6A"/>
         <SolidColorBrush x:Key="ColorNodeHeaderStaticBorder" Color="#FFABAdB3"/>
         <SolidColorBrush x:Key="ColorNodeHeaderMouseOverBorder" Color="#FF7EB4EA"/>
-        <SolidColorBrush x:Key="ColorNodeHeaderFocusBorder" Color="#FF569DE5"/>
+        <SolidColorBrush x:Key="ColorNodeHeaderFocusBorder" Color="Pink"/>
 
         <!--#endregion      Header-->
 

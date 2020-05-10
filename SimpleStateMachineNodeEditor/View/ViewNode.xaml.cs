@@ -99,6 +99,7 @@ namespace SimpleStateMachineNodeEditor.View
         {
             this.WhenActivated(disposable =>
             {
+                this.WhenAnyValue(x=>x.IsMouseOver).Subscribe(value=> Test(value)).DisposeWith(disposable);
                 this.Events().MouseLeftButtonDown.Subscribe(e => OnEventMouseLeftDowns(e)).DisposeWith(disposable);
                 this.Events().MouseLeftButtonUp.Subscribe(e => OnEventMouseLeftUp(e)).DisposeWith(disposable);
                 this.Events().MouseRightButtonDown.Subscribe(e => OnEventMouseRightDown(e)).DisposeWith(disposable);
@@ -106,14 +107,19 @@ namespace SimpleStateMachineNodeEditor.View
                 this.Events().MouseDown.Subscribe(e => OnEventMouseDown(e)).DisposeWith(disposable);
                 this.Events().MouseUp.Subscribe(e => OnEventMouseUp(e)).DisposeWith(disposable);
                 this.Events().MouseMove.Subscribe(e => OnMouseMove(e)).DisposeWith(disposable);
-                this.Events().MouseEnter.Subscribe(e => OnEventMouseEnter(e)).DisposeWith(disposable);
-                this.Events().MouseLeave.Subscribe(e => OnEventMouseMouseLeave(e)).DisposeWith(disposable);
+                //this.Events().MouseEnter.Subscribe(e => OnEventMouseEnter(e)).DisposeWith(disposable);
+                //this.Events().MouseLeave.Subscribe(e => OnEventMouseMouseLeave(e)).DisposeWith(disposable);
 
                 this.NodeHeaderElement.ButtonCollapse.Events().Click.Subscribe(_ => OnEventCollapse()).DisposeWith(disposable);
                 this.NodeHeaderElement.Events().LostFocus.Subscribe(e => Validate(e)).DisposeWith(disposable);
             });
         }
-
+        private void Test(bool value)
+        {
+            if (this.ViewModel.Selected != true)
+                this.ViewModel.BorderBrush = value?Application.Current.Resources["ColorSelectedElement"] as SolidColorBrush
+                                                 : Application.Current.Resources["ColorNodeBorderBrush"] as SolidColorBrush;
+        }
         private void OnEventMouseLeftDowns(MouseButtonEventArgs e)
         {
             Keyboard.Focus(this);
@@ -160,7 +166,7 @@ namespace SimpleStateMachineNodeEditor.View
         private void OnEventMouseMouseLeave(MouseEventArgs e)
         {
             if (this.ViewModel.Selected != true)
-                this.ViewModel.BorderBrush = Application.Current.Resources["ColorNodeBorder"] as SolidColorBrush;
+                this.ViewModel.BorderBrush = Application.Current.Resources["ColorNodeBorderBrush"] as SolidColorBrush;
         }
 
 

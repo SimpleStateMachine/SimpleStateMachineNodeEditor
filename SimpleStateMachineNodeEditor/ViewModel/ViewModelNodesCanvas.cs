@@ -45,10 +45,10 @@ namespace SimpleStateMachineNodeEditor.ViewModel
             SetupCommands();
             SetupStartState();
             Cutter = new ViewModelCutter(this);
-            //for (int i = 1; i <=10; i++)
-            //{
-            //    LogError("Message "+i.ToString());
-            //}
+            for (int i = 1; i <= 30; i++)
+            {
+                LogError("Message " + i.ToString());
+            }
 
         }
 

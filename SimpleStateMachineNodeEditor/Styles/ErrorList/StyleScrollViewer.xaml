@@ -2,7 +2,7 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:local="clr-namespace:SimpleStateMachineNodeEditor.Styles">
     
-    <Style x:Key="ScrollViewerTemplate" TargetType="{x:Type ScrollViewer}">
+    <Style x:Key="StyleScrollViewer" TargetType="{x:Type ScrollViewer}">
         <Setter Property="OverridesDefaultStyle" Value="True" />
         <Setter Property="Template">
             <Setter.Value>
@@ -17,17 +17,14 @@
                             <RowDefinition Height="Auto" />
                         </Grid.RowDefinitions>
                         <Border Grid.Column="0" Grid.Row="0" BorderThickness="0,1,1,1">
-                            <!--<Border.BorderBrush>
-                                <SolidColorBrush Color="{StaticResource BorderMediumColor}" />
-                            </Border.BorderBrush>-->
                             <ScrollContentPresenter />
                         </Border>
-                        <ScrollBar x:Name="PART_VerticalScrollBar"  Style="{StaticResource ScrollBarTemplate}"  Orientation="Vertical" Grid.Column="1" Grid.Row="0" Width="7"
+                        <ScrollBar x:Name="PART_VerticalScrollBar"  Style="{StaticResource StyleScrollBar}"  Orientation="Vertical" Grid.Column="1" Grid.Row="0" Width="7"
                      Value="{TemplateBinding VerticalOffset}"
                      Maximum="{TemplateBinding ScrollableHeight}"
                      ViewportSize="{TemplateBinding ViewportHeight}"
                      Visibility="{TemplateBinding ComputedVerticalScrollBarVisibility}"/>
-                        <ScrollBar x:Name="PART_HorizontalScrollBar"    Style="{StaticResource ScrollBarTemplate}"  Orientation="Horizontal" Grid.Column="0" Grid.Row="1"  Height="7"
+                        <ScrollBar x:Name="PART_HorizontalScrollBar"    Style="{StaticResource StyleScrollBar}"  Orientation="Horizontal" Grid.Column="0" Grid.Row="1"  Height="7"
                      Value="{TemplateBinding HorizontalOffset}"
                      Maximum="{TemplateBinding ScrollableWidth}"
                      ViewportSize="{TemplateBinding ViewportWidth}"

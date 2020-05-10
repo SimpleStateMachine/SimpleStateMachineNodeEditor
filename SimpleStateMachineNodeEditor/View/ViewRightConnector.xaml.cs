@@ -67,9 +67,9 @@ namespace SimpleStateMachineNodeEditor.View
 
                 this.OneWayBind(this.ViewModel, x => x.FormStroke, x => x.EllipseElement.Stroke).DisposeWith(disposable);
 
-                this.OneWayBind(this.ViewModel, x => x.FormStrokeThickness, x => x.EllipseElement.StrokeThickness).DisposeWith(disposable);
-
                 this.Bind(this.ViewModel, x => x.FormFill, x => x.EllipseElement.Fill).DisposeWith(disposable);
+
+                this.OneWayBind(this.ViewModel, x => x.FormStrokeThickness, x => x.EllipseElement.StrokeThickness).DisposeWith(disposable);
 
                 this.WhenAnyValue(x => x.ViewModel.Node.Size, x => x.ViewModel.Node.Point1.Value, x => x.ViewModel.Node.NodesCanvas.Scale.Scales.Value)
                 .Subscribe(_ => { UpdatePositionConnectPoin(); }).DisposeWith(disposable);
