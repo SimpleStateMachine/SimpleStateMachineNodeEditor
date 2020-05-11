@@ -43,12 +43,12 @@ namespace SimpleStateMachineNodeEditor.ViewModel
         /// <summary>
         /// Ellipse stroke color
         /// </summary>
-        [Reactive] public Brush FormStroke { get; set; } = Application.Current.Resources["ColorConnectorEllipseEnableBorder"] as SolidColorBrush;
+        [Reactive] public Brush FormStroke { get; set; } = Application.Current.Resources["ColorNodesCanvasBackground"] as SolidColorBrush;
 
         /// <summary>
         /// Ellipse fill color
         /// </summary>
-        [Reactive] public Brush FormFill { get; set; } = Application.Current.Resources["ColorConnectorEllipseEnableBackground"] as SolidColorBrush;
+        [Reactive] public Brush FormFill { get; set; } = Application.Current.Resources["ColorConnector"] as SolidColorBrush;
 
         [Reactive] public Brush Foreground { get; set; } = Application.Current.Resources["ColorForeground"] as SolidColorBrush;
 
@@ -125,7 +125,7 @@ namespace SimpleStateMachineNodeEditor.ViewModel
         {
 
             this.Foreground = value ? Application.Current.Resources["ColorSelectedElement"] as SolidColorBrush : Application.Current.Resources["ColorForeground"] as SolidColorBrush;
-            this.FormFill = value ? Application.Current.Resources["ColorSelectedElement"] as SolidColorBrush : Application.Current.Resources["ColorConnectorEllipseEnableBackground"] as SolidColorBrush;
+            this.FormFill = value ? Application.Current.Resources["ColorSelectedElement"] as SolidColorBrush : Application.Current.Resources["ColorConnector"] as SolidColorBrush;
         }
         private void Select(SelectMode selectMode)
         {

@@ -94,7 +94,7 @@
             <TabItem  Header="Node editor"  Style="{StaticResource StyleTabItem}" Background="{StaticResource ColorWindowHeader}" Foreground="{StaticResource ColorForeground}"  BorderBrush="{StaticResource ColorElementMouseOver}" OpacityMask="{StaticResource ColorElementMouseOver}">
                 <view:ViewNodesCanvas x:Name="NodesCanvas" />
             </TabItem>
-            <!--<TabItem Header="Transitions table"  Style="{StaticResource StyleTabItem}" Background="{StaticResource ColorWindowHeader}" Foreground="{StaticResource ColorTabItemText}" BorderBrush="{StaticResource ColorTabItemIsMouseOver}"   OpacityMask="{StaticResource ColorTabItemIsSelected}"/>-->
+            <!--<TabItem Header="Transitions table"  Style="{StaticResource StyleTabItem}" Foreground="{StaticResource ColorForeground}"/>-->
         </TabControl>
         <GridSplitter  Grid.Row="3" x:Name="ErrorListSplitter" HorizontalAlignment="Stretch" Background="{StaticResource ColorWindowHeader}" Height="3"  ShowsPreview="False" IsEnabled="False"/>
         <Expander Style="{StaticResource StyleExpander}"  x:Name="ErrorListExpander" Grid.Row="4"  HorizontalContentAlignment="Stretch" ExpandDirection="Up" Margin="3,0,0,0" >

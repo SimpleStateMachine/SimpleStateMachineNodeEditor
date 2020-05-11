@@ -65,8 +65,8 @@
                 <ControlTemplate TargetType="{x:Type ToggleButton}">
                     <Border x:Name="Bd" Background="{StaticResource ColorWindowHeader}" SnapsToDevicePixels="true">
                         <Canvas HorizontalAlignment="Right" Height="7" Margin="3,2,2,2" SnapsToDevicePixels="true" VerticalAlignment="Bottom" Width="6">
-                            <Path x:Name="BdLine" Data="M -1 -1 L 6 -1" Stroke="{StaticResource ColorHeaderButton}" StrokeThickness="1.5"/>
-                            <Path x:Name="BdArrow" Data="M -1 1 L 6 1 L 2.5 5 Z" Fill="{StaticResource ColorHeaderButton}" StrokeThickness="1.5"/>
+                            <Path x:Name="BdLine" Data="M -1 -1 L 6 -1" Stroke="{StaticResource ColorButtonStroke}" StrokeThickness="1.5"/>
+                            <Path x:Name="BdArrow" Data="M -1 1 L 6 1 L 2.5 5 Z" Fill="{StaticResource ColorButtonStroke}" StrokeThickness="1.5"/>
                         </Canvas>
                     </Border>
                     <ControlTemplate.Triggers>

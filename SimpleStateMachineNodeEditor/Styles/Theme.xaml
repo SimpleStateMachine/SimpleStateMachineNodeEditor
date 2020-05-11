@@ -9,7 +9,7 @@
 
     <SolidColorBrush x:Key="ColorElementMouseOver"  Color="#007acc"/>
 
-
+    <SolidColorBrush x:Key="ColorSelectedElement"  Color="#D23030"/>
     <SolidColorBrush x:Key="ColorButtonCloseBackgroundPressed"  Color="#a3232d"/>
     <SolidColorBrush x:Key="ColorButtonCloseBackgroundMouseOver" Color="#e81123"/>
 
@@ -18,7 +18,9 @@
 
     <SolidColorBrush x:Key="ColorConnect" Color="White"/>
 
-    <SolidColorBrush x:Key="ColorCutter" Color="White"/>
+    <SolidColorBrush x:Key="ColorConnector" Color="White"/>
+
+    <SolidColorBrush x:Key="ColorCutter" Color="Red"/>
 
     <SolidColorBrush x:Key="ColorButtonStroke" Color="LightGray"/>
 
@@ -49,8 +51,25 @@
     <SolidColorBrush x:Key="ColorNodeCollapseButtonBackground"  Color="White"/>
     <SolidColorBrush x:Key="ColorNodeCollapseButtonBorderBrush"  Color="White"/>
 
-    <SolidColorBrush x:Key="ColorNodeCollapseButtonMouseOverBackground"  Color="{Binding Path=Color, Source={StaticResource ColorSelectedElement}}"/>
-    <SolidColorBrush x:Key="ColorNodeCollapseButtonMouseOverBorderBrush"  Color="{Binding Path=Color, Source={StaticResource ColorSelectedElement}}"/>
+    <SolidColorBrush x:Key="ColorNodeCollapseButtonMouseOverBackground"  Color="#D23030"/>
+    <SolidColorBrush x:Key="ColorNodeCollapseButtonMouseOverBorderBrush"  Color="#D23030"/>
+
+
+
+
+    <DrawingBrush x:Key="ColorRightConnectorEllipseLoop" TileMode="Tile">
+        <DrawingBrush.Drawing>
+            <GeometryDrawing Brush="White">
+                <GeometryDrawing.Geometry >
+                    <PathGeometry  Figures="M 515.216,32.2104 C 471.039,64.9407 316.749,210.919 285,241.156 354.528,309.155 476.402,421.505 519.933,456.569 529.209,459.558 539.111,457.671 546.19,451.542 555.782,443.051 556.092,441.322 556.092,390.691 L 556.092,345.094 623.066,352.167 C 685.164,363.02 743.338,384.245 783.587,410.973 803.716,424.34 824.621,444.779 836.101,462.072 880.591,529.527 843.806,607.354 743.497,657.827 729.504,664.899 727.459,667.262 727.459,676.538 727.459,685.029 733.429,691 741.919,691 753.399,691 811.097,665.843 844.894,646.188 927.43,597.919 979,534.238 990.947,466.004 994.562,444.938 993.302,412.543 987.959,392.261 955.415,268.204 795.052,169.621 581.556,142.267 L 556.877,139.119 C 556.409,139.119 556.092,119.148 556.092,94.7828 556.092,52.9599 555.933,50.1294 552.794,43.6835 546.348,30.4748 528.265,24.9723 515.216,32.2104 Z" FillRule="Nonzero" >
+                        <PathGeometry.Transform>
+                            <ScaleTransform ScaleX="0.95" ScaleY="0.95"/>
+                        </PathGeometry.Transform>
+                    </PathGeometry>
+                </GeometryDrawing.Geometry>
+            </GeometryDrawing>
+        </DrawingBrush.Drawing>
+    </DrawingBrush>
 
 
 </ResourceDictionary>
