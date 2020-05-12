@@ -53,4 +53,10 @@
     <PackageReference Include="Splat.Drawing" Version="9.4.5" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Page Update="Styles\MainWindow\Header\StyleHeaderButtonClosePath.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+  </ItemGroup>
+
 </Project>

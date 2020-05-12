@@ -15,7 +15,7 @@
             <Grid.RowDefinitions>
                 <RowDefinition />
             </Grid.RowDefinitions>
-            <TextBox Name="TextBox"  Grid.Column="0" VerticalAlignment="Center" VerticalContentAlignment="Center" Style="{StaticResource StyleEmptyTextBox}" HorizontalContentAlignment="Center" BorderThickness="0,0,0,0"  Background="{x:Null}" BorderBrush="{x:Null}" Foreground="{StaticResource ColorForeground}"  Padding="10,2,0,2" ScrollViewer.CanContentScroll="True" HorizontalAlignment="Center" />
+            <TextBox Name="TextBox"  Grid.Column="0" VerticalAlignment="Center" VerticalContentAlignment="Center" Style="{StaticResource StyleEmptyTextBox}" HorizontalContentAlignment="Center" BorderThickness="0,0,0,0"  Background="{x:Null}" BorderBrush="{x:Null}" Foreground="{StaticResource ColorNodeHeaderForeground}"  Padding="10,2,0,2" ScrollViewer.CanContentScroll="True" HorizontalAlignment="Center" />
             <Button Name ="ButtonCollapse" Grid.Column="1"  Style="{StaticResource StyleNodeCollapseButton}"  HorizontalAlignment="Center" VerticalAlignment="Center" Margin="5">
                 <Button.RenderTransform>
                     <TransformGroup>

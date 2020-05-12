@@ -39,7 +39,7 @@ namespace SimpleStateMachineNodeEditor.ViewModel
         /// <summary>
         /// Цвет линии
         /// </summary>
-        [Reactive] public Brush Stroke { get; set; } = Application.Current.Resources["ColorConnector"] as SolidColorBrush;
+        [Reactive] public Brush Stroke { get; set; } = Application.Current.Resources["ColorConnect"] as SolidColorBrush;
 
         ///// <summary>
         ///// Флаг того, что соединение выбрано
@@ -87,7 +87,7 @@ namespace SimpleStateMachineNodeEditor.ViewModel
         private void Select(bool value)
         {
             //this.StrokeDashArray = value ? new DoubleCollection() { 10, 3 } : null;
-            this.Stroke = value ? Application.Current.Resources["ColorSelectedElement"].Cast<SolidColorBrush>(): Application.Current.Resources["ColorConnector"].Cast<SolidColorBrush>();
+            this.Stroke = value ? Application.Current.Resources["ColorSelectedElement"].Cast<SolidColorBrush>(): Application.Current.Resources["ColorConnect"].Cast<SolidColorBrush>();
         }
         private void FromConnectChanged()
         {

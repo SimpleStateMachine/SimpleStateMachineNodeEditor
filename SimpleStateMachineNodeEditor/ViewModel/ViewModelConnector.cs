@@ -50,7 +50,7 @@ namespace SimpleStateMachineNodeEditor.ViewModel
         /// </summary>
         [Reactive] public Brush FormFill { get; set; } = Application.Current.Resources["ColorConnector"] as SolidColorBrush;
 
-        [Reactive] public Brush Foreground { get; set; } = Application.Current.Resources["ColorForeground"] as SolidColorBrush;
+        [Reactive] public Brush Foreground { get; set; } = Application.Current.Resources["ColorConnectorForeground"] as SolidColorBrush;
 
         [Reactive] public double FormStrokeThickness { get; set; } = 1;
 
@@ -124,7 +124,7 @@ namespace SimpleStateMachineNodeEditor.ViewModel
         private void Select(bool value)
         {
 
-            this.Foreground = value ? Application.Current.Resources["ColorSelectedElement"] as SolidColorBrush : Application.Current.Resources["ColorForeground"] as SolidColorBrush;
+            this.Foreground = value ? Application.Current.Resources["ColorSelectedElement"] as SolidColorBrush : Application.Current.Resources["ColorConnectorForeground"] as SolidColorBrush;
             this.FormFill = value ? Application.Current.Resources["ColorSelectedElement"] as SolidColorBrush : Application.Current.Resources["ColorConnector"] as SolidColorBrush;
         }
         private void Select(SelectMode selectMode)

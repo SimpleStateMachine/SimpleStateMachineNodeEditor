@@ -20,7 +20,8 @@
             <RowDefinition  Height="auto" x:Name="Fotter" MinHeight="18"></RowDefinition>
         </Grid.RowDefinitions>
         <DockPanel x:Name="Header" Grid.Row="0" Background="{StaticResource ColorWindowHeader}" LastChildFill="False">
-            <Menu Background="{StaticResource ColorMenuBackground}"  Foreground="{StaticResource ColorForeground}" BorderBrush="{StaticResource ColorMenuBorder}" OpacityMask="{StaticResource ColorHeaderButtonBackgroundMouseOver}"  Template="{StaticResource MenuTemplate}" BorderThickness="1" HorizontalAlignment="Left" VerticalAlignment="Center">
+            <!--OpacityMask - it's color on MouseOver-->
+            <Menu Background="{StaticResource ColorMenuBackground}"  Foreground="{StaticResource ColorMenuForeground}" BorderBrush="{StaticResource ColorMenuBorder}" OpacityMask="{StaticResource ColorMenuBackgroundMouseOver}"  Template="{StaticResource MenuTemplate}" BorderThickness="1" HorizontalAlignment="Left" VerticalAlignment="Center">
                 <MenuItem Header="File" x:Name="Item" Style="{StaticResource StyleMenuItem}">
                     <MenuItem Header="New" x:Name="ItemNew" Style="{StaticResource StyleMenuItem}" />
                     <MenuItem Header="Open" x:Name="ItemOpen" Style="{StaticResource StyleMenuItem}" />
@@ -45,35 +46,41 @@
             </Menu>
 
             <!--BorderBrush - it's Background color on IsMouseOver, OpacityMask - it's color on IsPressed-->
-            <Button DockPanel.Dock="Right" x:Name="ButtonClose" Style="{StaticResource StyleHeaderButton}" Background="{StaticResource ColorWindowHeader}" BorderBrush="{StaticResource ColorButtonCloseBackgroundMouseOver}" OpacityMask="{StaticResource ColorButtonCloseBackgroundPressed}"  Padding="7" Grid.IsSharedSizeScope="True" Margin="0,0,-7,0">
+            <Button DockPanel.Dock="Right" x:Name="ButtonClose" Style="{StaticResource StyleHeaderButton}" Background="{StaticResource ColorWindowHeader}" BorderBrush="{StaticResource ColorWindowHeaderButtonCloseBackgroundMouseOver}" OpacityMask="{StaticResource ColorWindowHeaderButtonCloseBackgroundPressed}"  Padding="7" Grid.IsSharedSizeScope="True" Margin="0,0,-7,0">
                 <Path x:Name="ButtonClosePath"
-                      Stroke="{StaticResource ColorButtonStroke}" 
+                      Style="{StaticResource StyleHeaderButtonClosePath}"
                       StrokeThickness="1.1" 
                       Stretch="None" 
                       Data="M2,2 L13,13 M13,2 L2,13">
+
                 </Path>
             </Button>
-            <Button DockPanel.Dock="Right" x:Name="ButtonMax" Style="{StaticResource StyleHeaderButton}" Background="{StaticResource ColorWindowHeader}" BorderBrush="{StaticResource ColorHeaderButtonBackgroundMouseOver}" OpacityMask="{StaticResource ColorHeaderButtonBackgroundPressed}">
-                <Path x:Name="MaxButtonPath"
+            <Button DockPanel.Dock="Right" x:Name="ButtonMax" Style="{StaticResource StyleHeaderButton}" Background="{StaticResource ColorWindowHeader}" BorderBrush="{StaticResource ColorWindowHeaderButtonBackgroundMouseOver}" OpacityMask="{StaticResource ColorWindowHeaderButtonBackgroundPressed}">
+                <Path x:Name="path"
+                      Style="{StaticResource StyleHeaderButtonPath}"
                       StrokeThickness="1"
-                      Stroke="{StaticResource ColorButtonStroke}"
                       Stretch="None" 
                       Data="M0.5,0 V9.5 H13.5 V0 H0.5 V1 H13 V0 H0.5 V2 H13 " >
                 </Path>
             </Button>
-            <Button DockPanel.Dock="Right" x:Name="ButtonMin" Style="{StaticResource StyleHeaderButton}" Background="{StaticResource ColorWindowHeader}" BorderBrush="{StaticResource ColorHeaderButtonBackgroundMouseOver}" OpacityMask="{StaticResource ColorHeaderButtonBackgroundPressed}" >
+            <Button DockPanel.Dock="Right" x:Name="ButtonMin" Style="{StaticResource StyleHeaderButton}" Background="{StaticResource ColorWindowHeader}" BorderBrush="{StaticResource ColorWindowHeaderButtonBackgroundMouseOver}" OpacityMask="{StaticResource ColorWindowHeaderButtonBackgroundPressed}" >
                 <Path x:Name="ButtonMinPath"
-                      Stroke="{StaticResource ColorButtonStroke}" 
+                      Style="{StaticResource StyleHeaderButtonPath}"
                       StrokeThickness="1.2" 
                       Stretch="None" 
                       Data="M0,0 H11">
                 </Path>
+                <!--<Button.Triggers>
+                    <Trigger Property="IsMouseOver" Value="True">
+                      
+                    </Trigger>
+                </Button.Triggers>-->
             </Button>
             <Button DockPanel.Dock="Right" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="{x:Null}" />
         </DockPanel>
         <ToolBarTray Grid.Row="1" IsLocked="True"  Background="{x:Null}">
             <ToolBar Style="{StaticResource ToolBarTemplate}" Background="{x:Null}" Foreground="{x:Null}" >
-                <!--<Button Background="{StaticResource ColorWindowHeader}" BorderBrush="{StaticResource ColorButtonMaxIsMouseOver}" Foreground="{StaticResource ColorHeaderButtonBackgroundPressed}" Height="16" Width="16" Style="{StaticResource StyleHeaderButton}">
+                <!--<Button Background="{StaticResource ColorWindowHeader}" BorderBrush="{StaticResource ColorButtonMaxIsMouseOver}" Foreground="{StaticResource ColorWindowHeaderButtonBackgroundPressed}" Height="16" Width="16" Style="{StaticResource StyleHeaderButton}">
                     <Image Source="/View/SaveAs_16x.png"  Height="16"/>
                 </Button>-->
 
@@ -91,7 +98,7 @@
         </ToolBarTray>
         <!--BorderBrush - it's color on IsMouseOver, OpacityMask - it's color on IsPressed-->
         <TabControl  Grid.Row="2" Background="{x:Null}" BorderBrush="{x:Null}" TabStripPlacement="Top" Padding="2,2,2,0" >
-            <TabItem  Header="Node editor"  Style="{StaticResource StyleTabItem}" Background="{StaticResource ColorWindowHeader}" Foreground="{StaticResource ColorForeground}"  BorderBrush="{StaticResource ColorElementMouseOver}" OpacityMask="{StaticResource ColorElementMouseOver}">
+            <TabItem  Header="Node editor"  Style="{StaticResource StyleTabItem}" Background="{StaticResource ColorWindowHeader}" Foreground="{StaticResource ColorWindowHeaderTabItemForeground}"  BorderBrush="{StaticResource ColorElementMouseOver}" OpacityMask="{StaticResource ColorElementMouseOver}">
                 <view:ViewNodesCanvas x:Name="NodesCanvas" />
             </TabItem>
             <!--<TabItem Header="Transitions table"  Style="{StaticResource StyleTabItem}" Foreground="{StaticResource ColorForeground}"/>-->
@@ -104,7 +111,7 @@
             </Expander.Header>
             <Expander.Content>
                 <!--OpacityMask - Background on Selected-->
-                <ListBox x:Name="MessageList" Template="{StaticResource TemplateListBox}" Background="{StaticResource ColorMessagesBackground}" BorderBrush="{StaticResource ColorMessagesBorder}" OpacityMask="{StaticResource ColorElementMouseOver}" Foreground="AliceBlue" ItemContainerStyle="{StaticResource StyleListBoxItem}" 
+                <ListBox x:Name="MessageList" Template="{StaticResource TemplateListBox}" Background="{StaticResource ColorMessagesBackground}" BorderBrush="{StaticResource ColorMessagesBorder}" Foreground="{StaticResource ColorMessagesForeground}" ItemContainerStyle="{StaticResource StyleListBoxItem}" 
                          VirtualizingStackPanel.IsVirtualizing="True" 
                           VirtualizingStackPanel.VirtualizationMode="Recycling" 
                           VirtualizingStackPanel.CacheLength="1" 
@@ -114,7 +121,7 @@
                         <KeyBinding x:Name="BindingCopyError" Key="C" Modifiers="Control" />
                     </ListBox.InputBindings>
                     <ListBox.ContextMenu>
-                        <ContextMenu Template="{StaticResource TemplateContextMenu}" Background="{StaticResource ColorMenuBackground}" BorderBrush="{StaticResource ColorMenuBorder}" OpacityMask="{StaticResource ColorHeaderButtonBackgroundMouseOver}"  Foreground="{StaticResource ColorForeground}" BorderThickness="1" HorizontalAlignment="Left" VerticalAlignment="Center" >
+                        <ContextMenu Template="{StaticResource TemplateContextMenu}" Background="{StaticResource ColorMenuBackground}" BorderBrush="{StaticResource ColorMenuBorder}" OpacityMask="{StaticResource ColorWindowHeaderButtonBackgroundMouseOver}"  Foreground="{StaticResource ColorMenuForeground}" BorderThickness="1" HorizontalAlignment="Left" VerticalAlignment="Center" >
                             <MenuItem Header="Copy" x:Name="ItemCopyError" InputGestureText="Ctrl + C" Style="{StaticResource StyleContextMenuItem}"  />
                         </ContextMenu>
                     </ListBox.ContextMenu>
