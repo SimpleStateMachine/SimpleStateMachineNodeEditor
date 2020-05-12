@@ -1,7 +1,8 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-                    >
-    <Style x:Key="ListBoxItemStyle" TargetType="{x:Type ListBoxItem}">
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+    <!--OpacityMask - Background on Selected-->
+    <Style x:Key="StyleListBoxItem" TargetType="{x:Type ListBoxItem}">
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="ListBoxItem">
@@ -10,7 +11,8 @@
                     </Border>
                     <ControlTemplate.Triggers>
                         <Trigger Property="IsSelected" Value="true">
-                            <Setter TargetName="Border" Property="Background" Value="{StaticResource ColorHeaderButtonIsPressed}"/>
+                            <Setter TargetName="Border" Property="Background" Value="{StaticResource ColorElementMouseOver}"/>
+                            <Setter  Property="Foreground" Value="{StaticResource ColorMessagesForegroundSelected}"/>
                         </Trigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>

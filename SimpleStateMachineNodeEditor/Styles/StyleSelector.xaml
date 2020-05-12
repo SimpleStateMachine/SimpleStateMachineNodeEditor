@@ -1,7 +1,7 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
     
-    <Style x:Key="SelectorStyle" TargetType="{x:Type Rectangle}">
+    <Style x:Key="StyleSelector" TargetType="{x:Type Rectangle}">
         <Setter Property="HorizontalAlignment" Value="Stretch"/>
         <Setter Property="VerticalAlignment" Value="Stretch" />
         <Setter Property="Opacity" Value="0.2"/>

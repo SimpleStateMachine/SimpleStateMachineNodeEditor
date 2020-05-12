@@ -16,6 +16,7 @@ using ReactiveUI;
 using SimpleStateMachineNodeEditor.Helpers;
 using SimpleStateMachineNodeEditor.ViewModel;
 using SimpleStateMachineNodeEditor.Helpers.Transformations;
+using SimpleStateMachineNodeEditor.Helpers.Enums;
 
 namespace SimpleStateMachineNodeEditor.View
 {
@@ -42,9 +43,9 @@ namespace SimpleStateMachineNodeEditor.View
         public ViewRightConnector()
         {
             InitializeComponent();
+            SetupCommands();
             SetupBinding();
-            SetupEvents();
-           
+            SetupEvents();          
         }
 
         #region SetupBinding
@@ -54,20 +55,21 @@ namespace SimpleStateMachineNodeEditor.View
             {
                 Canvas.SetZIndex((UIElement)this.VisualParent, this.ViewModel.Node.Zindex+2);
 
+                this.OneWayBind(this.ViewModel, x => x.Visible, x => x.RightConnector.Visibility).DisposeWith(disposable);
+
                 this.OneWayBind(this.ViewModel, x => x.Name, x => x.TextBoxElement.Text).DisposeWith(disposable);
 
                 this.OneWayBind(this.ViewModel, x => x.TextEnable, x => x.TextBoxElement.IsEnabled).DisposeWith(disposable);
 
-                this.OneWayBind(this.ViewModel, x => x.FormEnable, x => x.EllipseElement.IsEnabled).DisposeWith(disposable);
+                this.OneWayBind(this.ViewModel, x => x.Foreground, x => x.TextBoxElement.Foreground).DisposeWith(disposable);
 
+                this.OneWayBind(this.ViewModel, x => x.FormEnable, x => x.EllipseElement.IsEnabled).DisposeWith(disposable);
 
                 this.OneWayBind(this.ViewModel, x => x.FormStroke, x => x.EllipseElement.Stroke).DisposeWith(disposable);
 
-                this.OneWayBind(this.ViewModel, x => x.FormStrokeThickness, x => x.EllipseElement.StrokeThickness).DisposeWith(disposable);
-
                 this.Bind(this.ViewModel, x => x.FormFill, x => x.EllipseElement.Fill).DisposeWith(disposable);
 
-                this.OneWayBind(this.ViewModel, x => x.Visible, x => x.RightConnector.Visibility).DisposeWith(disposable);
+                this.OneWayBind(this.ViewModel, x => x.FormStrokeThickness, x => x.EllipseElement.StrokeThickness).DisposeWith(disposable);
 
                 this.WhenAnyValue(x => x.ViewModel.Node.Size, x => x.ViewModel.Node.Point1.Value, x => x.ViewModel.Node.NodesCanvas.Scale.Scales.Value)
                 .Subscribe(_ => { UpdatePositionConnectPoin(); }).DisposeWith(disposable);
@@ -76,7 +78,16 @@ namespace SimpleStateMachineNodeEditor.View
             });
         }
         #endregion SetupBinding
-
+        #region Setup Commands
+        private void SetupCommands()
+        {
+            this.WhenActivated(disposable =>
+            {
+                //this.BindCommand(this.ViewModel, x => x.CommandSelect, x => x.BindingSelectWithCtrl).DisposeWith(disposable);
+                //this.BindCommand(this.ViewModel, x => x.CommandSelect, x => x.BindingSelectWithShift).DisposeWith(disposable);
+            });
+        }
+        #endregion Setup Commands
         #region SetupEvents
 
         private void test(bool value)
@@ -88,7 +99,7 @@ namespace SimpleStateMachineNodeEditor.View
         {
             this.WhenActivated(disposable =>
             {
-                this.EllipseElement.Events().MouseLeftButtonDown.Subscribe(e => ConnectDrag(e)).DisposeWith(disposable);
+                this.EllipseElement.Events().PreviewMouseLeftButtonDown.Subscribe(e => ConnectDrag(e)).DisposeWith(disposable);
                 this.TextBoxElement.Events().LostFocus.Subscribe(e => Validate(e)).DisposeWith(disposable);
                 this.BorderElement.Events().PreviewMouseLeftButtonDown.Subscribe(e => ConnectorDrag(e)).DisposeWith(disposable);
                 this.BorderElement.Events().PreviewDragEnter.Subscribe(e => ConnectorDragEnter(e)).DisposeWith(disposable);
@@ -122,16 +133,29 @@ namespace SimpleStateMachineNodeEditor.View
 
         private void ConnectorDrag(MouseButtonEventArgs e)
         {        
-                if (!this.ViewModel.TextEnable)
-                    return;
-                if (!Keyboard.IsKeyDown(Key.LeftShift))
-                    return;
+            if (!this.ViewModel.TextEnable)
+                return;
+            if (Keyboard.IsKeyDown(Key.LeftAlt))
+            {
                 this.ViewModel.CommandConnectorDrag.Execute();
                 DataObject data = new DataObject();
                 data.SetData("Connector", this.ViewModel);
                 DragDrop.DoDragDrop(this, data, DragDropEffects.Link);
-                e.Handled = true;
-           
+            }
+            else if (Keyboard.IsKeyDown(Key.LeftShift))
+            {
+                this.ViewModel.CommandSelect.Execute(SelectMode.ClickWithShift);
+            }
+            else if (Keyboard.IsKeyDown(Key.LeftCtrl))
+            {
+                this.ViewModel.CommandSelect.Execute(SelectMode.ClickWithCtrl);              
+            }
+            else
+            {
+                this.ViewModel.CommandSelect.Execute(SelectMode.Click);
+                return;
+            }
+            e.Handled = true;
         }
 
         private void ConnectorDragEnter(DragEventArgs e)

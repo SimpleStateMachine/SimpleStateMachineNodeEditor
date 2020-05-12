@@ -2,18 +2,6 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:local="clr-namespace:SimpleStateMachineNodeEditor.Styles">
     
-    <SolidColorBrush x:Key="Expander.Static.Circle.Stroke" Color="#FF333333"/>
-    <SolidColorBrush x:Key="Expander.Static.Circle.Fill" Color="#FFFFFFFF"/>
-    <SolidColorBrush x:Key="Expander.Static.Arrow.Stroke" Color="#FF333333"/>
-    <SolidColorBrush x:Key="Expander.MouseOver.Circle.Stroke" Color="#FF5593FF"/>
-    <SolidColorBrush x:Key="Expander.MouseOver.Circle.Fill" Color="#FFF3F9FF"/>
-    <SolidColorBrush x:Key="Expander.MouseOver.Arrow.Stroke" Color="#FF000000"/>
-    <SolidColorBrush x:Key="Expander.Pressed.Circle.Stroke" Color="#FF3C77DD"/>
-    <SolidColorBrush x:Key="Expander.Pressed.Circle.Fill" Color="#FFD9ECFF"/>
-    <SolidColorBrush x:Key="Expander.Pressed.Arrow.Stroke" Color="#FF000000"/>
-    <SolidColorBrush x:Key="Expander.Disabled.Circle.Stroke" Color="#FFBCBCBC"/>
-    <SolidColorBrush x:Key="Expander.Disabled.Circle.Fill" Color="#FFE6E6E6"/>
-    <SolidColorBrush x:Key="Expander.Disabled.Arrow.Stroke" Color="#FF707070"/>
     <Style x:Key="ExpanderHeaderFocusVisual">
         <Setter Property="Control.Template">
             <Setter.Value>
@@ -69,7 +57,7 @@
             </Setter.Value>
         </Setter>
     </Style>
-    <Style x:Key="ExpanderTemplate" TargetType="{x:Type Expander}">
+    <Style x:Key="StyleExpander" TargetType="{x:Type Expander}">
         <Setter Property="Foreground" Value="{StaticResource {x:Static SystemColors.ControlTextBrushKey}}"/>
         <Setter Property="Background" Value="Transparent"/>
         <Setter Property="HorizontalContentAlignment" Value="Stretch"/>

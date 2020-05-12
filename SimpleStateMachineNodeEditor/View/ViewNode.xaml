@@ -5,12 +5,13 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:SimpleStateMachineNodeEditor.View"
              xmlns:NodeStyles="clr-namespace:SimpleStateMachineNodeEditor.Styles.Node"
-             xmlns:View="clr-namespace:SimpleStateMachineNodeEditor.View"
+             xmlns:View="clr-namespace:SimpleStateMachineNodeEditor.View" 
+             xmlns:enums="clr-namespace:SimpleStateMachineNodeEditor.Helpers.Enums"
              mc:Ignorable="d" Focusable="True" AllowDrop="True" Visibility="Visible">
 
-    <Border x:Name="BorderElement" CornerRadius="5,5,5,5" BorderThickness="1,1,1,1"   HorizontalAlignment="Left" VerticalAlignment="Top" MinWidth="80" Background="{StaticResource ColorNodeBody}" >
+    <Border x:Name="BorderElement" CornerRadius="5,5,5,5" BorderThickness="1,1,1,1" BorderBrush="{StaticResource ColorNodeBorderBrush}" Background="{StaticResource ColorNodeBackground}" HorizontalAlignment="Left" VerticalAlignment="Top" MinWidth="80">
         <StackPanel Margin="0,0,0,5">
-            <NodeStyles:NodeHeader x:Name="NodeHeaderElement" />
+            <NodeStyles:ElementNodeHeader x:Name="NodeHeaderElement" />
             <!--Grid For Input and Output-->
             <Grid x:Name="GridElement"  MinWidth="60" >
                 <Grid.ColumnDefinitions>
@@ -29,7 +30,7 @@
                           VirtualizingStackPanel.VirtualizationMode="Recycling" 
                           VirtualizingStackPanel.CacheLength="1" 
                           VirtualizingStackPanel.CacheLengthUnit="Page" 
-                          ScrollViewer.IsDeferredScrollingEnabled="True" 
+                           
                           VirtualizingStackPanel.ScrollUnit="Pixel">
                 
                 <ItemsControl.ItemsPanel>
@@ -54,6 +55,6 @@
         </TransformGroup>
     </UserControl.RenderTransform>
     <UserControl.InputBindings>
-        <MouseBinding x:Name="BindingSelect" Gesture="Ctrl+LeftClick" />
+        <MouseBinding x:Name="BindingSelect" Gesture="Ctrl+LeftClick" CommandParameter="{x:Static enums:SelectMode.ClickWithCtrl}"/>
     </UserControl.InputBindings>
 </UserControl>

@@ -7,7 +7,7 @@
              d:DesignHeight="450" d:DesignWidth="800"
              Focusable="True" HorizontalAlignment="Left" VerticalAlignment="Top">
 
-    <Rectangle x:Name="Rectangle" Style="{StaticResource SelectorStyle}" />
+    <Rectangle x:Name="Rectangle" Style="{StaticResource StyleSelector}" />
 
     <UserControl.RenderTransform>
         <TransformGroup>

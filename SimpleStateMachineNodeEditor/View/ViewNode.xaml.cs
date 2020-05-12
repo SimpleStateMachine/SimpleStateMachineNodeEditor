@@ -18,6 +18,7 @@ using DynamicData;
 using SimpleStateMachineNodeEditor.ViewModel;
 using SimpleStateMachineNodeEditor.Helpers;
 using SimpleStateMachineNodeEditor.Helpers.Transformations;
+using SimpleStateMachineNodeEditor.Helpers.Enums;
 
 namespace SimpleStateMachineNodeEditor.View
 {
@@ -40,7 +41,6 @@ namespace SimpleStateMachineNodeEditor.View
             set { ViewModel = (ViewModelNode)value; }
         }
         #endregion ViewModel
-
         public ViewNode()
         {
             InitializeComponent();
@@ -49,6 +49,7 @@ namespace SimpleStateMachineNodeEditor.View
             SetupCommands();
          
         }
+
         #region Setup Binding
         private void SetupBinding()
         {
@@ -84,11 +85,21 @@ namespace SimpleStateMachineNodeEditor.View
             });
         }
         #endregion Setup Binding
+        #region Setup Commands
+        private void SetupCommands()
+        {
+            this.WhenActivated(disposable =>
+            {
+                this.BindCommand(this.ViewModel, x => x.CommandSelect, x => x.BindingSelect).DisposeWith(disposable);
+            });
+        }
+        #endregion Setup Commands
         #region Setup Events
         private void SetupEvents()
         {
             this.WhenActivated(disposable =>
             {
+                this.WhenAnyValue(x=>x.IsMouseOver).Subscribe(value=> Test(value)).DisposeWith(disposable);
                 this.Events().MouseLeftButtonDown.Subscribe(e => OnEventMouseLeftDowns(e)).DisposeWith(disposable);
                 this.Events().MouseLeftButtonUp.Subscribe(e => OnEventMouseLeftUp(e)).DisposeWith(disposable);
                 this.Events().MouseRightButtonDown.Subscribe(e => OnEventMouseRightDown(e)).DisposeWith(disposable);
@@ -96,18 +107,23 @@ namespace SimpleStateMachineNodeEditor.View
                 this.Events().MouseDown.Subscribe(e => OnEventMouseDown(e)).DisposeWith(disposable);
                 this.Events().MouseUp.Subscribe(e => OnEventMouseUp(e)).DisposeWith(disposable);
                 this.Events().MouseMove.Subscribe(e => OnMouseMove(e)).DisposeWith(disposable);
-                this.Events().MouseEnter.Subscribe(e => OnEventMouseEnter(e)).DisposeWith(disposable);
-                this.Events().MouseLeave.Subscribe(e => OnEventMouseMouseLeave(e)).DisposeWith(disposable);
+                //this.Events().MouseEnter.Subscribe(e => OnEventMouseEnter(e)).DisposeWith(disposable);
+                //this.Events().MouseLeave.Subscribe(e => OnEventMouseMouseLeave(e)).DisposeWith(disposable);
 
                 this.NodeHeaderElement.ButtonCollapse.Events().Click.Subscribe(_ => OnEventCollapse()).DisposeWith(disposable);
                 this.NodeHeaderElement.Events().LostFocus.Subscribe(e => Validate(e)).DisposeWith(disposable);
             });
         }
-
+        private void Test(bool value)
+        {
+            if (this.ViewModel.Selected != true)
+                this.ViewModel.BorderBrush = value?Application.Current.Resources["ColorSelectedElement"] as SolidColorBrush
+                                                 : Application.Current.Resources["ColorNodeBorderBrush"] as SolidColorBrush;
+        }
         private void OnEventMouseLeftDowns(MouseButtonEventArgs e)
         {
             Keyboard.Focus(this);
-            this.ViewModel.CommandSelect.Execute(true);
+            this.ViewModel.CommandSelect.Execute(SelectMode.Click);
         }
         private void Validate(RoutedEventArgs e)
         {
@@ -145,12 +161,12 @@ namespace SimpleStateMachineNodeEditor.View
         private void OnEventMouseEnter(MouseEventArgs e)
         {
             if (this.ViewModel.Selected != true)
-                this.ViewModel.BorderBrush = Application.Current.Resources["ColorNodeSelectedBorder"] as SolidColorBrush;
+                this.ViewModel.BorderBrush = Application.Current.Resources["ColorSelectedElement"] as SolidColorBrush;
         }
         private void OnEventMouseMouseLeave(MouseEventArgs e)
         {
             if (this.ViewModel.Selected != true)
-                this.ViewModel.BorderBrush = Application.Current.Resources["ColorNodeBorder"] as SolidColorBrush;
+                this.ViewModel.BorderBrush = Application.Current.Resources["ColorNodeBorderBrush"] as SolidColorBrush;
         }
 
 
@@ -162,14 +178,6 @@ namespace SimpleStateMachineNodeEditor.View
             
         }
         #endregion Setup Events
-        #region Setup Commands
-        private void SetupCommands()
-        {
-            this.WhenActivated(disposable =>
-            {
-                this.BindCommand(this.ViewModel, x => x.CommandSelect, x => x.BindingSelect);
-            });
-        }
-        #endregion Setup Commands
+
     }
 }

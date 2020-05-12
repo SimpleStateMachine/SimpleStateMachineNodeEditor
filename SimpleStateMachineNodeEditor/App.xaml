@@ -7,15 +7,19 @@
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="Images.xaml"/>
-                <ResourceDictionary Source="Styles/Colors.xaml"/>
-                <ResourceDictionary Source="Styles/ErrorList/ExpanderTemplate.xaml"/>
-                <ResourceDictionary Source="Styles/ErrorList/TextBoxTemplate.xaml"/>
-                <ResourceDictionary Source="Styles/ErrorList/ScrollBarTemplate.xaml"/>
-                <ResourceDictionary Source="Styles/ErrorList/ScrollViewerTemplate.xaml"/>
+                <ResourceDictionary Source="Styles/Themes/Dark.xaml"/>
+                <!--<ResourceDictionary Source="Styles/Themes/Light.xaml"/>-->
+                <!--<ResourceDictionary Source="Styles/Theme.xaml"/>-->
+                <ResourceDictionary Source="Styles/ErrorList/StyleExpander.xaml"/>
+                <ResourceDictionary Source="Styles/ErrorList/StyleScrollBar.xaml"/>
+                <ResourceDictionary Source="Styles/ErrorList/StyleScrollViewer.xaml"/>
                 
-                <ResourceDictionary Source="Styles/ErrorList/ListBoxTemplate.xaml"/>
-                <ResourceDictionary Source="Styles/ErrorList/LabelTemplate.xaml"/>
-                <ResourceDictionary Source="Styles/ErrorList/ListBoxItemTemplate.xaml"/>
+                <ResourceDictionary Source="Styles/ErrorList/TemplateListBox.xaml"/>
+                <ResourceDictionary Source="Styles/ErrorList/StyleLabel.xaml"/>
+                <ResourceDictionary Source="Styles/ErrorList/StyleListBoxItem.xaml"/>
+
+                
+
                 <!--#region         Test-->
                 
                 <!--#endregion      Test-->
@@ -24,48 +28,14 @@
 
                 <!--#region         Selector-->
                 
-                <ResourceDictionary Source="Styles\SelectorStyle.xaml"/>
+                <ResourceDictionary Source="Styles\StyleSelector.xaml"/>
 
                 <!--#endregion      Selector-->
 
                 <!--#region         Node-->
 
-                    <!--#region         LeftConnector-->
-
-                        <!--#region         LeftConnectorTextBox-->
-
-                            <ResourceDictionary Source="Styles\Node\LeftConnector\LeftConnectorTextBoxStyle.xaml"/>
-
-                        <!--#endregion      LeftConnectorTextBox-->
-
-                        <!--#region         LeftConnectorEllipse-->
-
-                            <ResourceDictionary Source="Styles\Node\LeftConnector\LeftConnectorEllipseStyle.xaml"/>
-
-                        <!--#endregion      LeftConnectorEllipse-->
-
-                    <!--#endregion      LeftConnector-->
-
-                    <!--#region         RightConnector-->
-
-                        <!--#region         RightConnectorTextBox-->
-
-                            <ResourceDictionary Source="Styles\Node\RightConnector\RightConnectorTextBoxStyle.xaml"/>
-
-                        <!--#endregion      RightConnectorTextBox-->
-
-                        <!--#region         RightConnectorEllipse-->
-
-                            <ResourceDictionary Source="Styles\Node\RightConnector\RightConnectorEllipseStyle.xaml"/>
-
-                        <!--#endregion      RightConnectorEllipse-->
-
-                    <!--#endregion      RightConnector-->
-
-
-                    <ResourceDictionary Source="Styles\Node\NodeBorderStyle.xaml"/>
-                    <ResourceDictionary Source="Styles\Node\NodeButtonRollUpStyle.xaml"/>
-                    <ResourceDictionary Source="Styles\Node\NodeHeaderStyle.xaml"/>
+                    <ResourceDictionary Source="Styles\Node\StyleNodeCollapseButton.xaml"/>
+                    <ResourceDictionary Source="Styles\StyleEmptyTextBox.xaml"/>
 
                 <!--#endregion      Node-->
 
@@ -77,8 +47,9 @@
                     <!--#region      Header-->
                     <ResourceDictionary Source="Styles/MainWindow/ToolBar/ToolButtonTemplate.xaml"/>
                     <ResourceDictionary Source="Styles/MainWindow/ToolBarTemplate.xaml"/>
-                    <ResourceDictionary Source="Styles/MainWindow/Header/HeaderButtonTemplate.xaml"/>
-                
+                    <ResourceDictionary Source="Styles/MainWindow/Header/StyleHeaderButton.xaml"/>
+                    <ResourceDictionary Source="Styles/MainWindow/Header/StyleHeaderButtonPath.xaml"/>
+                    <ResourceDictionary Source="Styles/MainWindow/Header/StyleHeaderButtonClosePath.xaml"/>
                     <!--#endregion   Header-->
                 
                 <!--#endregion   MainWindow-->
@@ -86,20 +57,20 @@
                 <!--#region         Menu-->
 
                 <ResourceDictionary Source="Styles/Menu/MenuTemplate.xaml"/>
-                <ResourceDictionary Source="Styles/Menu/MenuItemStyle.xaml"/>
+                <ResourceDictionary Source="Styles/Menu/StyleMenuItem.xaml"/>
 
                 <!--#endregion      Menu-->
 
                 <!--#region         ContextMenu-->
 
-                <ResourceDictionary Source="Styles/ContextMenu/ContextMenuTemplate.xaml"/>
-                <ResourceDictionary Source="Styles/ContextMenu/ContextMenuItemStyle.xaml"/>
+                <ResourceDictionary Source="Styles/ContextMenu/TemplateContextMenu.xaml"/>
+                <ResourceDictionary Source="Styles/ContextMenu/StyleContextMenuItem.xaml"/>
 
                 <!--#endregion      ContextMenu-->
 
                 <!--#region         Tabs-->
 
-                <ResourceDictionary Source="Styles/Tabs/TabItemTemplate.xaml"/>
+                <ResourceDictionary Source="Styles/Tabs/StyleTabItem.xaml"/>
 
                 <!--#endregion      Tabs-->
 

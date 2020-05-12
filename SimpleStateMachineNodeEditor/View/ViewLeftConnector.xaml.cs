@@ -58,6 +58,8 @@ namespace SimpleStateMachineNodeEditor.View
                 // Доступен ли переход для создания соединия
                 this.OneWayBind(this.ViewModel, x => x.FormEnable, x => x.EllipseElement.IsEnabled).DisposeWith(disposable);
 
+                this.OneWayBind(this.ViewModel, x => x.Foreground, x => x.TextBoxElement.Foreground).DisposeWith(disposable);
+
                 // Цвет рамки, вокруг перехода
                 this.OneWayBind(this.ViewModel, x => x.FormStroke, x => x.EllipseElement.Stroke).DisposeWith(disposable);
 

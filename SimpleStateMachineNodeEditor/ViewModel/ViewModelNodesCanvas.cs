@@ -45,10 +45,10 @@ namespace SimpleStateMachineNodeEditor.ViewModel
             SetupCommands();
             SetupStartState();
             Cutter = new ViewModelCutter(this);
-            //for (int i = 1; i <=10; i++)
-            //{
-            //    LogError("Message "+i.ToString());
-            //}
+            for (int i = 1; i <= 30; i++)
+            {
+                LogError("Message " + i.ToString());
+            }
 
         }
 
@@ -91,11 +91,11 @@ namespace SimpleStateMachineNodeEditor.ViewModel
         public SimpleCommand CommandSelectorIntersect { get; set; }
         public SimpleCommand CommandCutterIntersect { get; set; }
         public SimpleCommand CommandDeleteFreeConnect { get; set; }
+   
+        public SimpleCommandWithParameter<(ViewModelNode objectForValidate, string newValue)> CommandValidateNodeName { get; set; }
+        public SimpleCommandWithParameter<(ViewModelNode objectForValidate, string newValue)> CommandValidateConnectName { get; set; }
 
-        public SimpleCommandWithParameter<ValidateObjectProperty<ViewModelNode, string>> CommandValidateNodeName { get; set; }
-        public SimpleCommandWithParameter<ValidateObjectProperty<ViewModelConnector, string>> CommandValidateConnectName { get; set; }
-
-        public SimpleCommandWithParameter<object> CommandZoom { get; set; }
+        public SimpleCommandWithParameter<int> CommandZoom { get; set; }
         public SimpleCommandWithParameter<MyPoint> CommandSelect { get; set; }
         public SimpleCommandWithParameter<MyPoint> CommandCut { get; set; }
         public SimpleCommandWithParameter<MyPoint> CommandPartMoveAllNode { get; set; }
@@ -135,12 +135,12 @@ namespace SimpleStateMachineNodeEditor.ViewModel
             CommandUnSelectAll = new SimpleCommand(UnSelectedAll);
             CommandSelectorIntersect = new SimpleCommand(SelectNodes);
             CommandCutterIntersect = new SimpleCommand(SelectConnects);
-            CommandValidateNodeName = new SimpleCommandWithParameter<ValidateObjectProperty<ViewModelNode, string>>(ValidateNodeName);
-            CommandValidateConnectName = new SimpleCommandWithParameter<ValidateObjectProperty<ViewModelConnector, string>>(ValidateConnectName);
+            CommandValidateNodeName = new SimpleCommandWithParameter<(ViewModelNode objectForValidate, string newValue)>(ValidateNodeName);
+            CommandValidateConnectName = new SimpleCommandWithParameter<(ViewModelNode objectForValidate, string newValue)>(ValidateConnectName);
 
             CommandPartMoveAllNode = new SimpleCommandWithParameter<MyPoint>(PartMoveAllNode);
             CommandPartMoveAllSelectedNode = new SimpleCommandWithParameter<MyPoint>(PartMoveAllSelectedNode);
-            CommandZoom = new SimpleCommandWithParameter<object>(Zoom);
+            CommandZoom = new SimpleCommandWithParameter<int>(Zoom);
 
             CommandLogDebug = new SimpleCommandWithParameter<string>(LogDebug);
             CommandLogError = new SimpleCommandWithParameter<string>(LogError);
@@ -208,7 +208,10 @@ namespace SimpleStateMachineNodeEditor.ViewModel
         private void UnSelectedAll()
         {
             foreach (var node in Nodes)
-            { node.Selected = false; }
+            {
+                node.Selected = false;
+                node.CommandUnSelectedAllConnectors.Execute();
+            }
         }
         private List<ViewModelNode> FullMoveAllNode(MyPoint delta, List<ViewModelNode> nodes = null)
         {
@@ -281,16 +284,15 @@ namespace SimpleStateMachineNodeEditor.ViewModel
             Nodes.Remove(result);
             return result;
         }
-        private void Zoom(object delta)
+        private void Zoom(int delta)
         {
-            int Delta = (int)delta;
-            bool DeltaIsZero = (Delta == 0);
-            bool DeltaMax = ((Delta > 0) && (Scale.Value > ScaleMax));
-            bool DeltaMin = ((Delta < 0) && (Scale.Value < ScaleMin));
+            bool DeltaIsZero = (delta == 0);
+            bool DeltaMax = ((delta > 0) && (Scale.Value > ScaleMax));
+            bool DeltaMin = ((delta < 0) && (Scale.Value < ScaleMin));
             if (DeltaIsZero || DeltaMax || DeltaMin)
                 return;
 
-            Scale.Value += (Delta > 0) ? Scales : -Scales;
+            Scale.Value += (delta > 0) ? Scales : -Scales;
         }
         private void SelectConnects()
         {
@@ -305,12 +307,12 @@ namespace SimpleStateMachineNodeEditor.ViewModel
             //var connects = Connects;
             foreach (var connect in Connects)
             {
-                connect.Selected = false;
+                connect.FromConnector.Selected = false;
             }
 
             foreach (var connect in connects)
             {
-                connect.Selected = MyUtils.CheckIntersectCubicBezierCurveAndLine(connect.StartPoint, connect.Point1, connect.Point2, connect.EndPoint, cutterStartPoint, cutterEndPoint);
+                connect.FromConnector.Selected = MyUtils.CheckIntersectCubicBezierCurveAndLine(connect.StartPoint, connect.Point1, connect.Point2, connect.EndPoint, cutterStartPoint, cutterEndPoint);
             }
 
         }
@@ -365,23 +367,23 @@ namespace SimpleStateMachineNodeEditor.ViewModel
             Nodes.Add(result);
             return result;
         }
-        private void ValidateNodeName(ValidateObjectProperty<ViewModelNode, string> obj)
+        private void ValidateNodeName((ViewModelNode objectForValidate, string newValue) obj)
         {
-            if (!String.IsNullOrWhiteSpace(obj.Property))
+            if (!String.IsNullOrWhiteSpace(obj.newValue))
             {
-                if (!NodeExist(obj.Property))
+                if (!NodeExist(obj.newValue))
                 {
-                    obj.Obj.Name = obj.Property;
+                    obj.objectForValidate.Name = obj.newValue;
                 }
             }
         }
-        private void ValidateConnectName(ValidateObjectProperty<ViewModelConnector, string> obj)
+        private void ValidateConnectName((ViewModelNode objectForValidate, string newValue) obj)
         {
-            if (!String.IsNullOrWhiteSpace(obj.Property))
+            if (!String.IsNullOrWhiteSpace(obj.newValue))
             {
-                if (!ConnectExist(obj.Property))
+                if (!ConnectExist(obj.newValue))
                 {
-                    obj.Obj.Name = obj.Property;
+                    obj.objectForValidate.Name = obj.newValue;
                 }
             }
         }

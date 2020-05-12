@@ -19,7 +19,7 @@
                        VirtualizingStackPanel.VirtualizationMode="Recycling" 
                        VirtualizingStackPanel.CacheLength="1"
                        VirtualizingStackPanel.CacheLengthUnit="Page"
-                       ScrollViewer.IsDeferredScrollingEnabled="True"
+                       
                        VirtualizingStackPanel.ScrollUnit="Pixel">
             
             <ItemsControl.RenderTransform>
@@ -93,9 +93,9 @@
 
     </Canvas>
     <UserControl.ContextMenu >
-        <ContextMenu Template="{StaticResource ContextMenuTemplate}" Background="#1b1b1c" OpacityMask="#3e3e40"  Foreground="White" BorderBrush="#333337" BorderThickness="1" HorizontalAlignment="Left" VerticalAlignment="Center" >
-            <MenuItem Header="Add" x:Name="ItemAddNode" InputGestureText="Ctrl + N" Style="{StaticResource ContextMenuItemStyle}"  />
-            <MenuItem Header="Delete" x:Name="ItemDeleteNode" InputGestureText="Delete" Style="{StaticResource ContextMenuItemStyle}"/>
+        <ContextMenu Template="{StaticResource TemplateContextMenu}" Background="{StaticResource ColorMenuBackground}"  Foreground="{StaticResource ColorMenuForeground}" BorderBrush="{StaticResource ColorMenuBorder}" OpacityMask="{StaticResource ColorMenuBackgroundMouseOver}"  BorderThickness="1" HorizontalAlignment="Left" VerticalAlignment="Center" >
+            <MenuItem Header="Add" x:Name="ItemAddNode" InputGestureText="Ctrl + N" Style="{StaticResource StyleContextMenuItem}"  />
+            <MenuItem Header="Delete" x:Name="ItemDeleteNode" InputGestureText="Delete" Style="{StaticResource StyleContextMenuItem}"/>
         </ContextMenu>
     </UserControl.ContextMenu>
 
@@ -111,7 +111,7 @@
         <KeyBinding x:Name="BindingSelectAll" Key="A" Modifiers="Control" />
         <KeyBinding x:Name="BindingAddNode" Key="N" Modifiers="Control" />
         <KeyBinding x:Name="BindingDeleteNode" Key="Delete"  />
-        <MouseBinding x:Name="BindingSelect" Gesture="Ctrl+LeftClick" />
+        <MouseBinding x:Name="BindingSelect" Gesture="Ctrl+LeftClick"/>
         <MouseBinding x:Name="BindingCut" Gesture="Alt+LeftClick" />
         <MouseBinding x:Name="BindingZoom" Gesture="WheelClick"/>
     </UserControl.InputBindings>

@@ -9,6 +9,7 @@ using SimpleStateMachineNodeEditor.Helpers.Commands;
 using System;
 using System.Xml.Linq;
 using System.Linq;
+using SimpleStateMachineNodeEditor.Helpers.Enums;
 
 namespace SimpleStateMachineNodeEditor.ViewModel
 {
@@ -42,12 +43,14 @@ namespace SimpleStateMachineNodeEditor.ViewModel
         /// <summary>
         /// Ellipse stroke color
         /// </summary>
-        [Reactive] public Brush FormStroke { get; set; } = Application.Current.Resources["ColorConnectorEllipseEnableBorder"] as SolidColorBrush;
+        [Reactive] public Brush FormStroke { get; set; } = Application.Current.Resources["ColorNodesCanvasBackground"] as SolidColorBrush;
 
         /// <summary>
         /// Ellipse fill color
         /// </summary>
-        [Reactive] public Brush FormFill { get; set; } = Application.Current.Resources["ColorConnectorEllipseEnableBackground"] as SolidColorBrush;
+        [Reactive] public Brush FormFill { get; set; } = Application.Current.Resources["ColorConnector"] as SolidColorBrush;
+
+        [Reactive] public Brush Foreground { get; set; } = Application.Current.Resources["ColorConnectorForeground"] as SolidColorBrush;
 
         [Reactive] public double FormStrokeThickness { get; set; } = 1;
 
@@ -65,12 +68,23 @@ namespace SimpleStateMachineNodeEditor.ViewModel
 
         [Reactive] public ViewModelNodesCanvas NodesCanvas { get; set; }
 
+        [Reactive] public bool Selected { get; set; }
+
         public ViewModelConnector(ViewModelNodesCanvas nodesCanvas, ViewModelNode viewModelNode)
         {
             Node = viewModelNode;
             NodesCanvas = nodesCanvas;
             SetupCommands();
+            SetupBinding();
         }
+
+        #region SetupBinding
+        private void SetupBinding()
+        {
+            this.WhenAnyValue(x => x.Selected).Subscribe(value => Select(value));
+        }
+        #endregion SetupBinding
+
         #region Commands
 
         public SimpleCommand CommandConnectPointDrag { get; set; }
@@ -82,11 +96,12 @@ namespace SimpleStateMachineNodeEditor.ViewModel
         public SimpleCommand CommandSetAsLoop { get; set; }
         public SimpleCommand CommandAdd { get; set; }
         public SimpleCommand CommandDelete { get; set; }
+        public SimpleCommandWithParameter<SelectMode> CommandSelect { get; set; }
         public SimpleCommandWithParameter<string> CommandValidateName { get; set; }
 
         private void SetupCommands()
         {
-
+            
             CommandConnectPointDrag = new SimpleCommand(ConnectPointDrag);
             CommandConnectPointDrop = new SimpleCommand(ConnectPointDrop);
             CommandSetAsLoop = new SimpleCommand(SetAsLoop, NotSaved);
@@ -100,10 +115,47 @@ namespace SimpleStateMachineNodeEditor.ViewModel
             CommandDelete = new SimpleCommand(Delete);
             CommandValidateName = new SimpleCommandWithParameter<string>(ValidateName, NotSaved);
 
+            CommandSelect = new SimpleCommandWithParameter<SelectMode>(Select);
+
 
             //SimpleCommandWithResult<bool, Func<bool>> t = new SimpleCommandWithResult<bool, Func<bool>>()
         }
 
+        private void Select(bool value)
+        {
+
+            this.Foreground = value ? Application.Current.Resources["ColorSelectedElement"] as SolidColorBrush : Application.Current.Resources["ColorConnectorForeground"] as SolidColorBrush;
+            this.FormFill = value ? Application.Current.Resources["ColorSelectedElement"] as SolidColorBrush : Application.Current.Resources["ColorConnector"] as SolidColorBrush;
+        }
+        private void Select(SelectMode selectMode)
+        {
+            switch(selectMode)
+            {
+                case SelectMode.Click:
+                    {
+                        if(!this.Selected)
+                        {
+                            //this.Node.CommandUnSelectedAllConnectors.Execute();
+                            this.Node.CommandSetConnectorAsStartSelect.Execute(this);
+                            //this.Selected = true;                                     
+                        }
+                        
+                        break;
+                    }
+                case SelectMode.ClickWithCtrl:
+                    {
+                        this.Selected = !this.Selected;
+                        break;
+                    }
+                case SelectMode.ClickWithShift:
+                    {
+                        this.Node.CommandSelectWithShiftForConnectors.Execute(this);
+                        break;
+                    }
+            }
+
+            
+        }
         private void NotSaved()
         {
             NodesCanvas.ItSaved = false;

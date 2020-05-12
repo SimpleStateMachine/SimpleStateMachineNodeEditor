@@ -12,7 +12,7 @@
         </Setter>
     </Style>
 
-    <Style x:Key="HeaderButtonTemplate" TargetType="{x:Type Button}">
+    <Style x:Key="StyleHeaderButton" TargetType="{x:Type Button}">
         <Setter Property="BorderBrush" Value="{x:Null}"/> 
         <Setter Property="Height" Value="Auto"/>
         <Setter Property="Width" Value="{Binding ActualHeight, RelativeSource={RelativeSource Self}}"/>
@@ -29,7 +29,7 @@
                             <Setter TargetName="border" Property="Background" Value="{Binding BorderBrush, RelativeSource={RelativeSource TemplatedParent}}" />
                         </Trigger>
                         <Trigger Property="IsPressed" Value="True">
-                            <Setter TargetName="border" Property="Background" Value="{Binding Foreground, RelativeSource={RelativeSource TemplatedParent}}"/>
+                            <Setter TargetName="border" Property="Background" Value="{Binding OpacityMask, RelativeSource={RelativeSource TemplatedParent}}"/>
                         </Trigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>
