@@ -178,7 +178,7 @@ namespace SimpleStateMachineNodeEditor.View
         }
         void New()
         {
-            this.NodesCanvas.ViewModel.CommandNew.Execute();
+            this.NodesCanvas.ViewModel.CommandNewScheme.Execute();
         }
         void WithoutSaving(Action action)
         {

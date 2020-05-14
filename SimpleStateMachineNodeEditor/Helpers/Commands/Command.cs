@@ -25,9 +25,9 @@ namespace SimpleStateMachineNodeEditor.Helpers.Commands
 
         /// <summary>
         /// Результат выполнения команды
-        /// </summary>
         /// Например здесь может храниться список объектов, которые были изменены
         public TResult Result { get; set; }
+        /// </summary>
 
         /// <summary>
         /// Флаг того, является ли команда отменяемой 

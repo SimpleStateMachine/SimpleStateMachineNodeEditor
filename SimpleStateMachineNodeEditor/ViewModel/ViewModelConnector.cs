@@ -94,8 +94,10 @@ namespace SimpleStateMachineNodeEditor.ViewModel
         public SimpleCommand CommandConnectorDragEnter { get; set; }
         public SimpleCommand CommandConnectorDrop { get; set; }
         public SimpleCommand CommandSetAsLoop { get; set; }
-        public SimpleCommand CommandAdd { get; set; }
-        public SimpleCommand CommandDelete { get; set; }
+        //public SimpleCommand CommandAdd { get; set; }
+        //public SimpleCommand CommandDelete { get; set; }
+        //public SimpleCommand CommandAddWithConnect { get; set; }
+        //public SimpleCommand CommandDeleteWithConnect { get; set; }
         public SimpleCommandWithParameter<SelectMode> CommandSelect { get; set; }
         public SimpleCommandWithParameter<string> CommandValidateName { get; set; }
 
@@ -111,8 +113,11 @@ namespace SimpleStateMachineNodeEditor.ViewModel
             CommandConnectorDragEnter = new SimpleCommand(ConnectorDragEnter);
             CommandConnectorDrop = new SimpleCommand(ConnectorDrop);
 
-            CommandAdd = new SimpleCommand(Add);
-            CommandDelete = new SimpleCommand(Delete);
+            //CommandAdd = new SimpleCommand(Add);
+            //CommandDelete = new SimpleCommand(Delete);
+            //CommandAddWithConnect = new SimpleCommand(AddWithConnect);
+            //CommandDeleteWithConnect = new SimpleCommand(DeleteWithConnect);
+
             CommandValidateName = new SimpleCommandWithParameter<string>(ValidateName, NotSaved);
 
             CommandSelect = new SimpleCommandWithParameter<SelectMode>(Select);
@@ -170,18 +175,27 @@ namespace SimpleStateMachineNodeEditor.ViewModel
 
             Node.CommandAddEmptyConnector.Execute();
         }
-        private void Add()
-        {
-
-            Node.CommandAddConnector.Execute(this);
-        }
-        private void Delete()
-        {
-            Node.CommandDeleteConnector.Execute(this);
-        }
+        //private void Add()
+        //{
+        //    Node.CommandAddConnector.Execute((0, this));
+        //}
+        //private void Delete()
+        //{
+        //    Node.CommandDeleteConnector.Execute(this);
+        //}
+        //private void AddWithConnect()
+        //{
+        //    this.Add();
+        //    this.Connect?.CommandAdd.Execute();
+        //}
+        //private void DeleteWithConnect()
+        //{
+        //    this.Delete();
+        //    this.Connect?.CommandDelete.Execute();
+        //}
         private void ConnectPointDrag()
         {
-            Node.NodesCanvas.CommandAddFreeConnect.Execute(Node.CurrentConnector);
+            NodesCanvas.CommandAddDraggedConnect.Execute(Node.CurrentConnector);
         }
         private void DragConnector(ViewModelConnector draggedConnector)
         {
@@ -189,11 +203,10 @@ namespace SimpleStateMachineNodeEditor.ViewModel
         }
 
         private void ConnectPointDrop()
-        {
-           
-            if (Node.NodesCanvas.DraggedConnect.FromConnector.Node != this.Node)
+        {           
+            if (NodesCanvas.DraggedConnect.FromConnector.Node != this.Node)
             {
-                var connect = Node.NodesCanvas.DraggedConnect;
+                var connect = NodesCanvas.DraggedConnect;
                 connect.ToConnector = this;
             }
 
@@ -201,28 +214,28 @@ namespace SimpleStateMachineNodeEditor.ViewModel
 
         private void CheckConnectPointDrop()
         {
-            if (Node.NodesCanvas.DraggedConnect.ToConnector == null)
+            if (NodesCanvas.DraggedConnect.ToConnector == null)
             {
-                Node.NodesCanvas.CommandDeleteFreeConnect.Execute();
+                NodesCanvas.CommandDeleteDraggedConnect.Execute();
             }
             else
             {
                 Node.CommandAddEmptyConnector.Execute();
-                Node.NodesCanvas.CommandAddConnect.Execute(Node.NodesCanvas.DraggedConnect);
-                Node.NodesCanvas.DraggedConnect = null;
+                NodesCanvas.CommandAddConnectWithUndoRedo.Execute(Node.NodesCanvas.DraggedConnect);
+                NodesCanvas.DraggedConnect = null;
             }
         }
 
         private void ConnectorDrag()
         {            
-            this.NodesCanvas.ConnectorPreviewForDrop = this;
+            NodesCanvas.ConnectorPreviewForDrop = this;
         }
         private void ConnectorDragEnter()
         {
-            if (this.Node != this.NodesCanvas.ConnectorPreviewForDrop.Node)
+            if (Node != NodesCanvas.ConnectorPreviewForDrop.Node)
                 return;
 
-            int indexTo = this.Node.Transitions.IndexOf(this);
+            int indexTo = Node.Transitions.IndexOf(this);
             if (indexTo == 0)
                 return;
 
@@ -317,7 +330,7 @@ namespace SimpleStateMachineNodeEditor.ViewModel
             }
             else
             {
-                viewModelConnect = new ViewModelConnect(nodeFrom.CurrentConnector);
+                viewModelConnect = new ViewModelConnect(nodeFrom.NodesCanvas, nodeFrom.CurrentConnector);
                 viewModelConnect.ToConnector = nodeTo.Input;
                 nodeFrom.CommandAddEmptyConnector.Execute();
             }     

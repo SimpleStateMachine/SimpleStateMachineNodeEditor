@@ -11,6 +11,7 @@ using SimpleStateMachineNodeEditor.Helpers;
 using SimpleStateMachineNodeEditor.Helpers.Enums;
 using System.Xml.Linq;
 using SimpleStateMachineNodeEditor.Helpers.Extensions;
+using SimpleStateMachineNodeEditor.Helpers.Commands;
 
 namespace SimpleStateMachineNodeEditor.ViewModel
 {
@@ -41,31 +42,23 @@ namespace SimpleStateMachineNodeEditor.ViewModel
         /// </summary>
         [Reactive] public Brush Stroke { get; set; } = Application.Current.Resources["ColorConnect"] as SolidColorBrush;
 
-        ///// <summary>
-        ///// Флаг того, что соединение выбрано
-        ///// </summary>
-        //[Reactive] public bool Selected { get; set; } = true;
-
-        /// <summary>
-        /// Элемент, из которого выходит линия
-        /// </summary>
         [Reactive] public ViewModelConnector FromConnector { get; set; }
 
-        /// <summary>
-        /// Элемент, в который приходит линия
-        /// </summary>
         [Reactive] public ViewModelConnector ToConnector { get; set; }
+
+        [Reactive] public ViewModelNodesCanvas NodesCanvas { get; set; }
 
         [Reactive] public DoubleCollection StrokeDashArray { get; set; }
 
         [Reactive] public double StrokeThickness { get; set; } = 1;
 
-        public ViewModelConnect(ViewModelConnector fromConnector)
+        public ViewModelConnect(ViewModelNodesCanvas viewModelNodesCanvas, ViewModelConnector fromConnector)
         {
 
             SetupSubscriptions();
             SetupCommands();
 
+            NodesCanvas = viewModelNodesCanvas;
             FromConnector = fromConnector;
             FromConnector.Connect = this;           
             //SetupCommands();
@@ -118,11 +111,37 @@ namespace SimpleStateMachineNodeEditor.ViewModel
 
         #region Setup Commands
 
+        //public SimpleCommand CommandDelete { get; set; }
+        //public SimpleCommand CommandAdd { get; set; }
+        //public SimpleCommand CommandDeleteWithConnector { get; set; }
+        //public SimpleCommand CommandAddWithConnector { get; set; }
         private void SetupCommands()
         {
-
+            //CommandAdd = new SimpleCommand(Add, NotSaved);
+            //CommandDelete = new SimpleCommand(Delete, NotSaved);
+            //CommandAddWithConnector = new SimpleCommand(AddWithConnect, NotSaved);
+            //CommandDeleteWithConnector = new SimpleCommand(DeleteWithConnects, NotSaved);
         }
-
+        private void NotSaved()
+        {
+            NodesCanvas.ItSaved = false;
+        }
+        //private void Add()
+        //{
+        //    NodesCanvas.CommandAddConnect.Execute(this);
+        //}
+        //private void Delete()
+        //{
+        //    NodesCanvas.CommandDeleteConnect.Execute(this);
+        //}
+        //private void AddWithConnect()
+        //{
+        //    this.FromConnector.CommandAddWithConnect.Execute();
+        //}
+        //private void DeleteWithConnects()
+        //{
+        //    this.FromConnector.CommandDeleteWithConnect.Execute();
+        //}
         #endregion Setup Commands
 
     }

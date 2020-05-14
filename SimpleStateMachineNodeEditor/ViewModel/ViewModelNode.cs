@@ -93,9 +93,10 @@ namespace SimpleStateMachineNodeEditor.ViewModel
         public SimpleCommandWithParameter<SelectMode> CommandSelect { get; set; }
         public SimpleCommandWithParameter<MyPoint> CommandMove { get; set; }
         public SimpleCommandWithParameter<bool> CommandCollapse { get; set; }
-        public SimpleCommandWithParameter<ViewModelConnector> CommandAddConnector { get; set; }
-        public SimpleCommandWithParameter<ViewModelConnector> CommandDeleteConnector { get; set; }
-
+        //public SimpleCommandWithParameter<(int index, ViewModelConnector connector)> CommandAddConnector { get; set; }
+        //public SimpleCommandWithParameter<ViewModelConnector> CommandDeleteConnector { get; set; }
+        public SimpleCommandWithParameter<(int index, ViewModelConnector connector)> CommandAddConnectorWithConnect { get; set; }
+        public SimpleCommandWithParameter<ViewModelConnector> CommandDeleteConnectorWithConnect { get; set; }
         public SimpleCommandWithParameter<string> CommandValidateName { get; set; }
 
         public SimpleCommandWithParameter<ViewModelConnector> CommandSelectWithShiftForConnectors { get; set; }
@@ -129,8 +130,13 @@ namespace SimpleStateMachineNodeEditor.ViewModel
             //CommandTransitionsDragOver = new SimpleCommand(TransitionsDragOver);
             //CommandConnectorDrag = new SimpleCommandWithParameter<ViewModelConnector>(this, ConnectorDrag);
 
-            CommandAddConnector = new SimpleCommandWithParameter<ViewModelConnector>(AddConnector, NotSaved);
-            CommandDeleteConnector = new SimpleCommandWithParameter<ViewModelConnector>(DeleteConnector, NotSaved);
+            //CommandAddConnector = new SimpleCommandWithParameter<(int index, ViewModelConnector connector)>(AddConnector, NotSaved);
+            //CommandDeleteConnector = new SimpleCommandWithParameter<ViewModelConnector>(DeleteConnector, NotSaved);
+
+            CommandAddConnectorWithConnect = new SimpleCommandWithParameter<(int index, ViewModelConnector connector)>(AddConnectorWithConnect, NotSaved);
+            CommandDeleteConnectorWithConnect = new SimpleCommandWithParameter<ViewModelConnector>(DeleteConnectorWithConnec, NotSaved);
+
+
             CommandValidateName = new SimpleCommandWithParameter<string>(ValidateName, NotSaved);
 
 
@@ -156,12 +162,34 @@ namespace SimpleStateMachineNodeEditor.ViewModel
                 UnSelectedAllConnectors();
             }
         }
-        private void AddConnector(ViewModelConnector connector)
+        public int GetConnectorIndex(ViewModelConnector connector)
         {
-            Transitions.Add(connector);
+            return Transitions.IndexOf(connector);
         }
-        private void DeleteConnector(ViewModelConnector connector)
+
+        //private void AddConnector((int index, ViewModelConnector connector) element)
+        //{
+        //    Transitions.Insert(element.index, element.connector);
+        //}
+        //private void DeleteConnector(ViewModelConnector connector)
+        //{
+        //    Transitions.Remove(connector);
+        //    //connector.Connect?.Comma
+        //}
+        private void AddConnectorWithConnect((int index, ViewModelConnector connector) element)
         {
+            Transitions.Insert(element.index, element.connector);
+            if(element.connector.Connect!=null)
+            {
+                NodesCanvas.CommandAddConnect.Execute(element.connector.Connect);
+            }
+        }
+        private void DeleteConnectorWithConnec(ViewModelConnector connector)
+        {
+            if (connector.Connect != null)
+            {
+                NodesCanvas.CommandDeleteConnect.Execute(connector.Connect);
+            }
             Transitions.Remove(connector);
         }
         private void Select(SelectMode selectMode)
