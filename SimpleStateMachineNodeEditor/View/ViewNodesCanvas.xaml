@@ -15,12 +15,11 @@
         <local:ViewCutter x:Name="Cutter"  Panel.ZIndex="999"/>
 
         <ItemsControl  Panel.ZIndex="0" 
-                       VirtualizingStackPanel.IsVirtualizing="True" 
-                       VirtualizingStackPanel.VirtualizationMode="Recycling" 
-                       VirtualizingStackPanel.CacheLength="1"
-                       VirtualizingStackPanel.CacheLengthUnit="Page"
-                       
-                       VirtualizingStackPanel.ScrollUnit="Pixel">
+                       VirtualizingPanel.IsVirtualizing="True" 
+                       VirtualizingPanel.VirtualizationMode="Recycling" 
+                       VirtualizingPanel.CacheLength="1"
+                       VirtualizingPanel.CacheLengthUnit="Page"                 
+                       VirtualizingPanel.ScrollUnit="Pixel">
             
             <ItemsControl.RenderTransform>
                 <TransformGroup x:Name="TransformGroup">

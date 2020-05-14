@@ -395,7 +395,17 @@ namespace SimpleStateMachineNodeEditor.ViewModel
         }
         private DeleteMode UnDeleteSelectedElements(DeleteMode parameter, DeleteMode result)
         {
-            for (int i = 0;i<(int)result; i++)
+            int count = 0;
+
+            if((result == DeleteMode.DeleteNodes)|| (result == DeleteMode.DeleteConnects))
+            {
+                count = 1;
+            }else if (result == DeleteMode.DeleteAllSelected)
+            {
+                count = 2;
+            }
+
+                for (int i = 0;i< count; i++)
             {
                 CommandUndo.Execute();
             }

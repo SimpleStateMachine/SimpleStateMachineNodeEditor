@@ -96,17 +96,17 @@ namespace SimpleStateMachineNodeEditor.View
         }
         void UpdatePosition()
         {
-            // Координата центра
-            Point InputCenter = EllipseElement.TranslatePoint(new Point(EllipseElement.Width/2, EllipseElement.Height / 2), this);
+            Point positionConnectPoint = EllipseElement.TranslatePoint(new Point(EllipseElement.Width/2, EllipseElement.Height / 2), this);
 
-            //Ищем Canvas
             ViewNodesCanvas NodesCanvas = MyUtils.FindParent<ViewNodesCanvas>(this);
             if (NodesCanvas == null)
                 return;
-            //Получаем позицию центру на канвасе
-            MyPoint Position = MyPoint.CreateFromPoint(this.TransformToAncestor(NodesCanvas).Transform(InputCenter));
 
-            this.ViewModel.PositionConnectPoint.Set(Position/this.ViewModel.NodesCanvas.Scale.Value);
+            positionConnectPoint = this.TransformToAncestor(NodesCanvas).Transform(positionConnectPoint);
+
+            MyPoint Position = MyPoint.CreateFromPoint(positionConnectPoint)/ this.ViewModel.NodesCanvas.Scale.Value;
+
+            this.ViewModel.PositionConnectPoint.Set(Position);
         }
     }
 }

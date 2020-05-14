@@ -187,19 +187,15 @@ namespace SimpleStateMachineNodeEditor.View
         /// </summary>
         void UpdatePositionConnectPoin()
         {
-
             Point positionConnectPoint;
             MyPoint Position;
-            //Если отображается
+
             if (this.IsVisible)
             {
-                // Координата центра
                 positionConnectPoint = EllipseElement.TranslatePoint(new Point(EllipseElement.Width/2, EllipseElement.Height / 2), this);
 
-                //Ищем Canvas
                 ViewNodesCanvas NodesCanvas = MyUtils.FindParent<ViewNodesCanvas>(this);
 
-                //Получаем позицию центру на канвасе
                 positionConnectPoint = this.TransformToAncestor(NodesCanvas).Transform(positionConnectPoint);
 
                 Position  = MyPoint.CreateFromPoint(positionConnectPoint) / this.ViewModel.NodesCanvas.Scale.Value;
@@ -207,14 +203,11 @@ namespace SimpleStateMachineNodeEditor.View
             }
             else
             {
-                //Позиция выхода
                 positionConnectPoint = this.ViewModel.Node.Output.PositionConnectPoint.Value;
 
                 Position = MyPoint.CreateFromPoint(positionConnectPoint);
             }
-
-
-           
+         
             this.ViewModel.PositionConnectPoint.Set(Position);
         }
 
