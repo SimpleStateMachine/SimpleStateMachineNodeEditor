@@ -8,14 +8,20 @@
         <ResourceDictionary Source="ExportScheme.xaml"/>
         <ResourceDictionary Source="CollapseUp.xaml"/>
         <ResourceDictionary Source="CollapseUpGroup.xaml"/>
-        <ResourceDictionary Source="DeleteRelationship.xaml"/>
+        <ResourceDictionary Source="DeleteScheme.xaml"/>
         <ResourceDictionary Source="Error.xaml"/>
         <ResourceDictionary Source="ErrorList.xaml"/>
         <ResourceDictionary Source="Save.xaml"/>
         <ResourceDictionary Source="ExpandDown.xaml"/>
+        <ResourceDictionary Source="Restore.xaml"/>
+        <ResourceDictionary Source="Minimize.xaml"/>
+        <ResourceDictionary Source="Maximize.xaml"/>
+        <ResourceDictionary Source="SelectAll.xaml"/>
         <ResourceDictionary Source="Loop.xaml"/>
+        <ResourceDictionary Source="Close.xaml"/>
+        <ResourceDictionary Source="Copy.xaml"/>
         <ResourceDictionary Source="ExpandDownGroup.xaml"/>
-       
+        <ResourceDictionary Source="AddNode.xaml"/>
         <ResourceDictionary Source="Redo.xaml"/>
         <ResourceDictionary Source="Relationship.xaml"/>
         <ResourceDictionary Source="SaveAs.xaml"/>

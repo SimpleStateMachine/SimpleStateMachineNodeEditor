@@ -7,9 +7,11 @@
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
 
-    <Path  Data="M10,4L8,4l0-3l2,0L10,4z M1,14L1,1l3,0l0,5l8,0l0-5l1,0l2,2l0,11c0,0.6-0.4,1-1,1L2,15C1.4,15,1,14.6,1,14Z" Fill="Yellow" />
+    <Path  Data="M9,9v6h6V9H12.3V7h-1V9Zm5,5H10V11h4ZM9,1V5H7V3H1V9H2V5H6V8H2V9H7V6H9V7h6V1Zm5,5H10V3h4Z " Fill="Yellow" />
+
+    <!--M5.8,15l-1.1-2.6L3,14.2V7l5.4,5H5.9L7,14.5L5.8,15z-->
     <!--<Viewbox Width="16" Height="16" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation">
-        <Rectangle Width="16" Height="16" >
+        <Rectangle Width="16" Height="16">
             <Rectangle.Fill>
                 <DrawingBrush >
         <DrawingBrush.Drawing>
@@ -17,10 +19,10 @@
                 <DrawingGroup.Children>
                     <GeometryDrawing  Brush="Blue" Geometry="M13.3528 1.146L14.8528 2.646L14.9998 3V14.5L14.4998 15H1.49982L0.999817 14.5V1.5L1.49982 1H12.9998L13.3528 1.146ZM1.99982 2V14H13.9998V3.208L12.7928 2H10.9998V6H3.99982V2H1.99982ZM7.99982 2V5H9.99982V2H7.99982Z" />
 
-                    --><!--<GeometryDrawing Brush="#00FFFFFF" Geometry="F1M16,16L0,16 0,0 16,0z" />
+                    <GeometryDrawing Brush="#00FFFFFF" Geometry="F1M16,16L0,16 0,0 16,0z" />
                     <GeometryDrawing Brush="#FFF6F6F6" Geometry="F1M16,2L16,16 2.586,16 0,13.414 0,2C0,0.897,0.897,0,2,0L14,0C15.103,0,16,0.897,16,2" />
                     <GeometryDrawing Brush="#FFEFEFF0" Geometry="F1M4,10L4,15 6,15 6,12 8,12 8,15 12,15 12,10z M13,7L3,7 3,3 13,3z" />
-                    <GeometryDrawing Brush="#FF00529C" Geometry="F1M13,3L3,3 3,7 13,7z M15,2L15,15 12,15 12,10 4,10 4,15 3,15 1,13 1,2C1,1.448,1.448,1,2,1L14,1C14.553,1,15,1.448,15,2 M6,12L8,12 8,15 6,15z" />--><!--
+                    <GeometryDrawing Brush="#FF00529C" Geometry="F1M13,3L3,3 3,7 13,7z M15,2L15,15 12,15 12,10 4,10 4,15 3,15 1,13 1,2C1,1.448,1.448,1,2,1L14,1C14.553,1,15,1.448,15,2 M6,12L8,12 8,15 6,15z" />
                 </DrawingGroup.Children>
             </DrawingGroup>
         </DrawingBrush.Drawing>

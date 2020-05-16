@@ -117,7 +117,18 @@ namespace SimpleStateMachineNodeEditor.View
         }
         void StateNormalMaximaze()
         {
-            this.WindowState = this.WindowState == WindowState.Normal ? WindowState.Maximized : WindowState.Normal;
+            if(this.WindowState == WindowState.Normal)
+            {
+                this.WindowState = WindowState.Maximized;
+                this.ButtonMaxRectangle.Fill = System.Windows.Application.Current.Resources["IconRestore"] as DrawingBrush;
+            }
+            else
+            {
+                this.WindowState = WindowState.Normal;
+                this.ButtonMaxRectangle.Fill = System.Windows.Application.Current.Resources["IconMaximize"] as DrawingBrush;
+            }
+
+            //this.WindowState = this.WindowState == WindowState.Normal ? WindowState.Maximized : WindowState.Normal;
         }
         void ButtonCloseClick()
         {
