@@ -171,7 +171,7 @@ namespace SimpleStateMachineNodeEditor.ViewModel
             if (this == Node.Output)
                 return;
             this.FormStrokeThickness = 0;
-            this.FormFill = Application.Current.Resources["ColorRightConnectorEllipseLoop"] as DrawingBrush;
+            this.FormFill = Application.Current.Resources["IconLoop"] as DrawingBrush;
 
             Node.CommandAddEmptyConnector.Execute();
         }

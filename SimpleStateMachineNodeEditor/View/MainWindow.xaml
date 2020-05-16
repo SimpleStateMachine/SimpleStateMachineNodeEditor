@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:SimpleStateMachineNodeEditor"
         xmlns:styles="clr-namespace:SimpleStateMachineNodeEditor.Styles"
-         xmlns:sys="clr-namespace:System;assembly=mscorlib"
+        xmlns:sys="clr-namespace:System;assembly=mscorlib"
     
     xmlns:view="clr-namespace:SimpleStateMachineNodeEditor.View" xmlns:sys1="clr-namespace:System;assembly=System.Runtime"
     x:Class="SimpleStateMachineNodeEditor.View.MainWindow"
@@ -79,11 +79,43 @@
             <Button DockPanel.Dock="Right" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="{x:Null}" />
         </DockPanel>
         <ToolBarTray Grid.Row="1" IsLocked="True"  Background="{x:Null}">
-            <ToolBar Style="{StaticResource ToolBarTemplate}" Background="{x:Null}" Foreground="{x:Null}" >
-                <!--<Button Background="{StaticResource ColorWindowHeader}" BorderBrush="{StaticResource ColorButtonMaxIsMouseOver}" Foreground="{StaticResource ColorWindowHeaderButtonBackgroundPressed}" Height="16" Width="16" Style="{StaticResource StyleHeaderButton}">
-                    <Image Source="/View/SaveAs_16x.png"  Height="16"/>
-                </Button>-->
-
+            <ToolBar Style="{StaticResource ToolBarTemplate}" Background="{x:Null}" Foreground="{x:Null}"  ToolTip="Save Ctrl+S" >
+                <Button Style="{StaticResource StyleHeaderButton}" Background="{StaticResource ColorWindowHeader}" BorderBrush="{StaticResource ColorWindowHeaderButtonBackgroundMouseOver}">
+                    <Rectangle Fill="{StaticResource IconNewSheme}" Height="13" Width="13"/>
+                </Button>
+                <Button Style="{StaticResource StyleHeaderButton}" Background="{StaticResource ColorWindowHeader}" BorderBrush="{StaticResource ColorWindowHeaderButtonBackgroundMouseOver}">
+                    <Rectangle Fill="{StaticResource IconImportScheme}" Height="13" Width="13"/>
+                </Button>
+                <Button Style="{StaticResource StyleHeaderButton}" Background="{StaticResource ColorWindowHeader}" BorderBrush="{StaticResource ColorWindowHeaderButtonBackgroundMouseOver}">
+                    <Rectangle Fill="{StaticResource IconSave}" Height="13" Width="13"/>
+                </Button>
+                <Button Style="{StaticResource StyleHeaderButton}" Background="{StaticResource ColorWindowHeader}" BorderBrush="{StaticResource ColorWindowHeaderButtonBackgroundMouseOver}">
+                    <Rectangle Fill="{StaticResource IconExportScheme}" Height="13" Width="13"/>
+                </Button>
+                <Separator Background="DarkGray"  />
+                <Button Style="{StaticResource StyleHeaderButton}" Background="{StaticResource ColorWindowHeader}" BorderBrush="{StaticResource ColorWindowHeaderButtonBackgroundMouseOver}">
+                    <Rectangle Fill="{StaticResource IconUndo}" Height="13" Width="13"/>
+                </Button>
+                <Button Style="{StaticResource StyleHeaderButton}" Background="{StaticResource ColorWindowHeader}" BorderBrush="{StaticResource ColorWindowHeaderButtonBackgroundMouseOver}">
+                    <Rectangle Fill="{StaticResource IconRedo}" Height="13" Width="13"/>
+                </Button>
+                <Separator Background="DarkGray" />
+                <Button Style="{StaticResource StyleHeaderButton}" Background="{StaticResource ColorWindowHeader}" BorderBrush="{StaticResource ColorWindowHeaderButtonBackgroundMouseOver}">
+                    <Rectangle Fill="{StaticResource IconCollapseUpGroup}" Height="13" Width="13"/>
+                </Button>
+                <Button Style="{StaticResource StyleHeaderButton}" Background="{StaticResource ColorWindowHeader}" BorderBrush="{StaticResource ColorWindowHeaderButtonBackgroundMouseOver}">
+                    <Rectangle Fill="{StaticResource IconExpandDownGroup}" Height="13" Width="13"/>
+                </Button>
+                <Separator Background="DarkGray" />
+                <Button Style="{StaticResource StyleHeaderButton}" Background="{StaticResource ColorWindowHeader}" BorderBrush="{StaticResource ColorWindowHeaderButtonBackgroundMouseOver}">
+                    <Rectangle Fill="{StaticResource IconZoomIn}" Height="13" Width="13"/>
+                </Button>
+                <Button Style="{StaticResource StyleHeaderButton}" Background="{StaticResource ColorWindowHeader}" BorderBrush="{StaticResource ColorWindowHeaderButtonBackgroundMouseOver}">
+                    <Rectangle Fill="{StaticResource IconZoomOut}" Height="13" Width="13"/>
+                </Button>
+                <Button Style="{StaticResource StyleHeaderButton}" Background="{StaticResource ColorWindowHeader}" BorderBrush="{StaticResource ColorWindowHeaderButtonBackgroundMouseOver}">
+                    <Rectangle Fill="{StaticResource IconZoomOriginalSize}" Height="13" Width="13"/>
+                </Button>
             </ToolBar>
 
             <!--<Separator />
@@ -107,6 +139,7 @@
         <Expander Style="{StaticResource StyleExpander}"  x:Name="ErrorListExpander" Grid.Row="4"  HorizontalContentAlignment="Stretch" ExpandDirection="Up" Margin="3,0,0,0" >
             <Expander.Header>
                 <!--OpacityMask - Foreground on Mouse Over-->
+               
                 <Label Style="{StaticResource StyleLabel}" HorizontalAlignment="Left" VerticalAlignment="Top" OpacityMask="{StaticResource ColorElementMouseOver}">Error List</Label>
             </Expander.Header>
             <Expander.Content>

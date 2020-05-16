@@ -1,0 +1,14 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <DrawingBrush x:Key="IconCollapseUp" >
+        <DrawingBrush.Drawing>
+            <DrawingGroup>
+                <DrawingGroup.Children>
+                    <GeometryDrawing Brush="#00FFFFFF" Geometry="F1M16,16L0,16 0,0 16,0z" />
+                    <GeometryDrawing Brush="#FFF6F6F6" Geometry="F1M8.0879,3.6289L13.0699,8.6159 10.7579,10.9299 8.0289,8.1969 5.0639,10.8969 2.7569,8.5909z" />
+                    <GeometryDrawing Brush="#FF424242" Geometry="F1M10.7588,9.5146L11.6558,8.6166 8.0628,5.0186 4.1968,8.6166 5.0958,9.5146 8.0628,6.8156z" />
+                </DrawingGroup.Children>
+            </DrawingGroup>
+        </DrawingBrush.Drawing>
+    </DrawingBrush>
+</ResourceDictionary>

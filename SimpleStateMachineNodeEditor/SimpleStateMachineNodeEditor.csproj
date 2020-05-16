@@ -8,38 +8,38 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <None Remove="Images\ApplicationConnectionDiagram_16x.png" />
-    <None Remove="Images\ApplicationConnectionDiagram_16x.svg" />
-    <None Remove="Images\CollapseUp_16x.png" />
-    <None Remove="Images\CollapseUp_16x.svg" />
-    <None Remove="Images\DeleteRelationship_16x.png" />
-    <None Remove="Images\DeleteRelationship_16x.svg" />
-    <None Remove="Images\ExpandDown_lg_16x.png" />
-    <None Remove="Images\ExpandDown_lg_16x.svg" />
-    <None Remove="Images\NewDiagram_16x.png" />
-    <None Remove="Images\NewDiagram_16x.svg" />
-    <None Remove="Images\NewRelationshipMenu_16x.png" />
-    <None Remove="Images\NewRelationshipMenu_16x.svg" />
-    <None Remove="Images\Redo_16x.png" />
-    <None Remove="Images\Redo_16x.svg" />
-    <None Remove="Images\Relationship_16x.svg" />
-    <None Remove="Images\SaveAs_16x.png" />
-    <None Remove="Images\SaveAs_16x.svg" />
-    <None Remove="Images\Save_16x.png" />
-    <None Remove="Images\Save_16x.svg" />
-    <None Remove="Images\Undo_16x.png" />
-    <None Remove="Images\Undo_16x.svg" />
-    <None Remove="Images\ZoomIn_16x.png" />
-    <None Remove="Images\ZoomIn_16x.svg" />
-    <None Remove="Images\ZoomOriginalSize_16x.png" />
-    <None Remove="Images\ZoomOriginalSize_16x.svg" />
-    <None Remove="Images\ZoomOut_16x.png" />
-    <None Remove="Images\ZoomOut_16x.svg" />
+    <None Remove="Icons\ApplicationConnectionDiagram_16x.png" />
+    <None Remove="Icons\ApplicationConnectionDiagram_16x.svg" />
+    <None Remove="Icons\CollapseUp_16x.png" />
+    <None Remove="Icons\CollapseUp_16x.svg" />
+    <None Remove="Icons\DeleteRelationship_16x.png" />
+    <None Remove="Icons\DeleteRelationship_16x.svg" />
+    <None Remove="Icons\ExpandDown_lg_16x.png" />
+    <None Remove="Icons\ExpandDown_lg_16x.svg" />
+    <None Remove="Icons\NewDiagram_16x.png" />
+    <None Remove="Icons\NewDiagram_16x.svg" />
+    <None Remove="Icons\NewRelationshipMenu_16x.png" />
+    <None Remove="Icons\NewRelationshipMenu_16x.svg" />
+    <None Remove="Icons\Redo_16x.png" />
+    <None Remove="Icons\Redo_16x.svg" />
+    <None Remove="Icons\Relationship_16x.svg" />
+    <None Remove="Icons\SaveAs_16x.png" />
+    <None Remove="Icons\SaveAs_16x.svg" />
+    <None Remove="Icons\Save_16x.png" />
+    <None Remove="Icons\Save_16x.svg" />
+    <None Remove="Icons\Undo_16x.png" />
+    <None Remove="Icons\Undo_16x.svg" />
+    <None Remove="Icons\ZoomIn_16x.png" />
+    <None Remove="Icons\ZoomIn_16x.svg" />
+    <None Remove="Icons\ZoomOriginalSize_16x.png" />
+    <None Remove="Icons\ZoomOriginalSize_16x.svg" />
+    <None Remove="Icons\ZoomOut_16x.png" />
+    <None Remove="Icons\ZoomOut_16x.svg" />
   </ItemGroup>
 
   <ItemGroup>
-    <Page Remove="Images\Relationship_16x.xaml" />
-    <Page Remove="Images\SaveAs_16x.xaml" />
+    <Page Remove="Icons\Relationship_16x.xaml" />
+    <Page Remove="Icons\SaveAs_16x.xaml" />
   </ItemGroup>
 
   <ItemGroup>

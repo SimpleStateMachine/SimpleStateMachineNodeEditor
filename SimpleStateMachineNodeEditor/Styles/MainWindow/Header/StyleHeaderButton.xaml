@@ -2,7 +2,7 @@
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
     
-    <Style x:Key="FocusVisual2">
+    <!--<Style x:Key="FocusVisual2">
         <Setter Property="Control.Template">
             <Setter.Value>
                 <ControlTemplate>
@@ -10,14 +10,12 @@
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
-    </Style>
+    </Style>-->
 
     <Style x:Key="StyleHeaderButton" TargetType="{x:Type Button}">
         <Setter Property="BorderBrush" Value="{x:Null}"/> 
         <Setter Property="Height" Value="Auto"/>
         <Setter Property="Width" Value="{Binding ActualHeight, RelativeSource={RelativeSource Self}}"/>
-        <Setter Property="MinHeight" Value="30"/>
-        <Setter Property="MinWidth" Value="40"/>
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type Button}">
