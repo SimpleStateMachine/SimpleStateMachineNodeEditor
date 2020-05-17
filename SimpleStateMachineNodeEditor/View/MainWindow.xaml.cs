@@ -48,13 +48,14 @@ namespace SimpleStateMachineNodeEditor.View
         public MainWindow()
         {
             InitializeComponent();
-            ViewModel = new ViewModelMainWindow();         
+            ViewModel = new ViewModelMainWindow();
+            SetupSubscriptions();
             SetupBinding();
             SetupEvents();
             SetupCommands();
         }
 
-        #region SetupBinding
+        #region Setup Binding
          
         private void SetupBinding()
         {
@@ -66,15 +67,45 @@ namespace SimpleStateMachineNodeEditor.View
                 this.BindCommand(this.ViewModel, x => x.CommandCopyError, x => x.ItemCopyError, SelectedItem).DisposeWith(disposable);
 
                 this.OneWayBind(this.ViewModel, x=>x.Messages, x=>x.MessageList.ItemsSource).DisposeWith(disposable);
+
+
+                
+
+                //this.BindCommand(this.ViewModel, x=>this.CommandSave,  x=>x.ButtonSave).DisposeWith(disposable);
+
+
             });
         }
-        #endregion SetupBinding
+        #endregion Setup Binding
+        #region Setup Subscriptions
 
+        private void SetupSubscriptions()
+        {
+            this.WhenActivated(disposable =>
+            {
+                this.WhenAnyValue(x=>x.ViewModel.NodesCanvas.Path).Subscribe(value=> UpdateSchemeName(value)).DisposeWith(disposable);
+
+
+            });
+        }
+        private void UpdateSchemeName(string newName)
+        {
+            this.LabelSchemeName.Visibility = string.IsNullOrEmpty(newName) ? Visibility.Hidden : Visibility.Visible;
+            if (!string.IsNullOrEmpty(newName))
+            {
+                this.LabelSchemeName.Content = Path.GetFileNameWithoutExtension(newName);
+                this.LabelSchemeName.ToolTip = newName;
+            }
+        }
+        #endregion Setup Subscriptions
         #region Setup Commands
+
+        public SimpleCommand CommandSave { get; set; }
         private void SetupCommands()
         {
             this.WhenActivated(disposable =>
             {
+                CommandSave = new SimpleCommand(Save);
                 this.Events().KeyUp.Where(x => x.Key == Key.S && (Keyboard.IsKeyDown(Key.LeftCtrl) || Keyboard.IsKeyDown(Key.RightCtrl))).Subscribe(_ => Save()).DisposeWith(disposable);
                 this.Events().KeyUp.Where(x => x.Key == Key.F4 && (Keyboard.IsKeyDown(Key.LeftAlt) || Keyboard.IsKeyDown(Key.RightAlt))).Subscribe(_ => Close()).DisposeWith(disposable);
             });
@@ -86,12 +117,17 @@ namespace SimpleStateMachineNodeEditor.View
         {
             this.WhenActivated(disposable =>
             {
+                this.ItemExportToJPEG.Events().Click.Subscribe(_ => ExportToImage(ImageFormats.JPEG)).DisposeWith(disposable);
+                this.ItemExportToPNG.Events().Click.Subscribe(_ => ExportToImage(ImageFormats.PNG)).DisposeWith(disposable);
+                //this.ButtonImportScheme
+
+
+
+                //this.ItemSave.InputBindings.Bin
                 this.Header.Events().PreviewMouseLeftButtonDown.Subscribe(e => HeaderClick(e)).DisposeWith(disposable);
                 this.ButtonClose.Events().Click.Subscribe(_ => WithoutSaving(ButtonCloseClick)).DisposeWith(disposable);
                 this.ButtonMin.Events().Click.Subscribe(e => ButtonMinClick(e)).DisposeWith(disposable);
                 this.ButtonMax.Events().Click.Subscribe(e => ButtonMaxClick(e)).DisposeWith(disposable);
-                this.ItemExportToJPEG.Events().Click.Subscribe(_ => ExportToImage(ImageFormats.JPEG)).DisposeWith(disposable);
-                this.ItemExportToPNG.Events().Click.Subscribe(_ => ExportToImage(ImageFormats.PNG)).DisposeWith(disposable);
                 this.ItemSave.Events().Click.Subscribe(_=> Save()).DisposeWith(disposable);
                 this.ItemSaveAs.Events().Click.Subscribe(_ => SaveAs()).DisposeWith(disposable);
                 this.ItemOpen.Events().Click.Subscribe(_ => WithoutSaving(Open)).DisposeWith(disposable);
@@ -121,14 +157,14 @@ namespace SimpleStateMachineNodeEditor.View
             {
                 this.WindowState = WindowState.Maximized;
                 this.ButtonMaxRectangle.Fill = System.Windows.Application.Current.Resources["IconRestore"] as DrawingBrush;
+                this.ButtonMaxRectangle.ToolTip = "Maximize";
             }
             else
             {
                 this.WindowState = WindowState.Normal;
                 this.ButtonMaxRectangle.Fill = System.Windows.Application.Current.Resources["IconMaximize"] as DrawingBrush;
+                this.ButtonMaxRectangle.ToolTip = "Restore down";
             }
-
-            //this.WindowState = this.WindowState == WindowState.Normal ? WindowState.Maximized : WindowState.Normal;
         }
         void ButtonCloseClick()
         {
@@ -178,7 +214,8 @@ namespace SimpleStateMachineNodeEditor.View
         void ExportToImage(ImageFormats format)
         {
             SaveFileDialog dlg = new SaveFileDialog();
-            dlg.FileName = "SimpleStateMachine"; 
+            
+            dlg.FileName = SchemeName(); 
             dlg.Filter = (format == ImageFormats.JPEG)? "JPEG Image (.jpeg)|*.jpeg":"Png Image (.png)|*.png";
 
             DialogResult dialogResult = dlg.ShowDialog();
@@ -205,39 +242,49 @@ namespace SimpleStateMachineNodeEditor.View
 
         void Save()
         {
-            if (string.IsNullOrEmpty(this.ViewModel.Path))
+            if (string.IsNullOrEmpty(this.ViewModel.NodesCanvas.Path))
             {
                 SaveAs();
             }
             else
             {
-                this.NodesCanvas.ViewModel.CommandSave.Execute(this.ViewModel.Path);
+                this.NodesCanvas.ViewModel.CommandSave.Execute(this.ViewModel.NodesCanvas.Path);
             }
         }
         void SaveAs()
         {
             SaveFileDialog dlg = new SaveFileDialog();
-            dlg.FileName = "SimpleStateMachine";
+            dlg.FileName = SchemeName();
             dlg.Filter = "XML-File | *.xml";
             
             DialogResult dialogResult = dlg.ShowDialog();
             if (dialogResult == System.Windows.Forms.DialogResult.OK)
             {
                 this.NodesCanvas.ViewModel.CommandSave.Execute(dlg.FileName);
-                this.ViewModel.Path = dlg.FileName;
             }
         }
-
+        private string SchemeName()
+        {
+            if (!string.IsNullOrEmpty(this.ViewModel.NodesCanvas.Path))
+            {
+                return Path.GetFileNameWithoutExtension(this.ViewModel.NodesCanvas.Path);
+            }
+            else
+            {
+                return "SimpleStateMachine";
+            }
+        }
         void Open()
         {
             OpenFileDialog dlg = new OpenFileDialog();
-            dlg.FileName = "SimpleStateMachine";
+            dlg.FileName = SchemeName();
             dlg.Filter = "XML-File | *.xml";
 
             DialogResult dialogResult = dlg.ShowDialog();
             if (dialogResult == System.Windows.Forms.DialogResult.OK)
             {
                 this.NodesCanvas.ViewModel.CommandOpen.Execute(dlg.FileName);
+
             }
        
         }

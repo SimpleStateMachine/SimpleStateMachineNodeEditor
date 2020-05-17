@@ -47,9 +47,8 @@
                     <!--#region      Header-->
                     <ResourceDictionary Source="Styles/MainWindow/ToolBar/ToolButtonTemplate.xaml"/>
                     <ResourceDictionary Source="Styles/MainWindow/ToolBarTemplate.xaml"/>
-                    <ResourceDictionary Source="Styles/MainWindow/Header/StyleHeaderButton.xaml"/>
-                    <ResourceDictionary Source="Styles/MainWindow/Header/StyleHeaderButtonPath.xaml"/>
-                    <ResourceDictionary Source="Styles/MainWindow/Header/StyleHeaderButtonClosePath.xaml"/>
+                <ResourceDictionary Source="Styles/MainWindow/Header/StyleHeaderButton.xaml"/>
+                <ResourceDictionary Source="Styles/MainWindow/Header/StyleHeaderButtonClosePath.xaml"/>
                     <!--#endregion   Header-->
                 
                 <!--#endregion   MainWindow-->

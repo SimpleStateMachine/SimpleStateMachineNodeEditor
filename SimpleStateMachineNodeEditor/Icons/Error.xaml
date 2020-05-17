@@ -4,7 +4,6 @@
         <DrawingBrush.Drawing>
             <DrawingGroup>
                 <DrawingGroup.Children>
-                    <GeometryDrawing Brush="#00FFFFFF" Geometry="F1M16,16L0,16 0,0 16,0z" />
                     <GeometryDrawing Brush="#FFF6F6F6" Geometry="F1M2,8C2,4.687 4.687,2 8,2 11.313,2 14,4.687 14,8 14,11.313 11.313,14 8,14 4.687,14 2,11.313 2,8" />
                     <GeometryDrawing Brush="#FFE51300" Geometry="F1M11,10L10,11 8,9 6,11 5,10 7,7.972 5,6 6,5 8,7 10,5 11,6 9,7.972z M8,3C5.238,3 3,5.238 3,8 3,10.762 5.238,13 8,13 10.762,13 13,10.762 13,8 13,5.238 10.762,3 8,3" />
                     <GeometryDrawing Brush="#FFFFFFFF" Geometry="F1M9,7.9722L11,10.0002 10,11.0002 8,9.0002 6,11.0002 5,10.0002 7,7.9722 5,6.0002 6,5.0002 8,7.0002 10,5.0002 11,6.0002z" />

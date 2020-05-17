@@ -14,7 +14,8 @@
         <local:ViewSelector x:Name="Selector"  Panel.ZIndex="999"/>
         <local:ViewCutter x:Name="Cutter"  Panel.ZIndex="999"/>
 
-        <ItemsControl  Panel.ZIndex="0" 
+        <ItemsControl  x:Name="ElementItemControl"
+            Panel.ZIndex="0" 
                        VirtualizingPanel.IsVirtualizing="True" 
                        VirtualizingPanel.VirtualizationMode="Recycling" 
                        VirtualizingPanel.CacheLength="1"
@@ -31,7 +32,7 @@
             </ItemsControl.RenderTransform>
             <ItemsControl.ItemsPanel>
                 <ItemsPanelTemplate>
-                    <Grid Background="{x:Null}">
+                    <Grid x:Name="ElementGrid" Background="{x:Null}">
                     </Grid>
                 </ItemsPanelTemplate>
             </ItemsControl.ItemsPanel>
@@ -103,6 +104,17 @@
                     <Rectangle Fill="{StaticResource IconDeleteScheme}" Height="11" Width="11"/>
                 </MenuItem.Icon>
             </MenuItem>
+            <Separator Background="#333337"/>
+            <MenuItem Header="Collaps Up" x:Name="ItemCollapsUp" Style="{StaticResource StyleContextMenuItem}">
+                <MenuItem.Icon>
+                    <Rectangle Fill="{StaticResource IconCollapseUp}" Height="11" Width="11"/>
+                </MenuItem.Icon>
+            </MenuItem>
+            <MenuItem Header="Expand Down" x:Name="ItemExpandDown" Style="{StaticResource StyleContextMenuItem}">
+                <MenuItem.Icon>
+                    <Rectangle Fill="{StaticResource IconExpandDown}" Height="11" Width="11"/>
+                </MenuItem.Icon>
+            </MenuItem>
         </ContextMenu>
     </UserControl.ContextMenu>
 
@@ -114,12 +126,12 @@
     <UserControl.InputBindings>
         <KeyBinding x:Name="BindingUndo" Key="Z" Modifiers="Control" />
         <KeyBinding x:Name="BindingRedo" Key="Y" Modifiers="Control" />
-        <KeyBinding x:Name="BindingSave" Key="S" Modifiers="Control" />
+        <!--<KeyBinding x:Name="BindingSave" Key="S" Modifiers="Control" />-->
         <KeyBinding x:Name="BindingSelectAll" Key="A" Modifiers="Control" />
         <KeyBinding x:Name="BindingAddNode" Key="N" Modifiers="Control" />
         <KeyBinding x:Name="BindingDeleteSelectedElements" Key="Delete"  />
         <MouseBinding x:Name="BindingSelect" Gesture="Ctrl+LeftClick"/>
         <MouseBinding x:Name="BindingCut" Gesture="Alt+LeftClick" />
-        <MouseBinding x:Name="BindingZoom" Gesture="WheelClick"/>
+        <!--<MouseBinding x:Name="BindingZoom" Gesture="WheelClick"/>-->
     </UserControl.InputBindings>
 </UserControl>

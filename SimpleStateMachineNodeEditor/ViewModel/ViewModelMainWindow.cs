@@ -25,8 +25,6 @@ namespace SimpleStateMachineNodeEditor.ViewModel
             SetupCommands();
         }
 
-        public string Path { get;  set; }
-
         #region Setup Commands
 
         public SimpleCommandWithParameter<string> CommandCopyError { get; set; }

@@ -12,11 +12,11 @@
                                 <ColumnDefinition x:Name="Col0" MinWidth="12" Width="Auto" SharedSizeGroup="MenuItemIconColumnGroup"/>
                                 <ColumnDefinition Width="Auto" SharedSizeGroup="MenuTextColumnGroup"/>
                                 <ColumnDefinition Width="Auto" SharedSizeGroup="MenuItemIGTColumnGroup"/>
-                                <ColumnDefinition x:Name="Col3" Width="14"/>
+                                <ColumnDefinition x:Name="Col3" SharedSizeGroup="MenuGestureTextColumnGroup"/>
                             </Grid.ColumnDefinitions>
 
                             <!-- Icon -->
-                            <ContentPresenter Grid.Column="0" x:Name="Icon" Margin="4,0,6,0" VerticalAlignment="Center" ContentSource="Icon" Visibility="Visible"/>
+                            <ContentPresenter Grid.Column="0" x:Name="Icon" Margin="4,0,10,0" VerticalAlignment="Center" ContentSource="Icon" Visibility="Visible"/>
 
                              <!--Сheckmark --> 
                             <Grid Grid.Column="0" Visibility="Hidden" Margin="4,0,6,0" x:Name="GlyphPanel" VerticalAlignment="Center">
@@ -27,7 +27,7 @@
                             <ContentPresenter Grid.Column="1" x:Name="Header" Margin="{TemplateBinding Padding}"  RecognizesAccessKey="True" ContentSource="Header" Visibility="Visible"/>
 
                              <!-- InputGestureText -->
-                            <ContentPresenter Grid.Column="2" x:Name="InputGestureText" Margin="8,1,8,1"  ContentSource="InputGestureText" VerticalAlignment="Center" Visibility="Visible"/>
+                            <ContentPresenter Grid.Column="2" x:Name="InputGestureText" Margin="30,1,8,1"  ContentSource="InputGestureText" VerticalAlignment="Center" Visibility="Visible"/>
 
                             <!-- Arrow drawn for next level menu -->
                             <Grid Grid.Column="3" Margin="4,0,6,0" x:Name="ArrowPanel" VerticalAlignment="Center">

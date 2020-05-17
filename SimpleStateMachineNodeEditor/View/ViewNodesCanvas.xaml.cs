@@ -278,37 +278,7 @@ namespace SimpleStateMachineNodeEditor.View
 
         public void SaveCanvasToImage(string filename, ImageFormats format)
         {
-            int width = (int)this.Canvas.ActualWidth;
-            int height = (int)this.Canvas.ActualHeight;
-
-            var pSource = PresentationSource.FromVisual(Application.Current.MainWindow);
-            Matrix m = pSource.CompositionTarget.TransformToDevice;
-            double dpiX = m.M11 * 96;
-            double dpiY = m.M22 * 96;
-
-            RenderTargetBitmap renderBitmap = new RenderTargetBitmap(width, height, dpiX, dpiY, PixelFormats.Default);
-
-            //var crop = new CroppedBitmap(renderBitmap, new Int32Rect(50, 50, 250, 250));
-            // needed otherwise the image output is black
-            //this.Canvas.Measure(new Size(width, height));
-            //this.Canvas.Arrange(new Rect(new Size(width, height)));
-
-            renderBitmap.Render(this.Canvas);
-            BitmapEncoder encoder;
-
-            if (format == ImageFormats.JPEG)
-                encoder = new JpegBitmapEncoder();
-            else
-                encoder = new PngBitmapEncoder();
-
-            encoder.Frames.Add(BitmapFrame.Create(renderBitmap));
-
-            using (FileStream file = File.Create(filename))
-            {
-                encoder.Save(file);
-                file.Flush();
-                file.Close();
-            }
+            MyUtils.PanelToImage(this.Canvas, filename, format);
         }
 
     }

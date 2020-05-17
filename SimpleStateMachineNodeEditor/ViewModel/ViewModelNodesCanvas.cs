@@ -34,6 +34,8 @@ namespace SimpleStateMachineNodeEditor.ViewModel
 
         [Reactive] public bool ItSaved { get; set; } = true;
 
+        [Reactive] public string Path { get; set; }
+
         public IObservableCollection<ViewModelMessage> Messages { get; set; } = new ObservableCollectionExtended<ViewModelMessage>();
 
         /// <summary>
@@ -567,8 +569,10 @@ namespace SimpleStateMachineNodeEditor.ViewModel
                 if (WithError(errorMesage, x => Connects.Add(x), viewModelConnect))
                     return;
             }
-
+            Path = fileName;
             #endregion  setup Transitions/connects
+
+
 
             bool WithError<T>(string errorMessage, Action<T> action, T obj)
             {
@@ -616,8 +620,8 @@ namespace SimpleStateMachineNodeEditor.ViewModel
 
             xDocument.Save(fileName);
             ItSaved = true;
+            Path = fileName;
         }
-
 
         public class ElementsForDelete
         {

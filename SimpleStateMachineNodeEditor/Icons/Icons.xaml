@@ -16,6 +16,7 @@
         <ResourceDictionary Source="Restore.xaml"/>
         <ResourceDictionary Source="Minimize.xaml"/>
         <ResourceDictionary Source="Maximize.xaml"/>
+        <ResourceDictionary Source="Exit.xaml"/>
         <ResourceDictionary Source="SelectAll.xaml"/>
         <ResourceDictionary Source="Loop.xaml"/>
         <ResourceDictionary Source="Close.xaml"/>

@@ -7,7 +7,7 @@
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
 
-    <Path  Data="M9,9v6h6V9H12.3V7h-1V9Zm5,5H10V11h4ZM9,1V5H7V3H1V9H2V5H6V8H2V9H7V6H9V7h6V1Zm5,5H10V3h4Z " Fill="Yellow" />
+    <Path  Data="M15 7V1H9v1H4v3H1v6h3v3h5v1h6V9H9v4H5v-2h2V5H5V3h4v4h6zm-5-4h4v3h-4V3zm0 8h4v3h-4v-3zM6 7v3H2V7h4z" Fill="LightGray" />
 
     <!--M5.8,15l-1.1-2.6L3,14.2V7l5.4,5H5.9L7,14.5L5.8,15z-->
     <!--<Viewbox Width="16" Height="16" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation">

@@ -2,6 +2,10 @@
 using System.Windows.Media;
 using System;
 using System.Collections.Generic;
+using System.Windows.Controls;
+using SimpleStateMachineNodeEditor.Helpers.Enums;
+using System.Windows.Media.Imaging;
+using System.IO;
 
 namespace SimpleStateMachineNodeEditor.Helpers
 {
@@ -24,7 +28,26 @@ namespace SimpleStateMachineNodeEditor.Helpers
 
             return result;
         }
+        public static TParent FindChild<TParent>(DependencyObject currentObject) where TParent : DependencyObject
+        {
+            TParent child = default(TParent);
 
+            int numVisuals = VisualTreeHelper.GetChildrenCount(currentObject);
+            for (int i = 0; i < numVisuals; i++)
+            {
+                Visual v = (Visual)VisualTreeHelper.GetChild(currentObject, i);
+                child = v as TParent;
+                if (child == null)
+                {
+                    child = FindChild<TParent>(v);
+                }
+                if (child != null)
+                {
+                    break;
+                }
+            }
+            return child;
+        }
         public static void FindParents<TParent1, TParent2>(DependencyObject currentObject, out TParent1 parent1, out TParent2 parent2) where TParent1 : DependencyObject where TParent2 : DependencyObject
         {
             DependencyObject foundObject = currentObject;
@@ -52,6 +75,41 @@ namespace SimpleStateMachineNodeEditor.Helpers
                 }
 
             } while ((parent1 == default(TParent1)) || (parent2 == default(TParent2)));
+        }
+
+        public static void PanelToImage(Panel panel, string filename, ImageFormats format)
+        {
+            int width = (int)panel.ActualWidth;
+            int height = (int)panel.ActualHeight;
+
+            var pSource = PresentationSource.FromVisual(Application.Current.MainWindow);
+            Matrix m = pSource.CompositionTarget.TransformToDevice;
+            double dpiX = m.M11 * 96;
+            double dpiY = m.M22 * 96;
+
+            RenderTargetBitmap renderBitmap = new RenderTargetBitmap(width, height, dpiX, dpiY, PixelFormats.Default);
+
+            //var crop = new CroppedBitmap(renderBitmap, new Int32Rect(50, 50, 250, 250));
+            // needed otherwise the image output is black
+            //this.Canvas.Measure(new Size(width, height));
+            //this.Canvas.Arrange(new Rect(new Size(width, height)));
+
+            renderBitmap.Render(panel);
+            BitmapEncoder encoder;
+
+            if (format == ImageFormats.JPEG)
+                encoder = new JpegBitmapEncoder();
+            else
+                encoder = new PngBitmapEncoder();
+
+            encoder.Frames.Add(BitmapFrame.Create(renderBitmap));
+
+            using (FileStream file = File.Create(filename))
+            {
+                encoder.Save(file);
+                file.Flush();
+                file.Close();
+            }
         }
 
         public static bool CheckIntersectTwoRectangles(MyPoint a1, MyPoint a2, MyPoint b1, MyPoint b2)

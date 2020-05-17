@@ -3,9 +3,8 @@
     <DrawingBrush x:Key="IconMaximize" >
         <DrawingBrush.Drawing>
           <DrawingGroup>
-            <DrawingGroup.Children>
-              <!--<GeometryDrawing Brush="#00FFFFFF" Geometry="F1M16,16L0,16 0,0 16,0z" />-->
-              <GeometryDrawing Brush="LightGray" Geometry="F1M12,12L4,12 4,4 12,4z M3,13L13,13 13,3 3,3z" />
+                <DrawingGroup.Children>
+                    <GeometryDrawing Brush="LightGray" Geometry="F1M12,12L4,12 4,4 12,4z M3,13L13,13 13,3 3,3z" />
             </DrawingGroup.Children>
           </DrawingGroup>
         </DrawingBrush.Drawing>

@@ -23,12 +23,12 @@
     <SolidColorBrush x:Key="ColorConnectorForeground" Color="White"/>
 
     <SolidColorBrush x:Key="ColorCutter" Color="Red"/>
-    <!--changed-->
+    
 
     <SolidColorBrush x:Key="ColorButtonStroke" Color="LightGray"/>
 
     <SolidColorBrush x:Key="ColorNodesCanvasBackground" Color="#1e1e1e"/>
-    <!--changed-->
+    
 
     <!--#region Selector-->
 
@@ -69,26 +69,28 @@
     <!--#endregion  Window-->
 
     <!--#region     Menu-->
+    
+    
     <SolidColorBrush x:Key="ColorMenuBorder"                Color="#333337"/>
-    <!--changed-->
+    
     <SolidColorBrush x:Key="ColorMenuBackground"            Color="#1b1b1c"/>
-    <!--changed-->
+    
     <SolidColorBrush x:Key="ColorMenuForeground"            Color="White"/>
-    <!--changed-->
+    
     <SolidColorBrush x:Key="ColorMenuBackgroundMouseOver"   Color="#444549"/>
-    <!--changed-->
+    
     <!--#endregion  Menu-->
 
     <!--#region     Node-->
     <SolidColorBrush x:Key="ColorNodeBackground"  Color="#FF2D2D2D"/>
-    <!--changed-->
+    
     <SolidColorBrush x:Key="ColorNodeBorderBrush"  Color="LightGray"/>
-    <!--changed-->
+    
 
     <SolidColorBrush x:Key="ColorNodeHeader" Color="#FF123D6A"/>
-    <!--changed-->
+    
     <SolidColorBrush x:Key="ColorNodeHeaderForeground" Color="White"/>
-    <!--changed-->
+    
 
     <SolidColorBrush x:Key="ColorNodeCollapseButtonBackground"  Color="White"/>
     <SolidColorBrush x:Key="ColorNodeCollapseButtonBorderBrush"  Color="White"/>
