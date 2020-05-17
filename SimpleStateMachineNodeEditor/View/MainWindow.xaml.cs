@@ -66,10 +66,11 @@ namespace SimpleStateMachineNodeEditor.View
                 this.BindCommand(this.ViewModel,x=>x.CommandCopyError, x=>x.BindingCopyError, SelectedItem).DisposeWith(disposable);
                 this.BindCommand(this.ViewModel, x => x.CommandCopyError, x => x.ItemCopyError, SelectedItem).DisposeWith(disposable);
 
-                this.OneWayBind(this.ViewModel, x=>x.Messages, x=>x.MessageList.ItemsSource).DisposeWith(disposable);
+                this.OneWayBind(this.ViewModel, x => x.Messages, x => x.MessageList.ItemsSource).DisposeWith(disposable);
 
 
-                
+                //this.NodesCanvas.ViewModel.Messages.Find
+
 
                 //this.BindCommand(this.ViewModel, x=>this.CommandSave,  x=>x.ButtonSave).DisposeWith(disposable);
 
@@ -84,7 +85,7 @@ namespace SimpleStateMachineNodeEditor.View
             this.WhenActivated(disposable =>
             {
                 this.WhenAnyValue(x=>x.ViewModel.NodesCanvas.Path).Subscribe(value=> UpdateSchemeName(value)).DisposeWith(disposable);
-
+                
 
             });
         }
@@ -137,8 +138,23 @@ namespace SimpleStateMachineNodeEditor.View
                 this.ItemRedo.Events().Click.Subscribe(_ => this.NodesCanvas.ViewModel.CommandRedo.Execute()).DisposeWith(disposable);
                 this.ErrorListExpander.Events().Collapsed.Subscribe(_=> ErrorListCollapse()).DisposeWith(disposable);
                 this.ErrorListExpander.Events().Expanded.Subscribe(_ => ErrorListExpanded()).DisposeWith(disposable);
+
+                this.LabelErrorList.Events().PreviewMouseLeftButtonDown.Subscribe(e=> SetDisplayMessageType(e, TypeMessage.All)).DisposeWith(disposable);
+                this.LabelError.Events().PreviewMouseLeftButtonDown.Subscribe(e => SetDisplayMessageType(e, TypeMessage.Error)).DisposeWith(disposable);
+                this.LabelInformation.Events().MouseLeftButtonDown.Subscribe(e => SetDisplayMessageType(e, TypeMessage.Information)).DisposeWith(disposable);
+                this.LabelWarning.Events().MouseLeftButtonDown.Subscribe(e => SetDisplayMessageType(e, TypeMessage.Warning)).DisposeWith(disposable);
+                this.LabelDebug.Events().MouseLeftButtonDown.Subscribe(e => SetDisplayMessageType(e, TypeMessage.Debug)).DisposeWith(disposable);
+
+                //this.LabelUpdate.Events().PreviewMouseLeftButtonDown.Subscribe(_ => this.ViewModel.Messages.Cle).DisposeWith(disposable);
                 //this.ErrorListExpander.Events().Expanded.Subscribe(_ => ErrorListExpanded()).DisposeWith(disposable);
             });
+        }
+        void SetDisplayMessageType(MouseButtonEventArgs e, TypeMessage  typeMessage)
+        {          
+            if ((ErrorListExpander.IsExpanded)&&(this.ViewModel.NodesCanvas.DisplayMessageType != typeMessage))
+                e.Handled = true;
+
+            this.ViewModel.NodesCanvas.DisplayMessageType = typeMessage;
         }
         void ErrorListCollapse()
         {
@@ -148,8 +164,7 @@ namespace SimpleStateMachineNodeEditor.View
         void ErrorListExpanded()
         {
             this.ErrorListSplitter.IsEnabled = true;
-            //if(this.MessageList.Items.Count>this.ViewModel.CountShowingMessage)
-                this.Fotter.Height = new GridLength(this.ViewModel.MaxHeightMessagePanel);
+            this.Fotter.Height = new GridLength(this.ViewModel.MaxHeightMessagePanel);
         }
         void StateNormalMaximaze()
         {

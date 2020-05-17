@@ -11,6 +11,7 @@ namespace SimpleStateMachineNodeEditor.Helpers.Enums
         Debug,
         Error,
         Information,
-        Warning
+        Warning,
+        All
     }
 }

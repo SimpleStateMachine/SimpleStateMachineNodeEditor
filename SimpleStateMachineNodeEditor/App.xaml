@@ -17,8 +17,9 @@
                 <ResourceDictionary Source="Styles/ErrorList/TemplateListBox.xaml"/>
                 <ResourceDictionary Source="Styles/ErrorList/StyleLabel.xaml"/>
                 <ResourceDictionary Source="Styles/ErrorList/StyleListBoxItem.xaml"/>
-
+                <ResourceDictionary Source="Styles/ErrorList/StyleLabelWithIcon.xaml"/>
                 
+
 
                 <!--#region         Test-->
                 
@@ -46,6 +47,7 @@
                 
                     <!--#region      Header-->
                     <ResourceDictionary Source="Styles/MainWindow/ToolBar/ToolButtonTemplate.xaml"/>
+                <ResourceDictionary Source="Styles/MainWindow/ToolBar/TemplateSeparator.xaml"/>
                     <ResourceDictionary Source="Styles/MainWindow/ToolBarTemplate.xaml"/>
                 <ResourceDictionary Source="Styles/MainWindow/Header/StyleHeaderButton.xaml"/>
                 <ResourceDictionary Source="Styles/MainWindow/Header/StyleHeaderButtonClosePath.xaml"/>

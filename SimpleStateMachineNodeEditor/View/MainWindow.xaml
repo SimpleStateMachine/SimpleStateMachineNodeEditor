@@ -24,72 +24,57 @@
             <Menu Background="{StaticResource ColorMenuBackground}"  Foreground="{StaticResource ColorMenuForeground}" BorderBrush="{StaticResource ColorMenuBorder}" OpacityMask="{StaticResource ColorMenuBackgroundMouseOver}"  Template="{StaticResource MenuTemplate}" BorderThickness="1" HorizontalAlignment="Left" VerticalAlignment="Center">
                 <MenuItem Header="File" x:Name="Item" Style="{StaticResource StyleMenuItem}" Margin="3,0,3,0">
                     <MenuItem Header="New" x:Name="ItemNew" InputGestureText="Ctrl+Shift+N"  Style="{StaticResource StyleMenuItem}">
-                        <MenuItem.Icon>
-                            <Rectangle Fill="{StaticResource IconNewSheme}" Height="11" Width="11"/>
-                        </MenuItem.Icon>
+                            <MenuItem.Icon>
+                                <Rectangle Fill="{StaticResource IconNewSheme}" Height="15" Width="15"/>
+                            </MenuItem.Icon>
+                        </MenuItem>
+                        <MenuItem Header="Open" x:Name="ItemOpen" InputGestureText="Ctrl+Shift+O"  Style="{StaticResource StyleMenuItem}" >
+                            <MenuItem.Icon>
+                                <Rectangle Fill="{StaticResource IconImportScheme}" Height="15" Width="15"/>
+                            </MenuItem.Icon>
+                        </MenuItem>
+                        <Separator Background="{StaticResource ColorMenuSeparator}"/>
+                        <MenuItem Header="Save" InputGestureText="Ctrl+S" x:Name="ItemSave" Style="{StaticResource StyleMenuItem}" >
+                            <MenuItem.Icon>
+                                <Rectangle Fill="{StaticResource IconSave}" Height="13" Width="13"/>
+                            </MenuItem.Icon>
+                        </MenuItem>
+                        <MenuItem Header="SaveAs..." x:Name="ItemSaveAs" InputGestureText="Ctrl+Shift+S" Style="{StaticResource StyleMenuItem}">
+                            <MenuItem.Icon>
+                                <Rectangle Fill="{StaticResource IconSaveAs}" Height="15" Width="15"/>
+                            </MenuItem.Icon>
+                        </MenuItem>
+                        <MenuItem Header="Export" x:Name="ItemExport" Style="{StaticResource StyleMenuItem}">
+                            <MenuItem.Icon>
+                                <Rectangle Fill="{StaticResource IconExportScheme}" Height="15" Width="15"/>
+                            </MenuItem.Icon>
+                            <MenuItem Header="Export to PNG" x:Name="ItemExportToPNG" Style="{StaticResource StyleMenuItem}"/>
+                            <MenuItem Header="Export to JPEG" x:Name="ItemExportToJPEG" Style="{StaticResource StyleMenuItem}"/>
+                        </MenuItem>
+                        <Separator Background="{StaticResource ColorMenuSeparator}"/>
+                        <MenuItem Header="Exit"  x:Name="ItemExit" InputGestureText="Alt+F4"   Style="{StaticResource StyleMenuItem}">
+                            <MenuItem.Icon>
+                                <Rectangle Fill="{StaticResource IconExit}" Height="14" Width="14"/>
+                            </MenuItem.Icon>
+                        </MenuItem>
                     </MenuItem>
-                    <MenuItem Header="Open" x:Name="ItemOpen" InputGestureText="Ctrl+Shift+O"  Style="{StaticResource StyleMenuItem}" >
-                        <MenuItem.Icon>
-                            <Rectangle Fill="{StaticResource IconImportScheme}" Height="11" Width="11"/>
-                        </MenuItem.Icon>
-                    </MenuItem>
-                    <Separator Background="{StaticResource ColorMenuBorder}"/>
-                    <MenuItem Header="Save" InputGestureText="Ctrl+S" x:Name="ItemSave" Style="{StaticResource StyleMenuItem}" >
-                        <MenuItem.Icon>
-                            <Rectangle Fill="{StaticResource IconSave}" Height="11" Width="11"/>
-                        </MenuItem.Icon>
-                    </MenuItem>
-                    <MenuItem Header="SaveAs..." x:Name="ItemSaveAs" InputGestureText="Ctrl+Shift+S" Style="{StaticResource StyleMenuItem}">
-                        <MenuItem.Icon>
-                            <Rectangle Fill="{StaticResource IconSaveAs}" Height="11" Width="11"/>
-                        </MenuItem.Icon>
-                    </MenuItem>
-                    <MenuItem Header="Export" x:Name="ItemExport" Style="{StaticResource StyleMenuItem}">
-                        <MenuItem.Icon>
-                            <Rectangle Fill="{StaticResource IconExportScheme}" Height="11" Width="11"/>
-                        </MenuItem.Icon>
-                        <MenuItem Header="Export to PNG" x:Name="ItemExportToPNG" Style="{StaticResource StyleMenuItem}"/>
-                        <MenuItem Header="Export to JPEG" x:Name="ItemExportToJPEG" Style="{StaticResource StyleMenuItem}"/>
-                    </MenuItem>
-                    <Separator Background="{StaticResource ColorMenuBorder}"/>
-                    <MenuItem Header="Exit"  x:Name="ItemExit" InputGestureText="Alt+F4"   Style="{StaticResource StyleMenuItem}">
-                        <MenuItem.Icon>
-                            <Rectangle Fill="{StaticResource IconExit}" Height="11" Width="11"/>
-                        </MenuItem.Icon>
-                    </MenuItem>
-                </MenuItem>
-                <MenuItem Header="Edit"  x:Name="ItemEdit" Style="{StaticResource StyleMenuItem}" Margin="3,0,3,0">
-                    <MenuItem Header="Undo"  x:Name="ItemUndo" InputGestureText="Ctrl+Z"  Style="{StaticResource StyleMenuItem}">
-                        <MenuItem.Icon>
-                            <Rectangle Fill="{StaticResource IconUndo}" Height="11" Width="11"/>
-                        </MenuItem.Icon>
-                    </MenuItem>
-                    <MenuItem Header="Redo"  x:Name="ItemRedo" InputGestureText="Ctrl+Y" Style="{StaticResource StyleMenuItem}">
-                        <MenuItem.Icon>
-                            <Rectangle Fill="{StaticResource IconRedo}" Height="11" Width="11"/>
-                        </MenuItem.Icon>
-                    </MenuItem>
-                    <Separator Background="{StaticResource ColorMenuBorder}"/>
-                    <MenuItem Header="SelectAll"  x:Name="ItemSelectAll" InputGestureText="Ctrl+A" Style="{StaticResource StyleMenuItem}">
-                        <MenuItem.Icon>
-                            <Rectangle Fill="{StaticResource IconSelectAll}" Height="11" Width="11"/>
-                        </MenuItem.Icon>
-                    </MenuItem>
-                    <!--<MenuItem Header="Cut"  x:Name="ItemCut" Style="{StaticResource StyleMenuItem}">
-                        <MenuItem.Icon>
-                            <Rectangle Fill="{StaticResource IconImportScheme}" Height="12" Width="12"/>
-                        </MenuItem.Icon>
-                    </MenuItem>
-                    <MenuItem Header="Copy"  x:Name="ItemCopy" Style="{StaticResource StyleMenuItem}">
-                        <MenuItem.Icon>
-                            <Rectangle Fill="{StaticResource IconImportScheme}" Height="12" Width="12"/>
-                        </MenuItem.Icon>
-                    </MenuItem>
-                    <MenuItem Header="Paste" x:Name="ItemPaste" Style="{StaticResource StyleMenuItem}">
-                        <MenuItem.Icon>
-                            <Rectangle Fill="{StaticResource IconImportScheme}" Height="12" Width="12"/>
-                        </MenuItem.Icon>
-                    </MenuItem>-->
+                    <MenuItem Header="Edit"  x:Name="ItemEdit" Style="{StaticResource StyleMenuItem}" Margin="3,0,3,0">
+                        <MenuItem Header="Undo"  x:Name="ItemUndo" InputGestureText="Ctrl+Z"  Style="{StaticResource StyleMenuItem}">
+                            <MenuItem.Icon>
+                                <Rectangle Fill="{StaticResource IconUndo}" Height="13" Width="13"/>
+                            </MenuItem.Icon>
+                        </MenuItem>
+                        <MenuItem Header="Redo"  x:Name="ItemRedo" InputGestureText="Ctrl+Y" Style="{StaticResource StyleMenuItem}">
+                            <MenuItem.Icon>
+                                <Rectangle Fill="{StaticResource IconRedo}" Height="13" Width="13"/>
+                            </MenuItem.Icon>
+                        </MenuItem>
+                        <Separator Background="{StaticResource ColorMenuSeparator}"/>
+                        <MenuItem Header="SelectAll"  x:Name="ItemSelectAll" InputGestureText="Ctrl+A" Style="{StaticResource StyleMenuItem}">
+                            <MenuItem.Icon>
+                                <Rectangle Fill="{StaticResource IconSelectAll}" Height="15" Width="15"/>
+                            </MenuItem.Icon>
+                        </MenuItem>
                 </MenuItem>
             </Menu>
 
@@ -104,7 +89,20 @@
             <Button DockPanel.Dock="Right" x:Name="ButtonMin" ToolTip="Minimize" Style="{StaticResource StyleHeaderButton}" Background="{StaticResource ColorWindowHeader}" BorderBrush="{StaticResource ColorWindowHeaderButtonBackgroundMouseOver}" OpacityMask="{StaticResource ColorWindowHeaderButtonBackgroundPressed}" >
                 <Rectangle Fill="{StaticResource IconMinimize}" Height="1" Width="13" />
             </Button>
-            <Label x:Name="LabelSchemeName" Style="{StaticResource StyleLabel}" BorderBrush="{StaticResource ColorNodesCanvasBackground}" Background="{StaticResource ColorNodesCanvasBackground}" BorderThickness="10,5,10,5" Margin="10,  0, 0 ,0" HorizontalAlignment="Right" VerticalAlignment="Center" Foreground="{StaticResource ColorMenuForeground}"></Label>
+            <Label x:Name="LabelSchemeName" Style="{StaticResource StyleLabel}" BorderBrush="{StaticResource ColorNodesCanvasBackground}" Background="{StaticResource ColorNodesCanvasBackground}" BorderThickness="10,5,10,5" Margin="10,  0, 0 ,0" HorizontalAlignment="Right" VerticalAlignment="Center" Foreground="{StaticResource ColorMenuForeground}">
+                <Label.ContextMenu>
+                    <ContextMenu Template="{StaticResource TemplateContextMenu}" Background="{StaticResource ColorMenuBackground}" BorderBrush="{StaticResource ColorMenuBorder}" OpacityMask="{StaticResource ColorWindowHeaderButtonBackgroundMouseOver}"  Foreground="{StaticResource ColorMenuForeground}" BorderThickness="1" HorizontalAlignment="Left" VerticalAlignment="Center" >
+                        <MenuItem Header="Copy" x:Name="ItemSchemeName" InputGestureText="Ctrl+C" Style="{StaticResource StyleContextMenuItem}">
+                            <MenuItem.Icon>
+                                <Rectangle Fill="{StaticResource IconCopy}" Height="15" Width="13"/>
+                            </MenuItem.Icon>
+                        </MenuItem>
+                    </ContextMenu>
+                </Label.ContextMenu>
+                <Label.InputBindings>
+                    <KeyBinding x:Name="BindingCopySchemeName" Key="C" Modifiers="Control" />
+                </Label.InputBindings>
+            </Label>
 
             <Button DockPanel.Dock="Right" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="{x:Null}" />
         </DockPanel>
@@ -114,35 +112,35 @@
                     <Rectangle Fill="{StaticResource IconNewSheme}" Height="15" Width="15"/>
                 </Button>
                 <Button x:Name="ButtonImportScheme" ToolTip="Open (Ctrl+Shift+O)"  Style="{StaticResource StyleHeaderButton}" Background="{StaticResource ColorWindowHeader}" BorderBrush="{StaticResource ColorWindowHeaderButtonBackgroundMouseOver}">
-                    <Rectangle Fill="{StaticResource IconImportScheme}" Height="13" Width="13"/>
+                    <Rectangle Fill="{StaticResource IconImportScheme}" Height="15" Width="15"/>
                 </Button>
                 <Button x:Name="ButtonSave"  ToolTip="Save (Ctrl+S)" Style="{StaticResource StyleHeaderButton}" Background="{StaticResource ColorWindowHeader}" BorderBrush="{StaticResource ColorWindowHeaderButtonBackgroundMouseOver}">
                     <Rectangle Fill="{StaticResource IconSave}" Height="13" Width="13"/>
                 </Button>
                 <Button x:Name="ButtonSaveAs" ToolTip="Save As... (Ctrl+Shift+S)" Style="{StaticResource StyleHeaderButton}" Background="{StaticResource ColorWindowHeader}" BorderBrush="{StaticResource ColorWindowHeaderButtonBackgroundMouseOver}">
-                    <Rectangle Fill="{StaticResource IconSaveAs}" Height="13" Width="13"/>
+                    <Rectangle Fill="{StaticResource IconSaveAs}" Height="15" Width="15"/>
                 </Button>
                 <Button x:Name="ButtonHeaderButton" ToolTip="Export To Jpeg... (Ctrl+Shift+Alt+J)" Style="{StaticResource StyleHeaderButton}" Background="{StaticResource ColorWindowHeader}" BorderBrush="{StaticResource ColorWindowHeaderButtonBackgroundMouseOver}">
                     <Rectangle Fill="{StaticResource IconExportScheme}" Height="15" Width="15"/>
                 </Button>
-                <Separator Background="DarkGray"  />
+                <Separator Grid.Column="5" Style="{DynamicResource TemplateSeparator}" Height="Auto" BorderThickness="0,0,1,0" />
                 <Button x:Name="ButtonUndo" ToolTip="Undo (Ctrl + Z)" Style="{StaticResource StyleHeaderButton}" Background="{StaticResource ColorWindowHeader}" BorderBrush="{StaticResource ColorWindowHeaderButtonBackgroundMouseOver}">
                     <Rectangle Fill="{StaticResource IconUndo}" Height="13" Width="13"/>
                 </Button>
                 <Button x:Name="ButtonRedo" ToolTip="Redo (Ctrl + Y)" Style="{StaticResource StyleHeaderButton}" Background="{StaticResource ColorWindowHeader}" BorderBrush="{StaticResource ColorWindowHeaderButtonBackgroundMouseOver}">
                     <Rectangle Fill="{StaticResource IconRedo}" Height="13" Width="13"/>
                 </Button>
-                <Separator Background="DarkGray" />
+                <Separator Grid.Column="5" Style="{DynamicResource TemplateSeparator}" Height="Auto" BorderThickness="0,0,1,0" />
                 <Button x:Name="ButtonZoomIn"  ToolTip="Zoom In" Style="{StaticResource StyleHeaderButton}" Background="{StaticResource ColorWindowHeader}" BorderBrush="{StaticResource ColorWindowHeaderButtonBackgroundMouseOver}">
-                    <Rectangle Fill="{StaticResource IconZoomIn}" Height="13" Width="13"/>
+                    <Rectangle Fill="{StaticResource IconZoomIn}" Height="15" Width="15"/>
                 </Button>
                 <Button x:Name="ButtonZoomOut"  ToolTip="Zoom Out" Style="{StaticResource StyleHeaderButton}" Background="{StaticResource ColorWindowHeader}" BorderBrush="{StaticResource ColorWindowHeaderButtonBackgroundMouseOver}">
-                    <Rectangle Fill="{StaticResource IconZoomOut}" Height="13" Width="13"/>
+                    <Rectangle Fill="{StaticResource IconZoomOut}" Height="15" Width="15"/>
                 </Button>
                 <Button x:Name="ButtonZoomOriginalSize" ToolTip="Zoom Original Size"  Style="{StaticResource StyleHeaderButton}" Background="{StaticResource ColorWindowHeader}" BorderBrush="{StaticResource ColorWindowHeaderButtonBackgroundMouseOver}">
-                    <Rectangle Fill="{StaticResource IconZoomOriginalSize}" Height="13" Width="13"/>
+                    <Rectangle Fill="{StaticResource IconZoomOriginalSize}" Height="15" Width="15"/>
                 </Button>
-                <Separator Background="DarkGray" />
+                <Separator Grid.Column="5" Style="{DynamicResource TemplateSeparator}" Height="Auto" BorderThickness="0,0,1,0" />
                 <Button x:Name="ButtonCollapseUpGroup" ToolTip="Collapse Up All"  Style="{StaticResource StyleHeaderButton}" Background="{StaticResource ColorWindowHeader}" BorderBrush="{StaticResource ColorWindowHeaderButtonBackgroundMouseOver}">
                     <Rectangle Fill="{StaticResource IconCollapseUpGroup}" Height="13" Width="13"/>
                 </Button>
@@ -171,9 +169,29 @@
         <GridSplitter  Grid.Row="3" x:Name="ErrorListSplitter" HorizontalAlignment="Stretch" Background="{StaticResource ColorWindowHeader}" Height="3"  ShowsPreview="False" IsEnabled="False"/>
         <Expander Style="{StaticResource StyleExpander}"  x:Name="ErrorListExpander" Grid.Row="4"  HorizontalContentAlignment="Stretch" ExpandDirection="Up" Margin="3,0,0,0" >
             <Expander.Header>
-                <!--OpacityMask - Foreground on Mouse Over-->
-               
-                <Label Style="{StaticResource StyleLabel}" HorizontalAlignment="Left" VerticalAlignment="Top" OpacityMask="{StaticResource ColorElementMouseOver}">Error List</Label>
+                <Grid >
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition />
+                    </Grid.ColumnDefinitions>
+                    <Label  Grid.Column="0" x:Name="LabelErrorList"  Style="{DynamicResource StyleLabelWithIcon}" BorderBrush="{StaticResource IconErrorList}" OpacityMask="{StaticResource ColorElementMouseOver}">Error List</Label>
+                    <Separator Grid.Column="1" Style="{DynamicResource TemplateSeparator}" Height="Auto" BorderThickness="0,0,1,0" />
+                    <Label  Grid.Column="2" x:Name="LabelError" Style="{DynamicResource StyleLabelWithIcon}" BorderBrush="{StaticResource IconError}" OpacityMask="{StaticResource ColorElementMouseOver}">Erros</Label>
+                    <Separator Grid.Column="3" Style="{DynamicResource TemplateSeparator}" Height="Auto" BorderThickness="0,0,1,0" />
+                    <Label  Grid.Column="4" x:Name="LabelWarning" Style="{DynamicResource StyleLabelWithIcon}" BorderBrush="{StaticResource IconWarning}" OpacityMask="{StaticResource ColorElementMouseOver}">Warnings</Label>
+                    <Separator Grid.Column="5" Style="{DynamicResource TemplateSeparator}" Height="Auto" BorderThickness="0,0,1,0" />
+                    <Label  Grid.Column="6" x:Name="LabelInformation" Style="{DynamicResource StyleLabelWithIcon}" BorderBrush="{StaticResource IconInformation}" OpacityMask="{StaticResource ColorElementMouseOver}">Messages</Label>
+                    <Separator Grid.Column="7" Visibility="{Binding ElementName=LabelDebug, Path=Visibility}" Style="{DynamicResource TemplateSeparator}" Height="Auto" BorderThickness="0,0,1,0" />
+                    <Label  Grid.Column="8" x:Name="LabelDebug" Visibility="Hidden" Style="{DynamicResource StyleLabelWithIcon}" BorderBrush="{StaticResource IconDebug}" OpacityMask="{StaticResource ColorElementMouseOver}">Debug</Label>
+                    <Label  Grid.Column="9" x:Name="LabelUpdate"  Style="{DynamicResource StyleLabelWithIcon}" BorderBrush="{StaticResource IconUpdate}" OpacityMask="{StaticResource ColorElementMouseOver}" HorizontalAlignment="Right" Margin="0,0,5,0">Update</Label>
+                </Grid>
             </Expander.Header>
             <Expander.Content>
                 <!--OpacityMask - Background on Selected-->
@@ -188,9 +206,9 @@
                     </ListBox.InputBindings>
                     <ListBox.ContextMenu>
                         <ContextMenu Template="{StaticResource TemplateContextMenu}" Background="{StaticResource ColorMenuBackground}" BorderBrush="{StaticResource ColorMenuBorder}" OpacityMask="{StaticResource ColorWindowHeaderButtonBackgroundMouseOver}"  Foreground="{StaticResource ColorMenuForeground}" BorderThickness="1" HorizontalAlignment="Left" VerticalAlignment="Center" >
-                            <MenuItem Header="Copy" x:Name="ItemCopyError" InputGestureText="Ctrl + C" Style="{StaticResource StyleContextMenuItem}">
+                            <MenuItem Header="Copy" x:Name="ItemCopyError" InputGestureText="Ctrl+C" Style="{StaticResource StyleContextMenuItem}">
                                 <MenuItem.Icon>
-                                    <Rectangle Fill="{StaticResource IconCopy}" Height="11" Width="9"/>
+                                    <Rectangle Fill="{StaticResource IconCopy}" Height="15" Width="13"/>
                                 </MenuItem.Icon>
                             </MenuItem>
                         </ContextMenu>
@@ -203,7 +221,6 @@
                 </ListBox>
             </Expander.Content>
         </Expander>
-
     </Grid>
 
     <Window.InputBindings>

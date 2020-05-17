@@ -1,10 +1,10 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
-    <DrawingBrush x:Key="IconError" >
+    <DrawingBrush x:Key="IconUpdate" >
         <DrawingBrush.Drawing>
             <DrawingGroup>
                 <DrawingGroup.Children>
-                    <GeometryDrawing Brush="#FFE51300" Geometry="F1M11,10L10,11 8,9 6,11 5,10 7,7.972 5,6 6,5 8,7 10,5 11,6 9,7.972z M8,3C5.238,3 3,5.238 3,8 3,10.762 5.238,13 8,13 10.762,13 13,10.762 13,8 13,5.238 10.762,3 8,3" />
+                    <GeometryDrawing Brush="LightGray" Geometry="F1M15,8C15,11.859 11.859,15 8,15 4.14,15 1,11.859 1,8 1,6.076 1.801,4.292 3.121,3L1,3 1,1 7,1 7,7 5,7 5,4.002C3.766,4.931 3,6.401 3,8 3,10.757 5.243,13 8,13 10.757,13 13,10.757 13,8 13,6.321 12.164,4.763 10.764,3.833L11.871,2.167C13.83,3.469,15,5.649,15,8" />
                 </DrawingGroup.Children>
             </DrawingGroup>
         </DrawingBrush.Drawing>

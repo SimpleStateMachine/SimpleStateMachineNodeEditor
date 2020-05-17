@@ -19,6 +19,7 @@ using SimpleStateMachineNodeEditor.Helpers.Enums;
 using System.Windows.Media;
 using System.Windows;
 using System.Windows.Input;
+using System.Reactive;
 
 namespace SimpleStateMachineNodeEditor.ViewModel
 {
@@ -36,7 +37,8 @@ namespace SimpleStateMachineNodeEditor.ViewModel
 
         [Reactive] public string Path { get; set; }
 
-        public IObservableCollection<ViewModelMessage> Messages { get; set; } = new ObservableCollectionExtended<ViewModelMessage>();
+        [Reactive] public TypeMessage DisplayMessageType { get; set; }
+        public ObservableCollectionExtended<ViewModelMessage> Messages { get; set; } = new ObservableCollectionExtended<ViewModelMessage>();
 
         /// <summary>
         /// Масштаб 
@@ -48,9 +50,21 @@ namespace SimpleStateMachineNodeEditor.ViewModel
             SetupCommands();
             SetupStartState();
             Cutter = new ViewModelCutter(this);
-            for (int i = 1; i <= 30; i++)
+            for (int i = 1; i <= 5; i++)
             {
-                LogError("Message " + i.ToString());
+                LogError("Error " + i.ToString());
+            }
+            for (int i = 1; i <= 5; i++)
+            {
+                LogInformation("Information " + i.ToString());
+            }
+            for (int i = 1; i <= 5; i++)
+            {
+                LogWarning("Warning " + i.ToString());
+            }
+            for (int i = 1; i <= 5; i++)
+            {
+                LogDebug("Debug " + i.ToString());
             }
 
         }
@@ -223,6 +237,8 @@ namespace SimpleStateMachineNodeEditor.ViewModel
                 myPoint.Clear();
             }
             nodes.ForEach(node => node.CommandMove.Execute(myPoint));
+
+            LogInformation(Messages.Count.ToString());
             return nodes;
         }
         private List<ViewModelNode> UnFullMoveAllNode(MyPoint delta, List<ViewModelNode> nodes = null)

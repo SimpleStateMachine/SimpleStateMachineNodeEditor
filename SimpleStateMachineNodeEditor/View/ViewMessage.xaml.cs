@@ -14,6 +14,8 @@ using System.Reactive.Linq;
 using System.Windows.Markup;
 using SimpleStateMachineNodeEditor.ViewModel;
 using SimpleStateMachineNodeEditor.Helpers;
+using SimpleStateMachineNodeEditor.Helpers.Enums;
+using SimpleStateMachineNodeEditor.Helpers.Extensions;
 
 namespace SimpleStateMachineNodeEditor.View
 {
@@ -41,7 +43,9 @@ namespace SimpleStateMachineNodeEditor.View
         {
             InitializeComponent();
             SetupBinding();
+            SetupSubscriptions();
         }
+
         #region SetupBinding
         private void SetupBinding()
         {
@@ -51,5 +55,26 @@ namespace SimpleStateMachineNodeEditor.View
             });
         }
         #endregion SetupBinding
+
+        #region Setup Subscriptions
+
+        private void SetupSubscriptions()
+        {
+            this.WhenActivated(disposable =>
+            {
+                this.WhenAnyValue(x => x.ViewModel.TypeMessage).Where(value=>value!=TypeMessage.NotCorrect).Subscribe(value => UpdateIcon(value)).DisposeWith(disposable);
+            });
+        }
+        private void UpdateIcon(TypeMessage type)
+        {
+            this.RectangleElement.Fill = Application.Current.Resources["Icon" + type.Name()] as DrawingBrush;
+            //{
+            //    TypeMessage.Error => "IconError",
+            //    TypeMessage.Warning => new RGBColor(0x00, 0x00, 0xFF),
+            //    TypeMessage.Information => new RGBColor(0xFF, 0x7F, 0x00),
+            //    TypeMessage.Debug => new RGBColor(0xFF, 0x7F, 0x00),
+            //}] as DrawingBrush;
+        }
+        #endregion Setup Subscriptions
     }
 }

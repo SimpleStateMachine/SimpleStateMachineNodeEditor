@@ -96,23 +96,23 @@
         <ContextMenu Template="{StaticResource TemplateContextMenu}" Background="{StaticResource ColorMenuBackground}"  Foreground="{StaticResource ColorMenuForeground}" BorderBrush="{StaticResource ColorMenuBorder}" OpacityMask="{StaticResource ColorMenuBackgroundMouseOver}"  BorderThickness="1" HorizontalAlignment="Left" VerticalAlignment="Center" >
             <MenuItem Header="Add" x:Name="ItemAddNode" InputGestureText="Ctrl + N" Style="{StaticResource StyleContextMenuItem}" >
                 <MenuItem.Icon>
-                    <Rectangle Fill="{StaticResource IconAddNode}" Height="11" Width="11"/>
+                    <Rectangle Fill="{StaticResource IconAddNode}" Height="13" Width="13"/>
                 </MenuItem.Icon>
             </MenuItem>
             <MenuItem Header="Delete" x:Name="ItemDeleteNode" InputGestureText="Delete" Style="{StaticResource StyleContextMenuItem}">
                 <MenuItem.Icon>
-                    <Rectangle Fill="{StaticResource IconDeleteScheme}" Height="11" Width="11"/>
+                    <Rectangle Fill="{StaticResource IconDeleteScheme}" Height="15" Width="15"/>
                 </MenuItem.Icon>
             </MenuItem>
             <Separator Background="#333337"/>
             <MenuItem Header="Collaps Up" x:Name="ItemCollapsUp" Style="{StaticResource StyleContextMenuItem}">
                 <MenuItem.Icon>
-                    <Rectangle Fill="{StaticResource IconCollapseUp}" Height="11" Width="11"/>
+                    <Rectangle Fill="{StaticResource IconCollapseUp}" Height="13" Width="13"/>
                 </MenuItem.Icon>
             </MenuItem>
             <MenuItem Header="Expand Down" x:Name="ItemExpandDown" Style="{StaticResource StyleContextMenuItem}">
                 <MenuItem.Icon>
-                    <Rectangle Fill="{StaticResource IconExpandDown}" Height="11" Width="11"/>
+                    <Rectangle Fill="{StaticResource IconExpandDown}" Height="13" Width="13"/>
                 </MenuItem.Icon>
             </MenuItem>
         </ContextMenu>

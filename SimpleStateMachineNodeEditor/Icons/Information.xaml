@@ -4,9 +4,7 @@
         <DrawingBrush.Drawing>
             <DrawingGroup>
                 <DrawingGroup.Children>
-                    <GeometryDrawing Brush="#FFF6F6F6" Geometry="F1M14,7.5C14,10.537 11.537,13 8.5,13 5.463,13 3,10.537 3,7.5 3,4.463 5.463,2 8.5,2 11.537,2 14,4.463 14,7.5" />
                     <GeometryDrawing Brush="#FF1AA1E2" Geometry="F1M9,5L8,5 8,4 9,4z M9,11L8,11 8,6 9,6z M8.5,3C6.015,3 4,5.015 4,7.5 4,9.985 6.015,12 8.5,12 10.985,12 13,9.985 13,7.5 13,5.015 10.985,3 8.5,3" />
-                    <GeometryDrawing Brush="#FFFFFFFF" Geometry="F1M8,5L9,5 9,4 8,4z M8,11L9,11 9,6.001 8,6.001z" />
                 </DrawingGroup.Children>
             </DrawingGroup>
         </DrawingBrush.Drawing>

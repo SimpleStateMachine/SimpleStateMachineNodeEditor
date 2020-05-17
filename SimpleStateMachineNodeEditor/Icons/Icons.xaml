@@ -9,7 +9,7 @@
         <ResourceDictionary Source="CollapseUp.xaml"/>
         <ResourceDictionary Source="CollapseUpGroup.xaml"/>
         <ResourceDictionary Source="DeleteScheme.xaml"/>
-        <ResourceDictionary Source="Error.xaml"/>
+        
         <ResourceDictionary Source="ErrorList.xaml"/>
         <ResourceDictionary Source="Save.xaml"/>
         <ResourceDictionary Source="ExpandDown.xaml"/>
@@ -23,12 +23,19 @@
         <ResourceDictionary Source="Copy.xaml"/>
         <ResourceDictionary Source="ExpandDownGroup.xaml"/>
         <ResourceDictionary Source="AddNode.xaml"/>
-        <ResourceDictionary Source="Redo.xaml"/>
+        <ResourceDictionary Source="Update.xaml"/>
+        
         <ResourceDictionary Source="Relationship.xaml"/>
         <ResourceDictionary Source="SaveAs.xaml"/>
+        
+        <ResourceDictionary Source="Debug.xaml"/>
+        <ResourceDictionary Source="Error.xaml"/>
         <ResourceDictionary Source="Information.xaml"/>
         <ResourceDictionary Source="Warning.xaml"/>
+        
+        <ResourceDictionary Source="Redo.xaml"/>
         <ResourceDictionary Source="Undo.xaml"/>
+        
         <ResourceDictionary Source="ZoomIn.xaml"/>
         <ResourceDictionary Source="ZoomOriginalSize.xaml"/>
         <ResourceDictionary Source="ZoomOut.xaml"/>

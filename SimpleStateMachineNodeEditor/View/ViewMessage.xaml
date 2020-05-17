@@ -11,7 +11,7 @@
             <ColumnDefinition Width="auto" SharedSizeGroup="Icons"/>
             <ColumnDefinition />
         </Grid.ColumnDefinitions>
-        <Rectangle Grid.Column="0"  Fill="{StaticResource IconError}" Height="15" Width="15" VerticalAlignment="Center"  Margin="5,2,0,0"/> <!---->
+        <Rectangle Grid.Column="0" x:Name="RectangleElement" Height="14" Width="14" VerticalAlignment="Center"  Margin="5,2,0,0"/> <!---->
         <TextBlock Grid.Column="1" Text="TestTestTest" x:Name="TextBlockElement" Height="auto" VerticalAlignment="Center" TextWrapping="Wrap" Padding="5,3,3,3" /> <!--Margin="3"-->
     </Grid>
    

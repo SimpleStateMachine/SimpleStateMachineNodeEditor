@@ -20,7 +20,7 @@ namespace SimpleStateMachineNodeEditor.ViewModel
         public ViewModelMessage(TypeMessage typeMessage, string text)
         {
             TypeMessage = typeMessage;
-            Text = Enum.GetName(typeof(TypeMessage), typeMessage) + ": "+ text;
+            Text = text;
          
         }
     }
