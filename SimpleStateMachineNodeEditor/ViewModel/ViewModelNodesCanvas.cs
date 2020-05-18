@@ -26,23 +26,19 @@ namespace SimpleStateMachineNodeEditor.ViewModel
     public class ViewModelNodesCanvas : ReactiveObject
     {
         public IObservableCollection<ViewModelConnect> Connects = new ObservableCollectionExtended<ViewModelConnect>();
+
         public IObservableCollection<ViewModelNode> Nodes = new ObservableCollectionExtended<ViewModelNode>();
+
         [Reactive] public ViewModelSelector Selector { get; set; } = new ViewModelSelector();
         [Reactive] public ViewModelCutter Cutter { get; set; }
         [Reactive] public ViewModelConnect DraggedConnect { get; set; }
         [Reactive] public ViewModelConnector ConnectorPreviewForDrop { get; set; }
         [Reactive] public ViewModelNode StartState { get; set; }
-
         [Reactive] public bool ItSaved { get; set; } = true;
-
         [Reactive] public string Path { get; set; }
-
         [Reactive] public TypeMessage DisplayMessageType { get; set; }
         public ObservableCollectionExtended<ViewModelMessage> Messages { get; set; } = new ObservableCollectionExtended<ViewModelMessage>();
 
-        /// <summary>
-        /// Масштаб 
-        /// </summary>
         [Reactive] public Scale Scale { get; set; } = new Scale();
 
         public ViewModelNodesCanvas()
@@ -207,6 +203,7 @@ namespace SimpleStateMachineNodeEditor.ViewModel
         }
 
         #endregion Logging
+
         private void StartSelect(MyPoint point)
         {
             Selector.CommandStartSelect.Execute(point);

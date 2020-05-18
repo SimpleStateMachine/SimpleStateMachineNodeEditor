@@ -21,31 +21,18 @@ namespace SimpleStateMachineNodeEditor.ViewModel
     public class ViewModelNode : ReactiveValidationObject<ViewModelNode>
     {
         [Reactive] public MyPoint Point1 { get; set; } = new MyPoint();
-
         [Reactive] public MyPoint Point2 { get; set; } = new MyPoint();
-
         [Reactive] public Size Size { get; set; }
-
         [Reactive] public string Name { get; set; }
-
         [Reactive] public bool NameEnable { get; set; } = true;
-
         [Reactive] public bool Selected { get; set; }
-
         [Reactive] public Brush BorderBrush { get; set; } = Application.Current.Resources["ColorNodeBorder"] as SolidColorBrush;
-
         [Reactive] public bool? TransitionsVisible { get; set; } = true;
-
         [Reactive] public bool? RollUpVisible { get; set; } = true;
-
         [Reactive] public bool CanBeDelete { get; set; } = true;
-
         [Reactive] public ViewModelConnector Input { get; set; }
-
         [Reactive] public ViewModelConnector Output { get; set; }
-
         [Reactive] public ViewModelConnector CurrentConnector { get; set; }
-
         [Reactive] public ViewModelNodesCanvas NodesCanvas { get; set; }
 
         public int Zindex { get; private set; }

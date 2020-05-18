@@ -67,12 +67,7 @@ namespace SimpleStateMachineNodeEditor.View
                 this.BindCommand(this.ViewModel, x => x.CommandCopyError, x => x.ItemCopyError, SelectedItem).DisposeWith(disposable);
 
                 this.OneWayBind(this.ViewModel, x => x.Messages, x => x.MessageList.ItemsSource).DisposeWith(disposable);
-
-
-                //this.NodesCanvas.ViewModel.Messages.Find
-
-
-                //this.BindCommand(this.ViewModel, x=>this.CommandSave,  x=>x.ButtonSave).DisposeWith(disposable);
+                this.OneWayBind(this.ViewModel, x=>x.DebugEnable, x=>x.LabelDebug.Visibility).DisposeWith(disposable);
 
 
             });

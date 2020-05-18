@@ -16,71 +16,54 @@ namespace SimpleStateMachineNodeEditor.ViewModel
 {
     public class ViewModelMainWindow: ReactiveObject
     {
-        //public ReadOnlyObservableCollection<ViewModelMessage> Messages;
-        //[Reactive] public ObservableCollection<ViewModelMessage> Messages { get { return new ObservableCollection<ViewModelMessage>(NodesCanvas.Messages.Where(x => x.TypeMessage == this.NodesCanvas.DisplayMessageType || this.NodesCanvas.DisplayMessageType == TypeMessage.All)); } set { } }
         public ObservableCollectionExtended<ViewModelMessage> Messages { get; set; } = new ObservableCollectionExtended<ViewModelMessage>();
-        //public ReadOnlyObservableCollection<ViewModelMessage> Messages;
+
         [Reactive] public ViewModelNodesCanvas NodesCanvas { get; set; }
+
         [Reactive] public TypeMessage DisplayMessageType { get; set; }
+
+        [Reactive] public bool? DebugEnable { get; set; }
 
         private IDisposable ConnectToMessages;
 
         public double MaxHeightMessagePanel = 150;
 
-        public int CountShowingMessage = 5;
-
         public ViewModelMainWindow()
         {
             SetupCommands();
-            SetupSubscriptions();
-           
+            SetupSubscriptions();        
         }
+
         #region Setup Subscriptions
 
         private void SetupSubscriptions()
         {
-           this.WhenAnyValue(x => x.NodesCanvas).Where(x=>x!=null).Subscribe(_ => UpdateMessages());
-           this.WhenAnyValue(x => x.NodesCanvas.DisplayMessageType).Subscribe(_ => Test());
-           //this.WhenAnyValue(x => x.NodesCanvas.DisplayMessageType).Subscribe(_ => Test());
-            //this.WhenAnyValue(x => x.NodesCanvas.Messages).Subscribe(_ => Test());
+           this.WhenAnyValue(x => x.NodesCanvas.DisplayMessageType).Subscribe(_ => UpdateMessages());
 
-        }
-        private void Test()
-        {
-            ConnectToMessages?.Dispose();
-            Messages.Clear();
-            //Messages.AddRange(this.NodesCanvas.Messages.Where(x => x.TypeMessage == this.NodesCanvas.DisplayMessageType || this.NodesCanvas.DisplayMessageType == TypeMessage.All));
-            ConnectToMessages = this.NodesCanvas.Messages.ToObservableChangeSet().Filter(x => x.TypeMessage == this.NodesCanvas.DisplayMessageType || this.NodesCanvas.DisplayMessageType == TypeMessage.All).
-                ObserveOnDispatcher().Bind(Messages).DisposeMany().Subscribe();
         }
         private void UpdateMessages()
         {
+            ConnectToMessages?.Dispose();
+            Messages.Clear();
 
-            //var t = NodesCanvas.Messages.Where(x => x.TypeMessage == this.NodesCanvas.DisplayMessageType).ToList();
-            //Messages = t ;
+            bool debugEnable = DebugEnable.HasValue && DebugEnable.Value;
+            bool displayAll = this.NodesCanvas.DisplayMessageType == TypeMessage.All;
 
-            //var observable = this.NodesCanvas.ObservableForProperty(x => x.DisplayMessageType).Select(x => x.Value);
-            //this.NodesCanvas.DisplayMessageType.T
-            //    Observable
-            //var observable = this.NodesCanvas.ObservableForProperty(x => x.DisplayMessageType);
-            //NodesCanvas.Messages.Connect().Filter(x=>x.TypeMessage == this.NodesCanvas.DisplayMessageType || this.NodesCanvas.DisplayMessageType==TypeMessage.All).ObserveOnDispatcher().Bind(out Messages).DisposeMany().Subscribe();
-            //NodesCanvas.Messages.Connect().Filter(x => x.TypeMessage == this.NodesCanvas.DisplayMessageType || this.NodesCanvas.DisplayMessageType == TypeMessage.All).ObserveOnDispatcher().Bind(out Messages).DisposeMany().Subscribe();
-            //NodesCanvas.Messages.Connect().Filter(x => x!=null).ObserveOnDispatcher().Bind(out Messages).DisposeMany().Subscribe();
-            //Messages = ;
-            //NodesCanvas.Messages.
-            //NodesCanvas.Messages.Connect().ObserveOnDispatcher().Bind(out Messages).DisposeMany().Subscribe();
-            //NodesCanvas.Messages.Where(x => x.TypeMessage == this.NodesCanvas.DisplayMessageType || this.NodesCanvas.DisplayMessageType == TypeMessage.All).ToObservable().\
+            ConnectToMessages = this.NodesCanvas.Messages.ToObservableChangeSet().Filter(x=> CheckForDisplay(x.TypeMessage)).ObserveOnDispatcher().Bind(Messages).DisposeMany().Subscribe();
 
-            //Correct for new
-            //NodesCanvas.Messages.ToObservableChangeSet().Filter(x => x.TypeMessage == this.NodesCanvas.DisplayMessageType || this.NodesCanvas.DisplayMessageType == TypeMessage.All).ObserveOnDispatcher().Bind(out Messages).DisposeMany().Subscribe();
-            //NodesCanvas.Messages.Connect(x => x.TypeMessage == this.NodesCanvas.DisplayMessageType || this.NodesCanvas.DisplayMessageType == TypeMessage.All).ObserveOnDispatcher().Bind(out Messages).DisposeMany().Subscribe();
-            //var mySource = NodesCanvas.Messages.Connect().Filter(x => x.TypeMessage == this.NodesCanvas.DisplayMessageType || this.NodesCanvas.DisplayMessageType == TypeMessage.All);
-            //var myBindingOperation = mySource.ObserveOn(RxApp.MainThreadScheduler).Bind(out Messages).Subscribe();
-        
-            //NodesCanvas.Messages.All(x => x.TypeMessage == this.NodesCanvas.DisplayMessageType || this.NodesCanvas.DisplayMessageType == TypeMessage.All).ObservableForProperty(x=>x.M)
-            //NodesCanvas.Messages.ToObservableChangeSet().Filter(x => x.TypeMessage == this.NodesCanvas.DisplayMessageType).ObserveOnDispatcher().Bind(out Messages).DisposeMany().Subscribe();
-            //NodesCanvas.Messages.Connect().Filter(x => x.TypeMessage == this.NodesCanvas.DisplayMessageType || this.NodesCanvas.DisplayMessageType == TypeMessage.All).Bind(out Messages).Subscribe();
+            bool CheckForDisplay(TypeMessage typeMessage)
+            {
+                if (typeMessage == this.NodesCanvas.DisplayMessageType)
+                {
+                    return true;
+                }
+                else if(typeMessage==TypeMessage.Debug)
+                {
+                    return debugEnable && displayAll;
+                }
 
+                return displayAll;
+            }
         }
         #endregion Setup Subscriptions
         #region Setup Commands
