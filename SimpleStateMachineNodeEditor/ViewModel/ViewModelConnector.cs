@@ -220,8 +220,10 @@ namespace SimpleStateMachineNodeEditor.ViewModel
             }
             else
             {
+                NodesCanvas.CommandAddConnectorWithConnect.Execute(Node.CurrentConnector);
                 Node.CommandAddEmptyConnector.Execute();
-                NodesCanvas.CommandAddConnectWithUndoRedo.Execute(Node.NodesCanvas.DraggedConnect);
+
+                //NodesCanvas.CommandAddConnectWithUndoRedo.Execute(Node.NodesCanvas.DraggedConnect);
                 NodesCanvas.DraggedConnect = null;
             }
         }

@@ -19,13 +19,10 @@ namespace SimpleStateMachineNodeEditor.ViewModel
         public ObservableCollectionExtended<ViewModelMessage> Messages { get; set; } = new ObservableCollectionExtended<ViewModelMessage>();
 
         [Reactive] public ViewModelNodesCanvas NodesCanvas { get; set; }
-
         [Reactive] public TypeMessage DisplayMessageType { get; set; }
-
-        [Reactive] public bool? DebugEnable { get; set; }
+        [Reactive] public bool? DebugEnable { get; set; } = true;
 
         private IDisposable ConnectToMessages;
-
         public double MaxHeightMessagePanel = 150;
 
         public ViewModelMainWindow()

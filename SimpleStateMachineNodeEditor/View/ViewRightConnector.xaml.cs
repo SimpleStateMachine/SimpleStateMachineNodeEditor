@@ -99,9 +99,9 @@ namespace SimpleStateMachineNodeEditor.View
         {
             this.WhenActivated(disposable =>
             {
-                this.EllipseElement.Events().PreviewMouseLeftButtonDown.Subscribe(e => ConnectDrag(e)).DisposeWith(disposable);
+                this.EllipseElement.Events().MouseLeftButtonDown.Subscribe(e => ConnectDrag(e)).DisposeWith(disposable);
                 this.TextBoxElement.Events().LostFocus.Subscribe(e => Validate(e)).DisposeWith(disposable);
-                this.BorderElement.Events().PreviewMouseLeftButtonDown.Subscribe(e => ConnectorDrag(e)).DisposeWith(disposable);
+                //this.BorderElement.Events().PreviewMouseLeftButtonDown.Subscribe(e => ConnectorDrag(e)).DisposeWith(disposable);
                 this.BorderElement.Events().PreviewDragEnter.Subscribe(e => ConnectorDragEnter(e)).DisposeWith(disposable);
                 this.BorderElement.Events().PreviewDrop.Subscribe(e => ConnectorDrop(e)).DisposeWith(disposable);
             });
@@ -116,7 +116,14 @@ namespace SimpleStateMachineNodeEditor.View
 
         private void ConnectDrag(MouseButtonEventArgs e)
         {
-            if (e.ClickCount == 1)
+            if (Keyboard.IsKeyDown(Key.LeftCtrl))
+            {
+                this.ViewModel.CommandSetAsLoop.Execute();
+                this.ViewModel.NodesCanvas.CommandAddConnectorWithConnect.Execute(this.ViewModel);
+
+                this.ViewModel.NodesCanvas.LogDebug("Зашел 2 ");
+            }          
+            else 
             {
                 this.ViewModel.CommandConnectPointDrag.Execute();
                 DataObject data = new DataObject();
@@ -124,10 +131,8 @@ namespace SimpleStateMachineNodeEditor.View
                 DragDrop.DoDragDrop(this, data, DragDropEffects.Link);
                 this.ViewModel.CommandCheckConnectPointDrop.Execute();
                 e.Handled = true;
-            }
-            else if (e.ClickCount == 2)
-            {
-                this.ViewModel.CommandSetAsLoop.Execute();
+
+                this.ViewModel.NodesCanvas.LogDebug("Зашел 1 ");
             }
         }
 

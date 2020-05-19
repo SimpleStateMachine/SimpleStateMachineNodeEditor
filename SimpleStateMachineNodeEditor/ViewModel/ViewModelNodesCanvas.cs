@@ -25,9 +25,9 @@ namespace SimpleStateMachineNodeEditor.ViewModel
 {
     public class ViewModelNodesCanvas : ReactiveObject
     {
-        public IObservableCollection<ViewModelConnect> Connects = new ObservableCollectionExtended<ViewModelConnect>();
-
-        public IObservableCollection<ViewModelNode> Nodes = new ObservableCollectionExtended<ViewModelNode>();
+        public ObservableCollectionExtended<ViewModelConnect> Connects = new ObservableCollectionExtended<ViewModelConnect>();
+        public ObservableCollectionExtended<ViewModelNode> Nodes = new ObservableCollectionExtended<ViewModelNode>();
+        public ObservableCollectionExtended<ViewModelMessage> Messages { get; set; } = new ObservableCollectionExtended<ViewModelMessage>();
 
         [Reactive] public ViewModelSelector Selector { get; set; } = new ViewModelSelector();
         [Reactive] public ViewModelCutter Cutter { get; set; }
@@ -37,7 +37,7 @@ namespace SimpleStateMachineNodeEditor.ViewModel
         [Reactive] public bool ItSaved { get; set; } = true;
         [Reactive] public string Path { get; set; }
         [Reactive] public TypeMessage DisplayMessageType { get; set; }
-        public ObservableCollectionExtended<ViewModelMessage> Messages { get; set; } = new ObservableCollectionExtended<ViewModelMessage>();
+        
 
         [Reactive] public Scale Scale { get; set; } = new Scale();
 
@@ -124,7 +124,8 @@ namespace SimpleStateMachineNodeEditor.ViewModel
         public SimpleCommandWithParameter<string> CommandLogInformation { get; set; }
         public SimpleCommandWithParameter<string> CommandLogWarning { get; set; }
         public SimpleCommandWithParameter<MyPoint> CommandPartMoveAllSelectedNode { get; set; }
-        public Command<ViewModelConnect, ViewModelConnect> CommandAddConnectWithUndoRedo { get; set; }
+        //public Command<ViewModelConnect, ViewModelConnect> CommandAddConnectWithUndoRedo { get; set; }
+        public Command<ViewModelConnector, ViewModelConnector> CommandAddConnectorWithConnect {get; set; }
         public Command<MyPoint, List<ViewModelNode>> CommandFullMoveAllNode { get; set; }
         public Command<MyPoint, List<ViewModelNode>> CommandFullMoveAllSelectedNode { get; set; }
         public Command<MyPoint, ViewModelNode> CommandAddNodeWithUndoRedo { get; set; }
@@ -159,6 +160,7 @@ namespace SimpleStateMachineNodeEditor.ViewModel
             CommandPartMoveAllSelectedNode = new SimpleCommandWithParameter<MyPoint>(PartMoveAllSelectedNode);
             CommandFullMoveAllNode = new Command<MyPoint, List<ViewModelNode>>(FullMoveAllNode, UnFullMoveAllNode, NotSaved);
             CommandFullMoveAllSelectedNode = new Command<MyPoint, List<ViewModelNode>>(FullMoveAllSelectedNode, UnFullMoveAllSelectedNode, NotSaved);
+            CommandAddConnectorWithConnect = new Command<ViewModelConnector, ViewModelConnector>(AddConnectorWithConnect, DeleteConnectorWithConnect, NotSaved);
             CommandZoom = new SimpleCommandWithParameter<int>(Zoom);
             CommandLogDebug = new SimpleCommandWithParameter<string>(LogDebug);
             CommandLogError = new SimpleCommandWithParameter<string>(LogError);
@@ -169,7 +171,7 @@ namespace SimpleStateMachineNodeEditor.ViewModel
             CommandAddDraggedConnect = new SimpleCommandWithParameter<ViewModelConnector>(AddDraggedConnect);
             CommandDeleteDraggedConnect = new SimpleCommand(DeleteDraggedConnect);
             CommandAddNodeWithUndoRedo = new Command<MyPoint, ViewModelNode>(AddNodeWithUndoRedo, DeleteNodeWithUndoRedo, NotSaved);
-            CommandAddConnectWithUndoRedo = new Command<ViewModelConnect, ViewModelConnect>(AddConnectWithUndoRedo, DeleteConnectWithUndoRedo, NotSaved);
+            //CommandAddConnectWithUndoRedo = new Command<ViewModelConnect, ViewModelConnect>(AddConnectWithUndoRedo, DeleteConnectWithUndoRedo, NotSaved);
             CommandDeleteSelectedNodes = new Command<ElementsForDelete, ElementsForDelete>(DeleteSelectedNodes, UnDeleteSelectedNodes, NotSaved);
             CommandDeleteSelectedConnectors = new Command<List<(int index, ViewModelConnector element)>, List<(int index, ViewModelConnector connector)>>(DeleteSelectedConnectors, UnDeleteSelectedConnectors, NotSaved);
             CommandDeleteSelectedElements = new Command<DeleteMode, DeleteMode>(DeleteSelectedElements, UnDeleteSelectedElements);
@@ -351,19 +353,34 @@ namespace SimpleStateMachineNodeEditor.ViewModel
         private void DeleteDraggedConnect()
         {
             Connects.Remove(DraggedConnect);
+            DraggedConnect.FromConnector.Connect = null;
+
         }
-        private ViewModelConnect AddConnectWithUndoRedo(ViewModelConnect parameter, ViewModelConnect result)
+        private ViewModelConnector AddConnectorWithConnect(ViewModelConnector parameter, ViewModelConnector result)
         {
             if (result == null)
                 return parameter;
-            result.FromConnector.Node.CommandAddConnectorWithConnect.Execute((1, result.FromConnector));
+            result.Node.CommandAddConnectorWithConnect.Execute((1, result));
             return result;
         }
-        private ViewModelConnect DeleteConnectWithUndoRedo(ViewModelConnect parameter, ViewModelConnect result)
+        private ViewModelConnector DeleteConnectorWithConnect(ViewModelConnector parameter, ViewModelConnector result)
         {
-            result.FromConnector.Node.CommandDeleteConnectorWithConnect.Execute(result.FromConnector);
+            result.Node.CommandDeleteConnectorWithConnect.Execute(result);
             return parameter;
         }
+
+        //private ViewModelConnect AddConnectWithUndoRedo(ViewModelConnect parameter, ViewModelConnect result)
+        //{
+        //    if (result == null)
+        //        return parameter;
+        //    result.FromConnector.Node.CommandAddConnectorWithConnect.Execute((1, result.FromConnector));
+        //    return result;
+        //}
+        //private ViewModelConnect DeleteConnectWithUndoRedo(ViewModelConnect parameter, ViewModelConnect result)
+        //{
+        //    result.FromConnector.Node.CommandDeleteConnectorWithConnect.Execute(result.FromConnector);
+        //    return parameter;
+        //}
 
 
         private void AddConnect(ViewModelConnect ViewModelConnect)
