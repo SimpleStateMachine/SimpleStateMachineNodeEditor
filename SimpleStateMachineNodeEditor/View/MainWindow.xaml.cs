@@ -21,6 +21,7 @@ using SimpleStateMachineNodeEditor.Helpers;
 using Newtonsoft.Json;
 using System.Linq;
 using SimpleStateMachineNodeEditor.Helpers.Commands;
+using SimpleStateMachineNodeEditor.Helpers.Extensions;
 
 namespace SimpleStateMachineNodeEditor.View
 {
@@ -52,7 +53,7 @@ namespace SimpleStateMachineNodeEditor.View
             SetupSubscriptions();
             SetupBinding();
             SetupEvents();
-            SetupCommands();
+            //SetupCommands();
         }
 
         #region Setup Binding
@@ -68,6 +69,11 @@ namespace SimpleStateMachineNodeEditor.View
 
                 this.OneWayBind(this.ViewModel, x => x.Messages, x => x.MessageList.ItemsSource).DisposeWith(disposable);
                 this.OneWayBind(this.ViewModel, x=>x.DebugEnable, x=>x.LabelDebug.Visibility).DisposeWith(disposable);
+
+                //this.ItemSave.Inp
+
+                //this.OneWayBind(this.NodesCanvas.ViewModel, x => x.CommandSave, x => x.BindingSave.Command);
+                //this.OneWayBind(this.NodesCanvas.ViewModel, x => x.CommandSave, x => x.BindingSave.Command);
 
 
             });
@@ -96,16 +102,17 @@ namespace SimpleStateMachineNodeEditor.View
         #endregion Setup Subscriptions
         #region Setup Commands
 
-        public SimpleCommand CommandSave { get; set; }
-        private void SetupCommands()
-        {
-            this.WhenActivated(disposable =>
-            {
-                CommandSave = new SimpleCommand(Save);
-                this.Events().KeyUp.Where(x => x.Key == Key.S && (Keyboard.IsKeyDown(Key.LeftCtrl) || Keyboard.IsKeyDown(Key.RightCtrl))).Subscribe(_ => Save()).DisposeWith(disposable);
-                this.Events().KeyUp.Where(x => x.Key == Key.F4 && (Keyboard.IsKeyDown(Key.LeftAlt) || Keyboard.IsKeyDown(Key.RightAlt))).Subscribe(_ => Close()).DisposeWith(disposable);
-            });
-        }
+        //public ReactiveCommand<Unit,Unit> CommandSave { get; set; }
+        //private void SetupCommands()
+        //{
+        //    this.WhenActivated(disposable =>
+        //    {
+        //        CommandSave = ReactiveCommand.Create(Save);
+
+        //        //this.Events().KeyUp.Where(x => x.Key == Key.S && (Keyboard.IsKeyDown(Key.LeftCtrl) || Keyboard.IsKeyDown(Key.RightCtrl))).Subscribe(_ => Save()).DisposeWith(disposable);
+        //        //this.Events().KeyUp.Where(x => x.Key == Key.F4 && (Keyboard.IsKeyDown(Key.LeftAlt) || Keyboard.IsKeyDown(Key.RightAlt))).Subscribe(_ => Close()).DisposeWith(disposable);
+        //    });
+        //}
         #endregion Setup Commands
 
         #region SetupEvents
@@ -124,6 +131,7 @@ namespace SimpleStateMachineNodeEditor.View
                 this.ButtonClose.Events().Click.Subscribe(_ => WithoutSaving(ButtonCloseClick)).DisposeWith(disposable);
                 this.ButtonMin.Events().Click.Subscribe(e => ButtonMinClick(e)).DisposeWith(disposable);
                 this.ButtonMax.Events().Click.Subscribe(e => ButtonMaxClick(e)).DisposeWith(disposable);
+
                 this.ItemSave.Events().Click.Subscribe(_=> Save()).DisposeWith(disposable);
                 this.ItemSaveAs.Events().Click.Subscribe(_ => SaveAs()).DisposeWith(disposable);
                 this.ItemOpen.Events().Click.Subscribe(_ => WithoutSaving(Open)).DisposeWith(disposable);
@@ -236,7 +244,7 @@ namespace SimpleStateMachineNodeEditor.View
         }
         void New()
         {
-            this.NodesCanvas.ViewModel.CommandNewScheme.Execute();
+            this.NodesCanvas.ViewModel.CommandNewScheme.ExecuteWithSubscribe();
         }
         void WithoutSaving(Action action)
         {

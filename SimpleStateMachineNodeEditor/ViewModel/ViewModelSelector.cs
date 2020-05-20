@@ -8,6 +8,7 @@ using ReactiveUI.Fody.Helpers;
 using SimpleStateMachineNodeEditor.Helpers;
 using SimpleStateMachineNodeEditor.Helpers.Commands;
 using SimpleStateMachineNodeEditor.Helpers.Transformations;
+using System.Reactive;
 
 namespace SimpleStateMachineNodeEditor.ViewModel
 {
@@ -66,12 +67,12 @@ namespace SimpleStateMachineNodeEditor.ViewModel
 
         #region Setup Commands
         public SimpleCommandWithParameter<MyPoint> CommandStartSelect { get; set; }
-        public SimpleCommand CommandEndSelect { get; set; }
+        public ReactiveCommand<Unit,Unit> CommandEndSelect { get; set; }
 
         private void SetupCommands()
         {
             CommandStartSelect = new SimpleCommandWithParameter<MyPoint>(StartSelect);
-            CommandEndSelect = new SimpleCommand(EndSelect);
+            CommandEndSelect =  ReactiveCommand.Create(EndSelect);
         }
 
         private void StartSelect(MyPoint point)

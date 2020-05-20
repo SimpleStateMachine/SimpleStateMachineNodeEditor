@@ -15,6 +15,7 @@ using ReactiveUI;
 using SimpleStateMachineNodeEditor.Helpers;
 using SimpleStateMachineNodeEditor.ViewModel;
 using System.Windows.Shapes;
+using SimpleStateMachineNodeEditor.Helpers.Extensions;
 
 namespace SimpleStateMachineNodeEditor.View
 {
@@ -91,7 +92,7 @@ namespace SimpleStateMachineNodeEditor.View
 
         private void OnEventDrop(DragEventArgs e)
         {
-            this.ViewModel.CommandConnectPointDrop.Execute();
+            this.ViewModel.CommandConnectPointDrop.ExecuteWithSubscribe();
             e.Handled = true;
         }
         void UpdatePosition()

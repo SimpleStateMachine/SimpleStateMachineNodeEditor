@@ -23,12 +23,12 @@
             <!--OpacityMask - it's color on MouseOver-->
             <Menu Background="{StaticResource ColorMenuBackground}"  Foreground="{StaticResource ColorMenuForeground}" BorderBrush="{StaticResource ColorMenuBorder}" OpacityMask="{StaticResource ColorMenuBackgroundMouseOver}"  Template="{StaticResource MenuTemplate}" BorderThickness="1" HorizontalAlignment="Left" VerticalAlignment="Center">
                 <MenuItem Header="File" x:Name="Item" Style="{StaticResource StyleMenuItem}" Margin="3,0,3,0">
-                    <MenuItem Header="New" x:Name="ItemNew" InputGestureText="Ctrl+Shift+N"  Style="{StaticResource StyleMenuItem}">
+                    <MenuItem Header="New" x:Name="ItemNew" InputGestureText="Ctrl+N"  Style="{StaticResource StyleMenuItem}">
                             <MenuItem.Icon>
                                 <Rectangle Fill="{StaticResource IconNewSheme}" Height="15" Width="15"/>
                             </MenuItem.Icon>
                         </MenuItem>
-                        <MenuItem Header="Open" x:Name="ItemOpen" InputGestureText="Ctrl+Shift+O"  Style="{StaticResource StyleMenuItem}" >
+                        <MenuItem Header="Open" x:Name="ItemOpen" InputGestureText="Ctrl+O"  Style="{StaticResource StyleMenuItem}" >
                             <MenuItem.Icon>
                                 <Rectangle Fill="{StaticResource IconImportScheme}" Height="15" Width="15"/>
                             </MenuItem.Icon>
@@ -108,10 +108,10 @@
         </DockPanel>
         <ToolBarTray Grid.Row="1" IsLocked="True"  Background="{x:Null}">
             <ToolBar Style="{StaticResource ToolBarTemplate}" Background="{x:Null}" Foreground="{x:Null}"  >
-                <Button x:Name="ButtonNewScheme" ToolTip="New (Ctrl+Shift+N)" Style="{StaticResource StyleHeaderButton}" Background="{StaticResource ColorWindowHeader}" BorderBrush="{StaticResource ColorWindowHeaderButtonBackgroundMouseOver}">
+                <Button x:Name="ButtonNewScheme" ToolTip="New (Ctrl+N)" Style="{StaticResource StyleHeaderButton}" Background="{StaticResource ColorWindowHeader}" BorderBrush="{StaticResource ColorWindowHeaderButtonBackgroundMouseOver}">
                     <Rectangle Fill="{StaticResource IconNewSheme}" Height="15" Width="15"/>
                 </Button>
-                <Button x:Name="ButtonImportScheme" ToolTip="Open (Ctrl+Shift+O)"  Style="{StaticResource StyleHeaderButton}" Background="{StaticResource ColorWindowHeader}" BorderBrush="{StaticResource ColorWindowHeaderButtonBackgroundMouseOver}">
+                <Button x:Name="ButtonImportScheme" ToolTip="Open (Ctrl+O)"  Style="{StaticResource StyleHeaderButton}" Background="{StaticResource ColorWindowHeader}" BorderBrush="{StaticResource ColorWindowHeaderButtonBackgroundMouseOver}">
                     <Rectangle Fill="{StaticResource IconImportScheme}" Height="15" Width="15"/>
                 </Button>
                 <Button x:Name="ButtonSave"  ToolTip="Save (Ctrl+S)" Style="{StaticResource StyleHeaderButton}" Background="{StaticResource ColorWindowHeader}" BorderBrush="{StaticResource ColorWindowHeaderButtonBackgroundMouseOver}">
@@ -202,7 +202,7 @@
                           VirtualizingStackPanel.CacheLengthUnit="Page"                           
                           VirtualizingStackPanel.ScrollUnit="Pixel">
                     <ListBox.InputBindings>
-                        <KeyBinding x:Name="BindingCopyError" Key="C" Modifiers="Control" />
+                        <KeyBinding x:Name="BindingCopyError" Gesture="Ctrl+C"/>
                     </ListBox.InputBindings>
                     <ListBox.ContextMenu>
                         <ContextMenu Template="{StaticResource TemplateContextMenu}" Background="{StaticResource ColorMenuBackground}" BorderBrush="{StaticResource ColorMenuBorder}" OpacityMask="{StaticResource ColorWindowHeaderButtonBackgroundMouseOver}"  Foreground="{StaticResource ColorMenuForeground}" BorderThickness="1" HorizontalAlignment="Left" VerticalAlignment="Center" >
@@ -226,7 +226,12 @@
     <Window.InputBindings>
         <!--<KeyBinding x:Name="BindingUndo" Key="Z" Modifiers="Control" />
         <KeyBinding x:Name="BindingRedo" Key="Y" Modifiers="Control" />-->
-        <!--<KeyBinding x:Name="BindingSave" Key="S" Modifiers="Control" />-->
+        <KeyBinding x:Name="BindingSave" Key="S" Modifiers="Control" />
+        <KeyBinding x:Name="BindingSaveAs"  Gesture="Ctrl+Shift+S"/>
+        <KeyBinding x:Name="BindingOpen"    Gesture="Ctrl+Shift+O" />
+        <KeyBinding x:Name="BindingNew"    Gesture="Ctrl+Shift+N"/>
+        <KeyBinding x:Name="BindingExit"    Key="F4" Modifiers="Alt"/>
+        <KeyBinding x:Name="BindingExportToJpeg"    Key="F4" Modifiers="Alt"/>
         <!--<KeyBinding x:Name="BindingSelectAll" Key="A" Modifiers="Control" />
         <KeyBinding x:Name="BindingAddNode" Key="N" Modifiers="Control" />
         <KeyBinding x:Name="BindingDeleteSelectedElements" Key="Delete"  />

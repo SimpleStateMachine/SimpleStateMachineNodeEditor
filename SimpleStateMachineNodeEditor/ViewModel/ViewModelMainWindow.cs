@@ -25,6 +25,8 @@ namespace SimpleStateMachineNodeEditor.ViewModel
         private IDisposable ConnectToMessages;
         public double MaxHeightMessagePanel = 150;
 
+
+
         public ViewModelMainWindow()
         {
             SetupCommands();
@@ -70,6 +72,7 @@ namespace SimpleStateMachineNodeEditor.ViewModel
         private void SetupCommands()
         {
             CommandCopyError = new SimpleCommandWithParameter<string>(CopyError);
+
         }
 
         private void CopyError(string errrorText)
@@ -78,5 +81,6 @@ namespace SimpleStateMachineNodeEditor.ViewModel
         }
 
         #endregion Setup Commands
+
     }
 }

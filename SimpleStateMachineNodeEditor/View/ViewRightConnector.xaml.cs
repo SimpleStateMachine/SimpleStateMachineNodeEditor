@@ -17,6 +17,7 @@ using SimpleStateMachineNodeEditor.Helpers;
 using SimpleStateMachineNodeEditor.ViewModel;
 using SimpleStateMachineNodeEditor.Helpers.Transformations;
 using SimpleStateMachineNodeEditor.Helpers.Enums;
+using SimpleStateMachineNodeEditor.Helpers.Extensions;
 
 namespace SimpleStateMachineNodeEditor.View
 {
@@ -93,7 +94,7 @@ namespace SimpleStateMachineNodeEditor.View
         private void test(bool value)
         {
             if (value)
-                this.ViewModel.CommandSetAsLoop.Execute();
+                this.ViewModel.CommandSetAsLoop.ExecuteWithSubscribe();
         }
         private void SetupEvents()
         {
@@ -118,18 +119,18 @@ namespace SimpleStateMachineNodeEditor.View
         {
             if (Keyboard.IsKeyDown(Key.LeftCtrl))
             {
-                this.ViewModel.CommandSetAsLoop.Execute();
+                this.ViewModel.CommandSetAsLoop.ExecuteWithSubscribe();
                 this.ViewModel.NodesCanvas.CommandAddConnectorWithConnect.Execute(this.ViewModel);
 
                 this.ViewModel.NodesCanvas.LogDebug("Зашел 2 ");
             }          
             else 
             {
-                this.ViewModel.CommandConnectPointDrag.Execute();
+                this.ViewModel.CommandConnectPointDrag.ExecuteWithSubscribe();
                 DataObject data = new DataObject();
                 data.SetData("Node", this.ViewModel.Node);
                 DragDrop.DoDragDrop(this, data, DragDropEffects.Link);
-                this.ViewModel.CommandCheckConnectPointDrop.Execute();
+                this.ViewModel.CommandCheckConnectPointDrop.ExecuteWithSubscribe();
                 e.Handled = true;
 
                 this.ViewModel.NodesCanvas.LogDebug("Зашел 1 ");
@@ -142,7 +143,7 @@ namespace SimpleStateMachineNodeEditor.View
                 return;
             if (Keyboard.IsKeyDown(Key.LeftAlt))
             {
-                this.ViewModel.CommandConnectorDrag.Execute();
+                this.ViewModel.CommandConnectorDrag.ExecuteWithSubscribe();
                 DataObject data = new DataObject();
                 data.SetData("Connector", this.ViewModel);
                 DragDrop.DoDragDrop(this, data, DragDropEffects.Link);
@@ -171,7 +172,7 @@ namespace SimpleStateMachineNodeEditor.View
             if (this.ViewModel.NodesCanvas.ConnectorPreviewForDrop == this.ViewModel)
                 return;
 
-            this.ViewModel.CommandConnectorDragEnter.Execute();
+            this.ViewModel.CommandConnectorDragEnter.ExecuteWithSubscribe();
 
             e.Handled = true;
         }
@@ -180,7 +181,7 @@ namespace SimpleStateMachineNodeEditor.View
             if (this.ViewModel.NodesCanvas.ConnectorPreviewForDrop == null)
                 return;
            
-            this.ViewModel.CommandConnectorDrop.Execute();
+            this.ViewModel.CommandConnectorDrop.ExecuteWithSubscribe();
 
             e.Handled = true;
         }

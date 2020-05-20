@@ -7,6 +7,7 @@ using System.Reactive.Linq;
 
 using SimpleStateMachineNodeEditor.Helpers;
 using SimpleStateMachineNodeEditor.Helpers.Commands;
+using System.Reactive;
 
 namespace SimpleStateMachineNodeEditor.ViewModel
 {
@@ -41,12 +42,12 @@ namespace SimpleStateMachineNodeEditor.ViewModel
         }
         #region Setup Commands
         public SimpleCommandWithParameter<MyPoint> CommandStartCut { get; set; }
-        public SimpleCommand CommandEndCut { get; set; }
+        public ReactiveCommand<Unit,Unit> CommandEndCut { get; set; }
 
         private void SetupCommands()
         {
             CommandStartCut = new SimpleCommandWithParameter<MyPoint>(StartCut);
-            CommandEndCut = new SimpleCommand(EndCut);
+            CommandEndCut = ReactiveCommand.Create(EndCut);
         }
 
         private void StartCut(MyPoint point)

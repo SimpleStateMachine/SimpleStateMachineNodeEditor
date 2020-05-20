@@ -18,6 +18,8 @@ using SimpleStateMachineNodeEditor.ViewModel;
 using SimpleStateMachineNodeEditor.Helpers.Transformations;
 using System.IO;
 using SimpleStateMachineNodeEditor.Helpers.Enums;
+using SimpleStateMachineNodeEditor.Icons;
+using SimpleStateMachineNodeEditor.Helpers.Extensions;
 
 namespace SimpleStateMachineNodeEditor.View
 {
@@ -112,8 +114,8 @@ namespace SimpleStateMachineNodeEditor.View
                 this.BindCommand(this.ViewModel, x => x.CommandAddNodeWithUndoRedo, x => x.BindingAddNode, positionLeftClickObservable).DisposeWith(disposable);
                 this.BindCommand(this.ViewModel, x => x.CommandAddNodeWithUndoRedo, x => x.ItemAddNode, positionRightClickObservable).DisposeWith(disposable);
 
-                this.WhenAnyValue(x => x.ViewModel.Selector.Size).InvokeCommand(ViewModel.CommandSelectorIntersect).DisposeWith(disposable);
-                this.WhenAnyValue(x => x.ViewModel.Cutter.EndPoint.Value).InvokeCommand(ViewModel.CommandCutterIntersect).DisposeWith(disposable);
+                this.WhenAnyValue(x => x.ViewModel.Selector.Size).WithoutParameter().InvokeCommand(ViewModel,x=>x.CommandSelectorIntersect).DisposeWith(disposable);
+                this.WhenAnyValue(x => x.ViewModel.Cutter.EndPoint.Value).WithoutParameter().InvokeCommand(ViewModel, x => x.CommandCutterIntersect).DisposeWith(disposable);
 
             });
         }
@@ -151,7 +153,7 @@ namespace SimpleStateMachineNodeEditor.View
                 this.CaptureMouse();
                 Keyboard.Focus(this);
 
-                this.ViewModel.CommandUnSelectAll.Execute();
+                this.ViewModel.CommandUnSelectAll.ExecuteWithSubscribe();
             }
         }
         private void UpdateConnector()
@@ -197,6 +199,7 @@ namespace SimpleStateMachineNodeEditor.View
             PositionMove.Clear();
             Keyboard.Focus(this);
         }
+        private MyPoint test = new MyPoint();
         private void OnEventMouseMove(MouseEventArgs e)
         {
             //if ((Mouse.Captured == null)||(!(Mouse.Captured is CanBeMove)))
@@ -212,12 +215,14 @@ namespace SimpleStateMachineNodeEditor.View
             SumMove += delta;
             if (this.IsMouseCaptured)
             {
-                ViewModel.CommandPartMoveAllNode.Execute(delta);
+                //ViewModel.CommandPartMoveAllNode.Execute(delta).Subscribe();
+                ViewModel.CommandPartMoveAllNode.ExecuteWithSubscribe(delta);
                 Move = MoveNodes.MoveAll;
             }
             else
             {
-                ViewModel.CommandPartMoveAllSelectedNode.Execute(delta);
+                //ViewModel.CommandPartMoveAllSelectedNode.Execute(delta);
+                ViewModel.CommandPartMoveAllSelectedNode.ExecuteWithSubscribe(delta);
                 Move = MoveNodes.MoveSelected;
             }
         }
