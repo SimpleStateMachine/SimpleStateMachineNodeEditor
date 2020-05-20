@@ -1,5 +1,6 @@
 ﻿using SimpleStateMachineNodeEditor.Helpers.Extensions;
 using System;
+using System.DirectoryServices;
 using System.Windows.Input;
 
 namespace SimpleStateMachineNodeEditor.Helpers.Commands
@@ -58,5 +59,10 @@ namespace SimpleStateMachineNodeEditor.Helpers.Commands
             _execute = execute;
             OnExecute += onExecute;
         }
+
+        public static SimpleCommandWithParameter<TParameter> Create<TParameter>(Action<TParameter> execute, Action onExecute = null)
+        {
+            return new SimpleCommandWithParameter<TParameter>(execute, onExecute);
+    }
     }
 }

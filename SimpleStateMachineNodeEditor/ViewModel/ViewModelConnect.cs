@@ -111,16 +111,16 @@ namespace SimpleStateMachineNodeEditor.ViewModel
 
         #region Setup Commands
 
-        //public SimpleCommand CommandDelete { get; set; }
-        //public SimpleCommand CommandAdd { get; set; }
-        //public SimpleCommand CommandDeleteWithConnector { get; set; }
-        //public SimpleCommand CommandAddWithConnector { get; set; }
+        //public ReactiveCommand<Unit,Unit> CommandDelete { get; set; }
+        //public ReactiveCommand<Unit,Unit> CommandAdd { get; set; }
+        //public ReactiveCommand<Unit,Unit> CommandDeleteWithConnector { get; set; }
+        //public ReactiveCommand<Unit,Unit> CommandAddWithConnector { get; set; }
         private void SetupCommands()
         {
-            //CommandAdd = new SimpleCommand(Add, NotSaved);
-            //CommandDelete = new SimpleCommand(Delete, NotSaved);
-            //CommandAddWithConnector = new SimpleCommand(AddWithConnect, NotSaved);
-            //CommandDeleteWithConnector = new SimpleCommand(DeleteWithConnects, NotSaved);
+            //CommandAdd = ReactiveCommand.Create(Add, NotSaved);
+            //CommandDelete = ReactiveCommand.Create(Delete, NotSaved);
+            //CommandAddWithConnector = ReactiveCommand.Create(AddWithConnect, NotSaved);
+            //CommandDeleteWithConnector = ReactiveCommand.Create(DeleteWithConnects, NotSaved);
         }
         private void NotSaved()
         {
@@ -136,11 +136,11 @@ namespace SimpleStateMachineNodeEditor.ViewModel
         //}
         //private void AddWithConnect()
         //{
-        //    this.FromConnector.CommandAddWithConnect.Execute();
+        //    this.FromConnector.CommandAddWithConnect.ExecuteWithSubscribe();
         //}
         //private void DeleteWithConnects()
         //{
-        //    this.FromConnector.CommandDeleteWithConnect.Execute();
+        //    this.FromConnector.CommandDeleteWithConnect.ExecuteWithSubscribe();
         //}
         #endregion Setup Commands
 

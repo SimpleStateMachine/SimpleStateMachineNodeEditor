@@ -15,6 +15,8 @@ using System.Linq;
 using System.Xml.Linq;
 using SimpleStateMachineNodeEditor.Helpers.Enums;
 using DynamicData;
+using System.Reactive;
+using SimpleStateMachineNodeEditor.Helpers.Extensions;
 
 namespace SimpleStateMachineNodeEditor.ViewModel
 {
@@ -76,7 +78,7 @@ namespace SimpleStateMachineNodeEditor.ViewModel
         }
         #endregion Connectors
 
-        #region Commands
+        #region Setup Commands
         public SimpleCommandWithParameter<SelectMode> CommandSelect { get; set; }
         public SimpleCommandWithParameter<MyPoint> CommandMove { get; set; }
         public SimpleCommandWithParameter<bool> CommandCollapse { get; set; }
@@ -88,17 +90,17 @@ namespace SimpleStateMachineNodeEditor.ViewModel
 
         public SimpleCommandWithParameter<ViewModelConnector> CommandSelectWithShiftForConnectors { get; set; }
         public SimpleCommandWithParameter<ViewModelConnector> CommandSetConnectorAsStartSelect { get; set; }
-        public SimpleCommand CommandUnSelectedAllConnectors { get; set; }
-        public SimpleCommand CommandAddEmptyConnector { get; set; }
+        public ReactiveCommand<Unit,Unit> CommandUnSelectedAllConnectors { get; set; }
+        public ReactiveCommand<Unit,Unit> CommandAddEmptyConnector { get; set; }
 
 
-        //public SimpleCommand CommandTransitionsDragLeave { get; set; }
+        //public ReactiveCommand<Unit,Unit> CommandTransitionsDragLeave { get; set; }
 
-        //public SimpleCommand CommandTransitionsDragEnter { get; set; }
+        //public ReactiveCommand<Unit,Unit> CommandTransitionsDragEnter { get; set; }
 
-        //public SimpleCommand CommandTransitionsDrop { get; set; }
+        //public ReactiveCommand<Unit,Unit> CommandTransitionsDrop { get; set; }
 
-        //public SimpleCommand CommandTransitionsDragOver { get; set; }
+        //public ReactiveCommand<Unit,Unit> CommandTransitionsDragOver { get; set; }
 
         //public SimpleCommandWithParameter<ViewModelConnector> CommandConnectorDrag { get; set; }
 
@@ -106,15 +108,15 @@ namespace SimpleStateMachineNodeEditor.ViewModel
         {
             CommandSelect = new SimpleCommandWithParameter<SelectMode>(Select);
             CommandMove = new SimpleCommandWithParameter<MyPoint>(Move, NotSaved);
-            CommandAddEmptyConnector = new SimpleCommand(AddEmptyConnector);
+            CommandAddEmptyConnector = ReactiveCommand.Create(AddEmptyConnector);
             CommandCollapse = new SimpleCommandWithParameter<bool>(Collapse, NotSaved);
             CommandSelectWithShiftForConnectors = new SimpleCommandWithParameter<ViewModelConnector>(SelectWithShiftForConnectors);
             CommandSetConnectorAsStartSelect = new SimpleCommandWithParameter<ViewModelConnector>(SetConnectorAsStartSelect);
-            CommandUnSelectedAllConnectors = new SimpleCommand(UnSelectedAllConnectors);
-            //CommandTransitionsDragLeave = new SimpleCommand(TransitionsDragLeave);
-            //CommandTransitionsDragEnter = new SimpleCommand(TransitionsDragEnter);
-            //CommandTransitionsDrop = new SimpleCommand(TransitionsDrop);
-            //CommandTransitionsDragOver = new SimpleCommand(TransitionsDragOver);
+            CommandUnSelectedAllConnectors = ReactiveCommand.Create(UnSelectedAllConnectors);
+            //CommandTransitionsDragLeave = ReactiveCommand.Create(TransitionsDragLeave);
+            //CommandTransitionsDragEnter = ReactiveCommand.Create(TransitionsDragEnter);
+            //CommandTransitionsDrop = ReactiveCommand.Create(TransitionsDrop);
+            //CommandTransitionsDragOver = ReactiveCommand.Create(TransitionsDragOver);
             //CommandConnectorDrag = new SimpleCommandWithParameter<ViewModelConnector>(this, ConnectorDrag);
 
             //CommandAddConnector = new SimpleCommandWithParameter<(int index, ViewModelConnector connector)>(AddConnector, NotSaved);
@@ -133,7 +135,7 @@ namespace SimpleStateMachineNodeEditor.ViewModel
         {
             NodesCanvas.ItSaved = false;
         }
-        #endregion Commands
+        #endregion Setup Commands
 
         private void Collapse(bool value)
         {
@@ -188,7 +190,7 @@ namespace SimpleStateMachineNodeEditor.ViewModel
             }
             else if ((selectMode == SelectMode.Click) && (!Selected))
             {
-                NodesCanvas.CommandUnSelectAll.Execute();
+                NodesCanvas.CommandUnSelectAll.ExecuteWithSubscribe();
                 this.Selected = true;
             }
         }

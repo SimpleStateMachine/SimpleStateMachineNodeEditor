@@ -20,6 +20,7 @@ using System.Windows.Media;
 using System.Windows;
 using System.Windows.Input;
 using System.Reactive;
+using SimpleStateMachineNodeEditor.Helpers.Extensions;
 
 namespace SimpleStateMachineNodeEditor.ViewModel
 {
@@ -96,13 +97,14 @@ namespace SimpleStateMachineNodeEditor.ViewModel
         #endregion Setup Nodes
 
         #region Setup Commands
-        public SimpleCommand CommandNewScheme { get; set; }
-        public SimpleCommand CommandRedo { get; set; }
-        public SimpleCommand CommandUndo { get; set; }
-        public SimpleCommand CommandSelectAll { get; set; }
-        public SimpleCommand CommandUnSelectAll { get; set; }
-        public SimpleCommand CommandSelectorIntersect { get; set; }
-        public SimpleCommand CommandCutterIntersect { get; set; }
+        public ReactiveCommand<Unit,Unit> CommandNewScheme { get; set; }
+        public ReactiveCommand<Unit,Unit> CommandRedo { get; set; }
+        public ReactiveCommand<Unit,Unit> CommandUndo { get; set; }
+        //public ReactiveCommand<Unit,Unit> CommandSelectAll { get; set; }
+        public ReactiveCommand<Unit, Unit> CommandSelectAll { get; set; }
+        public ReactiveCommand<Unit,Unit> CommandUnSelectAll { get; set; }
+        public ReactiveCommand<Unit,Unit> CommandSelectorIntersect { get; set; }
+        public ReactiveCommand<Unit,Unit> CommandCutterIntersect { get; set; }
 
         public SimpleCommandWithParameter<ViewModelConnect> CommandAddConnect { get; set; }
         public SimpleCommandWithParameter<ViewModelConnect> CommandDeleteConnect { get; set; }
@@ -110,7 +112,7 @@ namespace SimpleStateMachineNodeEditor.ViewModel
         //public SimpleCommandWithParameter<ViewModelConnect> CommandDeleteConnectWithConnector { get; set; }
 
         public SimpleCommandWithParameter<ViewModelConnector> CommandAddDraggedConnect { get; set; }
-        public SimpleCommand CommandDeleteDraggedConnect { get; set; }
+        public ReactiveCommand<Unit,Unit> CommandDeleteDraggedConnect { get; set; }
    
         public SimpleCommandWithParameter<(ViewModelNode objectForValidate, string newValue)> CommandValidateNodeName { get; set; }
         public SimpleCommandWithParameter<(ViewModelNode objectForValidate, string newValue)> CommandValidateConnectName { get; set; }
@@ -118,12 +120,14 @@ namespace SimpleStateMachineNodeEditor.ViewModel
         public SimpleCommandWithParameter<int> CommandZoom { get; set; }
         public SimpleCommandWithParameter<MyPoint> CommandSelect { get; set; }
         public SimpleCommandWithParameter<MyPoint> CommandCut { get; set; }
-        public SimpleCommandWithParameter<MyPoint> CommandPartMoveAllNode { get; set; }
+        //public SimpleCommandWithParameter<MyPoint> CommandPartMoveAllNode { get; set; }
+        //public SimpleCommandWithParameter<MyPoint> CommandPartMoveAllSelectedNode { get; set; }
+        public ReactiveCommand<MyPoint, Unit> CommandPartMoveAllNode { get; set; }
+        public ReactiveCommand<MyPoint, Unit> CommandPartMoveAllSelectedNode { get; set; }
         public SimpleCommandWithParameter<string> CommandLogDebug { get; set; }
         public SimpleCommandWithParameter<string> CommandLogError { get; set; }
         public SimpleCommandWithParameter<string> CommandLogInformation { get; set; }
         public SimpleCommandWithParameter<string> CommandLogWarning { get; set; }
-        public SimpleCommandWithParameter<MyPoint> CommandPartMoveAllSelectedNode { get; set; }
         //public Command<ViewModelConnect, ViewModelConnect> CommandAddConnectWithUndoRedo { get; set; }
         public Command<ViewModelConnector, ViewModelConnector> CommandAddConnectorWithConnect {get; set; }
         public Command<MyPoint, List<ViewModelNode>> CommandFullMoveAllNode { get; set; }
@@ -141,23 +145,26 @@ namespace SimpleStateMachineNodeEditor.ViewModel
         public double ScaleMin = 0.1;
         public double Scales { get; set; } = 0.05;
 
-        //public Command CommandDropOver { get; set; }
-
         private void SetupCommands()
         {
-           
-            CommandRedo = new SimpleCommand(CommandUndoRedo.Redo, NotSaved);
-            CommandUndo = new SimpleCommand(CommandUndoRedo.Undo, NotSaved);
-            CommandSelectAll = new SimpleCommand(SelectedAll);
-            CommandUnSelectAll = new SimpleCommand(UnSelectedAll);
-            CommandSelectorIntersect = new SimpleCommand(SelectNodes);
-            CommandCutterIntersect = new SimpleCommand(SelectConnects);
+            CommandRedo = ReactiveCommand.Create(CommandWithUndoRedo.Redo);
+            CommandUndo = ReactiveCommand.Create(CommandWithUndoRedo.Undo);
+            //CommandSelectAll = new SimpleCommand(SelectedAll);
+            CommandSelectAll = ReactiveCommand.Create(SelectedAll);
+            CommandUnSelectAll = ReactiveCommand.Create(UnSelectedAll);
+            CommandSelectorIntersect = ReactiveCommand.Create(SelectNodes);
+            CommandCutterIntersect = ReactiveCommand.Create(SelectConnects);
             CommandValidateNodeName = new SimpleCommandWithParameter<(ViewModelNode objectForValidate, string newValue)>(ValidateNodeName);
             CommandValidateConnectName = new SimpleCommandWithParameter<(ViewModelNode objectForValidate, string newValue)>(ValidateConnectName);
             CommandAddConnect = new SimpleCommandWithParameter<ViewModelConnect>(AddConnect, NotSaved);
             CommandDeleteConnect = new SimpleCommandWithParameter<ViewModelConnect>(DeleteConnect, NotSaved);
-            CommandPartMoveAllNode = new SimpleCommandWithParameter<MyPoint>(PartMoveAllNode);
-            CommandPartMoveAllSelectedNode = new SimpleCommandWithParameter<MyPoint>(PartMoveAllSelectedNode);
+
+            //CommandPartMoveAllNode = new SimpleCommandWithParameter<MyPoint>(PartMoveAllNode);
+            //CommandPartMoveAllSelectedNode = new SimpleCommandWithParameter<MyPoint>(PartMoveAllSelectedNode);
+
+            CommandPartMoveAllNode = ReactiveCommand.Create<MyPoint>(PartMoveAllNode);
+            CommandPartMoveAllSelectedNode = ReactiveCommand.Create<MyPoint>(PartMoveAllSelectedNode);
+
             CommandFullMoveAllNode = new Command<MyPoint, List<ViewModelNode>>(FullMoveAllNode, UnFullMoveAllNode, NotSaved);
             CommandFullMoveAllSelectedNode = new Command<MyPoint, List<ViewModelNode>>(FullMoveAllSelectedNode, UnFullMoveAllSelectedNode, NotSaved);
             CommandAddConnectorWithConnect = new Command<ViewModelConnector, ViewModelConnector>(AddConnectorWithConnect, DeleteConnectorWithConnect, NotSaved);
@@ -169,7 +176,7 @@ namespace SimpleStateMachineNodeEditor.ViewModel
             CommandSelect = new SimpleCommandWithParameter<MyPoint>(StartSelect);
             CommandCut = new SimpleCommandWithParameter<MyPoint>(StartCut);
             CommandAddDraggedConnect = new SimpleCommandWithParameter<ViewModelConnector>(AddDraggedConnect);
-            CommandDeleteDraggedConnect = new SimpleCommand(DeleteDraggedConnect);
+            CommandDeleteDraggedConnect = ReactiveCommand.Create(DeleteDraggedConnect);
             CommandAddNodeWithUndoRedo = new Command<MyPoint, ViewModelNode>(AddNodeWithUndoRedo, DeleteNodeWithUndoRedo, NotSaved);
             //CommandAddConnectWithUndoRedo = new Command<ViewModelConnect, ViewModelConnect>(AddConnectWithUndoRedo, DeleteConnectWithUndoRedo, NotSaved);
             CommandDeleteSelectedNodes = new Command<ElementsForDelete, ElementsForDelete>(DeleteSelectedNodes, UnDeleteSelectedNodes, NotSaved);
@@ -177,11 +184,17 @@ namespace SimpleStateMachineNodeEditor.ViewModel
             CommandDeleteSelectedElements = new Command<DeleteMode, DeleteMode>(DeleteSelectedElements, UnDeleteSelectedElements);
             CommandSave = new SimpleCommandWithParameter<string>(Save);
             CommandOpen = new SimpleCommandWithParameter<string>(Open);
-            CommandNewScheme = new SimpleCommand(NewScheme);
+            CommandNewScheme = ReactiveCommand.Create(NewScheme);
         }
         private void NotSaved()
         {
             ItSaved = false;
+        }
+
+        private void NotSavedSubscrube()
+        {
+            CommandRedo.Subscribe(_=> NotSaved());
+            CommandUndo.Subscribe(_ => NotSaved());
         }
         #endregion Setup Commands
 
@@ -224,7 +237,7 @@ namespace SimpleStateMachineNodeEditor.ViewModel
             foreach (var node in Nodes)
             {
                 node.Selected = false;
-                node.CommandUnSelectedAllConnectors.Execute();
+                node.CommandUnSelectedAllConnectors.ExecuteWithSubscribe();
             }
         }
         private List<ViewModelNode> FullMoveAllNode(MyPoint delta, List<ViewModelNode> nodes = null)
@@ -439,7 +452,7 @@ namespace SimpleStateMachineNodeEditor.ViewModel
 
                 for (int i = 0;i< count; i++)
             {
-                CommandUndo.Execute();
+                CommandUndo.ExecuteWithSubscribe();
             }
             return result;
         }

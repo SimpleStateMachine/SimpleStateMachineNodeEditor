@@ -1,28 +1,29 @@
-﻿using System.Collections.Generic;
-
+﻿using System;
+using System.Collections.Generic;
+using System.Text;
 
 namespace SimpleStateMachineNodeEditor.Helpers.Commands
 {
-    public abstract class CommandUndoRedo
+    public interface Interface1
     {
         /// <summary>
         /// Стек отмененных команд, которые можно выполнить повторно
         /// </summary>
-        public static Stack<CommandUndoRedo> StackRedo { get; set; } = new Stack<CommandUndoRedo>();
+        public static Stack<Interface1> StackRedo { get; set; } = new Stack<Interface1>();
 
         /// <summary>
         /// Стек выполненных команд, которые можно отменить 
         /// </summary>
-        public static Stack<CommandUndoRedo> StackUndo { get; set; } = new Stack<CommandUndoRedo>();
+        public static Stack<Interface1> StackUndo { get; set; } = new Stack<Interface1>();
 
         /// <summary>
         /// Функция для команды повторного выполнения
         /// </summary>
         public static void Redo()
         {
-            if (CommandUndoRedo.StackRedo.Count > 0)
+            if (CommandWithUndoRedo.StackRedo.Count > 0)
             {
-                CommandUndoRedo last = CommandUndoRedo.StackRedo.Pop();
+                CommandWithUndoRedo last = CommandWithUndoRedo.StackRedo.Pop();
                 last.Execute();
             }
         }
@@ -32,9 +33,9 @@ namespace SimpleStateMachineNodeEditor.Helpers.Commands
         /// </summary>
         public static void Undo()
         {
-            if (CommandUndoRedo.StackUndo.Count > 0)
+            if (CommandWithUndoRedo.StackUndo.Count > 0)
             {
-                CommandUndoRedo last = CommandUndoRedo.StackUndo.Pop();
+                CommandWithUndoRedo last = CommandWithUndoRedo.StackUndo.Pop();
                 last.UnExecute();
             }
         }
@@ -45,7 +46,7 @@ namespace SimpleStateMachineNodeEditor.Helpers.Commands
         /// <summary>
         /// Добавить команду в стек команд, которые можно выполнить повторно
         /// </summary>
-        public void AddInRedo(CommandUndoRedo command)
+        public void AddInRedo(Interface1 command)
         {
             StackRedo.Push(command);
         }
@@ -53,7 +54,7 @@ namespace SimpleStateMachineNodeEditor.Helpers.Commands
         /// <summary>
         /// Добавить команду в стек команд, которые можно отменить
         /// </summary>
-        public void AddInUndo(CommandUndoRedo command)
+        public void AddInUndo(Interface1 command)
         {
             StackUndo.Push(command);
         }

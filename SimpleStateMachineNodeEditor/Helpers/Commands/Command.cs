@@ -1,12 +1,10 @@
-﻿
-using SimpleStateMachineNodeEditor.Helpers.Extensions;
+﻿using SimpleStateMachineNodeEditor.Helpers.Extensions;
 using System;
 using System.Windows.Input;
 
 namespace SimpleStateMachineNodeEditor.Helpers.Commands
 {
-
-    public class Command<TParameter, TResult> : CommandUndoRedo, ICommand, ICloneable 
+    public class Command<TParameter, TResult> : CommandWithUndoRedo, ICommand, ICloneable 
     {
 
         private readonly Func<TParameter, TResult, TResult> _execute;
@@ -29,13 +27,6 @@ namespace SimpleStateMachineNodeEditor.Helpers.Commands
         public TResult Result { get; set; }
         /// </summary>
 
-        /// <summary>
-        /// Флаг того, является ли команда отменяемой 
-        /// </summary>
-        private bool CanUnExecute
-        {
-            get { return _unExecute != null; }
-        }
 
         /// <summary>
         /// Клонирование текущей команды, для записи в стек выполненных или отмененных команд
@@ -43,6 +34,7 @@ namespace SimpleStateMachineNodeEditor.Helpers.Commands
         /// <returns></returns>
         public object Clone()
         {
+          
             return new Command<TParameter, TResult>(_execute, _unExecute, OnExecute)
             {
                 Parameters = this.Parameters,
@@ -81,15 +73,11 @@ namespace SimpleStateMachineNodeEditor.Helpers.Commands
             //Выполняем команду и запоминаем результат ( чтобы можно было выполнить отмену именно для этого результата)
             Result = this._execute(Parameters, Result).Cast<TResult>();
 
-            //Если команду можно отменить
-            if (CanUnExecute)
-            {
-                //Добавляем копию команды в стек команд, которые можно отменить
-                AddInUndo(this.Clone() as CommandUndoRedo);
+            //Добавляем копию команды в стек команд, которые можно отменить
+            CommandWithUndoRedo.AddInUndo(this.Clone() as CommandWithUndoRedo);
 
-                //Очищаем список отмененнных команд ( началась новая ветка изменений)
-                StackRedo.Clear();
-            }
+            //Очищаем список отмененнных команд ( началась новая ветка изменений)
+            CommandWithUndoRedo.StackRedo.Clear();
 
             //Очищаем результат ( чтобы не передавать его при повторном выполнении)
             Result = default(TResult);
@@ -103,37 +91,25 @@ namespace SimpleStateMachineNodeEditor.Helpers.Commands
         /// <summary>
         /// Отмена команды
         /// </summary>
-        public override void UnExecute()
-        {
+        public  void UnExecute()
+        {         
             //Выполняем отмену команду
             this._unExecute(Parameters, Result);
 
             //Добавляем копию команды в стек команд, которые можно выполнить повторно
-            AddInRedo(this.Clone() as CommandUndoRedo);
+            CommandWithUndoRedo.AddInRedo(this.Clone() as CommandWithUndoRedo);
         }
 
         /// <summary>
         /// Повторное выполнения команды
         /// </summary>
-        public override void Execute()
+        public  void Execute()
         {
             //Выполянем команду
             this.Result = this._execute(this.Parameters, this.Result);
 
             //Добавляем копию команды в стек команд, которые можно отменить
-            AddInUndo(this.Clone() as CommandUndoRedo);
-        }
-
-        /// <summary>
-        /// Создать неотменяемую команду ( Для создания отменяемой команды, добавьте функцию, которая будет вызвана при отмене)
-        /// </summary>
-        /// <param name="owner">Объкт, которому принадлежит команда</param>
-        /// <param name="action">Функция, которая будет вызвана при выполнении команды</param>
-        private Command(Func<TParameter, TResult, TResult> execute, Action onExecute = null)
-        {
-            _execute = execute;
-
-            OnExecute += onExecute;
+            CommandWithUndoRedo.AddInUndo(this.Clone() as CommandWithUndoRedo);
         }
 
         /// <summary>
@@ -142,9 +118,15 @@ namespace SimpleStateMachineNodeEditor.Helpers.Commands
         /// <param name="owner">Объкт, которому принадлежит команда</param>
         /// <param name="execute">Функция, которая будет вызвана при выполнении команды</param>
         /// <param name="unExecute">Функция, которая будет вызвана при отмене команды</param>
-        public Command(Func<TParameter, TResult, TResult> execute, Func<TParameter, TResult, TResult> unExecute, Action onExecute = null) : this(execute, onExecute)
+        public Command(Func<TParameter, TResult, TResult> execute, Func<TParameter, TResult, TResult> unExecute, Action onExecute = null)
         {
+            _execute = execute;
+
             _unExecute = unExecute;
+
+            OnExecute += onExecute;
+
+            
         }
     }
 }
