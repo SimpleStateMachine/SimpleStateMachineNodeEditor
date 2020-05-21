@@ -170,7 +170,7 @@ namespace SimpleStateMachineNodeEditor.ViewModel
             Transitions.Insert(element.index, element.connector);
             if(element.connector.Connect!=null)
             {
-                NodesCanvas.CommandAddConnect.Execute(element.connector.Connect);
+                NodesCanvas.CommandAddConnect.ExecuteWithSubscribe(element.connector.Connect);
             }
         }
         private void DeleteConnectorWithConnec(ViewModelConnector connector)

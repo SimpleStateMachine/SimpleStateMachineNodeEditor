@@ -106,7 +106,9 @@ namespace SimpleStateMachineNodeEditor.ViewModel
         public ReactiveCommand<Unit,Unit> CommandSelectorIntersect { get; set; }
         public ReactiveCommand<Unit,Unit> CommandCutterIntersect { get; set; }
 
-        public SimpleCommandWithParameter<ViewModelConnect> CommandAddConnect { get; set; }
+
+        //public SimpleCommandWithParameter<ViewModelConnect> CommandAddConnect { get; set; }
+        public ReactiveCommand<ViewModelConnect, Unit> CommandAddConnect { get; set; }
         public SimpleCommandWithParameter<ViewModelConnect> CommandDeleteConnect { get; set; }
         //public SimpleCommandWithParameter<(int connectorIndex, ViewModelConnect connect)> CommandAddConnectWithConnector { get; set; }
         //public SimpleCommandWithParameter<ViewModelConnect> CommandDeleteConnectWithConnector { get; set; }
@@ -156,7 +158,9 @@ namespace SimpleStateMachineNodeEditor.ViewModel
             CommandCutterIntersect = ReactiveCommand.Create(SelectConnects);
             CommandValidateNodeName = new SimpleCommandWithParameter<(ViewModelNode objectForValidate, string newValue)>(ValidateNodeName);
             CommandValidateConnectName = new SimpleCommandWithParameter<(ViewModelNode objectForValidate, string newValue)>(ValidateConnectName);
-            CommandAddConnect = new SimpleCommandWithParameter<ViewModelConnect>(AddConnect, NotSaved);
+            //CommandAddConnect = new SimpleCommandWithParameter<ViewModelConnect>(AddConnect, NotSaved);
+
+            CommandAddConnect = ReactiveCommand.Create< ViewModelConnect>(AddConnect);
             CommandDeleteConnect = new SimpleCommandWithParameter<ViewModelConnect>(DeleteConnect, NotSaved);
 
             //CommandPartMoveAllNode = new SimpleCommandWithParameter<MyPoint>(PartMoveAllNode);
@@ -195,6 +199,8 @@ namespace SimpleStateMachineNodeEditor.ViewModel
         {
             CommandRedo.Subscribe(_=> NotSaved());
             CommandUndo.Subscribe(_ => NotSaved());
+
+            CommandAddConnect.Subscribe(_ => NotSaved());
         }
         #endregion Setup Commands
 
