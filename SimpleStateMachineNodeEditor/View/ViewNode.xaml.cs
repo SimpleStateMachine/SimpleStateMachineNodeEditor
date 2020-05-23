@@ -19,6 +19,7 @@ using SimpleStateMachineNodeEditor.ViewModel;
 using SimpleStateMachineNodeEditor.Helpers;
 using SimpleStateMachineNodeEditor.Helpers.Transformations;
 using SimpleStateMachineNodeEditor.Helpers.Enums;
+using SimpleStateMachineNodeEditor.Helpers.Extensions;
 
 namespace SimpleStateMachineNodeEditor.View
 {
@@ -110,8 +111,9 @@ namespace SimpleStateMachineNodeEditor.View
                 //this.Events().MouseEnter.Subscribe(e => OnEventMouseEnter(e)).DisposeWith(disposable);
                 //this.Events().MouseLeave.Subscribe(e => OnEventMouseMouseLeave(e)).DisposeWith(disposable);
 
-                this.NodeHeaderElement.ButtonCollapse.Events().Click.Subscribe(_ => OnEventCollapse()).DisposeWith(disposable);
+                this.NodeHeaderElement.ButtonCollapse.Events().Click.Subscribe(_ => ViewModel.IsCollapse=!ViewModel.IsCollapse).DisposeWith(disposable);
                 this.NodeHeaderElement.Events().LostFocus.Subscribe(e => Validate(e)).DisposeWith(disposable);
+                this.ViewModel.WhenAnyValue(x=>x.IsCollapse).Subscribe(value=> OnEventCollapse(value)).DisposeWith(disposable);
             });
         }
         private void Test(bool value)
@@ -123,11 +125,11 @@ namespace SimpleStateMachineNodeEditor.View
         private void OnEventMouseLeftDowns(MouseButtonEventArgs e)
         {
             Keyboard.Focus(this);
-            this.ViewModel.CommandSelect.Execute(SelectMode.Click);
+            this.ViewModel.CommandSelect.ExecuteWithSubscribe(SelectMode.Click);
         }
         private void Validate(RoutedEventArgs e)
         {
-            ViewModel.CommandValidateName.Execute(NodeHeaderElement.TextBox.Text);
+            ViewModel.CommandValidateName.ExecuteWithSubscribe(NodeHeaderElement.TextBox.Text);
             if (NodeHeaderElement.TextBox.Text != ViewModel.Name)
                 NodeHeaderElement.TextBox.Text = ViewModel.Name;
         }
@@ -170,12 +172,10 @@ namespace SimpleStateMachineNodeEditor.View
         }
 
 
-        private void OnEventCollapse()
+        private void OnEventCollapse(bool isCollapse)
         {
-            bool visible = (this.NodeHeaderElement.ButtonRotate.Angle != 0);
-            this.NodeHeaderElement.ButtonRotate.Angle = visible ? 0 : 180;
-            ViewModel.CommandCollapse.Execute(visible);
-            
+            //bool visible = (this.NodeHeaderElement.ButtonRotate.Angle != 0);
+            this.NodeHeaderElement.ButtonRotate.Angle = isCollapse ? 180 : 0;
         }
         #endregion Setup Events
 

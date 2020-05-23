@@ -100,8 +100,8 @@ namespace SimpleStateMachineNodeEditor.ViewModel
         //public ReactiveCommand<Unit,Unit> CommandDelete { get; set; }
         //public ReactiveCommand<Unit,Unit> CommandAddWithConnect { get; set; }
         //public ReactiveCommand<Unit,Unit> CommandDeleteWithConnect { get; set; }
-        public SimpleCommandWithParameter<SelectMode> CommandSelect { get; set; }
-        public SimpleCommandWithParameter<string> CommandValidateName { get; set; }
+        public ReactiveCommand<SelectMode, Unit> CommandSelect { get; set; }
+        public ReactiveCommand<string, Unit> CommandValidateName { get; set; }
 
         private void SetupCommands()
         {
@@ -120,9 +120,9 @@ namespace SimpleStateMachineNodeEditor.ViewModel
             //CommandAddWithConnect = ReactiveCommand.Create(AddWithConnect);
             //CommandDeleteWithConnect = ReactiveCommand.Create(DeleteWithConnect);
 
-            CommandValidateName = new SimpleCommandWithParameter<string>(ValidateName, NotSaved);
+            CommandValidateName = ReactiveCommand.Create<string>(ValidateName);
 
-            CommandSelect = new SimpleCommandWithParameter<SelectMode>(Select);
+            CommandSelect = ReactiveCommand.Create<SelectMode>(Select);
 
 
             //SimpleCommandWithResult<bool, Func<bool>> t = new SimpleCommandWithResult<bool, Func<bool>>()
@@ -132,6 +132,7 @@ namespace SimpleStateMachineNodeEditor.ViewModel
         private void NotSavedSubscribe()
         {
             CommandSetAsLoop.Subscribe(_=>NotSaved());
+            CommandValidateName.Subscribe(_ => NotSaved());
         }
 
         private void Select(bool value)
@@ -149,7 +150,7 @@ namespace SimpleStateMachineNodeEditor.ViewModel
                         if(!this.Selected)
                         {
                             //this.Node.CommandUnSelectedAllConnectorsExecuteWithSubscribe();
-                            this.Node.CommandSetConnectorAsStartSelect.Execute(this);
+                            this.Node.CommandSetConnectorAsStartSelect.ExecuteWithSubscribe(this);
                             //this.Selected = true;                                     
                         }
                         
@@ -162,7 +163,7 @@ namespace SimpleStateMachineNodeEditor.ViewModel
                     }
                 case SelectMode.ClickWithShift:
                     {
-                        this.Node.CommandSelectWithShiftForConnectors.Execute(this);
+                        this.Node.CommandSelectWithShiftForConnectors.ExecuteWithSubscribe(this);
                         break;
                     }
             }
@@ -185,11 +186,11 @@ namespace SimpleStateMachineNodeEditor.ViewModel
         }
         //private void Add()
         //{
-        //    Node.CommandAddConnector.Execute((0, this));
+        //    Node.CommandAddConnector.ExecuteWithSubscribe((0, this));
         //}
         //private void Delete()
         //{
-        //    Node.CommandDeleteConnector.Execute(this);
+        //    Node.CommandDeleteConnector.ExecuteWithSubscribe(this);
         //}
         //private void AddWithConnect()
         //{
@@ -203,7 +204,7 @@ namespace SimpleStateMachineNodeEditor.ViewModel
         //}
         private void ConnectPointDrag()
         {
-            NodesCanvas.CommandAddDraggedConnect.Execute(Node.CurrentConnector);
+            NodesCanvas.CommandAddDraggedConnect.ExecuteWithSubscribe(Node.CurrentConnector);
         }
         private void DragConnector(ViewModelConnector draggedConnector)
         {
@@ -231,7 +232,7 @@ namespace SimpleStateMachineNodeEditor.ViewModel
                 NodesCanvas.CommandAddConnectorWithConnect.Execute(Node.CurrentConnector);
                 Node.CommandAddEmptyConnector.ExecuteWithSubscribe();
 
-                //NodesCanvas.CommandAddConnectWithUndoRedo.Execute(Node.NodesCanvas.DraggedConnect);
+                //NodesCanvas.CommandAddConnectWithUndoRedo.ExecuteWithSubscribe(Node.NodesCanvas.DraggedConnect);
                 NodesCanvas.DraggedConnect = null;
             }
         }
@@ -284,7 +285,7 @@ namespace SimpleStateMachineNodeEditor.ViewModel
         }
         private void ValidateName(string newName)
         {
-            NodesCanvas.CommandValidateConnectName.Execute(new ValidateObjectProperty<ViewModelConnector, string>(this, newName));
+            NodesCanvas.CommandValidateConnectName.ExecuteWithSubscribe((this, newName));
         }
 
         public XElement ToXElement()

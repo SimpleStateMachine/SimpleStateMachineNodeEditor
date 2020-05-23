@@ -128,11 +128,11 @@ namespace SimpleStateMachineNodeEditor.ViewModel
         }
         //private void Add()
         //{
-        //    NodesCanvas.CommandAddConnect.Execute(this);
+        //    NodesCanvas.CommandAddConnect.ExecuteWithSubscribe(this);
         //}
         //private void Delete()
         //{
-        //    NodesCanvas.CommandDeleteConnect.Execute(this);
+        //    NodesCanvas.CommandDeleteConnect.ExecuteWithSubscribe(this);
         //}
         //private void AddWithConnect()
         //{

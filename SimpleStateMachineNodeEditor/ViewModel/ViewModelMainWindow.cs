@@ -11,6 +11,7 @@ using System.Windows;
 using SimpleStateMachineNodeEditor.Helpers.Enums;
 using System.Reactive.Linq;
 using System.Collections.ObjectModel;
+using System.Reactive;
 
 namespace SimpleStateMachineNodeEditor.ViewModel
 {
@@ -27,8 +28,9 @@ namespace SimpleStateMachineNodeEditor.ViewModel
 
 
 
-        public ViewModelMainWindow()
+        public ViewModelMainWindow(ViewModelNodesCanvas viewModelNodesCanvas)
         {
+            NodesCanvas = viewModelNodesCanvas;
             SetupCommands();
             SetupSubscriptions();        
         }
@@ -67,11 +69,11 @@ namespace SimpleStateMachineNodeEditor.ViewModel
         #endregion Setup Subscriptions
         #region Setup Commands
 
-        public SimpleCommandWithParameter<string> CommandCopyError { get; set; }
+        public ReactiveCommand<string, Unit> CommandCopyError { get; set; }
 
         private void SetupCommands()
         {
-            CommandCopyError = new SimpleCommandWithParameter<string>(CopyError);
+            CommandCopyError = ReactiveCommand.Create<string>(CopyError);
 
         }
 

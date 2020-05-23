@@ -63,9 +63,10 @@ namespace SimpleStateMachineNodeEditor.View
         {
             InitializeComponent();
             ViewModel = new ViewModelNodesCanvas();
+            SetupCommands();
             SetupBinding();
             SetupEvents();
-            SetupCommands();
+           
         }
         #region Setup Binding
         private void SetupBinding()
@@ -99,20 +100,28 @@ namespace SimpleStateMachineNodeEditor.View
                 var positionLeftClickObservable = this.ObservableForProperty(x => x.PositionLeftClick).Select(x => x.Value);
                 var positionRightClickObservable = this.ObservableForProperty(x => x.PositionRightClick).Select(x => x.Value);
 
-                this.BindCommand(this.ViewModel, x => x.CommandRedo, x => x.BindingRedo).DisposeWith(disposable);
-                this.BindCommand(this.ViewModel, x => x.CommandUndo, x => x.BindingUndo).DisposeWith(disposable);
-                this.BindCommand(this.ViewModel, x => x.CommandSelectAll, x => x.BindingSelectAll).DisposeWith(disposable);
+                this.BindCommand(this.ViewModel, x => x.CommandSelect,              x => x.BindingSelect, positionLeftClickObservable).DisposeWith(disposable);
+                this.BindCommand(this.ViewModel, x => x.CommandCut,                 x => x.BindingCut, positionLeftClickObservable).DisposeWith(disposable);
+                this.BindCommand(this.ViewModel, x => x.CommandAddNodeWithUndoRedo, x => x.BindingAddNode, positionLeftClickObservable).DisposeWith(disposable);
+                this.BindCommand(this.ViewModel, x => x.CommandAddNodeWithUndoRedo, x => x.ItemAddNode, positionRightClickObservable).DisposeWith(disposable);
 
+                this.BindCommand(this.ViewModel, x => x.CommandRedo,                x => x.BindingRedo).DisposeWith(disposable);
+                this.BindCommand(this.ViewModel, x => x.CommandUndo,                x => x.BindingUndo).DisposeWith(disposable);
+                this.BindCommand(this.ViewModel, x => x.CommandSelectAll,           x => x.BindingSelectAll).DisposeWith(disposable);
+
+                this.BindCommand(this.ViewModel, x => x.CommandUndo,                x => x.ItemCollapsUp).DisposeWith(disposable);
+                this.BindCommand(this.ViewModel, x => x.CommandSelectAll,           x => x.ItemExpandDown).DisposeWith(disposable);
 
                 this.BindCommand(this.ViewModel, x => x.CommandDeleteSelectedElements, x => x.BindingDeleteSelectedElements).DisposeWith(disposable);
 
                 //this.BindCommand(this.ViewModel, x => x.CommandDeleteSelectedNodes, x => x.BindingDeleteSelected).DisposeWith(disposable);
                 //this.BindCommand(this.ViewModel, x => x.CommandDeleteSelectedConnectors, x => x.BindingDeleteSelected).DisposeWith(disposable);
 
-                this.BindCommand(this.ViewModel, x => x.CommandSelect, x => x.BindingSelect, positionLeftClickObservable).DisposeWith(disposable);
-                this.BindCommand(this.ViewModel, x => x.CommandCut, x => x.BindingCut, positionLeftClickObservable).DisposeWith(disposable);
-                this.BindCommand(this.ViewModel, x => x.CommandAddNodeWithUndoRedo, x => x.BindingAddNode, positionLeftClickObservable).DisposeWith(disposable);
-                this.BindCommand(this.ViewModel, x => x.CommandAddNodeWithUndoRedo, x => x.ItemAddNode, positionRightClickObservable).DisposeWith(disposable);
+
+                this.BindCommand(this.ViewModel, x => x.CommandCollapseUpSelected,  x => x.ItemCollapsUp).DisposeWith(disposable);
+                this.BindCommand(this.ViewModel, x => x.CommandExpandDownSelected,  x => x.ItemExpandDown).DisposeWith(disposable);
+                
+                
 
                 this.WhenAnyValue(x => x.ViewModel.Selector.Size).WithoutParameter().InvokeCommand(ViewModel,x=>x.CommandSelectorIntersect).DisposeWith(disposable);
                 this.WhenAnyValue(x => x.ViewModel.Cutter.EndPoint.Value).WithoutParameter().InvokeCommand(ViewModel, x => x.CommandCutterIntersect).DisposeWith(disposable);
@@ -190,7 +199,7 @@ namespace SimpleStateMachineNodeEditor.View
             //var position = e.GetPosition(this.Canvas);
             //this.Scale.CenterX = position.X / this.ViewModel.Scale.Value;
             //this.Scale.CenterY = position.Y / this.ViewModel.Scale.Value;
-            this.ViewModel.CommandZoom.Execute(e.Delta);
+            this.ViewModel.CommandZoom.ExecuteWithSubscribe(e.Delta);
 
         }
         private void OnEventMouseUp(MouseButtonEventArgs e)
@@ -215,13 +224,13 @@ namespace SimpleStateMachineNodeEditor.View
             SumMove += delta;
             if (this.IsMouseCaptured)
             {
-                //ViewModel.CommandPartMoveAllNode.Execute(delta).Subscribe();
+                //ViewModel.CommandPartMoveAllNode.ExecuteWithSubscribe(delta).Subscribe();
                 ViewModel.CommandPartMoveAllNode.ExecuteWithSubscribe(delta);
                 Move = MoveNodes.MoveAll;
             }
             else
             {
-                //ViewModel.CommandPartMoveAllSelectedNode.Execute(delta);
+                //ViewModel.CommandPartMoveAllSelectedNode.ExecuteWithSubscribe(delta);
                 ViewModel.CommandPartMoveAllSelectedNode.ExecuteWithSubscribe(delta);
                 Move = MoveNodes.MoveSelected;
             }

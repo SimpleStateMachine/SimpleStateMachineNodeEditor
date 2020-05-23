@@ -17,6 +17,7 @@ using SimpleStateMachineNodeEditor.Helpers.Enums;
 using DynamicData;
 using System.Reactive;
 using SimpleStateMachineNodeEditor.Helpers.Extensions;
+using System.Threading.Tasks;
 
 namespace SimpleStateMachineNodeEditor.ViewModel
 {
@@ -32,6 +33,7 @@ namespace SimpleStateMachineNodeEditor.ViewModel
         [Reactive] public bool? TransitionsVisible { get; set; } = true;
         [Reactive] public bool? RollUpVisible { get; set; } = true;
         [Reactive] public bool CanBeDelete { get; set; } = true;
+        [Reactive] public bool IsCollapse { get; set; }
         [Reactive] public ViewModelConnector Input { get; set; }
         [Reactive] public ViewModelConnector Output { get; set; }
         [Reactive] public ViewModelConnector CurrentConnector { get; set; }
@@ -49,9 +51,10 @@ namespace SimpleStateMachineNodeEditor.ViewModel
             NodesCanvas = nodesCanvas;
             Zindex = nodesCanvas.Nodes.Count;
 
-            SetupBinding();
             SetupConnectors();
             SetupCommands();
+            SetupBinding(); 
+            
         }
 
         #region SetupBinding
@@ -59,6 +62,7 @@ namespace SimpleStateMachineNodeEditor.ViewModel
         {
             this.WhenAnyValue(x => x.Selected).Subscribe(value => { this.BorderBrush = value ? Application.Current.Resources["ColorSelectedElement"] as SolidColorBrush : Brushes.LightGray; });
             this.WhenAnyValue(x => x.Point1.Value, x => x.Size).Subscribe(_ => UpdatePoint2());
+            this.WhenAnyValue(x => x.IsCollapse).Subscribe(value => Collapse(value));
         }
         #endregion SetupBinding
 
@@ -79,58 +83,43 @@ namespace SimpleStateMachineNodeEditor.ViewModel
         #endregion Connectors
 
         #region Setup Commands
-        public SimpleCommandWithParameter<SelectMode> CommandSelect { get; set; }
-        public SimpleCommandWithParameter<MyPoint> CommandMove { get; set; }
-        public SimpleCommandWithParameter<bool> CommandCollapse { get; set; }
-        //public SimpleCommandWithParameter<(int index, ViewModelConnector connector)> CommandAddConnector { get; set; }
-        //public SimpleCommandWithParameter<ViewModelConnector> CommandDeleteConnector { get; set; }
-        public SimpleCommandWithParameter<(int index, ViewModelConnector connector)> CommandAddConnectorWithConnect { get; set; }
-        public SimpleCommandWithParameter<ViewModelConnector> CommandDeleteConnectorWithConnect { get; set; }
-        public SimpleCommandWithParameter<string> CommandValidateName { get; set; }
 
-        public SimpleCommandWithParameter<ViewModelConnector> CommandSelectWithShiftForConnectors { get; set; }
-        public SimpleCommandWithParameter<ViewModelConnector> CommandSetConnectorAsStartSelect { get; set; }
-        public ReactiveCommand<Unit,Unit> CommandUnSelectedAllConnectors { get; set; }
-        public ReactiveCommand<Unit,Unit> CommandAddEmptyConnector { get; set; }
+        public ReactiveCommand<Unit, Unit> CommandUnSelectedAllConnectors { get; set; }
+        public ReactiveCommand<Unit, Unit> CommandAddEmptyConnector { get; set; }
+        public ReactiveCommand<SelectMode, Unit> CommandSelect { get; set; }
+        public ReactiveCommand<MyPoint, Unit> CommandMove { get; set; }
+        //public ReactiveCommand<bool, Unit> CommandCollapse { get; set; }
+        public ReactiveCommand<(int index, ViewModelConnector connector), Unit> CommandAddConnectorWithConnect { get; set; }
+        public ReactiveCommand<ViewModelConnector, Unit> CommandDeleteConnectorWithConnect { get; set; }
+        public ReactiveCommand<string, Unit> CommandValidateName { get; set; }
 
-
-        //public ReactiveCommand<Unit,Unit> CommandTransitionsDragLeave { get; set; }
-
-        //public ReactiveCommand<Unit,Unit> CommandTransitionsDragEnter { get; set; }
-
-        //public ReactiveCommand<Unit,Unit> CommandTransitionsDrop { get; set; }
-
-        //public ReactiveCommand<Unit,Unit> CommandTransitionsDragOver { get; set; }
-
-        //public SimpleCommandWithParameter<ViewModelConnector> CommandConnectorDrag { get; set; }
+        public ReactiveCommand<ViewModelConnector, Unit> CommandSelectWithShiftForConnectors { get; set; }
+        public ReactiveCommand<ViewModelConnector, Unit> CommandSetConnectorAsStartSelect { get; set; }
 
         private void SetupCommands()
         {
-            CommandSelect = new SimpleCommandWithParameter<SelectMode>(Select);
-            CommandMove = new SimpleCommandWithParameter<MyPoint>(Move, NotSaved);
+            CommandSelect = ReactiveCommand.Create<SelectMode>(Select);
+            CommandMove = ReactiveCommand.Create<MyPoint>(Move);
             CommandAddEmptyConnector = ReactiveCommand.Create(AddEmptyConnector);
-            CommandCollapse = new SimpleCommandWithParameter<bool>(Collapse, NotSaved);
-            CommandSelectWithShiftForConnectors = new SimpleCommandWithParameter<ViewModelConnector>(SelectWithShiftForConnectors);
-            CommandSetConnectorAsStartSelect = new SimpleCommandWithParameter<ViewModelConnector>(SetConnectorAsStartSelect);
+            //CommandCollapse = ReactiveCommand.Create<bool>(Collapse);
+            CommandSelectWithShiftForConnectors = ReactiveCommand.Create<ViewModelConnector>(SelectWithShiftForConnectors);
+            CommandSetConnectorAsStartSelect = ReactiveCommand.Create<ViewModelConnector>(SetConnectorAsStartSelect);
             CommandUnSelectedAllConnectors = ReactiveCommand.Create(UnSelectedAllConnectors);
-            //CommandTransitionsDragLeave = ReactiveCommand.Create(TransitionsDragLeave);
-            //CommandTransitionsDragEnter = ReactiveCommand.Create(TransitionsDragEnter);
-            //CommandTransitionsDrop = ReactiveCommand.Create(TransitionsDrop);
-            //CommandTransitionsDragOver = ReactiveCommand.Create(TransitionsDragOver);
-            //CommandConnectorDrag = new SimpleCommandWithParameter<ViewModelConnector>(this, ConnectorDrag);
+            CommandAddConnectorWithConnect = ReactiveCommand.Create<(int index, ViewModelConnector connector)>(AddConnectorWithConnect);
+            CommandDeleteConnectorWithConnect = ReactiveCommand.Create<ViewModelConnector>(DeleteConnectorWithConnec);
+            CommandValidateName = ReactiveCommand.Create<string>(ValidateName);
+        }
+        private void NotSavedSubscrube()
+        {
+            CommandMove.Subscribe(_ => NotSaved());
+            //CommandCollapse.Subscribe(_ => NotSaved());
+            CommandAddConnectorWithConnect.Subscribe(_ => NotSaved());
+            CommandDeleteConnectorWithConnect.Subscribe(_ => NotSaved());
+            CommandValidateName.Subscribe(_ => NotSaved());
 
-            //CommandAddConnector = new SimpleCommandWithParameter<(int index, ViewModelConnector connector)>(AddConnector, NotSaved);
-            //CommandDeleteConnector = new SimpleCommandWithParameter<ViewModelConnector>(DeleteConnector, NotSaved);
-
-            CommandAddConnectorWithConnect = new SimpleCommandWithParameter<(int index, ViewModelConnector connector)>(AddConnectorWithConnect, NotSaved);
-            CommandDeleteConnectorWithConnect = new SimpleCommandWithParameter<ViewModelConnector>(DeleteConnectorWithConnec, NotSaved);
-
-
-            CommandValidateName = new SimpleCommandWithParameter<string>(ValidateName, NotSaved);
 
 
         }
-
         private void NotSaved()
         {
             NodesCanvas.ItSaved = false;
@@ -139,9 +128,9 @@ namespace SimpleStateMachineNodeEditor.ViewModel
 
         private void Collapse(bool value)
         {
-            if (value)
+            if (!value)
             {
-                TransitionsVisible = value;
+                TransitionsVisible = true;
                 Output.Visible = null;
             }
             else
@@ -150,21 +139,13 @@ namespace SimpleStateMachineNodeEditor.ViewModel
                 Output.Visible = true;
                 UnSelectedAllConnectors();
             }
+            NotSaved();
         }
         public int GetConnectorIndex(ViewModelConnector connector)
         {
             return Transitions.IndexOf(connector);
         }
 
-        //private void AddConnector((int index, ViewModelConnector connector) element)
-        //{
-        //    Transitions.Insert(element.index, element.connector);
-        //}
-        //private void DeleteConnector(ViewModelConnector connector)
-        //{
-        //    Transitions.Remove(connector);
-        //    //connector.Connect?.Comma
-        //}
         private void AddConnectorWithConnect((int index, ViewModelConnector connector) element)
         {
             Transitions.Insert(element.index, element.connector);
@@ -177,7 +158,7 @@ namespace SimpleStateMachineNodeEditor.ViewModel
         {
             if (connector.Connect != null)
             {
-                NodesCanvas.CommandDeleteConnect.Execute(connector.Connect);
+                NodesCanvas.CommandDeleteConnect.ExecuteWithSubscribe(connector.Connect);
             }
             Transitions.Remove(connector);
         }
@@ -200,7 +181,7 @@ namespace SimpleStateMachineNodeEditor.ViewModel
         }
         private void ValidateName(string newName)
         {
-            NodesCanvas.CommandValidateNodeName.Execute((this, newName));
+            NodesCanvas.CommandValidateNodeName.ExecuteWithSubscribe((this, newName));
         }
         private void UpdatePoint2()
         {
@@ -256,7 +237,7 @@ namespace SimpleStateMachineNodeEditor.ViewModel
             XElement element = new XElement("State");
             element.Add(new XAttribute("Name", Name));
             element.Add(new XAttribute("Position", Point1.ToString()));
-            element.Add(new XAttribute("IsCollapse", (TransitionsVisible!=true).ToString()));
+            element.Add(new XAttribute("IsCollapse", IsCollapse.ToString()));
             return element;
         }
 
@@ -287,9 +268,41 @@ namespace SimpleStateMachineNodeEditor.ViewModel
 
             var isCollapse = node.Attribute("IsCollapse")?.Value;
             if (isCollapse != null)
-                viewModelNode.Collapse(!bool.Parse(isCollapse));
-      
+                viewModelNode.IsCollapse = bool.Parse(isCollapse);
+
             return viewModelNode;
         }
+
+        //public static async Task<(ViewModelNode node, string message)> FromXElement(ViewModelNodesCanvas nodesCanvas, XElement node, Func<string, bool> actionForCheck)
+        //{
+        //  string errorMessage = null;
+        //    ViewModelNode viewModelNode = null;
+        //    string name = node.Attribute("Name")?.Value;
+
+        //    if (string.IsNullOrEmpty(name))
+        //    {
+        //        errorMessage = "Node without name";
+        //        return (viewModelNode, errorMessage);
+        //    }
+
+        //    if (actionForCheck(name))
+        //    {
+        //        errorMessage = String.Format("Contains more than one node with name \"{0}\"", name);
+        //        return (viewModelNode, errorMessage);
+        //    }
+
+        //    viewModelNode = new ViewModelNode(nodesCanvas);
+        //    viewModelNode.Name = name;
+
+        //    var position = node.Attribute("Position")?.Value;
+        //    if (position != null)
+        //        viewModelNode.Point1 = MyPoint.Parse(position);
+
+        //    var isCollapse = node.Attribute("IsCollapse")?.Value;
+        //    if (isCollapse != null)
+        //        viewModelNode.Collapse(!bool.Parse(isCollapse));
+
+        //    return (viewModelNode, errorMessage);
+        //}
     }
 }

@@ -66,12 +66,12 @@ namespace SimpleStateMachineNodeEditor.ViewModel
         }
 
         #region Setup Commands
-        public SimpleCommandWithParameter<MyPoint> CommandStartSelect { get; set; }
+        public ReactiveCommand<MyPoint, Unit> CommandStartSelect { get; set; }
         public ReactiveCommand<Unit,Unit> CommandEndSelect { get; set; }
 
         private void SetupCommands()
         {
-            CommandStartSelect = new SimpleCommandWithParameter<MyPoint>(StartSelect);
+            CommandStartSelect = ReactiveCommand.Create<MyPoint>(StartSelect);
             CommandEndSelect =  ReactiveCommand.Create(EndSelect);
         }
 

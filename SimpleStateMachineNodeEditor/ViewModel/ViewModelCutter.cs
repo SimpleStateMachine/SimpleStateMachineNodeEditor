@@ -41,12 +41,12 @@ namespace SimpleStateMachineNodeEditor.ViewModel
             NodesCanvas = nodesCanvas;
         }
         #region Setup Commands
-        public SimpleCommandWithParameter<MyPoint> CommandStartCut { get; set; }
+        public ReactiveCommand<MyPoint, Unit> CommandStartCut { get; set; }
         public ReactiveCommand<Unit,Unit> CommandEndCut { get; set; }
 
         private void SetupCommands()
         {
-            CommandStartCut = new SimpleCommandWithParameter<MyPoint>(StartCut);
+            CommandStartCut = ReactiveCommand.Create<MyPoint>(StartCut);
             CommandEndCut = ReactiveCommand.Create(EndCut);
         }
 

@@ -7,7 +7,7 @@
         <ResourceDictionary Source="ImportScheme.xaml"/>
         <ResourceDictionary Source="ExportScheme.xaml"/>
         <ResourceDictionary Source="CollapseUp.xaml"/>
-        <ResourceDictionary Source="CollapseUpGroup.xaml"/>
+        <ResourceDictionary Source="CollapseUpAll.xaml"/>
         <ResourceDictionary Source="DeleteScheme.xaml"/>
         
         <ResourceDictionary Source="ErrorList.xaml"/>
@@ -21,7 +21,7 @@
         <ResourceDictionary Source="Loop.xaml"/>
         <ResourceDictionary Source="Close.xaml"/>
         <ResourceDictionary Source="Copy.xaml"/>
-        <ResourceDictionary Source="ExpandDownGroup.xaml"/>
+        <ResourceDictionary Source="ExpandDownAll.xaml"/>
         <ResourceDictionary Source="AddNode.xaml"/>
         <ResourceDictionary Source="Update.xaml"/>
         

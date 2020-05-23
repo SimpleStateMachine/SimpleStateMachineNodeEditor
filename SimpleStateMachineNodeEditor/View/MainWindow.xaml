@@ -3,11 +3,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:SimpleStateMachineNodeEditor"
-        xmlns:styles="clr-namespace:SimpleStateMachineNodeEditor.Styles"
-        xmlns:sys="clr-namespace:System;assembly=mscorlib"
-    
-    xmlns:view="clr-namespace:SimpleStateMachineNodeEditor.View" xmlns:sys1="clr-namespace:System;assembly=System.Runtime"
+    xmlns:view="clr-namespace:SimpleStateMachineNodeEditor.View"
     x:Class="SimpleStateMachineNodeEditor.View.MainWindow"
         mc:Ignorable="d"
         Title="SimpleStateMachineNodeEditor"  d:DesignWidth="808.96" Height="738.592" BorderThickness="1" Padding="7,0,7,7" ResizeMode="CanResizeWithGrip" BorderBrush="{StaticResource ColorWindowBorder}" Background="{StaticResource ColorWindowHeader}" Foreground="{x:Null}" WindowStyle="None" AllowsTransparency="True" Style="{StaticResource CustomWindowStyle}">
@@ -141,11 +137,11 @@
                     <Rectangle Fill="{StaticResource IconZoomOriginalSize}" Height="15" Width="15"/>
                 </Button>
                 <Separator Grid.Column="5" Style="{DynamicResource TemplateSeparator}" Height="Auto" BorderThickness="0,0,1,0" />
-                <Button x:Name="ButtonCollapseUpGroup" ToolTip="Collapse Up All"  Style="{StaticResource StyleHeaderButton}" Background="{StaticResource ColorWindowHeader}" BorderBrush="{StaticResource ColorWindowHeaderButtonBackgroundMouseOver}">
-                    <Rectangle Fill="{StaticResource IconCollapseUpGroup}" Height="13" Width="13"/>
+                <Button x:Name="ButtonCollapseUpAll" ToolTip="Collapse Up All"  Style="{StaticResource StyleHeaderButton}" Background="{StaticResource ColorWindowHeader}" BorderBrush="{StaticResource ColorWindowHeaderButtonBackgroundMouseOver}">
+                    <Rectangle Fill="{StaticResource IconCollapseUpAll}" Height="13" Width="13"/>
                 </Button>
-                <Button x:Name="ButtonExpandDownGroup" ToolTip="Expand Down All" Style="{StaticResource StyleHeaderButton}" Background="{StaticResource ColorWindowHeader}" BorderBrush="{StaticResource ColorWindowHeaderButtonBackgroundMouseOver}">
-                    <Rectangle Fill="{StaticResource IconExpandDownGroup}" Height="13" Width="13"/>
+                <Button x:Name="ButtonExpandDownAll" ToolTip="Expand Down All" Style="{StaticResource StyleHeaderButton}" Background="{StaticResource ColorWindowHeader}" BorderBrush="{StaticResource ColorWindowHeaderButtonBackgroundMouseOver}">
+                    <Rectangle Fill="{StaticResource IconExpandDownAll}" Height="13" Width="13"/>
                 </Button>
             </ToolBar>
 
@@ -226,7 +222,7 @@
     <Window.InputBindings>
         <!--<KeyBinding x:Name="BindingUndo" Key="Z" Modifiers="Control" />
         <KeyBinding x:Name="BindingRedo" Key="Y" Modifiers="Control" />-->
-        <KeyBinding x:Name="BindingSave" Key="S" Modifiers="Control" />
+        <KeyBinding x:Name="BindingSave" Command="{Binding ElementName=ItemSave, Path=Command}"  Key="S" Modifiers="Control" />
         <KeyBinding x:Name="BindingSaveAs"  Gesture="Ctrl+Shift+S"/>
         <KeyBinding x:Name="BindingOpen"    Gesture="Ctrl+Shift+O" />
         <KeyBinding x:Name="BindingNew"    Gesture="Ctrl+Shift+N"/>

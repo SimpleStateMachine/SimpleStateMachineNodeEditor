@@ -110,7 +110,7 @@ namespace SimpleStateMachineNodeEditor.View
 
         private void Validate(RoutedEventArgs e)
         {
-            ViewModel.CommandValidateName.Execute(TextBoxElement.Text);
+            ViewModel.CommandValidateName.ExecuteWithSubscribe(TextBoxElement.Text);
             if (TextBoxElement.Text != ViewModel.Name)
                 TextBoxElement.Text = ViewModel.Name;
         }
@@ -150,15 +150,15 @@ namespace SimpleStateMachineNodeEditor.View
             }
             else if (Keyboard.IsKeyDown(Key.LeftShift))
             {
-                this.ViewModel.CommandSelect.Execute(SelectMode.ClickWithShift);
+                this.ViewModel.CommandSelect.ExecuteWithSubscribe(SelectMode.ClickWithShift);
             }
             else if (Keyboard.IsKeyDown(Key.LeftCtrl))
             {
-                this.ViewModel.CommandSelect.Execute(SelectMode.ClickWithCtrl);              
+                this.ViewModel.CommandSelect.ExecuteWithSubscribe(SelectMode.ClickWithCtrl);              
             }
             else
             {
-                this.ViewModel.CommandSelect.Execute(SelectMode.Click);
+                this.ViewModel.CommandSelect.ExecuteWithSubscribe(SelectMode.Click);
                 return;
             }
             e.Handled = true;
