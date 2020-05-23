@@ -26,6 +26,7 @@ using System.Reactive.Concurrency;
 using System.Threading.Tasks;
 using System.Threading;
 using System.Reactive;
+using System.Collections.Generic;
 
 namespace SimpleStateMachineNodeEditor.View
 {
@@ -49,10 +50,26 @@ namespace SimpleStateMachineNodeEditor.View
             set { ViewModel = (ViewModelMainWindow)value; }
         }
         #endregion ViewModel
+        Dictionary<TypeMessage, System.Windows.Controls.Label> messagesLabels;
+        static Dictionary<TypeMessage, string> labelPostfix = new Dictionary<TypeMessage, string>()
+        {
+            {TypeMessage.Error, "Error" },
+            {TypeMessage.Information, "Information" },
+            {TypeMessage.Warning, "Warning" },
+            {TypeMessage.Debug, "Debug" },
+        };
 
         public MainWindow()
         {
             InitializeComponent();
+            messagesLabels = new Dictionary<TypeMessage, System.Windows.Controls.Label>()
+            {
+                {TypeMessage.Error, LabelError },
+                {TypeMessage.Information, LabelInformation },
+                {TypeMessage.Warning, LabelWarning },
+                {TypeMessage.Debug, LabelDebug },
+            };
+
             ViewModel = new ViewModelMainWindow(this.NodesCanvas.ViewModel);
             SetupCommands();
             SetupSubscriptions();
@@ -88,6 +105,19 @@ namespace SimpleStateMachineNodeEditor.View
                 this.BindCommand(this.ViewModel, x => x.NodesCanvas.CommandUndo ,           x => x.ItemUndo).DisposeWith(disposable);
                 this.BindCommand(this.ViewModel, x => x.NodesCanvas.CommandRedo,            x => x.ItemRedo).DisposeWith(disposable);
                 this.BindCommand(this.ViewModel, x => x.NodesCanvas.CommandSelectAll,       x => x.ItemSelectAll).DisposeWith(disposable);
+
+
+                this.WhenAnyValue(x => x.NodesCanvas.ViewModel.Messages.Count).Subscribe(_=> UpdateLabels());
+                //var informationCount = this.ObservableForProperty(x => x.NodesCanvas.ViewModel.Messages).Select(x=>x.Value.Where(x=>x.TypeMessage==TypeMessage.Information).Count().ToString());
+                ////var SelectedItem = this.ObservableForProperty(x => x.NodesCanvas.ViewModel.Messages).Select(x=>x.);
+                //this.OneWayBind(this.ViewModel, x => informationCount, x => x.LabelError.Content).DisposeWith(disposable);
+
+                //informationCount.WhenAnyValue().Sub
+                //this.LabelError.Content.
+                //this.LabelError.Events().PreviewMouseLeftButtonDown.Subscribe(e => SetDisplayMessageType(e, TypeMessage.Error)).DisposeWith(disposable);
+                //this.LabelInformation.Events().MouseLeftButtonDown.Subscribe(e => SetDisplayMessageType(e, TypeMessage.Information)).DisposeWith(disposable);
+                //this.LabelWarning.Events().MouseLeftButtonDown.Subscribe(e => SetDisplayMessageType(e, TypeMessage.Warning)).DisposeWith(disposable);
+                //this.LabelDebug.Events().MouseLeftButtonDown.Subscribe(e => SetDisplayMessageType(e, TypeMessage.Debug)).DisposeWith(disposable);
 
 
                 //ItemSave.Command = CommandSave;
@@ -152,18 +182,13 @@ namespace SimpleStateMachineNodeEditor.View
             {
                 this.ItemExportToJPEG.Events().Click.Subscribe(_ => ExportToImage(ImageFormats.JPEG)).DisposeWith(disposable);
                 this.ItemExportToPNG.Events().Click.Subscribe(_ => ExportToImage(ImageFormats.PNG)).DisposeWith(disposable);
-                //this.ButtonImportScheme
 
-
-
-                //this.ItemSave.InputBindings.Bin
                 this.Header.Events().PreviewMouseLeftButtonDown.Subscribe(e => HeaderClick(e)).DisposeWith(disposable);
                 this.ButtonClose.Events().Click.Subscribe(_ => WithoutSaving(ButtonCloseClick)).DisposeWith(disposable);
                 this.ButtonMin.Events().Click.Subscribe(e => ButtonMinClick(e)).DisposeWith(disposable);
                 this.ButtonMax.Events().Click.Subscribe(e => ButtonMaxClick(e)).DisposeWith(disposable);
-                
 
-                //this.ItemSave.Events().Click.Subscribe(_=> Save()).DisposeWith(disposable);
+                this.ItemSave.Events().Click.Subscribe(_ => Save()).DisposeWith(disposable);
                 this.ItemSaveAs.Events().Click.Subscribe(_ => SaveAs()).DisposeWith(disposable);
                 this.ItemOpen.Events().Click.Subscribe(async _ => await WithoutSavingAsync(OpenAsync)).DisposeWith(disposable);
                 this.ItemExit.Events().Click.Subscribe(_=> WithoutSaving(ButtonCloseClick)).DisposeWith(disposable);
@@ -171,15 +196,25 @@ namespace SimpleStateMachineNodeEditor.View
                 this.ErrorListExpander.Events().Collapsed.Subscribe(_=> ErrorListCollapse()).DisposeWith(disposable);
                 this.ErrorListExpander.Events().Expanded.Subscribe(_ => ErrorListExpanded()).DisposeWith(disposable);
 
-                this.LabelErrorList.Events().PreviewMouseLeftButtonDown.Subscribe(e=> SetDisplayMessageType(e, TypeMessage.All)).DisposeWith(disposable);
-                this.LabelError.Events().PreviewMouseLeftButtonDown.Subscribe(e => SetDisplayMessageType(e, TypeMessage.Error)).DisposeWith(disposable);
-                this.LabelInformation.Events().MouseLeftButtonDown.Subscribe(e => SetDisplayMessageType(e, TypeMessage.Information)).DisposeWith(disposable);
-                this.LabelWarning.Events().MouseLeftButtonDown.Subscribe(e => SetDisplayMessageType(e, TypeMessage.Warning)).DisposeWith(disposable);
-                this.LabelDebug.Events().MouseLeftButtonDown.Subscribe(e => SetDisplayMessageType(e, TypeMessage.Debug)).DisposeWith(disposable);
+                foreach(var label in messagesLabels)
+                {
+                    label.Value.Events().PreviewMouseLeftButtonDown.Subscribe(e => SetDisplayMessageType(e, label.Key)).DisposeWith(disposable);
+                }
 
-                //this.LabelUpdate.Events().PreviewMouseLeftButtonDown.Subscribe(_ => this.ViewModel.Messages.Cle).DisposeWith(disposable);
-                //this.ErrorListExpander.Events().Expanded.Subscribe(_ => ErrorListExpanded()).DisposeWith(disposable);
+                this.LabelErrorList.Events().PreviewMouseLeftButtonDown.Subscribe(e=> SetDisplayMessageType(e, TypeMessage.All)).DisposeWith(disposable);
+                this.LabelErrorListUpdate.Events().MouseLeftButtonDown.Subscribe(_ => NodesCanvas.ViewModel.CommandErrorListUpdate.ExecuteWithSubscribe()).DisposeWith(disposable);
             });
+        }
+        
+        void UpdateLabels()
+        {
+           var counts =  this.NodesCanvas.ViewModel.Messages.GroupBy(x => x.TypeMessage).ToDictionary(x=>x.Key,x=>x.Count());
+          
+           foreach(var lable in messagesLabels)
+            {
+                lable.Value.Content = (counts.Keys.Contains(lable.Key) ? counts[lable.Key].ToString() : "0") +" "+ labelPostfix[lable.Key];
+            }
+
         }
         void SetDisplayMessageType(MouseButtonEventArgs e, TypeMessage  typeMessage)
         {          

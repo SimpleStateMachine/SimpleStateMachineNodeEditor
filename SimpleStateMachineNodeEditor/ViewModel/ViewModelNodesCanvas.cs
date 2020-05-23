@@ -39,9 +39,14 @@ namespace SimpleStateMachineNodeEditor.ViewModel
         [Reactive] public ViewModelNode StartState { get; set; }
         [Reactive] public bool ItSaved { get; set; } = true;
         [Reactive] public string Path { get; set; }
-        [Reactive] public TypeMessage DisplayMessageType { get; set; }
-        
 
+        [Reactive] public TypeMessage DisplayMessageType { get; set; }
+
+
+        public int NodesCount = 0;
+        public double ScaleMax = 5;
+        public double ScaleMin = 0.1;
+        public double Scales { get; set; } = 0.05;
         [Reactive] public Scale Scale { get; set; } = new Scale();
 
         public ViewModelNodesCanvas()
@@ -49,6 +54,8 @@ namespace SimpleStateMachineNodeEditor.ViewModel
             SetupCommands();
             SetupStartState();
             Cutter = new ViewModelCutter(this);
+            this.WhenAnyValue(x => x.Nodes.Count).Subscribe(value => UpdateCount(value));
+
             for (int i = 1; i <= 5; i++)
             {
                 LogError("Error " + i.ToString());
@@ -114,7 +121,7 @@ namespace SimpleStateMachineNodeEditor.ViewModel
         public ReactiveCommand<Unit, Unit> CommandExpandDownAll { get; set; }
         public ReactiveCommand<Unit, Unit> CommandCollapseUpSelected { get; set; }
         public ReactiveCommand<Unit, Unit> CommandExpandDownSelected { get; set; }
-
+        public ReactiveCommand<Unit, Unit> CommandErrorListUpdate { get; set; }
 
 
 
@@ -154,13 +161,6 @@ namespace SimpleStateMachineNodeEditor.ViewModel
         public Command<List<(int index, ViewModelConnector element)>, List<(int index, ViewModelConnector element)>> CommandDeleteSelectedConnectors { get; set; }
         public Command<DeleteMode, DeleteMode> CommandDeleteSelectedElements { get; set; }
 
-
-
-
-        public double ScaleMax = 5;
-        public double ScaleMin = 0.1;
-        public double Scales { get; set; } = 0.05;
-
         private void SetupCommands()
         {
             CommandRedo = ReactiveCommand.Create(ICommandWithUndoRedo.Redo);
@@ -177,6 +177,8 @@ namespace SimpleStateMachineNodeEditor.ViewModel
             CommandExpandDownAll = ReactiveCommand.Create(ExpandDownAll);
             CommandCollapseUpSelected = ReactiveCommand.Create(CollapseUpSelected);
             CommandExpandDownSelected = ReactiveCommand.Create(ExpandDownSelected);
+            CommandErrorListUpdate = ReactiveCommand.Create(ErrosUpdaate);
+
 
             CommandValidateNodeName = ReactiveCommand.Create<(ViewModelNode objectForValidate, string newValue)>(ValidateNodeName);
             CommandValidateConnectName = ReactiveCommand.Create<(ViewModelConnector objectForValidate, string newValue)>(ValidateConnectName);
@@ -249,6 +251,11 @@ namespace SimpleStateMachineNodeEditor.ViewModel
 
         #endregion Logging
 
+        private void UpdateCount(int count)
+        {
+            if (count > NodesCount)
+                NodesCount = count;
+        }
         private void CollapseUpAll()
         {
             foreach(var node in Nodes)
@@ -262,6 +269,10 @@ namespace SimpleStateMachineNodeEditor.ViewModel
             {
                 node.IsCollapse = false;
             }
+        }
+        private void ErrosUpdaate()
+        {
+            Messages.RemoveMany(Messages.Where(x => x.TypeMessage == DisplayMessageType || DisplayMessageType==TypeMessage.All));
         }
         private void CollapseUpSelected()
         {
@@ -348,7 +359,7 @@ namespace SimpleStateMachineNodeEditor.ViewModel
         }
         private string GetNameForNewNode()
         {
-            return "State " + Nodes.Count.ToString();
+            return "State " + NodesCount.ToString();
         }
         private ViewModelNode AddNodeWithUndoRedo(MyPoint parameter, ViewModelNode result)
         {

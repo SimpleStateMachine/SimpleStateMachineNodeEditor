@@ -186,7 +186,7 @@
                     <Label  Grid.Column="6" x:Name="LabelInformation" Style="{DynamicResource StyleLabelWithIcon}" BorderBrush="{StaticResource IconInformation}" OpacityMask="{StaticResource ColorElementMouseOver}">Messages</Label>
                     <Separator Grid.Column="7" Visibility="{Binding ElementName=LabelDebug, Path=Visibility}" Style="{DynamicResource TemplateSeparator}" Height="Auto" BorderThickness="0,0,1,0" />
                     <Label  Grid.Column="8" x:Name="LabelDebug" Visibility="Hidden" Style="{DynamicResource StyleLabelWithIcon}" BorderBrush="{StaticResource IconDebug}" OpacityMask="{StaticResource ColorElementMouseOver}">Debug</Label>
-                    <Label  Grid.Column="9" x:Name="LabelUpdate"  Style="{DynamicResource StyleLabelWithIcon}" BorderBrush="{StaticResource IconUpdate}" OpacityMask="{StaticResource ColorElementMouseOver}" HorizontalAlignment="Right" Margin="0,0,5,0">Update</Label>
+                    <Label  Grid.Column="9" x:Name="LabelErrorListUpdate"  Style="{DynamicResource StyleLabelWithIcon}" BorderBrush="{StaticResource IconUpdate}" OpacityMask="{StaticResource ColorElementMouseOver}" HorizontalAlignment="Right" Margin="0,0,5,0">Update/Clear</Label>
                 </Grid>
             </Expander.Header>
             <Expander.Content>

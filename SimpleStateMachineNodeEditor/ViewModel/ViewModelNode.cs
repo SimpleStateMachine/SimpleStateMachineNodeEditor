@@ -38,11 +38,14 @@ namespace SimpleStateMachineNodeEditor.ViewModel
         [Reactive] public ViewModelConnector Output { get; set; }
         [Reactive] public ViewModelConnector CurrentConnector { get; set; }
         [Reactive] public ViewModelNodesCanvas NodesCanvas { get; set; }
+        [Reactive] public int IndexStartSelectConnectors { get; set; } = 0;
 
+        public IObservableCollection<ViewModelConnector> Transitions { get; set; } = new ObservableCollectionExtended<ViewModelConnector>();
         public int Zindex { get; private set; }
 
-        [Reactive] public int IndexStartSelectConnectors { get; set; } = 0;
-        public IObservableCollection<ViewModelConnector> Transitions { get; set; } = new ObservableCollectionExtended<ViewModelConnector>();
+        public int TransitionsCount = -1;
+
+        
 
 
 
@@ -61,6 +64,8 @@ namespace SimpleStateMachineNodeEditor.ViewModel
         private void SetupBinding()
         {
             this.WhenAnyValue(x => x.Selected).Subscribe(value => { this.BorderBrush = value ? Application.Current.Resources["ColorSelectedElement"] as SolidColorBrush : Brushes.LightGray; });
+            this.WhenAnyValue(x => x.Transitions.Count).Subscribe(value => UpdateCount(value));
+
             this.WhenAnyValue(x => x.Point1.Value, x => x.Size).Subscribe(_ => UpdatePoint2());
             this.WhenAnyValue(x => x.IsCollapse).Subscribe(value => Collapse(value));
         }
@@ -123,6 +128,11 @@ namespace SimpleStateMachineNodeEditor.ViewModel
         private void NotSaved()
         {
             NodesCanvas.ItSaved = false;
+        }
+        private void UpdateCount(int count)
+        {
+            if (count > TransitionsCount)
+                TransitionsCount = count;
         }
         #endregion Setup Commands
 
@@ -195,7 +205,7 @@ namespace SimpleStateMachineNodeEditor.ViewModel
                 CurrentConnector.TextEnable = true;
                 CurrentConnector.FormEnable = false;
                 if (string.IsNullOrEmpty(CurrentConnector.Name))
-                    CurrentConnector.Name = "Transition " + NodesCanvas.Nodes.Sum(x => x.Transitions.Count - 1).ToString();
+                    CurrentConnector.Name = "Transition " + TransitionsCount.ToString();
             }
             CurrentConnector = new ViewModelConnector(NodesCanvas, this)
             {

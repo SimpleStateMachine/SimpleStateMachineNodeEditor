@@ -121,8 +121,6 @@ namespace SimpleStateMachineNodeEditor.View
             {
                 this.ViewModel.CommandSetAsLoop.ExecuteWithSubscribe();
                 this.ViewModel.NodesCanvas.CommandAddConnectorWithConnect.Execute(this.ViewModel);
-
-                this.ViewModel.NodesCanvas.LogDebug("Зашел 2 ");
             }          
             else 
             {
@@ -132,8 +130,6 @@ namespace SimpleStateMachineNodeEditor.View
                 DragDrop.DoDragDrop(this, data, DragDropEffects.Link);
                 this.ViewModel.CommandCheckConnectPointDrop.ExecuteWithSubscribe();
                 e.Handled = true;
-
-                this.ViewModel.NodesCanvas.LogDebug("Зашел 1 ");
             }
         }
 

@@ -14,14 +14,13 @@
         <local:ViewSelector x:Name="Selector"  Panel.ZIndex="999"/>
         <local:ViewCutter x:Name="Cutter"  Panel.ZIndex="999"/>
 
-        <ItemsControl  x:Name="ElementItemControl"
-            Panel.ZIndex="0" 
+        <ItemsControl  x:Name="ElementItemControl" Panel.ZIndex="0" 
                        VirtualizingPanel.IsVirtualizing="True" 
                        VirtualizingPanel.VirtualizationMode="Recycling" 
                        VirtualizingPanel.CacheLength="1"
                        VirtualizingPanel.CacheLengthUnit="Page"                 
                        VirtualizingPanel.ScrollUnit="Pixel">
-            
+
             <ItemsControl.RenderTransform>
                 <TransformGroup x:Name="TransformGroup">
                     <ScaleTransform x:Name="Scale" ScaleX="1" ScaleY="1" />
@@ -51,46 +50,6 @@
                 </CompositeCollection>
             </ItemsControl.ItemsSource>
         </ItemsControl>
-        
-        
-        <!--<ItemsControl x:Name="Nodes" >
-            <ItemsControl.RenderTransform>
-                <TransformGroup x:Name="TransformGroup">
-                    <ScaleTransform x:Name="Scale" ScaleX="1" ScaleY="1" />
-                    <SkewTransform/>
-                    <RotateTransform Angle="0" />
-                    <TranslateTransform x:Name="Translate"/>
-                </TransformGroup>
-            </ItemsControl.RenderTransform>
-            <ItemsControl.ItemsPanel>
-                <ItemsPanelTemplate>
-                    <Grid Background="{x:Null}">
-                    </Grid>
-                </ItemsPanelTemplate>
-            </ItemsControl.ItemsPanel>
-            <ItemsControl.ItemTemplate>
-                <DataTemplate>
-                    <View:ViewNode ViewModel="{Binding}" />
-                </DataTemplate>
-            </ItemsControl.ItemTemplate>
-        </ItemsControl>
-
-        
-       
-        <ItemsControl x:Name="Connects" >
-            <ItemsControl.ItemsPanel>
-                <ItemsPanelTemplate>
-                    <Grid Background="{x:Null}">
-                    </Grid>
-                </ItemsPanelTemplate>
-            </ItemsControl.ItemsPanel>
-            <ItemsControl.ItemTemplate>
-                <DataTemplate>
-                    <View:ViewConnect ViewModel="{Binding}"/>
-                </DataTemplate>
-            </ItemsControl.ItemTemplate>
-        </ItemsControl>-->
-
     </Canvas>
     <UserControl.ContextMenu >
         <ContextMenu Template="{StaticResource TemplateContextMenu}" Background="{StaticResource ColorMenuBackground}"  Foreground="{StaticResource ColorMenuForeground}" BorderBrush="{StaticResource ColorMenuBorder}" OpacityMask="{StaticResource ColorMenuBackgroundMouseOver}"  BorderThickness="1" HorizontalAlignment="Left" VerticalAlignment="Center" >
@@ -117,21 +76,13 @@
             </MenuItem>
         </ContextMenu>
     </UserControl.ContextMenu>
-
-    <UserControl.CommandBindings>
-        <!--<CommandBinding Command="Zoom" Executed="Zoom" />-->
-        <CommandBinding Command="Redo" x:Name="RedoCommand"/>
-
-    </UserControl.CommandBindings>
     <UserControl.InputBindings>
-        <KeyBinding x:Name="BindingUndo" Key="Z" Modifiers="Control" />
-        <KeyBinding x:Name="BindingRedo" Key="Y" Modifiers="Control" />
-        <!--<KeyBinding x:Name="BindingSave" Key="S" Modifiers="Control" />-->
-        <KeyBinding x:Name="BindingSelectAll" Key="A" Modifiers="Control" />
-        <KeyBinding x:Name="BindingAddNode" Key="N" Modifiers="Control" />
+        <KeyBinding x:Name="BindingUndo"        Key="Z" Modifiers="Control" />
+        <KeyBinding x:Name="BindingRedo"        Key="Y" Modifiers="Control" />
+        <KeyBinding x:Name="BindingSelectAll"   Key="A" Modifiers="Control" />
+        <KeyBinding x:Name="BindingAddNode"     Key="N" Modifiers="Control" />
         <KeyBinding x:Name="BindingDeleteSelectedElements" Key="Delete"  />
-        <MouseBinding x:Name="BindingSelect" Gesture="Ctrl+LeftClick"/>
-        <MouseBinding x:Name="BindingCut" Gesture="Alt+LeftClick" />
-        <!--<MouseBinding x:Name="BindingZoom" Gesture="WheelClick"/>-->
+        <MouseBinding x:Name="BindingSelect"    Gesture="Ctrl+LeftClick"/>
+        <MouseBinding x:Name="BindingCut"       Gesture="Alt+LeftClick" />
     </UserControl.InputBindings>
 </UserControl>
