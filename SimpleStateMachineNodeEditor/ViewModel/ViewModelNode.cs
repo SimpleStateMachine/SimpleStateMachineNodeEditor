@@ -10,14 +10,12 @@ using ReactiveUI.Validation.Helpers;
 using DynamicData.Binding;
 
 using SimpleStateMachineNodeEditor.Helpers;
-using SimpleStateMachineNodeEditor.Helpers.Commands;
 using System.Linq;
 using System.Xml.Linq;
 using SimpleStateMachineNodeEditor.Helpers.Enums;
 using DynamicData;
 using System.Reactive;
 using SimpleStateMachineNodeEditor.Helpers.Extensions;
-using System.Threading.Tasks;
 using SimpleStateMachineNodeEditor.ViewModel.NodesCanvas;
 
 namespace SimpleStateMachineNodeEditor.ViewModel
@@ -50,7 +48,7 @@ namespace SimpleStateMachineNodeEditor.ViewModel
         private ViewModelNode()
         {
             SetupCommands();
-            //SetupBinding();
+            SetupBinding();
         }
 
 
@@ -98,7 +96,6 @@ namespace SimpleStateMachineNodeEditor.ViewModel
         public ReactiveCommand<Unit, Unit> CommandAddEmptyConnector { get; set; }
         public ReactiveCommand<SelectMode, Unit> CommandSelect { get; set; }
         public ReactiveCommand<MyPoint, Unit> CommandMove { get; set; }
-        //public ReactiveCommand<bool, Unit> CommandCollapse { get; set; }
         public ReactiveCommand<(int index, ViewModelConnector connector), Unit> CommandAddConnectorWithConnect { get; set; }
         public ReactiveCommand<ViewModelConnector, Unit> CommandDeleteConnectorWithConnect { get; set; }
         public ReactiveCommand<string, Unit> CommandValidateName { get; set; }
@@ -111,24 +108,21 @@ namespace SimpleStateMachineNodeEditor.ViewModel
             CommandSelect = ReactiveCommand.Create<SelectMode>(Select);
             CommandMove = ReactiveCommand.Create<MyPoint>(Move);
             CommandAddEmptyConnector = ReactiveCommand.Create(AddEmptyConnector);
-            //CommandCollapse = ReactiveCommand.Create<bool>(Collapse);
             CommandSelectWithShiftForConnectors = ReactiveCommand.Create<ViewModelConnector>(SelectWithShiftForConnectors);
             CommandSetConnectorAsStartSelect = ReactiveCommand.Create<ViewModelConnector>(SetConnectorAsStartSelect);
             CommandUnSelectedAllConnectors = ReactiveCommand.Create(UnSelectedAllConnectors);
             CommandAddConnectorWithConnect = ReactiveCommand.Create<(int index, ViewModelConnector connector)>(AddConnectorWithConnect);
             CommandDeleteConnectorWithConnect = ReactiveCommand.Create<ViewModelConnector>(DeleteConnectorWithConnec);
             CommandValidateName = ReactiveCommand.Create<string>(ValidateName);
+
+            NotSavedSubscrube();
         }
         private void NotSavedSubscrube()
         {
             CommandMove.Subscribe(_ => NotSaved());
-            //CommandCollapse.Subscribe(_ => NotSaved());
             CommandAddConnectorWithConnect.Subscribe(_ => NotSaved());
             CommandDeleteConnectorWithConnect.Subscribe(_ => NotSaved());
             CommandValidateName.Subscribe(_ => NotSaved());
-
-
-
         }
         private void NotSaved()
         {
@@ -287,67 +281,5 @@ namespace SimpleStateMachineNodeEditor.ViewModel
 
             return viewModelNode;
         }
-        public static ViewModelNode FromXElement(XElement node)
-        {
-            //errorMessage = null;
-            ViewModelNode viewModelNode = null;
-            string name = node.Attribute("Name")?.Value;
-
-            //if (string.IsNullOrEmpty(name))
-            //{
-            //    errorMessage = "Node without name";
-            //    return viewModelNode;
-            //}
-
-            //if (actionForCheck(name))
-            //{
-            //    errorMessage = String.Format("Contains more than one node with name \"{0}\"", name);
-            //    return viewModelNode;
-            //}
-
-            viewModelNode = new ViewModelNode();
-            viewModelNode.Name = name;
-
-            var position = node.Attribute("Position")?.Value;
-            if (position != null)
-                viewModelNode.Point1 = MyPoint.Parse(position);
-
-            var isCollapse = node.Attribute("IsCollapse")?.Value;
-            if (isCollapse != null)
-                viewModelNode.IsCollapse = bool.Parse(isCollapse);
-
-            return viewModelNode;
-        }
-        //public static async Task<(ViewModelNode node, string message)> FromXElement(ViewModelNodesCanvas nodesCanvas, XElement node, Func<string, bool> actionForCheck)
-        //{
-        //  string errorMessage = null;
-        //    ViewModelNode viewModelNode = null;
-        //    string name = node.Attribute("Name")?.Value;
-
-        //    if (string.IsNullOrEmpty(name))
-        //    {
-        //        errorMessage = "Node without name";
-        //        return (viewModelNode, errorMessage);
-        //    }
-
-        //    if (actionForCheck(name))
-        //    {
-        //        errorMessage = String.Format("Contains more than one node with name \"{0}\"", name);
-        //        return (viewModelNode, errorMessage);
-        //    }
-
-        //    viewModelNode = new ViewModelNode(nodesCanvas);
-        //    viewModelNode.Name = name;
-
-        //    var position = node.Attribute("Position")?.Value;
-        //    if (position != null)
-        //        viewModelNode.Point1 = MyPoint.Parse(position);
-
-        //    var isCollapse = node.Attribute("IsCollapse")?.Value;
-        //    if (isCollapse != null)
-        //        viewModelNode.Collapse(!bool.Parse(isCollapse));
-
-        //    return (viewModelNode, errorMessage);
-        //}
     }
 }

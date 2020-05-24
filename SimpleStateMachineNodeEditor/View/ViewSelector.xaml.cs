@@ -44,7 +44,6 @@ namespace SimpleStateMachineNodeEditor.View
             InitializeComponent();
             SetupBinding();
             SetupEvents();
-            SetupCommands();
         }
         protected override void OnMouseMove(MouseEventArgs e)
         {
@@ -109,16 +108,6 @@ namespace SimpleStateMachineNodeEditor.View
 
         #endregion Setup Events
 
-        #region Setup Commands
-        private void SetupCommands()
-        {
-            this.WhenActivated(disposable =>
-            {
-
-
-            });
-        }
-        #endregion Setup Commands
 
     }
 }

@@ -66,26 +66,24 @@ namespace SimpleStateMachineNodeEditor.View
 
             });
         }
-
-        #endregion Setup Binding 
-
-        #region Setup Events
-
         private void Update()
         {
             Mouse.Capture(this);
             Keyboard.Focus(this);
         }
+
+        #endregion Setup Binding 
+
+        #region Setup Events
+
         private void SetupEvents()
         {
             this.WhenActivated(disposable =>
             {
                 this.Events().MouseMove.Subscribe(e => OnMouseMoves(e)).DisposeWith(disposable);
                 this.Events().MouseLeftButtonUp.Subscribe(e => OnMouseLeftButtonUp(e)).DisposeWith(disposable);
-
             });
         }
-
         private void OnMouseMoves(MouseEventArgs e)
         {
             ViewNodesCanvas NodesCanvas = MyUtils.FindParent<ViewNodesCanvas>(this);
@@ -99,17 +97,8 @@ namespace SimpleStateMachineNodeEditor.View
         {
             this.ViewModel.Visible = null;
         }
+
         #endregion Setup Events
 
-        #region Setup Commands
-        private void SetupCommands()
-        {
-            this.WhenActivated(disposable =>
-            {
-
-
-            });
-        }
-        #endregion Setup Commands
     }
 }

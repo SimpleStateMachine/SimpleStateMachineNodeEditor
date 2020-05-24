@@ -70,11 +70,8 @@ namespace SimpleStateMachineNodeEditor.View
             {
 
                 this.OneWayBind(this.ViewModel, x => x.Nodes, x => x.Nodes.Collection).DisposeWith(disposable);
+
                 this.OneWayBind(this.ViewModel, x => x.Connects, x => x.Connects.Collection).DisposeWith(disposable);
-
-
-                //this.OneWayBind(this.ViewModel, x => x.Nodes, x => x.Nodes.ItemsSource).DisposeWith(disposable);
-                //this.OneWayBind(this.ViewModel, x => x.Connects, x => x.Connects.ItemsSource).DisposeWith(disposable);
 
                 this.OneWayBind(this.ViewModel, x => x.Scale.Scales.Value.X, x => x.Scale.ScaleX).DisposeWith(disposable);
 
@@ -111,9 +108,6 @@ namespace SimpleStateMachineNodeEditor.View
 
                 this.BindCommand(this.ViewModel, x => x.CommandDeleteSelectedElements, x => x.BindingDeleteSelectedElements).DisposeWith(disposable);
 
-                //this.BindCommand(this.ViewModel, x => x.CommandDeleteSelectedNodes, x => x.BindingDeleteSelected).DisposeWith(disposable);
-                //this.BindCommand(this.ViewModel, x => x.CommandDeleteSelectedConnectors, x => x.BindingDeleteSelected).DisposeWith(disposable);
-
 
                 this.BindCommand(this.ViewModel, x => x.CommandCollapseUpSelected,  x => x.ItemCollapsUp).DisposeWith(disposable);
                 this.BindCommand(this.ViewModel, x => x.CommandExpandDownSelected,  x => x.ItemExpandDown).DisposeWith(disposable);
@@ -137,14 +131,14 @@ namespace SimpleStateMachineNodeEditor.View
                 this.Events().MouseLeftButtonDown.Subscribe(e => OnEventMouseLeftDown(e)).DisposeWith(disposable);
                 this.Events().MouseLeftButtonUp.Subscribe(e => OnEventMouseLeftUp(e));
                 this.Events().MouseRightButtonDown.Subscribe(e => OnEventMouseRightDown(e)).DisposeWith(disposable);
-                this.Events().MouseRightButtonUp.Subscribe(e => OnEventMouseRightUp(e)).DisposeWith(disposable);
-                this.Events().MouseDown.Subscribe(e => OnEventMouseDown(e)).DisposeWith(disposable);
+                //this.Events().MouseRightButtonUp.Subscribe(e => OnEventMouseRightUp(e)).DisposeWith(disposable);
+                //this.Events().MouseDown.Subscribe(e => OnEventMouseDown(e)).DisposeWith(disposable);
                 this.Events().MouseUp.Subscribe(e => OnEventMouseUp(e)).DisposeWith(disposable);
                 this.Events().MouseMove.Subscribe(e => OnEventMouseMove(e)).DisposeWith(disposable);
                 this.Events().MouseWheel.Subscribe(e => OnEventMouseWheel(e)).DisposeWith(disposable);
                 this.Events().DragOver.Subscribe(e => OnEventDragOver(e)).DisposeWith(disposable);
-                this.Events().DragEnter.Subscribe(e => OnEventDragEnter(e)).DisposeWith(disposable);
-                this.Events().DragLeave.Subscribe(e => OnEventDragLeave(e)).DisposeWith(disposable);
+                //this.Events().DragEnter.Subscribe(e => OnEventDragEnter(e)).DisposeWith(disposable);
+                //this.Events().DragLeave.Subscribe(e => OnEventDragLeave(e)).DisposeWith(disposable);
                 //Эти события срабатывают раньше команд
                 this.Events().PreviewMouseLeftButtonDown.Subscribe(e => OnEventPreviewMouseLeftButtonDown(e)).DisposeWith(disposable);
                 this.Events().PreviewMouseRightButtonDown.Subscribe(e => OnEventPreviewMouseRightButtonDown(e)).DisposeWith(disposable);
@@ -164,11 +158,7 @@ namespace SimpleStateMachineNodeEditor.View
                 this.ViewModel.CommandUnSelectAll.ExecuteWithSubscribe();
             }
         }
-        private void UpdateConnector()
-        {
-            //this.Connector.Visibility = (this.ViewModel.DraggedConnector == null) ? Visibility.Collapsed : Visibility.Visible;
 
-        }
         private void OnEventMouseLeftUp(MouseButtonEventArgs e)
         {
             if (Move == TypeMove.None)
@@ -206,10 +196,8 @@ namespace SimpleStateMachineNodeEditor.View
 
         private void OnEventMouseMove(MouseEventArgs e)
         {
-            //if ((Mouse.Captured == null)||(!(Mouse.Captured is CanBeMove)))
             if (!(Mouse.Captured is CanBeMove))
                 return;
-
 
             MyPoint delta = GetDeltaMove();
 
@@ -219,13 +207,11 @@ namespace SimpleStateMachineNodeEditor.View
             SumMove += delta;
             if (this.IsMouseCaptured)
             {
-                //ViewModel.CommandPartMoveAllNode.ExecuteWithSubscribe(delta).Subscribe();
                 ViewModel.CommandPartMoveAllNode.ExecuteWithSubscribe(delta);
                 Move = TypeMove.MoveAll;
             }
             else
             {
-                //ViewModel.CommandPartMoveAllSelectedNode.ExecuteWithSubscribe(delta);
                 ViewModel.CommandPartMoveAllSelectedNode.ExecuteWithSubscribe(delta);
                 Move = TypeMove.MoveSelected;
             }
@@ -270,24 +256,11 @@ namespace SimpleStateMachineNodeEditor.View
             PositionMove = CurrentPosition;
             return result;
         }
-        private MyPoint GetDeltaDragOver(DragEventArgs e)
-        {
-            MyPoint CurrentPosition = new MyPoint(e.GetPosition(this));
-
-            MyPoint result = new MyPoint();
-
-            if (!PositionDragOver.IsClear)
-            {
-                result = CurrentPosition - PositionDragOver;
-            }
-            PositionDragOver = CurrentPosition;
-
-            return result;
-        }
 
         private void SaveCanvasToImage(string filename, ImageFormats format)
         {
             MyUtils.PanelToImage(this.Canvas, filename, format);
+            ViewModel.CommandLogDebug.ExecuteWithSubscribe(String.Format("Scheme was exported to \"{0}\"", filename));
         }
 
     }

@@ -8,39 +8,18 @@ using ReactiveUI;
 using ReactiveUI.Fody.Helpers;
 
 using SimpleStateMachineNodeEditor.Helpers;
-using SimpleStateMachineNodeEditor.Helpers.Enums;
-using System.Xml.Linq;
 using SimpleStateMachineNodeEditor.Helpers.Extensions;
-using SimpleStateMachineNodeEditor.Helpers.Commands;
 using SimpleStateMachineNodeEditor.ViewModel.NodesCanvas;
 
 namespace SimpleStateMachineNodeEditor.ViewModel
 {
     public class ViewModelConnect : ReactiveObject
     {
-        /// <summary>
-        /// Точка, из которой выходит линия ( совпадает с центром элемента, из которого выходит линия)
-        /// </summary>
         [Reactive] public MyPoint StartPoint { get; set; } = new MyPoint();
-
-        /// <summary>
-        /// Точка, в которую приходит линия ( совпадает с центром элемента, в который приходит линия)
-        /// </summary>
         [Reactive] public MyPoint EndPoint { get; set; } = new MyPoint();
-
-        /// <summary>
-        /// Первая промежуточная точка линии 
-        /// </summary>
         [Reactive] public MyPoint Point1 { get; set; } = new MyPoint();
-
-        /// <summary>
-        /// Вторая промежуточная точка линии
-        /// </summary>
         [Reactive] public MyPoint Point2 { get; set; } = new MyPoint();
 
-        /// <summary>
-        /// Цвет линии
-        /// </summary>
         [Reactive] public Brush Stroke { get; set; } = Application.Current.Resources["ColorConnect"] as SolidColorBrush;
 
         [Reactive] public ViewModelConnector FromConnector { get; set; }
@@ -62,7 +41,6 @@ namespace SimpleStateMachineNodeEditor.ViewModel
             NodesCanvas = viewModelNodesCanvas;
             FromConnector = fromConnector;
             FromConnector.Connect = this;           
-            //SetupCommands();
         }
         #region Setup Subscriptions
 

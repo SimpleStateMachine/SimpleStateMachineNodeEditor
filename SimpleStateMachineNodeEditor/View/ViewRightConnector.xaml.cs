@@ -44,7 +44,6 @@ namespace SimpleStateMachineNodeEditor.View
         public ViewRightConnector()
         {
             InitializeComponent();
-            SetupCommands();
             SetupBinding();
             SetupEvents();          
         }
@@ -80,16 +79,6 @@ namespace SimpleStateMachineNodeEditor.View
         }
         #endregion SetupBinding
 
-        #region Setup Commands
-        private void SetupCommands()
-        {
-            this.WhenActivated(disposable =>
-            {
-                //this.BindCommand(this.ViewModel, x => x.CommandSelect, x => x.BindingSelectWithCtrl).DisposeWith(disposable);
-                //this.BindCommand(this.ViewModel, x => x.CommandSelect, x => x.BindingSelectWithShift).DisposeWith(disposable);
-            });
-        }
-        #endregion Setup Commands
         #region SetupEvents
 
         private void SetupEvents()
@@ -184,9 +173,7 @@ namespace SimpleStateMachineNodeEditor.View
 
         #endregion SetupEvents
 
-        /// <summary>
-        /// Обновить координату центра круга
-        /// </summary>
+
         void UpdatePositionConnectPoin()
         {
             Point positionConnectPoint;
@@ -213,21 +200,5 @@ namespace SimpleStateMachineNodeEditor.View
             this.ViewModel.PositionConnectPoint.Set(Position);
         }
 
-        //void UpdatePosition()
-        //{
-        //    if (!this.IsVisible)
-        //        return;
-
-        //    Point position = new Point();
-
-        //    //Ищем Canvas
-        //    ViewNodesCanvas NodesCanvas = MyUtils.FindParent<ViewNodesCanvas>(this);
-
-        //    position = this.TransformToAncestor(NodesCanvas).Transform(position);
-
-        //    this.ViewModel.Position.Set(position);
-
-        //    this.ViewModel.NodesCanvas.Text = "UpdatePosition for " + this.ViewModel.Name;
-        //}
     }
 }

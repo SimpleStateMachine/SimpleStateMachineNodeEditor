@@ -4,16 +4,13 @@ using SimpleStateMachineNodeEditor.Helpers;
 using SimpleStateMachineNodeEditor.Helpers.Commands;
 using SimpleStateMachineNodeEditor.Helpers.Enums;
 using SimpleStateMachineNodeEditor.Helpers.Extensions;
+using SimpleStateMachineNodeEditor.Icons;
 using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Linq;
 using System.Reactive;
 using System.Reactive.Linq;
-using System.Threading;
-using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Data;
 using System.Windows.Input;
 using System.Xml.Linq;
 
@@ -107,10 +104,10 @@ namespace SimpleStateMachineNodeEditor.ViewModel.NodesCanvas
             CommandAddConnect = ReactiveCommand.Create<ViewModelConnect>(AddConnect);
             CommandDeleteConnect = ReactiveCommand.Create<ViewModelConnect>(DeleteConnect);
             CommandZoom = ReactiveCommand.Create<int>(Zoom);
-            CommandLogDebug = ReactiveCommand.Create<string>(LogDebug);
-            CommandLogError = ReactiveCommand.Create<string>(LogError);
-            CommandLogInformation = ReactiveCommand.Create<string>(LogInformation);
-            CommandLogWarning = ReactiveCommand.Create<string>(LogWarning);
+            CommandLogDebug = ReactiveCommand.Create<string>((message)=>LogDebug(message));
+            CommandLogError = ReactiveCommand.Create<string>((message) => LogError(message));
+            CommandLogInformation = ReactiveCommand.Create<string>((message) => LogInformation(message));
+            CommandLogWarning = ReactiveCommand.Create<string>((message) => LogWarning(message));
             CommandSelect = ReactiveCommand.Create<MyPoint>(StartSelect);
             CommandCut = ReactiveCommand.Create<MyPoint>(StartCut);
             CommandAddDraggedConnect = ReactiveCommand.Create<ViewModelConnector>(AddDraggedConnect);
@@ -222,7 +219,7 @@ namespace SimpleStateMachineNodeEditor.ViewModel.NodesCanvas
         }
         private void ExportToJPEG()
         {
-            Dialog.ShowSaveFileDialog("JPEG Image (.jpeg)|*.jpeg", SchemeName(), "Export scheme");
+            Dialog.ShowSaveFileDialog("JPEG Image (.jpeg)|*.jpeg", SchemeName(), "Export scheme to JPEG");
             if (Dialog.Result != DialogResult.Ok)
                 return;
             //"Png Image (.png)|*.png";
@@ -238,6 +235,7 @@ namespace SimpleStateMachineNodeEditor.ViewModel.NodesCanvas
         {
             this.Nodes.Clear();
             this.Connects.Clear();
+            this.SchemePath = "";
 
             this.SetupStartState();
         }
@@ -246,12 +244,11 @@ namespace SimpleStateMachineNodeEditor.ViewModel.NodesCanvas
             if (!WithoutSaving())
                 return;
 
-            Dialog.ShowOpenFileDialog("XML-File | *.xml", SchemeName(), "Import scheme");
+            Dialog.ShowOpenFileDialog("XML-File | *.xml", SchemeName(), "Import scheme from xml file");
             if (Dialog.Result != DialogResult.Ok)
                 return;
 
             string fileName = Dialog.FileName;
-            //string fileName = @"C:\Users\roman\Downloads\100 States.xml";
             this.Nodes.Clear();
             this.Connects.Clear();
 
@@ -297,6 +294,7 @@ namespace SimpleStateMachineNodeEditor.ViewModel.NodesCanvas
                     return;
             }
             SchemePath = fileName;
+            LogDebug("Scheme was imported from file \"{0}\"", SchemePath);
             #endregion  setup Transitions/connects
 
 
@@ -317,7 +315,7 @@ namespace SimpleStateMachineNodeEditor.ViewModel.NodesCanvas
             }
             void Error(string errorMessage)
             {
-                LogError("File is not valid: " + errorMessage);
+                LogError("File is not valid. " + errorMessage);
                 ClearScheme();
             }
         }
@@ -340,7 +338,7 @@ namespace SimpleStateMachineNodeEditor.ViewModel.NodesCanvas
         }
         private void SaveAs()
         {
-            Dialog.ShowSaveFileDialog("XML-File | *.xml", SchemeName(), "Save scheme");
+            Dialog.ShowSaveFileDialog("XML-File | *.xml", SchemeName(), "Save scheme as...");
             if (Dialog.Result != DialogResult.Ok)
                 return;
 
@@ -373,6 +371,8 @@ namespace SimpleStateMachineNodeEditor.ViewModel.NodesCanvas
             xDocument.Save(fileName);
             ItSaved = true;
             SchemePath = fileName;
+
+            LogDebug("Scheme was saved as \"{0}\"", SchemePath);
         }
 
 
@@ -430,8 +430,18 @@ namespace SimpleStateMachineNodeEditor.ViewModel.NodesCanvas
             {
                 if (!NodesExist(obj.newValue))
                 {
+                    LogDebug("Node \"{0}\"  has been renamed . New name is \"{1}\"", obj.objectForValidate.Name, obj.newValue);
                     obj.objectForValidate.Name = obj.newValue;
+                   
                 }
+                else
+                {
+                    LogError("Name for node doesn't set, because node with name \"{0}\" already exist", obj.newValue);
+                }
+            }
+            else
+            {
+                LogError("Name for node doesn't set, name off node should not be empty", obj.newValue);
             }
         }
         private void ValidateConnectName((ViewModelConnector objectForValidate, string newValue) obj)
@@ -440,8 +450,17 @@ namespace SimpleStateMachineNodeEditor.ViewModel.NodesCanvas
             {
                 if (!ConnectsExist(obj.newValue))
                 {
+                    LogDebug("Transition \"{0}\"  has been renamed . New name is \"{1}\"", obj.objectForValidate.Name, obj.newValue);
                     obj.objectForValidate.Name = obj.newValue;
                 }
+                else
+                {
+                    LogError("Name for transition doesn't set, because transition with name \"{0}\" already exist", obj.newValue);
+                }
+            }
+            else
+            {
+                LogError("Name for transition doesn't set, name off transition should not be empty", obj.newValue);
             }
         }
 
@@ -455,8 +474,6 @@ namespace SimpleStateMachineNodeEditor.ViewModel.NodesCanvas
                 myPoint.Clear();
             }
             nodes.ForEach(node => node.CommandMove.ExecuteWithSubscribe(myPoint));
-
-            LogInformation(Messages.Count.ToString());
             return nodes;
         }
         private List<ViewModelNode> UnFullMoveAllNode(MyPoint delta, List<ViewModelNode> nodes = null)

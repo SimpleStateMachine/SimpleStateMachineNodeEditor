@@ -49,11 +49,6 @@ namespace SimpleStateMachineNodeEditor.Helpers
             Value = new Point();
         }
 
-        /// <summary>
-        /// Отразить координаты
-        /// </summary>
-        /// <param name="onX">Отразить по X (По умолчанию true) </param>
-        /// <param name="onY">Отразить по Y (По умолчанию true) </param>
         public void Mirror(bool onX = true, bool onY = true)
         {
             Value = new Point(onX ? -this.X : this.X, onY ? -this.Y : this.Y);

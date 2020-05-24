@@ -2,15 +2,10 @@
 using DynamicData.Binding;
 using ReactiveUI;
 using ReactiveUI.Fody.Helpers;
-using SimpleStateMachineNodeEditor.Helpers.Commands;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Windows;
 using SimpleStateMachineNodeEditor.Helpers.Enums;
 using System.Reactive.Linq;
-using System.Collections.ObjectModel;
 using System.Reactive;
 using SimpleStateMachineNodeEditor.ViewModel.NodesCanvas;
 

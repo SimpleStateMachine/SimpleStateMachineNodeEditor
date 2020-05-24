@@ -15,18 +15,9 @@ using ReactiveUI;
 using System.Windows.Markup;
 using SimpleStateMachineNodeEditor.ViewModel;
 using SimpleStateMachineNodeEditor.Helpers.Enums;
-using System.Windows.Forms;
 using System.IO;
-using SimpleStateMachineNodeEditor.Helpers;
-using Newtonsoft.Json;
 using System.Linq;
-using SimpleStateMachineNodeEditor.Helpers.Commands;
 using SimpleStateMachineNodeEditor.Helpers.Extensions;
-using System.Reactive.Concurrency;
-using System.Threading.Tasks;
-using System.Threading;
-using System.Reactive;
-using System.Collections.Generic;
 
 namespace SimpleStateMachineNodeEditor.View
 {

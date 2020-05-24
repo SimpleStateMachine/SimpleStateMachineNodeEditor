@@ -1,14 +1,5 @@
-﻿using System;
-using System.Windows;
-using System.Reactive.Linq;
-
-using ReactiveUI;
+﻿using ReactiveUI;
 using ReactiveUI.Fody.Helpers;
-
-using SimpleStateMachineNodeEditor.Helpers;
-using SimpleStateMachineNodeEditor.Helpers.Commands;
-using SimpleStateMachineNodeEditor.Helpers.Transformations;
-using SimpleStateMachineNodeEditor.Helpers.Logging;
 using SimpleStateMachineNodeEditor.Helpers.Enums;
 
 namespace SimpleStateMachineNodeEditor.ViewModel

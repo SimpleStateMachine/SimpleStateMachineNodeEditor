@@ -5,7 +5,6 @@ using ReactiveUI.Fody.Helpers;
 using ReactiveUI;
 
 using SimpleStateMachineNodeEditor.Helpers;
-using SimpleStateMachineNodeEditor.Helpers.Commands;
 using System;
 using System.Xml.Linq;
 using System.Linq;
@@ -13,66 +12,24 @@ using SimpleStateMachineNodeEditor.Helpers.Enums;
 using System.Reactive;
 using SimpleStateMachineNodeEditor.Helpers.Extensions;
 using SimpleStateMachineNodeEditor.ViewModel.NodesCanvas;
-using System.Windows.Documents;
-using System.Collections.Generic;
 
 namespace SimpleStateMachineNodeEditor.ViewModel
 {
     public class ViewModelConnector : ReactiveObject
     {
-        /// <summary>
-        /// Координата перехода ( нужна для создания соединения )
-        /// </summary>
         [Reactive] public MyPoint PositionConnectPoint { get; set; } = new MyPoint();
-
-        /// <summary>
-        /// Имя перехода ( вводится в узле)
-        /// </summary>
         [Reactive] public string Name { get; set; }
-
-        /// <summary>
-        /// Доступно ли имя перехода для редактирования
-        /// </summary>
         [Reactive] public bool TextEnable { get; set; } = false;
-
-        /// <summary>
-        /// Отображается ли переход
-        /// </summary>
         [Reactive] public bool? Visible { get; set; } = true;
-
-        /// <summary>
-        /// Ellipse enable
-        /// </summary>
         [Reactive] public bool FormEnable { get; set; } = true;
-
-        /// <summary>
-        /// Ellipse stroke color
-        /// </summary>
         [Reactive] public Brush FormStroke { get; set; } = Application.Current.Resources["ColorNodesCanvasBackground"] as SolidColorBrush;
-
-        /// <summary>
-        /// Ellipse fill color
-        /// </summary>
         [Reactive] public Brush FormFill { get; set; } = Application.Current.Resources["ColorConnector"] as SolidColorBrush;
-
         [Reactive] public Brush Foreground { get; set; } = Application.Current.Resources["ColorConnectorForeground"] as SolidColorBrush;
-
         [Reactive] public double FormStrokeThickness { get; set; } = 1;
-
-        /// <summary>
-        /// Узел, которому принадлежит переход
-        /// </summary>
         [Reactive] public ViewModelNode Node { get; set; }
-
-        /// <summary>
-        /// Соединение, которое связанно с этим переходом
-        /// </summary>
         [Reactive] public ViewModelConnect Connect { get; set; }
-
         [Reactive] public bool ItsLoop { get; set; } = false;
-
         [Reactive] public ViewModelNodesCanvas NodesCanvas { get; set; }
-
         [Reactive] public bool Selected { get; set; }
 
         public ViewModelConnector(ViewModelNodesCanvas nodesCanvas, ViewModelNode viewModelNode)
@@ -99,10 +56,6 @@ namespace SimpleStateMachineNodeEditor.ViewModel
         public ReactiveCommand<Unit,Unit> CommandConnectorDragEnter { get; set; }
         public ReactiveCommand<Unit,Unit> CommandConnectorDrop { get; set; }
         public ReactiveCommand<Unit,Unit> CommandSetAsLoop { get; set; }
-        //public ReactiveCommand<Unit,Unit> CommandAdd { get; set; }
-        //public ReactiveCommand<Unit,Unit> CommandDelete { get; set; }
-        //public ReactiveCommand<Unit,Unit> CommandAddWithConnect { get; set; }
-        //public ReactiveCommand<Unit,Unit> CommandDeleteWithConnect { get; set; }
         public ReactiveCommand<SelectMode, Unit> CommandSelect { get; set; }
         public ReactiveCommand<string, Unit> CommandValidateName { get; set; }
 
@@ -118,17 +71,10 @@ namespace SimpleStateMachineNodeEditor.ViewModel
             CommandConnectorDragEnter = ReactiveCommand.Create(ConnectorDragEnter);
             CommandConnectorDrop = ReactiveCommand.Create(ConnectorDrop);
 
-            //CommandAdd = ReactiveCommand.Create(Add);
-            //CommandDelete = ReactiveCommand.Create(Delete);
-            //CommandAddWithConnect = ReactiveCommand.Create(AddWithConnect);
-            //CommandDeleteWithConnect = ReactiveCommand.Create(DeleteWithConnect);
-
             CommandValidateName = ReactiveCommand.Create<string>(ValidateName);
 
             CommandSelect = ReactiveCommand.Create<SelectMode>(Select);
 
-
-            //SimpleCommandWithResult<bool, Func<bool>> t = new SimpleCommandWithResult<bool, Func<bool>>()
 
             NotSavedSubscribe();
         }
@@ -152,9 +98,7 @@ namespace SimpleStateMachineNodeEditor.ViewModel
                     {
                         if(!this.Selected)
                         {
-                            //this.Node.CommandUnSelectedAllConnectorsExecuteWithSubscribe();
-                            this.Node.CommandSetConnectorAsStartSelect.ExecuteWithSubscribe(this);
-                            //this.Selected = true;                                     
+                            this.Node.CommandSetConnectorAsStartSelect.ExecuteWithSubscribe(this);                                  
                         }
                         
                         break;
@@ -187,31 +131,9 @@ namespace SimpleStateMachineNodeEditor.ViewModel
 
             Node.CommandAddEmptyConnector.ExecuteWithSubscribe();
         }
-        //private void Add()
-        //{
-        //    Node.CommandAddConnector.ExecuteWithSubscribe((0, this));
-        //}
-        //private void Delete()
-        //{
-        //    Node.CommandDeleteConnector.ExecuteWithSubscribe(this);
-        //}
-        //private void AddWithConnect()
-        //{
-        //    this.Add();
-        //    this.Connect?.CommandAddExecuteWithSubscribe();
-        //}
-        //private void DeleteWithConnect()
-        //{
-        //    this.Delete();
-        //    this.Connect?.CommandDeleteExecuteWithSubscribe();
-        //}
         private void ConnectPointDrag()
         {
             NodesCanvas.CommandAddDraggedConnect.ExecuteWithSubscribe(Node.CurrentConnector);
-        }
-        private void DragConnector(ViewModelConnector draggedConnector)
-        {
-
         }
 
         private void ConnectPointDrop()
@@ -234,8 +156,6 @@ namespace SimpleStateMachineNodeEditor.ViewModel
             {
                 NodesCanvas.CommandAddConnectorWithConnect.Execute(Node.CurrentConnector);
                 Node.CommandAddEmptyConnector.ExecuteWithSubscribe();
-
-                //NodesCanvas.CommandAddConnectWithUndoRedo.ExecuteWithSubscribe(Node.NodesCanvas.DraggedConnect);
                 NodesCanvas.DraggedConnect = null;
             }
         }

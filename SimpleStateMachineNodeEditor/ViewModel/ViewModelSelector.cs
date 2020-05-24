@@ -6,7 +6,6 @@ using ReactiveUI;
 using ReactiveUI.Fody.Helpers;
 
 using SimpleStateMachineNodeEditor.Helpers;
-using SimpleStateMachineNodeEditor.Helpers.Commands;
 using SimpleStateMachineNodeEditor.Helpers.Transformations;
 using System.Reactive;
 
@@ -52,11 +51,17 @@ namespace SimpleStateMachineNodeEditor.ViewModel
         }
 
 
-
         public ViewModelSelector()
+        {   
+            SetupCommands();
+            SetupSubscriptions();
+        }
+        
+        #region Setup Subscriptions
+
+        private void SetupSubscriptions()
         {
             this.WhenAnyValue(x => x.Point1.Value, x => x.Point2.Value).Subscribe(_ => UpdateSize());
-            SetupCommands();
         }
         private void UpdateSize()
         {
@@ -65,24 +70,20 @@ namespace SimpleStateMachineNodeEditor.ViewModel
             Scale.Scales.Set(((different.X > 0) ? 1 : -1), ((different.Y > 0) ? 1 : -1));
         }
 
+        #endregion Setup Subscriptions
+
         #region Setup Commands
         public ReactiveCommand<MyPoint, Unit> CommandStartSelect { get; set; }
-        public ReactiveCommand<Unit,Unit> CommandEndSelect { get; set; }
 
         private void SetupCommands()
         {
             CommandStartSelect = ReactiveCommand.Create<MyPoint>(StartSelect);
-            CommandEndSelect =  ReactiveCommand.Create(EndSelect);
         }
 
         private void StartSelect(MyPoint point)
         {
             Visible = true;
             Point1.Set(point);
-        }
-        private void EndSelect()
-        {
-
         }
 
         #endregion Setup Commands

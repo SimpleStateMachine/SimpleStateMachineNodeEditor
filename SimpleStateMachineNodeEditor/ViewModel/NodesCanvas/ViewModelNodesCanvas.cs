@@ -8,6 +8,7 @@ using SimpleStateMachineNodeEditor.Helpers.Transformations;
 using SimpleStateMachineNodeEditor.Helpers.Enums;
 using System.Windows.Data;
 using System.IO;
+using Splat;
 
 namespace SimpleStateMachineNodeEditor.ViewModel.NodesCanvas
 {
@@ -48,24 +49,6 @@ namespace SimpleStateMachineNodeEditor.ViewModel.NodesCanvas
             SetupStartState();
             Cutter = new ViewModelCutter(this);
             this.WhenAnyValue(x => x.Nodes.Count).Subscribe(value => UpdateCount(value));
-
-            //for (int i = 1; i <= 5; i++)
-            //{
-            //    LogError("Error " + i.ToString());
-            //}
-            //for (int i = 1; i <= 5; i++)
-            //{
-            //    LogInformation("Information " + i.ToString());
-            //}
-            //for (int i = 1; i <= 5; i++)
-            //{
-            //    LogWarning("Warning " + i.ToString());
-            //}
-            //for (int i = 1; i <= 5; i++)
-            //{
-            //    LogDebug("Debug " + i.ToString());
-            //}
-
         }
         public readonly object lockNodes = new object();
         public readonly object lockConnects = new object();
@@ -104,21 +87,21 @@ namespace SimpleStateMachineNodeEditor.ViewModel.NodesCanvas
 
         #region Logging
 
-        public void LogDebug(string message)
+        public void LogDebug(string message, params object[] args)
         {
-            Messages.Add(new ViewModelMessage(TypeMessage.Debug, message));
+            Messages.Add(new ViewModelMessage(TypeMessage.Debug, string.Format(message, args)));
         }
-        public void LogError(string message)
+        public void LogError(string message, params object[] args)
         {
-            Messages.Add(new ViewModelMessage(TypeMessage.Error, message));
+            Messages.Add(new ViewModelMessage(TypeMessage.Error, string.Format(message, args)));
         }
-        public void LogInformation(string message)
+        public void LogInformation(string message, params object[] args)
         {
-            Messages.Add(new ViewModelMessage(TypeMessage.Information, message));
+            Messages.Add(new ViewModelMessage(TypeMessage.Information, string.Format(message, args)));
         }
-        public void LogWarning(string message)
+        public void LogWarning(string message, params object[] args)
         {
-            Messages.Add(new ViewModelMessage(TypeMessage.Warning, message));
+            Messages.Add(new ViewModelMessage(TypeMessage.Warning, string.Format(message, args)));
         }
 
         #endregion Logging
