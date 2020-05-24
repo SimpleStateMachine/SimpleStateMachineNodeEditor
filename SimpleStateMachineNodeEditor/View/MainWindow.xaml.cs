@@ -50,6 +50,7 @@ namespace SimpleStateMachineNodeEditor.View
             set { ViewModel = (ViewModelMainWindow)value; }
         }
         #endregion ViewModel
+
         Dictionary<TypeMessage, System.Windows.Controls.Label> messagesLabels;
         static Dictionary<TypeMessage, string> labelPostfix = new Dictionary<TypeMessage, string>()
         {
@@ -71,7 +72,6 @@ namespace SimpleStateMachineNodeEditor.View
             };
 
             ViewModel = new ViewModelMainWindow(this.NodesCanvas.ViewModel);
-            SetupCommands();
             SetupSubscriptions();
             SetupBinding();
             SetupEvents();
@@ -106,34 +106,6 @@ namespace SimpleStateMachineNodeEditor.View
                 this.BindCommand(this.ViewModel, x => x.NodesCanvas.CommandRedo,            x => x.ItemRedo).DisposeWith(disposable);
                 this.BindCommand(this.ViewModel, x => x.NodesCanvas.CommandSelectAll,       x => x.ItemSelectAll).DisposeWith(disposable);
 
-
-                this.WhenAnyValue(x => x.NodesCanvas.ViewModel.Messages.Count).Subscribe(_=> UpdateLabels());
-                //var informationCount = this.ObservableForProperty(x => x.NodesCanvas.ViewModel.Messages).Select(x=>x.Value.Where(x=>x.TypeMessage==TypeMessage.Information).Count().ToString());
-                ////var SelectedItem = this.ObservableForProperty(x => x.NodesCanvas.ViewModel.Messages).Select(x=>x.);
-                //this.OneWayBind(this.ViewModel, x => informationCount, x => x.LabelError.Content).DisposeWith(disposable);
-
-                //informationCount.WhenAnyValue().Sub
-                //this.LabelError.Content.
-                //this.LabelError.Events().PreviewMouseLeftButtonDown.Subscribe(e => SetDisplayMessageType(e, TypeMessage.Error)).DisposeWith(disposable);
-                //this.LabelInformation.Events().MouseLeftButtonDown.Subscribe(e => SetDisplayMessageType(e, TypeMessage.Information)).DisposeWith(disposable);
-                //this.LabelWarning.Events().MouseLeftButtonDown.Subscribe(e => SetDisplayMessageType(e, TypeMessage.Warning)).DisposeWith(disposable);
-                //this.LabelDebug.Events().MouseLeftButtonDown.Subscribe(e => SetDisplayMessageType(e, TypeMessage.Debug)).DisposeWith(disposable);
-
-
-                //ItemSave.Command = CommandSave;
-                //this.OneWayBind(this, x => x.CommandSave, x => x.ItemSave.Command).DisposeWith(disposable);
-
-                //this.OneWayBind(this, x => x.CommandSave, x => x.BindingSave.Command).DisposeWith(disposable);
-
-                //this.OneWayBind(this.ViewModel, x=>x.CommandCopyError, x=>x.BindingSave.Command)
-
-
-                //this.ItemSave.Inp
-
-                //this.OneWayBind(this.NodesCanvas.ViewModel, x => x.CommandSave, x => x.BindingSave.Command);
-                //this.OneWayBind(this.NodesCanvas.ViewModel, x => x.CommandSave, x => x.BindingSave.Command);
-
-
             });
         }
         #endregion Setup Binding
@@ -144,8 +116,8 @@ namespace SimpleStateMachineNodeEditor.View
         {
             this.WhenActivated(disposable =>
             {
-                this.WhenAnyValue(x=>x.ViewModel.NodesCanvas.Path).Subscribe(value=> UpdateSchemeName(value)).DisposeWith(disposable);
-                
+                this.WhenAnyValue(x=>x.ViewModel.NodesCanvas.SchemePath).Subscribe(value=> UpdateSchemeName(value)).DisposeWith(disposable);
+                this.WhenAnyValue(x => x.NodesCanvas.ViewModel.Messages.Count).Subscribe(_ => UpdateLabels());
 
             });
         }
@@ -160,28 +132,16 @@ namespace SimpleStateMachineNodeEditor.View
         }
         #endregion Setup Subscriptions
 
-        #region Setup Commands
-
-        public ReactiveCommand<Unit,Unit> CommandSave { get; set; }
-        private void SetupCommands()
-        {
-            this.WhenActivated(disposable =>
-            {
-                CommandSave = ReactiveCommand.Create(Save);
-
-                //this.Events().KeyUp.Where(x => x.Key == Key.S && (Keyboard.IsKeyDown(Key.LeftCtrl) || Keyboard.IsKeyDown(Key.RightCtrl))).Subscribe(_ => Save()).DisposeWith(disposable);
-                //this.Events().KeyUp.Where(x => x.Key == Key.F4 && (Keyboard.IsKeyDown(Key.LeftAlt) || Keyboard.IsKeyDown(Key.RightAlt))).Subscribe(_ => Close()).DisposeWith(disposable);
-            });
-        }
-        #endregion Setup Commands
 
         #region SetupEvents
         private void SetupEvents()
         {
             this.WhenActivated(disposable =>
             {
+
                 this.ItemExportToJPEG.Events().Click.Subscribe(_ => ExportToImage(ImageFormats.JPEG)).DisposeWith(disposable);
                 this.ItemExportToPNG.Events().Click.Subscribe(_ => ExportToImage(ImageFormats.PNG)).DisposeWith(disposable);
+
 
                 this.Header.Events().PreviewMouseLeftButtonDown.Subscribe(e => HeaderClick(e)).DisposeWith(disposable);
                 this.ButtonClose.Events().Click.Subscribe(_ => WithoutSaving(ButtonCloseClick)).DisposeWith(disposable);
@@ -190,9 +150,10 @@ namespace SimpleStateMachineNodeEditor.View
 
                 this.ItemSave.Events().Click.Subscribe(_ => Save()).DisposeWith(disposable);
                 this.ItemSaveAs.Events().Click.Subscribe(_ => SaveAs()).DisposeWith(disposable);
-                this.ItemOpen.Events().Click.Subscribe(async _ => await WithoutSavingAsync(OpenAsync)).DisposeWith(disposable);
+                this.ItemOpen.Events().Click.Subscribe(_ => WithoutSaving(Open)).DisposeWith(disposable);
                 this.ItemExit.Events().Click.Subscribe(_=> WithoutSaving(ButtonCloseClick)).DisposeWith(disposable);
                 this.ItemNew.Events().Click.Subscribe(_ => WithoutSaving(New)).DisposeWith(disposable);
+
                 this.ErrorListExpander.Events().Collapsed.Subscribe(_=> ErrorListCollapse()).DisposeWith(disposable);
                 this.ErrorListExpander.Events().Expanded.Subscribe(_ => ErrorListExpanded()).DisposeWith(disposable);
 
@@ -300,7 +261,7 @@ namespace SimpleStateMachineNodeEditor.View
             dlg.FileName = SchemeName(); 
             dlg.Filter = (format == ImageFormats.JPEG)? "JPEG Image (.jpeg)|*.jpeg":"Png Image (.png)|*.png";
 
-            DialogResult dialogResult = dlg.ShowDialog();
+            System.Windows.Forms.DialogResult dialogResult = dlg.ShowDialog();
             if(dialogResult==System.Windows.Forms.DialogResult.OK)
             {
                 this.NodesCanvas.SaveCanvasToImage(dlg.FileName, format);
@@ -321,26 +282,16 @@ namespace SimpleStateMachineNodeEditor.View
             if (result == MessageBoxResult.Yes)
                 action.Invoke();
         }
-        async Task WithoutSavingAsync(Func<Task> action)
-        {
-            var result = MessageBoxResult.Yes;
-            if (!this.NodesCanvas.ViewModel.ItSaved)
-            {
-                result = System.Windows.MessageBox.Show("Exit without saving ?", "Test", MessageBoxButton.YesNo);
-            }
 
-            if (result == MessageBoxResult.Yes)
-                await action.Invoke();
-        }
         void Save()
         {
-            if (string.IsNullOrEmpty(this.ViewModel.NodesCanvas.Path))
+            if (string.IsNullOrEmpty(this.ViewModel.NodesCanvas.SchemePath))
             {
                 SaveAs();
             }
             else
             {
-                this.NodesCanvas.ViewModel.CommandSave.ExecuteWithSubscribe(this.ViewModel.NodesCanvas.Path);
+                this.NodesCanvas.ViewModel.CommandSave.ExecuteWithSubscribe(this.ViewModel.NodesCanvas.SchemePath);
             }
         }
         void SaveAs()
@@ -348,35 +299,38 @@ namespace SimpleStateMachineNodeEditor.View
             SaveFileDialog dlg = new SaveFileDialog();
             dlg.FileName = SchemeName();
             dlg.Filter = "XML-File | *.xml";
-            
-            DialogResult dialogResult = dlg.ShowDialog();
+
+            System.Windows.Forms.DialogResult dialogResult = dlg.ShowDialog();
             if (dialogResult == System.Windows.Forms.DialogResult.OK)
             {
+                Mouse.OverrideCursor = System.Windows.Input.Cursors.Wait;
                 this.NodesCanvas.ViewModel.CommandSave.ExecuteWithSubscribe(dlg.FileName);
+                Mouse.OverrideCursor = null;
             }
         }
         private string SchemeName()
         {
-            if (!string.IsNullOrEmpty(this.ViewModel.NodesCanvas.Path))
+            if (!string.IsNullOrEmpty(this.ViewModel.NodesCanvas.SchemePath))
             {
-                return Path.GetFileNameWithoutExtension(this.ViewModel.NodesCanvas.Path);
+                return Path.GetFileNameWithoutExtension(this.ViewModel.NodesCanvas.SchemePath);
             }
             else
             {
                 return "SimpleStateMachine";
             }
         }
-        async Task OpenAsync()
+       private void Open()
         {
             OpenFileDialog dlg = new OpenFileDialog();
             dlg.FileName = SchemeName();
             dlg.Filter = "XML-File | *.xml";
 
-            DialogResult dialogResult = dlg.ShowDialog();
+            System.Windows.Forms.DialogResult dialogResult = dlg.ShowDialog();
             if (dialogResult == System.Windows.Forms.DialogResult.OK)
             {
-                //this.NodesCanvas.ViewModel.CommandOpen.ExecuteWithSubscribe(dlg.FileName);
-                await this.NodesCanvas.ViewModel.CommandOpen.Execute(dlg.FileName);
+                Mouse.OverrideCursor = System.Windows.Input.Cursors.Wait;
+                this.NodesCanvas.ViewModel.CommandOpen.ExecuteWithSubscribe(dlg.FileName);
+                Mouse.OverrideCursor = null;
             }
 
         }

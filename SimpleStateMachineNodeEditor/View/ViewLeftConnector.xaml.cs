@@ -85,11 +85,22 @@ namespace SimpleStateMachineNodeEditor.View
             this.WhenActivated(disposable =>
             {               
                 this.EllipseElement.Events().Drop.Subscribe(e => OnEventDrop(e)).DisposeWith(disposable);
+                this.EllipseElement.Events().DragEnter.Subscribe(e => OnEventDragEnter(e)).DisposeWith(disposable);
+                this.EllipseElement.Events().DragLeave.Subscribe(e => OnEventDragLeave(e)).DisposeWith(disposable);
             });
         }
 
         #endregion SetupEvents
-
+        private void OnEventDragEnter(DragEventArgs e)
+        {
+            this.ViewModel.FormStroke = Application.Current.Resources["ColorConnector"] as SolidColorBrush;
+            e.Handled = true;
+        }
+        private void OnEventDragLeave(DragEventArgs e)
+        {
+            this.ViewModel.FormStroke = Application.Current.Resources["ColorNodesCanvasBackground"] as SolidColorBrush;
+            e.Handled = true;
+        }
         private void OnEventDrop(DragEventArgs e)
         {
             this.ViewModel.CommandConnectPointDrop.ExecuteWithSubscribe();

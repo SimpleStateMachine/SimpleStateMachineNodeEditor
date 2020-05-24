@@ -12,6 +12,9 @@ using System.Linq;
 using SimpleStateMachineNodeEditor.Helpers.Enums;
 using System.Reactive;
 using SimpleStateMachineNodeEditor.Helpers.Extensions;
+using SimpleStateMachineNodeEditor.ViewModel.NodesCanvas;
+using System.Windows.Documents;
+using System.Collections.Generic;
 
 namespace SimpleStateMachineNodeEditor.ViewModel
 {
@@ -299,7 +302,7 @@ namespace SimpleStateMachineNodeEditor.ViewModel
             return element;
         }
 
-        public static ViewModelConnect FromXElement(ViewModelNodesCanvas nodesCanvas, XElement node, out string errorMessage, Func<string, bool> actionForCheck)
+        public static ViewModelConnect FromXElement(ViewModelNodesCanvas nodesCanvas,XElement node, out string errorMessage, Func<string, bool> actionForCheck)
         {
             ViewModelConnect viewModelConnect = null;
 

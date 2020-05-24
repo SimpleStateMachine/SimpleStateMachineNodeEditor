@@ -100,7 +100,7 @@ namespace SimpleStateMachineNodeEditor.View
         {
             this.WhenActivated(disposable =>
             {
-                this.WhenAnyValue(x=>x.IsMouseOver).Subscribe(value=> Test(value)).DisposeWith(disposable);
+                this.WhenAnyValue(x=>x.IsMouseOver).Subscribe(value=> OnEventMouseOver(value)).DisposeWith(disposable);
                 this.Events().MouseLeftButtonDown.Subscribe(e => OnEventMouseLeftDowns(e)).DisposeWith(disposable);
                 this.Events().MouseLeftButtonUp.Subscribe(e => OnEventMouseLeftUp(e)).DisposeWith(disposable);
                 this.Events().MouseRightButtonDown.Subscribe(e => OnEventMouseRightDown(e)).DisposeWith(disposable);
@@ -116,7 +116,7 @@ namespace SimpleStateMachineNodeEditor.View
                 this.ViewModel.WhenAnyValue(x=>x.IsCollapse).Subscribe(value=> OnEventCollapse(value)).DisposeWith(disposable);
             });
         }
-        private void Test(bool value)
+        private void OnEventMouseOver(bool value)
         {
             if (this.ViewModel.Selected != true)
                 this.ViewModel.BorderBrush = value?Application.Current.Resources["ColorSelectedElement"] as SolidColorBrush

@@ -8,6 +8,7 @@ using System.Reactive.Linq;
 using SimpleStateMachineNodeEditor.Helpers;
 using SimpleStateMachineNodeEditor.Helpers.Commands;
 using System.Reactive;
+using SimpleStateMachineNodeEditor.ViewModel.NodesCanvas;
 
 namespace SimpleStateMachineNodeEditor.ViewModel
 {

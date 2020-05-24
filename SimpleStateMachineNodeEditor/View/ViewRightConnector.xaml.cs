@@ -75,10 +75,11 @@ namespace SimpleStateMachineNodeEditor.View
                 this.WhenAnyValue(x => x.ViewModel.Node.Size, x => x.ViewModel.Node.Point1.Value, x => x.ViewModel.Node.NodesCanvas.Scale.Scales.Value)
                 .Subscribe(_ => { UpdatePositionConnectPoin(); }).DisposeWith(disposable);
 
-                this.WhenAnyValue(x =>x.ViewModel.ItsLoop).Subscribe(value=> test(value)).DisposeWith(disposable);
+                this.WhenAnyValue(x=>x.EllipseElement.IsMouseOver).Subscribe(value=> OnEventMouseOver(value)).DisposeWith(disposable);
             });
         }
         #endregion SetupBinding
+
         #region Setup Commands
         private void SetupCommands()
         {
@@ -91,11 +92,6 @@ namespace SimpleStateMachineNodeEditor.View
         #endregion Setup Commands
         #region SetupEvents
 
-        private void test(bool value)
-        {
-            if (value)
-                this.ViewModel.CommandSetAsLoop.ExecuteWithSubscribe();
-        }
         private void SetupEvents()
         {
             this.WhenActivated(disposable =>
@@ -107,7 +103,11 @@ namespace SimpleStateMachineNodeEditor.View
                 this.BorderElement.Events().PreviewDrop.Subscribe(e => ConnectorDrop(e)).DisposeWith(disposable);
             });
         }
-
+        private void OnEventMouseOver(bool value)
+        {
+                this.ViewModel.FormStroke = value ? Application.Current.Resources["ColorConnector"] as SolidColorBrush
+                                                 : Application.Current.Resources["ColorNodesCanvasBackground"] as SolidColorBrush;
+        }
         private void Validate(RoutedEventArgs e)
         {
             ViewModel.CommandValidateName.ExecuteWithSubscribe(TextBoxElement.Text);

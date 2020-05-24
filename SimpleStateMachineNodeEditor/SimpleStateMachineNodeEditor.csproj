@@ -44,6 +44,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="MvvmDialogs" Version="7.0.0" />
     <PackageReference Include="Newtonsoft.Json" Version="12.0.3" />
     <PackageReference Include="ReactiveUI" Version="11.4.1" />
     <PackageReference Include="ReactiveUI.Events.WPF" Version="11.4.1" />

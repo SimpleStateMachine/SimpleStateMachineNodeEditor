@@ -20,6 +20,7 @@ using System.IO;
 using SimpleStateMachineNodeEditor.Helpers.Enums;
 using SimpleStateMachineNodeEditor.Icons;
 using SimpleStateMachineNodeEditor.Helpers.Extensions;
+using SimpleStateMachineNodeEditor.ViewModel.NodesCanvas;
 
 namespace SimpleStateMachineNodeEditor.View
 {
@@ -28,12 +29,6 @@ namespace SimpleStateMachineNodeEditor.View
     /// </summary>
     public partial class ViewNodesCanvas : UserControl, IViewFor<ViewModelNodesCanvas>, CanBeMove
     {
-        enum MoveNodes
-        {
-            No = 0,
-            MoveAll,
-            MoveSelected
-        }
         #region ViewModel
         public static readonly DependencyProperty ViewModelProperty = DependencyProperty.Register(nameof(ViewModel),
             typeof(ViewModelNodesCanvas), typeof(ViewNodesCanvas), new PropertyMetadata(null));
@@ -57,7 +52,7 @@ namespace SimpleStateMachineNodeEditor.View
         private MyPoint PositionMove { get; set; } = new MyPoint();
 
         private MyPoint SumMove { get; set; } = new MyPoint();
-        private MoveNodes Move { get; set; } = MoveNodes.No;
+        private TypeMove Move { get; set; } = TypeMove.None;
 
         public ViewNodesCanvas()
         {
@@ -88,6 +83,8 @@ namespace SimpleStateMachineNodeEditor.View
                 this.OneWayBind(this.ViewModel, x => x.Selector, x => x.Selector.ViewModel).DisposeWith(disposable);
 
                 this.OneWayBind(this.ViewModel, x => x.Cutter, x => x.Cutter.ViewModel).DisposeWith(disposable);
+
+                this.OneWayBind(this.ViewModel, x => x.Dialog, x => x.Dialog.ViewModel).DisposeWith(disposable);
             });
         }
         #endregion Setup Binding
@@ -172,15 +169,15 @@ namespace SimpleStateMachineNodeEditor.View
         }
         private void OnEventMouseLeftUp(MouseButtonEventArgs e)
         {
-            if (Move == MoveNodes.No)
+            if (Move == TypeMove.None)
                 return;
 
-            if (Move == MoveNodes.MoveAll)
+            if (Move == TypeMove.MoveAll)
                 this.ViewModel.CommandFullMoveAllNode.Execute(SumMove);
-            else if (Move == MoveNodes.MoveSelected)
+            else if (Move == TypeMove.MoveSelected)
                 this.ViewModel.CommandFullMoveAllSelectedNode.Execute(SumMove);
 
-            Move = MoveNodes.No;
+            Move = TypeMove.None;
             SumMove = new MyPoint();
         }
         private void OnEventMouseRightDown(MouseButtonEventArgs e)
@@ -196,11 +193,7 @@ namespace SimpleStateMachineNodeEditor.View
         }
         private void OnEventMouseWheel(MouseWheelEventArgs e)
         {
-            //var position = e.GetPosition(this.Canvas);
-            //this.Scale.CenterX = position.X / this.ViewModel.Scale.Value;
-            //this.Scale.CenterY = position.Y / this.ViewModel.Scale.Value;
             this.ViewModel.CommandZoom.ExecuteWithSubscribe(e.Delta);
-
         }
         private void OnEventMouseUp(MouseButtonEventArgs e)
         {
@@ -208,7 +201,7 @@ namespace SimpleStateMachineNodeEditor.View
             PositionMove.Clear();
             Keyboard.Focus(this);
         }
-        private MyPoint test = new MyPoint();
+
         private void OnEventMouseMove(MouseEventArgs e)
         {
             //if ((Mouse.Captured == null)||(!(Mouse.Captured is CanBeMove)))
@@ -226,13 +219,13 @@ namespace SimpleStateMachineNodeEditor.View
             {
                 //ViewModel.CommandPartMoveAllNode.ExecuteWithSubscribe(delta).Subscribe();
                 ViewModel.CommandPartMoveAllNode.ExecuteWithSubscribe(delta);
-                Move = MoveNodes.MoveAll;
+                Move = TypeMove.MoveAll;
             }
             else
             {
                 //ViewModel.CommandPartMoveAllSelectedNode.ExecuteWithSubscribe(delta);
                 ViewModel.CommandPartMoveAllSelectedNode.ExecuteWithSubscribe(delta);
-                Move = MoveNodes.MoveSelected;
+                Move = TypeMove.MoveSelected;
             }
         }
         private void OnEventDragEnter(DragEventArgs e)

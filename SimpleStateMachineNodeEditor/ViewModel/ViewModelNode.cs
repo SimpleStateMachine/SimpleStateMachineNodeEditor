@@ -18,6 +18,7 @@ using DynamicData;
 using System.Reactive;
 using SimpleStateMachineNodeEditor.Helpers.Extensions;
 using System.Threading.Tasks;
+using SimpleStateMachineNodeEditor.ViewModel.NodesCanvas;
 
 namespace SimpleStateMachineNodeEditor.ViewModel
 {
@@ -46,7 +47,11 @@ namespace SimpleStateMachineNodeEditor.ViewModel
         public int TransitionsCount = -1;
 
         
-
+        private ViewModelNode()
+        {
+            SetupCommands();
+            //SetupBinding();
+        }
 
 
         public ViewModelNode(ViewModelNodesCanvas nodesCanvas)
@@ -273,7 +278,7 @@ namespace SimpleStateMachineNodeEditor.ViewModel
             viewModelNode.Name = name;
 
             var position = node.Attribute("Position")?.Value;
-            if(position!=null)
+            if (position != null)
                 viewModelNode.Point1 = MyPoint.Parse(position);
 
             var isCollapse = node.Attribute("IsCollapse")?.Value;
@@ -282,7 +287,37 @@ namespace SimpleStateMachineNodeEditor.ViewModel
 
             return viewModelNode;
         }
+        public static ViewModelNode FromXElement(XElement node)
+        {
+            //errorMessage = null;
+            ViewModelNode viewModelNode = null;
+            string name = node.Attribute("Name")?.Value;
 
+            //if (string.IsNullOrEmpty(name))
+            //{
+            //    errorMessage = "Node without name";
+            //    return viewModelNode;
+            //}
+
+            //if (actionForCheck(name))
+            //{
+            //    errorMessage = String.Format("Contains more than one node with name \"{0}\"", name);
+            //    return viewModelNode;
+            //}
+
+            viewModelNode = new ViewModelNode();
+            viewModelNode.Name = name;
+
+            var position = node.Attribute("Position")?.Value;
+            if (position != null)
+                viewModelNode.Point1 = MyPoint.Parse(position);
+
+            var isCollapse = node.Attribute("IsCollapse")?.Value;
+            if (isCollapse != null)
+                viewModelNode.IsCollapse = bool.Parse(isCollapse);
+
+            return viewModelNode;
+        }
         //public static async Task<(ViewModelNode node, string message)> FromXElement(ViewModelNodesCanvas nodesCanvas, XElement node, Func<string, bool> actionForCheck)
         //{
         //  string errorMessage = null;

@@ -12,6 +12,7 @@ using SimpleStateMachineNodeEditor.Helpers.Enums;
 using System.Reactive.Linq;
 using System.Collections.ObjectModel;
 using System.Reactive;
+using SimpleStateMachineNodeEditor.ViewModel.NodesCanvas;
 
 namespace SimpleStateMachineNodeEditor.ViewModel
 {
