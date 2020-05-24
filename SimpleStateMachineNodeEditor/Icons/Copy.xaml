@@ -4,7 +4,7 @@
         <DrawingBrush.Drawing>
           <DrawingGroup>
             <DrawingGroup.Children>
-                <GeometryDrawing Brush="LightGray" Geometry="M20.6,0H8l0,1.5V6H4.1L2.8,6v18l1.3,0h10.2l1.2,0v-6h4l1.1,0V4.5V0z M14.3,22.5H4.1v-15h3.8v9.1l0,1.4h6.3V22.5z M19.4,16.5H9.2v-15h10.2V16.5z"/>
+                    <GeometryDrawing Brush="{StaticResource ColorIconsMain}" Geometry="M20.6,0H8l0,1.5V6H4.1L2.8,6v18l1.3,0h10.2l1.2,0v-6h4l1.1,0V4.5V0z M14.3,22.5H4.1v-15h3.8v9.1l0,1.4h6.3V22.5z M19.4,16.5H9.2v-15h10.2V16.5z"/>
             </DrawingGroup.Children>
           </DrawingGroup>
         </DrawingBrush.Drawing>

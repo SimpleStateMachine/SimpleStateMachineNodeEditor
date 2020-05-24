@@ -1,7 +1,8 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
     <!--#region Selector-->
-
+    <SolidColorBrush x:Key="ColorIconsSecond"  Color="#7ac0ff"/>
+    <SolidColorBrush x:Key="ColorIconsMain"  Color="LightGray"/>
     <SolidColorBrush x:Key="ColorScrollBarBackground"  Color="#3e3e42"/>
     <SolidColorBrush x:Key="ColorScrollBarThumb"  Color="#1e1e1e"/>
 
@@ -49,17 +50,16 @@
 
     <!--#region Header buttons-->
 
+    <SolidColorBrush x:Key="ColorWindowHeaderButtonsIcon"  Color="LightGray"/>
+
     <SolidColorBrush x:Key="ColorWindowHeaderButtonCloseBackgroundPressed"  Color="#a3232d"/>
-    <SolidColorBrush x:Key="ColorWindowHeaderButtonClosePathStrokePressed"   Color="White"/>
     <SolidColorBrush x:Key="ColorWindowHeaderButtonCloseBackgroundMouseOver" Color="#e81123"/>
-    <SolidColorBrush x:Key="ColorWindowHeaderButtonClosePathStrokeMouseOver" Color="White"/>
 
     <SolidColorBrush x:Key="ColorWindowHeaderButtonBackgroundPressed"  Color="#007acc"/>
-    <SolidColorBrush x:Key="ColorWindowHeaderButtonPathStrokePressed"  Color="White"/>
     <SolidColorBrush x:Key="ColorWindowHeaderButtonBackgroundMouseOver" Color="#444549"/>
-    <SolidColorBrush x:Key="ColorWindowHeaderButtonPathStrokeMouseOver" Color="White"/>
 
-    <SolidColorBrush x:Key="ColorWindowToolBarSeparator" Color="#1e1e1e"/>
+    <SolidColorBrush x:Key="ColorSeparator"             Color="#333337"/>
+    <SolidColorBrush x:Key="ColorSeparatorBorder"       Color="#46464a"/>
 
 
     <!--#endregion  Header buttons-->
@@ -73,7 +73,6 @@
     
     <SolidColorBrush x:Key="ColorMenuForeground"            Color="White"/>
 
-    <SolidColorBrush x:Key="ColorMenuSeparator"             Color="#333337"/>
 
     <SolidColorBrush x:Key="ColorMenuBackgroundMouseOver"   Color="#444549"/>
       

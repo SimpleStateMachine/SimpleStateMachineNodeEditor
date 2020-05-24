@@ -6,9 +6,11 @@
     <Application.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
+                <!--<ResourceDictionary Source="Styles/Themes/Dark.xaml"/>-->
+                <ResourceDictionary Source="Styles/Themes/Light.xaml"/>
                 <ResourceDictionary Source="Icons/Icons.xaml"/>
-                <ResourceDictionary Source="Styles/Themes/Dark.xaml"/>
-                <!--<ResourceDictionary Source="Styles/Themes/Light.xaml"/>-->
+                
+               
                 <!--<ResourceDictionary Source="Styles/Theme.xaml"/>-->
                 <ResourceDictionary Source="Styles/ErrorList/StyleExpander.xaml"/>
                 <ResourceDictionary Source="Styles/ErrorList/StyleScrollBar.xaml"/>
@@ -46,12 +48,11 @@
                 <ResourceDictionary Source="Styles/MainWindow/CustomWindowTemplate.xaml"/>
                 
                     <!--#region      Header-->
-                    <ResourceDictionary Source="Styles/MainWindow/ToolBar/ToolButtonTemplate.xaml"/>
+                <ResourceDictionary Source="Styles/MainWindow/ToolBar/ToolButtonTemplate.xaml"/>
                 <ResourceDictionary Source="Styles/MainWindow/ToolBar/TemplateSeparator.xaml"/>
-                    <ResourceDictionary Source="Styles/MainWindow/ToolBarTemplate.xaml"/>
+                <ResourceDictionary Source="Styles/MainWindow/ToolBarTemplate.xaml"/>
                 <ResourceDictionary Source="Styles/MainWindow/Header/StyleHeaderButton.xaml"/>
-                <ResourceDictionary Source="Styles/MainWindow/Header/StyleHeaderButtonClosePath.xaml"/>
-                    <!--#endregion   Header-->
+                <!--#endregion   Header-->
                 
                 <!--#endregion   MainWindow-->
 

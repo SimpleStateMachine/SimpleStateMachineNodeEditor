@@ -29,7 +29,7 @@
                                 <Rectangle Fill="{StaticResource IconImportScheme}" Height="15" Width="15"/>
                             </MenuItem.Icon>
                         </MenuItem>
-                        <Separator Background="{StaticResource ColorMenuSeparator}"/>
+                        <Separator Background="{StaticResource ColorSeparator}"/>
                         <MenuItem Header="Save" InputGestureText="Ctrl+S" x:Name="ItemSave" Style="{StaticResource StyleMenuItem}" >
                             <MenuItem.Icon>
                                 <Rectangle Fill="{StaticResource IconSave}" Height="13" Width="13"/>
@@ -47,7 +47,7 @@
                             <!--<MenuItem Header="Export to PNG" x:Name="ItemExportToPNG" Style="{StaticResource StyleMenuItem}"/>-->
                             <MenuItem Header="Export to JPEG" x:Name="ItemExportToJPEG" Style="{StaticResource StyleMenuItem}"/>
                         </MenuItem>
-                        <Separator Background="{StaticResource ColorMenuSeparator}"/>
+                        <Separator Background="{StaticResource ColorSeparator}"/>
                         <MenuItem Header="Exit"  x:Name="ItemExit" InputGestureText="Alt+F4"   Style="{StaticResource StyleMenuItem}">
                             <MenuItem.Icon>
                                 <Rectangle Fill="{StaticResource IconExit}" Height="14" Width="14"/>
@@ -65,7 +65,7 @@
                                 <Rectangle Fill="{StaticResource IconRedo}" Height="13" Width="13"/>
                             </MenuItem.Icon>
                         </MenuItem>
-                        <Separator Background="{StaticResource ColorMenuSeparator}"/>
+                        <Separator Background="{StaticResource ColorSeparator}"/>
                         <MenuItem Header="SelectAll"  x:Name="ItemSelectAll" InputGestureText="Ctrl+A" Style="{StaticResource StyleMenuItem}">
                             <MenuItem.Icon>
                                 <Rectangle Fill="{StaticResource IconSelectAll}" Height="15" Width="15"/>
@@ -76,14 +76,14 @@
 
             <!--BorderBrush - it's Background color on IsMouseOver, OpacityMask - it's color on IsPressed-->
             <Button DockPanel.Dock="Right" x:Name="ButtonClose" ToolTip="Close" Style="{StaticResource StyleHeaderButton}" Background="{StaticResource ColorWindowHeader}" BorderBrush="{StaticResource ColorWindowHeaderButtonCloseBackgroundMouseOver}" OpacityMask="{StaticResource ColorWindowHeaderButtonCloseBackgroundPressed}"  Padding="7" Grid.IsSharedSizeScope="True" Margin="0,0,-7,0">
-                <Rectangle  Fill="{StaticResource IconClose}" Height="13" Width="13"/>
+                <Rectangle  Fill="{StaticResource IconClose}" Height="11" Width="11"/>
             </Button>
 
             <Button DockPanel.Dock="Right" x:Name="ButtonMax" ToolTip="Maximize" Style="{StaticResource StyleHeaderButton}" Background="{StaticResource ColorWindowHeader}" BorderBrush="{StaticResource ColorWindowHeaderButtonBackgroundMouseOver}" OpacityMask="{StaticResource ColorWindowHeaderButtonBackgroundPressed}">
-                <Rectangle x:Name="ButtonMaxRectangle"  Stroke="Yellow" Fill="{StaticResource IconMaximize}" Height="13" Width="13" StrokeThickness="0"/>
+                <Rectangle x:Name="ButtonMaxRectangle"  Stroke="Yellow" Fill="{StaticResource IconMaximize}" Height="11" Width="11" StrokeThickness="0"/>
             </Button>
             <Button DockPanel.Dock="Right" x:Name="ButtonMin" ToolTip="Minimize" Style="{StaticResource StyleHeaderButton}" Background="{StaticResource ColorWindowHeader}" BorderBrush="{StaticResource ColorWindowHeaderButtonBackgroundMouseOver}" OpacityMask="{StaticResource ColorWindowHeaderButtonBackgroundPressed}" >
-                <Rectangle Fill="{StaticResource IconMinimize}" Height="1" Width="13" />
+                <Rectangle Fill="{StaticResource IconMinimize}" Height="1" Width="11" />
             </Button>
             <Label x:Name="LabelSchemeName" Style="{StaticResource StyleLabel}" BorderBrush="{StaticResource ColorNodesCanvasBackground}" Background="{StaticResource ColorNodesCanvasBackground}" BorderThickness="10,5,10,5" Margin="10,  0, 0 ,0" HorizontalAlignment="Right" VerticalAlignment="Center" Foreground="{StaticResource ColorMenuForeground}">
                 <Label.ContextMenu>

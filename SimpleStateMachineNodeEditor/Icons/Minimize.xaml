@@ -3,9 +3,8 @@
     <DrawingBrush x:Key="IconMinimize" >
         <DrawingBrush.Drawing>
           <DrawingGroup>
-            <DrawingGroup.Children>
-              <!--<GeometryDrawing Brush="#00FFFFFF" Geometry="F1M16,16L0,16 0,0 16,0z" />-->
-              <GeometryDrawing Brush="LightGray" Geometry="F1M3,8L13,8 13,7 3,7z" />
+                <DrawingGroup.Children>
+                  <GeometryDrawing Brush="{StaticResource ColorWindowHeaderButtonsIcon}" Geometry="F1M3,8L13,8 13,7 3,7z" />
             </DrawingGroup.Children>
           </DrawingGroup>
         </DrawingBrush.Drawing>

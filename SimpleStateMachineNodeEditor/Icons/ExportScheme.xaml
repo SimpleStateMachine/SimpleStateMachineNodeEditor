@@ -5,9 +5,9 @@
             <DrawingGroup>
                 <DrawingGroup.Children>
                     <GeometryDrawing Brush="Yellow" Geometry="F1M12,8C12,7.448 11.553,7 11,7 10.447,7 10,7.448 10,8 10,8.552 10.447,9 11,9 11.553,9 12,8.552 12,8" />
-                    <GeometryDrawing Brush="LightGray" Geometry="F1M14,14L6,14 6,13 8,11 10.5,13 12.5,12 14,13z M7.658,5C7.481,5.373,7.228,5.707,6.926,6L14,6 14,11 12.5,10 10.5,11 8,9 6,11 6,6.828 5,7.688 5,15 15,15 15,5z" />
+                    <GeometryDrawing Brush="{StaticResource ColorIconsMain}" Geometry="F1M14,14L6,14 6,13 8,11 10.5,13 12.5,12 14,13z M7.658,5C7.481,5.373,7.228,5.707,6.926,6L14,6 14,11 12.5,10 10.5,11 8,9 6,11 6,6.828 5,7.688 5,15 15,15 15,5z" />
                     <GeometryDrawing Brush="#ac79d5" Geometry="F1M7,3.5C7,2.122 5.879,1 4.502,1 3.91,1 3.578,1.097 2.887,1.594L2,2.362 2,1 1,1.945 1,4 3,4 3.062,4 3.031,3.969 4,3 2.76,3 3.533,2.356C3.853,2.149 4.147,2 4.502,2 5.328,2 6.001,2.673 6.001,3.5 6.001,3.938 5.81,4.354 5.471,4.645L3.062,6.757 3.75,7.444 6.127,5.398C6.682,4.923,7,4.23,7,3.5" />
-                    <GeometryDrawing Brush="#FF1AA1E2" Geometry="F1M10.5,13L8,11 6,13 6,14 14,14 14,13 12.5,12z" />
+                    <GeometryDrawing Brush="#7ac0ff" Geometry="F1M10.5,13L8,11 6,13 6,14 14,14 14,13 12.5,12z" />
                 </DrawingGroup.Children>
             </DrawingGroup>
         </DrawingBrush.Drawing>

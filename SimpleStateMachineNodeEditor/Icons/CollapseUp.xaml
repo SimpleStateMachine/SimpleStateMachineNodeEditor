@@ -5,7 +5,7 @@
             <DrawingGroup>
                 <DrawingGroup.Children>
                     <GeometryDrawing Brush="#00FFFFFF" Geometry="M8,4L13,9 14,8 8,2 2,8 3,9z" />
-                    <GeometryDrawing Brush="#7ac0ff" Geometry="F1M8,8L13,13 14,12 8,6 2,12 3,13z " />
+                    <GeometryDrawing Brush="{StaticResource ColorIconsSecond}" Geometry="F1M8,8L13,13 14,12 8,6 2,12 3,13z " />
 
                 </DrawingGroup.Children>
             </DrawingGroup>

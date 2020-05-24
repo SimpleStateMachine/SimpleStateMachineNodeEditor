@@ -38,7 +38,7 @@ namespace SimpleStateMachineNodeEditor.ViewModel.NodesCanvas
         [Reactive] public string JPEGPath{ get; set; }
 
         public int NodesCount = 0;
-        public int TransitionsCount = 0;
+        public int TransitionsCount = 1;
         public double ScaleMax = 5;
         public double ScaleMin = 0.1;
         public double Scales { get; set; } = 0.05;
