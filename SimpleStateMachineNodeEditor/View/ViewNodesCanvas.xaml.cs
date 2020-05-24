@@ -14,11 +14,8 @@ using System.Reactive.Disposables;
 using ReactiveUI;
 
 using SimpleStateMachineNodeEditor.Helpers;
-using SimpleStateMachineNodeEditor.ViewModel;
 using SimpleStateMachineNodeEditor.Helpers.Transformations;
-using System.IO;
 using SimpleStateMachineNodeEditor.Helpers.Enums;
-using SimpleStateMachineNodeEditor.Icons;
 using SimpleStateMachineNodeEditor.Helpers.Extensions;
 using SimpleStateMachineNodeEditor.ViewModel.NodesCanvas;
 
