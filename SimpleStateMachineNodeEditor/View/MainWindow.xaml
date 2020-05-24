@@ -116,7 +116,7 @@
                 <Button x:Name="ButtonSaveAs" ToolTip="Save As... (Ctrl+Shift+S)" Style="{StaticResource StyleHeaderButton}" Background="{StaticResource ColorWindowHeader}" BorderBrush="{StaticResource ColorWindowHeaderButtonBackgroundMouseOver}">
                     <Rectangle Fill="{StaticResource IconSaveAs}" Height="15" Width="15"/>
                 </Button>
-                <Button x:Name="ButtonExportToJPEG" ToolTip="Export To Jpeg... (Ctrl+Shift+Alt+J)" Style="{StaticResource StyleHeaderButton}" Background="{StaticResource ColorWindowHeader}" BorderBrush="{StaticResource ColorWindowHeaderButtonBackgroundMouseOver}">
+                <Button x:Name="ButtonExportToJPEG" ToolTip="Export To JPEG.. (Ctrl+Shift+Alt+J)" Style="{StaticResource StyleHeaderButton}" Background="{StaticResource ColorWindowHeader}" BorderBrush="{StaticResource ColorWindowHeaderButtonBackgroundMouseOver}">
                     <Rectangle Fill="{StaticResource IconExportScheme}" Height="15" Width="15"/>
                 </Button>
                 <Separator Grid.Column="5" Style="{DynamicResource TemplateSeparator}" Height="Auto" BorderThickness="0,0,1,0" />
@@ -217,6 +217,6 @@
         <KeyBinding x:Name="BindingOpen"    Gesture="Ctrl+Shift+O" />
         <KeyBinding x:Name="BindingNew"     Gesture="Ctrl+Shift+N"/>
         <KeyBinding x:Name="BindingExit"    Gesture="Alt+F4"/>
-        <!--<KeyBinding x:Name="BindingExportToJpeg"    Key="F4" Modifiers="Alt"/>-->
+        <KeyBinding x:Name="BindingExportToJPEG"   Gesture="Ctrl+Shift+Alt+J"/>
     </Window.InputBindings>
 </Window>
