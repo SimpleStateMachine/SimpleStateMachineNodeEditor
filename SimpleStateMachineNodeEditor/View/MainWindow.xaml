@@ -44,7 +44,7 @@
                             <MenuItem.Icon>
                                 <Rectangle Fill="{StaticResource IconExportScheme}" Height="15" Width="15"/>
                             </MenuItem.Icon>
-                            <MenuItem Header="Export to PNG" x:Name="ItemExportToPNG" Style="{StaticResource StyleMenuItem}"/>
+                            <!--<MenuItem Header="Export to PNG" x:Name="ItemExportToPNG" Style="{StaticResource StyleMenuItem}"/>-->
                             <MenuItem Header="Export to JPEG" x:Name="ItemExportToJPEG" Style="{StaticResource StyleMenuItem}"/>
                         </MenuItem>
                         <Separator Background="{StaticResource ColorMenuSeparator}"/>
@@ -104,10 +104,10 @@
         </DockPanel>
         <ToolBarTray Grid.Row="1" IsLocked="True"  Background="{x:Null}">
             <ToolBar Style="{StaticResource ToolBarTemplate}" Background="{x:Null}" Foreground="{x:Null}"  >
-                <Button x:Name="ButtonNewScheme" ToolTip="New (Ctrl+N)" Style="{StaticResource StyleHeaderButton}" Background="{StaticResource ColorWindowHeader}" BorderBrush="{StaticResource ColorWindowHeaderButtonBackgroundMouseOver}">
+                <Button x:Name="ButtonNew" ToolTip="New (Ctrl+N)" Style="{StaticResource StyleHeaderButton}" Background="{StaticResource ColorWindowHeader}" BorderBrush="{StaticResource ColorWindowHeaderButtonBackgroundMouseOver}">
                     <Rectangle Fill="{StaticResource IconNewSheme}" Height="15" Width="15"/>
                 </Button>
-                <Button x:Name="ButtonImportScheme" ToolTip="Open (Ctrl+O)"  Style="{StaticResource StyleHeaderButton}" Background="{StaticResource ColorWindowHeader}" BorderBrush="{StaticResource ColorWindowHeaderButtonBackgroundMouseOver}">
+                <Button x:Name="ButtonOpen" ToolTip="Open (Ctrl+O)"  Style="{StaticResource StyleHeaderButton}" Background="{StaticResource ColorWindowHeader}" BorderBrush="{StaticResource ColorWindowHeaderButtonBackgroundMouseOver}">
                     <Rectangle Fill="{StaticResource IconImportScheme}" Height="15" Width="15"/>
                 </Button>
                 <Button x:Name="ButtonSave"  ToolTip="Save (Ctrl+S)" Style="{StaticResource StyleHeaderButton}" Background="{StaticResource ColorWindowHeader}" BorderBrush="{StaticResource ColorWindowHeaderButtonBackgroundMouseOver}">
@@ -116,7 +116,7 @@
                 <Button x:Name="ButtonSaveAs" ToolTip="Save As... (Ctrl+Shift+S)" Style="{StaticResource StyleHeaderButton}" Background="{StaticResource ColorWindowHeader}" BorderBrush="{StaticResource ColorWindowHeaderButtonBackgroundMouseOver}">
                     <Rectangle Fill="{StaticResource IconSaveAs}" Height="15" Width="15"/>
                 </Button>
-                <Button x:Name="ButtonHeaderButton" ToolTip="Export To Jpeg... (Ctrl+Shift+Alt+J)" Style="{StaticResource StyleHeaderButton}" Background="{StaticResource ColorWindowHeader}" BorderBrush="{StaticResource ColorWindowHeaderButtonBackgroundMouseOver}">
+                <Button x:Name="ButtonExportToJPEG" ToolTip="Export To Jpeg... (Ctrl+Shift+Alt+J)" Style="{StaticResource StyleHeaderButton}" Background="{StaticResource ColorWindowHeader}" BorderBrush="{StaticResource ColorWindowHeaderButtonBackgroundMouseOver}">
                     <Rectangle Fill="{StaticResource IconExportScheme}" Height="15" Width="15"/>
                 </Button>
                 <Separator Grid.Column="5" Style="{DynamicResource TemplateSeparator}" Height="Auto" BorderThickness="0,0,1,0" />
@@ -144,16 +144,6 @@
                     <Rectangle Fill="{StaticResource IconExpandDownAll}" Height="13" Width="13"/>
                 </Button>
             </ToolBar>
-
-            <!--<Separator />
-            <Button>
-                <Image Source="icon2.png" />
-            </Button>
-            <Separator />
-            <Button>
-                <Image Source="icon3.png" />
-            </Button>
-            <TextBox Foreground="LightGray" Width="100">Поиск...</TextBox>-->
         </ToolBarTray>
         <!--BorderBrush - it's color on IsMouseOver, OpacityMask - it's color on IsPressed-->
         <TabControl  Grid.Row="2" Background="{x:Null}" BorderBrush="{x:Null}" TabStripPlacement="Top" Padding="2,2,2,0" >
@@ -222,17 +212,11 @@
     <Window.InputBindings>
         <!--<KeyBinding x:Name="BindingUndo" Key="Z" Modifiers="Control" />
         <KeyBinding x:Name="BindingRedo" Key="Y" Modifiers="Control" />-->
-        <KeyBinding x:Name="BindingSave" Command="{Binding ElementName=ItemSave, Path=Command}"  Key="S" Modifiers="Control" />
+        <KeyBinding x:Name="BindingSave"    Gesture="Ctrl+S"/>
         <KeyBinding x:Name="BindingSaveAs"  Gesture="Ctrl+Shift+S"/>
         <KeyBinding x:Name="BindingOpen"    Gesture="Ctrl+Shift+O" />
-        <KeyBinding x:Name="BindingNew"    Gesture="Ctrl+Shift+N"/>
-        <KeyBinding x:Name="BindingExit"    Key="F4" Modifiers="Alt"/>
-        <KeyBinding x:Name="BindingExportToJpeg"    Key="F4" Modifiers="Alt"/>
-        <!--<KeyBinding x:Name="BindingSelectAll" Key="A" Modifiers="Control" />
-        <KeyBinding x:Name="BindingAddNode" Key="N" Modifiers="Control" />
-        <KeyBinding x:Name="BindingDeleteSelectedElements" Key="Delete"  />
-        <MouseBinding x:Name="BindingSelect" Gesture="Ctrl+LeftClick"/>
-        <MouseBinding x:Name="BindingCut" Gesture="Alt+LeftClick" />-->
-        <!--<MouseBinding x:Name="BindingZoom" Gesture="WheelClick"/>-->
+        <KeyBinding x:Name="BindingNew"     Gesture="Ctrl+Shift+N"/>
+        <KeyBinding x:Name="BindingExit"    Gesture="Alt+F4"/>
+        <!--<KeyBinding x:Name="BindingExportToJpeg"    Key="F4" Modifiers="Alt"/>-->
     </Window.InputBindings>
 </Window>

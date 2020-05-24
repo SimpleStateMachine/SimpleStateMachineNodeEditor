@@ -123,6 +123,8 @@ namespace SimpleStateMachineNodeEditor.View
                 this.WhenAnyValue(x => x.ViewModel.Selector.Size).WithoutParameter().InvokeCommand(ViewModel,x=>x.CommandSelectorIntersect).DisposeWith(disposable);
                 this.WhenAnyValue(x => x.ViewModel.Cutter.EndPoint.Value).WithoutParameter().InvokeCommand(ViewModel, x => x.CommandCutterIntersect).DisposeWith(disposable);
 
+                this.WhenAnyValue(x => x.ViewModel.JPEGPath).Where(x=>!string.IsNullOrEmpty(x)).Subscribe(value=> SaveCanvasToImage(value, ImageFormats.JPEG)).DisposeWith(disposable);
+
             });
         }
         #endregion Setup Commands
@@ -283,7 +285,7 @@ namespace SimpleStateMachineNodeEditor.View
             return result;
         }
 
-        public void SaveCanvasToImage(string filename, ImageFormats format)
+        private void SaveCanvasToImage(string filename, ImageFormats format)
         {
             MyUtils.PanelToImage(this.Canvas, filename, format);
         }

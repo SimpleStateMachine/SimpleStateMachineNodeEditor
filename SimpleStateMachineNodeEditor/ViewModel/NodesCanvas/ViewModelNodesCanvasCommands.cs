@@ -12,6 +12,7 @@ using System.Reactive;
 using System.Reactive.Linq;
 using System.Threading;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Data;
 using System.Windows.Input;
 using System.Xml.Linq;
@@ -21,7 +22,7 @@ namespace SimpleStateMachineNodeEditor.ViewModel.NodesCanvas
     public partial class ViewModelNodesCanvas
     {
         #region commands without parameter
-        public ReactiveCommand<Unit, Unit> CommandNewScheme { get; set; }
+        public ReactiveCommand<Unit, Unit> CommandNew { get; set; }
         public ReactiveCommand<Unit, Unit> CommandRedo { get; set; }
         public ReactiveCommand<Unit, Unit> CommandUndo { get; set; }
         public ReactiveCommand<Unit, Unit> CommandSelectAll { get; set; }
@@ -37,6 +38,11 @@ namespace SimpleStateMachineNodeEditor.ViewModel.NodesCanvas
         public ReactiveCommand<Unit, Unit> CommandCollapseUpSelected { get; set; }
         public ReactiveCommand<Unit, Unit> CommandExpandDownSelected { get; set; }
         public ReactiveCommand<Unit, Unit> CommandErrorListUpdate { get; set; }
+        public ReactiveCommand<Unit, Unit> CommandExportToJPEG { get; set; }
+        public ReactiveCommand<Unit, Unit> CommandOpen { get; set; }
+        public ReactiveCommand<Unit, Unit> CommandSave { get; set; }
+        public ReactiveCommand<Unit, Unit> CommandSaveAs { get; set; }
+        public ReactiveCommand<Unit, Unit> CommandExit { get; set; }
 
         #endregion commands without parameter
 
@@ -56,8 +62,6 @@ namespace SimpleStateMachineNodeEditor.ViewModel.NodesCanvas
         public ReactiveCommand<string, Unit> CommandLogError { get; set; }
         public ReactiveCommand<string, Unit> CommandLogInformation { get; set; }
         public ReactiveCommand<string, Unit> CommandLogWarning { get; set; }
-        public ReactiveCommand<string, Unit> CommandSave { get; set; }
-        public ReactiveCommand<string, Unit> CommandOpen { get; set; }
 
         #endregion commands with parameter
 
@@ -90,7 +94,12 @@ namespace SimpleStateMachineNodeEditor.ViewModel.NodesCanvas
             CommandCollapseUpSelected = ReactiveCommand.Create(CollapseUpSelected);
             CommandExpandDownSelected = ReactiveCommand.Create(ExpandDownSelected);
             CommandErrorListUpdate = ReactiveCommand.Create(ErrosUpdaate);
-
+            CommandExportToJPEG = ReactiveCommand.Create(ExportToJPEG);
+            CommandOpen = ReactiveCommand.Create(Open);
+            CommandSave = ReactiveCommand.Create(Save);
+            CommandSaveAs = ReactiveCommand.Create(SaveAs);
+            CommandExit = ReactiveCommand.Create(Exit);
+            
 
             CommandValidateNodeName = ReactiveCommand.Create<(ViewModelNode objectForValidate, string newValue)>(ValidateNodeName);
             CommandValidateConnectName = ReactiveCommand.Create<(ViewModelConnector objectForValidate, string newValue)>(ValidateConnectName);
@@ -105,10 +114,8 @@ namespace SimpleStateMachineNodeEditor.ViewModel.NodesCanvas
             CommandCut = ReactiveCommand.Create<MyPoint>(StartCut);
             CommandAddDraggedConnect = ReactiveCommand.Create<ViewModelConnector>(AddDraggedConnect);
             CommandDeleteDraggedConnect = ReactiveCommand.Create(DeleteDraggedConnect);
-            CommandSave = ReactiveCommand.Create<string>(Save);
-            CommandOpen = ReactiveCommand.Create<string>(Open);
-
-            CommandNewScheme = ReactiveCommand.Create(NewScheme);
+                       
+            CommandNew = ReactiveCommand.Create(NewScheme);
             CommandPartMoveAllNode = ReactiveCommand.Create<MyPoint>(PartMoveAllNode);
             CommandPartMoveAllSelectedNode = ReactiveCommand.Create<MyPoint>(PartMoveAllSelectedNode);
 
@@ -121,6 +128,7 @@ namespace SimpleStateMachineNodeEditor.ViewModel.NodesCanvas
             CommandDeleteSelectedConnectors = new Command<List<(int index, ViewModelConnector element)>, List<(int index, ViewModelConnector connector)>>(DeleteSelectedConnectors, UnDeleteSelectedConnectors, NotSaved);
             CommandDeleteSelectedElements = new Command<DeleteMode, DeleteMode>(DeleteSelectedElements, UnDeleteSelectedElements);
 
+            NotSavedSubscrube();
         }
 
         private void NotSaved()
@@ -133,7 +141,6 @@ namespace SimpleStateMachineNodeEditor.ViewModel.NodesCanvas
             CommandUndo.Subscribe(_ => NotSaved());
             CommandAddConnect.Subscribe(_ => NotSaved());
             CommandDeleteConnect.Subscribe(_ => NotSaved());
-
         }
         private void SelectedAll()
         {
@@ -212,12 +219,153 @@ namespace SimpleStateMachineNodeEditor.ViewModel.NodesCanvas
                 node.Selected = MyUtils.CheckIntersectTwoRectangles(node.Point1, node.Point2, selectorPoint1, selectorPoint2);
             }
         }
+        private void ExportToJPEG()
+        {
+            Dialog.ShowSaveFileDialog("JPEG Image (.jpeg)|*.jpeg", SchemeName(), "Export scheme");
+            if (Dialog.Result != DialogResult.Ok)
+                return;
+            //"Png Image (.png)|*.png";
+            JPEGPath = Dialog.FileName;
+        }
         private void NewScheme()
         {
             this.Nodes.Clear();
             this.Connects.Clear();
 
             this.SetupStartState();
+        }
+        private void Open()
+        {
+            if (!WithoutSaving())
+                return;
+
+            Dialog.ShowOpenFileDialog("XML-File | *.xml", SchemeName(), "Import scheme");
+            if (Dialog.Result != DialogResult.Ok)
+                return;
+
+            string fileName = Dialog.FileName;
+            //string fileName = @"C:\Users\roman\Downloads\100 States.xml";
+            this.Nodes.Clear();
+            this.Connects.Clear();
+
+            XDocument xDocument = XDocument.Load(fileName);
+            XElement stateMachineXElement = xDocument.Element("StateMachine");
+            if (stateMachineXElement == null)
+            {
+                Error("not contanins StateMachine");
+                return;
+            }
+            #region setup states/nodes
+
+            var States = stateMachineXElement.Element("States")?.Elements()?.ToList() ?? new List<XElement>();
+            ViewModelNode viewModelNode = null;
+            foreach (var state in States)
+            {
+                viewModelNode = ViewModelNode.FromXElement(this, state, out string errorMesage, NodesExist);
+                if (WithError(errorMesage, x => Nodes.Add(x), viewModelNode))
+                    return;
+            }
+
+            #region setup start state
+
+            var startState = stateMachineXElement.Element("StartState")?.Attribute("Name")?.Value;
+
+            if (string.IsNullOrEmpty(startState))
+                this.SetupStartState();
+            else
+                this.SetAsStart(this.Nodes.Single(x => x.Name == startState));
+
+            #endregion  setup start state
+
+            #endregion  setup states/nodes
+
+            #region setup Transitions/connects
+
+            var Transitions = stateMachineXElement.Element("Transitions")?.Elements()?.ToList() ?? new List<XElement>();
+            ViewModelConnect viewModelConnect;
+            foreach (var transition in Transitions)
+            {
+                viewModelConnect = ViewModelConnector.FromXElement(this, transition, out string errorMesage, ConnectsExist);
+                if (WithError(errorMesage, x => Connects.Add(x), viewModelConnect))
+                    return;
+            }
+            SchemePath = fileName;
+            #endregion  setup Transitions/connects
+
+
+
+            bool WithError<T>(string errorMessage, Action<T> action, T obj)
+            {
+                if (string.IsNullOrEmpty(errorMessage))
+                {
+                    if (!object.Equals(obj, default(T)))
+                        action.Invoke(obj);
+                }
+                else
+                {
+                    Error(errorMessage);
+                    return true;
+                }
+                return false;
+            }
+            void Error(string errorMessage)
+            {
+                LogError("File is not valid: " + errorMessage);
+                NewScheme();
+            }
+        }
+        private void Save()
+        {
+            if (string.IsNullOrEmpty(SchemePath))
+            {
+                SaveAs();
+            }
+            else
+            {
+                Save(SchemePath);
+            }
+        }
+        private void Exit()
+        {
+            if (!WithoutSaving())
+                return;
+            this.NeedExit = true;
+        }
+        private void SaveAs()
+        {
+            Dialog.ShowSaveFileDialog("XML-File | *.xml", SchemeName(), "Save scheme");
+            if (Dialog.Result != DialogResult.Ok)
+                return;
+
+            Save(Dialog.FileName);
+        }
+        private void Save(string fileName)
+        {
+            XDocument xDocument = new XDocument();
+            XElement stateMachineXElement = new XElement("StateMachine");
+            xDocument.Add(stateMachineXElement);
+            XElement states = new XElement("States");
+            stateMachineXElement.Add(states);
+            foreach (var state in Nodes)
+            {
+                states.Add(state.ToXElement());
+            }
+
+            XElement startState = new XElement("StartState");
+            stateMachineXElement.Add(startState);
+            startState.Add(new XAttribute("Name", StartState.Name));
+
+
+            XElement transitions = new XElement("Transitions");
+            stateMachineXElement.Add(transitions);
+            foreach (var transition in Nodes.SelectMany(x => x.Transitions.Where(y => !string.IsNullOrEmpty(y.Name))).Reverse())
+            {
+                transitions.Add(transition.ToXElement());
+            }
+
+            xDocument.Save(fileName);
+            ItSaved = true;
+            SchemePath = fileName;
         }
 
 
@@ -482,7 +630,6 @@ namespace SimpleStateMachineNodeEditor.ViewModel.NodesCanvas
 
             return result;
         }
-
         private IEnumerable<ViewModelConnector> GetAllConnectors()
         {
             return this.Nodes.SelectMany(x => x.Transitions);
@@ -496,106 +643,6 @@ namespace SimpleStateMachineNodeEditor.ViewModel.NodesCanvas
         {
             return Nodes.Any(x => x.Name == nameNode);
         }
-        private void Open(string fileName)
-        {
-            this.Nodes.Clear();
-            this.Connects.Clear();
-
-            XDocument xDocument = XDocument.Load(fileName);
-            XElement stateMachineXElement = xDocument.Element("StateMachine");
-            if (stateMachineXElement == null)
-            {
-                Error("not contanins StateMachine");
-                return;
-            }
-            #region setup states/nodes
-
-            var States = stateMachineXElement.Element("States")?.Elements()?.ToList() ?? new List<XElement>();
-            ViewModelNode viewModelNode = null;
-            foreach (var state in States)
-            {
-                viewModelNode = ViewModelNode.FromXElement(this, state, out string errorMesage, NodesExist);
-                if (WithError(errorMesage, x => Nodes.Add(x), viewModelNode))
-                    return;
-            }
-
-            #region setup start state
-
-            var startState = stateMachineXElement.Element("StartState")?.Attribute("Name")?.Value;
-
-            if (string.IsNullOrEmpty(startState))
-                this.SetupStartState();
-            else
-                this.SetAsStart(this.Nodes.Single(x => x.Name == startState));
-
-            #endregion  setup start state
-
-            #endregion  setup states/nodes
-
-            #region setup Transitions/connects
-
-            var Transitions = stateMachineXElement.Element("Transitions")?.Elements()?.ToList() ?? new List<XElement>();
-            ViewModelConnect viewModelConnect;
-            foreach (var transition in Transitions)
-            {
-                viewModelConnect = ViewModelConnector.FromXElement(this, transition, out string errorMesage, ConnectsExist);
-                if (WithError(errorMesage, x => Connects.Add(x), viewModelConnect))
-                    return;
-            }
-            SchemePath = fileName;
-            #endregion  setup Transitions/connects
-
-
-
-            bool WithError<T>(string errorMessage, Action<T> action, T obj)
-            {
-                if (string.IsNullOrEmpty(errorMessage))
-                {
-                    if (!object.Equals(obj, default(T)))
-                        action.Invoke(obj);
-                }
-                else
-                {
-                    Error(errorMessage);
-                    return true;
-                }
-                return false;
-            }
-            void Error(string errorMessage)
-            {
-                LogError("File is not valid: " + errorMessage);
-                NewScheme();
-            }
-        }
-        private void Save(string fileName)
-        {
-            XDocument xDocument = new XDocument();
-            XElement stateMachineXElement = new XElement("StateMachine");
-            xDocument.Add(stateMachineXElement);
-            XElement states = new XElement("States");
-            stateMachineXElement.Add(states);
-            foreach (var state in Nodes)
-            {
-                states.Add(state.ToXElement());
-            }
-
-            XElement startState = new XElement("StartState");
-            stateMachineXElement.Add(startState);
-            startState.Add(new XAttribute("Name", StartState.Name));
-
-
-            XElement transitions = new XElement("Transitions");
-            stateMachineXElement.Add(transitions);
-            foreach (var transition in Nodes.SelectMany(x => x.Transitions.Where(y => !string.IsNullOrEmpty(y.Name))).Reverse())
-            {
-                transitions.Add(transition.ToXElement());
-            }
-
-            xDocument.Save(fileName);
-            ItSaved = true;
-            SchemePath = fileName;
-        }
-
         public class ElementsForDelete
         {
             public List<ViewModelNode> NodesToDelete;
@@ -606,6 +653,18 @@ namespace SimpleStateMachineNodeEditor.ViewModel.NodesCanvas
             {
                 return A.connectorIndex.CompareTo(B.connectorIndex);
             }
+        }
+
+        bool WithoutSaving()
+        {
+            if (!ItSaved)
+            {
+                Dialog.ShowMessageBox("Exit without saving ?", "Exit without saving", MessageBoxButton.YesNo);
+
+                return Dialog.Result == DialogResult.Yes;
+            }
+
+            return true;
         }
     }
 }

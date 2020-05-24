@@ -47,8 +47,7 @@ namespace SimpleStateMachineNodeEditor.View
         {
             this.WhenActivated(disposable =>
             {
-                this.WhenAnyValue(x => x.Visibility).ObserveOn(RxApp.MainThreadScheduler).
-                Where(x => x == Visibility.Visible).Subscribe(_ => Show()).DisposeWith(disposable);
+                this.WhenAnyValue(x => x.Visibility).Where(x => x == Visibility.Visible).Subscribe(_ => Show()).DisposeWith(disposable);
             });
         }
         private void Show()

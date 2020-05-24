@@ -28,8 +28,13 @@ namespace SimpleStateMachineNodeEditor.ViewModel.NodesCanvas
         [Reactive] public bool ItSaved { get; set; } = true;
         [Reactive] public TypeMessage DisplayMessageType { get; set; }
         [Reactive] public string SchemePath { get; set; }
-      
 
+        /// <summary>
+        /// Flag for close application
+        /// </summary>
+        [Reactive] public bool NeedExit { get; set; }
+
+        [Reactive] public string JPEGPath{ get; set; }
 
         public int NodesCount = 0;
         public double ScaleMax = 5;

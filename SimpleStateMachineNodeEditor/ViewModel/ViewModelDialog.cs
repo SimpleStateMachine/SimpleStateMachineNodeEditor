@@ -24,8 +24,18 @@ namespace SimpleStateMachineNodeEditor.ViewModel
         {
             Visibility = true;
         }
+        private void Clear()
+        {
+            Type = DialogType.noCorrect;
+            Result = DialogResult.noCorrect;
+            Title = "";
+            MessageBoxText = "";
+            FileDialogFilter = "";
+            FileName = "";
+        }
         public void ShowMessageBox(string messageBoxText, string caption, MessageBoxButton button)
         {
+            Clear();
             MessageBoxText = messageBoxText;
             MessageBoxButtons = button;
             Type = DialogType.MessageBox;
@@ -35,6 +45,7 @@ namespace SimpleStateMachineNodeEditor.ViewModel
 
         public void ShowOpenFileDialog(string filter, string fileName, string title)
         {
+            Clear();
             FileDialogFilter = filter;
             FileName = fileName;
             Title = title;
@@ -44,6 +55,7 @@ namespace SimpleStateMachineNodeEditor.ViewModel
 
         public void ShowSaveFileDialog(string filter, string fileName, string title)
         {
+            Clear();
             FileDialogFilter = filter;
             FileName = fileName;
             Title = title;
