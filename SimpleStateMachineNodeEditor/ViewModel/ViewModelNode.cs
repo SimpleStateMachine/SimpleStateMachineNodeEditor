@@ -190,7 +190,8 @@ namespace SimpleStateMachineNodeEditor.ViewModel
         }
         private void ValidateName(string newName)
         {
-            NodesCanvas.CommandValidateNodeName.ExecuteWithSubscribe((this, newName));
+
+              NodesCanvas.CommandValidateNodeName.ExecuteWithSubscribe((this, newName));
         }
         private void UpdatePoint2()
         {

@@ -99,7 +99,8 @@ namespace SimpleStateMachineNodeEditor.View
         }
         private void Validate(RoutedEventArgs e)
         {
-            ViewModel.CommandValidateName.ExecuteWithSubscribe(TextBoxElement.Text);
+            if (TextBoxElement.Text != ViewModel.Name)
+                ViewModel.CommandValidateName.ExecuteWithSubscribe(TextBoxElement.Text);
             if (TextBoxElement.Text != ViewModel.Name)
                 TextBoxElement.Text = ViewModel.Name;
         }

@@ -236,6 +236,7 @@ namespace SimpleStateMachineNodeEditor.ViewModel.NodesCanvas
             this.Nodes.Clear();
             this.Connects.Clear();
             this.SchemePath = "";
+            this.NodesCount = 0;
 
             this.SetupStartState();
         }

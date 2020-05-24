@@ -5,7 +5,7 @@
     <TargetFramework>netcoreapp3.1</TargetFramework>
     <UseWPF>true</UseWPF>
     <StartupObject>SimpleStateMachineNodeEditor.App</StartupObject>
-    <ApplicationIcon>StateMachine_16x.ico</ApplicationIcon>
+    <ApplicationIcon>StateMachine.ico</ApplicationIcon>
   </PropertyGroup>
 
   <ItemGroup>
