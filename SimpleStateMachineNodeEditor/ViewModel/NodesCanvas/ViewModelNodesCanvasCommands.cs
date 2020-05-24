@@ -205,7 +205,7 @@ namespace SimpleStateMachineNodeEditor.ViewModel.NodesCanvas
             {
                 connect.FromConnector.Selected = MyUtils.CheckIntersectCubicBezierCurveAndLine(connect.StartPoint, connect.Point1, connect.Point2, connect.EndPoint, cutterStartPoint, cutterEndPoint);
             }
-
+          
         }
         private void SelectNodes()
         {
@@ -235,9 +235,10 @@ namespace SimpleStateMachineNodeEditor.ViewModel.NodesCanvas
         {
             this.Nodes.Clear();
             this.Connects.Clear();
-            this.SchemePath = "";
             this.NodesCount = 0;
-
+            this.TransitionsCount = 0;
+            this.SchemePath = "";
+       
             this.SetupStartState();
         }
         private void Open()
@@ -515,6 +516,10 @@ namespace SimpleStateMachineNodeEditor.ViewModel.NodesCanvas
                     Point1 = new MyPoint(myPoint)
                 };
             }
+            else
+            {
+                NodesCount--;
+            }
             Nodes.Add(newNode);
             return newNode;
         }
@@ -527,6 +532,9 @@ namespace SimpleStateMachineNodeEditor.ViewModel.NodesCanvas
         {
             if (result == null)
                 return parameter;
+            else
+                TransitionsCount--;
+
             result.Node.CommandAddConnectorWithConnect.ExecuteWithSubscribe((1, result));
             return result;
         }
@@ -607,6 +615,7 @@ namespace SimpleStateMachineNodeEditor.ViewModel.NodesCanvas
         {
             foreach (var element in result)
             {
+                TransitionsCount--;
                 element.connector.Node.CommandAddConnectorWithConnect.ExecuteWithSubscribe((element.index, element.connector));
             }
 
@@ -645,11 +654,13 @@ namespace SimpleStateMachineNodeEditor.ViewModel.NodesCanvas
         }
         private ElementsForDelete UnDeleteSelectedNodes(ElementsForDelete parameter, ElementsForDelete result)
         {
+            NodesCount -= result.NodesToDelete.Count;
             Nodes.AddRange(result.NodesToDelete);
             Connects.AddRange(result.ConnectsToDelete);
             result.ConnectsToDeleteWithConnectors.Sort(ElementsForDelete.Sort);
             foreach (var element in result.ConnectsToDeleteWithConnectors)
             {
+                TransitionsCount--;
                 element.connect.FromConnector.Node.CommandAddConnectorWithConnect.ExecuteWithSubscribe((element.connectorIndex, element.connect.FromConnector));
             }
 

@@ -59,7 +59,7 @@
                     <Rectangle Fill="{StaticResource IconAddNode}" Height="13" Width="13"/>
                 </MenuItem.Icon>
             </MenuItem>
-            <MenuItem Header="Delete" x:Name="ItemDeleteNode" InputGestureText="Delete" Style="{StaticResource StyleContextMenuItem}">
+            <MenuItem Header="Delete" x:Name="ItemDelete" InputGestureText="Delete" Style="{StaticResource StyleContextMenuItem}">
                 <MenuItem.Icon>
                     <Rectangle Fill="{StaticResource IconDeleteScheme}" Height="15" Width="15"/>
                 </MenuItem.Icon>

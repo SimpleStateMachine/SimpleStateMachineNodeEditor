@@ -107,7 +107,7 @@ namespace SimpleStateMachineNodeEditor.View
                 this.BindCommand(this.ViewModel, x => x.CommandSelectAll,           x => x.ItemExpandDown).DisposeWith(disposable);
 
                 this.BindCommand(this.ViewModel, x => x.CommandDeleteSelectedElements, x => x.BindingDeleteSelectedElements).DisposeWith(disposable);
-
+                this.BindCommand(this.ViewModel, x => x.CommandDeleteSelectedElements, x => x.ItemDelete).DisposeWith(disposable);
 
                 this.BindCommand(this.ViewModel, x => x.CommandCollapseUpSelected,  x => x.ItemCollapsUp).DisposeWith(disposable);
                 this.BindCommand(this.ViewModel, x => x.CommandExpandDownSelected,  x => x.ItemExpandDown).DisposeWith(disposable);
@@ -118,6 +118,8 @@ namespace SimpleStateMachineNodeEditor.View
                 this.WhenAnyValue(x => x.ViewModel.Cutter.EndPoint.Value).WithoutParameter().InvokeCommand(ViewModel, x => x.CommandCutterIntersect).DisposeWith(disposable);
 
                 this.WhenAnyValue(x => x.ViewModel.JPEGPath).Where(x=>!string.IsNullOrEmpty(x)).Subscribe(value=> SaveCanvasToImage(value, ImageFormats.JPEG)).DisposeWith(disposable);
+
+                
 
             });
         }
@@ -131,15 +133,11 @@ namespace SimpleStateMachineNodeEditor.View
                 this.Events().MouseLeftButtonDown.Subscribe(e => OnEventMouseLeftDown(e)).DisposeWith(disposable);
                 this.Events().MouseLeftButtonUp.Subscribe(e => OnEventMouseLeftUp(e));
                 this.Events().MouseRightButtonDown.Subscribe(e => OnEventMouseRightDown(e)).DisposeWith(disposable);
-                //this.Events().MouseRightButtonUp.Subscribe(e => OnEventMouseRightUp(e)).DisposeWith(disposable);
-                //this.Events().MouseDown.Subscribe(e => OnEventMouseDown(e)).DisposeWith(disposable);
                 this.Events().MouseUp.Subscribe(e => OnEventMouseUp(e)).DisposeWith(disposable);
                 this.Events().MouseMove.Subscribe(e => OnEventMouseMove(e)).DisposeWith(disposable);
                 this.Events().MouseWheel.Subscribe(e => OnEventMouseWheel(e)).DisposeWith(disposable);
                 this.Events().DragOver.Subscribe(e => OnEventDragOver(e)).DisposeWith(disposable);
-                //this.Events().DragEnter.Subscribe(e => OnEventDragEnter(e)).DisposeWith(disposable);
-                //this.Events().DragLeave.Subscribe(e => OnEventDragLeave(e)).DisposeWith(disposable);
-                //Эти события срабатывают раньше команд
+                this.Cutter.Events().MouseLeftButtonUp.InvokeCommand(this.ViewModel.CommandDeleteSelectedConnectors).DisposeWith(disposable);
                 this.Events().PreviewMouseLeftButtonDown.Subscribe(e => OnEventPreviewMouseLeftButtonDown(e)).DisposeWith(disposable);
                 this.Events().PreviewMouseRightButtonDown.Subscribe(e => OnEventPreviewMouseRightButtonDown(e)).DisposeWith(disposable);
                 this.WhenAnyValue(x => x.ViewModel.Scale.Value).Subscribe(value => { this.Canvas.Height /= value; this.Canvas.Width /= value; }).DisposeWith(disposable);
@@ -177,12 +175,6 @@ namespace SimpleStateMachineNodeEditor.View
             Keyboard.Focus(this);
 
         }
-        private void OnEventMouseRightUp(MouseButtonEventArgs e)
-        {
-        }
-        private void OnEventMouseDown(MouseButtonEventArgs e)
-        {
-        }
         private void OnEventMouseWheel(MouseWheelEventArgs e)
         {
             this.ViewModel.CommandZoom.ExecuteWithSubscribe(e.Delta);
@@ -216,10 +208,6 @@ namespace SimpleStateMachineNodeEditor.View
                 Move = TypeMove.MoveSelected;
             }
         }
-        private void OnEventDragEnter(DragEventArgs e)
-        {
-
-        }
         private void OnEventDragOver(DragEventArgs e)
         {
             MyPoint point = new MyPoint(e.GetPosition(this));
@@ -228,10 +216,6 @@ namespace SimpleStateMachineNodeEditor.View
                 point -= 2;
                 this.ViewModel.DraggedConnect.EndPoint.Set(point / this.ViewModel.Scale.Value);
             }
-        }
-        private void OnEventDragLeave(DragEventArgs e)
-        {
-
         }
         private void OnEventPreviewMouseLeftButtonDown(MouseButtonEventArgs e)
         {

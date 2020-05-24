@@ -41,9 +41,6 @@ namespace SimpleStateMachineNodeEditor.ViewModel
 
         public IObservableCollection<ViewModelConnector> Transitions { get; set; } = new ObservableCollectionExtended<ViewModelConnector>();
         public int Zindex { get; private set; }
-
-        public int TransitionsCount = -1;
-
         
         private ViewModelNode()
         {
@@ -56,24 +53,30 @@ namespace SimpleStateMachineNodeEditor.ViewModel
         {
             NodesCanvas = nodesCanvas;
             Zindex = nodesCanvas.Nodes.Count;
-
+            
             SetupConnectors();
             SetupCommands();
-            SetupBinding(); 
-            
+            SetupBinding();
+            SetupSubscriptions();
         }
 
         #region SetupBinding
         private void SetupBinding()
         {
+        }
+        #endregion SetupBinding
+
+        #region Setup Subscriptions
+
+        private void SetupSubscriptions()
+        {
             this.WhenAnyValue(x => x.Selected).Subscribe(value => { this.BorderBrush = value ? Application.Current.Resources["ColorSelectedElement"] as SolidColorBrush : Brushes.LightGray; });
-            this.WhenAnyValue(x => x.Transitions.Count).Subscribe(value => UpdateCount(value));
+            this.WhenAnyValue(x => x.Transitions.Count).Buffer(2, 1).Select(x => (Previous: x[0], Current: x[1])).Subscribe(x => UpdateCount(x.Previous, x.Current));
 
             this.WhenAnyValue(x => x.Point1.Value, x => x.Size).Subscribe(_ => UpdatePoint2());
             this.WhenAnyValue(x => x.IsCollapse).Subscribe(value => Collapse(value));
         }
-        #endregion SetupBinding
-
+        #endregion Setup Subscriptions
         #region Connectors
         private void SetupConnectors()
         {
@@ -128,10 +131,12 @@ namespace SimpleStateMachineNodeEditor.ViewModel
         {
             NodesCanvas.ItSaved = false;
         }
-        private void UpdateCount(int count)
+        private void UpdateCount(int oldValue, int newValue)
         {
-            if (count > TransitionsCount)
-                TransitionsCount = count;
+            if (newValue > oldValue)
+            {
+                NodesCanvas.TransitionsCount++;
+            }
         }
         #endregion Setup Commands
 
@@ -205,7 +210,7 @@ namespace SimpleStateMachineNodeEditor.ViewModel
                 CurrentConnector.TextEnable = true;
                 CurrentConnector.FormEnable = false;
                 if (string.IsNullOrEmpty(CurrentConnector.Name))
-                    CurrentConnector.Name = "Transition " + TransitionsCount.ToString();
+                    CurrentConnector.Name = "Transition " + NodesCanvas.TransitionsCount.ToString();
             }
             CurrentConnector = new ViewModelConnector(NodesCanvas, this)
             {

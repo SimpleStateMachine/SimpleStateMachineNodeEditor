@@ -102,14 +102,9 @@ namespace SimpleStateMachineNodeEditor.View
             {
                 this.WhenAnyValue(x=>x.IsMouseOver).Subscribe(value=> OnEventMouseOver(value)).DisposeWith(disposable);
                 this.Events().MouseLeftButtonDown.Subscribe(e => OnEventMouseLeftDowns(e)).DisposeWith(disposable);
-                //this.Events().MouseLeftButtonUp.Subscribe(e => OnEventMouseLeftUp(e)).DisposeWith(disposable);
-                //this.Events().MouseRightButtonDown.Subscribe(e => OnEventMouseRightDown(e)).DisposeWith(disposable);
-                //this.Events().MouseRightButtonUp.Subscribe(e => OnEventMouseRightUp(e)).DisposeWith(disposable);
                 this.Events().MouseDown.Subscribe(e => OnEventMouseDown(e)).DisposeWith(disposable);
                 this.Events().MouseUp.Subscribe(e => OnEventMouseUp(e)).DisposeWith(disposable);
                 this.Events().MouseMove.Subscribe(e => OnMouseMove(e)).DisposeWith(disposable);
-                //this.Events().MouseEnter.Subscribe(e => OnEventMouseEnter(e)).DisposeWith(disposable);
-                //this.Events().MouseLeave.Subscribe(e => OnEventMouseMouseLeave(e)).DisposeWith(disposable);
 
                 this.NodeHeaderElement.ButtonCollapse.Events().Click.Subscribe(_ => ViewModel.IsCollapse=!ViewModel.IsCollapse).DisposeWith(disposable);
                 this.NodeHeaderElement.Events().LostFocus.Subscribe(e => Validate(e)).DisposeWith(disposable);
@@ -135,17 +130,6 @@ namespace SimpleStateMachineNodeEditor.View
                 NodeHeaderElement.TextBox.Text = ViewModel.Name;
         }
 
-        private void OnEventMouseLeftUp(MouseButtonEventArgs e)
-        {
-        }
-        private void OnEventMouseRightDown(MouseButtonEventArgs e)
-        {
-
-        }
-        private void OnEventMouseRightUp(MouseButtonEventArgs e)
-        {
-        }
-
         private void OnEventMouseDown(MouseButtonEventArgs e)
         {
             if (Mouse.Captured == null)
@@ -160,19 +144,6 @@ namespace SimpleStateMachineNodeEditor.View
         {
             this.ReleaseMouseCapture();
         }
-
-        private void OnEventMouseEnter(MouseEventArgs e)
-        {
-            if (this.ViewModel.Selected != true)
-                this.ViewModel.BorderBrush = Application.Current.Resources["ColorSelectedElement"] as SolidColorBrush;
-        }
-        private void OnEventMouseMouseLeave(MouseEventArgs e)
-        {
-            if (this.ViewModel.Selected != true)
-                this.ViewModel.BorderBrush = Application.Current.Resources["ColorNodeBorderBrush"] as SolidColorBrush;
-        }
-
-
         private void OnEventCollapse(bool isCollapse)
         {
             //bool visible = (this.NodeHeaderElement.ButtonRotate.Angle != 0);

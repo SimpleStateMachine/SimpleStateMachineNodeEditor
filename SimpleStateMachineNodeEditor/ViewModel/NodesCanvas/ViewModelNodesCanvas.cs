@@ -38,6 +38,7 @@ namespace SimpleStateMachineNodeEditor.ViewModel.NodesCanvas
         [Reactive] public string JPEGPath{ get; set; }
 
         public int NodesCount = 0;
+        public int TransitionsCount = 0;
         public double ScaleMax = 5;
         public double ScaleMin = 0.1;
         public double Scales { get; set; } = 0.05;
@@ -45,14 +46,19 @@ namespace SimpleStateMachineNodeEditor.ViewModel.NodesCanvas
 
         public ViewModelNodesCanvas()
         {
-            SetupCommands();
-            SetupStartState();
             Cutter = new ViewModelCutter(this);
-            this.WhenAnyValue(x => x.Nodes.Count).Subscribe(value => UpdateCount(value));
+            SetupCommands();
+            SetupSubscriptions();
+            SetupStartState();
         }
-        public readonly object lockNodes = new object();
-        public readonly object lockConnects = new object();
 
+        #region Setup Subscriptions
+
+        private void SetupSubscriptions()
+        {
+            this.WhenAnyValue(x => x.Nodes.Count).Buffer(2, 1).Select(x => (Previous: x[0], Current: x[1])).Subscribe(x => UpdateCount(x.Previous, x.Current));
+        }
+        #endregion Setup Subscriptions
         #region Setup Nodes
 
         private void SetupStartState()
@@ -105,12 +111,11 @@ namespace SimpleStateMachineNodeEditor.ViewModel.NodesCanvas
         }
 
         #endregion Logging
-
-        private void UpdateCount(int count)
+        private void UpdateCount(int oldValue, int newValue)
         {
-            if (count > NodesCount)
+            if (newValue > oldValue)
             {
-                NodesCount = count; 
+                NodesCount++;
             }   
         }
         private string SchemeName()
