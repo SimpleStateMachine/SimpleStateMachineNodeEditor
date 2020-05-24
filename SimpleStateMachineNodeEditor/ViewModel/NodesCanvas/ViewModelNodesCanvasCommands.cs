@@ -95,6 +95,7 @@ namespace SimpleStateMachineNodeEditor.ViewModel.NodesCanvas
             CommandExpandDownSelected = ReactiveCommand.Create(ExpandDownSelected);
             CommandErrorListUpdate = ReactiveCommand.Create(ErrosUpdaate);
             CommandExportToJPEG = ReactiveCommand.Create(ExportToJPEG);
+            CommandNew = ReactiveCommand.Create(New);
             CommandOpen = ReactiveCommand.Create(Open);
             CommandSave = ReactiveCommand.Create(Save);
             CommandSaveAs = ReactiveCommand.Create(SaveAs);
@@ -115,7 +116,7 @@ namespace SimpleStateMachineNodeEditor.ViewModel.NodesCanvas
             CommandAddDraggedConnect = ReactiveCommand.Create<ViewModelConnector>(AddDraggedConnect);
             CommandDeleteDraggedConnect = ReactiveCommand.Create(DeleteDraggedConnect);
                        
-            CommandNew = ReactiveCommand.Create(NewScheme);
+            
             CommandPartMoveAllNode = ReactiveCommand.Create<MyPoint>(PartMoveAllNode);
             CommandPartMoveAllSelectedNode = ReactiveCommand.Create<MyPoint>(PartMoveAllSelectedNode);
 
@@ -227,7 +228,13 @@ namespace SimpleStateMachineNodeEditor.ViewModel.NodesCanvas
             //"Png Image (.png)|*.png";
             JPEGPath = Dialog.FileName;
         }
-        private void NewScheme()
+        private void New()
+        {
+            if (!WithoutSaving())
+                return;
+            ClearScheme();
+        }
+        private void ClearScheme()
         {
             this.Nodes.Clear();
             this.Connects.Clear();
@@ -311,7 +318,7 @@ namespace SimpleStateMachineNodeEditor.ViewModel.NodesCanvas
             void Error(string errorMessage)
             {
                 LogError("File is not valid: " + errorMessage);
-                NewScheme();
+                ClearScheme();
             }
         }
         private void Save()

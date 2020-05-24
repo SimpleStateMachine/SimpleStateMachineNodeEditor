@@ -49,22 +49,22 @@ namespace SimpleStateMachineNodeEditor.ViewModel.NodesCanvas
             Cutter = new ViewModelCutter(this);
             this.WhenAnyValue(x => x.Nodes.Count).Subscribe(value => UpdateCount(value));
 
-            for (int i = 1; i <= 5; i++)
-            {
-                LogError("Error " + i.ToString());
-            }
-            for (int i = 1; i <= 5; i++)
-            {
-                LogInformation("Information " + i.ToString());
-            }
-            for (int i = 1; i <= 5; i++)
-            {
-                LogWarning("Warning " + i.ToString());
-            }
-            for (int i = 1; i <= 5; i++)
-            {
-                LogDebug("Debug " + i.ToString());
-            }
+            //for (int i = 1; i <= 5; i++)
+            //{
+            //    LogError("Error " + i.ToString());
+            //}
+            //for (int i = 1; i <= 5; i++)
+            //{
+            //    LogInformation("Information " + i.ToString());
+            //}
+            //for (int i = 1; i <= 5; i++)
+            //{
+            //    LogWarning("Warning " + i.ToString());
+            //}
+            //for (int i = 1; i <= 5; i++)
+            //{
+            //    LogDebug("Debug " + i.ToString());
+            //}
 
         }
         public readonly object lockNodes = new object();
