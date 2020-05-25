@@ -6,6 +6,7 @@
              xmlns:local="clr-namespace:SimpleStateMachineNodeEditor.View"
              xmlns:View="clr-namespace:SimpleStateMachineNodeEditor.View"
              xmlns:ViewModel="clr-namespace:SimpleStateMachineNodeEditor.ViewModel"
+             xmlns:Connect="clr-namespace:SimpleStateMachineNodeEditor.ViewModel.Connect"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800" Focusable="True" AllowDrop="True" ClipToBounds="True">
 
@@ -37,7 +38,7 @@
                 </ItemsPanelTemplate>
             </ItemsControl.ItemsPanel>
             <ItemsControl.Resources >
-                <DataTemplate DataType="{x:Type ViewModel:ViewModelConnect}">
+                <DataTemplate DataType="{x:Type Connect:ViewModelConnect}">
                     <View:ViewConnect ViewModel="{Binding}"/>
                 </DataTemplate>
                 <DataTemplate DataType="{x:Type ViewModel:ViewModelNode}">

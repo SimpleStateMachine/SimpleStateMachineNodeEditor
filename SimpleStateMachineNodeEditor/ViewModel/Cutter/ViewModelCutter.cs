@@ -14,23 +14,10 @@ namespace SimpleStateMachineNodeEditor.ViewModel
 {
     public class ViewModelCutter : ReactiveObject
     {
-        /// <summary>
-        /// Отображается ли линия среза
-        /// </summary>
-        [Reactive] public bool? Visible { get; set; } = false;
-
-        /// <summary>
-        /// Точка из которой выходит линия среза
-        /// </summary>
-        [Reactive] public MyPoint StartPoint { get; set; } = new MyPoint();
-
-        /// <summary>
-        /// Точка в которую приходит линия среза
-        /// </summary>
-        [Reactive] public MyPoint EndPoint { get; set; } = new MyPoint();
-
         [Reactive] public ViewModelNodesCanvas NodesCanvas { get; set; }
-
+        [Reactive] public bool? Visible { get; set; } = false;
+        [Reactive] public MyPoint StartPoint { get; set; } = new MyPoint();
+        [Reactive] public MyPoint EndPoint { get; set; } = new MyPoint();      
         [Reactive] public double StrokeThickness { get; set; } = 1;
 
         public ViewModelCutter(ViewModelNodesCanvas nodesCanvas)

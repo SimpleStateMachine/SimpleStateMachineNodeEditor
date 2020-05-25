@@ -9,6 +9,8 @@ using SimpleStateMachineNodeEditor.Helpers.Enums;
 using System.Windows.Data;
 using System.IO;
 using Splat;
+using SimpleStateMachineNodeEditor.ViewModel.Connector;
+using SimpleStateMachineNodeEditor.ViewModel.Connect;
 
 namespace SimpleStateMachineNodeEditor.ViewModel.NodesCanvas
 {

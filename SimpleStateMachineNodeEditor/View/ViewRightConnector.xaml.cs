@@ -18,6 +18,7 @@ using SimpleStateMachineNodeEditor.ViewModel;
 using SimpleStateMachineNodeEditor.Helpers.Transformations;
 using SimpleStateMachineNodeEditor.Helpers.Enums;
 using SimpleStateMachineNodeEditor.Helpers.Extensions;
+using SimpleStateMachineNodeEditor.ViewModel.Connector;
 
 namespace SimpleStateMachineNodeEditor.View
 {
@@ -45,7 +46,8 @@ namespace SimpleStateMachineNodeEditor.View
         {
             InitializeComponent();
             SetupBinding();
-            SetupEvents();          
+            SetupEvents();
+            SetupSubcriptions();
         }
 
         #region SetupBinding
@@ -67,18 +69,27 @@ namespace SimpleStateMachineNodeEditor.View
 
                 this.OneWayBind(this.ViewModel, x => x.FormStroke, x => x.EllipseElement.Stroke).DisposeWith(disposable);
 
-                this.Bind(this.ViewModel, x => x.FormFill, x => x.EllipseElement.Fill).DisposeWith(disposable);
+                this.OneWayBind(this.ViewModel, x => x.FormFill, x => x.EllipseElement.Fill).DisposeWith(disposable);
 
                 this.OneWayBind(this.ViewModel, x => x.FormStrokeThickness, x => x.EllipseElement.StrokeThickness).DisposeWith(disposable);
 
-                this.WhenAnyValue(x => x.ViewModel.Node.Size, x => x.ViewModel.Node.Point1.Value, x => x.ViewModel.Node.NodesCanvas.Scale.Scales.Value)
-                .Subscribe(_ => { UpdatePositionConnectPoin(); }).DisposeWith(disposable);
 
-                this.WhenAnyValue(x=>x.EllipseElement.IsMouseOver).Subscribe(value=> OnEventMouseOver(value)).DisposeWith(disposable);
             });
         }
         #endregion SetupBinding
 
+        #region Setup Subcriptions
+        private void SetupSubcriptions()
+        {
+            this.WhenActivated(disposable =>
+            {
+                this.WhenAnyValue(x => x.ViewModel.Node.Size, x => x.ViewModel.Node.Point1.Value, x => x.ViewModel.Node.NodesCanvas.Scale.Scales.Value)
+                       .Subscribe(_ => UpdatePositionConnectPoin()).DisposeWith(disposable);
+                this.WhenAnyValue(x => x.EllipseElement.IsMouseOver).Subscribe(value => OnEventMouseOver(value)).DisposeWith(disposable);
+            });
+        }
+
+        #endregion Setup Subcriptions
         #region SetupEvents
 
         private void SetupEvents()
@@ -175,12 +186,12 @@ namespace SimpleStateMachineNodeEditor.View
         #endregion SetupEvents
 
 
-        void UpdatePositionConnectPoin()
+        private  void UpdatePositionConnectPoin()
         {
             Point positionConnectPoint;
             MyPoint Position;
 
-            if (this.IsVisible)
+            if((!ViewModel.Node.IsCollapse)||(ViewModel.Node.IsCollapse && this.ViewModel.Name == "Output"))
             {
                 positionConnectPoint = EllipseElement.TranslatePoint(new Point(EllipseElement.Width/2, EllipseElement.Height / 2), this);
 
@@ -188,16 +199,20 @@ namespace SimpleStateMachineNodeEditor.View
 
                 positionConnectPoint = this.TransformToAncestor(NodesCanvas).Transform(positionConnectPoint);
 
-                Position  = MyPoint.CreateFromPoint(positionConnectPoint) / this.ViewModel.NodesCanvas.Scale.Value;
+                Position  = positionConnectPoint.ToMyPoint()/ this.ViewModel.NodesCanvas.Scale.Value;
 
             }
             else
             {
                 positionConnectPoint = this.ViewModel.Node.Output.PositionConnectPoint.Value;
 
-                Position = MyPoint.CreateFromPoint(positionConnectPoint);
+                Position = positionConnectPoint.ToMyPoint();
             }
-         
+
+            if (this.ViewModel.Name == "Output")
+            {
+                this.ViewModel.NodesCanvas.LogDebug(Position.ToString());
+            }
             this.ViewModel.PositionConnectPoint.Set(Position);
         }
 

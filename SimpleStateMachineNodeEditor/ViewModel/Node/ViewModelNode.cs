@@ -17,6 +17,7 @@ using DynamicData;
 using System.Reactive;
 using SimpleStateMachineNodeEditor.Helpers.Extensions;
 using SimpleStateMachineNodeEditor.ViewModel.NodesCanvas;
+using SimpleStateMachineNodeEditor.ViewModel.Connector;
 
 namespace SimpleStateMachineNodeEditor.ViewModel
 {

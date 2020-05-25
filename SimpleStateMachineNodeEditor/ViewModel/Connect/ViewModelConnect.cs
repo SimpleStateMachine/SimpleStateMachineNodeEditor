@@ -10,8 +10,9 @@ using ReactiveUI.Fody.Helpers;
 using SimpleStateMachineNodeEditor.Helpers;
 using SimpleStateMachineNodeEditor.Helpers.Extensions;
 using SimpleStateMachineNodeEditor.ViewModel.NodesCanvas;
+using SimpleStateMachineNodeEditor.ViewModel.Connector;
 
-namespace SimpleStateMachineNodeEditor.ViewModel
+namespace SimpleStateMachineNodeEditor.ViewModel.Connect
 {
     public class ViewModelConnect : ReactiveObject
     {
@@ -34,38 +35,33 @@ namespace SimpleStateMachineNodeEditor.ViewModel
 
         public ViewModelConnect(ViewModelNodesCanvas viewModelNodesCanvas, ViewModelConnector fromConnector)
         {
-
             SetupSubscriptions();
-            SetupCommands();
-
-            NodesCanvas = viewModelNodesCanvas;
-            FromConnector = fromConnector;
-            FromConnector.Connect = this;           
+            Initial(viewModelNodesCanvas, fromConnector);
+            
         }
         #region Setup Subscriptions
 
         private void SetupSubscriptions()
         {
-            this.WhenAnyValue(x => x.FromConnector.PositionConnectPoint.Value).Subscribe(value => StartPointUpdate(value));
-            this.WhenAnyValue(x => x.ToConnector.PositionConnectPoint.Value).Subscribe(value => EndPointUpdate(value));
             this.WhenAnyValue(x => x.StartPoint.Value, x => x.EndPoint.Value).Subscribe(_ => UpdateMedium());
-            this.WhenAnyValue(x => x.FromConnector).Where(x => x != null).Subscribe(_ => FromConnectChanged());
+            this.WhenAnyValue(x => x.FromConnector.PositionConnectPoint.Value).Subscribe(value => StartPointUpdate(value));
+            this.WhenAnyValue(x => x.ToConnector.PositionConnectPoint.Value).Subscribe(value => EndPointUpdate(value));                     
             this.WhenAnyValue(x => x.ToConnector).Where(x => x != null).Subscribe(_ => ToConnectChanged());
-            this.WhenAnyValue(x => x.FromConnector.Node.NodesCanvas.Scale.Value).Subscribe(value => StrokeThickness = value);
-
-           
+            this.WhenAnyValue(x => x.FromConnector.Node.NodesCanvas.Scale.Value).Subscribe(value => StrokeThickness = value);      
         }
+        private void Initial(ViewModelNodesCanvas viewModelNodesCanvas, ViewModelConnector fromConnector)
+        {
+            NodesCanvas = viewModelNodesCanvas;
+            FromConnector = fromConnector;
+            FromConnector.Connect = this;
 
+            StartPointUpdate((FromConnector.Node.IsCollapse ? FromConnector.Node.Output : FromConnector).PositionConnectPoint.ToPoint());
+            this.WhenAnyValue(x => x.FromConnector.Selected).Subscribe(value => Select(value));
+        }
         private void Select(bool value)
         {
             //this.StrokeDashArray = value ? new DoubleCollection() { 10, 3 } : null;
             this.Stroke = value ? Application.Current.Resources["ColorSelectedElement"].Cast<SolidColorBrush>(): Application.Current.Resources["ColorConnect"].Cast<SolidColorBrush>();
-        }
-        private void FromConnectChanged()
-        {
-            StartPointUpdate(FromConnector.PositionConnectPoint.ToPoint()); 
-            this.WhenAnyValue(x => x.FromConnector.Selected).Subscribe(value => Select(value));
-            //this.FromConnector.WhenAnyValue(x => x.Selected).Subscribe(value => Selected = value);
         }
         private void ToConnectChanged()
         {
@@ -87,41 +83,6 @@ namespace SimpleStateMachineNodeEditor.ViewModel
         }
 
         #endregion Setup Subscriptions
-
-        #region Setup Commands
-
-        //public ReactiveCommand<Unit,Unit> CommandDelete { get; set; }
-        //public ReactiveCommand<Unit,Unit> CommandAdd { get; set; }
-        //public ReactiveCommand<Unit,Unit> CommandDeleteWithConnector { get; set; }
-        //public ReactiveCommand<Unit,Unit> CommandAddWithConnector { get; set; }
-        private void SetupCommands()
-        {
-            //CommandAdd = ReactiveCommand.Create(Add, NotSaved);
-            //CommandDelete = ReactiveCommand.Create(Delete, NotSaved);
-            //CommandAddWithConnector = ReactiveCommand.Create(AddWithConnect, NotSaved);
-            //CommandDeleteWithConnector = ReactiveCommand.Create(DeleteWithConnects, NotSaved);
-        }
-        private void NotSaved()
-        {
-            NodesCanvas.ItSaved = false;
-        }
-        //private void Add()
-        //{
-        //    NodesCanvas.CommandAddConnect.ExecuteWithSubscribe(this);
-        //}
-        //private void Delete()
-        //{
-        //    NodesCanvas.CommandDeleteConnect.ExecuteWithSubscribe(this);
-        //}
-        //private void AddWithConnect()
-        //{
-        //    this.FromConnector.CommandAddWithConnect.ExecuteWithSubscribe();
-        //}
-        //private void DeleteWithConnects()
-        //{
-        //    this.FromConnector.CommandDeleteWithConnect.ExecuteWithSubscribe();
-        //}
-        #endregion Setup Commands
 
     }
 }

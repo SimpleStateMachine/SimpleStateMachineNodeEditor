@@ -4,6 +4,8 @@ using SimpleStateMachineNodeEditor.Helpers;
 using SimpleStateMachineNodeEditor.Helpers.Commands;
 using SimpleStateMachineNodeEditor.Helpers.Enums;
 using SimpleStateMachineNodeEditor.Helpers.Extensions;
+using SimpleStateMachineNodeEditor.ViewModel.Connect;
+using SimpleStateMachineNodeEditor.ViewModel.Connector;
 using System;
 using System.Collections.Generic;
 using System.Linq;

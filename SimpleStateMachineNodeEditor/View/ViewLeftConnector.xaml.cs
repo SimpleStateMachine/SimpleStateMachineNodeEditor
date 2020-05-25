@@ -16,6 +16,7 @@ using SimpleStateMachineNodeEditor.Helpers;
 using SimpleStateMachineNodeEditor.ViewModel;
 using System.Windows.Shapes;
 using SimpleStateMachineNodeEditor.Helpers.Extensions;
+using SimpleStateMachineNodeEditor.ViewModel.Connector;
 
 namespace SimpleStateMachineNodeEditor.View
 {
