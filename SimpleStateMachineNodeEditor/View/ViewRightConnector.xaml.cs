@@ -48,6 +48,8 @@ namespace SimpleStateMachineNodeEditor.View
             SetupBinding();
             SetupEvents();
             SetupSubcriptions();
+
+       
         }
 
         #region SetupBinding
@@ -55,6 +57,7 @@ namespace SimpleStateMachineNodeEditor.View
         {
             this.WhenActivated(disposable =>
             {
+
                 Canvas.SetZIndex((UIElement)this.VisualParent, this.ViewModel.Node.Zindex+2);
 
                 this.OneWayBind(this.ViewModel, x => x.Visible, x => x.RightConnector.Visibility).DisposeWith(disposable);
@@ -83,8 +86,9 @@ namespace SimpleStateMachineNodeEditor.View
         {
             this.WhenActivated(disposable =>
             {
-                this.WhenAnyValue(x => x.ViewModel.Node.Size, x => x.ViewModel.Node.Point1.Value, x => x.ViewModel.Node.NodesCanvas.Scale.Scales.Value)
-                       .Subscribe(_ => UpdatePositionConnectPoin()).DisposeWith(disposable);
+
+                //this.WhenAnyValue(x => x.ViewModel.Node.Size, x => x.ViewModel.Node.Point1.Value, x => x.ViewModel.Node.NodesCanvas.Scale.Scales.Value)
+                //       .Subscribe(_ => UpdatePositionConnectPoin()).DisposeWith(disposable);
                 this.WhenAnyValue(x => x.EllipseElement.IsMouseOver).Subscribe(value => OnEventMouseOver(value)).DisposeWith(disposable);
             });
         }
@@ -186,7 +190,7 @@ namespace SimpleStateMachineNodeEditor.View
         #endregion SetupEvents
 
 
-        private  void UpdatePositionConnectPoin()
+        private  void UpdatePosition()
         {
             Point positionConnectPoint;
             MyPoint Position;

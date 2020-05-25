@@ -80,12 +80,11 @@ namespace SimpleStateMachineNodeEditor.View
                 this.OneWayBind(this.ViewModel, x => x.Output, x => x.Output.ViewModel).DisposeWith(disposable);
 
                 this.OneWayBind(this.ViewModel, x => x.Transitions, x => x.ItemsControlTransitions.ItemsSource).DisposeWith(disposable);
-
-
                 
             });
         }
         #endregion Setup Binding
+
         #region Setup Commands
         private void SetupCommands()
         {
@@ -95,6 +94,7 @@ namespace SimpleStateMachineNodeEditor.View
             });
         }
         #endregion Setup Commands
+
         #region Setup Events
         private void SetupEvents()
         {

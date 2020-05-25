@@ -108,14 +108,14 @@ namespace SimpleStateMachineNodeEditor.ViewModel.Connector
 
             if ((indexFrom > -1) && (indexTo > -1) && (indexFrom < count) && (indexTo < count))
             {
-                MyPoint positionTo = this.Node.Transitions[indexTo].PositionConnectPoint;
+                MyPoint positionTo = this.Node.Transitions[indexTo].PositionConnectPoint.Copy();
                 MyPoint position;
                 //shift down
                 if (indexTo > indexFrom)
                 {
                     for (int i = indexTo; i >= indexFrom + 1; i--)
                     {
-                        position = this.Node.Transitions[i - 1].PositionConnectPoint;
+                        position = this.Node.Transitions[i - 1].PositionConnectPoint.Copy();
                         this.Node.Transitions[i].PositionConnectPoint.Set(position);
                     }
                 }
@@ -124,7 +124,7 @@ namespace SimpleStateMachineNodeEditor.ViewModel.Connector
                 {
                     for (int i = indexTo; i <= indexFrom - 1; i++)
                     {
-                        position = this.Node.Transitions[i + 1].PositionConnectPoint;
+                        position = this.Node.Transitions[i + 1].PositionConnectPoint.Copy();
                         this.Node.Transitions[i].PositionConnectPoint.Set(position);
                     }
                 }

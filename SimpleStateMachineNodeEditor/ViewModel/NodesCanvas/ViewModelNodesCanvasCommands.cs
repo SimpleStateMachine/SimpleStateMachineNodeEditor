@@ -509,13 +509,9 @@ namespace SimpleStateMachineNodeEditor.ViewModel.NodesCanvas
             ViewModelNode newNode = result;
             if (result == null)
             {
-                MyPoint myPoint = parameter.Copy();
-                myPoint /= Scale.Value;
-                newNode = new ViewModelNode(this)
-                {
-                    Name = GetNameForNewNode(),
-                    Point1 = new MyPoint(myPoint)
-                };
+                //MyPoint myPoint = parameter.Copy();
+                //myPoint /= Scale.Value;
+                newNode = new ViewModelNode(this, GetNameForNewNode(), parameter /Scale.Value);
             }
             else
             {

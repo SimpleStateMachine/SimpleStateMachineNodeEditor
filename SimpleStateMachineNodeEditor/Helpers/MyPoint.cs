@@ -56,7 +56,7 @@ namespace SimpleStateMachineNodeEditor.Helpers
 
         public MyPoint Add(MyPoint point)
         {
-            Value = new Point(point.X, point.Y);
+            Value = new Point(this.X + point.X, this.Y + point.Y);
             return this;
         }
 

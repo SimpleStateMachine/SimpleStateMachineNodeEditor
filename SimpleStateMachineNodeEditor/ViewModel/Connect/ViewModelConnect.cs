@@ -33,30 +33,42 @@ namespace SimpleStateMachineNodeEditor.ViewModel.Connect
 
         [Reactive] public double StrokeThickness { get; set; } = 1;
 
+        private IDisposable subscriptionOnConnectorPositionChange;
+        private IDisposable subscriptionOnOutputPositionChange;
+
         public ViewModelConnect(ViewModelNodesCanvas viewModelNodesCanvas, ViewModelConnector fromConnector)
         {
-            SetupSubscriptions();
             Initial(viewModelNodesCanvas, fromConnector);
-            
+            SetupSubscriptions();     
         }
         #region Setup Subscriptions
 
         private void SetupSubscriptions()
         {
             this.WhenAnyValue(x => x.StartPoint.Value, x => x.EndPoint.Value).Subscribe(_ => UpdateMedium());
-            this.WhenAnyValue(x => x.FromConnector.PositionConnectPoint.Value).Subscribe(value => StartPointUpdate(value));
-            this.WhenAnyValue(x => x.ToConnector.PositionConnectPoint.Value).Subscribe(value => EndPointUpdate(value));                     
-            this.WhenAnyValue(x => x.ToConnector).Where(x => x != null).Subscribe(_ => ToConnectChanged());
-            this.WhenAnyValue(x => x.FromConnector.Node.NodesCanvas.Scale.Value).Subscribe(value => StrokeThickness = value);      
+            this.WhenAnyValue(x => x.FromConnector.Node.IsCollapse).Subscribe(value => UpdateSubscriptionForPosition(value));           
+            this.WhenAnyValue(x => x.ToConnector.PositionConnectPoint.Value).Subscribe(value => EndPointUpdate(value));
+            this.WhenAnyValue(x => x.FromConnector.Selected).Subscribe(value => Select(value));
+        }
+        private void UpdateSubscriptionForPosition(bool nodeIsCollapse)
+        {
+            if(!nodeIsCollapse)
+            {
+                subscriptionOnOutputPositionChange?.Dispose();
+                subscriptionOnConnectorPositionChange = this.WhenAnyValue(x => x.FromConnector.PositionConnectPoint.Value).Subscribe(value => StartPointUpdate(value));
+                
+            }
+            else
+            {
+                subscriptionOnConnectorPositionChange?.Dispose();
+                subscriptionOnOutputPositionChange = this.WhenAnyValue(x => x.FromConnector.Node.Output.PositionConnectPoint.Value).Subscribe(value => StartPointUpdate(value));              
+            }
         }
         private void Initial(ViewModelNodesCanvas viewModelNodesCanvas, ViewModelConnector fromConnector)
         {
             NodesCanvas = viewModelNodesCanvas;
             FromConnector = fromConnector;
-            FromConnector.Connect = this;
-
-            StartPointUpdate((FromConnector.Node.IsCollapse ? FromConnector.Node.Output : FromConnector).PositionConnectPoint.ToPoint());
-            this.WhenAnyValue(x => x.FromConnector.Selected).Subscribe(value => Select(value));
+            FromConnector.Connect = this;           
         }
         private void Select(bool value)
         {

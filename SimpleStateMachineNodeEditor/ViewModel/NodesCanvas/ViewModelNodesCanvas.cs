@@ -11,6 +11,7 @@ using System.IO;
 using Splat;
 using SimpleStateMachineNodeEditor.ViewModel.Connector;
 using SimpleStateMachineNodeEditor.ViewModel.Connect;
+using SimpleStateMachineNodeEditor.Helpers;
 
 namespace SimpleStateMachineNodeEditor.ViewModel.NodesCanvas
 {
@@ -60,29 +61,18 @@ namespace SimpleStateMachineNodeEditor.ViewModel.NodesCanvas
         {
             this.WhenAnyValue(x => x.Nodes.Count).Buffer(2, 1).Select(x => (Previous: x[0], Current: x[1])).Subscribe(x => UpdateCount(x.Previous, x.Current));
         }
+
         #endregion Setup Subscriptions
+
         #region Setup Nodes
 
         private void SetupStartState()
         {
             string name = Nodes.Any(x => x.Name == "Start") ? GetNameForNewNode() : "Start";
-            StartState = new ViewModelNode(this)
-            {
-                Name = name
-            };
+            StartState = new ViewModelNode(this, name, new MyPoint());
             SetAsStart(StartState);
             Nodes.Add(StartState);
             this.ItSaved = true;
-            //ViewModelNode end = new ViewModelNode(this)
-            //{
-            //    Name = "End",
-            //    NameEnable = false,
-            //    CanBeDelete = false,
-            //    Point1 = new MyPoint(100, 100)
-            //};
-            //end.TransitionsVisible = null;
-            //end.RollUpVisible = null;
-            //Nodes.Add(end);
         }
         private void SetAsStart(ViewModelNode node)
         {

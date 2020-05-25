@@ -71,9 +71,9 @@ namespace SimpleStateMachineNodeEditor.View
                 // Отображается ли переход
                 this.OneWayBind(this.ViewModel, x => x.Visible, x => x.LeftConnector.Visibility).DisposeWith(disposable);
 
-                // При изменении размера, позиции или zoom узла
-                this.WhenAnyValue(x => x.ViewModel.Node.Size, x => x.ViewModel.Node.Point1.Value, x => x.ViewModel.Node.NodesCanvas.Scale.Scales.Value)
-                .Subscribe(_ => UpdatePosition()).DisposeWith(disposable);
+                //// При изменении размера, позиции или zoom узла
+                //this.WhenAnyValue(x => x.ViewModel.Node.Size, x => x.ViewModel.Node.Point1.Value, x => x.ViewModel.Node.NodesCanvas.Scale.Scales.Value)
+                //.Subscribe(_ => UpdatePosition()).DisposeWith(disposable);
 
 
             });

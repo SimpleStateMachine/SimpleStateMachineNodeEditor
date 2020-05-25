@@ -11,12 +11,13 @@ using System.Linq;
 using SimpleStateMachineNodeEditor.Helpers.Extensions;
 using SimpleStateMachineNodeEditor.ViewModel.NodesCanvas;
 using SimpleStateMachineNodeEditor.ViewModel.Connect;
+using System.Reactive.Linq;
 
 namespace SimpleStateMachineNodeEditor.ViewModel.Connector
 {
     public partial class ViewModelConnector : ReactiveObject
     {
-        [Reactive] public MyPoint PositionConnectPoint { get; set; } = new MyPoint();
+        [Reactive] public MyPoint PositionConnectPoint { get; set; } 
         [Reactive] public string Name { get; set; }
         [Reactive] public bool TextEnable { get; set; } = false;
         [Reactive] public bool? Visible { get; set; } = true;
@@ -30,22 +31,24 @@ namespace SimpleStateMachineNodeEditor.ViewModel.Connector
         [Reactive] public bool ItsLoop { get; set; } = false;
         [Reactive] public ViewModelNodesCanvas NodesCanvas { get; set; }
         [Reactive] public bool Selected { get; set; }
-
-        public ViewModelConnector(ViewModelNodesCanvas nodesCanvas, ViewModelNode viewModelNode)
+        public ViewModelConnector(ViewModelNodesCanvas nodesCanvas, ViewModelNode viewModelNode, string name,  MyPoint myPoint)
         {
             Node = viewModelNode;
             NodesCanvas = nodesCanvas;
+            Name = name;
+            PositionConnectPoint = new MyPoint(myPoint);
             SetupCommands();
-            SetupBinding();
+            SetupSubscriptions();
         }
-
-        #region SetupBinding
-        private void SetupBinding()
+        #region Setup Subscriptions
+        private void SetupSubscriptions()
         {
             this.WhenAnyValue(x => x.Selected).Subscribe(value => Select(value));
-        }
-        #endregion SetupBinding
+            this.WhenAnyValue(x => x.Node.Point1).Buffer(2, 1).Subscribe(value => PositionConnectPoint.Add(value[1] - value[0]));
 
+        }
+
+        #endregion Setup Subscriptions
         public XElement ToXElement()
         {
             XElement element = new XElement("Transition");
