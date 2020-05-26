@@ -31,6 +31,8 @@ namespace SimpleStateMachineNodeEditor.ViewModel.Connector
         [Reactive] public bool ItsLoop { get; set; } = false;
         [Reactive] public ViewModelNodesCanvas NodesCanvas { get; set; }
         [Reactive] public bool Selected { get; set; }
+
+        private IDisposable subscriptionOnNodeWidthChange;
         public ViewModelConnector(ViewModelNodesCanvas nodesCanvas, ViewModelNode viewModelNode, string name, Point myPoint)
         {
             Node = viewModelNode;
@@ -44,12 +46,42 @@ namespace SimpleStateMachineNodeEditor.ViewModel.Connector
         private void SetupSubscriptions()
         {
             this.WhenAnyValue(x => x.Selected).Subscribe(value => Select(value));
+            
+
+            if(this.Name!="Input")
+            {
+                if (this.Name != "Output")
+                {
+                    this.WhenAnyValue(x => x.Node.Transitions.Count).Subscribe(x => UpdatePositionOnTransitionCountChange());
+                    this.WhenAnyValue(x => x.Node.IsCollapse).Subscribe(value => UpdateSubscriptionForPosition(value));
+                }             
+            }
+
             this.WhenAnyValue(x => x.Node.Point1).Buffer(2, 1).Subscribe(value => PositionConnectPoint = PositionConnectPoint.Addition(value[1].Subtraction(value[0])));
-
         }
-        private void Test(Point point)
+        private void UpdateSubscriptionForPosition(bool nodeIsCollapse)
         {
-
+            if (!nodeIsCollapse)
+            {
+                subscriptionOnNodeWidthChange = this.WhenAnyValue(x => x.Node.Size.Width).Buffer(2, 1).Where(x => x[0] >= 80 && x[1] >= 80 && x[1]!=Node.WidthBeforeCollapse)
+                    .Subscribe(x => UpdatePositionOnWidthChange(x[1] - x[0]));
+            }
+            else
+            {
+                subscriptionOnNodeWidthChange?.Dispose();
+            }
+        }
+        private void UpdatePositionOnTransitionCountChange()
+        {
+            if (!string.IsNullOrEmpty(Name))
+            {
+                int index = Node.Transitions.IndexOf(this);
+                this.PositionConnectPoint = Node.Output.PositionConnectPoint.Addition(0, index*19);
+            }
+        }
+        private void UpdatePositionOnWidthChange(double value)
+        {
+            this.PositionConnectPoint = this.PositionConnectPoint.Addition(value, 0);
         }
 
         #endregion Setup Subscriptions

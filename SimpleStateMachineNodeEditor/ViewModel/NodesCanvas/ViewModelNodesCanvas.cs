@@ -23,7 +23,8 @@ namespace SimpleStateMachineNodeEditor.ViewModel.NodesCanvas
         public ObservableCollectionExtended<ViewModelNode> Nodes = new ObservableCollectionExtended<ViewModelNode>();
         public ObservableCollectionExtended<ViewModelMessage> Messages { get; set; } = new ObservableCollectionExtended<ViewModelMessage>();
 
-        [Reactive] public Point Position { get; set; }
+        [Reactive] public Point PositionRight { get; set; }
+        [Reactive] public Point PositionLeft { get; set; }
         [Reactive] public ViewModelSelector Selector { get; set; } = new ViewModelSelector();
         [Reactive] public ViewModelDialog Dialog { get; set; } = new ViewModelDialog();
         [Reactive] public ViewModelCutter Cutter { get; set; }

@@ -91,16 +91,16 @@ namespace SimpleStateMachineNodeEditor.View
             {
                 //this.WhenAnyValue(x => x.PositionLeftClick).Subscribe(x => Test(x)).DisposeWith(disposable);
                 var positionLeftClickObservable = this.WhenAnyValue(x => x.PositionLeftClick);
-                var positionRightClickObservable = this.WhenAnyValue(x => x.PositionRightClick);
+                var positionRightClickObservable = this.WhenAnyValue(x => x.PositionRightClick).Select(x => x);
 
 
                 //IObservable<Point> positionLeftClickObservable = this.WhenAnyValue(x => x.PositionLeftClick).;
                 //IObservable<Point> positionRightClickObservable = this.WhenAnyValue(x => x.PositionRightClick);
 
-                this.BindCommand(this.ViewModel, x => x.CommandSelect,              x => x.BindingSelect, positionLeftClickObservable).DisposeWith(disposable);
-                this.BindCommand(this.ViewModel, x => x.CommandCut,                 x => x.BindingCut, x => x.Position).DisposeWith(disposable);
-                this.BindCommand(this.ViewModel, x => x.CommandAddNodeWithUndoRedo, x => x.BindingAddNode, x => x.Position).DisposeWith(disposable);
-                this.BindCommand(this.ViewModel, x => x.CommandAddNodeWithUndoRedo, x => x.ItemAddNode, positionLeftClickObservable).DisposeWith(disposable);
+                this.BindCommand(this.ViewModel, x => x.CommandSelect,              x => x.BindingSelect, x => x.PositionRight).DisposeWith(disposable);
+                this.BindCommand(this.ViewModel, x => x.CommandCut,                 x => x.BindingCut, x => x.PositionRight).DisposeWith(disposable);
+                this.BindCommand(this.ViewModel, x => x.CommandAddNodeWithUndoRedo, x => x.BindingAddNode, x => x.PositionRight).DisposeWith(disposable);
+                this.BindCommand(this.ViewModel, x => x.CommandAddNodeWithUndoRedo, x => x.ItemAddNode, x => x.PositionLeft).DisposeWith(disposable);
 
                 this.BindCommand(this.ViewModel, x => x.CommandRedo,                x => x.BindingRedo).DisposeWith(disposable);
                 this.BindCommand(this.ViewModel, x => x.CommandUndo,                x => x.BindingUndo).DisposeWith(disposable);
@@ -226,11 +226,12 @@ namespace SimpleStateMachineNodeEditor.View
         private void OnEventPreviewMouseLeftButtonDown(MouseButtonEventArgs e)
         {
              PositionLeftClick = e.GetPosition(this.Canvas);
-            this.ViewModel.Position = PositionLeftClick;
+            this.ViewModel.PositionRight = PositionLeftClick;
         }
         private void OnEventPreviewMouseRightButtonDown(MouseButtonEventArgs e)
         {
             PositionRightClick = e.GetPosition(this.Canvas);
+            this.ViewModel.PositionLeft = PositionRightClick;
         }
 
         #endregion Setup Events

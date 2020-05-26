@@ -28,6 +28,7 @@ namespace SimpleStateMachineNodeEditor.ViewModel
         [Reactive] public Point Point1 { get; set; }
         [Reactive] public Point Point2 { get; set; }
         [Reactive] public Size Size { get; set; }
+        [Reactive] public double WidthBeforeCollapse { get; set; }
         [Reactive] public string Name { get; set; }
         [Reactive] public bool NameEnable { get; set; } = true;
         [Reactive] public bool Selected { get; set; }
@@ -144,11 +145,13 @@ namespace SimpleStateMachineNodeEditor.ViewModel
         {
             if (!value)
             {
+              
                 TransitionsVisible = true;
                 Output.Visible = null;
             }
             else
             {
+                WidthBeforeCollapse = Size.Width;
                 TransitionsVisible = null;
                 Output.Visible = true;
                 UnSelectedAllConnectors();
@@ -210,22 +213,15 @@ namespace SimpleStateMachineNodeEditor.ViewModel
             {
                 CurrentConnector.TextEnable = true;
                 CurrentConnector.FormEnable = false;
-                ShiftConnectors();
                 if (string.IsNullOrEmpty(CurrentConnector.Name))
                     CurrentConnector.Name = "Transition " + NodesCanvas.TransitionsCount.ToString();
             }
-            CurrentConnector = new ViewModelConnector(NodesCanvas, this,"", Point1.Addition(80,54))
+            double width = Size.Width == 0 ? 80 : Size.Width;
+            CurrentConnector = new ViewModelConnector(NodesCanvas, this,"", Point1.Addition(width, 54))
             {
                 TextEnable = false
             };
             Transitions.Insert(0, CurrentConnector);
-        }
-        private void ShiftConnectors()
-        {
-            foreach(var transition in Transitions)
-            {
-                transition.PositionConnectPoint = transition.PositionConnectPoint.Addition(0, 19);
-            }
         }
         private void UnSelectedAllConnectors()
         {
