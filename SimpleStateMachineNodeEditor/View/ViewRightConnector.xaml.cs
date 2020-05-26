@@ -18,6 +18,7 @@ using SimpleStateMachineNodeEditor.ViewModel;
 using SimpleStateMachineNodeEditor.Helpers.Transformations;
 using SimpleStateMachineNodeEditor.Helpers.Enums;
 using SimpleStateMachineNodeEditor.Helpers.Extensions;
+using SimpleStateMachineNodeEditor.ViewModel.Connector;
 
 namespace SimpleStateMachineNodeEditor.View
 {
@@ -44,9 +45,11 @@ namespace SimpleStateMachineNodeEditor.View
         public ViewRightConnector()
         {
             InitializeComponent();
-            SetupCommands();
             SetupBinding();
-            SetupEvents();          
+            SetupEvents();
+            SetupSubcriptions();
+
+       
         }
 
         #region SetupBinding
@@ -54,6 +57,7 @@ namespace SimpleStateMachineNodeEditor.View
         {
             this.WhenActivated(disposable =>
             {
+
                 Canvas.SetZIndex((UIElement)this.VisualParent, this.ViewModel.Node.Zindex+2);
 
                 this.OneWayBind(this.ViewModel, x => x.Visible, x => x.RightConnector.Visibility).DisposeWith(disposable);
@@ -68,34 +72,30 @@ namespace SimpleStateMachineNodeEditor.View
 
                 this.OneWayBind(this.ViewModel, x => x.FormStroke, x => x.EllipseElement.Stroke).DisposeWith(disposable);
 
-                this.Bind(this.ViewModel, x => x.FormFill, x => x.EllipseElement.Fill).DisposeWith(disposable);
+                this.OneWayBind(this.ViewModel, x => x.FormFill, x => x.EllipseElement.Fill).DisposeWith(disposable);
 
                 this.OneWayBind(this.ViewModel, x => x.FormStrokeThickness, x => x.EllipseElement.StrokeThickness).DisposeWith(disposable);
 
-                this.WhenAnyValue(x => x.ViewModel.Node.Size, x => x.ViewModel.Node.Point1.Value, x => x.ViewModel.Node.NodesCanvas.Scale.Scales.Value)
-                .Subscribe(_ => { UpdatePositionConnectPoin(); }).DisposeWith(disposable);
 
-                this.WhenAnyValue(x =>x.ViewModel.ItsLoop).Subscribe(value=> test(value)).DisposeWith(disposable);
             });
         }
         #endregion SetupBinding
-        #region Setup Commands
-        private void SetupCommands()
+
+        #region Setup Subcriptions
+        private void SetupSubcriptions()
         {
             this.WhenActivated(disposable =>
             {
-                //this.BindCommand(this.ViewModel, x => x.CommandSelect, x => x.BindingSelectWithCtrl).DisposeWith(disposable);
-                //this.BindCommand(this.ViewModel, x => x.CommandSelect, x => x.BindingSelectWithShift).DisposeWith(disposable);
+
+                //this.WhenAnyValue(x => x.ViewModel.Node.Size, x => x.ViewModel.Node.Point1.Value, x => x.ViewModel.Node.NodesCanvas.Scale.Scales.Value)
+                //       .Subscribe(_ => UpdatePositionConnectPoin()).DisposeWith(disposable);
+                this.WhenAnyValue(x => x.EllipseElement.IsMouseOver).Subscribe(value => OnEventMouseOver(value)).DisposeWith(disposable);
             });
         }
-        #endregion Setup Commands
+
+        #endregion Setup Subcriptions
         #region SetupEvents
 
-        private void test(bool value)
-        {
-            if (value)
-                this.ViewModel.CommandSetAsLoop.ExecuteWithSubscribe();
-        }
         private void SetupEvents()
         {
             this.WhenActivated(disposable =>
@@ -107,10 +107,15 @@ namespace SimpleStateMachineNodeEditor.View
                 this.BorderElement.Events().PreviewDrop.Subscribe(e => ConnectorDrop(e)).DisposeWith(disposable);
             });
         }
-
+        private void OnEventMouseOver(bool value)
+        {
+                this.ViewModel.FormStroke = value ? Application.Current.Resources["ColorConnector"] as SolidColorBrush
+                                                 : Application.Current.Resources["ColorNodesCanvasBackground"] as SolidColorBrush;
+        }
         private void Validate(RoutedEventArgs e)
         {
-            ViewModel.CommandValidateName.Execute(TextBoxElement.Text);
+            if (TextBoxElement.Text != ViewModel.Name)
+                ViewModel.CommandValidateName.ExecuteWithSubscribe(TextBoxElement.Text);
             if (TextBoxElement.Text != ViewModel.Name)
                 TextBoxElement.Text = ViewModel.Name;
         }
@@ -121,8 +126,6 @@ namespace SimpleStateMachineNodeEditor.View
             {
                 this.ViewModel.CommandSetAsLoop.ExecuteWithSubscribe();
                 this.ViewModel.NodesCanvas.CommandAddConnectorWithConnect.Execute(this.ViewModel);
-
-                this.ViewModel.NodesCanvas.LogDebug("Зашел 2 ");
             }          
             else 
             {
@@ -132,8 +135,6 @@ namespace SimpleStateMachineNodeEditor.View
                 DragDrop.DoDragDrop(this, data, DragDropEffects.Link);
                 this.ViewModel.CommandCheckConnectPointDrop.ExecuteWithSubscribe();
                 e.Handled = true;
-
-                this.ViewModel.NodesCanvas.LogDebug("Зашел 1 ");
             }
         }
 
@@ -150,15 +151,15 @@ namespace SimpleStateMachineNodeEditor.View
             }
             else if (Keyboard.IsKeyDown(Key.LeftShift))
             {
-                this.ViewModel.CommandSelect.Execute(SelectMode.ClickWithShift);
+                this.ViewModel.CommandSelect.ExecuteWithSubscribe(SelectMode.ClickWithShift);
             }
             else if (Keyboard.IsKeyDown(Key.LeftCtrl))
             {
-                this.ViewModel.CommandSelect.Execute(SelectMode.ClickWithCtrl);              
+                this.ViewModel.CommandSelect.ExecuteWithSubscribe(SelectMode.ClickWithCtrl);              
             }
             else
             {
-                this.ViewModel.CommandSelect.Execute(SelectMode.Click);
+                this.ViewModel.CommandSelect.ExecuteWithSubscribe(SelectMode.Click);
                 return;
             }
             e.Handled = true;
@@ -188,15 +189,12 @@ namespace SimpleStateMachineNodeEditor.View
 
         #endregion SetupEvents
 
-        /// <summary>
-        /// Обновить координату центра круга
-        /// </summary>
-        void UpdatePositionConnectPoin()
+
+        private  void UpdatePosition()
         {
             Point positionConnectPoint;
-            MyPoint Position;
 
-            if (this.IsVisible)
+            if((!ViewModel.Node.IsCollapse)||(ViewModel.Node.IsCollapse && this.ViewModel.Name == "Output"))
             {
                 positionConnectPoint = EllipseElement.TranslatePoint(new Point(EllipseElement.Width/2, EllipseElement.Height / 2), this);
 
@@ -204,34 +202,21 @@ namespace SimpleStateMachineNodeEditor.View
 
                 positionConnectPoint = this.TransformToAncestor(NodesCanvas).Transform(positionConnectPoint);
 
-                Position  = MyPoint.CreateFromPoint(positionConnectPoint) / this.ViewModel.NodesCanvas.Scale.Value;
+                positionConnectPoint = positionConnectPoint.Division(this.ViewModel.NodesCanvas.Scale.Value);
 
             }
             else
             {
-                positionConnectPoint = this.ViewModel.Node.Output.PositionConnectPoint.Value;
+                positionConnectPoint = this.ViewModel.Node.Output.PositionConnectPoint;
 
-                Position = MyPoint.CreateFromPoint(positionConnectPoint);
             }
-         
-            this.ViewModel.PositionConnectPoint.Set(Position);
+
+            if (this.ViewModel.Name == "Output")
+            {
+                this.ViewModel.NodesCanvas.LogDebug(positionConnectPoint.ToString());
+            }
+            this.ViewModel.PositionConnectPoint = positionConnectPoint;
         }
 
-        //void UpdatePosition()
-        //{
-        //    if (!this.IsVisible)
-        //        return;
-
-        //    Point position = new Point();
-
-        //    //Ищем Canvas
-        //    ViewNodesCanvas NodesCanvas = MyUtils.FindParent<ViewNodesCanvas>(this);
-
-        //    position = this.TransformToAncestor(NodesCanvas).Transform(position);
-
-        //    this.ViewModel.Position.Set(position);
-
-        //    this.ViewModel.NodesCanvas.Text = "UpdatePosition for " + this.ViewModel.Name;
-        //}
     }
 }

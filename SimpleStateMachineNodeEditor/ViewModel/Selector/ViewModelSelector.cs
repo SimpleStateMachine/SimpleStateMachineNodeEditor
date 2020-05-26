@@ -6,9 +6,9 @@ using ReactiveUI;
 using ReactiveUI.Fody.Helpers;
 
 using SimpleStateMachineNodeEditor.Helpers;
-using SimpleStateMachineNodeEditor.Helpers.Commands;
 using SimpleStateMachineNodeEditor.Helpers.Transformations;
 using System.Reactive;
+using SimpleStateMachineNodeEditor.Helpers.Extensions;
 
 namespace SimpleStateMachineNodeEditor.ViewModel
 {
@@ -16,11 +16,11 @@ namespace SimpleStateMachineNodeEditor.ViewModel
     {
         [Reactive] public Size Size { get; set; }
         [Reactive] public bool? Visible { get; set; } = false;
-        [Reactive] public MyPoint Point1 { get; set; } = new MyPoint();
-        [Reactive] public MyPoint Point2 { get; set; } = new MyPoint();
+        [Reactive] public Point Point1 { get; set; }
+        [Reactive] public Point Point2 { get; set; }
         [Reactive] public Scale Scale { get; set; } = new Scale();
 
-        public MyPoint Point1WithScale
+        public Point Point1WithScale
         {
             get
             {
@@ -32,10 +32,10 @@ namespace SimpleStateMachineNodeEditor.ViewModel
                 if (Scale.ScaleY < 0)
                     Y -= Size.Height;
 
-                return new MyPoint(X, Y);
+                return new Point(X, Y);
             }
         }
-        public MyPoint Point2WithScale
+        public Point Point2WithScale
         {
             get
             {
@@ -47,42 +47,44 @@ namespace SimpleStateMachineNodeEditor.ViewModel
                 if (Scale.ScaleY > 0)
                     Y += Size.Height;
 
-                return new MyPoint(X, Y);
+                return new Point(X, Y);
             }
         }
 
 
-
         public ViewModelSelector()
-        {
-            this.WhenAnyValue(x => x.Point1.Value, x => x.Point2.Value).Subscribe(_ => UpdateSize());
+        {   
             SetupCommands();
+            SetupSubscriptions();
+        }
+        
+        #region Setup Subscriptions
+
+        private void SetupSubscriptions()
+        {
+            this.WhenAnyValue(x => x.Point1, x => x.Point2).Subscribe(_ => UpdateSize());
         }
         private void UpdateSize()
         {
-            MyPoint different = Point2 - Point1;
+            Point different =  Point2.Subtraction(Point1);
             Size = new Size(Math.Abs(different.X), Math.Abs(different.Y));
-            Scale.Scales.Set(((different.X > 0) ? 1 : -1), ((different.Y > 0) ? 1 : -1));
+            Scale.Scales = Scale.Scales.CreateNew(((different.X > 0) ? 1 : -1), ((different.Y > 0) ? 1 : -1));
         }
 
+        #endregion Setup Subscriptions
+
         #region Setup Commands
-        public SimpleCommandWithParameter<MyPoint> CommandStartSelect { get; set; }
-        public ReactiveCommand<Unit,Unit> CommandEndSelect { get; set; }
+        public ReactiveCommand<Point, Unit> CommandStartSelect { get; set; }
 
         private void SetupCommands()
         {
-            CommandStartSelect = new SimpleCommandWithParameter<MyPoint>(StartSelect);
-            CommandEndSelect =  ReactiveCommand.Create(EndSelect);
+            CommandStartSelect = ReactiveCommand.Create<Point>(StartSelect);
         }
 
-        private void StartSelect(MyPoint point)
+        private void StartSelect(Point point)
         {
             Visible = true;
-            Point1.Set(point);
-        }
-        private void EndSelect()
-        {
-
+            Point1 = point;
         }
 
         #endregion Setup Commands

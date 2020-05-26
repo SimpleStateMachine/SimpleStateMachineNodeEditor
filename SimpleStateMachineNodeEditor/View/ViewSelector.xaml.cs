@@ -44,7 +44,6 @@ namespace SimpleStateMachineNodeEditor.View
             InitializeComponent();
             SetupBinding();
             SetupEvents();
-            SetupCommands();
         }
         protected override void OnMouseMove(MouseEventArgs e)
         {
@@ -62,13 +61,13 @@ namespace SimpleStateMachineNodeEditor.View
 
                 this.OneWayBind(this.ViewModel, x => x.Size.Height, x => x.Rectangle.Height).DisposeWith(disposable);
 
-                this.OneWayBind(this.ViewModel, x => x.Point1.Value.X, x => x.TranslateTransformElement.X).DisposeWith(disposable);
+                this.OneWayBind(this.ViewModel, x => x.Point1.X, x => x.TranslateTransformElement.X).DisposeWith(disposable);
 
-                this.OneWayBind(this.ViewModel, x => x.Point1.Value.Y, x => x.TranslateTransformElement.Y).DisposeWith(disposable);
+                this.OneWayBind(this.ViewModel, x => x.Point1.Y, x => x.TranslateTransformElement.Y).DisposeWith(disposable);
 
-                this.OneWayBind(this.ViewModel, x => x.Scale.Scales.Value.X, x => x.ScaleTransformElement.ScaleX).DisposeWith(disposable);
+                this.OneWayBind(this.ViewModel, x => x.Scale.Scales.X, x => x.ScaleTransformElement.ScaleX).DisposeWith(disposable);
 
-                this.OneWayBind(this.ViewModel, x => x.Scale.Scales.Value.Y, x => x.ScaleTransformElement.ScaleY).DisposeWith(disposable);
+                this.OneWayBind(this.ViewModel, x => x.Scale.Scales.Y, x => x.ScaleTransformElement.ScaleY).DisposeWith(disposable);
 
                 this.WhenAnyValue(x => x.Visibility).Where(IsVisible => IsVisible==Visibility.Visible).Subscribe(_ => Update()).DisposeWith(disposable);
             });
@@ -98,7 +97,7 @@ namespace SimpleStateMachineNodeEditor.View
             //find canvas
             ViewNodesCanvas NodesCanvas = MyUtils.FindParent<ViewNodesCanvas>(this);
 
-            ViewModel.Point2.Set(e.GetPosition(NodesCanvas));
+            ViewModel.Point2 = e.GetPosition(NodesCanvas);
 
             e.Handled = true;
         }
@@ -109,16 +108,6 @@ namespace SimpleStateMachineNodeEditor.View
 
         #endregion Setup Events
 
-        #region Setup Commands
-        private void SetupCommands()
-        {
-            this.WhenActivated(disposable =>
-            {
-
-
-            });
-        }
-        #endregion Setup Commands
 
     }
 }

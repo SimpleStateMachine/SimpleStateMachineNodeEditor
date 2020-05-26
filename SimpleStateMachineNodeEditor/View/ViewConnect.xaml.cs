@@ -14,6 +14,7 @@ using System.Reactive.Linq;
 using System.Windows.Markup;
 using SimpleStateMachineNodeEditor.ViewModel;
 using SimpleStateMachineNodeEditor.Helpers;
+using SimpleStateMachineNodeEditor.ViewModel.Connect;
 
 namespace SimpleStateMachineNodeEditor.View
 {
@@ -41,7 +42,6 @@ namespace SimpleStateMachineNodeEditor.View
         {
             InitializeComponent();
             SetupBinding();
-            SetupEvents();
         }
 
         #region SetupBinding
@@ -49,25 +49,19 @@ namespace SimpleStateMachineNodeEditor.View
         {
             this.WhenActivated(disposable =>
             {
-
-                // Цвет линии
                 this.OneWayBind(this.ViewModel, x => x.Stroke, x => x.PathElement.Stroke).DisposeWith(disposable);
 
-                // Точка, из которой выходит линия
-                this.OneWayBind(this.ViewModel, x => x.StartPoint.Value, x => x.PathFigureElement.StartPoint).DisposeWith(disposable);
+                this.OneWayBind(this.ViewModel, x => x.StartPoint, x => x.PathFigureElement.StartPoint).DisposeWith(disposable);
 
-                // Первая промежуточная точка линии 
-                this.OneWayBind(this.ViewModel, x => x.Point1.Value, x => x.BezierSegmentElement.Point1).DisposeWith(disposable);
+                this.OneWayBind(this.ViewModel, x => x.Point1, x => x.BezierSegmentElement.Point1).DisposeWith(disposable);
 
-                // Вторая промежуточная точка линии
-                this.OneWayBind(this.ViewModel, x => x.Point2.Value, x => x.BezierSegmentElement.Point2).DisposeWith(disposable);
+                this.OneWayBind(this.ViewModel, x => x.Point2, x => x.BezierSegmentElement.Point2).DisposeWith(disposable);
 
-                // Точка, в которую приходит линия
-                this.OneWayBind(this.ViewModel, x => x.EndPoint.Value, x => x.BezierSegmentElement.Point3).DisposeWith(disposable);
+                this.OneWayBind(this.ViewModel, x => x.EndPoint, x => x.BezierSegmentElement.Point3).DisposeWith(disposable);
 
                 this.OneWayBind(this.ViewModel, x => x.StrokeDashArray, x => x.PathElement.StrokeDashArray).DisposeWith(disposable);
 
-                this.OneWayBind(this.ViewModel, x => x.StrokeThickness, x => x.PathElement.StrokeThickness).DisposeWith(disposable);
+                this.OneWayBind(this.ViewModel, x => x.FromConnector.NodesCanvas.Scale.Value, x => x.PathElement.StrokeThickness).DisposeWith(disposable);
 
                 this.WhenAnyValue(x => x.ViewModel.ToConnector).Where(x=>x!=null).Subscribe(_ => UpdateZindex()).DisposeWith(disposable);
 
@@ -75,22 +69,12 @@ namespace SimpleStateMachineNodeEditor.View
 
             });
         }
-        #endregion SetupBinding
 
-        #region SetupEvents
-        private void SetupEvents()
-        {
-            this.WhenActivated(disposable =>
-            {
-
-            });
-        }
         private void UpdateZindex()
         {
-            if(this.ViewModel.FromConnector.Node!=this.ViewModel.ToConnector.Node)
+            if (this.ViewModel.FromConnector.Node != this.ViewModel.ToConnector.Node)
                 Canvas.SetZIndex((UIElement)this.VisualParent, this.ViewModel.ToConnector.Node.Zindex);
         }
-
-        #endregion SetupEvents
+        #endregion SetupBinding
     }
 }

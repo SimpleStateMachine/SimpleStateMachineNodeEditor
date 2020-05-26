@@ -19,6 +19,7 @@ using SimpleStateMachineNodeEditor.ViewModel;
 using SimpleStateMachineNodeEditor.Helpers;
 using SimpleStateMachineNodeEditor.Helpers.Transformations;
 using SimpleStateMachineNodeEditor.Helpers.Enums;
+using SimpleStateMachineNodeEditor.Helpers.Extensions;
 
 namespace SimpleStateMachineNodeEditor.View
 {
@@ -79,12 +80,11 @@ namespace SimpleStateMachineNodeEditor.View
                 this.OneWayBind(this.ViewModel, x => x.Output, x => x.Output.ViewModel).DisposeWith(disposable);
 
                 this.OneWayBind(this.ViewModel, x => x.Transitions, x => x.ItemsControlTransitions.ItemsSource).DisposeWith(disposable);
-
-
                 
             });
         }
         #endregion Setup Binding
+
         #region Setup Commands
         private void SetupCommands()
         {
@@ -94,27 +94,24 @@ namespace SimpleStateMachineNodeEditor.View
             });
         }
         #endregion Setup Commands
+
         #region Setup Events
         private void SetupEvents()
         {
             this.WhenActivated(disposable =>
             {
-                this.WhenAnyValue(x=>x.IsMouseOver).Subscribe(value=> Test(value)).DisposeWith(disposable);
+                this.WhenAnyValue(x=>x.IsMouseOver).Subscribe(value=> OnEventMouseOver(value)).DisposeWith(disposable);
                 this.Events().MouseLeftButtonDown.Subscribe(e => OnEventMouseLeftDowns(e)).DisposeWith(disposable);
-                this.Events().MouseLeftButtonUp.Subscribe(e => OnEventMouseLeftUp(e)).DisposeWith(disposable);
-                this.Events().MouseRightButtonDown.Subscribe(e => OnEventMouseRightDown(e)).DisposeWith(disposable);
-                this.Events().MouseRightButtonUp.Subscribe(e => OnEventMouseRightUp(e)).DisposeWith(disposable);
                 this.Events().MouseDown.Subscribe(e => OnEventMouseDown(e)).DisposeWith(disposable);
                 this.Events().MouseUp.Subscribe(e => OnEventMouseUp(e)).DisposeWith(disposable);
                 this.Events().MouseMove.Subscribe(e => OnMouseMove(e)).DisposeWith(disposable);
-                //this.Events().MouseEnter.Subscribe(e => OnEventMouseEnter(e)).DisposeWith(disposable);
-                //this.Events().MouseLeave.Subscribe(e => OnEventMouseMouseLeave(e)).DisposeWith(disposable);
 
-                this.NodeHeaderElement.ButtonCollapse.Events().Click.Subscribe(_ => OnEventCollapse()).DisposeWith(disposable);
+                this.NodeHeaderElement.ButtonCollapse.Events().Click.Subscribe(_ => ViewModel.IsCollapse=!ViewModel.IsCollapse).DisposeWith(disposable);
                 this.NodeHeaderElement.Events().LostFocus.Subscribe(e => Validate(e)).DisposeWith(disposable);
+                this.ViewModel.WhenAnyValue(x=>x.IsCollapse).Subscribe(value=> OnEventCollapse(value)).DisposeWith(disposable);
             });
         }
-        private void Test(bool value)
+        private void OnEventMouseOver(bool value)
         {
             if (this.ViewModel.Selected != true)
                 this.ViewModel.BorderBrush = value?Application.Current.Resources["ColorSelectedElement"] as SolidColorBrush
@@ -123,24 +120,14 @@ namespace SimpleStateMachineNodeEditor.View
         private void OnEventMouseLeftDowns(MouseButtonEventArgs e)
         {
             Keyboard.Focus(this);
-            this.ViewModel.CommandSelect.Execute(SelectMode.Click);
+            this.ViewModel.CommandSelect.ExecuteWithSubscribe(SelectMode.Click);
         }
         private void Validate(RoutedEventArgs e)
         {
-            ViewModel.CommandValidateName.Execute(NodeHeaderElement.TextBox.Text);
+            if (NodeHeaderElement.TextBox.Text != ViewModel.Name)
+                ViewModel.CommandValidateName.ExecuteWithSubscribe(NodeHeaderElement.TextBox.Text);
             if (NodeHeaderElement.TextBox.Text != ViewModel.Name)
                 NodeHeaderElement.TextBox.Text = ViewModel.Name;
-        }
-
-        private void OnEventMouseLeftUp(MouseButtonEventArgs e)
-        {
-        }
-        private void OnEventMouseRightDown(MouseButtonEventArgs e)
-        {
-
-        }
-        private void OnEventMouseRightUp(MouseButtonEventArgs e)
-        {
         }
 
         private void OnEventMouseDown(MouseButtonEventArgs e)
@@ -157,25 +144,10 @@ namespace SimpleStateMachineNodeEditor.View
         {
             this.ReleaseMouseCapture();
         }
-
-        private void OnEventMouseEnter(MouseEventArgs e)
+        private void OnEventCollapse(bool isCollapse)
         {
-            if (this.ViewModel.Selected != true)
-                this.ViewModel.BorderBrush = Application.Current.Resources["ColorSelectedElement"] as SolidColorBrush;
-        }
-        private void OnEventMouseMouseLeave(MouseEventArgs e)
-        {
-            if (this.ViewModel.Selected != true)
-                this.ViewModel.BorderBrush = Application.Current.Resources["ColorNodeBorderBrush"] as SolidColorBrush;
-        }
-
-
-        private void OnEventCollapse()
-        {
-            bool visible = (this.NodeHeaderElement.ButtonRotate.Angle != 0);
-            this.NodeHeaderElement.ButtonRotate.Angle = visible ? 0 : 180;
-            ViewModel.CommandCollapse.Execute(visible);
-            
+            //bool visible = (this.NodeHeaderElement.ButtonRotate.Angle != 0);
+            this.NodeHeaderElement.ButtonRotate.Angle = isCollapse ? 180 : 0;
         }
         #endregion Setup Events
 

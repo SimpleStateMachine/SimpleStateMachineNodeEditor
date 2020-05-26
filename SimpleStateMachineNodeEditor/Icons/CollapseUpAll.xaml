@@ -1,10 +1,10 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
-    <DrawingBrush x:Key="IconCollapseUpGroup" >
+    <DrawingBrush x:Key="IconCollapseUpAll" >
         <DrawingBrush.Drawing>
             <DrawingGroup>
                 <DrawingGroup.Children>
-                    <GeometryDrawing Brush="LightGray" Geometry="F1M8,8L13,13 14,12 8,6 2,12 3,13z M8,4L13,9 14,8 8,2 2,8 3,9z" />
+                    <GeometryDrawing Brush="{StaticResource ColorIconsMain}" Geometry="F1M8,8L13,13 14,12 8,6 2,12 3,13z M8,4L13,9 14,8 8,2 2,8 3,9z" />
                 </DrawingGroup.Children>
             </DrawingGroup>
         </DrawingBrush.Drawing>

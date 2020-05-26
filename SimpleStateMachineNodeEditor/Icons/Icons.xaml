@@ -1,13 +1,15 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:local="clr-namespace:SimpleStateMachineNodeEditor.Icons">
-   
+    
     <ResourceDictionary.MergedDictionaries>
+        
+        
         <ResourceDictionary Source="NewSheme.xaml"/>
         <ResourceDictionary Source="ImportScheme.xaml"/>
         <ResourceDictionary Source="ExportScheme.xaml"/>
         <ResourceDictionary Source="CollapseUp.xaml"/>
-        <ResourceDictionary Source="CollapseUpGroup.xaml"/>
+        <ResourceDictionary Source="CollapseUpAll.xaml"/>
         <ResourceDictionary Source="DeleteScheme.xaml"/>
         
         <ResourceDictionary Source="ErrorList.xaml"/>
@@ -21,11 +23,10 @@
         <ResourceDictionary Source="Loop.xaml"/>
         <ResourceDictionary Source="Close.xaml"/>
         <ResourceDictionary Source="Copy.xaml"/>
-        <ResourceDictionary Source="ExpandDownGroup.xaml"/>
+        <ResourceDictionary Source="ExpandDownAll.xaml"/>
         <ResourceDictionary Source="AddNode.xaml"/>
         <ResourceDictionary Source="Update.xaml"/>
         
-        <ResourceDictionary Source="Relationship.xaml"/>
         <ResourceDictionary Source="SaveAs.xaml"/>
         
         <ResourceDictionary Source="Debug.xaml"/>

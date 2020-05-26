@@ -10,5 +10,7 @@ namespace SimpleStateMachineNodeEditor.Helpers.Extensions
         {
             return Enum.GetName(enumType.GetType(), enumType);
         }
+
+
     }
 }

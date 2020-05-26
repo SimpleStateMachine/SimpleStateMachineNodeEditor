@@ -12,9 +12,5 @@ namespace SimpleStateMachineNodeEditor.Helpers.Extensions
         {
             return reactiveCommand.Execute(parameter).Subscribe();
         }
-        public static ReactiveCommandWithUndoRedo<TParam, TResult> CreateCommandWithUndoRedo<TParam, TResult>(TParam parameter = default)
-        {
-            return null;
-        }
     }
 }

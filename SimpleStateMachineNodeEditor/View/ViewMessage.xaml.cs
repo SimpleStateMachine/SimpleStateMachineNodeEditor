@@ -68,12 +68,6 @@ namespace SimpleStateMachineNodeEditor.View
         private void UpdateIcon(TypeMessage type)
         {
             this.RectangleElement.Fill = Application.Current.Resources["Icon" + type.Name()] as DrawingBrush;
-            //{
-            //    TypeMessage.Error => "IconError",
-            //    TypeMessage.Warning => new RGBColor(0x00, 0x00, 0xFF),
-            //    TypeMessage.Information => new RGBColor(0xFF, 0x7F, 0x00),
-            //    TypeMessage.Debug => new RGBColor(0xFF, 0x7F, 0x00),
-            //}] as DrawingBrush;
         }
         #endregion Setup Subscriptions
     }
