@@ -67,7 +67,10 @@ namespace SimpleStateMachineNodeEditor.View
                 this.OneWayBind(this.ViewModel, x => x.Messages, x => x.MessageList.ItemsSource).DisposeWith(disposable);
                 this.OneWayBind(this.ViewModel, x => x.DebugEnable, x => x.LabelDebug.Visibility).DisposeWith(disposable);
 
-
+                this.OneWayBind(this.ViewModel, x => x.CountError, x => x.LabelError.Content, value=>value.ToString()+" Error").DisposeWith(disposable);
+                this.OneWayBind(this.ViewModel, x => x.CountWarning, x => x.LabelWarning.Content, value => value.ToString() + " Warning").DisposeWith(disposable);
+                this.OneWayBind(this.ViewModel, x => x.CountInformation, x => x.LabelInformation.Content, value => value.ToString() + " Information").DisposeWith(disposable);
+                this.OneWayBind(this.ViewModel, x => x.CountDebug, x => x.LabelDebug.Content, value => value.ToString() + " Debug").DisposeWith(disposable);
 
                 this.BindCommand(this.ViewModel, x => x.NodesCanvas.CommandSelectAll,        x => x.ItemSelectAll).DisposeWith(disposable);
                 this.BindCommand(this.ViewModel, x => x.NodesCanvas.CommandZoomIn,           x => x.ButtonZoomIn).DisposeWith(disposable);
@@ -115,9 +118,9 @@ namespace SimpleStateMachineNodeEditor.View
         {
             this.WhenActivated(disposable =>
             {
-                this.WhenAnyValue(x=>x.ViewModel.NodesCanvas.SchemePath).Subscribe(value=> UpdateSchemeName(value)).DisposeWith(disposable);
-                this.WhenAnyValue(x => x.NodesCanvas.ViewModel.Messages.Count).Subscribe(_ => UpdateLabels()).DisposeWith(disposable);
+                this.WhenAnyValue(x => x.ViewModel.NodesCanvas.SchemePath).Subscribe(value=> UpdateSchemeName(value)).DisposeWith(disposable);              
                 this.WhenAnyValue(x => x.NodesCanvas.ViewModel.NeedExit).Where(x=>x).Subscribe(_ => this.Close()).DisposeWith(disposable);
+                this.WhenAnyValue(x => x.ViewModel.CountError).Buffer(2, 1).Where(x => x[1] > x[0]).Subscribe(_ => ShowError()).DisposeWith(disposable);
             });
         }
         private void UpdateSchemeName(string newName)
@@ -148,23 +151,10 @@ namespace SimpleStateMachineNodeEditor.View
                 this.LabelInformation.Events().PreviewMouseLeftButtonDown.Subscribe(e => SetDisplayMessageType(e, TypeMessage.Information)).DisposeWith(disposable);
                 this.LabelDebug.Events().PreviewMouseLeftButtonDown.Subscribe(e => SetDisplayMessageType(e, TypeMessage.Debug)).DisposeWith(disposable);
                 this.LabelErrorList.Events().PreviewMouseLeftButtonDown.Subscribe(e=> SetDisplayMessageType(e, TypeMessage.All)).DisposeWith(disposable);
-                this.LabelErrorListUpdate.Events().MouseLeftButtonDown.Subscribe(_ => NodesCanvas.ViewModel.CommandErrorListUpdate.ExecuteWithSubscribe()).DisposeWith(disposable);
+                this.LabelErrorListUpdate.Events().MouseLeftButtonDown.WithoutParameter().InvokeCommand(NodesCanvas.ViewModel.CommandErrorListUpdate).DisposeWith(disposable);
             });
         }
 
-        private void UpdateLabels()
-        {
-           var counts =  this.NodesCanvas.ViewModel.Messages.GroupBy(x => x.TypeMessage).ToDictionary(x=>x.Key,x=>x.Count());
-           var countError = counts.Keys.Contains(TypeMessage.Error) ? counts[TypeMessage.Error].ToString() : "0";
-           var countWarning = counts.Keys.Contains(TypeMessage.Warning) ? counts[TypeMessage.Warning].ToString() : "0";
-           var countInformation = counts.Keys.Contains(TypeMessage.Information) ? counts[TypeMessage.Information].ToString() : "0";
-           var countDebug = counts.Keys.Contains(TypeMessage.Debug) ? counts[TypeMessage.Debug].ToString() : "0";
-
-            LabelError.Content = countError + " Error";
-            LabelWarning.Content = countWarning + " Warning";
-            LabelInformation.Content = countInformation + " Information";
-            LabelDebug.Content = countDebug + " Debug";
-        }
         private void SetDisplayMessageType(MouseButtonEventArgs e, TypeMessage  typeMessage)
         {          
             if ((ErrorListExpander.IsExpanded)&&(this.ViewModel.NodesCanvas.DisplayMessageType != typeMessage))
@@ -182,7 +172,17 @@ namespace SimpleStateMachineNodeEditor.View
             this.ErrorListSplitter.IsEnabled = true;
             this.Fotter.Height = new GridLength(this.ViewModel.MaxHeightMessagePanel);
         }
+        private void ShowError()
+        {
+            if (!this.ErrorListExpander.IsExpanded)
+            {
+                this.ErrorListExpander.IsExpanded = true;
+                ErrorListExpanded();
+            }
+            //this.ErrorListExpander.RaiseEvent(new RoutedEventArgs(Expander.ExpandedEvent));
+            //this.ErrorListExpander.IsExpanded = true;
 
+        }
 
         private void ButtonMinClick(RoutedEventArgs e)
         {

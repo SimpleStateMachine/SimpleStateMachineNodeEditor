@@ -318,5 +318,16 @@ namespace SimpleStateMachineNodeEditor.Helpers.Extensions
         {
             return new Point(point1.X * size.Width, point1.Y * size.Height);
         }
+
+        public static string PointToString(Point point)
+        {
+            return string.Format("{0}, {1}", point.X.ToString(System.Globalization.CultureInfo.InvariantCulture), point.Y.ToString(System.Globalization.CultureInfo.InvariantCulture));
+        }
+
+        public static Point StringToPoint(string str)
+        {
+            string[] parts = str.Split(",");
+            return new Point(double.Parse(parts[0], System.Globalization.CultureInfo.InvariantCulture), double.Parse(parts[1], System.Globalization.CultureInfo.InvariantCulture));
+        }
     }
 }

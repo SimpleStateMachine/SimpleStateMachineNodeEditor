@@ -231,6 +231,7 @@ namespace SimpleStateMachineNodeEditor.ViewModel.NodesCanvas
             if (!WithoutSaving())
                 return;
             ClearScheme();
+            this.SetupStartState();
         }
         private void ClearScheme()
         {
@@ -239,8 +240,9 @@ namespace SimpleStateMachineNodeEditor.ViewModel.NodesCanvas
             this.NodesCount = 0;
             this.TransitionsCount = 0;
             this.SchemePath = "";
-       
-            this.SetupStartState();
+            this.JPEGPath = "";
+            WithoutMessages = false;
+            this.Messages.Clear();        
         }
         private void Open()
         {
@@ -252,9 +254,8 @@ namespace SimpleStateMachineNodeEditor.ViewModel.NodesCanvas
                 return;
 
             string fileName = Dialog.FileName;
-            this.Nodes.Clear();
-            this.Connects.Clear();
-
+            ClearScheme();
+            WithoutMessages = true;
             XDocument xDocument = XDocument.Load(fileName);
             XElement stateMachineXElement = xDocument.Element("StateMachine");
             if (stateMachineXElement == null)
@@ -297,10 +298,10 @@ namespace SimpleStateMachineNodeEditor.ViewModel.NodesCanvas
                     return;
             }
             SchemePath = fileName;
-            LogDebug("Scheme was imported from file \"{0}\"", SchemePath);
+
             #endregion  setup Transitions/connects
-
-
+            WithoutMessages = false;
+            LogDebug("Scheme was loaded from file \"{0}\"", SchemePath);
 
             bool WithError<T>(string errorMessage, Action<T> action, T obj)
             {
@@ -317,9 +318,10 @@ namespace SimpleStateMachineNodeEditor.ViewModel.NodesCanvas
                 return false;
             }
             void Error(string errorMessage)
-            {
-                LogError("File is not valid. " + errorMessage);
+            {              
                 ClearScheme();
+                LogError("File is not valid. " + errorMessage);
+                this.SetupStartState();
             }
         }
         private void Save()
@@ -511,32 +513,40 @@ namespace SimpleStateMachineNodeEditor.ViewModel.NodesCanvas
                 //MyPoint myPoint = parameter.Copy();
                 //myPoint /= Scale.Value;
                 newNode = new ViewModelNode(this, GetNameForNewNode(), parameter.Division(Scale.Value));
+               
             }
             else
             {
                 NodesCount--;
             }
             Nodes.Add(newNode);
+            LogDebug("Node with name \"{0}\" was added", newNode.Name);
             return newNode;
         }
         private ViewModelNode DeleteNodeWithUndoRedo(Point parameter, ViewModelNode result)
         {
             Nodes.Remove(result);
+            LogDebug("Node with name \"{0}\" was removed", result.Name);
             return result;
         }
         private ViewModelConnector AddConnectorWithConnect(ViewModelConnector parameter, ViewModelConnector result)
         {
             if (result == null)
+            {
                 return parameter;
+                
+            }
             else
                 TransitionsCount--;
 
             result.Node.CommandAddConnectorWithConnect.ExecuteWithSubscribe((1, result));
+            LogDebug("Transition with name \"{0}\" was added", result.Name);
             return result;
         }
         private ViewModelConnector DeleteConnectorWithConnect(ViewModelConnector parameter, ViewModelConnector result)
         {
             result.Node.CommandDeleteConnectorWithConnect.ExecuteWithSubscribe(result);
+            LogDebug("Transition with name \"{0}\" was removed", result.Name);
             return parameter;
         }
         private DeleteMode DeleteSelectedElements(DeleteMode parameter, DeleteMode result)
@@ -604,6 +614,7 @@ namespace SimpleStateMachineNodeEditor.ViewModel.NodesCanvas
             foreach (var element in result)
             {
                 element.connector.Node.CommandDeleteConnectorWithConnect.ExecuteWithSubscribe(element.connector);
+                LogDebug("Transition with name \"{0}\" was removed", element.connector.Name);
             }
             return result;
         }
@@ -613,6 +624,7 @@ namespace SimpleStateMachineNodeEditor.ViewModel.NodesCanvas
             {
                 TransitionsCount--;
                 element.connector.Node.CommandAddConnectorWithConnect.ExecuteWithSubscribe((element.index, element.connector));
+                LogDebug("Transition with name \"{0}\" was added", element.connector.Name);
             }
 
             return result;
@@ -641,10 +653,15 @@ namespace SimpleStateMachineNodeEditor.ViewModel.NodesCanvas
             foreach (var element in result.ConnectsToDeleteWithConnectors)
             {
                 element.connect.FromConnector.Node.CommandDeleteConnectorWithConnect.ExecuteWithSubscribe(element.connect.FromConnector);
+                LogDebug("Transition with name \"{0}\" was removed", element.connect.FromConnector.Name);
             }
 
             Connects.RemoveMany(result.ConnectsToDelete);
             Nodes.RemoveMany(result.NodesToDelete);
+            foreach(var node in result.NodesToDelete)
+            {
+                LogDebug("Node with name \"{0}\" was removed", node.Name);
+            }
 
             return result;
         }
@@ -652,12 +669,17 @@ namespace SimpleStateMachineNodeEditor.ViewModel.NodesCanvas
         {
             NodesCount -= result.NodesToDelete.Count;
             Nodes.AddRange(result.NodesToDelete);
+            foreach (var node in result.NodesToDelete)
+            {
+                LogDebug("Node with name \"{0}\" was added", node.Name);
+            }
             Connects.AddRange(result.ConnectsToDelete);
             result.ConnectsToDeleteWithConnectors.Sort(ElementsForDelete.Sort);
             foreach (var element in result.ConnectsToDeleteWithConnectors)
             {
                 TransitionsCount--;
                 element.connect.FromConnector.Node.CommandAddConnectorWithConnect.ExecuteWithSubscribe((element.connectorIndex, element.connect.FromConnector));
+                LogDebug("Transition with name \"{0}\" was added", element.connect.FromConnector.Name);
             }
 
             return result;

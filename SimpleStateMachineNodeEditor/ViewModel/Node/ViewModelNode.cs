@@ -215,6 +215,7 @@ namespace SimpleStateMachineNodeEditor.ViewModel
                 CurrentConnector.FormEnable = false;
                 if (string.IsNullOrEmpty(CurrentConnector.Name))
                     CurrentConnector.Name = "Transition " + NodesCanvas.TransitionsCount.ToString();
+               NodesCanvas.LogDebug("Transition with name \"{0}\" was added", CurrentConnector.Name);
             }
             double width = Size.Width == 0 ? 80 : Size.Width;
             CurrentConnector = new ViewModelConnector(NodesCanvas, this,"", Point1.Addition(width, 54))
@@ -256,7 +257,7 @@ namespace SimpleStateMachineNodeEditor.ViewModel
         {
             XElement element = new XElement("State");
             element.Add(new XAttribute("Name", Name));
-            element.Add(new XAttribute("Position", Point1.ToString()));
+            element.Add(new XAttribute("Position", PointExtensition.PointToString(Point1)));
             element.Add(new XAttribute("IsCollapse", IsCollapse.ToString()));
             return element;
         }
@@ -280,7 +281,7 @@ namespace SimpleStateMachineNodeEditor.ViewModel
             }
 
             var position =  node.Attribute("Position")?.Value;
-            Point point = string.IsNullOrEmpty(position) ? new Point() : Point.Parse(position);
+            Point point = string.IsNullOrEmpty(position) ? new Point() : PointExtensition.StringToPoint(position);
             viewModelNode = new ViewModelNode(nodesCanvas, name, point);
             var isCollapse = node.Attribute("IsCollapse")?.Value;
             if (isCollapse != null)

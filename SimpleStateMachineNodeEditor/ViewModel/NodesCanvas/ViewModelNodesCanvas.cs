@@ -40,8 +40,8 @@ namespace SimpleStateMachineNodeEditor.ViewModel.NodesCanvas
         /// Flag for close application
         /// </summary>
         [Reactive] public bool NeedExit { get; set; }
-
         [Reactive] public string JPEGPath{ get; set; }
+        [Reactive] public bool WithoutMessages { get; set; }
 
         public int NodesCount = 0;
         public int TransitionsCount = 1;
@@ -63,6 +63,7 @@ namespace SimpleStateMachineNodeEditor.ViewModel.NodesCanvas
         private void SetupSubscriptions()
         {
             this.WhenAnyValue(x => x.Nodes.Count).Buffer(2, 1).Select(x => (Previous: x[0], Current: x[1])).Subscribe(x => UpdateCount(x.Previous, x.Current));
+            //this.WhenAnyValue(x => x.CountError).Buffer(2, 1).Where(x => x[1] > x[0]).Subscribe(_ => DisplayMessageType = TypeMessage.Error).DisposeWith(disposable);
         }
 
         #endregion Setup Subscriptions
@@ -90,19 +91,24 @@ namespace SimpleStateMachineNodeEditor.ViewModel.NodesCanvas
 
         public void LogDebug(string message, params object[] args)
         {
-            Messages.Add(new ViewModelMessage(TypeMessage.Debug, string.Format(message, args)));
+            if(!WithoutMessages)
+                Messages.Add(new ViewModelMessage(TypeMessage.Debug, string.Format(message, args)));
         }
         public void LogError(string message, params object[] args)
         {
-            Messages.Add(new ViewModelMessage(TypeMessage.Error, string.Format(message, args)));
+            DisplayMessageType = TypeMessage.Error;
+            if (!WithoutMessages)
+                Messages.Add(new ViewModelMessage(TypeMessage.Error, string.Format(message, args)));
         }
         public void LogInformation(string message, params object[] args)
         {
-            Messages.Add(new ViewModelMessage(TypeMessage.Information, string.Format(message, args)));
+            if (!WithoutMessages)
+                Messages.Add(new ViewModelMessage(TypeMessage.Information, string.Format(message, args)));
         }
         public void LogWarning(string message, params object[] args)
         {
-            Messages.Add(new ViewModelMessage(TypeMessage.Warning, string.Format(message, args)));
+            if (!WithoutMessages)
+                Messages.Add(new ViewModelMessage(TypeMessage.Warning, string.Format(message, args)));
         }
 
         #endregion Logging

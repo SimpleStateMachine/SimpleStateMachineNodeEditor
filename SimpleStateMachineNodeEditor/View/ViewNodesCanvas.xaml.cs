@@ -43,10 +43,6 @@ namespace SimpleStateMachineNodeEditor.View
             set { ViewModel = (ViewModelNodesCanvas)value; }
         }
         #endregion ViewModel
-
-        private Point PositionDragOver { get; set; }
-        private Point PositionRightClick { get; set; } = new Point();
-        [Reactive] public Point PositionLeftClick { get; set; } = new Point();
         private Point PositionMove { get; set; }
 
         private Point SumMove { get; set; }
@@ -89,13 +85,6 @@ namespace SimpleStateMachineNodeEditor.View
         {
             this.WhenActivated(disposable =>
             {
-                //this.WhenAnyValue(x => x.PositionLeftClick).Subscribe(x => Test(x)).DisposeWith(disposable);
-                var positionLeftClickObservable = this.WhenAnyValue(x => x.PositionLeftClick);
-                var positionRightClickObservable = this.WhenAnyValue(x => x.PositionRightClick).Select(x => x);
-
-
-                //IObservable<Point> positionLeftClickObservable = this.WhenAnyValue(x => x.PositionLeftClick).;
-                //IObservable<Point> positionRightClickObservable = this.WhenAnyValue(x => x.PositionRightClick);
 
                 this.BindCommand(this.ViewModel, x => x.CommandSelect,              x => x.BindingSelect, x => x.PositionRight).DisposeWith(disposable);
                 this.BindCommand(this.ViewModel, x => x.CommandCut,                 x => x.BindingCut, x => x.PositionRight).DisposeWith(disposable);
@@ -225,13 +214,11 @@ namespace SimpleStateMachineNodeEditor.View
         }
         private void OnEventPreviewMouseLeftButtonDown(MouseButtonEventArgs e)
         {
-             PositionLeftClick = e.GetPosition(this.Canvas);
-            this.ViewModel.PositionRight = PositionLeftClick;
+            this.ViewModel.PositionRight = e.GetPosition(this.Canvas);
         }
         private void OnEventPreviewMouseRightButtonDown(MouseButtonEventArgs e)
         {
-            PositionRightClick = e.GetPosition(this.Canvas);
-            this.ViewModel.PositionLeft = PositionRightClick;
+            this.ViewModel.PositionLeft = e.GetPosition(this.Canvas);
         }
 
         #endregion Setup Events
