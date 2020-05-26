@@ -104,6 +104,7 @@ namespace SimpleStateMachineNodeEditor.View
         }
         private void OnEventDrop(DragEventArgs e)
         {
+            this.ViewModel.FormStroke = Application.Current.Resources["ColorNodesCanvasBackground"] as SolidColorBrush;
             this.ViewModel.CommandConnectPointDrop.ExecuteWithSubscribe();
             e.Handled = true;
         }
@@ -117,9 +118,7 @@ namespace SimpleStateMachineNodeEditor.View
 
             positionConnectPoint = this.TransformToAncestor(NodesCanvas).Transform(positionConnectPoint);
 
-            MyPoint Position = MyPoint.CreateFromPoint(positionConnectPoint)/ this.ViewModel.NodesCanvas.Scale.Value;
-
-            this.ViewModel.PositionConnectPoint.Set(Position);
+            this.ViewModel.PositionConnectPoint = positionConnectPoint.Division(this.ViewModel.NodesCanvas.Scale.Value);
         }
     }
 }

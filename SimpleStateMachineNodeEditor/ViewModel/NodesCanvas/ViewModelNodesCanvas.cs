@@ -12,6 +12,7 @@ using Splat;
 using SimpleStateMachineNodeEditor.ViewModel.Connector;
 using SimpleStateMachineNodeEditor.ViewModel.Connect;
 using SimpleStateMachineNodeEditor.Helpers;
+using System.Windows;
 
 namespace SimpleStateMachineNodeEditor.ViewModel.NodesCanvas
 {
@@ -22,6 +23,7 @@ namespace SimpleStateMachineNodeEditor.ViewModel.NodesCanvas
         public ObservableCollectionExtended<ViewModelNode> Nodes = new ObservableCollectionExtended<ViewModelNode>();
         public ObservableCollectionExtended<ViewModelMessage> Messages { get; set; } = new ObservableCollectionExtended<ViewModelMessage>();
 
+        [Reactive] public Point Position { get; set; }
         [Reactive] public ViewModelSelector Selector { get; set; } = new ViewModelSelector();
         [Reactive] public ViewModelDialog Dialog { get; set; } = new ViewModelDialog();
         [Reactive] public ViewModelCutter Cutter { get; set; }
@@ -69,7 +71,7 @@ namespace SimpleStateMachineNodeEditor.ViewModel.NodesCanvas
         private void SetupStartState()
         {
             string name = Nodes.Any(x => x.Name == "Start") ? GetNameForNewNode() : "Start";
-            StartState = new ViewModelNode(this, name, new MyPoint());
+            StartState = new ViewModelNode(this, name, new Point());
             SetAsStart(StartState);
             Nodes.Add(StartState);
             this.ItSaved = true;

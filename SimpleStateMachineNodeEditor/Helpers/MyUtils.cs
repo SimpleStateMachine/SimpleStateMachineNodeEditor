@@ -112,7 +112,7 @@ namespace SimpleStateMachineNodeEditor.Helpers
             }
         }
 
-        public static bool CheckIntersectTwoRectangles(MyPoint a1, MyPoint a2, MyPoint b1, MyPoint b2)
+        public static bool CheckIntersectTwoRectangles(Point a1, Point a2, Point b1, Point b2)
         {
             bool par1 = a1.X > b2.X; //second before first
             bool par2 = b1.X > a2.X; //first before second
@@ -123,13 +123,13 @@ namespace SimpleStateMachineNodeEditor.Helpers
             return !(par1 || par2 || par3 || par4);
         }
 
-        public static MyPoint GetStartPointDiagonal(MyPoint a1, MyPoint b1)
+        public static Point GetStartPointDiagonal(Point a1, Point b1)
         {
-            return new MyPoint(Math.Min(a1.X, b1.X), Math.Min(a1.Y, b1.Y));
+            return new Point(Math.Min(a1.X, b1.X), Math.Min(a1.Y, b1.Y));
         }
-        public static MyPoint GetEndPointDiagonal(MyPoint a1, MyPoint b1)
+        public static Point GetEndPointDiagonal(Point a1, Point b1)
         {
-            return new MyPoint(Math.Max(a1.X, b1.X), Math.Max(a1.Y, b1.Y));
+            return new Point(Math.Max(a1.X, b1.X), Math.Max(a1.Y, b1.Y));
         }
 
         #region Check on intersections curve Bezier and line
@@ -143,7 +143,7 @@ namespace SimpleStateMachineNodeEditor.Helpers
 
 
         //Gets coefficients of curve Bezier 
-        private static Point[] bezierCoeffs(MyPoint bezierStartPoint, MyPoint bezierPoint1, MyPoint bezierPoint2, MyPoint bezierEndPoint)
+        private static Point[] bezierCoeffs(Point bezierStartPoint, Point bezierPoint1, Point bezierPoint2, Point bezierEndPoint)
         {
             Point[] coeffs = new Point[4];
             double bezierStartPointX_M_3 = bezierStartPoint.X * 3.0;
@@ -258,7 +258,7 @@ namespace SimpleStateMachineNodeEditor.Helpers
         }
 
         //Check on intersections curve Bezier and line
-        public static bool CheckIntersectCubicBezierCurveAndLine(MyPoint bezierStartPoint, MyPoint bezierPoint1, MyPoint bezierPoint2, MyPoint bezierEndPoint, MyPoint lineStartPoint, MyPoint lineEndPoint)
+        public static bool CheckIntersectCubicBezierCurveAndLine(Point bezierStartPoint, Point bezierPoint1, Point bezierPoint2, Point bezierEndPoint, Point lineStartPoint, Point lineEndPoint)
         {
             // coefficients of line
             double A = lineEndPoint.Y - lineStartPoint.Y;// A = y2 - y1
@@ -279,9 +279,9 @@ namespace SimpleStateMachineNodeEditor.Helpers
             //find roots of cubic
             var r = cubicRoots(P[0], P[1], P[2], P[3]);
 
-            List<MyPoint> X = new List<MyPoint>();
+            List<Point> X = new List<Point>();
             double t;
-            MyPoint p;
+            Point p;
             double s;
             double tMt;
             double tMtMt;
@@ -294,7 +294,7 @@ namespace SimpleStateMachineNodeEditor.Helpers
                 tMtMt = tMt * t; 
 
                 #endregion some optimization
-                p = new MyPoint
+                p = new Point
                 (
                    coeffs[0].X * tMtMt + coeffs[1].X * tMt + coeffs[2].X * t + coeffs[3].X,
                    coeffs[0].Y * tMtMt + coeffs[1].Y * tMt + coeffs[2].Y * t + coeffs[3].Y

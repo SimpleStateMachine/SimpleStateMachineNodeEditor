@@ -52,10 +52,10 @@ namespace SimpleStateMachineNodeEditor.ViewModel.NodesCanvas
         public ReactiveCommand<(ViewModelNode objectForValidate, string newValue), Unit> CommandValidateNodeName { get; set; }
         public ReactiveCommand<(ViewModelConnector objectForValidate, string newValue), Unit> CommandValidateConnectName { get; set; }
         public ReactiveCommand<int, Unit> CommandZoom { get; set; }
-        public ReactiveCommand<MyPoint, Unit> CommandSelect { get; set; }
-        public ReactiveCommand<MyPoint, Unit> CommandCut { get; set; }
-        public ReactiveCommand<MyPoint, Unit> CommandPartMoveAllNode { get; set; }
-        public ReactiveCommand<MyPoint, Unit> CommandPartMoveAllSelectedNode { get; set; }
+        public ReactiveCommand<Point, Unit> CommandSelect { get; set; }
+        public ReactiveCommand<Point, Unit> CommandCut { get; set; }
+        public ReactiveCommand<Point, Unit> CommandPartMoveAllNode { get; set; }
+        public ReactiveCommand<Point, Unit> CommandPartMoveAllSelectedNode { get; set; }
         public ReactiveCommand<string, Unit> CommandLogDebug { get; set; }
         public ReactiveCommand<string, Unit> CommandLogError { get; set; }
         public ReactiveCommand<string, Unit> CommandLogInformation { get; set; }
@@ -66,9 +66,9 @@ namespace SimpleStateMachineNodeEditor.ViewModel.NodesCanvas
         #region commands with undo-redo
 
         public Command<ViewModelConnector, ViewModelConnector> CommandAddConnectorWithConnect { get; set; }
-        public Command<MyPoint, List<ViewModelNode>> CommandFullMoveAllNode { get; set; }
-        public Command<MyPoint, List<ViewModelNode>> CommandFullMoveAllSelectedNode { get; set; }
-        public Command<MyPoint, ViewModelNode> CommandAddNodeWithUndoRedo { get; set; }
+        public Command<Point, List<ViewModelNode>> CommandFullMoveAllNode { get; set; }
+        public Command<Point, List<ViewModelNode>> CommandFullMoveAllSelectedNode { get; set; }
+        public Command<Point, ViewModelNode> CommandAddNodeWithUndoRedo { get; set; }
         public Command<ElementsForDelete, ElementsForDelete> CommandDeleteSelectedNodes { get; set; }
         public Command<List<(int index, ViewModelConnector element)>, List<(int index, ViewModelConnector element)>> CommandDeleteSelectedConnectors { get; set; }
         public Command<DeleteMode, DeleteMode> CommandDeleteSelectedElements { get; set; }
@@ -109,20 +109,20 @@ namespace SimpleStateMachineNodeEditor.ViewModel.NodesCanvas
             CommandLogError = ReactiveCommand.Create<string>((message) => LogError(message));
             CommandLogInformation = ReactiveCommand.Create<string>((message) => LogInformation(message));
             CommandLogWarning = ReactiveCommand.Create<string>((message) => LogWarning(message));
-            CommandSelect = ReactiveCommand.Create<MyPoint>(StartSelect);
-            CommandCut = ReactiveCommand.Create<MyPoint>(StartCut);
+            CommandSelect = ReactiveCommand.Create<Point>(StartSelect);
+            CommandCut = ReactiveCommand.Create<Point>(StartCut);
             CommandAddDraggedConnect = ReactiveCommand.Create<ViewModelConnector>(AddDraggedConnect);
             CommandDeleteDraggedConnect = ReactiveCommand.Create(DeleteDraggedConnect);
                        
             
-            CommandPartMoveAllNode = ReactiveCommand.Create<MyPoint>(PartMoveAllNode);
-            CommandPartMoveAllSelectedNode = ReactiveCommand.Create<MyPoint>(PartMoveAllSelectedNode);
+            CommandPartMoveAllNode = ReactiveCommand.Create<Point>(PartMoveAllNode);
+            CommandPartMoveAllSelectedNode = ReactiveCommand.Create<Point>(PartMoveAllSelectedNode);
 
 
-            CommandFullMoveAllNode = new Command<MyPoint, List<ViewModelNode>>(FullMoveAllNode, UnFullMoveAllNode, NotSaved);
-            CommandFullMoveAllSelectedNode = new Command<MyPoint, List<ViewModelNode>>(FullMoveAllSelectedNode, UnFullMoveAllSelectedNode, NotSaved);
+            CommandFullMoveAllNode = new Command<Point, List<ViewModelNode>>(FullMoveAllNode, UnFullMoveAllNode, NotSaved);
+            CommandFullMoveAllSelectedNode = new Command<Point, List<ViewModelNode>>(FullMoveAllSelectedNode, UnFullMoveAllSelectedNode, NotSaved);
             CommandAddConnectorWithConnect = new Command<ViewModelConnector, ViewModelConnector>(AddConnectorWithConnect, DeleteConnectorWithConnect, NotSaved);
-            CommandAddNodeWithUndoRedo = new Command<MyPoint, ViewModelNode>(AddNodeWithUndoRedo, DeleteNodeWithUndoRedo, NotSaved);
+            CommandAddNodeWithUndoRedo = new Command<Point, ViewModelNode>(AddNodeWithUndoRedo, DeleteNodeWithUndoRedo, NotSaved);
             CommandDeleteSelectedNodes = new Command<ElementsForDelete, ElementsForDelete>(DeleteSelectedNodes, UnDeleteSelectedNodes, NotSaved);
             CommandDeleteSelectedConnectors = new Command<List<(int index, ViewModelConnector element)>, List<(int index, ViewModelConnector connector)>>(DeleteSelectedConnectors, UnDeleteSelectedConnectors, NotSaved);
             CommandDeleteSelectedElements = new Command<DeleteMode, DeleteMode>(DeleteSelectedElements, UnDeleteSelectedElements);
@@ -192,8 +192,8 @@ namespace SimpleStateMachineNodeEditor.ViewModel.NodesCanvas
         }
         private void SelectConnects()
         {
-            MyPoint cutterStartPoint = Cutter.StartPoint / Scale.Value;
-            MyPoint cutterEndPoint = Cutter.EndPoint / Scale.Value;
+            Point cutterStartPoint = Cutter.StartPoint.Division(Scale.Value);
+            Point cutterEndPoint = Cutter.EndPoint.Division(Scale.Value);
 
             var connects = Connects.Where(x => MyUtils.CheckIntersectTwoRectangles(MyUtils.GetStartPointDiagonal(x.StartPoint, x.EndPoint), MyUtils.GetEndPointDiagonal(x.StartPoint, x.EndPoint),
                                                MyUtils.GetStartPointDiagonal(cutterStartPoint, cutterEndPoint), MyUtils.GetEndPointDiagonal(cutterStartPoint, cutterEndPoint)));
@@ -210,8 +210,8 @@ namespace SimpleStateMachineNodeEditor.ViewModel.NodesCanvas
         }
         private void SelectNodes()
         {
-            MyPoint selectorPoint1 = Selector.Point1WithScale / Scale.Value;
-            MyPoint selectorPoint2 = Selector.Point2WithScale / Scale.Value;
+            Point selectorPoint1 = Selector.Point1WithScale.Division(Scale.Value);
+            Point selectorPoint2 = Selector.Point2WithScale.Division(Scale.Value);
 
             foreach (ViewModelNode node in Nodes)
             {
@@ -379,20 +379,20 @@ namespace SimpleStateMachineNodeEditor.ViewModel.NodesCanvas
         }
 
 
-        private void StartSelect(MyPoint point)
+        private void StartSelect(Point point)
         {
             Selector.CommandStartSelect.ExecuteWithSubscribe(point);
         }
-        private void StartCut(MyPoint point)
+        private void StartCut(Point point)
         {
             Cutter.CommandStartCut.ExecuteWithSubscribe(point);
         }
-        private void PartMoveAllNode(MyPoint delta)
+        private void PartMoveAllNode(Point delta)
         {
             foreach (var node in Nodes)
             { node.CommandMove.ExecuteWithSubscribe(delta); }
         }
-        private void PartMoveAllSelectedNode(MyPoint delta)
+        private void PartMoveAllSelectedNode(Point delta)
         {
             foreach (var node in Nodes.Where(x => x.Selected))
             { node.CommandMove.ExecuteWithSubscribe(delta); }
@@ -468,50 +468,49 @@ namespace SimpleStateMachineNodeEditor.ViewModel.NodesCanvas
         }
 
 
-        private List<ViewModelNode> FullMoveAllNode(MyPoint delta, List<ViewModelNode> nodes = null)
+        private List<ViewModelNode> FullMoveAllNode(Point delta, List<ViewModelNode> nodes = null)
         {
-            MyPoint myPoint = delta.Copy();
             if (nodes == null)
             {
                 nodes = Nodes.ToList();
-                myPoint.Clear();
+                delta = new Point();
             }
-            nodes.ForEach(node => node.CommandMove.ExecuteWithSubscribe(myPoint));
+            nodes.ForEach(node => node.CommandMove.ExecuteWithSubscribe(delta));
             return nodes;
         }
-        private List<ViewModelNode> UnFullMoveAllNode(MyPoint delta, List<ViewModelNode> nodes = null)
+        private List<ViewModelNode> UnFullMoveAllNode(Point delta, List<ViewModelNode> nodes = null)
         {
-            MyPoint myPoint = delta.Copy();
+            Point myPoint = delta.Copy();
             myPoint.Mirror();
             nodes.ForEach(node => node.CommandMove.ExecuteWithSubscribe(myPoint));
             return nodes;
         }
-        private List<ViewModelNode> FullMoveAllSelectedNode(MyPoint delta, List<ViewModelNode> nodes = null)
+        private List<ViewModelNode> FullMoveAllSelectedNode(Point delta, List<ViewModelNode> nodes = null)
         {
-            MyPoint myPoint = delta.Copy();
+            Point myPoint = delta.Copy();
             if (nodes == null)
             {
                 nodes = Nodes.Where(x => x.Selected).ToList();
-                myPoint.Clear();
+                myPoint = new Point();
             }
             nodes.ForEach(node => node.CommandMove.ExecuteWithSubscribe(myPoint));
             return nodes;
         }
-        private List<ViewModelNode> UnFullMoveAllSelectedNode(MyPoint delta, List<ViewModelNode> nodes = null)
+        private List<ViewModelNode> UnFullMoveAllSelectedNode(Point delta, List<ViewModelNode> nodes = null)
         {
-            MyPoint myPoint = delta.Copy();
+            Point myPoint = delta.Copy();
             myPoint.Mirror();
             nodes.ForEach(node => node.CommandMove.ExecuteWithSubscribe(myPoint));
             return nodes;
         }
-        private ViewModelNode AddNodeWithUndoRedo(MyPoint parameter, ViewModelNode result)
+        private ViewModelNode AddNodeWithUndoRedo(Point parameter, ViewModelNode result)
         {
             ViewModelNode newNode = result;
             if (result == null)
             {
                 //MyPoint myPoint = parameter.Copy();
                 //myPoint /= Scale.Value;
-                newNode = new ViewModelNode(this, GetNameForNewNode(), parameter /Scale.Value);
+                newNode = new ViewModelNode(this, GetNameForNewNode(), parameter.Division(Scale.Value));
             }
             else
             {
@@ -520,7 +519,7 @@ namespace SimpleStateMachineNodeEditor.ViewModel.NodesCanvas
             Nodes.Add(newNode);
             return newNode;
         }
-        private ViewModelNode DeleteNodeWithUndoRedo(MyPoint parameter, ViewModelNode result)
+        private ViewModelNode DeleteNodeWithUndoRedo(Point parameter, ViewModelNode result)
         {
             Nodes.Remove(result);
             return result;

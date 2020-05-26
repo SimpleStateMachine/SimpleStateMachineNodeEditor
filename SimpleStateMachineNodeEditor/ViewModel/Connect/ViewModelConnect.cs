@@ -16,10 +16,10 @@ namespace SimpleStateMachineNodeEditor.ViewModel.Connect
 {
     public class ViewModelConnect : ReactiveObject
     {
-        [Reactive] public MyPoint StartPoint { get; set; } = new MyPoint();
-        [Reactive] public MyPoint EndPoint { get; set; } = new MyPoint();
-        [Reactive] public MyPoint Point1 { get; set; } = new MyPoint();
-        [Reactive] public MyPoint Point2 { get; set; } = new MyPoint();
+        [Reactive] public Point StartPoint { get; set; }
+        [Reactive] public Point EndPoint { get; set; }
+        [Reactive] public Point Point1 { get; set; }
+        [Reactive] public Point Point2 { get; set; }
 
         [Reactive] public Brush Stroke { get; set; } = Application.Current.Resources["ColorConnect"] as SolidColorBrush;
 
@@ -45,9 +45,9 @@ namespace SimpleStateMachineNodeEditor.ViewModel.Connect
 
         private void SetupSubscriptions()
         {
-            this.WhenAnyValue(x => x.StartPoint.Value, x => x.EndPoint.Value).Subscribe(_ => UpdateMedium());
+            this.WhenAnyValue(x => x.StartPoint, x => x.EndPoint).Subscribe(_ => UpdateMedium());
             this.WhenAnyValue(x => x.FromConnector.Node.IsCollapse).Subscribe(value => UpdateSubscriptionForPosition(value));           
-            this.WhenAnyValue(x => x.ToConnector.PositionConnectPoint.Value).Subscribe(value => EndPointUpdate(value));
+            this.WhenAnyValue(x => x.ToConnector.PositionConnectPoint).Subscribe(value => EndPointUpdate(value));
             this.WhenAnyValue(x => x.FromConnector.Selected).Subscribe(value => Select(value));
         }
         private void UpdateSubscriptionForPosition(bool nodeIsCollapse)
@@ -55,13 +55,13 @@ namespace SimpleStateMachineNodeEditor.ViewModel.Connect
             if(!nodeIsCollapse)
             {
                 subscriptionOnOutputPositionChange?.Dispose();
-                subscriptionOnConnectorPositionChange = this.WhenAnyValue(x => x.FromConnector.PositionConnectPoint.Value).Subscribe(value => StartPointUpdate(value));
+                subscriptionOnConnectorPositionChange = this.WhenAnyValue(x => x.FromConnector.PositionConnectPoint).Subscribe(value => StartPointUpdate(value));
                 
             }
             else
             {
                 subscriptionOnConnectorPositionChange?.Dispose();
-                subscriptionOnOutputPositionChange = this.WhenAnyValue(x => x.FromConnector.Node.Output.PositionConnectPoint.Value).Subscribe(value => StartPointUpdate(value));              
+                subscriptionOnOutputPositionChange = this.WhenAnyValue(x => x.FromConnector.Node.Output.PositionConnectPoint).Subscribe(value => StartPointUpdate(value));              
             }
         }
         private void Initial(ViewModelNodesCanvas viewModelNodesCanvas, ViewModelConnector fromConnector)
@@ -77,21 +77,21 @@ namespace SimpleStateMachineNodeEditor.ViewModel.Connect
         }
         private void ToConnectChanged()
         {
-            EndPointUpdate(ToConnector.PositionConnectPoint.ToPoint());
+            EndPointUpdate(ToConnector.PositionConnectPoint);
         }
         private void StartPointUpdate(Point point)
         {
-            StartPoint.Set(point);
+            StartPoint = point;
         }
         private void EndPointUpdate(Point point)
         {
-            EndPoint.Set(point);
+            EndPoint = point;
         }
         private void UpdateMedium()
         {
-            MyPoint different = EndPoint - StartPoint;
-            Point1.Set(StartPoint.X + 3 * different.X / 8, StartPoint.Y + 1 * different.Y / 8);
-            Point2.Set(StartPoint.X + 5 * different.X / 8, StartPoint.Y + 7 * different.Y / 8);
+            Point different = EndPoint.Subtraction(StartPoint);
+            Point1 = new Point(StartPoint.X + 3 * different.X / 8, StartPoint.Y + 1 * different.Y / 8);
+            Point2 = new Point(StartPoint.X + 5 * different.X / 8, StartPoint.Y + 7 * different.Y / 8);
         }
 
         #endregion Setup Subscriptions

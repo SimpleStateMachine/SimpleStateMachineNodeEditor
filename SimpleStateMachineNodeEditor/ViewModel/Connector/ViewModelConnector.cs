@@ -17,7 +17,7 @@ namespace SimpleStateMachineNodeEditor.ViewModel.Connector
 {
     public partial class ViewModelConnector : ReactiveObject
     {
-        [Reactive] public MyPoint PositionConnectPoint { get; set; } 
+        [Reactive] public Point PositionConnectPoint { get; set; } 
         [Reactive] public string Name { get; set; }
         [Reactive] public bool TextEnable { get; set; } = false;
         [Reactive] public bool? Visible { get; set; } = true;
@@ -31,12 +31,12 @@ namespace SimpleStateMachineNodeEditor.ViewModel.Connector
         [Reactive] public bool ItsLoop { get; set; } = false;
         [Reactive] public ViewModelNodesCanvas NodesCanvas { get; set; }
         [Reactive] public bool Selected { get; set; }
-        public ViewModelConnector(ViewModelNodesCanvas nodesCanvas, ViewModelNode viewModelNode, string name,  MyPoint myPoint)
+        public ViewModelConnector(ViewModelNodesCanvas nodesCanvas, ViewModelNode viewModelNode, string name, Point myPoint)
         {
             Node = viewModelNode;
             NodesCanvas = nodesCanvas;
             Name = name;
-            PositionConnectPoint = new MyPoint(myPoint);
+            PositionConnectPoint = myPoint;
             SetupCommands();
             SetupSubscriptions();
         }
@@ -44,7 +44,11 @@ namespace SimpleStateMachineNodeEditor.ViewModel.Connector
         private void SetupSubscriptions()
         {
             this.WhenAnyValue(x => x.Selected).Subscribe(value => Select(value));
-            this.WhenAnyValue(x => x.Node.Point1).Buffer(2, 1).Subscribe(value => PositionConnectPoint.Add(value[1] - value[0]));
+            this.WhenAnyValue(x => x.Node.Point1).Buffer(2, 1).Subscribe(value => PositionConnectPoint = PositionConnectPoint.Addition(value[1].Subtraction(value[0])));
+
+        }
+        private void Test(Point point)
+        {
 
         }
 

@@ -193,7 +193,6 @@ namespace SimpleStateMachineNodeEditor.View
         private  void UpdatePosition()
         {
             Point positionConnectPoint;
-            MyPoint Position;
 
             if((!ViewModel.Node.IsCollapse)||(ViewModel.Node.IsCollapse && this.ViewModel.Name == "Output"))
             {
@@ -203,21 +202,20 @@ namespace SimpleStateMachineNodeEditor.View
 
                 positionConnectPoint = this.TransformToAncestor(NodesCanvas).Transform(positionConnectPoint);
 
-                Position  = positionConnectPoint.ToMyPoint()/ this.ViewModel.NodesCanvas.Scale.Value;
+                positionConnectPoint = positionConnectPoint.Division(this.ViewModel.NodesCanvas.Scale.Value);
 
             }
             else
             {
-                positionConnectPoint = this.ViewModel.Node.Output.PositionConnectPoint.Value;
+                positionConnectPoint = this.ViewModel.Node.Output.PositionConnectPoint;
 
-                Position = positionConnectPoint.ToMyPoint();
             }
 
             if (this.ViewModel.Name == "Output")
             {
-                this.ViewModel.NodesCanvas.LogDebug(Position.ToString());
+                this.ViewModel.NodesCanvas.LogDebug(positionConnectPoint.ToString());
             }
-            this.ViewModel.PositionConnectPoint.Set(Position);
+            this.ViewModel.PositionConnectPoint = positionConnectPoint;
         }
 
     }

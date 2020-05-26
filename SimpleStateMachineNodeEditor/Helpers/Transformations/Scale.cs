@@ -1,14 +1,17 @@
 ﻿using ReactiveUI;
 using ReactiveUI.Fody.Helpers;
+using SimpleStateMachineNodeEditor.Helpers.Extensions;
+using Splat;
 using System;
 using System.Reactive.Linq;
+using System.Windows;
 
 namespace SimpleStateMachineNodeEditor.Helpers.Transformations
 {
     public class Scale : ReactiveObject
     {
-        [Reactive] public MyPoint Scales { get; set; } = new MyPoint(1, 1);
-        [Reactive] public MyPoint Center { get; set; } = new MyPoint();
+        [Reactive] public Point Scales { get; set; } = new Point(1, 1);
+        [Reactive] public Point Center { get; set; }
 
         [Reactive] public double Value { get; set; } = 1.0;
 
@@ -32,7 +35,7 @@ namespace SimpleStateMachineNodeEditor.Helpers.Transformations
 
         public Scale()
         {
-            this.WhenAnyValue(x => x.Value).Subscribe(value => Scales.Set(value, value));
+            this.WhenAnyValue(x => x.Value).Subscribe(value => Scales = PointExtensition.CreatePoint(value));
         }
     }
 }

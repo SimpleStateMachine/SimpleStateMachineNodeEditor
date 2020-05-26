@@ -51,13 +51,13 @@ namespace SimpleStateMachineNodeEditor.View
             {
                 this.OneWayBind(this.ViewModel, x => x.Stroke, x => x.PathElement.Stroke).DisposeWith(disposable);
 
-                this.OneWayBind(this.ViewModel, x => x.StartPoint.Value, x => x.PathFigureElement.StartPoint).DisposeWith(disposable);
+                this.OneWayBind(this.ViewModel, x => x.StartPoint, x => x.PathFigureElement.StartPoint).DisposeWith(disposable);
 
-                this.OneWayBind(this.ViewModel, x => x.Point1.Value, x => x.BezierSegmentElement.Point1).DisposeWith(disposable);
+                this.OneWayBind(this.ViewModel, x => x.Point1, x => x.BezierSegmentElement.Point1).DisposeWith(disposable);
 
-                this.OneWayBind(this.ViewModel, x => x.Point2.Value, x => x.BezierSegmentElement.Point2).DisposeWith(disposable);
+                this.OneWayBind(this.ViewModel, x => x.Point2, x => x.BezierSegmentElement.Point2).DisposeWith(disposable);
 
-                this.OneWayBind(this.ViewModel, x => x.EndPoint.Value, x => x.BezierSegmentElement.Point3).DisposeWith(disposable);
+                this.OneWayBind(this.ViewModel, x => x.EndPoint, x => x.BezierSegmentElement.Point3).DisposeWith(disposable);
 
                 this.OneWayBind(this.ViewModel, x => x.StrokeDashArray, x => x.PathElement.StrokeDashArray).DisposeWith(disposable);
 

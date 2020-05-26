@@ -25,8 +25,8 @@ namespace SimpleStateMachineNodeEditor.ViewModel
 {
     public class ViewModelNode : ReactiveValidationObject<ViewModelNode>
     {
-        [Reactive] public MyPoint Point1 { get; set; }
-        [Reactive] public MyPoint Point2 { get; set; } = new MyPoint();
+        [Reactive] public Point Point1 { get; set; }
+        [Reactive] public Point Point2 { get; set; }
         [Reactive] public Size Size { get; set; }
         [Reactive] public string Name { get; set; }
         [Reactive] public bool NameEnable { get; set; } = true;
@@ -52,7 +52,7 @@ namespace SimpleStateMachineNodeEditor.ViewModel
         }
 
 
-        public ViewModelNode(ViewModelNodesCanvas nodesCanvas, string name, MyPoint point)
+        public ViewModelNode(ViewModelNodesCanvas nodesCanvas, string name, Point point)
         {
             NodesCanvas = nodesCanvas;
             Name = name;
@@ -76,15 +76,15 @@ namespace SimpleStateMachineNodeEditor.ViewModel
         {
             this.WhenAnyValue(x => x.Selected).Subscribe(value => { this.BorderBrush = value ? Application.Current.Resources["ColorSelectedElement"] as SolidColorBrush : Brushes.LightGray; });
             this.WhenAnyValue(x => x.Transitions.Count).Buffer(2, 1).Select(x => (Previous: x[0], Current: x[1])).Subscribe(x => UpdateCount(x.Previous, x.Current));
-            this.WhenAnyValue(x => x.Point1.Value, x => x.Size).Subscribe(_ => UpdatePoint2());
+            this.WhenAnyValue(x => x.Point1, x => x.Size).Subscribe(_ => UpdatePoint2());
             this.WhenAnyValue(x => x.IsCollapse).Subscribe(value => Collapse(value));
         }
         #endregion Setup Subscriptions
         #region Connectors
         private void SetupConnectors()
         {
-            Input = new ViewModelConnector(NodesCanvas, this, "Input", new MyPoint(Point1.X, Point1.Y + 30));
-            Output = new ViewModelConnector(NodesCanvas, this, "Output", new MyPoint(Point1.X + 80, Point1.Y + 54))
+            Input = new ViewModelConnector(NodesCanvas, this, "Input", Point1.Addition(0, 30));
+            Output = new ViewModelConnector(NodesCanvas, this, "Output", Point1.Addition(80, 54))
             {
                 Visible = null
             };
@@ -97,7 +97,7 @@ namespace SimpleStateMachineNodeEditor.ViewModel
         public ReactiveCommand<Unit, Unit> CommandUnSelectedAllConnectors { get; set; }
         public ReactiveCommand<Unit, Unit> CommandAddEmptyConnector { get; set; }
         public ReactiveCommand<SelectMode, Unit> CommandSelect { get; set; }
-        public ReactiveCommand<MyPoint, Unit> CommandMove { get; set; }
+        public ReactiveCommand<Point, Unit> CommandMove { get; set; }
         public ReactiveCommand<(int index, ViewModelConnector connector), Unit> CommandAddConnectorWithConnect { get; set; }
         public ReactiveCommand<ViewModelConnector, Unit> CommandDeleteConnectorWithConnect { get; set; }
         public ReactiveCommand<string, Unit> CommandValidateName { get; set; }
@@ -108,7 +108,7 @@ namespace SimpleStateMachineNodeEditor.ViewModel
         private void SetupCommands()
         {
             CommandSelect = ReactiveCommand.Create<SelectMode>(Select);
-            CommandMove = ReactiveCommand.Create<MyPoint>(Move);
+            CommandMove = ReactiveCommand.Create<Point>(Move);
             CommandAddEmptyConnector = ReactiveCommand.Create(AddEmptyConnector);
             CommandSelectWithShiftForConnectors = ReactiveCommand.Create<ViewModelConnector>(SelectWithShiftForConnectors);
             CommandSetConnectorAsStartSelect = ReactiveCommand.Create<ViewModelConnector>(SetConnectorAsStartSelect);
@@ -189,10 +189,10 @@ namespace SimpleStateMachineNodeEditor.ViewModel
                 this.Selected = true;
             }
         }
-        private void Move(MyPoint delta)
+        private void Move(Point delta)
         {
-            MyPoint moveValue = delta / NodesCanvas.Scale.Value;
-            Point1 += moveValue;
+            Point moveValue = delta.Division(NodesCanvas.Scale.Value);
+            Point1 = Point1.Addition(moveValue);
         }
         private void ValidateName(string newName)
         {
@@ -201,7 +201,7 @@ namespace SimpleStateMachineNodeEditor.ViewModel
         }
         private void UpdatePoint2()
         {
-            Point2.Set(Point1.X + Size.Width, Point1.Y + Size.Height);
+            Point2 = Point1.Addition(Size);
         }
 
         private void AddEmptyConnector()
@@ -214,7 +214,7 @@ namespace SimpleStateMachineNodeEditor.ViewModel
                 if (string.IsNullOrEmpty(CurrentConnector.Name))
                     CurrentConnector.Name = "Transition " + NodesCanvas.TransitionsCount.ToString();
             }
-            CurrentConnector = new ViewModelConnector(NodesCanvas, this,"", new MyPoint(Point1.X + 80 , Point1.Y + 54))
+            CurrentConnector = new ViewModelConnector(NodesCanvas, this,"", Point1.Addition(80,54))
             {
                 TextEnable = false
             };
@@ -224,7 +224,7 @@ namespace SimpleStateMachineNodeEditor.ViewModel
         {
             foreach(var transition in Transitions)
             {
-                transition.PositionConnectPoint.Add(0, 19);
+                transition.PositionConnectPoint = transition.PositionConnectPoint.Addition(0, 19);
             }
         }
         private void UnSelectedAllConnectors()
@@ -284,7 +284,7 @@ namespace SimpleStateMachineNodeEditor.ViewModel
             }
 
             var position =  node.Attribute("Position")?.Value;
-            MyPoint point = string.IsNullOrEmpty(position) ? new MyPoint() : MyPoint.Parse(position);
+            Point point = string.IsNullOrEmpty(position) ? new Point() : Point.Parse(position);
             viewModelNode = new ViewModelNode(nodesCanvas, name, point);
             var isCollapse = node.Attribute("IsCollapse")?.Value;
             if (isCollapse != null)

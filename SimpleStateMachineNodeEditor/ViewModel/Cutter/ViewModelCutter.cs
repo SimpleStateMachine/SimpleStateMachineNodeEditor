@@ -4,11 +4,9 @@ using ReactiveUI.Fody.Helpers;
 
 using System;
 using System.Reactive.Linq;
-
-using SimpleStateMachineNodeEditor.Helpers;
-using SimpleStateMachineNodeEditor.Helpers.Commands;
 using System.Reactive;
 using SimpleStateMachineNodeEditor.ViewModel.NodesCanvas;
+using System.Windows;
 
 namespace SimpleStateMachineNodeEditor.ViewModel
 {
@@ -16,8 +14,8 @@ namespace SimpleStateMachineNodeEditor.ViewModel
     {
         [Reactive] public ViewModelNodesCanvas NodesCanvas { get; set; }
         [Reactive] public bool? Visible { get; set; } = false;
-        [Reactive] public MyPoint StartPoint { get; set; } = new MyPoint();
-        [Reactive] public MyPoint EndPoint { get; set; } = new MyPoint();      
+        [Reactive] public Point StartPoint { get; set;}
+        [Reactive] public Point EndPoint { get; set; }      
         [Reactive] public double StrokeThickness { get; set; } = 1;
 
         public ViewModelCutter(ViewModelNodesCanvas nodesCanvas)
@@ -37,17 +35,17 @@ namespace SimpleStateMachineNodeEditor.ViewModel
         #endregion Setup Subscriptions
 
         #region Setup Commands
-        public ReactiveCommand<MyPoint, Unit> CommandStartCut { get; set; }
+        public ReactiveCommand<Point, Unit> CommandStartCut { get; set; }
 
         private void SetupCommands()
         {
-            CommandStartCut = ReactiveCommand.Create<MyPoint>(StartCut);
+            CommandStartCut = ReactiveCommand.Create<Point>(StartCut);
         }
 
-        private void StartCut(MyPoint point)
+        private void StartCut(Point point)
         {
             Visible = true;
-            StartPoint.Set(point);
+            StartPoint = point;
         }
 
         #endregion Setup Commands

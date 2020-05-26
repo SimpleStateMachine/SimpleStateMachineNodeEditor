@@ -18,6 +18,7 @@ using SimpleStateMachineNodeEditor.Helpers.Transformations;
 using SimpleStateMachineNodeEditor.Helpers.Enums;
 using SimpleStateMachineNodeEditor.Helpers.Extensions;
 using SimpleStateMachineNodeEditor.ViewModel.NodesCanvas;
+using ReactiveUI.Fody.Helpers;
 
 namespace SimpleStateMachineNodeEditor.View
 {
@@ -43,12 +44,12 @@ namespace SimpleStateMachineNodeEditor.View
         }
         #endregion ViewModel
 
-        private MyPoint PositionDragOver { get; set; } = new MyPoint();
-        private MyPoint PositionRightClick { get; set; } = new MyPoint();
-        private MyPoint PositionLeftClick { get; set; } = new MyPoint();
-        private MyPoint PositionMove { get; set; } = new MyPoint();
+        private Point PositionDragOver { get; set; }
+        private Point PositionRightClick { get; set; } = new Point();
+        [Reactive] public Point PositionLeftClick { get; set; } = new Point();
+        private Point PositionMove { get; set; }
 
-        private MyPoint SumMove { get; set; } = new MyPoint();
+        private Point SumMove { get; set; }
         private TypeMove Move { get; set; } = TypeMove.None;
 
         public ViewNodesCanvas()
@@ -70,9 +71,9 @@ namespace SimpleStateMachineNodeEditor.View
 
                 this.OneWayBind(this.ViewModel, x => x.Connects, x => x.Connects.Collection).DisposeWith(disposable);
 
-                this.OneWayBind(this.ViewModel, x => x.Scale.Scales.Value.X, x => x.Scale.ScaleX).DisposeWith(disposable);
+                this.OneWayBind(this.ViewModel, x => x.Scale.Scales.X, x => x.Scale.ScaleX).DisposeWith(disposable);
 
-                this.OneWayBind(this.ViewModel, x => x.Scale.Scales.Value.Y, x => x.Scale.ScaleY).DisposeWith(disposable);
+                this.OneWayBind(this.ViewModel, x => x.Scale.Scales.Y, x => x.Scale.ScaleY).DisposeWith(disposable);
 
                 this.OneWayBind(this.ViewModel, x => x.Selector, x => x.Selector.ViewModel).DisposeWith(disposable);
 
@@ -88,13 +89,18 @@ namespace SimpleStateMachineNodeEditor.View
         {
             this.WhenActivated(disposable =>
             {
-                var positionLeftClickObservable = this.ObservableForProperty(x => x.PositionLeftClick).Select(x => x.Value);
-                var positionRightClickObservable = this.ObservableForProperty(x => x.PositionRightClick).Select(x => x.Value);
+                //this.WhenAnyValue(x => x.PositionLeftClick).Subscribe(x => Test(x)).DisposeWith(disposable);
+                var positionLeftClickObservable = this.WhenAnyValue(x => x.PositionLeftClick);
+                var positionRightClickObservable = this.WhenAnyValue(x => x.PositionRightClick);
+
+
+                //IObservable<Point> positionLeftClickObservable = this.WhenAnyValue(x => x.PositionLeftClick).;
+                //IObservable<Point> positionRightClickObservable = this.WhenAnyValue(x => x.PositionRightClick);
 
                 this.BindCommand(this.ViewModel, x => x.CommandSelect,              x => x.BindingSelect, positionLeftClickObservable).DisposeWith(disposable);
-                this.BindCommand(this.ViewModel, x => x.CommandCut,                 x => x.BindingCut, positionLeftClickObservable).DisposeWith(disposable);
-                this.BindCommand(this.ViewModel, x => x.CommandAddNodeWithUndoRedo, x => x.BindingAddNode, positionLeftClickObservable).DisposeWith(disposable);
-                this.BindCommand(this.ViewModel, x => x.CommandAddNodeWithUndoRedo, x => x.ItemAddNode, positionRightClickObservable).DisposeWith(disposable);
+                this.BindCommand(this.ViewModel, x => x.CommandCut,                 x => x.BindingCut, x => x.Position).DisposeWith(disposable);
+                this.BindCommand(this.ViewModel, x => x.CommandAddNodeWithUndoRedo, x => x.BindingAddNode, x => x.Position).DisposeWith(disposable);
+                this.BindCommand(this.ViewModel, x => x.CommandAddNodeWithUndoRedo, x => x.ItemAddNode, positionLeftClickObservable).DisposeWith(disposable);
 
                 this.BindCommand(this.ViewModel, x => x.CommandRedo,                x => x.BindingRedo).DisposeWith(disposable);
                 this.BindCommand(this.ViewModel, x => x.CommandUndo,                x => x.BindingUndo).DisposeWith(disposable);
@@ -112,7 +118,7 @@ namespace SimpleStateMachineNodeEditor.View
                 
 
                 this.WhenAnyValue(x => x.ViewModel.Selector.Size).WithoutParameter().InvokeCommand(ViewModel,x=>x.CommandSelectorIntersect).DisposeWith(disposable);
-                this.WhenAnyValue(x => x.ViewModel.Cutter.EndPoint.Value).WithoutParameter().InvokeCommand(ViewModel, x => x.CommandCutterIntersect).DisposeWith(disposable);
+                this.WhenAnyValue(x => x.ViewModel.Cutter.EndPoint).WithoutParameter().InvokeCommand(ViewModel, x => x.CommandCutterIntersect).DisposeWith(disposable);
 
                 this.WhenAnyValue(x => x.ViewModel.JPEGPath).Where(x=>!string.IsNullOrEmpty(x)).Subscribe(value=> SaveCanvasToImage(value, ImageFormats.JPEG)).DisposeWith(disposable);
 
@@ -121,7 +127,10 @@ namespace SimpleStateMachineNodeEditor.View
             });
         }
         #endregion Setup Commands
+        private void Test(Point point)
+        {
 
+        }
         #region Setup Events
         private void SetupEvents()
         {
@@ -142,7 +151,7 @@ namespace SimpleStateMachineNodeEditor.View
         }
         private void OnEventMouseLeftDown(MouseButtonEventArgs e)
         {
-            PositionMove = new MyPoint(Mouse.GetPosition(this.Canvas));
+            PositionMove = Mouse.GetPosition(this.Canvas);
 
             if (Mouse.Captured == null)
             {
@@ -165,7 +174,7 @@ namespace SimpleStateMachineNodeEditor.View
                 this.ViewModel.CommandFullMoveAllSelectedNode.Execute(SumMove);
 
             Move = TypeMove.None;
-            SumMove = new MyPoint();
+            SumMove = new Point();
         }
         private void OnEventMouseRightDown(MouseButtonEventArgs e)
         {
@@ -179,7 +188,7 @@ namespace SimpleStateMachineNodeEditor.View
         private void OnEventMouseUp(MouseButtonEventArgs e)
         {
             this.ReleaseMouseCapture();
-            PositionMove.Clear();
+            PositionMove = new Point();
             Keyboard.Focus(this);
         }
 
@@ -188,12 +197,12 @@ namespace SimpleStateMachineNodeEditor.View
             if (!(Mouse.Captured is CanBeMove))
                 return;
 
-            MyPoint delta = GetDeltaMove();
+            Point delta = GetDeltaMove();
 
-            if (delta.IsClear)
+            if (delta.IsClear())
                 return;
 
-            SumMove += delta;
+            SumMove = SumMove.Addition(delta);
             if (this.IsMouseCaptured)
             {
                 ViewModel.CommandPartMoveAllNode.ExecuteWithSubscribe(delta);
@@ -207,31 +216,32 @@ namespace SimpleStateMachineNodeEditor.View
         }
         private void OnEventDragOver(DragEventArgs e)
         {
-            MyPoint point = new MyPoint(e.GetPosition(this));
+            Point point = e.GetPosition(this);
             if (this.ViewModel.DraggedConnect != null)
             {
-                point -= 2;
-                this.ViewModel.DraggedConnect.EndPoint.Set(point / this.ViewModel.Scale.Value);
+                point = point.Subtraction(2);
+                this.ViewModel.DraggedConnect.EndPoint = point.Division(this.ViewModel.Scale.Value);
             }
         }
         private void OnEventPreviewMouseLeftButtonDown(MouseButtonEventArgs e)
         {
-            PositionLeftClick.Set(e.GetPosition(this.Canvas));
+             PositionLeftClick = e.GetPosition(this.Canvas);
+            this.ViewModel.Position = PositionLeftClick;
         }
         private void OnEventPreviewMouseRightButtonDown(MouseButtonEventArgs e)
         {
-            PositionRightClick.Set(e.GetPosition(this.Canvas));
+            PositionRightClick = e.GetPosition(this.Canvas);
         }
 
         #endregion Setup Events
-        private MyPoint GetDeltaMove()
+        private Point GetDeltaMove()
         {
-            MyPoint CurrentPosition = new MyPoint(Mouse.GetPosition(this.Canvas));
-            MyPoint result = new MyPoint();
+            Point CurrentPosition = Mouse.GetPosition(this.Canvas);
+            Point result = new Point();
 
-            if (!PositionMove.IsClear)
+            if (!PositionMove.IsClear())
             {
-                result = CurrentPosition - PositionMove;
+                result = CurrentPosition.Subtraction(PositionMove);
             }
 
             PositionMove = CurrentPosition;
