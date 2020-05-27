@@ -4,8 +4,6 @@ using SimpleStateMachineNodeEditor.Helpers;
 using SimpleStateMachineNodeEditor.Helpers.Commands;
 using SimpleStateMachineNodeEditor.Helpers.Enums;
 using SimpleStateMachineNodeEditor.Helpers.Extensions;
-using SimpleStateMachineNodeEditor.ViewModel.Connect;
-using SimpleStateMachineNodeEditor.ViewModel.Connector;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,7 +13,7 @@ using System.Windows;
 using System.Windows.Input;
 using System.Xml.Linq;
 
-namespace SimpleStateMachineNodeEditor.ViewModel.NodesCanvas
+namespace SimpleStateMachineNodeEditor.ViewModel
 {
     public partial class ViewModelNodesCanvas
     {
@@ -483,7 +481,7 @@ namespace SimpleStateMachineNodeEditor.ViewModel.NodesCanvas
         private List<ViewModelNode> UnFullMoveAllNode(Point delta, List<ViewModelNode> nodes = null)
         {
             Point myPoint = delta.Copy();
-            myPoint.Mirror();
+            myPoint = myPoint.Mirror();
             nodes.ForEach(node => node.CommandMove.ExecuteWithSubscribe(myPoint));
             return nodes;
         }
@@ -501,7 +499,7 @@ namespace SimpleStateMachineNodeEditor.ViewModel.NodesCanvas
         private List<ViewModelNode> UnFullMoveAllSelectedNode(Point delta, List<ViewModelNode> nodes = null)
         {
             Point myPoint = delta.Copy();
-            myPoint.Mirror();
+            myPoint = myPoint.Mirror();
             nodes.ForEach(node => node.CommandMove.ExecuteWithSubscribe(myPoint));
             return nodes;
         }

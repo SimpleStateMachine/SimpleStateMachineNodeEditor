@@ -7,7 +7,6 @@ using System.Windows;
 using SimpleStateMachineNodeEditor.Helpers.Enums;
 using System.Reactive.Linq;
 using System.Reactive;
-using SimpleStateMachineNodeEditor.ViewModel.NodesCanvas;
 using System.Linq;
 
 namespace SimpleStateMachineNodeEditor.ViewModel
@@ -74,16 +73,21 @@ namespace SimpleStateMachineNodeEditor.ViewModel
         #region Setup Commands
 
         public ReactiveCommand<string, Unit> CommandCopyError { get; set; }
+        public ReactiveCommand<Unit, Unit> CommandCopySchemeName{ get; set; }
         public ReactiveCommand<Unit, Unit> CommandUpdateMessagesType { get; set; }
         private void SetupCommands()
         {
             CommandCopyError = ReactiveCommand.Create<string>(CopyError);
-
+            CommandCopySchemeName = ReactiveCommand.Create(CopySchemeName);
         }
 
         private void CopyError(string errrorText)
         {
             Clipboard.SetText(errrorText);
+        }
+        private void CopySchemeName()
+        {
+            Clipboard.SetText(this.NodesCanvas.SchemePath);
         }
         private void UpdateCountMessages()
         {          

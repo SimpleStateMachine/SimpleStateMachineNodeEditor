@@ -9,11 +9,9 @@ using System;
 using System.Xml.Linq;
 using System.Linq;
 using SimpleStateMachineNodeEditor.Helpers.Extensions;
-using SimpleStateMachineNodeEditor.ViewModel.NodesCanvas;
-using SimpleStateMachineNodeEditor.ViewModel.Connect;
 using System.Reactive.Linq;
 
-namespace SimpleStateMachineNodeEditor.ViewModel.Connector
+namespace SimpleStateMachineNodeEditor.ViewModel
 {
     public partial class ViewModelConnector : ReactiveObject
     {

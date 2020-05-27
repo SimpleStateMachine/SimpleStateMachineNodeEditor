@@ -17,8 +17,8 @@ using SimpleStateMachineNodeEditor.Helpers;
 using SimpleStateMachineNodeEditor.Helpers.Transformations;
 using SimpleStateMachineNodeEditor.Helpers.Enums;
 using SimpleStateMachineNodeEditor.Helpers.Extensions;
-using SimpleStateMachineNodeEditor.ViewModel.NodesCanvas;
 using ReactiveUI.Fody.Helpers;
+using SimpleStateMachineNodeEditor.ViewModel;
 
 namespace SimpleStateMachineNodeEditor.View
 {

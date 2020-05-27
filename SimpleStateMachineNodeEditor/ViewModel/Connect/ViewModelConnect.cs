@@ -9,10 +9,8 @@ using ReactiveUI.Fody.Helpers;
 
 using SimpleStateMachineNodeEditor.Helpers;
 using SimpleStateMachineNodeEditor.Helpers.Extensions;
-using SimpleStateMachineNodeEditor.ViewModel.NodesCanvas;
-using SimpleStateMachineNodeEditor.ViewModel.Connector;
 
-namespace SimpleStateMachineNodeEditor.ViewModel.Connect
+namespace SimpleStateMachineNodeEditor.ViewModel
 {
     public class ViewModelConnect : ReactiveObject
     {

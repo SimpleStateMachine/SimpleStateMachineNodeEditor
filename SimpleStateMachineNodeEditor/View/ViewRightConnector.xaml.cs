@@ -18,7 +18,6 @@ using SimpleStateMachineNodeEditor.ViewModel;
 using SimpleStateMachineNodeEditor.Helpers.Transformations;
 using SimpleStateMachineNodeEditor.Helpers.Enums;
 using SimpleStateMachineNodeEditor.Helpers.Extensions;
-using SimpleStateMachineNodeEditor.ViewModel.Connector;
 
 namespace SimpleStateMachineNodeEditor.View
 {

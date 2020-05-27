@@ -6,7 +6,6 @@
              xmlns:local="clr-namespace:SimpleStateMachineNodeEditor.View"
              xmlns:View="clr-namespace:SimpleStateMachineNodeEditor.View"
              xmlns:ViewModel="clr-namespace:SimpleStateMachineNodeEditor.ViewModel"
-             xmlns:Connect="clr-namespace:SimpleStateMachineNodeEditor.ViewModel.Connect"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800" Focusable="True" AllowDrop="True" ClipToBounds="True">
 
@@ -38,7 +37,7 @@
                 </ItemsPanelTemplate>
             </ItemsControl.ItemsPanel>
             <ItemsControl.Resources >
-                <DataTemplate DataType="{x:Type Connect:ViewModelConnect}">
+                <DataTemplate DataType="{x:Type ViewModel:ViewModelConnect}">
                     <View:ViewConnect ViewModel="{Binding}"/>
                 </DataTemplate>
                 <DataTemplate DataType="{x:Type ViewModel:ViewModelNode}">
@@ -83,7 +82,8 @@
         <KeyBinding x:Name="BindingRedo"        Key="Y" Modifiers="Control" />
         <KeyBinding x:Name="BindingSelectAll"   Key="A" Modifiers="Control" />
         <KeyBinding x:Name="BindingAddNode"     Key="N" Modifiers="Control" />
-        <KeyBinding x:Name="BindingDeleteSelectedElements" Key="Delete"  />
+        <KeyBinding x:Name="BindingDeleteSelectedElements" Key="Delete"/>
+        <KeyBinding x:Name="BindingExportToJPEG"   Gesture="Ctrl+Shift+Alt+J"/>
         <MouseBinding x:Name="BindingSelect"    Gesture="Ctrl+LeftClick"/>
         <MouseBinding x:Name="BindingCut"       Gesture="Alt+LeftClick" />
     </UserControl.InputBindings>

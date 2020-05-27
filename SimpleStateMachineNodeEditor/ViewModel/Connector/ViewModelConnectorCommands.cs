@@ -7,7 +7,7 @@ using System.Reactive;
 using System.Windows;
 using System.Windows.Media;
 
-namespace SimpleStateMachineNodeEditor.ViewModel.Connector
+namespace SimpleStateMachineNodeEditor.ViewModel
 {
     public partial class ViewModelConnector
     {

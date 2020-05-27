@@ -5,7 +5,6 @@ using ReactiveUI.Fody.Helpers;
 using System;
 using System.Reactive.Linq;
 using System.Reactive;
-using SimpleStateMachineNodeEditor.ViewModel.NodesCanvas;
 using System.Windows;
 
 namespace SimpleStateMachineNodeEditor.ViewModel

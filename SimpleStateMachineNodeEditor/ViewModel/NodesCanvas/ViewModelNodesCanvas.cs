@@ -9,12 +9,10 @@ using SimpleStateMachineNodeEditor.Helpers.Enums;
 using System.Windows.Data;
 using System.IO;
 using Splat;
-using SimpleStateMachineNodeEditor.ViewModel.Connector;
-using SimpleStateMachineNodeEditor.ViewModel.Connect;
 using SimpleStateMachineNodeEditor.Helpers;
 using System.Windows;
 
-namespace SimpleStateMachineNodeEditor.ViewModel.NodesCanvas
+namespace SimpleStateMachineNodeEditor.ViewModel
 {
     public partial class ViewModelNodesCanvas : ReactiveObject
     {
@@ -63,7 +61,6 @@ namespace SimpleStateMachineNodeEditor.ViewModel.NodesCanvas
         private void SetupSubscriptions()
         {
             this.WhenAnyValue(x => x.Nodes.Count).Buffer(2, 1).Select(x => (Previous: x[0], Current: x[1])).Subscribe(x => UpdateCount(x.Previous, x.Current));
-            //this.WhenAnyValue(x => x.CountError).Buffer(2, 1).Where(x => x[1] > x[0]).Subscribe(_ => DisplayMessageType = TypeMessage.Error).DisposeWith(disposable);
         }
 
         #endregion Setup Subscriptions

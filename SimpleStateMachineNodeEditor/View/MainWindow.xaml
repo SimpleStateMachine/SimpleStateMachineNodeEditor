@@ -15,7 +15,10 @@
             <RowDefinition  Height="auto"></RowDefinition>
             <RowDefinition  Height="auto" x:Name="Fotter" MinHeight="18"></RowDefinition>
         </Grid.RowDefinitions>
+        
+        <!--#region Header-->
         <DockPanel x:Name="Header" Grid.Row="0" Background="{StaticResource ColorWindowHeader}" LastChildFill="False">
+            <!--#region  Menu-->
             <!--OpacityMask - it's color on MouseOver-->
             <Menu Background="{StaticResource ColorMenuBackground}"  Foreground="{StaticResource ColorMenuForeground}" BorderBrush="{StaticResource ColorMenuBorder}" OpacityMask="{StaticResource ColorMenuBackgroundMouseOver}"  Template="{StaticResource MenuTemplate}" BorderThickness="1" HorizontalAlignment="Left" VerticalAlignment="Center">
                 <MenuItem Header="File" x:Name="Item" Style="{StaticResource StyleMenuItem}" Margin="3,0,3,0">
@@ -73,7 +76,9 @@
                         </MenuItem>
                 </MenuItem>
             </Menu>
-
+            
+           <!--#endregion Menu-->           
+            <!--#region  Main Panel-->
             <!--BorderBrush - it's Background color on IsMouseOver, OpacityMask - it's color on IsPressed-->
             <Button DockPanel.Dock="Right" x:Name="ButtonClose" ToolTip="Close" Style="{StaticResource StyleHeaderButton}" Background="{StaticResource ColorWindowHeader}" BorderBrush="{StaticResource ColorWindowHeaderButtonCloseBackgroundMouseOver}" OpacityMask="{StaticResource ColorWindowHeaderButtonCloseBackgroundPressed}"  Padding="7" Grid.IsSharedSizeScope="True" Margin="0,0,-7,0">
                 <Rectangle  Fill="{StaticResource IconClose}" Height="11" Width="11"/>
@@ -85,10 +90,12 @@
             <Button DockPanel.Dock="Right" x:Name="ButtonMin" ToolTip="Minimize" Style="{StaticResource StyleHeaderButton}" Background="{StaticResource ColorWindowHeader}" BorderBrush="{StaticResource ColorWindowHeaderButtonBackgroundMouseOver}" OpacityMask="{StaticResource ColorWindowHeaderButtonBackgroundPressed}" >
                 <Rectangle Fill="{StaticResource IconMinimize}" Height="1" Width="11" />
             </Button>
+
+            <!--For Name of scheme-->
             <Label x:Name="LabelSchemeName" Style="{StaticResource StyleLabel}" BorderBrush="{StaticResource ColorNodesCanvasBackground}" Background="{StaticResource ColorNodesCanvasBackground}" BorderThickness="10,5,10,5" Margin="10,  0, 0 ,0" HorizontalAlignment="Right" VerticalAlignment="Center" Foreground="{StaticResource ColorMenuForeground}">
                 <Label.ContextMenu>
                     <ContextMenu Template="{StaticResource TemplateContextMenu}" Background="{StaticResource ColorMenuBackground}" BorderBrush="{StaticResource ColorMenuBorder}" OpacityMask="{StaticResource ColorWindowHeaderButtonBackgroundMouseOver}"  Foreground="{StaticResource ColorMenuForeground}" BorderThickness="1" HorizontalAlignment="Left" VerticalAlignment="Center" >
-                        <MenuItem Header="Copy" x:Name="ItemSchemeName" InputGestureText="Ctrl+C" Style="{StaticResource StyleContextMenuItem}">
+                        <MenuItem Header="Copy" x:Name="ItemCopySchemeName" InputGestureText="Ctrl+C" Style="{StaticResource StyleContextMenuItem}">
                             <MenuItem.Icon>
                                 <Rectangle Fill="{StaticResource IconCopy}" Height="15" Width="13"/>
                             </MenuItem.Icon>
@@ -99,9 +106,12 @@
                     <KeyBinding x:Name="BindingCopySchemeName" Key="C" Modifiers="Control" />
                 </Label.InputBindings>
             </Label>
-
             <Button DockPanel.Dock="Right" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="{x:Null}" />
+            <!--#endregion Main Panel-->             
         </DockPanel>
+        <!--#endregion  Header-->
+        
+        <!--#region ToolBar-->
         <ToolBarTray Grid.Row="1" IsLocked="True"  Background="{x:Null}">
             <ToolBar Style="{StaticResource ToolBarTemplate}" Background="{x:Null}" Foreground="{x:Null}"  >
                 <Button x:Name="ButtonNew" ToolTip="New (Ctrl+N)" Style="{StaticResource StyleHeaderButton}" Background="{StaticResource ColorWindowHeader}" BorderBrush="{StaticResource ColorWindowHeaderButtonBackgroundMouseOver}">
@@ -145,6 +155,9 @@
                 </Button>
             </ToolBar>
         </ToolBarTray>
+        <!--#endregion ToolBar-->
+        
+        <!--#region  Tabs-->
         <!--BorderBrush - it's color on IsMouseOver, OpacityMask - it's color on IsPressed-->
         <TabControl  Grid.Row="2" Background="{x:Null}" BorderBrush="{x:Null}" TabStripPlacement="Top" Padding="2,2,2,0" >
             <TabItem  Header="Node editor"  Style="{StaticResource StyleTabItem}" Background="{StaticResource ColorWindowHeader}" Foreground="{StaticResource ColorWindowHeaderTabItemForeground}"  BorderBrush="{StaticResource ColorElementMouseOver}" OpacityMask="{StaticResource ColorElementMouseOver}">
@@ -152,6 +165,9 @@
             </TabItem>
             <!--<TabItem Header="Transitions table" ToolTip="" Style="{StaticResource StyleTabItem}" Foreground="{StaticResource ColorForeground}"/>-->
         </TabControl>
+        <!--#endregion Tabs-->   
+        
+        <!--#region Error List-->
         <GridSplitter  Grid.Row="3" x:Name="ErrorListSplitter" HorizontalAlignment="Stretch" Background="{StaticResource ColorWindowHeader}" Height="3"  ShowsPreview="False" IsEnabled="False"/>
         <Expander Style="{StaticResource StyleExpander}"  x:Name="ErrorListExpander" Grid.Row="4"  HorizontalContentAlignment="Stretch" ExpandDirection="Up" Margin="3,0,0,0" >
             <Expander.Header>
@@ -207,11 +223,10 @@
                 </ListBox>
             </Expander.Content>
         </Expander>
+        <!--#endregion Error List-->
     </Grid>
 
     <Window.InputBindings>
-        <!--<KeyBinding x:Name="BindingUndo" Key="Z" Modifiers="Control" />
-        <KeyBinding x:Name="BindingRedo" Key="Y" Modifiers="Control" />-->
         <KeyBinding x:Name="BindingSave"    Gesture="Ctrl+S"/>
         <KeyBinding x:Name="BindingSaveAs"  Gesture="Ctrl+Shift+S"/>
         <KeyBinding x:Name="BindingOpen"    Gesture="Ctrl+Shift+O" />

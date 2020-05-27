@@ -16,8 +16,6 @@ using SimpleStateMachineNodeEditor.Helpers.Enums;
 using DynamicData;
 using System.Reactive;
 using SimpleStateMachineNodeEditor.Helpers.Extensions;
-using SimpleStateMachineNodeEditor.ViewModel.NodesCanvas;
-using SimpleStateMachineNodeEditor.ViewModel.Connector;
 using System.Windows.Documents;
 using System.Collections.Generic;
 

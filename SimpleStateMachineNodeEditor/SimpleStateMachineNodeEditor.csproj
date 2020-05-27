@@ -54,4 +54,10 @@
     <PackageReference Include="Splat.Drawing" Version="9.4.5" />
   </ItemGroup>
 
+  <ItemGroup>
+    <None Update="README.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
 </Project>
