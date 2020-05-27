@@ -11,8 +11,8 @@
                     </Border>
                     <ControlTemplate.Triggers>
                         <Trigger Property="IsSelected" Value="true">
-                            <Setter TargetName="Border" Property="Background" Value="{StaticResource ColorElementMouseOver}"/>
-                            <Setter  Property="Foreground" Value="{StaticResource ColorMessagesForegroundSelected}"/>
+                            <Setter TargetName="Border" Property="Background" Value="{DynamicResource ColorElementMouseOver}"/>
+                            <Setter  Property="Foreground" Value="{DynamicResource ColorMessagesForegroundSelected}"/>
                         </Trigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>

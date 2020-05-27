@@ -71,8 +71,8 @@ namespace SimpleStateMachineNodeEditor.View
                 this.OneWayBind(this.ViewModel, x => x.CountInformation, x => x.LabelInformation.Content, value => value.ToString() + " Information").DisposeWith(disposable);
                 this.OneWayBind(this.ViewModel, x => x.CountDebug, x => x.LabelDebug.Content, value => value.ToString() + " Debug").DisposeWith(disposable);
 
-                
 
+                this.BindCommand(this.ViewModel, x => x.CommandChangeTheme, x => x.ButtonChangeTheme).DisposeWith(disposable);
 
                 this.BindCommand(this.ViewModel, x => x.CommandCopySchemeName, x => x.ItemCopySchemeName).DisposeWith(disposable);
                 this.BindCommand(this.ViewModel, x => x.NodesCanvas.CommandSelectAll,        x => x.ItemSelectAll).DisposeWith(disposable);

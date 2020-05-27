@@ -14,5 +14,5 @@
             <TranslateTransform x:Name="TranslateTransformElement"/>
         </TransformGroup>
     </UserControl.RenderTransform>
-    <Line x:Name="LineElement" Stroke="{StaticResource ColorCutter}"  HorizontalAlignment="Left" VerticalAlignment="Top" StrokeDashArray="10, 3" StrokeDashCap="Round" StrokeEndLineCap="Round" StrokeStartLineCap="Round"/>
+    <Line x:Name="LineElement" Stroke="{DynamicResource ColorCutter}"  HorizontalAlignment="Left" VerticalAlignment="Top" StrokeDashArray="10, 3" StrokeDashCap="Round" StrokeEndLineCap="Round" StrokeStartLineCap="Round"/>
 </UserControl>

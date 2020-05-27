@@ -3,7 +3,7 @@
 
     <ControlTemplate x:Key="TemplateListBox" TargetType="{x:Type ListBox}">
         <Border x:Name="Bd" Background="{TemplateBinding Background}" BorderThickness="{TemplateBinding BorderThickness}" BorderBrush="{TemplateBinding BorderBrush}" Padding="1" SnapsToDevicePixels="true">
-            <ScrollViewer Padding="{TemplateBinding Padding}" Focusable="false" HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto" Style="{StaticResource StyleScrollViewer}" >
+            <ScrollViewer Padding="{TemplateBinding Padding}" Focusable="false" HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto" Style="{DynamicResource StyleScrollViewer}" >
                 <ItemsPresenter SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"/>
             </ScrollViewer>
         </Border>

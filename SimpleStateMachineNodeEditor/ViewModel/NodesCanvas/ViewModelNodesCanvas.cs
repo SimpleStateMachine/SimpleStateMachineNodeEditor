@@ -32,7 +32,7 @@ namespace SimpleStateMachineNodeEditor.ViewModel
         [Reactive] public Scale Scale { get; set; } = new Scale();
         [Reactive] public bool ItSaved { get; set; } = true;
         [Reactive] public TypeMessage DisplayMessageType { get; set; }
-        [Reactive] public string SchemePath { get; set; }
+        [Reactive] public string SchemePath { get; set; } = "delete it";
 
         /// <summary>
         /// Flag for close application

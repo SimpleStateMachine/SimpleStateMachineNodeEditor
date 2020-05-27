@@ -4,8 +4,8 @@
     <DrawingBrush.Drawing>
           <DrawingGroup>
             <DrawingGroup.Children>
-                    <GeometryDrawing Brush="{StaticResource ColorIconsSecond}" Geometry="M9,9v6h6V9H12.3V7h-1V9Zm5,5H10V11h4ZM9,1V5H7V3H1V9H2V5H6V8H2V9H7V6H9V7h6V1Zm5,5H10V3h4Z " />
-                    <GeometryDrawing Brush="{StaticResource ColorIconsMain}" Geometry="M5.8,15l-1.1-2.6L3,14.2V7l5.4,5H5.9L7,14.5L5.8,15z"/>
+                    <GeometryDrawing Brush="{DynamicResource ColorIconsSecond}" Geometry="M9,9v6h6V9H12.3V7h-1V9Zm5,5H10V11h4ZM9,1V5H7V3H1V9H2V5H6V8H2V9H7V6H9V7h6V1Zm5,5H10V3h4Z " />
+                    <GeometryDrawing Brush="{DynamicResource ColorIconsMain}" Geometry="M5.8,15l-1.1-2.6L3,14.2V7l5.4,5H5.9L7,14.5L5.8,15z"/>
             </DrawingGroup.Children>
           </DrawingGroup>
         </DrawingBrush.Drawing>

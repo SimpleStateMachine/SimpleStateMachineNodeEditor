@@ -8,6 +8,8 @@ using SimpleStateMachineNodeEditor.Helpers.Enums;
 using System.Reactive.Linq;
 using System.Reactive;
 using System.Linq;
+using System.Collections.Generic;
+using System.Runtime.CompilerServices;
 
 namespace SimpleStateMachineNodeEditor.ViewModel
 {
@@ -24,6 +26,12 @@ namespace SimpleStateMachineNodeEditor.ViewModel
         [Reactive] public int CountInformation { get; set; }
         [Reactive] public int CountDebug { get; set; }
 
+        public Theme CurrentTheme { get; set; } = Theme.Dark;
+        static Dictionary<Theme, string> themesPaths = new Dictionary<Theme, string>()
+        {
+            {Theme.Dark, @"Styles\Themes\Dark.xaml" },
+            {Theme.Light, @"Styles\Themes\Light.xaml"},
+        };
 
         private IDisposable ConnectToMessages;
         public double MaxHeightMessagePanel = 150;
@@ -74,11 +82,12 @@ namespace SimpleStateMachineNodeEditor.ViewModel
 
         public ReactiveCommand<string, Unit> CommandCopyError { get; set; }
         public ReactiveCommand<Unit, Unit> CommandCopySchemeName{ get; set; }
-        public ReactiveCommand<Unit, Unit> CommandUpdateMessagesType { get; set; }
+        public ReactiveCommand<Unit, Unit> CommandChangeTheme { get; set; }
         private void SetupCommands()
         {
             CommandCopyError = ReactiveCommand.Create<string>(CopyError);
             CommandCopySchemeName = ReactiveCommand.Create(CopySchemeName);
+            CommandChangeTheme = ReactiveCommand.Create(ChangeTheme);
         }
 
         private void CopyError(string errrorText)
@@ -88,6 +97,34 @@ namespace SimpleStateMachineNodeEditor.ViewModel
         private void CopySchemeName()
         {
             Clipboard.SetText(this.NodesCanvas.SchemePath);
+        }
+        private void ChangeTheme()
+        {
+            if (CurrentTheme == Theme.Dark)
+            {
+                SetTheme(Theme.Light);
+            }
+            else if (CurrentTheme == Theme.Light)
+            {
+                SetTheme(Theme.Dark);
+            }
+           
+        }
+        private void SetTheme(Theme theme)
+        {
+            Application.Current.Resources.Clear();
+            var uri = new Uri(themesPaths[theme], UriKind.RelativeOrAbsolute);
+            ResourceDictionary resourceDict = Application.LoadComponent(uri) as ResourceDictionary;         
+            Application.Current.Resources.MergedDictionaries.Add(resourceDict);
+            CurrentTheme = theme;
+            LoadIcons();
+        }
+        private void LoadIcons()
+        {
+            string path = @"Icons\Icons.xaml";
+            var uri = new Uri(path, UriKind.RelativeOrAbsolute);
+            ResourceDictionary resourceDict = Application.LoadComponent(uri) as ResourceDictionary;
+            Application.Current.Resources.MergedDictionaries.Add(resourceDict);
         }
         private void UpdateCountMessages()
         {          
