@@ -185,9 +185,6 @@ namespace SimpleStateMachineNodeEditor.View
                 this.ErrorListExpander.IsExpanded = true;
                 ErrorListExpanded();
             }
-            //this.ErrorListExpander.RaiseEvent(new RoutedEventArgs(Expander.ExpandedEvent));
-            //this.ErrorListExpander.IsExpanded = true;
-
         }
 
         private void ButtonMinClick(RoutedEventArgs e)

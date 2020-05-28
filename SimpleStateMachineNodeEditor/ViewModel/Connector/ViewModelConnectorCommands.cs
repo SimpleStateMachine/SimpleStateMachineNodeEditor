@@ -5,6 +5,7 @@ using SimpleStateMachineNodeEditor.Helpers.Extensions;
 using System;
 using System.Reactive;
 using System.Windows;
+using System.Windows.Input;
 using System.Windows.Media;
 
 namespace SimpleStateMachineNodeEditor.ViewModel
@@ -106,7 +107,6 @@ namespace SimpleStateMachineNodeEditor.ViewModel
             int indexTo = Node.Transitions.IndexOf(this);
             if (indexTo == 0)
                 return;
-
             int count = this.Node.Transitions.Count;
             int indexFrom = this.Node.Transitions.IndexOf(this.NodesCanvas.ConnectorPreviewForDrop);
 

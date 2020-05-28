@@ -4,12 +4,11 @@ using ReactiveUI.Fody.Helpers;
 
 using System;
 using System.Reactive.Linq;
-using System.Reactive;
 using System.Windows;
 
 namespace SimpleStateMachineNodeEditor.ViewModel
 {
-    public class ViewModelCutter : ReactiveObject
+    public partial  class ViewModelCutter : ReactiveObject
     {
         [Reactive] public ViewModelNodesCanvas NodesCanvas { get; set; }
         [Reactive] public bool? Visible { get; set; } = false;
@@ -32,21 +31,5 @@ namespace SimpleStateMachineNodeEditor.ViewModel
         }
 
         #endregion Setup Subscriptions
-
-        #region Setup Commands
-        public ReactiveCommand<Point, Unit> CommandStartCut { get; set; }
-
-        private void SetupCommands()
-        {
-            CommandStartCut = ReactiveCommand.Create<Point>(StartCut);
-        }
-
-        private void StartCut(Point point)
-        {
-            Visible = true;
-            StartPoint = point;
-        }
-
-        #endregion Setup Commands
     }
 }

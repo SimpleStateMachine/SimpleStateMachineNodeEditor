@@ -283,7 +283,7 @@ namespace SimpleStateMachineNodeEditor.ViewModel
             Dialog.ShowOpenFileDialog("XML-File | *.xml", SchemeName(), "Import scheme from xml file");
             if (Dialog.Result != DialogResult.Ok)
                 return;
-
+            Mouse.OverrideCursor = Cursors.Wait;
             string fileName = Dialog.FileName;
             ClearScheme();
             WithoutMessages = true;
@@ -331,6 +331,7 @@ namespace SimpleStateMachineNodeEditor.ViewModel
             SchemePath = fileName;
 
             #endregion  setup Transitions/connects
+            Mouse.OverrideCursor = null;
             WithoutMessages = false;
             LogDebug("Scheme was loaded from file \"{0}\"", SchemePath);
 
@@ -382,6 +383,7 @@ namespace SimpleStateMachineNodeEditor.ViewModel
         }
         private void Save(string fileName)
         {
+            Mouse.OverrideCursor = Cursors.Wait;
             XDocument xDocument = new XDocument();
             XElement stateMachineXElement = new XElement("StateMachine");
             xDocument.Add(stateMachineXElement);
@@ -407,7 +409,7 @@ namespace SimpleStateMachineNodeEditor.ViewModel
             xDocument.Save(fileName);
             ItSaved = true;
             SchemePath = fileName;
-
+            Mouse.OverrideCursor = null;
             LogDebug("Scheme was saved as \"{0}\"", SchemePath);
         }
 

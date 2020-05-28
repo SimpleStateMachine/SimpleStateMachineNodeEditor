@@ -74,10 +74,6 @@ namespace SimpleStateMachineNodeEditor.ViewModel
             //this.StrokeDashArray = value ? new DoubleCollection() { 10, 3 } : null;
             this.Stroke =  Application.Current.Resources[value ? "ColorSelectedElement": "ColorConnect"] as SolidColorBrush;
         }
-        private void ToConnectChanged()
-        {
-            EndPointUpdate(ToConnector.PositionConnectPoint);
-        }
         private void StartPointUpdate(Point point)
         {
             StartPoint = point;
