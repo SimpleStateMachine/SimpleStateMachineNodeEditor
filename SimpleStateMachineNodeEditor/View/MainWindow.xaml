@@ -6,7 +6,7 @@
     xmlns:view="clr-namespace:SimpleStateMachineNodeEditor.View"
     x:Class="SimpleStateMachineNodeEditor.View.MainWindow"
         mc:Ignorable="d"
-        Title="SimpleStateMachineNodeEditor"  d:DesignWidth="808.96" Height="738.592" BorderThickness="1" Padding="7,0,7,7" ResizeMode="CanResizeWithGrip" BorderBrush="{DynamicResource ColorWindowBorder}" Background="{DynamicResource ColorWindowHeader}" Foreground="{x:Null}" WindowStyle="None" AllowsTransparency="True" Style="{DynamicResource CustomWindowStyle}">
+        Title="SimpleStateMachineNodeEditor"  d:DesignWidth="550" Height="738.592" MinWidth="570" MinHeight="400"  BorderThickness="1" Padding="7,0,7,7" ResizeMode="CanResizeWithGrip" BorderBrush="{DynamicResource ColorWindowBorder}" Background="{DynamicResource ColorWindowHeader}" Foreground="{x:Null}" WindowStyle="None" AllowsTransparency="True" Style="{DynamicResource CustomWindowStyle}">
     <Grid Background="{DynamicResource ColorWindowHeader}" >
         <Grid.RowDefinitions>
             <RowDefinition Height="auto" />
