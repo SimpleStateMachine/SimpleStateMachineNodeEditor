@@ -4,7 +4,7 @@ using System.Text;
 
 namespace SimpleStateMachineNodeEditor.Helpers.Enums
 {
-    public enum Theme
+    public enum Themes
     {
         noCorrect = 0,
         Light,

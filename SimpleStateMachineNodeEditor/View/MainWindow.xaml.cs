@@ -72,7 +72,7 @@ namespace SimpleStateMachineNodeEditor.View
                 this.OneWayBind(this.ViewModel, x => x.CountDebug, x => x.LabelDebug.Content, value => value.ToString() + " Debug").DisposeWith(disposable);
 
 
-                this.BindCommand(this.ViewModel, x => x.CommandChangeTheme, x => x.ButtonChangeTheme).DisposeWith(disposable);
+                this.BindCommand(this.ViewModel, x => x.NodesCanvas.CommandChangeTheme, x => x.ButtonChangeTheme).DisposeWith(disposable);
 
                 this.BindCommand(this.ViewModel, x => x.CommandCopySchemeName, x => x.ItemCopySchemeName).DisposeWith(disposable);
                 this.BindCommand(this.ViewModel, x => x.NodesCanvas.CommandSelectAll,        x => x.ItemSelectAll).DisposeWith(disposable);
@@ -124,6 +124,7 @@ namespace SimpleStateMachineNodeEditor.View
                 this.WhenAnyValue(x => x.ViewModel.NodesCanvas.SchemePath).Subscribe(value=> UpdateSchemeName(value)).DisposeWith(disposable);              
                 this.WhenAnyValue(x => x.NodesCanvas.ViewModel.NeedExit).Where(x=>x).Subscribe(_ => this.Close()).DisposeWith(disposable);
                 this.WhenAnyValue(x => x.ViewModel.CountError).Buffer(2, 1).Where(x => x[1] > x[0]).Subscribe(_ => ShowError()).DisposeWith(disposable);
+                this.WhenAnyValue(x => x.ViewModel.NodesCanvas.Theme).Subscribe(_ => UpdateButton()).DisposeWith(disposable);
             });
         }
         private void UpdateSchemeName(string newName)
@@ -199,18 +200,29 @@ namespace SimpleStateMachineNodeEditor.View
         }
         private void StateNormalMaximaze()
         {
+            this.WindowState = (this.WindowState == WindowState.Normal) ? WindowState.Maximized : WindowState.Normal;
+            UpdateButton();          
+        }
+        private void UpdateButton()
+        {
             if (this.WindowState == WindowState.Normal)
             {
-                this.WindowState = WindowState.Maximized;
-                this.ButtonMaxRectangle.Fill = System.Windows.Application.Current.Resources["IconRestore"] as DrawingBrush;
-                this.ButtonMaxRectangle.ToolTip = "Maximize";
+                StateNormal();              
             }
             else
             {
-                this.WindowState = WindowState.Normal;
-                this.ButtonMaxRectangle.Fill = System.Windows.Application.Current.Resources["IconMaximize"] as DrawingBrush;
-                this.ButtonMaxRectangle.ToolTip = "Restore down";
+                StateMaximize();
             }
+        }
+        private void StateMaximize()
+        {         
+            this.ButtonMaxRectangle.Fill = Application.Current.Resources["IconRestore"] as DrawingBrush;
+            this.ButtonMaxRectangle.ToolTip = "Maximize";
+        }
+        private void StateNormal()
+        {
+            this.ButtonMaxRectangle.Fill = Application.Current.Resources["IconMaximize"] as DrawingBrush;
+            this.ButtonMaxRectangle.ToolTip = "Restore down";
         }
         private void HeaderClick(MouseButtonEventArgs e)
         {
@@ -231,7 +243,8 @@ namespace SimpleStateMachineNodeEditor.View
                             Left = point.X - (RestoreBounds.Width / 2);
 
                         Top = point.Y - (this.Header.ActualHeight / 2);
-                        WindowState = WindowState.Normal;
+                        StateNormal();
+                        this.WindowState = WindowState.Normal;
                     }
 
                     this.DragMove();

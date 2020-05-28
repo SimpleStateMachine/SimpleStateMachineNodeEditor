@@ -47,6 +47,7 @@ namespace SimpleStateMachineNodeEditor.ViewModel
             this.WhenAnyValue(x => x.FromConnector.Node.IsCollapse).Subscribe(value => UpdateSubscriptionForPosition(value));           
             this.WhenAnyValue(x => x.ToConnector.PositionConnectPoint).Subscribe(value => EndPointUpdate(value));
             this.WhenAnyValue(x => x.FromConnector.Selected).Subscribe(value => Select(value));
+            this.WhenAnyValue(x => x.NodesCanvas.Theme).Subscribe(_ => Select(this.FromConnector.Selected));
         }
         private void UpdateSubscriptionForPosition(bool nodeIsCollapse)
         {
@@ -71,7 +72,7 @@ namespace SimpleStateMachineNodeEditor.ViewModel
         private void Select(bool value)
         {
             //this.StrokeDashArray = value ? new DoubleCollection() { 10, 3 } : null;
-            this.Stroke = value ? Application.Current.Resources["ColorSelectedElement"].Cast<SolidColorBrush>(): Application.Current.Resources["ColorConnect"].Cast<SolidColorBrush>();
+            this.Stroke =  Application.Current.Resources[value ? "ColorSelectedElement": "ColorConnect"] as SolidColorBrush;
         }
         private void ToConnectChanged()
         {

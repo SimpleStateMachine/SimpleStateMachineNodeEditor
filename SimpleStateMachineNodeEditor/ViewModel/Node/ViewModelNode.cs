@@ -76,7 +76,7 @@ namespace SimpleStateMachineNodeEditor.ViewModel
             this.WhenAnyValue(x => x.Selected).Subscribe(value => { this.BorderBrush = value ? Application.Current.Resources["ColorSelectedElement"] as SolidColorBrush : Brushes.LightGray; });
             this.WhenAnyValue(x => x.Transitions.Count).Buffer(2, 1).Select(x => (Previous: x[0], Current: x[1])).Subscribe(x => UpdateCount(x.Previous, x.Current));
             this.WhenAnyValue(x => x.Point1, x => x.Size).Subscribe(_ => UpdatePoint2());
-            this.WhenAnyValue(x => x.IsCollapse).Subscribe(value => Collapse(value));
+            this.WhenAnyValue(x => x.IsCollapse).Subscribe(value => Collapse(value));        
         }
         #endregion Setup Subscriptions
         #region Connectors
@@ -90,6 +90,34 @@ namespace SimpleStateMachineNodeEditor.ViewModel
             AddEmptyConnector();
         }
         #endregion Connectors
+        private void UpdatePoint2()
+        {
+            Point2 = Point1.Addition(Size);
+        }
+        private void UpdateCount(int oldValue, int newValue)
+        {
+            if (newValue > oldValue)
+            {
+                NodesCanvas.TransitionsCount++;
+            }
+        }
+        private void Collapse(bool value)
+        {
+            if (!value)
+            {
+
+                TransitionsVisible = true;
+                Output.Visible = null;
+            }
+            else
+            {
+                WidthBeforeCollapse = Size.Width;
+                TransitionsVisible = null;
+                Output.Visible = true;
+                UnSelectedAllConnectors();
+            }
+            NotSaved();
+        }
 
         #region Setup Commands
 
@@ -130,32 +158,10 @@ namespace SimpleStateMachineNodeEditor.ViewModel
             NodesCanvas.ItSaved = false;
         }
 
-        private void UpdateCount(int oldValue, int newValue)
-        {
-            if (newValue > oldValue)
-            {
-                NodesCanvas.TransitionsCount++;
-            }
-        }
+
         #endregion Setup Commands
 
-        private void Collapse(bool value)
-        {
-            if (!value)
-            {
-              
-                TransitionsVisible = true;
-                Output.Visible = null;
-            }
-            else
-            {
-                WidthBeforeCollapse = Size.Width;
-                TransitionsVisible = null;
-                Output.Visible = true;
-                UnSelectedAllConnectors();
-            }
-            NotSaved();
-        }
+
         public int GetConnectorIndex(ViewModelConnector connector)
         {
             return Transitions.IndexOf(connector);
@@ -200,10 +206,7 @@ namespace SimpleStateMachineNodeEditor.ViewModel
 
               NodesCanvas.CommandValidateNodeName.ExecuteWithSubscribe((this, newName));
         }
-        private void UpdatePoint2()
-        {
-            Point2 = Point1.Addition(Size);
-        }
+
 
         private void AddEmptyConnector()
         {

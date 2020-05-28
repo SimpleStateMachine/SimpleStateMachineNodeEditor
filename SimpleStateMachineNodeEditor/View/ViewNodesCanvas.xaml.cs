@@ -53,6 +53,7 @@ namespace SimpleStateMachineNodeEditor.View
             InitializeComponent();
             ViewModel = new ViewModelNodesCanvas();
             SetupCommands();
+            SetupSubscriptions();
             SetupBinding();
             SetupEvents();
            
@@ -103,23 +104,22 @@ namespace SimpleStateMachineNodeEditor.View
 
                 this.BindCommand(this.ViewModel, x => x.CommandCollapseUpSelected,  x => x.ItemCollapsUp).DisposeWith(disposable);
                 this.BindCommand(this.ViewModel, x => x.CommandExpandDownSelected,  x => x.ItemExpandDown).DisposeWith(disposable);
-                
-                
-
-                this.WhenAnyValue(x => x.ViewModel.Selector.Size).WithoutParameter().InvokeCommand(ViewModel,x=>x.CommandSelectorIntersect).DisposeWith(disposable);
-                this.WhenAnyValue(x => x.ViewModel.Cutter.EndPoint).WithoutParameter().InvokeCommand(ViewModel, x => x.CommandCutterIntersect).DisposeWith(disposable);
-
-                this.WhenAnyValue(x => x.ViewModel.JPEGPath).Where(x=>!string.IsNullOrEmpty(x)).Subscribe(value=> SaveCanvasToImage(value, ImageFormats.JPEG)).DisposeWith(disposable);
-
-                
-
             });
         }
         #endregion Setup Commands
-        private void Test(Point point)
-        {
+        #region Setup Subscriptions
 
+        private void SetupSubscriptions()
+        {
+            this.WhenActivated(disposable =>
+            {
+                this.WhenAnyValue(x => x.ViewModel.Selector.Size).WithoutParameter().InvokeCommand(ViewModel, x => x.CommandSelectorIntersect).DisposeWith(disposable);
+                this.WhenAnyValue(x => x.ViewModel.Cutter.EndPoint).WithoutParameter().InvokeCommand(ViewModel, x => x.CommandCutterIntersect).DisposeWith(disposable);
+                this.WhenAnyValue(x => x.ViewModel.JPEGPath).Where(x => !string.IsNullOrEmpty(x)).Subscribe(value => SaveCanvasToImage(value, ImageFormats.JPEG)).DisposeWith(disposable);
+            });
         }
+
+        #endregion Setup Subscriptions
         #region Setup Events
         private void SetupEvents()
         {

@@ -20,9 +20,9 @@ namespace SimpleStateMachineNodeEditor.ViewModel
         [Reactive] public bool TextEnable { get; set; } = false;
         [Reactive] public bool? Visible { get; set; } = true;
         [Reactive] public bool FormEnable { get; set; } = true;
-        [Reactive] public Brush FormStroke { get; set; } = Application.Current.Resources["ColorNodesCanvasBackground"] as SolidColorBrush;
-        [Reactive] public Brush FormFill { get; set; } = Application.Current.Resources["ColorConnector"] as SolidColorBrush;
-        [Reactive] public Brush Foreground { get; set; } = Application.Current.Resources["ColorConnectorForeground"] as SolidColorBrush;
+        [Reactive] public Brush FormStroke { get; set; }
+        [Reactive] public Brush FormFill { get; set; }
+        [Reactive] public Brush Foreground { get; set; }
         [Reactive] public double FormStrokeThickness { get; set; } = 1;
         [Reactive] public ViewModelNode Node { get; set; }
         [Reactive] public ViewModelConnect Connect { get; set; }
@@ -44,9 +44,9 @@ namespace SimpleStateMachineNodeEditor.ViewModel
         private void SetupSubscriptions()
         {
             this.WhenAnyValue(x => x.Selected).Subscribe(value => Select(value));
-            
+            this.WhenAnyValue(x => x.NodesCanvas.Theme).Subscribe(_ => UpdateResources());
 
-            if(this.Name!="Input")
+            if (this.Name!="Input")
             {
                 if (this.Name != "Output")
                 {
@@ -81,6 +81,15 @@ namespace SimpleStateMachineNodeEditor.ViewModel
         {
             this.PositionConnectPoint = this.PositionConnectPoint.Addition(value, 0);
         }
+        private void UpdateResources()
+        {
+           Select(this.Selected);
+            if (this.ItsLoop)
+            {
+                ToLoop();
+            }
+        }           
+            
 
         #endregion Setup Subscriptions
         public XElement ToXElement()

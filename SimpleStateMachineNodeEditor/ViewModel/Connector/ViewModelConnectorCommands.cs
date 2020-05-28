@@ -56,10 +56,14 @@ namespace SimpleStateMachineNodeEditor.ViewModel
         {
             if (this == Node.Output)
                 return;
+            ToLoop();
+            ItsLoop = true;
+            Node.CommandAddEmptyConnector.ExecuteWithSubscribe();
+        }
+        private void ToLoop()
+        {            
             this.FormStrokeThickness = 0;
             this.FormFill = Application.Current.Resources["IconLoop"] as DrawingBrush;
-
-            Node.CommandAddEmptyConnector.ExecuteWithSubscribe();
         }
         private void ConnectPointDrag()
         {
@@ -144,9 +148,9 @@ namespace SimpleStateMachineNodeEditor.ViewModel
 
         private void Select(bool value)
         {
-
-            this.Foreground = value ? Application.Current.Resources["ColorSelectedElement"] as SolidColorBrush : Application.Current.Resources["ColorConnectorForeground"] as SolidColorBrush;
-            this.FormFill = value ? Application.Current.Resources["ColorSelectedElement"] as SolidColorBrush : Application.Current.Resources["ColorConnector"] as SolidColorBrush;
+            this.FormStroke = Application.Current.Resources["ColorNodesCanvasBackground"] as SolidColorBrush;
+            this.Foreground = Application.Current.Resources[this.Selected ? "ColorSelectedElement" : "ColorConnectorForeground"] as SolidColorBrush;
+            this.FormFill = Application.Current.Resources[this.Selected ? "ColorSelectedElement" : "ColorConnector"] as SolidColorBrush;
         }
         private void Select(SelectMode selectMode)
         {

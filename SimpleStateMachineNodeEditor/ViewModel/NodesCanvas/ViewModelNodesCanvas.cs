@@ -11,6 +11,7 @@ using System.IO;
 using Splat;
 using SimpleStateMachineNodeEditor.Helpers;
 using System.Windows;
+using System.Collections.Generic;
 
 namespace SimpleStateMachineNodeEditor.ViewModel
 {
@@ -32,7 +33,7 @@ namespace SimpleStateMachineNodeEditor.ViewModel
         [Reactive] public Scale Scale { get; set; } = new Scale();
         [Reactive] public bool ItSaved { get; set; } = true;
         [Reactive] public TypeMessage DisplayMessageType { get; set; }
-        [Reactive] public string SchemePath { get; set; } = "delete it";
+        [Reactive] public string SchemePath { get; set; }
 
         /// <summary>
         /// Flag for close application
@@ -40,6 +41,13 @@ namespace SimpleStateMachineNodeEditor.ViewModel
         [Reactive] public bool NeedExit { get; set; }
         [Reactive] public string JPEGPath{ get; set; }
         [Reactive] public bool WithoutMessages { get; set; }
+        [Reactive]  public Themes Theme { get; set; } = Themes.Dark;
+
+        static Dictionary<Themes, string> themesPaths = new Dictionary<Themes, string>()
+        {
+            {Themes.Dark, @"Styles\Themes\Dark.xaml" },
+            {Themes.Light, @"Styles\Themes\Light.xaml"},
+        };
 
         public int NodesCount = 0;
         public int TransitionsCount = 1;
