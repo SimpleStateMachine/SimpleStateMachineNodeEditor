@@ -1,4 +1,4 @@
-Ctrl + A = Select All
+Ctrl + A = Select All Nodes
 Ctrl + S = Save
 Ctrl + Shift + S = Save As
 Ctrl + Shift + O = Open
@@ -10,10 +10,10 @@ Ctrl + Y = Redo
 Ctrl + N = Add Node
 Ctrl + LMB on Canvas = Start Select
 Ctrl + LMB on Connector = Create Loop
-Описать процесс выделения элементов
-LMB on Node = Select Node
-Ctrl + LMB on Node = Select Node
-Ctrl + LMB on Transition = Select Transition
+LMB on Node = Select one Node
+Ctrl + LMB on Node = Select/UnSelect Node 
+Ctrl + LMB on Transition = Select/UnSelect Transition
+Shift + LMB on Transition = Multiple selection
 LMB on Connector = Start create Connect
 Alt + LMB on Connector = Move Connector in Node
 Alt + LMB on Canvas = Start Cut
