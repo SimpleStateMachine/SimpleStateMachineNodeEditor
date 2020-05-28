@@ -8,7 +8,7 @@
         <Setter Property="Padding" Value="0"/>
         <Setter Property="HorizontalContentAlignment" Value="Left"/>
         <Setter Property="VerticalContentAlignment" Value="Top"/>
-        <Setter Property="Foreground" Value="{StaticResource ColorMessagesForeground}"/>
+        <Setter Property="Foreground" Value="{DynamicResource ColorMessagesForeground}"/>
 
         <Setter Property="Template">
             <Setter.Value>

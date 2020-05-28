@@ -146,7 +146,6 @@ namespace SimpleStateMachineNodeEditor.View
         }
         private void OnEventCollapse(bool isCollapse)
         {
-            //bool visible = (this.NodeHeaderElement.ButtonRotate.Angle != 0);
             this.NodeHeaderElement.ButtonRotate.Angle = isCollapse ? 180 : 0;
         }
         #endregion Setup Events

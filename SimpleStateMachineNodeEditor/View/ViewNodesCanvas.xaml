@@ -6,11 +6,10 @@
              xmlns:local="clr-namespace:SimpleStateMachineNodeEditor.View"
              xmlns:View="clr-namespace:SimpleStateMachineNodeEditor.View"
              xmlns:ViewModel="clr-namespace:SimpleStateMachineNodeEditor.ViewModel"
-             xmlns:Connect="clr-namespace:SimpleStateMachineNodeEditor.ViewModel.Connect"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800" Focusable="True" AllowDrop="True" ClipToBounds="True">
 
-    <Canvas x:Name="Canvas" Background="{StaticResource ColorNodesCanvasBackground}">
+    <Canvas x:Name="Canvas" Background="{DynamicResource ColorNodesCanvasBackground}">
 
         <local:ViewDialog x:Name="Dialog"/>
         <local:ViewSelector x:Name="Selector"  Panel.ZIndex="999"/>
@@ -38,7 +37,7 @@
                 </ItemsPanelTemplate>
             </ItemsControl.ItemsPanel>
             <ItemsControl.Resources >
-                <DataTemplate DataType="{x:Type Connect:ViewModelConnect}">
+                <DataTemplate DataType="{x:Type ViewModel:ViewModelConnect}">
                     <View:ViewConnect ViewModel="{Binding}"/>
                 </DataTemplate>
                 <DataTemplate DataType="{x:Type ViewModel:ViewModelNode}">
@@ -54,26 +53,26 @@
         </ItemsControl>
     </Canvas>
     <UserControl.ContextMenu >
-        <ContextMenu Template="{StaticResource TemplateContextMenu}" Background="{StaticResource ColorMenuBackground}"  Foreground="{StaticResource ColorMenuForeground}" BorderBrush="{StaticResource ColorMenuBorder}" OpacityMask="{StaticResource ColorMenuBackgroundMouseOver}"  BorderThickness="1" HorizontalAlignment="Left" VerticalAlignment="Center" >
-            <MenuItem Header="Add" x:Name="ItemAddNode" InputGestureText="Ctrl + N" Style="{StaticResource StyleContextMenuItem}" >
+        <ContextMenu Template="{DynamicResource TemplateContextMenu}" Background="{DynamicResource ColorMenuBackground}"  Foreground="{DynamicResource ColorMenuForeground}" BorderBrush="{DynamicResource ColorMenuBorder}" OpacityMask="{DynamicResource ColorMenuBackgroundMouseOver}"  BorderThickness="1" HorizontalAlignment="Left" VerticalAlignment="Center" >
+            <MenuItem Header="Add" x:Name="ItemAddNode" InputGestureText="Ctrl + N" Style="{DynamicResource StyleContextMenuItem}" >
                 <MenuItem.Icon>
-                    <Rectangle Fill="{StaticResource IconAddNode}" Height="13" Width="13"/>
+                    <Rectangle Fill="{DynamicResource IconAddNode}" Height="13" Width="13"/>
                 </MenuItem.Icon>
             </MenuItem>
-            <MenuItem Header="Delete" x:Name="ItemDelete" InputGestureText="Delete" Style="{StaticResource StyleContextMenuItem}">
+            <MenuItem Header="Delete" x:Name="ItemDelete" InputGestureText="Delete" Style="{DynamicResource StyleContextMenuItem}">
                 <MenuItem.Icon>
-                    <Rectangle Fill="{StaticResource IconDeleteScheme}" Height="15" Width="15"/>
+                    <Rectangle Fill="{DynamicResource IconDeleteScheme}" Height="15" Width="15"/>
                 </MenuItem.Icon>
             </MenuItem>
             <Separator Background="#333337"/>
-            <MenuItem Header="Collaps Up" x:Name="ItemCollapsUp" Style="{StaticResource StyleContextMenuItem}">
+            <MenuItem Header="Collaps Up" x:Name="ItemCollapsUp" Style="{DynamicResource StyleContextMenuItem}">
                 <MenuItem.Icon>
-                    <Rectangle Fill="{StaticResource IconCollapseUp}" Height="13" Width="13"/>
+                    <Rectangle Fill="{DynamicResource IconCollapseUp}" Height="13" Width="13"/>
                 </MenuItem.Icon>
             </MenuItem>
-            <MenuItem Header="Expand Down" x:Name="ItemExpandDown" Style="{StaticResource StyleContextMenuItem}">
+            <MenuItem Header="Expand Down" x:Name="ItemExpandDown" Style="{DynamicResource StyleContextMenuItem}">
                 <MenuItem.Icon>
-                    <Rectangle Fill="{StaticResource IconExpandDown}" Height="13" Width="13"/>
+                    <Rectangle Fill="{DynamicResource IconExpandDown}" Height="13" Width="13"/>
                 </MenuItem.Icon>
             </MenuItem>
         </ContextMenu>
@@ -83,7 +82,8 @@
         <KeyBinding x:Name="BindingRedo"        Key="Y" Modifiers="Control" />
         <KeyBinding x:Name="BindingSelectAll"   Key="A" Modifiers="Control" />
         <KeyBinding x:Name="BindingAddNode"     Key="N" Modifiers="Control" />
-        <KeyBinding x:Name="BindingDeleteSelectedElements" Key="Delete"  />
+        <KeyBinding x:Name="BindingDeleteSelectedElements" Key="Delete"/>
+        <KeyBinding x:Name="BindingExportToJPEG"   Gesture="Ctrl+Shift+Alt+J"/>
         <MouseBinding x:Name="BindingSelect"    Gesture="Ctrl+LeftClick"/>
         <MouseBinding x:Name="BindingCut"       Gesture="Alt+LeftClick" />
     </UserControl.InputBindings>

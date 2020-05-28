@@ -61,8 +61,7 @@ namespace SimpleStateMachineNodeEditor.View
             {
                 var SelectedItem = this.ObservableForProperty(x => x.MessageList.SelectedItem).Select(x=>(x.Value as ViewModelMessage)?.Text);
                 this.BindCommand(this.ViewModel, x => x.CommandCopyError, x => x.BindingCopyError, SelectedItem).DisposeWith(disposable);
-                this.BindCommand(this.ViewModel, x => x.CommandCopyError, x => x.ItemCopyError, SelectedItem).DisposeWith(disposable);
-
+                this.BindCommand(this.ViewModel, x => x.CommandCopyError, x => x.ItemCopyError, SelectedItem).DisposeWith(disposable);               
 
                 this.OneWayBind(this.ViewModel, x => x.Messages, x => x.MessageList.ItemsSource).DisposeWith(disposable);
                 this.OneWayBind(this.ViewModel, x => x.DebugEnable, x => x.LabelDebug.Visibility).DisposeWith(disposable);
@@ -72,6 +71,10 @@ namespace SimpleStateMachineNodeEditor.View
                 this.OneWayBind(this.ViewModel, x => x.CountInformation, x => x.LabelInformation.Content, value => value.ToString() + " Information").DisposeWith(disposable);
                 this.OneWayBind(this.ViewModel, x => x.CountDebug, x => x.LabelDebug.Content, value => value.ToString() + " Debug").DisposeWith(disposable);
 
+
+                this.BindCommand(this.ViewModel, x => x.NodesCanvas.CommandChangeTheme, x => x.ButtonChangeTheme).DisposeWith(disposable);
+
+                this.BindCommand(this.ViewModel, x => x.CommandCopySchemeName, x => x.ItemCopySchemeName).DisposeWith(disposable);
                 this.BindCommand(this.ViewModel, x => x.NodesCanvas.CommandSelectAll,        x => x.ItemSelectAll).DisposeWith(disposable);
                 this.BindCommand(this.ViewModel, x => x.NodesCanvas.CommandZoomIn,           x => x.ButtonZoomIn).DisposeWith(disposable);
                 this.BindCommand(this.ViewModel, x => x.NodesCanvas.CommandZoomOut,          x => x.ButtonZoomOut).DisposeWith(disposable);
@@ -121,6 +124,7 @@ namespace SimpleStateMachineNodeEditor.View
                 this.WhenAnyValue(x => x.ViewModel.NodesCanvas.SchemePath).Subscribe(value=> UpdateSchemeName(value)).DisposeWith(disposable);              
                 this.WhenAnyValue(x => x.NodesCanvas.ViewModel.NeedExit).Where(x=>x).Subscribe(_ => this.Close()).DisposeWith(disposable);
                 this.WhenAnyValue(x => x.ViewModel.CountError).Buffer(2, 1).Where(x => x[1] > x[0]).Subscribe(_ => ShowError()).DisposeWith(disposable);
+                this.WhenAnyValue(x => x.ViewModel.NodesCanvas.Theme).Subscribe(_ => UpdateButton()).DisposeWith(disposable);
             });
         }
         private void UpdateSchemeName(string newName)
@@ -139,6 +143,8 @@ namespace SimpleStateMachineNodeEditor.View
         {
             this.WhenActivated(disposable =>
             {
+                this.MessageList.Events().MouseDoubleClick.Subscribe(_ => ViewModel.CommandCopyError.ExecuteWithSubscribe((MessageList.SelectedItem as ViewModelMessage)?.Text)).DisposeWith(disposable);
+                this.LabelSchemeName.Events().MouseDoubleClick.WithoutParameter().InvokeCommand(ViewModel.CommandCopySchemeName).DisposeWith(disposable);
                 this.Header.Events().PreviewMouseLeftButtonDown.Subscribe(e => HeaderClick(e)).DisposeWith(disposable);              
                 this.ButtonMin.Events().Click.Subscribe(e => ButtonMinClick(e)).DisposeWith(disposable);
                 this.ButtonMax.Events().Click.Subscribe(e => ButtonMaxClick(e)).DisposeWith(disposable);
@@ -179,9 +185,6 @@ namespace SimpleStateMachineNodeEditor.View
                 this.ErrorListExpander.IsExpanded = true;
                 ErrorListExpanded();
             }
-            //this.ErrorListExpander.RaiseEvent(new RoutedEventArgs(Expander.ExpandedEvent));
-            //this.ErrorListExpander.IsExpanded = true;
-
         }
 
         private void ButtonMinClick(RoutedEventArgs e)
@@ -194,18 +197,29 @@ namespace SimpleStateMachineNodeEditor.View
         }
         private void StateNormalMaximaze()
         {
+            this.WindowState = (this.WindowState == WindowState.Normal) ? WindowState.Maximized : WindowState.Normal;
+            UpdateButton();          
+        }
+        private void UpdateButton()
+        {
             if (this.WindowState == WindowState.Normal)
             {
-                this.WindowState = WindowState.Maximized;
-                this.ButtonMaxRectangle.Fill = System.Windows.Application.Current.Resources["IconRestore"] as DrawingBrush;
-                this.ButtonMaxRectangle.ToolTip = "Maximize";
+                StateNormal();              
             }
             else
             {
-                this.WindowState = WindowState.Normal;
-                this.ButtonMaxRectangle.Fill = System.Windows.Application.Current.Resources["IconMaximize"] as DrawingBrush;
-                this.ButtonMaxRectangle.ToolTip = "Restore down";
+                StateMaximize();
             }
+        }
+        private void StateMaximize()
+        {         
+            this.ButtonMaxRectangle.Fill = Application.Current.Resources["IconRestore"] as DrawingBrush;
+            this.ButtonMaxRectangle.ToolTip = "Maximize";
+        }
+        private void StateNormal()
+        {
+            this.ButtonMaxRectangle.Fill = Application.Current.Resources["IconMaximize"] as DrawingBrush;
+            this.ButtonMaxRectangle.ToolTip = "Restore down";
         }
         private void HeaderClick(MouseButtonEventArgs e)
         {
@@ -226,7 +240,8 @@ namespace SimpleStateMachineNodeEditor.View
                             Left = point.X - (RestoreBounds.Width / 2);
 
                         Top = point.Y - (this.Header.ActualHeight / 2);
-                        WindowState = WindowState.Normal;
+                        StateNormal();
+                        this.WindowState = WindowState.Normal;
                     }
 
                     this.DragMove();

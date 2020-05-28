@@ -18,7 +18,6 @@ using SimpleStateMachineNodeEditor.ViewModel;
 using SimpleStateMachineNodeEditor.Helpers.Transformations;
 using SimpleStateMachineNodeEditor.Helpers.Enums;
 using SimpleStateMachineNodeEditor.Helpers.Extensions;
-using SimpleStateMachineNodeEditor.ViewModel.Connector;
 
 namespace SimpleStateMachineNodeEditor.View
 {
@@ -86,14 +85,11 @@ namespace SimpleStateMachineNodeEditor.View
         {
             this.WhenActivated(disposable =>
             {
-
-                //this.WhenAnyValue(x => x.ViewModel.Node.Size, x => x.ViewModel.Node.Point1.Value, x => x.ViewModel.Node.NodesCanvas.Scale.Scales.Value)
-                //       .Subscribe(_ => UpdatePositionConnectPoin()).DisposeWith(disposable);
                 this.WhenAnyValue(x => x.EllipseElement.IsMouseOver).Subscribe(value => OnEventMouseOver(value)).DisposeWith(disposable);
             });
         }
-
         #endregion Setup Subcriptions
+
         #region SetupEvents
 
         private void SetupEvents()
@@ -104,6 +100,7 @@ namespace SimpleStateMachineNodeEditor.View
                 this.TextBoxElement.Events().LostFocus.Subscribe(e => Validate(e)).DisposeWith(disposable);
                 this.BorderElement.Events().PreviewMouseLeftButtonDown.Subscribe(e => ConnectorDrag(e)).DisposeWith(disposable);
                 this.BorderElement.Events().PreviewDragEnter.Subscribe(e => ConnectorDragEnter(e)).DisposeWith(disposable);
+                this.BorderElement.Events().PreviewDragOver.Subscribe(e => e.Handled = true).DisposeWith(disposable);
                 this.BorderElement.Events().PreviewDrop.Subscribe(e => ConnectorDrop(e)).DisposeWith(disposable);
             });
         }
@@ -132,7 +129,7 @@ namespace SimpleStateMachineNodeEditor.View
                 this.ViewModel.CommandConnectPointDrag.ExecuteWithSubscribe();
                 DataObject data = new DataObject();
                 data.SetData("Node", this.ViewModel.Node);
-                DragDrop.DoDragDrop(this, data, DragDropEffects.Link);
+                DragDrop.DoDragDrop(this, data, DragDropEffects.Copy);
                 this.ViewModel.CommandCheckConnectPointDrop.ExecuteWithSubscribe();
                 e.Handled = true;
             }
@@ -147,7 +144,7 @@ namespace SimpleStateMachineNodeEditor.View
                 this.ViewModel.CommandConnectorDrag.ExecuteWithSubscribe();
                 DataObject data = new DataObject();
                 data.SetData("Connector", this.ViewModel);
-                DragDrop.DoDragDrop(this, data, DragDropEffects.Link);
+                DragDrop.DoDragDrop(this, data, DragDropEffects.Copy);
             }
             else if (Keyboard.IsKeyDown(Key.LeftShift))
             {
@@ -172,9 +169,7 @@ namespace SimpleStateMachineNodeEditor.View
 
             if (this.ViewModel.NodesCanvas.ConnectorPreviewForDrop == this.ViewModel)
                 return;
-
             this.ViewModel.CommandConnectorDragEnter.ExecuteWithSubscribe();
-
             e.Handled = true;
         }
         private void ConnectorDrop(DragEventArgs e)

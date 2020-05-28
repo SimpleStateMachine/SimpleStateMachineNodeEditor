@@ -5,9 +5,10 @@ using SimpleStateMachineNodeEditor.Helpers.Extensions;
 using System;
 using System.Reactive;
 using System.Windows;
+using System.Windows.Input;
 using System.Windows.Media;
 
-namespace SimpleStateMachineNodeEditor.ViewModel.Connector
+namespace SimpleStateMachineNodeEditor.ViewModel
 {
     public partial class ViewModelConnector
     {
@@ -56,10 +57,14 @@ namespace SimpleStateMachineNodeEditor.ViewModel.Connector
         {
             if (this == Node.Output)
                 return;
+            ToLoop();
+            ItsLoop = true;
+            Node.CommandAddEmptyConnector.ExecuteWithSubscribe();
+        }
+        private void ToLoop()
+        {            
             this.FormStrokeThickness = 0;
             this.FormFill = Application.Current.Resources["IconLoop"] as DrawingBrush;
-
-            Node.CommandAddEmptyConnector.ExecuteWithSubscribe();
         }
         private void ConnectPointDrag()
         {
@@ -102,7 +107,6 @@ namespace SimpleStateMachineNodeEditor.ViewModel.Connector
             int indexTo = Node.Transitions.IndexOf(this);
             if (indexTo == 0)
                 return;
-
             int count = this.Node.Transitions.Count;
             int indexFrom = this.Node.Transitions.IndexOf(this.NodesCanvas.ConnectorPreviewForDrop);
 
@@ -144,9 +148,9 @@ namespace SimpleStateMachineNodeEditor.ViewModel.Connector
 
         private void Select(bool value)
         {
-
-            this.Foreground = value ? Application.Current.Resources["ColorSelectedElement"] as SolidColorBrush : Application.Current.Resources["ColorConnectorForeground"] as SolidColorBrush;
-            this.FormFill = value ? Application.Current.Resources["ColorSelectedElement"] as SolidColorBrush : Application.Current.Resources["ColorConnector"] as SolidColorBrush;
+            this.FormStroke = Application.Current.Resources["ColorNodesCanvasBackground"] as SolidColorBrush;
+            this.Foreground = Application.Current.Resources[this.Selected ? "ColorSelectedElement" : "ColorConnectorForeground"] as SolidColorBrush;
+            this.FormFill = Application.Current.Resources[this.Selected ? "ColorSelectedElement" : "ColorConnector"] as SolidColorBrush;
         }
         private void Select(SelectMode selectMode)
         {

@@ -3,16 +3,13 @@ using DynamicData.Binding;
 using ReactiveUI;
 using ReactiveUI.Fody.Helpers;
 using System;
-using System.Windows;
 using SimpleStateMachineNodeEditor.Helpers.Enums;
 using System.Reactive.Linq;
-using System.Reactive;
-using SimpleStateMachineNodeEditor.ViewModel.NodesCanvas;
 using System.Linq;
 
 namespace SimpleStateMachineNodeEditor.ViewModel
 {
-    public class ViewModelMainWindow : ReactiveObject
+    public partial class ViewModelMainWindow : ReactiveObject
     {
         public ObservableCollectionExtended<ViewModelMessage> Messages { get; set; } = new ObservableCollectionExtended<ViewModelMessage>();
 
@@ -24,7 +21,6 @@ namespace SimpleStateMachineNodeEditor.ViewModel
         [Reactive] public int CountWarning { get; set; }
         [Reactive] public int CountInformation { get; set; }
         [Reactive] public int CountDebug { get; set; }
-
 
         private IDisposable ConnectToMessages;
         public double MaxHeightMessagePanel = 150;
@@ -70,31 +66,16 @@ namespace SimpleStateMachineNodeEditor.ViewModel
                 return displayAll;
             }
         }
-        #endregion Setup Subscriptions
-        #region Setup Commands
-
-        public ReactiveCommand<string, Unit> CommandCopyError { get; set; }
-        public ReactiveCommand<Unit, Unit> CommandUpdateMessagesType { get; set; }
-        private void SetupCommands()
-        {
-            CommandCopyError = ReactiveCommand.Create<string>(CopyError);
-
-        }
-
-        private void CopyError(string errrorText)
-        {
-            Clipboard.SetText(errrorText);
-        }
         private void UpdateCountMessages()
-        {          
-            var counts =  NodesCanvas.Messages.GroupBy(x => x.TypeMessage).ToDictionary(x => x.Key, x => x.Count());
+        {
+            var counts = NodesCanvas.Messages.GroupBy(x => x.TypeMessage).ToDictionary(x => x.Key, x => x.Count());
             CountError = counts.Keys.Contains(TypeMessage.Error) ? counts[TypeMessage.Error] : 0;
             CountWarning = counts.Keys.Contains(TypeMessage.Warning) ? counts[TypeMessage.Warning] : 0;
             CountInformation = counts.Keys.Contains(TypeMessage.Information) ? counts[TypeMessage.Information] : 0;
             CountDebug = counts.Keys.Contains(TypeMessage.Debug) ? counts[TypeMessage.Debug] : 0;
         }
 
-        #endregion Setup Commands
+        #endregion Setup Subscriptions
 
     }
 }

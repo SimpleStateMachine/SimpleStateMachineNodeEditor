@@ -4,7 +4,7 @@
         <DrawingBrush.Drawing>
             <DrawingGroup>
                 <DrawingGroup.Children>
-                    <GeometryDrawing Brush="{StaticResource ColorIconsMain}" Geometry="F1M8,8L13,13 14,12 8,6 2,12 3,13z M8,4L13,9 14,8 8,2 2,8 3,9z" />
+                    <GeometryDrawing Brush="{DynamicResource ColorIconsMain}" Geometry="F1M8,8L13,13 14,12 8,6 2,12 3,13z M8,4L13,9 14,8 8,2 2,8 3,9z" />
                 </DrawingGroup.Children>
             </DrawingGroup>
         </DrawingBrush.Drawing>

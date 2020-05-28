@@ -15,6 +15,7 @@
         <ResourceDictionary Source="ErrorList.xaml"/>
         <ResourceDictionary Source="Save.xaml"/>
         <ResourceDictionary Source="ExpandDown.xaml"/>
+        <ResourceDictionary Source="Theme.xaml"/>
         <ResourceDictionary Source="Restore.xaml"/>
         <ResourceDictionary Source="Minimize.xaml"/>
         <ResourceDictionary Source="Maximize.xaml"/>

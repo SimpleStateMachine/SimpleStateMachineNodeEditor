@@ -14,7 +14,6 @@ using System.Reactive.Linq;
 using System.Windows.Markup;
 using SimpleStateMachineNodeEditor.ViewModel;
 using SimpleStateMachineNodeEditor.Helpers;
-using SimpleStateMachineNodeEditor.ViewModel.Connect;
 
 namespace SimpleStateMachineNodeEditor.View
 {

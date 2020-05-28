@@ -5,9 +5,9 @@
         <Setter Property="HorizontalAlignment" Value="Stretch"/>
         <Setter Property="VerticalAlignment" Value="Stretch" />
         <Setter Property="Opacity" Value="0.2"/>
-        <Setter Property="Fill" Value="{StaticResource ColorSelectorFill}" />
+        <Setter Property="Fill" Value="{DynamicResource ColorSelectorFill}" />
         <Setter Property="StrokeThickness" Value="2"/>
-        <Setter Property="Stroke" Value="{StaticResource ColorSelectorStroke}"/>
+        <Setter Property="Stroke" Value="{DynamicResource ColorSelectorStroke}"/>
     </Style>
     
 </ResourceDictionary>

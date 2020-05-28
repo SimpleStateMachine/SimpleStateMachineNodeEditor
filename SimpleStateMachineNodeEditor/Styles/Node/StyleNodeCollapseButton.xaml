@@ -3,8 +3,8 @@
                     xmlns:local="clr-namespace:SimpleStateMachineNodeEditor.Styles.Node">
     
     <Style x:Key="StyleNodeCollapseButton" TargetType="{x:Type Button}">
-        <Setter Property="Background" Value="{StaticResource ColorNodeCollapseButtonBackground}"/>
-        <Setter Property="BorderBrush" Value="{StaticResource ColorNodeCollapseButtonBorderBrush}"/>
+        <Setter Property="Background" Value="{DynamicResource ColorNodeCollapseButtonBackground}"/>
+        <Setter Property="BorderBrush" Value="{DynamicResource ColorNodeCollapseButtonBorderBrush}"/>
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type Button}">
@@ -14,8 +14,8 @@
 
                     <ControlTemplate.Triggers>
                         <Trigger Property="IsMouseOver" Value="true">
-                            <Setter Property="Background" Value="{StaticResource ColorNodeCollapseButtonMouseOverBackground}"/>
-                            <Setter Property="BorderBrush" Value="{StaticResource ColorNodeCollapseButtonMouseOverBorderBrush}"/>
+                            <Setter Property="Background" Value="{DynamicResource ColorNodeCollapseButtonMouseOverBackground}"/>
+                            <Setter Property="BorderBrush" Value="{DynamicResource ColorNodeCollapseButtonMouseOverBorderBrush}"/>
                         </Trigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>

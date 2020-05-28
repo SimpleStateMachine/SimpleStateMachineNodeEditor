@@ -4,8 +4,6 @@ using SimpleStateMachineNodeEditor.Helpers;
 using SimpleStateMachineNodeEditor.Helpers.Commands;
 using SimpleStateMachineNodeEditor.Helpers.Enums;
 using SimpleStateMachineNodeEditor.Helpers.Extensions;
-using SimpleStateMachineNodeEditor.ViewModel.Connect;
-using SimpleStateMachineNodeEditor.ViewModel.Connector;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,7 +13,7 @@ using System.Windows;
 using System.Windows.Input;
 using System.Xml.Linq;
 
-namespace SimpleStateMachineNodeEditor.ViewModel.NodesCanvas
+namespace SimpleStateMachineNodeEditor.ViewModel
 {
     public partial class ViewModelNodesCanvas
     {
@@ -41,6 +39,8 @@ namespace SimpleStateMachineNodeEditor.ViewModel.NodesCanvas
         public ReactiveCommand<Unit, Unit> CommandSave { get; set; }
         public ReactiveCommand<Unit, Unit> CommandSaveAs { get; set; }
         public ReactiveCommand<Unit, Unit> CommandExit { get; set; }
+
+        public ReactiveCommand<Unit, Unit> CommandChangeTheme { get; set; }
 
         #endregion commands without parameter
 
@@ -98,7 +98,8 @@ namespace SimpleStateMachineNodeEditor.ViewModel.NodesCanvas
             CommandSave = ReactiveCommand.Create(Save);
             CommandSaveAs = ReactiveCommand.Create(SaveAs);
             CommandExit = ReactiveCommand.Create(Exit);
-            
+            CommandChangeTheme = ReactiveCommand.Create(ChangeTheme);
+
 
             CommandValidateNodeName = ReactiveCommand.Create<(ViewModelNode objectForValidate, string newValue)>(ValidateNodeName);
             CommandValidateConnectName = ReactiveCommand.Create<(ViewModelConnector objectForValidate, string newValue)>(ValidateConnectName);
@@ -126,6 +127,8 @@ namespace SimpleStateMachineNodeEditor.ViewModel.NodesCanvas
             CommandDeleteSelectedNodes = new Command<ElementsForDelete, ElementsForDelete>(DeleteSelectedNodes, UnDeleteSelectedNodes, NotSaved);
             CommandDeleteSelectedConnectors = new Command<List<(int index, ViewModelConnector element)>, List<(int index, ViewModelConnector connector)>>(DeleteSelectedConnectors, UnDeleteSelectedConnectors, NotSaved);
             CommandDeleteSelectedElements = new Command<DeleteMode, DeleteMode>(DeleteSelectedElements, UnDeleteSelectedElements);
+
+            
 
             NotSavedSubscrube();
         }
@@ -163,6 +166,34 @@ namespace SimpleStateMachineNodeEditor.ViewModel.NodesCanvas
         private void ErrosUpdaate()
         {
             Messages.RemoveMany(Messages.Where(x => x.TypeMessage == DisplayMessageType || DisplayMessageType == TypeMessage.All));
+        }
+        private void ChangeTheme()
+        {
+            if (Theme == Themes.Dark)
+            {
+                SetTheme(Themes.Light);
+            }
+            else if (Theme == Themes.Light)
+            {
+                SetTheme(Themes.Dark);
+            }
+
+        }
+        private void SetTheme(Themes theme)
+        {
+            Application.Current.Resources.Clear();
+            var uri = new Uri(themesPaths[theme], UriKind.RelativeOrAbsolute);
+            ResourceDictionary resourceDict = Application.LoadComponent(uri) as ResourceDictionary;
+            Application.Current.Resources.MergedDictionaries.Add(resourceDict);       
+            LoadIcons();
+            Theme = theme;
+        }
+        private void LoadIcons()
+        {
+            string path = @"Icons\Icons.xaml";
+            var uri = new Uri(path, UriKind.RelativeOrAbsolute);
+            ResourceDictionary resourceDict = Application.LoadComponent(uri) as ResourceDictionary;
+            Application.Current.Resources.MergedDictionaries.Add(resourceDict);
         }
         private void CollapseUpSelected()
         {
@@ -252,7 +283,7 @@ namespace SimpleStateMachineNodeEditor.ViewModel.NodesCanvas
             Dialog.ShowOpenFileDialog("XML-File | *.xml", SchemeName(), "Import scheme from xml file");
             if (Dialog.Result != DialogResult.Ok)
                 return;
-
+            Mouse.OverrideCursor = Cursors.Wait;
             string fileName = Dialog.FileName;
             ClearScheme();
             WithoutMessages = true;
@@ -300,6 +331,7 @@ namespace SimpleStateMachineNodeEditor.ViewModel.NodesCanvas
             SchemePath = fileName;
 
             #endregion  setup Transitions/connects
+            Mouse.OverrideCursor = null;
             WithoutMessages = false;
             LogDebug("Scheme was loaded from file \"{0}\"", SchemePath);
 
@@ -351,6 +383,7 @@ namespace SimpleStateMachineNodeEditor.ViewModel.NodesCanvas
         }
         private void Save(string fileName)
         {
+            Mouse.OverrideCursor = Cursors.Wait;
             XDocument xDocument = new XDocument();
             XElement stateMachineXElement = new XElement("StateMachine");
             xDocument.Add(stateMachineXElement);
@@ -376,7 +409,7 @@ namespace SimpleStateMachineNodeEditor.ViewModel.NodesCanvas
             xDocument.Save(fileName);
             ItSaved = true;
             SchemePath = fileName;
-
+            Mouse.OverrideCursor = null;
             LogDebug("Scheme was saved as \"{0}\"", SchemePath);
         }
 
@@ -483,7 +516,7 @@ namespace SimpleStateMachineNodeEditor.ViewModel.NodesCanvas
         private List<ViewModelNode> UnFullMoveAllNode(Point delta, List<ViewModelNode> nodes = null)
         {
             Point myPoint = delta.Copy();
-            myPoint.Mirror();
+            myPoint = myPoint.Mirror();
             nodes.ForEach(node => node.CommandMove.ExecuteWithSubscribe(myPoint));
             return nodes;
         }
@@ -501,7 +534,7 @@ namespace SimpleStateMachineNodeEditor.ViewModel.NodesCanvas
         private List<ViewModelNode> UnFullMoveAllSelectedNode(Point delta, List<ViewModelNode> nodes = null)
         {
             Point myPoint = delta.Copy();
-            myPoint.Mirror();
+            myPoint = myPoint.Mirror();
             nodes.ForEach(node => node.CommandMove.ExecuteWithSubscribe(myPoint));
             return nodes;
         }

@@ -3,8 +3,8 @@
                     xmlns:local="clr-namespace:SimpleStateMachineNodeEditor.Styles.MainWindow.ToolBar">
 
     <Style x:Key="TemplateSeparator" TargetType="{x:Type Separator}">
-        <Setter Property="Background" Value="{StaticResource ColorSeparator}"/>
-        <Setter Property="BorderBrush" Value="{StaticResource ColorSeparatorBorder}"/> <!--#46464a-->
+        <Setter Property="Background" Value="{DynamicResource ColorSeparator}"/>
+        <Setter Property="BorderBrush" Value="{DynamicResource ColorSeparatorBorder}"/> <!--#46464a-->
         <Setter Property="Height" Value="2"/>
         <Setter Property="Width" Value="2"/>
         <Setter Property="VerticalAlignment" Value="Stretch"/>

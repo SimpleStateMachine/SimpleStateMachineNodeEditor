@@ -9,10 +9,8 @@ using ReactiveUI.Fody.Helpers;
 
 using SimpleStateMachineNodeEditor.Helpers;
 using SimpleStateMachineNodeEditor.Helpers.Extensions;
-using SimpleStateMachineNodeEditor.ViewModel.NodesCanvas;
-using SimpleStateMachineNodeEditor.ViewModel.Connector;
 
-namespace SimpleStateMachineNodeEditor.ViewModel.Connect
+namespace SimpleStateMachineNodeEditor.ViewModel
 {
     public class ViewModelConnect : ReactiveObject
     {
@@ -49,6 +47,7 @@ namespace SimpleStateMachineNodeEditor.ViewModel.Connect
             this.WhenAnyValue(x => x.FromConnector.Node.IsCollapse).Subscribe(value => UpdateSubscriptionForPosition(value));           
             this.WhenAnyValue(x => x.ToConnector.PositionConnectPoint).Subscribe(value => EndPointUpdate(value));
             this.WhenAnyValue(x => x.FromConnector.Selected).Subscribe(value => Select(value));
+            this.WhenAnyValue(x => x.NodesCanvas.Theme).Subscribe(_ => Select(this.FromConnector.Selected));
         }
         private void UpdateSubscriptionForPosition(bool nodeIsCollapse)
         {
@@ -73,11 +72,7 @@ namespace SimpleStateMachineNodeEditor.ViewModel.Connect
         private void Select(bool value)
         {
             //this.StrokeDashArray = value ? new DoubleCollection() { 10, 3 } : null;
-            this.Stroke = value ? Application.Current.Resources["ColorSelectedElement"].Cast<SolidColorBrush>(): Application.Current.Resources["ColorConnect"].Cast<SolidColorBrush>();
-        }
-        private void ToConnectChanged()
-        {
-            EndPointUpdate(ToConnector.PositionConnectPoint);
+            this.Stroke =  Application.Current.Resources[value ? "ColorSelectedElement": "ColorConnect"] as SolidColorBrush;
         }
         private void StartPointUpdate(Point point)
         {

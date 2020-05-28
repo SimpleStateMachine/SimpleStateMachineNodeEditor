@@ -35,7 +35,7 @@
                             </Grid>
 
                             <!-- Next level menu -->
-                            <Popup  AllowsTransparency="True" IsOpen="{Binding Path=IsSubmenuOpen, RelativeSource={RelativeSource TemplatedParent}}" Placement="Right" x:Name="SubMenuPopup" Focusable="false" PopupAnimation="{StaticResource {x:Static SystemParameters.MenuPopupAnimationKey}}">
+                            <Popup  AllowsTransparency="True" IsOpen="{Binding Path=IsSubmenuOpen, RelativeSource={RelativeSource TemplatedParent}}" Placement="Right" x:Name="SubMenuPopup" Focusable="false" PopupAnimation="{DynamicResource {x:Static SystemParameters.MenuPopupAnimationKey}}">
                                 <Border x:Name="SubMenuBorder" Margin="0,0,5,5" Background="{Binding Path=Background, RelativeSource={RelativeSource AncestorType={x:Type ContextMenu}}}" BorderBrush="{Binding Path=BorderBrush, RelativeSource={RelativeSource AncestorType={x:Type ContextMenu}}}" BorderThickness="{Binding Path=BorderThickness, RelativeSource={RelativeSource AncestorType={x:Type ContextMenu}}}">
                                     <Border.Effect>
                                         <DropShadowEffect BlurRadius="5" Opacity="0.4"/>
