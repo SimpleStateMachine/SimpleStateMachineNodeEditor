@@ -67,7 +67,8 @@ namespace SimpleStateMachineNodeEditor.ViewModel
         {
             NodesCanvas = viewModelNodesCanvas;
             FromConnector = fromConnector;
-            FromConnector.Connect = this;           
+            FromConnector.Connect = this;
+            this.EndPoint = fromConnector.PositionConnectPoint;
         }
         private void Select(bool value)
         {
