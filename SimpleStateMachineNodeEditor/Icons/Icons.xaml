@@ -22,6 +22,7 @@
         <ResourceDictionary Source="Exit.xaml"/>
         <ResourceDictionary Source="SelectAll.xaml"/>
         <ResourceDictionary Source="Loop.xaml"/>
+        <ResourceDictionary Source="SelectedLoop.xaml"/>
         <ResourceDictionary Source="Close.xaml"/>
         <ResourceDictionary Source="Copy.xaml"/>
         <ResourceDictionary Source="ExpandDownAll.xaml"/>

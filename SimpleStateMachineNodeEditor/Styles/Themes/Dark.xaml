@@ -18,7 +18,7 @@
 
     <SolidColorBrush x:Key="ColorConnectorForeground" Color="White"/>
 
-    <SolidColorBrush x:Key="ColorCutter" Color="Red"/>
+    <SolidColorBrush x:Key="ColorCutter" Color="#D23030"/>
     
 
     <SolidColorBrush x:Key="ColorButtonStroke" Color="LightGray"/>

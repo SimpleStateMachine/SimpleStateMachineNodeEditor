@@ -150,7 +150,11 @@ namespace SimpleStateMachineNodeEditor.ViewModel
         {
             this.FormStroke = Application.Current.Resources["ColorNodesCanvasBackground"] as SolidColorBrush;
             this.Foreground = Application.Current.Resources[this.Selected ? "ColorSelectedElement" : "ColorConnectorForeground"] as SolidColorBrush;
-            this.FormFill = Application.Current.Resources[this.Selected ? "ColorSelectedElement" : "ColorConnector"] as SolidColorBrush;
+            if (!this.ItsLoop)
+                this.FormFill = Application.Current.Resources[this.Selected ? "ColorSelectedElement" : "ColorConnector"] as SolidColorBrush;
+            else
+                this.FormFill = Application.Current.Resources[this.Selected ? "IconSelectedLoop" : "IconLoop"] as DrawingBrush;
+
         }
         private void Select(SelectMode selectMode)
         {

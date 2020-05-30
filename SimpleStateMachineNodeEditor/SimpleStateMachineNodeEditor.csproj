@@ -60,4 +60,10 @@
     </None>
   </ItemGroup>
 
+  <ItemGroup>
+    <Page Update="Icons\SelectedLoop.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+  </ItemGroup>
+
 </Project>

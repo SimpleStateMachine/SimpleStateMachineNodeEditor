@@ -27,7 +27,7 @@ namespace SimpleStateMachineNodeEditor.ViewModel
 
         [Reactive] public ViewModelNodesCanvas NodesCanvas { get; set; }
 
-        [Reactive] public DoubleCollection StrokeDashArray { get; set; }
+        [Reactive] public DoubleCollection StrokeDashArray { get; set; } = new DoubleCollection() { 10, 3 };
 
         [Reactive] public double StrokeThickness { get; set; } = 1;
 
@@ -48,6 +48,7 @@ namespace SimpleStateMachineNodeEditor.ViewModel
             this.WhenAnyValue(x => x.ToConnector.PositionConnectPoint).Subscribe(value => EndPointUpdate(value));
             this.WhenAnyValue(x => x.FromConnector.Selected).Subscribe(value => Select(value));
             this.WhenAnyValue(x => x.NodesCanvas.Theme).Subscribe(_ => Select(this.FromConnector.Selected));
+            this.WhenAnyValue(x => x.ToConnector).Where(x => x != null).Subscribe(_ => StrokeDashArray = null);
         }
         private void UpdateSubscriptionForPosition(bool nodeIsCollapse)
         {
@@ -72,7 +73,6 @@ namespace SimpleStateMachineNodeEditor.ViewModel
         }
         private void Select(bool value)
         {
-            //this.StrokeDashArray = value ? new DoubleCollection() { 10, 3 } : null;
             this.Stroke =  Application.Current.Resources[value ? "ColorSelectedElement": "ColorConnect"] as SolidColorBrush;
         }
         private void StartPointUpdate(Point point)
