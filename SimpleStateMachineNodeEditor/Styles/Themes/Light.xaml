@@ -12,9 +12,9 @@
 
     <SolidColorBrush x:Key="ColorSelectedElement"  Color="#D23030"/>
 
-    <SolidColorBrush x:Key="ColorConnect" Color="#d7d7e2"/>
+    <SolidColorBrush x:Key="ColorConnect" Color="#414141"/>
 
-    <SolidColorBrush x:Key="ColorConnector" Color="#d7d7e2"/>
+    <SolidColorBrush x:Key="ColorConnector" Color="#414141"/>
 
     <SolidColorBrush x:Key="ColorConnectorForeground" Color="Black"/>
 
@@ -23,7 +23,7 @@
 
     <SolidColorBrush x:Key="ColorButtonStroke" Color="#626264"/>
 
-    <SolidColorBrush x:Key="ColorNodesCanvasBackground" Color="White"/>
+    <SolidColorBrush x:Key="ColorNodesCanvasBackground" Color="#fcfcfd"/>
     
 
     <!--#region Selector-->
@@ -76,18 +76,18 @@
     <!--#endregion  Menu-->
 
     <!--#region     Node-->
-    <SolidColorBrush x:Key="ColorNodeBackground"  Color="#fcfcfd"/>
-    
-    <SolidColorBrush x:Key="ColorNodeBorderBrush"  Color="#d7d7e2"/>
-    
+    <SolidColorBrush x:Key="ColorNodeBackground"  Color="#eeeef2"/>
 
-    <SolidColorBrush x:Key="ColorNodeHeader" Color="#f0f0f0"/>
-    
-    <SolidColorBrush x:Key="ColorNodeHeaderForeground" Color="Black"/>
-    
+    <SolidColorBrush x:Key="ColorNodeBorderBrush"  Color="#c2c3c9"/>
 
-    <SolidColorBrush x:Key="ColorNodeCollapseButtonBackground"  Color="#d7d7e2"/>
-    <SolidColorBrush x:Key="ColorNodeCollapseButtonBorderBrush"  Color="#d7d7e2"/>
+
+    <SolidColorBrush x:Key="ColorNodeHeader" Color="#414141"/>
+    
+    <SolidColorBrush x:Key="ColorNodeHeaderForeground" Color="White"/>
+
+
+    <SolidColorBrush x:Key="ColorNodeCollapseButtonBackground"  Color="#c2c3c9"/>
+    <SolidColorBrush x:Key="ColorNodeCollapseButtonBorderBrush"  Color="#c2c3c9"/>
 
     <SolidColorBrush x:Key="ColorNodeCollapseButtonMouseOverBackground"  Color="#D23030"/>
     <SolidColorBrush x:Key="ColorNodeCollapseButtonMouseOverBorderBrush"  Color="#D23030"/>
