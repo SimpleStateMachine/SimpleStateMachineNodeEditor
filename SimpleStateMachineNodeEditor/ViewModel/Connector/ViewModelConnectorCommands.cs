@@ -73,10 +73,14 @@ namespace SimpleStateMachineNodeEditor.ViewModel
 
         private void ConnectPointDrop()
         {
-            if (NodesCanvas.DraggedConnect.FromConnector.Node != this.Node)
-            {
-                var connect = NodesCanvas.DraggedConnect;
+            var connect = NodesCanvas.DraggedConnect;
+            if (connect.FromConnector.Node != this.Node)
+            {              
                 connect.ToConnector = this;
+            }
+            else
+            {
+                connect.FromConnector.SetAsLoop();
             }
 
         }

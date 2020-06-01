@@ -19,7 +19,8 @@ namespace SimpleStateMachineNodeEditor.ViewModel
         [Reactive] public Point Point1 { get; set; }
         [Reactive] public Point Point2 { get; set; }
         [Reactive] public Size Size { get; set; }
-        [Reactive] public double WidthBeforeCollapse { get; set; }
+        //[Reactive] public double WidthBeforeCollapse { get; set; }
+        [Reactive] public bool AfterCollapse { get; set; }
         [Reactive] public string Name { get; set; }
         [Reactive] public bool NameEnable { get; set; } = true;
         [Reactive] public bool Selected { get; set; }
@@ -104,7 +105,8 @@ namespace SimpleStateMachineNodeEditor.ViewModel
             }
             else
             {
-                WidthBeforeCollapse = Size.Width;
+                AfterCollapse = true;
+                //WidthBeforeCollapse = Size.Width;
                 TransitionsVisible = null;
                 Output.Visible = true;
                 UnSelectedAllConnectors();
