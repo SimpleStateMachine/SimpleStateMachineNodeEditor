@@ -1,5 +1,11 @@
 # StateMachineNodeEditor [![](https://img.shields.io/badge/version-1.0-blue)](https://github.com/SimpleStateMachine/SimpleStateMachineNodeEditor/releases/tag/v1.0)
  StateMachineNodeEditor is a WPF node-editor for visual work and editoring  state-machine
+ # Why SimpleStateMachine?
+ Create state machine in **two steps** :
+1. Create scheme in  [node editor](https://github.com/SimpleStateMachine/SimpleStateMachineNodeEditor) ♦️
+2. Load scheme in your project using [library](https://github.com/SimpleStateMachine/SimpleStateMachineLibrary)📑
+ 
+ Just describe your app logic and run the state machine🚀
  ## Give a Star! :star:
 If you like or are using this project please give it a star. Thanks!
 
