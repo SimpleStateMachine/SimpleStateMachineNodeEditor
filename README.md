@@ -19,7 +19,7 @@ If you like or are using this project please give it a star. Thanks!
 ### Two themes
 ![](https://github.com/SimpleStateMachine/SimpleStateMachineNodeEditor/blob/gh-pages/img/Themes.jpg)
 ### Adding nodes and connections
-![](https://github.com/SimpleStateMachine/SimpleStateMachineNodeEditor/blob/gh-pages/img/adding.gif)
+![](https://github.com/SimpleStateMachine/SimpleStateMachineNodeEditor/blob/gh-pages/img/adding1.gif)
 ### Undo and redo
 ![](https://github.com/SimpleStateMachine/SimpleStateMachineNodeEditor/blob/gh-pages/img/undo%20and%20redo.gif)
 ### Collapsing and  moving
