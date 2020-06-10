@@ -1,4 +1,4 @@
-# StateMachineNodeEditor [![](https://img.shields.io/badge/version-1.0-blue)](https://github.com/SimpleStateMachine/SimpleStateMachineNodeEditor/releases/tag/v1.0)
+# StateMachineNodeEditor [![](https://img.shields.io/badge/version-1.0.2-blue)](https://github.com/SimpleStateMachine/SimpleStateMachineNodeEditor/releases)
  StateMachineNodeEditor is a WPF node-editor for visual work and editoring  state-machine
  # Why SimpleStateMachine?
  Create state machine in **two steps** :
