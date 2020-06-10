@@ -19,8 +19,6 @@ namespace SimpleStateMachineNodeEditor.ViewModel
         [Reactive] public Point Point1 { get; set; }
         [Reactive] public Point Point2 { get; set; }
         [Reactive] public Size Size { get; set; }
-        //[Reactive] public double WidthBeforeCollapse { get; set; }
-        [Reactive] public bool AfterCollapse { get; set; }
         [Reactive] public string Name { get; set; }
         [Reactive] public bool NameEnable { get; set; } = true;
         [Reactive] public bool Selected { get; set; }
@@ -34,6 +32,8 @@ namespace SimpleStateMachineNodeEditor.ViewModel
         [Reactive] public ViewModelConnector CurrentConnector { get; set; }
         [Reactive] public ViewModelNodesCanvas NodesCanvas { get; set; }
         [Reactive] public int IndexStartSelectConnectors { get; set; } = 0;
+
+        [Reactive] public double HeaderWidth { get; set; } = 80;
 
         public IObservableCollection<ViewModelConnector> Transitions { get; set; } = new ObservableCollectionExtended<ViewModelConnector>();
         public int Zindex { get; private set; }
@@ -105,8 +105,6 @@ namespace SimpleStateMachineNodeEditor.ViewModel
             }
             else
             {
-                AfterCollapse = true;
-                //WidthBeforeCollapse = Size.Width;
                 TransitionsVisible = null;
                 Output.Visible = true;
                 UnSelectedAllConnectors();
