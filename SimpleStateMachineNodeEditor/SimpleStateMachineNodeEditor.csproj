@@ -14,6 +14,7 @@
     <RepositoryUrl>https://github.com/SimpleStateMachine/SimpleStateMachineNodeEditor</RepositoryUrl>
     <PackageTags>statemachine state-machine finite-state-machine</PackageTags>
     <GeneratePackageOnBuild>false</GeneratePackageOnBuild>
+    <Description>Node editor for SimpleStateMachine</Description>
   </PropertyGroup>
 
   <ItemGroup>
