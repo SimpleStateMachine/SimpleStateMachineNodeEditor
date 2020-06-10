@@ -49,7 +49,7 @@
                                 <Rectangle Fill="{DynamicResource IconExportScheme}" Height="15" Width="15"/>
                             </MenuItem.Icon>
                             <!--<MenuItem Header="Export to PNG" x:Name="ItemExportToPNG" Style="{DynamicResource StyleMenuItem}"/>-->
-                            <MenuItem Header="Export to JPEG" x:Name="ItemExportToJPEG" Style="{DynamicResource StyleMenuItem}"/>
+                            <MenuItem Header="Export to PNG" x:Name="ItemExportToPNG" Style="{DynamicResource StyleMenuItem}"/>
                         </MenuItem>
                         <Separator Background="{DynamicResource ColorSeparator}"/>
                         <MenuItem Header="Exit"  x:Name="ItemExit" InputGestureText="Alt+F4"   Style="{DynamicResource StyleMenuItem}">
@@ -133,7 +133,7 @@
                     <Button x:Name="ButtonSaveAs" ToolTip="Save As... (Ctrl+Shift+S)" Style="{DynamicResource StyleHeaderButton}" Background="{DynamicResource ColorWindowHeader}" BorderBrush="{DynamicResource ColorWindowHeaderButtonBackgroundMouseOver}">
                         <Rectangle Fill="{DynamicResource IconSaveAs}" Height="15" Width="15"/>
                     </Button>
-                    <Button x:Name="ButtonExportToJPEG" ToolTip="Export To JPEG.. (Ctrl+Shift+Alt+J)" Style="{DynamicResource StyleHeaderButton}" Background="{DynamicResource ColorWindowHeader}" BorderBrush="{DynamicResource ColorWindowHeaderButtonBackgroundMouseOver}">
+                    <Button x:Name="ButtonExportToPNG" ToolTip="Export To PNG.. (Ctrl+Shift+Alt+P)" Style="{DynamicResource StyleHeaderButton}" Background="{DynamicResource ColorWindowHeader}" BorderBrush="{DynamicResource ColorWindowHeaderButtonBackgroundMouseOver}">
                         <Rectangle Fill="{DynamicResource IconExportScheme}" Height="15" Width="15"/>
                     </Button>
                     <Separator Grid.Column="5" Style="{DynamicResource TemplateSeparator}" Height="Auto" BorderThickness="0,0,1,0" />
@@ -247,5 +247,6 @@
         <KeyBinding x:Name="BindingNew"     Gesture="Ctrl+Shift+N"/>
         <KeyBinding x:Name="BindingExit"    Gesture="Alt+F4"/>
         <KeyBinding x:Name="BindingExportToJPEG"   Gesture="Ctrl+Shift+Alt+J"/>
+        <KeyBinding x:Name="BindingExportToPNG"   Gesture="Ctrl+Shift+Alt+P"/>
     </Window.InputBindings>
 </Window>

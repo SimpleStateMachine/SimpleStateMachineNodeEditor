@@ -4,6 +4,7 @@ Ctrl + Shift + S = Save As
 Ctrl + Shift + O = Open
 Ctrl + Shift + N = New
 Alt + F4 = Exit
+Ctrl + Shift + Alt + P = Export to PNG
 Ctrl + Shift + Alt + J = Export to JPEG
 Ctrl + Z = Undo
 Ctrl + Y = Redo

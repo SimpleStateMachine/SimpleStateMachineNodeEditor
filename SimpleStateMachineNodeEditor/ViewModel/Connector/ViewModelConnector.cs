@@ -48,10 +48,11 @@ namespace SimpleStateMachineNodeEditor.ViewModel
 
             if (this.Name!="Input")
             {
+                this.WhenAnyValue(x => x.Node.IsCollapse).Subscribe(value => UpdateSubscriptionForPosition(value));
                 if (this.Name != "Output")
                 {
                     this.WhenAnyValue(x => x.Node.Transitions.Count).Subscribe(x => UpdatePositionOnTransitionCountChange());
-                    this.WhenAnyValue(x => x.Node.IsCollapse).Subscribe(value => UpdateSubscriptionForPosition(value));
+                   
                 }
                 
             }

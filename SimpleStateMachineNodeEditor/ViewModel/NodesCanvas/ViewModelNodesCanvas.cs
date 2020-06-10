@@ -39,7 +39,8 @@ namespace SimpleStateMachineNodeEditor.ViewModel
         /// Flag for close application
         /// </summary>
         [Reactive] public bool NeedExit { get; set; }
-        [Reactive] public string JPEGPath{ get; set; }
+        [Reactive] public string ImagePath{ get; set; }
+        [Reactive] public ImageFormats ImageFormat { get; set; }
         [Reactive] public bool WithoutMessages { get; set; }
         [Reactive]  public Themes Theme { get; set; } = Themes.Dark;
 

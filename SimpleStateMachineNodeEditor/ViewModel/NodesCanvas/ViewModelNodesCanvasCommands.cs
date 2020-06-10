@@ -34,6 +34,7 @@ namespace SimpleStateMachineNodeEditor.ViewModel
         public ReactiveCommand<Unit, Unit> CommandCollapseUpSelected { get; set; }
         public ReactiveCommand<Unit, Unit> CommandExpandDownSelected { get; set; }
         public ReactiveCommand<Unit, Unit> CommandErrorListUpdate { get; set; }
+        public ReactiveCommand<Unit, Unit> CommandExportToPNG { get; set; }
         public ReactiveCommand<Unit, Unit> CommandExportToJPEG { get; set; }
         public ReactiveCommand<Unit, Unit> CommandOpen { get; set; }
         public ReactiveCommand<Unit, Unit> CommandSave { get; set; }
@@ -92,7 +93,9 @@ namespace SimpleStateMachineNodeEditor.ViewModel
             CommandCollapseUpSelected = ReactiveCommand.Create(CollapseUpSelected);
             CommandExpandDownSelected = ReactiveCommand.Create(ExpandDownSelected);
             CommandErrorListUpdate = ReactiveCommand.Create(ErrosUpdaate);
+            CommandExportToPNG = ReactiveCommand.Create(ExportToPNG);
             CommandExportToJPEG = ReactiveCommand.Create(ExportToJPEG);
+
             CommandNew = ReactiveCommand.Create(New);
             CommandOpen = ReactiveCommand.Create(Open);
             CommandSave = ReactiveCommand.Create(Save);
@@ -249,13 +252,21 @@ namespace SimpleStateMachineNodeEditor.ViewModel
                 node.Selected = MyUtils.CheckIntersectTwoRectangles(node.Point1, node.Point2, selectorPoint1, selectorPoint2);
             }
         }
+        private void ExportToPNG()
+        {
+            Dialog.ShowSaveFileDialog("PNG Image (.png)|*.png", SchemeName(), "Export scheme to PNG");
+            if (Dialog.Result != DialogResult.Ok)
+                return;
+            ImageFormat = ImageFormats.PNG;
+            ImagePath = Dialog.FileName;
+        }
         private void ExportToJPEG()
         {
             Dialog.ShowSaveFileDialog("JPEG Image (.jpeg)|*.jpeg", SchemeName(), "Export scheme to JPEG");
             if (Dialog.Result != DialogResult.Ok)
                 return;
-            //"Png Image (.png)|*.png";
-            JPEGPath = Dialog.FileName;
+            ImageFormat = ImageFormats.JPEG;
+            ImagePath = Dialog.FileName;
         }
         private void New()
         {
@@ -271,7 +282,7 @@ namespace SimpleStateMachineNodeEditor.ViewModel
             this.NodesCount = 0;
             this.TransitionsCount = 0;
             this.SchemePath = "";
-            this.JPEGPath = "";
+            this.ImagePath = "";
             WithoutMessages = false;
             this.Messages.Clear();        
         }

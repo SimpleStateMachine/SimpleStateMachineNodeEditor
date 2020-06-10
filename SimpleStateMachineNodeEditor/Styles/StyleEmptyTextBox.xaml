@@ -11,7 +11,10 @@
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type TextBox}">
-                    <Border x:Name="border"  BorderThickness="{TemplateBinding BorderThickness}" SnapsToDevicePixels="True">
+                    <Border x:Name="border"  BorderThickness="{TemplateBinding BorderThickness}" SnapsToDevicePixels="True" >
+                        <Border.ContextMenu>
+                            <ContextMenu Visibility="Collapsed"/>
+                        </Border.ContextMenu>
                         <ScrollViewer x:Name="PART_ContentHost" Focusable="false" HorizontalScrollBarVisibility="Hidden" VerticalScrollBarVisibility="Hidden" />
                     </Border>
                 </ControlTemplate>
