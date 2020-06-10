@@ -30,7 +30,6 @@ namespace SimpleStateMachineNodeEditor.ViewModel
         [Reactive] public ViewModelNodesCanvas NodesCanvas { get; set; }
         [Reactive] public bool Selected { get; set; }
 
-        private IDisposable subscriptionOnNodeWidthChange;
         public ViewModelConnector(ViewModelNodesCanvas nodesCanvas, ViewModelNode viewModelNode, string name, Point myPoint)
         {
             Node = viewModelNode;
@@ -48,29 +47,17 @@ namespace SimpleStateMachineNodeEditor.ViewModel
 
             if (this.Name!="Input")
             {
-                this.WhenAnyValue(x => x.Node.IsCollapse).Subscribe(value => UpdateSubscriptionForPosition(value));
+                this.WhenAnyValue(x => x.Node.HeaderWidth).Buffer(2, 1).Subscribe(x => UpdatePositionOnWidthChange(x[1] - x[0]));
                 if (this.Name != "Output")
                 {
-                    this.WhenAnyValue(x => x.Node.Transitions.Count).Subscribe(x => UpdatePositionOnTransitionCountChange());
-                   
+                    this.WhenAnyValue(x => x.Node.Transitions.Count).Subscribe(x => UpdatePositionOnTransitionCountChange());                   
                 }
                 
             }
 
             this.WhenAnyValue(x => x.Node.Point1).Buffer(2, 1).Subscribe(value => PositionConnectPoint = PositionConnectPoint.Addition(value[1].Subtraction(value[0])));
         }
-        private void UpdateSubscriptionForPosition(bool nodeIsCollapse)
-        {
-            if (!nodeIsCollapse)
-            {
-                subscriptionOnNodeWidthChange = this.WhenAnyValue(x => x.Node.Size.Width).Buffer(2, 1).Where(x => (x[0]>= 80 && x[1] >= 80))
-                    .Subscribe(x => UpdatePositionOnWidthChange(x[1] - x[0]));
-            }
-            else
-            {
-                subscriptionOnNodeWidthChange?.Dispose();
-            }
-        }
+
         private void UpdatePositionOnTransitionCountChange()
         {
             if (!string.IsNullOrEmpty(Name))
@@ -81,13 +68,7 @@ namespace SimpleStateMachineNodeEditor.ViewModel
         }
         private void UpdatePositionOnWidthChange(double value)
         {
-            if(!Node.AfterCollapse)       
-                this.PositionConnectPoint = this.PositionConnectPoint.Addition(value, 0);
-
-            if ((Node.AfterCollapse)&&(string.IsNullOrEmpty(this.Name)))
-            {
-                Node.AfterCollapse = false;
-            }
+            this.PositionConnectPoint = this.PositionConnectPoint.Addition(value, 0);
         }
         private void UpdateResources()
         {

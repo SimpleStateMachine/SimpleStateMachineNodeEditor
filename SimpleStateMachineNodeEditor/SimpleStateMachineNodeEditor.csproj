@@ -6,6 +6,15 @@
     <UseWPF>true</UseWPF>
     <StartupObject>SimpleStateMachineNodeEditor.App</StartupObject>
     <ApplicationIcon>StateMachine.ico</ApplicationIcon>
+    <SignAssembly>false</SignAssembly>
+    <Version>1.0.2</Version>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <PackageProjectUrl>https://github.com/SimpleStateMachine/SimpleStateMachineNodeEditor</PackageProjectUrl>
+    <PackageIcon>SimpleStateMachine.png</PackageIcon>
+    <RepositoryUrl>https://github.com/SimpleStateMachine/SimpleStateMachineNodeEditor</RepositoryUrl>
+    <PackageTags>statemachine state-machine finite-state-machine</PackageTags>
+    <GeneratePackageOnBuild>false</GeneratePackageOnBuild>
+    <Description>Node editor for SimpleStateMachine</Description>
   </PropertyGroup>
 
   <ItemGroup>
@@ -36,6 +45,10 @@
     <None Remove="Icons\ZoomOriginalSize_16x.svg" />
     <None Remove="Icons\ZoomOut_16x.png" />
     <None Remove="Icons\ZoomOut_16x.svg" />
+    <None Include="SimpleStateMachine.png">
+      <Pack>True</Pack>
+      <PackagePath></PackagePath>
+    </None>
   </ItemGroup>
 
   <ItemGroup>
