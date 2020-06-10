@@ -35,7 +35,9 @@ If you like or are using this project please give it a star. Thanks!
 ### Deleting transitions
 ![](https://github.com/SimpleStateMachine/SimpleStateMachineNodeEditor/blob/gh-pages/img/deleting%20transitions.gif)
 ### Import/Export scheme from/to xml
+![](https://github.com/SimpleStateMachine/SimpleStateMachineNodeEditor/blob/gh-pages/img/xml.jpg)
 ### Save work space as PNG/JPEG
+![](https://github.com/SimpleStateMachine/SimpleStateMachineNodeEditor/blob/gh-pages/img/jpg.jpg)
 ## License
 
 Copyright (c) SimpleStateMachine
