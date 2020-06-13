@@ -4,6 +4,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:enums="clr-namespace:SimpleStateMachineNodeEditor.Helpers.Enums"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:styles="clr-namespace:SimpleStateMachineNodeEditor.Styles"
              mc:Ignorable="d" 
              x:Name="RightConnector" HorizontalAlignment="Stretch" VerticalAlignment="Top"  BorderThickness="0" AllowDrop="True">
     <Grid x:Name="GridElement" Background="#00000000" >
@@ -14,7 +15,7 @@
         <Grid.RowDefinitions>
             <RowDefinition />
         </Grid.RowDefinitions>
-        <TextBox Name="TextBoxElement" Grid.Row="0" Grid.Column="0" HorizontalAlignment="Right" VerticalAlignment="Center"  Margin="5,0,5,3"   TextWrapping="NoWrap" BorderThickness="0,0,0,0"  Background="{x:Null}" BorderBrush="{x:Null}" Style="{DynamicResource StyleEmptyTextBox}"/>
+        <styles:MyTextBox x:Name="TextBoxElement"  Grid.Row="0" Grid.Column="0" HorizontalAlignment="Right" VerticalAlignment="Center"  Margin="5,0,5,3" />
         <Ellipse Name="EllipseElement" Grid.Row="0" Grid.Column="1" Margin="0,0,-7,0" HorizontalAlignment="Right" VerticalAlignment="Center"  Height="12" Width="12"  AllowDrop="True"  StrokeThickness="1"  />
     </Grid>
 </UserControl>

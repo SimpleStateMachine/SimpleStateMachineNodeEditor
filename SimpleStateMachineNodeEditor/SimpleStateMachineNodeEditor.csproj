@@ -17,9 +17,11 @@
     <Description>Node editor for SimpleStateMachine</Description>
     <AssemblyVersion>1.0.3.0</AssemblyVersion>
     <FileVersion>1.0.3.0</FileVersion>
-    <PackageReleaseNotes>some fix
-some optimization
-feature with opacity</PackageReleaseNotes>
+    <PackageReleaseNotes>Some fix
+Some optimization
+Feature with opacity
+Custom for drag and drop textbox
+Undo - Redo for renaming</PackageReleaseNotes>
   </PropertyGroup>
 
   <ItemGroup>

@@ -100,7 +100,6 @@ namespace SimpleStateMachineNodeEditor.View
                 this.TextBoxElement.Events().LostFocus.Subscribe(e => Validate(e)).DisposeWith(disposable);
                 this.GridElement.Events().PreviewMouseLeftButtonDown.Subscribe(e => ConnectorDrag(e)).DisposeWith(disposable);
                 this.GridElement.Events().PreviewDragEnter.Subscribe(e => ConnectorDragEnter(e)).DisposeWith(disposable);
-                this.GridElement.Events().PreviewDragOver.Subscribe(e => e.Handled = true).DisposeWith(disposable);
                 this.GridElement.Events().PreviewDrop.Subscribe(e => ConnectorDrop(e)).DisposeWith(disposable);
             });
         }
@@ -129,7 +128,7 @@ namespace SimpleStateMachineNodeEditor.View
                 this.ViewModel.CommandConnectPointDrag.ExecuteWithSubscribe();
                 DataObject data = new DataObject();
                 data.SetData("Node", this.ViewModel.Node);
-                DragDrop.DoDragDrop(this, data, DragDropEffects.Copy);
+                DragDrop.DoDragDrop(this, data, DragDropEffects.Move);
                 this.ViewModel.CommandCheckConnectPointDrop.ExecuteWithSubscribe();
                 e.Handled = true;
             }
@@ -144,7 +143,7 @@ namespace SimpleStateMachineNodeEditor.View
                 this.ViewModel.CommandConnectorDrag.ExecuteWithSubscribe();
                 DataObject data = new DataObject();
                 data.SetData("Connector", this.ViewModel);
-                DragDrop.DoDragDrop(this, data, DragDropEffects.Copy);
+                DragDrop.DoDragDrop(this, data, DragDropEffects.Move);
             }
             else if (Keyboard.IsKeyDown(Key.LeftShift))
             {

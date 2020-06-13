@@ -3,7 +3,8 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:local="clr-namespace:SimpleStateMachineNodeEditor.View"
+             xmlns:local="clr-namespace:SimpleStateMachineNodeEditor.View" 
+             xmlns:styles="clr-namespace:SimpleStateMachineNodeEditor.Styles"
              x:Name="LeftConnector" HorizontalAlignment="Stretch" VerticalAlignment="Top"  AllowDrop="True" >
     <Grid x:Name="GridElement" Background="#00000000">
         <Grid.ColumnDefinitions>
@@ -13,7 +14,7 @@
         <Grid.RowDefinitions>
             <RowDefinition />
         </Grid.RowDefinitions>
-        <TextBox Name="TextBoxElement" Grid.Row="0" Grid.Column="1" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="5,0,5,3"   TextWrapping="NoWrap"  BorderThickness="0,0,0,0"  Background="{x:Null}" BorderBrush="{x:Null}" Style="{DynamicResource StyleEmptyTextBox}"/>
+        <styles:MyTextBox x:Name="TextBoxElement" Grid.Row="0" Grid.Column="1" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="5,0,5,3" />
         <Ellipse Name="EllipseElement" Grid.Row="0" Grid.Column="0"  HorizontalAlignment="Left"  VerticalAlignment="Center"  Margin="-7,0,0,0" Height="12" Width="12"   AllowDrop="True" StrokeThickness="1" />
     </Grid>
     

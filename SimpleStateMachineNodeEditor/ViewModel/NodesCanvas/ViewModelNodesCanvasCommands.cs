@@ -74,6 +74,10 @@ namespace SimpleStateMachineNodeEditor.ViewModel
         public Command<List<(int index, ViewModelConnector element)>, List<(int index, ViewModelConnector element)>> CommandDeleteSelectedConnectors { get; set; }
         public Command<DeleteMode, DeleteMode> CommandDeleteSelectedElements { get; set; }
 
+
+        public Command<(ViewModelNode node, string newName), (ViewModelNode node, string oldName)> CommandChangeNodeName { get; set; }
+        public Command<(ViewModelConnector connector, string newName), (ViewModelConnector connector, string oldName)> CommandChangeConnectName { get; set; }
+
         #endregion commands with undo-redo
 
         private void SetupCommands()
@@ -130,8 +134,9 @@ namespace SimpleStateMachineNodeEditor.ViewModel
             CommandDeleteSelectedNodes = new Command<ElementsForDelete, ElementsForDelete>(DeleteSelectedNodes, UnDeleteSelectedNodes, NotSaved);
             CommandDeleteSelectedConnectors = new Command<List<(int index, ViewModelConnector element)>, List<(int index, ViewModelConnector connector)>>(DeleteSelectedConnectors, UnDeleteSelectedConnectors, NotSaved);
             CommandDeleteSelectedElements = new Command<DeleteMode, DeleteMode>(DeleteSelectedElements, UnDeleteSelectedElements);
+            CommandChangeNodeName = new Command<(ViewModelNode node, string newName), (ViewModelNode node, string oldName)>(ChangeNodeName, UnChangeNodeName);
+            CommandChangeConnectName = new Command<(ViewModelConnector connector, string newName), (ViewModelConnector connector, string oldName)>(ChangeConnectName, UnChangeConnectName);
 
-            
 
             NotSavedSubscrube();
         }
@@ -376,7 +381,10 @@ namespace SimpleStateMachineNodeEditor.ViewModel
             }
             else
             {
-                Save(SchemePath);
+                WithValidateScheme(() =>
+                {
+                    Save(SchemePath);
+                });
             }
         }
         private void Exit()
@@ -387,14 +395,18 @@ namespace SimpleStateMachineNodeEditor.ViewModel
         }
         private void SaveAs()
         {
-            Dialog.ShowSaveFileDialog("XML-File | *.xml", SchemeName(), "Save scheme as...");
-            if (Dialog.Result != DialogResult.Ok)
-                return;
+            WithValidateScheme(()=>
+            {
+                Dialog.ShowSaveFileDialog("XML-File | *.xml", SchemeName(), "Save scheme as...");
+                if (Dialog.Result != DialogResult.Ok)
+                    return;
 
-            Save(Dialog.FileName);
+                Save(Dialog.FileName);
+            });
         }
         private void Save(string fileName)
         {
+            
             Mouse.OverrideCursor = Cursors.Wait;
             XDocument xDocument = new XDocument();
             XElement stateMachineXElement = new XElement("StateMachine");
@@ -424,7 +436,29 @@ namespace SimpleStateMachineNodeEditor.ViewModel
             Mouse.OverrideCursor = null;
             LogDebug("Scheme was saved as \"{0}\"", SchemePath);
         }
+        private void WithValidateScheme(Action action)
+        {
+            var unReachable = ValidateScheme();
+            if (unReachable.Count < 1)
+            {
+                action.Invoke();
+            }
+            else
+            {
+                LogError("Nodes without connects: {0}", string.Join(',', unReachable));
+            }
+        }
+        private List<string> ValidateScheme()
+        {
+          Dictionary<string, bool> forValidate =  Nodes.Where(x=>x!=StartState).ToDictionary(x => x.Name, x=>false);
 
+            foreach(var connect in Connects )
+            {
+                forValidate[connect.ToConnector.Node.Name] = true;
+            }
+
+          return forValidate.Where(x => !x.Value).Select(x=>x.Key).ToList();
+        }
 
         private void StartSelect(Point point)
         {
@@ -481,8 +515,8 @@ namespace SimpleStateMachineNodeEditor.ViewModel
                 if (!NodesExist(obj.newValue))
                 {
                     LogDebug("Node \"{0}\"  has been renamed . New name is \"{1}\"", obj.objectForValidate.Name, obj.newValue);
-                    obj.objectForValidate.Name = obj.newValue;
-                   
+
+                    CommandChangeNodeName.Execute((obj.objectForValidate, obj.newValue));
                 }
                 else
                 {
@@ -501,7 +535,8 @@ namespace SimpleStateMachineNodeEditor.ViewModel
                 if (!ConnectsExist(obj.newValue))
                 {
                     LogDebug("Transition \"{0}\"  has been renamed . New name is \"{1}\"", obj.objectForValidate.Name, obj.newValue);
-                    obj.objectForValidate.Name = obj.newValue;
+
+                    CommandChangeConnectName.Execute((obj.objectForValidate, obj.newValue));
                 }
                 else
                 {
@@ -672,6 +707,30 @@ namespace SimpleStateMachineNodeEditor.ViewModel
                 LogDebug("Transition with name \"{0}\" was added", element.connector.Name);
             }
 
+            return result;
+        }
+        private (ViewModelConnector connector, string oldName) ChangeConnectName((ViewModelConnector connector, string newName) parameter, (ViewModelConnector connector, string oldName) result)
+        {
+            string oldName = parameter.connector.Name;
+            parameter.connector.Name = parameter.newName;
+            return (parameter.connector, oldName);
+        }
+        private (ViewModelConnector connector, string oldName) UnChangeConnectName((ViewModelConnector connector, string newName) parameter, (ViewModelConnector connector, string oldName) result)
+        {
+            result.connector.Name = result.oldName;
+            return result;
+        }
+
+
+        private (ViewModelNode node, string oldName) ChangeNodeName((ViewModelNode node, string newName) parameter, (ViewModelNode node, string oldName) result)
+        {
+            string oldName = parameter.node.Name;
+            parameter.node.Name = parameter.newName;
+            return (parameter.node, oldName);
+        }
+        private (ViewModelNode node, string oldName) UnChangeNodeName((ViewModelNode node, string newName) parameter, (ViewModelNode node, string oldName) result)
+        {
+            result.node.Name = result.oldName;
             return result;
         }
         private ElementsForDelete DeleteSelectedNodes(ElementsForDelete parameter, ElementsForDelete result)
