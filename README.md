@@ -15,6 +15,9 @@ If you like or are using this project please give it a star. Thanks!
 2. [License](#License)
 
 ## Features
+### Validating 
+* for unique name for Node/Transition
+* for exists Nodes without connects
 ### Custom Window with Visual Studio design
 ![](https://github.com/SimpleStateMachine/SimpleStateMachineNodeEditor/blob/gh-pages/img/Custom%20window.jpg)
 ### Two themes
