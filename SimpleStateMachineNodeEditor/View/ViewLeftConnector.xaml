@@ -5,8 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:SimpleStateMachineNodeEditor.View"
              x:Name="LeftConnector" HorizontalAlignment="Stretch" VerticalAlignment="Top"  AllowDrop="True" >
-
-    <Grid x:Name="GridElement" Background="{DynamicResource ColorNodeBackground}">
+    <Grid x:Name="GridElement" Background="#00000000">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="Auto" />
             <ColumnDefinition />

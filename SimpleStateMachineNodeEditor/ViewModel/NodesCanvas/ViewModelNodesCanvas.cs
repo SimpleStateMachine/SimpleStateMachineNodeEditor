@@ -12,6 +12,8 @@ using Splat;
 using SimpleStateMachineNodeEditor.Helpers;
 using System.Windows;
 using System.Collections.Generic;
+using System.Windows.Controls;
+using System.Windows.Media;
 
 namespace SimpleStateMachineNodeEditor.ViewModel
 {
@@ -88,6 +90,7 @@ namespace SimpleStateMachineNodeEditor.ViewModel
         {
             node.Input.Visible = false;
             node.CanBeDelete = false;
+            StartState = node;
         }
 
         #endregion Setup Nodes

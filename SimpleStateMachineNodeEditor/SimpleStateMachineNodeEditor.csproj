@@ -7,7 +7,7 @@
     <StartupObject>SimpleStateMachineNodeEditor.App</StartupObject>
     <ApplicationIcon>StateMachine.ico</ApplicationIcon>
     <SignAssembly>false</SignAssembly>
-    <Version>1.0.2</Version>
+    <Version>1.0.3</Version>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <PackageProjectUrl>https://github.com/SimpleStateMachine/SimpleStateMachineNodeEditor</PackageProjectUrl>
     <PackageIcon>SimpleStateMachine.png</PackageIcon>
@@ -15,6 +15,11 @@
     <PackageTags>statemachine state-machine finite-state-machine</PackageTags>
     <GeneratePackageOnBuild>false</GeneratePackageOnBuild>
     <Description>Node editor for SimpleStateMachine</Description>
+    <AssemblyVersion>1.0.3.0</AssemblyVersion>
+    <FileVersion>1.0.3.0</FileVersion>
+    <PackageReleaseNotes>some fix
+some optimization
+feature with opacity</PackageReleaseNotes>
   </PropertyGroup>
 
   <ItemGroup>

@@ -333,6 +333,7 @@ namespace SimpleStateMachineNodeEditor.ViewModel
 
             var Transitions = stateMachineXElement.Element("Transitions")?.Elements()?.ToList() ?? new List<XElement>();
             ViewModelConnect viewModelConnect;
+            Transitions?.Reverse();
             foreach (var transition in Transitions)
             {
                 viewModelConnect = ViewModelConnector.FromXElement(this, transition, out string errorMesage, ConnectsExist);
@@ -412,7 +413,7 @@ namespace SimpleStateMachineNodeEditor.ViewModel
 
             XElement transitions = new XElement("Transitions");
             stateMachineXElement.Add(transitions);
-            foreach (var transition in Nodes.SelectMany(x => x.Transitions.Where(y => !string.IsNullOrEmpty(y.Name))).Reverse())
+            foreach (var transition in Nodes.SelectMany(x => x.Transitions.Where(y => !string.IsNullOrEmpty(y.Name))))
             {
                 transitions.Add(transition.ToXElement());
             }
