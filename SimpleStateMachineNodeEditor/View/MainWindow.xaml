@@ -45,11 +45,11 @@
                             </MenuItem.Icon>
                         </MenuItem>
                         <MenuItem Header="Export" x:Name="ItemExport" Style="{DynamicResource StyleMenuItem}">
-                            <MenuItem.Icon>
-                                <Rectangle Fill="{DynamicResource IconExportScheme}" Height="15" Width="15"/>
-                            </MenuItem.Icon>
-                            <!--<MenuItem Header="Export to PNG" x:Name="ItemExportToPNG" Style="{DynamicResource StyleMenuItem}"/>-->
-                            <MenuItem Header="Export to PNG" x:Name="ItemExportToPNG" Style="{DynamicResource StyleMenuItem}"/>
+                        <MenuItem.Icon>
+                            <Rectangle Fill="{DynamicResource IconExportScheme}" Height="15" Width="15"/>
+                        </MenuItem.Icon>
+                        <MenuItem Header="Export to PNG" x:Name="ItemExportToPNG" Style="{DynamicResource StyleMenuItem}"/>
+                        <MenuItem Header="Export to JPEG" x:Name="ItemExportToJPEG" Style="{DynamicResource StyleMenuItem}"/>
                         </MenuItem>
                         <Separator Background="{DynamicResource ColorSeparator}"/>
                         <MenuItem Header="Exit"  x:Name="ItemExit" InputGestureText="Alt+F4"   Style="{DynamicResource StyleMenuItem}">
