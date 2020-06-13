@@ -9,7 +9,10 @@
              xmlns:enums="clr-namespace:SimpleStateMachineNodeEditor.Helpers.Enums"
              mc:Ignorable="d" Focusable="True" AllowDrop="True" Visibility="Visible">
 
-    <Border x:Name="BorderElement" CornerRadius="5,5,5,5" BorderThickness="1,1,1,1" BorderBrush="{DynamicResource ColorNodeBorderBrush}" Background="{DynamicResource ColorNodeBackground}" HorizontalAlignment="Left" VerticalAlignment="Top" MinWidth="80">
+    <Border x:Name="BorderElement" CornerRadius="5,5,5,5" BorderThickness="1,1,1,1" BorderBrush="{DynamicResource ColorNodeBorderBrush}" HorizontalAlignment="Left" VerticalAlignment="Top" MinWidth="80">
+        <Border.Background>
+            <SolidColorBrush Color="{DynamicResource ColorNodeBackground}" />
+        </Border.Background>
         <StackPanel Margin="0,0,0,5">
             <NodeStyles:ElementNodeHeader x:Name="NodeHeaderElement" />
             <!--Grid For Input and Output-->

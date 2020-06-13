@@ -48,6 +48,8 @@ namespace SimpleStateMachineNodeEditor.View
         {
             this.WhenActivated(disposable =>
             {
+                Canvas.SetZIndex((UIElement)this.VisualParent, this.ViewModel.FromConnector.Node.Zindex + 1);
+
                 this.OneWayBind(this.ViewModel, x => x.Stroke, x => x.PathElement.Stroke).DisposeWith(disposable);
 
                 this.OneWayBind(this.ViewModel, x => x.StartPoint, x => x.PathFigureElement.StartPoint).DisposeWith(disposable);
@@ -63,9 +65,6 @@ namespace SimpleStateMachineNodeEditor.View
                 this.OneWayBind(this.ViewModel, x => x.FromConnector.NodesCanvas.Scale.Value, x => x.PathElement.StrokeThickness).DisposeWith(disposable);
 
                 this.WhenAnyValue(x => x.ViewModel.ToConnector).Where(x=>x!=null).Subscribe(_ => UpdateZindex()).DisposeWith(disposable);
-
-                Canvas.SetZIndex((UIElement)this.VisualParent, this.ViewModel.FromConnector.Node.Zindex+1);
-
             });
         }
 

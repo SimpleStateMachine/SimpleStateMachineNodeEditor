@@ -6,15 +6,13 @@
              xmlns:local="clr-namespace:SimpleStateMachineNodeEditor.View"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800" IsHitTestVisible="False">
-    <Grid>
-        <Path x:Name="PathElement" StrokeDashCap="Round" StrokeLineJoin="Round" Stroke="{DynamicResource ColorConnect}" StrokeEndLineCap="Round" StrokeStartLineCap="Round">
-            <Path.Data>
-                <PathGeometry  x:Name="PathGeometryElement">
-                    <PathFigure x:Name="PathFigureElement"  IsClosed="False">
-                        <BezierSegment  x:Name="BezierSegmentElement"/>
-                    </PathFigure>
-                </PathGeometry>
-            </Path.Data>
-        </Path>
-    </Grid>
+    <Path x:Name="PathElement" StrokeDashCap="Round" StrokeLineJoin="Round" Stroke="{DynamicResource ColorConnect}"    StrokeEndLineCap="Round" StrokeStartLineCap="Round">
+        <Path.Data>
+            <PathGeometry  x:Name="PathGeometryElement">
+                <PathFigure x:Name="PathFigureElement"  IsClosed="False">
+                    <BezierSegment  x:Name="BezierSegmentElement"/>
+                </PathFigure>
+            </PathGeometry>
+        </Path.Data>
+    </Path>
 </UserControl>

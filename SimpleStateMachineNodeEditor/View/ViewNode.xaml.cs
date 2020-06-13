@@ -60,9 +60,9 @@ namespace SimpleStateMachineNodeEditor.View
 
                 this.OneWayBind(this.ViewModel, x => x.BorderBrush, x => x.BorderElement.BorderBrush).DisposeWith(disposable);
 
-                this.OneWayBind(this.ViewModel, x => x.Name, x => x.NodeHeaderElement.TextBox.Text).DisposeWith(disposable);
+                this.OneWayBind(this.ViewModel, x => x.Name, x => x.NodeHeaderElement.TextBoxElement.Text).DisposeWith(disposable);
 
-                this.Bind(this.ViewModel, x => x.NameEnable, x => x.NodeHeaderElement.TextBox.IsEnabled).DisposeWith(disposable);
+                this.Bind(this.ViewModel, x => x.NameEnable, x => x.NodeHeaderElement.TextBoxElement.IsEnabled).DisposeWith(disposable);
 
                 this.OneWayBind(this.ViewModel, x => x.Point1.X, x => x.TranslateTransformElement.X).DisposeWith(disposable);
 
@@ -126,10 +126,10 @@ namespace SimpleStateMachineNodeEditor.View
         }
         private void Validate(RoutedEventArgs e)
         {
-            if (NodeHeaderElement.TextBox.Text != ViewModel.Name)
-                ViewModel.CommandValidateName.ExecuteWithSubscribe(NodeHeaderElement.TextBox.Text);
-            if (NodeHeaderElement.TextBox.Text != ViewModel.Name)
-                NodeHeaderElement.TextBox.Text = ViewModel.Name;
+            if (NodeHeaderElement.TextBoxElement.Text != ViewModel.Name)
+                ViewModel.CommandValidateName.ExecuteWithSubscribe(NodeHeaderElement.TextBoxElement.Text);
+            if (NodeHeaderElement.TextBoxElement.Text != ViewModel.Name)
+                NodeHeaderElement.TextBoxElement.Text = ViewModel.Name;
         }
 
         private void OnEventMouseDown(MouseButtonEventArgs e)
