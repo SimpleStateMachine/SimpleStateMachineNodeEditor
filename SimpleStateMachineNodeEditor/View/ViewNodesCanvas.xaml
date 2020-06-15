@@ -10,8 +10,7 @@
              d:DesignHeight="450" d:DesignWidth="800" Focusable="True" AllowDrop="True" ClipToBounds="True">
 
     <Canvas x:Name="Canvas" Background="{DynamicResource ColorNodesCanvasBackground}">
-
-        <local:ViewDialog x:Name="Dialog"/>
+        
         <local:ViewSelector x:Name="Selector"  Panel.ZIndex="999"/>
         <local:ViewCutter x:Name="Cutter"  Panel.ZIndex="999"/>
 

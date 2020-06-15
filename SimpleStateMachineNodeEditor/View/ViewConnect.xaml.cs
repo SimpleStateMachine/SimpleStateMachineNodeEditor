@@ -48,7 +48,7 @@ namespace SimpleStateMachineNodeEditor.View
         {
             this.WhenActivated(disposable =>
             {
-                Canvas.SetZIndex((UIElement)this.VisualParent, this.ViewModel.FromConnector.Node.Zindex + 1);
+                Canvas.SetZIndex((UIElement)this.VisualParent, 999);
 
                 this.OneWayBind(this.ViewModel, x => x.Stroke, x => x.PathElement.Stroke).DisposeWith(disposable);
 
@@ -70,8 +70,10 @@ namespace SimpleStateMachineNodeEditor.View
 
         private void UpdateZindex()
         {
-            if (this.ViewModel.FromConnector.Node != this.ViewModel.ToConnector.Node)
-                Canvas.SetZIndex((UIElement)this.VisualParent, this.ViewModel.ToConnector.Node.Zindex);
+            int toIndex = this.ViewModel.ToConnector.Node.Zindex;
+            int fromIndex = this.ViewModel.FromConnector.Node.Zindex;
+           
+            Canvas.SetZIndex((UIElement)this.VisualParent, Math.Min(toIndex, fromIndex));
         }
         #endregion SetupBinding
     }

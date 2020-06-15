@@ -12,9 +12,10 @@
 
     <SolidColorBrush x:Key="ColorSelectedElement"  Color="#D23030"/>
 
-    <SolidColorBrush x:Key="ColorConnect" Color="#98989a"/>
-
-    <SolidColorBrush x:Key="ColorConnector" Color="#98989a"/>
+    <SolidColorBrush x:Key="ColorConnect" Color="#414141"/>
+    
+    <!--#98989a-->
+    <SolidColorBrush x:Key="ColorConnector" Color="#414141"/>
 
     <SolidColorBrush x:Key="ColorConnectorForeground" Color="Black"/>
 
@@ -81,7 +82,7 @@
     
     <SolidColorBrush x:Key="ColorNodeBorderBrush"  Color="#c2c3c9"/>
 
-    <Color x:Key="ColorNodeHeader" >#90414141</Color>
+    <Color x:Key="ColorNodeHeader" >#414141</Color>
     
     <SolidColorBrush x:Key="ColorNodeHeaderForeground" Color="White"/>
 

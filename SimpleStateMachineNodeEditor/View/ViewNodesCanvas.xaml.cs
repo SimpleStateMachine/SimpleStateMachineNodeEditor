@@ -75,8 +75,6 @@ namespace SimpleStateMachineNodeEditor.View
                 this.OneWayBind(this.ViewModel, x => x.Selector, x => x.Selector.ViewModel).DisposeWith(disposable);
 
                 this.OneWayBind(this.ViewModel, x => x.Cutter, x => x.Cutter.ViewModel).DisposeWith(disposable);
-
-                this.OneWayBind(this.ViewModel, x => x.Dialog, x => x.Dialog.ViewModel).DisposeWith(disposable);
             });
         }
         #endregion Setup Binding

@@ -15,7 +15,7 @@
             <RowDefinition  Height="auto"/>
             <RowDefinition  Height="auto" x:Name="Fotter" MinHeight="18"/>
         </Grid.RowDefinitions>
-
+        <view:ViewDialog x:Name="Dialog"/>
 
         <!--#region Header-->
         <DockPanel x:Name="Header" Grid.Row="0" Background="{DynamicResource ColorWindowHeader}" LastChildFill="False">
