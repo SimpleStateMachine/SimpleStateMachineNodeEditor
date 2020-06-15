@@ -425,7 +425,7 @@ namespace SimpleStateMachineNodeEditor.ViewModel
 
             XElement transitions = new XElement("Transitions");
             stateMachineXElement.Add(transitions);
-            foreach (var transition in Nodes.SelectMany(x => x.Transitions.Where(y => !string.IsNullOrEmpty(y.Name))))
+            foreach (var transition in Nodes.SelectMany(x => x.Transitions.Items.Where(y => !string.IsNullOrEmpty(y.Name))))
             {
                 transitions.Add(transition.ToXElement());
             }
@@ -790,7 +790,8 @@ namespace SimpleStateMachineNodeEditor.ViewModel
         }
         private IEnumerable<ViewModelConnector> GetAllConnectors()
         {
-            return this.Nodes.SelectMany(x => x.Transitions);
+            //return this.Nodes.SelectMany(x => x.Transitions);
+            return null;
         }
 
         private bool ConnectsExist(string nameConnect)

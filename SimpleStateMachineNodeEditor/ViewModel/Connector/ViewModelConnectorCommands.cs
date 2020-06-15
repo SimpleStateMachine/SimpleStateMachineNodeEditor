@@ -1,8 +1,10 @@
-﻿using ReactiveUI;
+﻿using DynamicData;
+using ReactiveUI;
 using SimpleStateMachineNodeEditor.Helpers;
 using SimpleStateMachineNodeEditor.Helpers.Enums;
 using SimpleStateMachineNodeEditor.Helpers.Extensions;
 using System;
+using System.Linq;
 using System.Reactive;
 using System.Windows;
 using System.Windows.Input;
@@ -108,23 +110,23 @@ namespace SimpleStateMachineNodeEditor.ViewModel
             if (Node != NodesCanvas.ConnectorPreviewForDrop.Node)
                 return;
 
-            int indexTo = Node.Transitions.IndexOf(this);
+            int indexTo = Node.Transitions.Items.IndexOf(this);
             if (indexTo == 0)
                 return;
             int count = this.Node.Transitions.Count;
-            int indexFrom = this.Node.Transitions.IndexOf(this.NodesCanvas.ConnectorPreviewForDrop);
+            int indexFrom = this.Node.Transitions.Items.IndexOf(this.NodesCanvas.ConnectorPreviewForDrop);
 
             if ((indexFrom > -1) && (indexTo > -1) && (indexFrom < count) && (indexTo < count))
             {
-                Point positionTo = this.Node.Transitions[indexTo].PositionConnectPoint;
+                Point positionTo = this.Node.Transitions.Items.ElementAt(indexTo).PositionConnectPoint;
                 Point position;
                 //shift down
                 if (indexTo > indexFrom)
                 {
                     for (int i = indexTo; i >= indexFrom + 1; i--)
                     {
-                        position = this.Node.Transitions[i - 1].PositionConnectPoint;
-                        this.Node.Transitions[i].PositionConnectPoint = position;
+                        position = this.Node.Transitions.Items.ElementAt(i - 1).PositionConnectPoint;
+                        this.Node.Transitions.Items.ElementAt(i).PositionConnectPoint = position;
                     }
                 }
                 //shift up
@@ -132,11 +134,11 @@ namespace SimpleStateMachineNodeEditor.ViewModel
                 {
                     for (int i = indexTo; i <= indexFrom - 1; i++)
                     {
-                        position = this.Node.Transitions[i + 1].PositionConnectPoint;
-                        this.Node.Transitions[i].PositionConnectPoint = position;
+                        position = this.Node.Transitions.Items.ElementAt(i + 1).PositionConnectPoint;
+                        this.Node.Transitions.Items.ElementAt(i).PositionConnectPoint = position;
                     }
                 }
-                this.Node.Transitions[indexFrom].PositionConnectPoint = positionTo;
+                this.Node.Transitions.Items.ElementAt(indexFrom).PositionConnectPoint = positionTo;
                 this.Node.Transitions.Move(indexFrom, indexTo);
             }
         }

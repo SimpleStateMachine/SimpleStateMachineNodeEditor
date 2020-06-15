@@ -10,6 +10,7 @@ using System.Xml.Linq;
 using System.Linq;
 using SimpleStateMachineNodeEditor.Helpers.Extensions;
 using System.Reactive.Linq;
+using DynamicData;
 
 namespace SimpleStateMachineNodeEditor.ViewModel
 {
@@ -62,7 +63,7 @@ namespace SimpleStateMachineNodeEditor.ViewModel
         {
             if (!string.IsNullOrEmpty(Name))
             {
-                int index = Node.Transitions.IndexOf(this);
+                int index = Node.Transitions.Items.IndexOf(this);
                 this.PositionConnectPoint = Node.CurrentConnector.PositionConnectPoint.Addition(0, index*19);
             }
         }

@@ -11,6 +11,8 @@ using DynamicData.Binding;
 using System.Linq;
 using System.Xml.Linq;
 using SimpleStateMachineNodeEditor.Helpers.Extensions;
+using DynamicData;
+using System.Collections.ObjectModel;
 
 namespace SimpleStateMachineNodeEditor.ViewModel
 {
@@ -35,11 +37,19 @@ namespace SimpleStateMachineNodeEditor.ViewModel
 
         [Reactive] public double HeaderWidth { get; set; } = 80;
 
-        public IObservableCollection<ViewModelConnector> Transitions { get; set; } = new ObservableCollectionExtended<ViewModelConnector>();
+        public SourceList<ViewModelConnector> Transitions { get; set; } = new SourceList<ViewModelConnector>();
+
+        private readonly IObservableCollection<ViewModelConnector> _Transitions2 = new ObservableCollectionExtended<ViewModelConnector>();
+        public IObservableCollection<ViewModelConnector> Transitions2 => _Transitions2;
+
+        //public IObservableCollection<ViewModelConnector> Transitions2 { get; } = new ObservableCollectionExtended<ViewModelConnector>();
+
         public int Zindex { get; private set; }
         
         private ViewModelNode()
         {
+            Transitions.Connect().ObserveOnDispatcher().Bind(_Transitions2).Subscribe();
+
             SetupCommands();
             SetupBinding();
         }

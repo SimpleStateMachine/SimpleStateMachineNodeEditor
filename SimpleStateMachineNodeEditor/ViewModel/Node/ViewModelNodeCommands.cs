@@ -52,7 +52,7 @@ namespace SimpleStateMachineNodeEditor.ViewModel
 
         public int GetConnectorIndex(ViewModelConnector connector)
         {
-            return Transitions.IndexOf(connector);
+            return Transitions.Items.IndexOf(connector);
         }
 
         private void AddConnectorWithConnect((int index, ViewModelConnector connector) element)
@@ -115,7 +115,7 @@ namespace SimpleStateMachineNodeEditor.ViewModel
         }
         private void UnSelectedAllConnectors()
         {
-            foreach (var transition in Transitions)
+            foreach (var transition in Transitions.Items)
             {
                 transition.Selected = false;
             }
@@ -124,19 +124,19 @@ namespace SimpleStateMachineNodeEditor.ViewModel
         }
         private void SetConnectorAsStartSelect(ViewModelConnector viewModelConnector)
         {
-            IndexStartSelectConnectors = Transitions.IndexOf(viewModelConnector) - 1;
+            IndexStartSelectConnectors = Transitions.Items.IndexOf(viewModelConnector) - 1;
         }
         private void SelectWithShiftForConnectors(ViewModelConnector viewModelConnector)
         {
             if (viewModelConnector == null)
                 return;
 
-            var transitions = this.Transitions.Skip(1);
+            var transitions = this.Transitions.Items.Skip(1);
             int indexCurrent = transitions.IndexOf(viewModelConnector);
             int indexStart = IndexStartSelectConnectors;
             UnSelectedAllConnectors();
             IndexStartSelectConnectors = indexStart;
-            transitions = transitions.Skip(Math.Min(indexCurrent, indexStart)).SkipLast(Transitions.Count() - Math.Max(indexCurrent, indexStart) - 2);
+            transitions = transitions.Skip(Math.Min(indexCurrent, indexStart)).SkipLast(Transitions.Count - Math.Max(indexCurrent, indexStart) - 2);
             foreach (var transition in transitions)
             {
                 transition.Selected = true;
