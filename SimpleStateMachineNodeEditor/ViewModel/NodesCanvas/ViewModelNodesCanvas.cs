@@ -24,7 +24,8 @@ namespace SimpleStateMachineNodeEditor.ViewModel
 
         //public ObservableCollectionExtended<ViewModelNode> Nodes = new ObservableCollectionExtended<ViewModelNode>();
         public SourceList<ViewModelNode> Nodes = new SourceList<ViewModelNode>();
-        public ObservableCollectionExtended<ViewModelNode> Nodes2 = new ObservableCollectionExtended<ViewModelNode>();
+
+        public ObservableCollectionExtended<ViewModelNode> NodesForView = new ObservableCollectionExtended<ViewModelNode>();
         public ObservableCollectionExtended<ViewModelMessage> Messages { get; set; } = new ObservableCollectionExtended<ViewModelMessage>();
 
         [Reactive] public Point PositionRight { get; set; }
@@ -67,7 +68,7 @@ namespace SimpleStateMachineNodeEditor.ViewModel
         public ViewModelNodesCanvas()
         {
             Cutter = new ViewModelCutter(this);
-            Nodes.Connect().ObserveOnDispatcher().Bind(Nodes2).Subscribe();
+            Nodes.Connect().ObserveOnDispatcher().Bind(NodesForView).Subscribe();
             SetupCommands();
             SetupSubscriptions();
             SetupStartState();
@@ -77,7 +78,7 @@ namespace SimpleStateMachineNodeEditor.ViewModel
 
         private void SetupSubscriptions()
         {
-            this.WhenAnyValue(x => x.Nodes.Count).Buffer(2, 1).Select(x => (Previous: x[0], Current: x[1])).Subscribe(x => UpdateCount(x.Previous, x.Current));
+            this.WhenAnyValue(x => x.NodesForView.Count).Buffer(2, 1).Select(x => (Previous: x[0], Current: x[1])).Subscribe(x => UpdateCount(x.Previous, x.Current));
         }
 
         #endregion Setup Subscriptions

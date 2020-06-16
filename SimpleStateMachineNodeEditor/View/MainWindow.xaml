@@ -179,15 +179,46 @@
             </TabItem>
             <!--<TabItem Header="Transitions table" ToolTip="" Style="{DynamicResource StyleTabItem}" Foreground="{DynamicResource ColorForeground}"/>-->
             <TabItem  Header="Transitions table"  Style="{DynamicResource StyleTabItem}" Background="{DynamicResource ColorWindowHeader}" Foreground="{DynamicResource ColorWindowHeaderTabItemForeground}"  BorderBrush="{DynamicResource ColorElementMouseOver}" OpacityMask="{DynamicResource ColorElementMouseOver}">
-                <DataGrid x:Name="TableOfTransitions">
-                    <DataGridTemplateColumn Header="Address">
-                        <DataGridTemplateColumn.CellTemplate>
-                            <DataTemplate>
-                                <TextBox Text="{Binding Path=Name}"/>
-                            </DataTemplate>
-                        </DataGridTemplateColumn.CellTemplate>
-                    </DataGridTemplateColumn>
-                </DataGrid>
+
+                <ListBox x:Name="TableOfTransitions" Template="{DynamicResource TemplateListBox}" Background="{DynamicResource ColorWindowHeader}" BorderBrush="{DynamicResource ColorMessagesBorder}" Foreground="{DynamicResource ColorMessagesForeground}" ItemContainerStyle="{DynamicResource StyleListBoxTransitionsItem}"  AlternationCount="2"
+                         VirtualizingStackPanel.IsVirtualizing="True" 
+                          VirtualizingStackPanel.VirtualizationMode="Recycling" 
+                          VirtualizingStackPanel.CacheLength="1" 
+                          VirtualizingStackPanel.CacheLengthUnit="Page"                           
+                          VirtualizingStackPanel.ScrollUnit="Pixel">
+                    <ListBox.Resources>
+                    <ControlTemplate x:Key="GroupItemTemplate" TargetType="{x:Type GroupItem}">
+                        <DockPanel>
+                            <Separator DockPanel.Dock="Left" Style="{StaticResource {x:Static ToolBar.SeparatorStyleKey}}" />
+                            <StackPanel>
+                                <ContentPresenter />
+                                <!-- This will be automatically wired -->
+                                <ItemsPresenter Margin="5,0,0,0" />
+                                <!-- So will this -->
+                            </StackPanel>
+                        </DockPanel>
+                    </ControlTemplate>
+                    </ListBox.Resources>
+                    <ListBox.GroupStyle>
+                        <GroupStyle>
+                            <GroupStyle.HeaderTemplate>
+                                <DataTemplate>
+                                    <TextBlock Text="{Binding Path=Name}" FontWeight="Bold" />
+                                </DataTemplate>
+                            </GroupStyle.HeaderTemplate>
+                            <GroupStyle.ContainerStyle>
+                                <Style TargetType="{x:Type GroupItem}">
+                                    <Setter Property="Template" Value="{StaticResource GroupItemTemplate}" />
+                                </Style>
+                            </GroupStyle.ContainerStyle>
+                        </GroupStyle>
+                    </ListBox.GroupStyle>
+                    <ListBox.ItemTemplate>
+                        <DataTemplate>
+                            <view:ViewTableOfTransitionsItem ViewModel="{Binding}" />
+                        </DataTemplate>
+                    </ListBox.ItemTemplate>
+                </ListBox>
             </TabItem>
         </TabControl>
         <!--#endregion Tabs-->   

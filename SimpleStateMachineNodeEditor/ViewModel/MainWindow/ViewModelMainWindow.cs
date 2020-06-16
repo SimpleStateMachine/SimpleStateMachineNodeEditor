@@ -32,15 +32,19 @@ namespace SimpleStateMachineNodeEditor.ViewModel
         [Reactive] public int CountInformation { get; set; }
         [Reactive] public int CountDebug { get; set; }
 
-
-        public ObservableCollectionExtended<ViewModelConnector> Tests = new ObservableCollectionExtended<ViewModelConnector>();
         private IDisposable ConnectToMessages;
         public double MaxHeightMessagePanel = 150;
+        public ObservableCollectionExtended<ViewModelConnector> Transitions { get; set; }  = new ObservableCollectionExtended<ViewModelConnector>();
+      
 
         public ViewModelMainWindow(ViewModelNodesCanvas viewModelNodesCanvas)
         {
             NodesCanvas = viewModelNodesCanvas;
-            NodesCanvas.Nodes.Connect().SelectMany(x=>x.Transitions.Items).Bind(Tests).Subscribe();
+            NodesCanvas.Nodes.Connect().TransformMany(x=>x.Transitions).AutoRefresh(x => x.Name).Filter(x=> Filter(x.Name)).Bind(Transitions).Subscribe();
+            bool Filter(string name)
+            {
+                return !string.IsNullOrEmpty(name);
+            }
             SetupCommands();
             SetupSubscriptions();
         }

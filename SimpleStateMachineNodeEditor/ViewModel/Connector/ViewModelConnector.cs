@@ -53,7 +53,7 @@ namespace SimpleStateMachineNodeEditor.ViewModel
                 this.WhenAnyValue(x => x.Node.HeaderWidth).Buffer(2, 1).Subscribe(x => UpdatePositionOnWidthChange(x[1] - x[0]));
                 if (this.Name != "Output")
                 {
-                    this.WhenAnyValue(x => x.Node.Transitions2.Count).Subscribe(x => UpdatePositionOnTransitionCountChange());                   
+                    this.WhenAnyValue(x => x.Node.TransitionsForView.Count).Subscribe(x => UpdatePositionOnTransitionCountChange());                   
                 }
                 
             }

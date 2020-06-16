@@ -15,12 +15,13 @@
                 <ResourceDictionary Source="Styles/ErrorList/StyleExpander.xaml"/>
                 <ResourceDictionary Source="Styles/ErrorList/StyleScrollBar.xaml"/>
                 <ResourceDictionary Source="Styles/ErrorList/StyleScrollViewer.xaml"/>
-                
                 <ResourceDictionary Source="Styles/ErrorList/TemplateListBox.xaml"/>
                 <ResourceDictionary Source="Styles/ErrorList/StyleLabel.xaml"/>
                 <ResourceDictionary Source="Styles/ErrorList/StyleListBoxItem.xaml"/>
                 <ResourceDictionary Source="Styles/ErrorList/StyleLabelWithIcon.xaml"/>
-                
+
+
+                <ResourceDictionary Source="Styles/TableOfTransitions/StyleListBoxTransitionsItem.xaml"/>
 
 
                 <!--#region         Test-->

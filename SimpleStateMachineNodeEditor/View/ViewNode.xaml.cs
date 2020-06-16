@@ -79,7 +79,7 @@ namespace SimpleStateMachineNodeEditor.View
 
                 this.OneWayBind(this.ViewModel, x => x.Output, x => x.Output.ViewModel).DisposeWith(disposable);
 
-                this.OneWayBind(this.ViewModel, x => x.Transitions2, x => x.ItemsControlTransitions.ItemsSource).DisposeWith(disposable);
+                this.OneWayBind(this.ViewModel, x => x.TransitionsForView, x => x.ItemsControlTransitions.ItemsSource).DisposeWith(disposable);
 
                 this.WhenAnyValue(v => v.NodeHeaderElement.ActualWidth).BindTo(this, v => v.ViewModel.HeaderWidth).DisposeWith(disposable);
 

@@ -424,7 +424,7 @@ namespace SimpleStateMachineNodeEditor.ViewModel
 
             XElement transitions = new XElement("Transitions");
             stateMachineXElement.Add(transitions);
-            foreach (var transition in Nodes.Items.SelectMany(x => x.Transitions2.Where(y => !string.IsNullOrEmpty(y.Name))))
+            foreach (var transition in Nodes.Items.SelectMany(x => x.TransitionsForView.Where(y => !string.IsNullOrEmpty(y.Name))))
             {
                 transitions.Add(transition.ToXElement());
             }
