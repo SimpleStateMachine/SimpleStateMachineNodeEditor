@@ -14,6 +14,7 @@ using System.Windows;
 using System.Collections.Generic;
 using System.Windows.Controls;
 using System.Windows.Media;
+using DynamicData;
 
 namespace SimpleStateMachineNodeEditor.ViewModel
 {
@@ -21,7 +22,9 @@ namespace SimpleStateMachineNodeEditor.ViewModel
     {
         public ObservableCollectionExtended<ViewModelConnect> Connects = new ObservableCollectionExtended<ViewModelConnect>();
 
-        public ObservableCollectionExtended<ViewModelNode> Nodes = new ObservableCollectionExtended<ViewModelNode>();
+        //public ObservableCollectionExtended<ViewModelNode> Nodes = new ObservableCollectionExtended<ViewModelNode>();
+        public SourceList<ViewModelNode> Nodes = new SourceList<ViewModelNode>();
+        public ObservableCollectionExtended<ViewModelNode> Nodes2 = new ObservableCollectionExtended<ViewModelNode>();
         public ObservableCollectionExtended<ViewModelMessage> Messages { get; set; } = new ObservableCollectionExtended<ViewModelMessage>();
 
         [Reactive] public Point PositionRight { get; set; }
@@ -46,6 +49,8 @@ namespace SimpleStateMachineNodeEditor.ViewModel
         [Reactive] public bool WithoutMessages { get; set; }
         [Reactive]  public Themes Theme { get; set; } = Themes.Dark;
 
+
+
         static Dictionary<Themes, string> themesPaths = new Dictionary<Themes, string>()
         {
             {Themes.Dark, @"Styles\Themes\Dark.xaml" },
@@ -53,7 +58,7 @@ namespace SimpleStateMachineNodeEditor.ViewModel
         };
 
         public int NodesCount = 0;
-        public int TransitionsCount = 1;
+        public int TransitionsCount = 0;
         public double ScaleMax = 5;
         public double ScaleMin = 0.1;
         public double Scales { get; set; } = 0.05;
@@ -62,6 +67,7 @@ namespace SimpleStateMachineNodeEditor.ViewModel
         public ViewModelNodesCanvas()
         {
             Cutter = new ViewModelCutter(this);
+            Nodes.Connect().ObserveOnDispatcher().Bind(Nodes2).Subscribe();
             SetupCommands();
             SetupSubscriptions();
             SetupStartState();
@@ -80,7 +86,7 @@ namespace SimpleStateMachineNodeEditor.ViewModel
 
         private void SetupStartState()
         {
-            string name = Nodes.Any(x => x.Name == "Start") ? GetNameForNewNode() : "Start";
+            string name = Nodes.Items.Any(x => x.Name == "Start") ? GetNameForNewNode() : "Start";
             StartState = new ViewModelNode(this, name, new Point());
             SetAsStart(StartState);
             Nodes.Add(StartState);

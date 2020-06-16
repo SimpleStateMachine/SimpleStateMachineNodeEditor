@@ -178,6 +178,17 @@
                 <view:ViewNodesCanvas x:Name="NodesCanvas" />
             </TabItem>
             <!--<TabItem Header="Transitions table" ToolTip="" Style="{DynamicResource StyleTabItem}" Foreground="{DynamicResource ColorForeground}"/>-->
+            <TabItem  Header="Transitions table"  Style="{DynamicResource StyleTabItem}" Background="{DynamicResource ColorWindowHeader}" Foreground="{DynamicResource ColorWindowHeaderTabItemForeground}"  BorderBrush="{DynamicResource ColorElementMouseOver}" OpacityMask="{DynamicResource ColorElementMouseOver}">
+                <DataGrid x:Name="TableOfTransitions">
+                    <DataGridTemplateColumn Header="Address">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <TextBox Text="{Binding Path=Name}"/>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                </DataGrid>
+            </TabItem>
         </TabControl>
         <!--#endregion Tabs-->   
         

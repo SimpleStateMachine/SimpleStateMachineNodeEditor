@@ -38,18 +38,11 @@ namespace SimpleStateMachineNodeEditor.ViewModel
         [Reactive] public double HeaderWidth { get; set; } = 80;
 
         public SourceList<ViewModelConnector> Transitions { get; set; } = new SourceList<ViewModelConnector>();
-
-        private readonly IObservableCollection<ViewModelConnector> _Transitions2 = new ObservableCollectionExtended<ViewModelConnector>();
-        public IObservableCollection<ViewModelConnector> Transitions2 => _Transitions2;
-
-        //public IObservableCollection<ViewModelConnector> Transitions2 { get; } = new ObservableCollectionExtended<ViewModelConnector>();
-
+        public ObservableCollectionExtended<ViewModelConnector> Transitions2  = new ObservableCollectionExtended<ViewModelConnector>();
         public int Zindex { get; private set; }
         
         private ViewModelNode()
         {
-            Transitions.Connect().ObserveOnDispatcher().Bind(_Transitions2).Subscribe();
-
             SetupCommands();
             SetupBinding();
         }
@@ -61,7 +54,9 @@ namespace SimpleStateMachineNodeEditor.ViewModel
             Name = name;
             Zindex = nodesCanvas.Nodes.Count;
             Point1 = point;
+            Transitions.Connect().ObserveOnDispatcher().Bind(Transitions2).Subscribe();
             SetupConnectors();
+        
             SetupCommands();
             SetupBinding();
             SetupSubscriptions();
@@ -78,9 +73,15 @@ namespace SimpleStateMachineNodeEditor.ViewModel
         private void SetupSubscriptions()
         {
             this.WhenAnyValue(x => x.Selected).Subscribe(value => { this.BorderBrush = value ? Application.Current.Resources["ColorSelectedElement"] as SolidColorBrush : Brushes.LightGray; });
-            this.WhenAnyValue(x => x.Transitions.Count).Buffer(2, 1).Select(x => (Previous: x[0], Current: x[1])).Subscribe(x => UpdateCount(x.Previous, x.Current));
+            this.WhenAnyValue(x => x.Transitions2.Count).Buffer(2, 1).Select(x => (Previous: x[0], Current: x[1])).Subscribe(x => UpdateCount(x.Previous, x.Current));
             this.WhenAnyValue(x => x.Point1, x => x.Size).Subscribe(_ => UpdatePoint2());
-            this.WhenAnyValue(x => x.IsCollapse).Subscribe(value => Collapse(value));        
+            this.WhenAnyValue(x => x.IsCollapse).Subscribe(value => Collapse(value));
+
+            //this.WhenAnyValue(x => x.Transitions.Count).Subscribe(value => UpdateCount(value));
+        }
+        private void UpdateCount(int value)
+        {
+            NodesCanvas.TransitionsCount++;
         }
         #endregion Setup Subscriptions
         #region Connectors
@@ -100,7 +101,7 @@ namespace SimpleStateMachineNodeEditor.ViewModel
         }
         private void UpdateCount(int oldValue, int newValue)
         {
-            if (newValue > oldValue)
+            if ((oldValue>0)&&(newValue > oldValue))
             {
                 NodesCanvas.TransitionsCount++;
             }

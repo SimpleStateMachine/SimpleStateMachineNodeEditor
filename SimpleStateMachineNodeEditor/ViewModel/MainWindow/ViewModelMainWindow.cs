@@ -6,9 +6,19 @@ using System;
 using SimpleStateMachineNodeEditor.Helpers.Enums;
 using System.Reactive.Linq;
 using System.Linq;
+using DynamicData.Alias;
 
 namespace SimpleStateMachineNodeEditor.ViewModel
 {
+    public class Test: ReactiveObject
+    {
+        [Reactive] public string Name { get; set; }
+
+        public Test(ViewModelNode viewModelNode)
+        {
+            Name = viewModelNode.Name;
+        }
+    }
     public partial class ViewModelMainWindow : ReactiveObject
     {
         public ObservableCollectionExtended<ViewModelMessage> Messages { get; set; } = new ObservableCollectionExtended<ViewModelMessage>();
@@ -22,14 +32,15 @@ namespace SimpleStateMachineNodeEditor.ViewModel
         [Reactive] public int CountInformation { get; set; }
         [Reactive] public int CountDebug { get; set; }
 
+
+        public ObservableCollectionExtended<ViewModelConnector> Tests = new ObservableCollectionExtended<ViewModelConnector>();
         private IDisposable ConnectToMessages;
         public double MaxHeightMessagePanel = 150;
-
-
 
         public ViewModelMainWindow(ViewModelNodesCanvas viewModelNodesCanvas)
         {
             NodesCanvas = viewModelNodesCanvas;
+            NodesCanvas.Nodes.Connect().SelectMany(x=>x.Transitions.Items).Bind(Tests).Subscribe();
             SetupCommands();
             SetupSubscriptions();
         }

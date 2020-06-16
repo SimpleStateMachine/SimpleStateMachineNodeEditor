@@ -154,19 +154,19 @@ namespace SimpleStateMachineNodeEditor.ViewModel
         }
         private void SelectedAll()
         {
-            foreach (var node in Nodes)
+            foreach (var node in Nodes.Items)
             { node.Selected = true; }
         }
         private void CollapseUpAll()
         {
-            foreach (var node in Nodes)
+            foreach (var node in Nodes.Items)
             {
                 node.IsCollapse = true;
             }
         }
         private void ExpandDownAll()
         {
-            foreach (var node in Nodes)
+            foreach (var node in Nodes.Items)
             {
                 node.IsCollapse = false;
             }
@@ -205,21 +205,21 @@ namespace SimpleStateMachineNodeEditor.ViewModel
         }
         private void CollapseUpSelected()
         {
-            foreach (var node in Nodes.Where(x => x.Selected))
+            foreach (var node in Nodes.Items.Where(x => x.Selected))
             {
                 node.IsCollapse = true;
             }
         }
         private void ExpandDownSelected()
         {
-            foreach (var node in Nodes.Where(x => x.Selected))
+            foreach (var node in Nodes.Items.Where(x => x.Selected))
             {
                 node.IsCollapse = false;
             }
         }
         private void UnSelectedAll()
         {
-            foreach (var node in Nodes)
+            foreach (var node in Nodes.Items)
             {
                 node.Selected = false;
                 node.CommandUnSelectedAllConnectors.ExecuteWithSubscribe();
@@ -252,7 +252,7 @@ namespace SimpleStateMachineNodeEditor.ViewModel
             Point selectorPoint1 = Selector.Point1WithScale.Division(Scale.Value);
             Point selectorPoint2 = Selector.Point2WithScale.Division(Scale.Value);
 
-            foreach (ViewModelNode node in Nodes)
+            foreach (ViewModelNode node in Nodes.Items)
             {
                 node.Selected = MyUtils.CheckIntersectTwoRectangles(node.Point1, node.Point2, selectorPoint1, selectorPoint2);
             }
@@ -328,7 +328,7 @@ namespace SimpleStateMachineNodeEditor.ViewModel
             if (string.IsNullOrEmpty(startState))
                 this.SetupStartState();
             else
-                this.SetAsStart(this.Nodes.Single(x => x.Name == startState));
+                this.SetAsStart(this.Nodes.Items.Single(x => x.Name == startState));
 
             #endregion  setup start state
 
@@ -405,15 +405,14 @@ namespace SimpleStateMachineNodeEditor.ViewModel
             });
         }
         private void Save(string fileName)
-        {
-            
+        {            
             Mouse.OverrideCursor = Cursors.Wait;
             XDocument xDocument = new XDocument();
             XElement stateMachineXElement = new XElement("StateMachine");
             xDocument.Add(stateMachineXElement);
             XElement states = new XElement("States");
             stateMachineXElement.Add(states);
-            foreach (var state in Nodes)
+            foreach (var state in Nodes.Items)
             {
                 states.Add(state.ToXElement());
             }
@@ -425,7 +424,7 @@ namespace SimpleStateMachineNodeEditor.ViewModel
 
             XElement transitions = new XElement("Transitions");
             stateMachineXElement.Add(transitions);
-            foreach (var transition in Nodes.SelectMany(x => x.Transitions.Items.Where(y => !string.IsNullOrEmpty(y.Name))))
+            foreach (var transition in Nodes.Items.SelectMany(x => x.Transitions2.Where(y => !string.IsNullOrEmpty(y.Name))))
             {
                 transitions.Add(transition.ToXElement());
             }
@@ -450,7 +449,7 @@ namespace SimpleStateMachineNodeEditor.ViewModel
         }
         private List<string> ValidateScheme()
         {
-          Dictionary<string, bool> forValidate =  Nodes.Where(x=>x!=StartState).ToDictionary(x => x.Name, x=>false);
+          Dictionary<string, bool> forValidate =  Nodes.Items.Where(x=>x!=StartState).ToDictionary(x => x.Name, x=>false);
 
             foreach(var connect in Connects )
             {
@@ -470,12 +469,12 @@ namespace SimpleStateMachineNodeEditor.ViewModel
         }
         private void PartMoveAllNode(Point delta)
         {
-            foreach (var node in Nodes)
+            foreach (var node in Nodes.Items)
             { node.CommandMove.ExecuteWithSubscribe(delta); }
         }
         private void PartMoveAllSelectedNode(Point delta)
         {
-            foreach (var node in Nodes.Where(x => x.Selected))
+            foreach (var node in Nodes.Items.Where(x => x.Selected))
             { node.CommandMove.ExecuteWithSubscribe(delta); }
         }
         private void Zoom(int delta)
@@ -554,7 +553,7 @@ namespace SimpleStateMachineNodeEditor.ViewModel
         {
             if (nodes == null)
             {
-                nodes = Nodes.ToList();
+                nodes = Nodes.Items.ToList();
                 delta = new Point();
             }
             nodes.ForEach(node => node.CommandMove.ExecuteWithSubscribe(delta));
@@ -572,7 +571,7 @@ namespace SimpleStateMachineNodeEditor.ViewModel
             Point myPoint = delta.Copy();
             if (nodes == null)
             {
-                nodes = Nodes.Where(x => x.Selected).ToList();
+                nodes = Nodes.Items.Where(x => x.Selected).ToList();
                 myPoint = new Point();
             }
             nodes.ForEach(node => node.CommandMove.ExecuteWithSubscribe(myPoint));
@@ -738,7 +737,7 @@ namespace SimpleStateMachineNodeEditor.ViewModel
             if (result == null)
             {
                 result = new ElementsForDelete();
-                result.NodesToDelete = Nodes.Where(x => x.Selected && x.CanBeDelete).ToList();
+                result.NodesToDelete = Nodes.Items.Where(x => x.Selected && x.CanBeDelete).ToList();
                 result.ConnectsToDelete = new List<ViewModelConnect>();
                 result.ConnectsToDeleteWithConnectors = new List<(int connectorIndex, ViewModelConnect connect)>();
 
@@ -790,8 +789,7 @@ namespace SimpleStateMachineNodeEditor.ViewModel
         }
         private IEnumerable<ViewModelConnector> GetAllConnectors()
         {
-            //return this.Nodes.SelectMany(x => x.Transitions);
-            return null;
+            return this.Nodes.Items.SelectMany(x => x.Transitions.Items);
         }
 
         private bool ConnectsExist(string nameConnect)
@@ -800,7 +798,7 @@ namespace SimpleStateMachineNodeEditor.ViewModel
         }
         private bool NodesExist(string nameNode)
         {
-            return Nodes.Any(x => x.Name == nameNode);
+            return Nodes.Items.Any(x => x.Name == nameNode);
         }
         public class ElementsForDelete
         {

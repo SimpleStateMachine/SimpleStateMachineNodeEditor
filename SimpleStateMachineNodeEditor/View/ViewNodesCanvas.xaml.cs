@@ -64,7 +64,7 @@ namespace SimpleStateMachineNodeEditor.View
             this.WhenActivated(disposable =>
             {
 
-                this.OneWayBind(this.ViewModel, x => x.Nodes, x => x.Nodes.Collection).DisposeWith(disposable);
+                this.OneWayBind(this.ViewModel, x => x.Nodes2, x => x.Nodes.Collection).DisposeWith(disposable);
 
                 this.OneWayBind(this.ViewModel, x => x.Connects, x => x.Connects.Collection).DisposeWith(disposable);
 

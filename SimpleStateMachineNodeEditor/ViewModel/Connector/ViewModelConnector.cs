@@ -31,6 +31,8 @@ namespace SimpleStateMachineNodeEditor.ViewModel
         [Reactive] public ViewModelNodesCanvas NodesCanvas { get; set; }
         [Reactive] public bool Selected { get; set; }
 
+        [Reactive] public SourceList<string> test { get; set; }
+
         public ViewModelConnector(ViewModelNodesCanvas nodesCanvas, ViewModelNode viewModelNode, string name, Point myPoint)
         {
             Node = viewModelNode;
@@ -51,7 +53,7 @@ namespace SimpleStateMachineNodeEditor.ViewModel
                 this.WhenAnyValue(x => x.Node.HeaderWidth).Buffer(2, 1).Subscribe(x => UpdatePositionOnWidthChange(x[1] - x[0]));
                 if (this.Name != "Output")
                 {
-                    this.WhenAnyValue(x => x.Node.Transitions.Count).Subscribe(x => UpdatePositionOnTransitionCountChange());                   
+                    this.WhenAnyValue(x => x.Node.Transitions2.Count).Subscribe(x => UpdatePositionOnTransitionCountChange());                   
                 }
                 
             }
@@ -123,8 +125,8 @@ namespace SimpleStateMachineNodeEditor.ViewModel
                 return viewModelConnect;
             }
 
-            ViewModelNode nodeFrom = nodesCanvas.Nodes.Single(x => x.Name == from);
-            ViewModelNode nodeTo = nodesCanvas.Nodes.Single(x => x.Name == to);
+            ViewModelNode nodeFrom = nodesCanvas.Nodes.Items.Single(x => x.Name == from);
+            ViewModelNode nodeTo = nodesCanvas.Nodes.Items.Single(x => x.Name == to);
           
             nodeFrom.CurrentConnector.Name = name;
 
