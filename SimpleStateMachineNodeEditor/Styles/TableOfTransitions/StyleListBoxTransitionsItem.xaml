@@ -10,12 +10,12 @@
                         <ContentPresenter />
                     </Border>
                     <ControlTemplate.Triggers>
-                        <!--<Trigger Property="ItemsControl.AlternationIndex" Value="0">
+                        <Trigger Property="ItemsControl.AlternationIndex" Value="0">
                             <Setter TargetName="Border" Property="Background"  Value="{DynamicResource ColorNodesCanvasBackground}"></Setter>
                             </Trigger>
                         <Trigger Property="ItemsControl.AlternationIndex" Value="1">
                             <Setter TargetName="Border" Property="Background"  Value="{DynamicResource ColorMessagesBackground}"></Setter>
-                        </Trigger>-->
+                        </Trigger>
                         <Trigger Property="IsSelected" Value="true">
                             <Setter TargetName="Border" Property="Background" Value="{DynamicResource ColorElementMouseOver}"/>
                             <Setter  Property="Foreground" Value="{DynamicResource ColorMessagesForegroundSelected}"/>

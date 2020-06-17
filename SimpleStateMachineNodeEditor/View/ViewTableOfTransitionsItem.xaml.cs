@@ -52,8 +52,19 @@ namespace SimpleStateMachineNodeEditor.View
                     this.OneWayBind(this.ViewModel, x => x.Node.Name, x => x.TextBoxElementStateTo.Text).DisposeWith(disposable);
                 else
                     this.OneWayBind(this.ViewModel, x => x.Connect.ToConnector.Node.Name, x => x.TextBoxElementStateTo.Text).DisposeWith(disposable);
+                //this.WhenAnyValue(x=>x.GridElement.ActualWidth).Subscribe(value=>UpdateWidth(value)).DisposeWith(disposable);
             });
 
+        }
+        private void UpdateWidth(double value)
+        {
+            //value *= 0.33;
+            //if(TextBoxElementStateFrom.ActualWidth-10<value)
+            //    TextBoxElementStateFrom.Width = value;
+            //if (TextBoxElementStateTo.ActualWidth - 10 < value)
+            //    TextBoxElementStateTo.Width = value;
+            //if (TextBoxElementTransitionName.ActualWidth - 10 < value)
+            //    TextBoxElementTransitionName.Width = value;
         }
         #endregion SetupBinding
 

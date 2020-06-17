@@ -7,22 +7,22 @@
              xmlns:styles="clr-namespace:SimpleStateMachineNodeEditor.Styles"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
-    <Border BorderThickness="1" BorderBrush="Red">
-    <Grid HorizontalAlignment="Stretch" x:Name="GridElement" >
+    <Grid x:Name="GridElement" HorizontalAlignment="Stretch" >
         <Grid.ColumnDefinitions>
-            <ColumnDefinition SharedSizeGroup="StateFrom"/>
-            <!--<ColumnDefinition/>-->
-            <ColumnDefinition SharedSizeGroup="TransitionName"/>
-            <!--<ColumnDefinition/>-->
-            <ColumnDefinition SharedSizeGroup="StateTo"/>
+            <ColumnDefinition x:Name="ColumnStateFrom" SharedSizeGroup="StateFrom"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition x:Name="TransitionName" SharedSizeGroup="TransitionName"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition x:Name="StateTo" SharedSizeGroup="StateTo"/>
+            <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
-        <styles:MyTextBox Grid.Column="0" x:Name="TextBoxElementStateFrom" Foreground="{Binding Path=Foreground, RelativeSource={RelativeSource AncestorType={x:Type ListBoxItem}}}"  HorizontalAlignment="Left" VerticalAlignment="Center" Padding="3" />
-        <!--<Separator Grid.Column="1" Style="{DynamicResource TemplateSeparator}" Height="Auto" BorderThickness="0,0,1,0" />-->
-        <styles:MyTextBox  Grid.Column="1"  x:Name="TextBoxElementTransitionName" Foreground="{Binding Path=Foreground, RelativeSource={RelativeSource AncestorType={x:Type ListBoxItem}}}" TextWrapping="NoWrap"  HorizontalAlignment="Left" VerticalAlignment="Center" Padding="3" />
-        <!--<Separator Grid.Column="3" Style="{DynamicResource TemplateSeparator}" Height="Auto" BorderThickness="0,0,1,0" />-->
-        <styles:MyTextBox Grid.Column="2" x:Name="TextBoxElementStateTo" Foreground="{Binding Path=Foreground, RelativeSource={RelativeSource AncestorType={x:Type ListBoxItem}}}" TextWrapping="NoWrap"  HorizontalAlignment="Left" VerticalAlignment="Center" Padding="3"  />
+        <Grid.RowDefinitions>
+            <RowDefinition />
+        </Grid.RowDefinitions>
+        <styles:MyTextBox Grid.Column="0" Text="Test1" Grid.Row="0" Background="Red" x:Name="TextBoxElementStateFrom" Foreground="{Binding Path=Foreground, RelativeSource={RelativeSource AncestorType={x:Type ListBoxItem}}}"  TextWrapping="NoWrap"   Padding="3" />
+        <styles:MyTextBox  Grid.Column="2" Text="Test2"   Grid.Row="0"  Background="Green" x:Name="TextBoxElementTransitionName" Foreground="{Binding Path=Foreground, RelativeSource={RelativeSource AncestorType={x:Type ListBoxItem}}}" TextWrapping="NoWrap"  Padding="3" />
+        <styles:MyTextBox Grid.Column="4" Text="Test3"    Grid.Row="0"  Background="Blue" x:Name="TextBoxElementStateTo" Foreground="{Binding Path=Foreground, RelativeSource={RelativeSource AncestorType={x:Type ListBoxItem}}}" TextWrapping="NoWrap" Padding="3"  />
     </Grid>
-    </Border>
 </UserControl>
 
 
