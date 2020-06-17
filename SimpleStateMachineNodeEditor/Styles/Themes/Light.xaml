@@ -47,7 +47,8 @@
     <SolidColorBrush x:Key="ColorWindowBackground" Color="#FF212121"/>
     <SolidColorBrush x:Key="ColorWindowBorder" Color="LightGray"/>
     <SolidColorBrush x:Key="ColorWindowHeader" Color="#eeeef2"/>
-    <SolidColorBrush x:Key="ColorWindowHeaderTabItemForeground"  Color="White"/>
+    <SolidColorBrush x:Key="ColorWindowHeaderTabItemForeground"  Color="Black"/>
+    <SolidColorBrush x:Key="ColorWindowHeaderTabItemForegroundOnSelect"  Color="White"/>
 
     <!--#region Header buttons-->
     <SolidColorBrush x:Key="ColorWindowHeaderButtonsIcon"  Color="#8f8f91"/>

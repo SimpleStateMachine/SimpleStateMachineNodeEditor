@@ -3,7 +3,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    xmlns:view="clr-namespace:SimpleStateMachineNodeEditor.View"
+    xmlns:view="clr-namespace:SimpleStateMachineNodeEditor.View" xmlns:styles="clr-namespace:SimpleStateMachineNodeEditor.Styles"
     x:Class="SimpleStateMachineNodeEditor.View.MainWindow"
         mc:Ignorable="d"
         Title="SimpleStateMachineNodeEditor"  d:DesignWidth="550" Height="738.592" MinWidth="570" MinHeight="400"  BorderThickness="1" Padding="7,0,7,7" ResizeMode="CanResizeWithGrip" BorderBrush="{DynamicResource ColorWindowBorder}" Background="{DynamicResource ColorWindowHeader}" Foreground="{x:Null}" WindowStyle="None" AllowsTransparency="True" Style="{DynamicResource CustomWindowStyle}">
@@ -173,14 +173,30 @@
         
         <!--#region  Tabs-->
         <!--BorderBrush - it's color on IsMouseOver, OpacityMask - it's color on IsPressed-->
-        <TabControl  Grid.Row="2" Background="{x:Null}" BorderBrush="{x:Null}" TabStripPlacement="Top" Padding="2,2,2,0" >
+        <TabControl  Grid.Row="2" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="Green" TabStripPlacement="Top" Padding="2,2,2,0" >
             <TabItem  Header="Node editor"  Style="{DynamicResource StyleTabItem}" Background="{DynamicResource ColorWindowHeader}" Foreground="{DynamicResource ColorWindowHeaderTabItemForeground}"  BorderBrush="{DynamicResource ColorElementMouseOver}" OpacityMask="{DynamicResource ColorElementMouseOver}">
                 <view:ViewNodesCanvas x:Name="NodesCanvas" />
             </TabItem>
             <!--<TabItem Header="Transitions table" ToolTip="" Style="{DynamicResource StyleTabItem}" Foreground="{DynamicResource ColorForeground}"/>-->
-            <TabItem  Header="Transitions table"  Style="{DynamicResource StyleTabItem}" Background="{DynamicResource ColorWindowHeader}" Foreground="{DynamicResource ColorWindowHeaderTabItemForeground}"  BorderBrush="{DynamicResource ColorElementMouseOver}" OpacityMask="{DynamicResource ColorElementMouseOver}">
+            <TabItem Header="Transitions table"  Style="{DynamicResource StyleTabItem}" Background="{DynamicResource ColorWindowHeader}" Foreground="{DynamicResource ColorWindowHeaderTabItemForeground}"  BorderBrush="{DynamicResource ColorElementMouseOver}" OpacityMask="{DynamicResource ColorElementMouseOver}">
+                <Grid Grid.IsSharedSizeScope="True">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition SharedSizeGroup="StateFrom"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition SharedSizeGroup="TransitionName"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition SharedSizeGroup="StateTo"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="auto"/>
+                        <RowDefinition/>
+                    </Grid.RowDefinitions>
+                    <Label  Grid.Column="0" Style="{DynamicResource StyleLabelWithIcon}" BorderBrush="{DynamicResource IconStateFrom}" OpacityMask="{DynamicResource ColorMessagesForeground}" MinHeight="11" MinWidth="11">State from</Label>
+                    <Label  Grid.Column="2" Style="{DynamicResource StyleLabelWithIcon}" BorderBrush="{DynamicResource IconTransitionName}" OpacityMask="{DynamicResource ColorMessagesForeground}" MinHeight="14" MinWidth="14">Transition name</Label>
+                    <Label  Grid.Column="4" Style="{DynamicResource StyleLabelWithIcon}" BorderBrush="{DynamicResource IconStateTo}" OpacityMask="{DynamicResource ColorMessagesForeground}" MinHeight="11" MinWidth="11">State To</Label>
 
-                <ListBox x:Name="TableOfTransitions" Template="{DynamicResource TemplateListBox}" Background="{DynamicResource ColorWindowHeader}" BorderBrush="{DynamicResource ColorMessagesBorder}" Foreground="{DynamicResource ColorMessagesForeground}" ItemContainerStyle="{DynamicResource StyleListBoxTransitionsItem}"  AlternationCount="2" Grid.IsSharedSizeScope="True"
+                    <ListBox Grid.Row="1" Grid.ColumnSpan="6" x:Name="TableOfTransitions" Template="{DynamicResource TemplateListBox}" Background="{DynamicResource ColorWindowHeader}" BorderBrush="{DynamicResource ColorMessagesBorder}" Foreground="{DynamicResource ColorMessagesForeground}" ItemContainerStyle="{DynamicResource StyleListBoxTransitionsItem}"  AlternationCount="2" 
                          VirtualizingStackPanel.IsVirtualizing="True" 
                           VirtualizingStackPanel.VirtualizationMode="Recycling" 
                           VirtualizingStackPanel.CacheLength="1" 
@@ -192,6 +208,7 @@
                         </DataTemplate>
                     </ListBox.ItemTemplate>
                 </ListBox>
+                </Grid>
             </TabItem>
         </TabControl>
         <!--#endregion Tabs-->   
@@ -212,15 +229,15 @@
                         <ColumnDefinition Width="Auto"/>
                         <ColumnDefinition />
                     </Grid.ColumnDefinitions>
-                    <Label  Grid.Column="0" x:Name="LabelErrorList"  Style="{DynamicResource StyleLabelWithIcon}" BorderBrush="{DynamicResource IconErrorList}" OpacityMask="{DynamicResource ColorElementMouseOver}">Error List</Label>
+                    <Label  Grid.Column="0" x:Name="LabelErrorList" Style="{DynamicResource StyleLabelWithIcon}" BorderBrush="{DynamicResource IconErrorList}" OpacityMask="{DynamicResource ColorElementMouseOver}" MinHeight="14" MinWidth="14">Error List</Label>
                     <Separator Grid.Column="1" Style="{DynamicResource TemplateSeparator}" Height="Auto" BorderThickness="0,0,1,0" />
-                    <Label  Grid.Column="2" x:Name="LabelError" Style="{DynamicResource StyleLabelWithIcon}" BorderBrush="{DynamicResource IconError}" OpacityMask="{DynamicResource ColorElementMouseOver}">Erros</Label>
+                    <Label  Grid.Column="2" x:Name="LabelError" Style="{DynamicResource StyleLabelWithIcon}" BorderBrush="{DynamicResource IconError}" OpacityMask="{DynamicResource ColorElementMouseOver}" MinHeight="14" MinWidth="14">Erros</Label>
                     <Separator Grid.Column="3" Style="{DynamicResource TemplateSeparator}" Height="Auto" BorderThickness="0,0,1,0" />
-                    <Label  Grid.Column="4" x:Name="LabelWarning" Style="{DynamicResource StyleLabelWithIcon}" BorderBrush="{DynamicResource IconWarning}" OpacityMask="{DynamicResource ColorElementMouseOver}">Warnings</Label>
+                    <Label  Grid.Column="4" x:Name="LabelWarning" Style="{DynamicResource StyleLabelWithIcon}" BorderBrush="{DynamicResource IconWarning}" OpacityMask="{DynamicResource ColorElementMouseOver}" MinHeight="14" MinWidth="14">Warnings</Label>
                     <Separator Grid.Column="5" Style="{DynamicResource TemplateSeparator}" Height="Auto" BorderThickness="0,0,1,0" />
-                    <Label  Grid.Column="6" x:Name="LabelInformation" Style="{DynamicResource StyleLabelWithIcon}" BorderBrush="{DynamicResource IconInformation}" OpacityMask="{DynamicResource ColorElementMouseOver}">Messages</Label>
+                    <Label  Grid.Column="6" x:Name="LabelInformation" Style="{DynamicResource StyleLabelWithIcon}" BorderBrush="{DynamicResource IconInformation}" OpacityMask="{DynamicResource ColorElementMouseOver}" MinHeight="14" MinWidth="14">Messages</Label>
                     <Separator Grid.Column="7" Visibility="{Binding ElementName=LabelDebug, Path=Visibility}" Style="{DynamicResource TemplateSeparator}" Height="Auto" BorderThickness="0,0,1,0" />
-                    <Label  Grid.Column="8" x:Name="LabelDebug" Visibility="Hidden" Style="{DynamicResource StyleLabelWithIcon}" BorderBrush="{DynamicResource IconDebug}" OpacityMask="{DynamicResource ColorElementMouseOver}">Debug</Label>
+                    <Label  Grid.Column="8" x:Name="LabelDebug" Visibility="Hidden" Style="{DynamicResource StyleLabelWithIcon}" BorderBrush="{DynamicResource IconDebug}" OpacityMask="{DynamicResource ColorElementMouseOver}" MinHeight="14" MinWidth="14">Debug</Label>
                     <Label  Grid.Column="9" x:Name="LabelErrorListUpdate"  Style="{DynamicResource StyleLabelWithIcon}" BorderBrush="{DynamicResource IconUpdate}" OpacityMask="{DynamicResource ColorElementMouseOver}" HorizontalAlignment="Right" Margin="0,0,5,0">Update/Clear</Label>
                 </Grid>
             </Expander.Header>

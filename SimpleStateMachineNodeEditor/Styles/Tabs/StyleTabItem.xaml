@@ -17,10 +17,12 @@
                     <ControlTemplate.Triggers>
                         <Trigger Property="IsMouseOver" Value="True">
                             <Setter Property="Background" TargetName="mainBorder" Value="{Binding BorderBrush, RelativeSource={RelativeSource TemplatedParent}}"/>
+                            <Setter Property="TextElement.Foreground" TargetName="contentPresenter" Value="{DynamicResource ColorWindowHeaderTabItemForegroundOnSelect}"/>
                         </Trigger>
 
                         <Trigger Property="IsSelected" Value="True">
                             <Setter Property="Background" TargetName="mainBorder" Value="{Binding OpacityMask, RelativeSource={RelativeSource TemplatedParent}}"/>
+                            <Setter Property="TextElement.Foreground" TargetName="contentPresenter" Value="{DynamicResource ColorWindowHeaderTabItemForegroundOnSelect}"/>
                             <Setter Property="BorderThickness" TargetName="innerBorder" Value="1,1,1,0"/>
                             <Setter Property="BorderThickness" TargetName="mainBorder" Value="1,1,1,0"/>
                         </Trigger>

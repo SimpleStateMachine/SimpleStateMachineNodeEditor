@@ -4,8 +4,8 @@
 
     <!--OpacityMask - Foreground on Mouse Over-->
     <!--BorderBrush - Icon-->
-    <!--Width - Icon Width-->
-    <!--Height - Icon Height-->
+    <!--MinWidth - Icon Width-->
+    <!--MinHeight - Icon Height-->
     <Style x:Key="StyleLabelWithIcon" TargetType="{x:Type Label}">
         <!--<Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.ControlTextBrushKey}}"/>
         <Setter Property="Background" Value="Transparent"/>
@@ -21,7 +21,7 @@
                             <ColumnDefinition Width="auto" SharedSizeGroup="Icons"/>
                             <ColumnDefinition />
                         </Grid.ColumnDefinitions>
-                        <Rectangle Grid.Column="0" x:Name="RectangleElement" Fill="{TemplateBinding BorderBrush}" Height="14" Width="14" VerticalAlignment="Center"  Margin="8,2,0,0"/>
+                        <Rectangle Grid.Column="0" x:Name="RectangleElement" Fill="{TemplateBinding BorderBrush}" Height="{TemplateBinding MinHeight}" Width="{TemplateBinding MinWidth}" VerticalAlignment="Center"  Margin="8,2,0,0"/>
                         <TextBlock Grid.Column="1" Text="{TemplateBinding Content}" x:Name="TextBlockElement" Height="auto" VerticalAlignment="Center" HorizontalAlignment="Left" TextWrapping="NoWrap" Padding="5,3,8,3"  />
                     </Grid>
                     <ControlTemplate.Triggers>

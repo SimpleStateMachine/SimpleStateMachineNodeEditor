@@ -7,7 +7,7 @@
              xmlns:styles="clr-namespace:SimpleStateMachineNodeEditor.Styles"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
-    <Grid x:Name="GridElement" HorizontalAlignment="Stretch" >
+    <Grid x:Name="GridElement" HorizontalAlignment="Stretch">
         <Grid.ColumnDefinitions>
             <ColumnDefinition x:Name="ColumnStateFrom" SharedSizeGroup="StateFrom"/>
             <ColumnDefinition Width="*"/>

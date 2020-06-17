@@ -13,6 +13,9 @@
         <ResourceDictionary Source="DeleteScheme.xaml"/>
         
         <ResourceDictionary Source="ErrorList.xaml"/>
+        <ResourceDictionary Source="StateFrom.xaml"/>
+        <ResourceDictionary Source="StateTo.xaml"/>
+        <ResourceDictionary Source="TransitionName.xaml"/>
         <ResourceDictionary Source="Save.xaml"/>
         <ResourceDictionary Source="ExpandDown.xaml"/>
         <ResourceDictionary Source="Theme.xaml"/>

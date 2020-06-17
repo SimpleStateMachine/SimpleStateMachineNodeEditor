@@ -84,6 +84,12 @@ Validating for exists Nodes without connects</PackageReleaseNotes>
     <Page Update="Icons\SelectedLoop.xaml">
       <SubType>Designer</SubType>
     </Page>
+    <Page Update="Icons\TransitionName.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Icons\StateTo.xaml">
+      <SubType>Designer</SubType>
+    </Page>
   </ItemGroup>
 
 </Project>
