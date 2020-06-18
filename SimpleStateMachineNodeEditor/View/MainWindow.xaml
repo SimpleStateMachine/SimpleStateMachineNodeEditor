@@ -11,7 +11,7 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="auto" />
             <RowDefinition Height="auto"/>
-            <RowDefinition MinHeight="50"></RowDefinition>
+            <RowDefinition x:Name="MainColumn" MinHeight="50"></RowDefinition>
             <RowDefinition Height="auto"/>
             <RowDefinition Height="auto" x:Name="Fotter" MinHeight="18"/>
         </Grid.RowDefinitions>
@@ -176,7 +176,7 @@
             <Grid.ColumnDefinitions>
                 <ColumnDefinition MinWidth="50"/>
                 <ColumnDefinition Width="auto"/>
-                <ColumnDefinition Width="auto" x:Name="TableOfTransitionsColumn" />
+                <ColumnDefinition MinWidth="18" Width="auto" x:Name="TableOfTransitionsColumn" />
             </Grid.ColumnDefinitions>
         <!--BorderBrush - it's color on IsMouseOver, OpacityMask - it's color on IsPressed-->
         <TabControl  Grid.Column="0"  Background="{x:Null}" BorderBrush="{x:Null}" Foreground="Green" TabStripPlacement="Top" Padding="2,2,2,0" >
@@ -257,7 +257,7 @@
                     <Label  Grid.Column="6" x:Name="LabelInformation" Style="{DynamicResource StyleLabelWithIcon}" BorderBrush="{DynamicResource IconInformation}" OpacityMask="{DynamicResource ColorElementMouseOver}" MinHeight="14" MinWidth="14">Messages</Label>
                     <Separator Grid.Column="7" Visibility="{Binding ElementName=LabelDebug, Path=Visibility}" Style="{DynamicResource TemplateSeparator}" Height="Auto" BorderThickness="0,0,1,0" />
                     <Label  Grid.Column="8" x:Name="LabelDebug" Visibility="Hidden" Style="{DynamicResource StyleLabelWithIcon}" BorderBrush="{DynamicResource IconDebug}" OpacityMask="{DynamicResource ColorElementMouseOver}" MinHeight="14" MinWidth="14">Debug</Label>
-                    <Label  Grid.Column="9" x:Name="LabelErrorListUpdate"  Style="{DynamicResource StyleLabelWithIcon}" BorderBrush="{DynamicResource IconUpdate}" OpacityMask="{DynamicResource ColorElementMouseOver}" HorizontalAlignment="Right" Margin="0,0,5,0">Update/Clear</Label>
+                    <Label  Grid.Column="9" x:Name="LabelErrorListUpdate"  Style="{DynamicResource StyleLabelWithIcon}" BorderBrush="{DynamicResource IconUpdate}" OpacityMask="{DynamicResource ColorElementMouseOver}" HorizontalAlignment="Right" Margin="0,0,5,0" MinHeight="14" MinWidth="14">Update/Clear</Label>
                 </Grid>
             </Expander.Header>
             <Expander.Content>

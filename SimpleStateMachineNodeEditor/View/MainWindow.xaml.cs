@@ -132,6 +132,9 @@ namespace SimpleStateMachineNodeEditor.View
                 this.WhenAnyValue(x => x.NodesCanvas.ViewModel.NeedExit).Where(x=>x).Subscribe(_ => this.Close()).DisposeWith(disposable);
                 this.WhenAnyValue(x => x.ViewModel.CountError).Buffer(2, 1).Where(x => x[1] > x[0]).Subscribe(_ => ShowError()).DisposeWith(disposable);
                 this.WhenAnyValue(x => x.ViewModel.NodesCanvas.Theme).Subscribe(_ => UpdateButton()).DisposeWith(disposable);
+
+                this.WhenAnyValue(x => x.ActualWidth).Subscribe(value => TableOfTransitionsColumn.MaxWidth = value - 50).DisposeWith(disposable);
+                this.WhenAnyValue(x => x.ActualHeight).Subscribe(value => Fotter.MaxHeight = value - 150).DisposeWith(disposable);
             });
         }
         private void UpdateSchemeName(string newName)
@@ -183,11 +186,12 @@ namespace SimpleStateMachineNodeEditor.View
             this.ErrorListSplitter.IsEnabled = false;
             this.Fotter.Height = new GridLength();
             this.Fotter.MinHeight = 18;
+            
         }
         private void ErrorListExpanded()
         {
             this.ErrorListSplitter.IsEnabled = true;
-            this.Fotter.Height = new GridLength(this.ViewModel.MaxHeightMessagePanel);
+            this.Fotter.Height = new GridLength(this.ViewModel.DefaultHeightMessagePanel);
             this.Fotter.MinHeight = 52;
         }
 
@@ -195,13 +199,13 @@ namespace SimpleStateMachineNodeEditor.View
         {
             this.TableOfTransitionsSplitter.IsEnabled = false;
             this.TableOfTransitionsColumn.Width = new GridLength();
-            //this.Fotter.MinHeight = 18;
+            this.TableOfTransitionsColumn.MinWidth = 18;
         }
         private void TableOfTransitionsExpanded()
         {
             this.TableOfTransitionsSplitter.IsEnabled = true;
-            //this.TableOfTransitionsColumn.Width = new GridLength(this.ViewModel.MaxHeightMessagePanel);
-            //this.Fotter.MinHeight = 52;
+            //this.TableOfTransitionsColumn.Width = new GridLength(this.ViewModel.DefaultWidthTransitionsTable);
+            this.TableOfTransitionsColumn.MinWidth = 52;
         }
         private void ShowError()
         {

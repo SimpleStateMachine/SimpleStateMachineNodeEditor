@@ -33,7 +33,8 @@ namespace SimpleStateMachineNodeEditor.ViewModel
         [Reactive] public int CountDebug { get; set; }
 
         private IDisposable ConnectToMessages;
-        public double MaxHeightMessagePanel = 150;
+        public double DefaultHeightMessagePanel = 150;
+        public double DefaultWidthTransitionsTable = 350;
         public ObservableCollectionExtended<ViewModelConnector> Transitions { get; set; }  = new ObservableCollectionExtended<ViewModelConnector>();
       
 

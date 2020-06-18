@@ -289,7 +289,8 @@ namespace SimpleStateMachineNodeEditor.ViewModel
             this.SchemePath = "";
             this.ImagePath = "";
             WithoutMessages = false;
-            this.Messages.Clear();        
+            this.Messages.Clear();
+            ItSaved = true;
         }
         private void Open()
         {
@@ -371,6 +372,7 @@ namespace SimpleStateMachineNodeEditor.ViewModel
                 ClearScheme();
                 LogError("File is not valid. " + errorMessage);
                 this.SetupStartState();
+                Mouse.OverrideCursor = null;
             }
         }
         private void Save()

@@ -19,9 +19,9 @@
         <Grid.RowDefinitions>
             <RowDefinition />
         </Grid.RowDefinitions>
-        <styles:MyTextBox Grid.Column="0" Text="Test1" Grid.Row="0" Background="Red" x:Name="TextBoxElementStateFrom" Foreground="{Binding Path=Foreground, RelativeSource={RelativeSource AncestorType={x:Type ListBoxItem}}}"  TextWrapping="NoWrap"   Padding="3" />
-        <styles:MyTextBox  Grid.Column="2" Text="Test2"   Grid.Row="0"  Background="Green" x:Name="TextBoxElementTransitionName" Foreground="{Binding Path=Foreground, RelativeSource={RelativeSource AncestorType={x:Type ListBoxItem}}}" TextWrapping="NoWrap"  Padding="3" />
-        <styles:MyTextBox Grid.Column="4" Text="Test3"    Grid.Row="0"  Background="Blue" x:Name="TextBoxElementStateTo" Foreground="{Binding Path=Foreground, RelativeSource={RelativeSource AncestorType={x:Type ListBoxItem}}}" TextWrapping="NoWrap" Padding="3"  />
+        <styles:MyTextBox Grid.Column="0" Grid.Row="0" Background="Red" x:Name="TextBoxElementStateFrom" Foreground="{Binding Path=Foreground, RelativeSource={RelativeSource AncestorType={x:Type ListBoxItem}}}"  TextWrapping="NoWrap"   Padding="3" />
+        <styles:MyTextBox Grid.Column="2" Grid.Row="0" Background="Green" x:Name="TextBoxElementTransitionName" Foreground="{Binding Path=Foreground, RelativeSource={RelativeSource AncestorType={x:Type ListBoxItem}}}" TextWrapping="NoWrap"  Padding="3" />
+        <styles:MyTextBox Grid.Column="4" Grid.Row="0" Background="Blue" x:Name="TextBoxElementStateTo" Foreground="{Binding Path=Foreground, RelativeSource={RelativeSource AncestorType={x:Type ListBoxItem}}}" TextWrapping="NoWrap" Padding="3"  />
     </Grid>
 </UserControl>
 
