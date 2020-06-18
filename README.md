@@ -20,6 +20,10 @@ If you like or are using this project please give it a star. Thanks!
 2. [License](#License)
 
 ## Features
+### Two representations for State machine
+* Scheme of nodes
+* Table of transitions
+
 ### Validating 
 * for unique name for Node/Transition
 * for exists Nodes without connects
