@@ -159,6 +159,9 @@ namespace SimpleStateMachineNodeEditor.View
                 this.ErrorListExpander.Events().Collapsed.Subscribe(_=> ErrorListCollapse()).DisposeWith(disposable);
                 this.ErrorListExpander.Events().Expanded.Subscribe(_ => ErrorListExpanded()).DisposeWith(disposable);
 
+                this.TableOfTransitionsExpander.Events().Collapsed.Subscribe(_ => TableOfTransitionsCollapse()).DisposeWith(disposable);
+                this.TableOfTransitionsExpander.Events().Expanded.Subscribe(_ => TableOfTransitionsExpanded()).DisposeWith(disposable);
+
                 this.LabelError.Events().PreviewMouseLeftButtonDown.Subscribe(e => SetDisplayMessageType(e, TypeMessage.Error)).DisposeWith(disposable);
                 this.LabelWarning.Events().PreviewMouseLeftButtonDown.Subscribe(e => SetDisplayMessageType(e, TypeMessage.Warning)).DisposeWith(disposable);
                 this.LabelInformation.Events().PreviewMouseLeftButtonDown.Subscribe(e => SetDisplayMessageType(e, TypeMessage.Information)).DisposeWith(disposable);
@@ -179,11 +182,26 @@ namespace SimpleStateMachineNodeEditor.View
         {
             this.ErrorListSplitter.IsEnabled = false;
             this.Fotter.Height = new GridLength();
+            this.Fotter.MinHeight = 18;
         }
         private void ErrorListExpanded()
         {
             this.ErrorListSplitter.IsEnabled = true;
             this.Fotter.Height = new GridLength(this.ViewModel.MaxHeightMessagePanel);
+            this.Fotter.MinHeight = 52;
+        }
+
+        private void TableOfTransitionsCollapse()
+        {
+            this.TableOfTransitionsSplitter.IsEnabled = false;
+            this.TableOfTransitionsColumn.Width = new GridLength();
+            //this.Fotter.MinHeight = 18;
+        }
+        private void TableOfTransitionsExpanded()
+        {
+            this.TableOfTransitionsSplitter.IsEnabled = true;
+            //this.TableOfTransitionsColumn.Width = new GridLength(this.ViewModel.MaxHeightMessagePanel);
+            //this.Fotter.MinHeight = 52;
         }
         private void ShowError()
         {

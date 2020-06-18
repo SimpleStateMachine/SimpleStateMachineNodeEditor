@@ -11,9 +11,9 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="auto" />
             <RowDefinition Height="auto"/>
-            <RowDefinition></RowDefinition>
-            <RowDefinition  Height="auto"/>
-            <RowDefinition  Height="auto" x:Name="Fotter" MinHeight="18"/>
+            <RowDefinition MinHeight="50"></RowDefinition>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto" x:Name="Fotter" MinHeight="18"/>
         </Grid.RowDefinitions>
         <view:ViewDialog x:Name="Dialog"/>
 
@@ -172,49 +172,68 @@
         <!--#endregion ToolBar-->
         
         <!--#region  Tabs-->
+        <Grid Grid.Row="2">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition MinWidth="50"/>
+                <ColumnDefinition Width="auto"/>
+                <ColumnDefinition Width="auto" x:Name="TableOfTransitionsColumn" />
+            </Grid.ColumnDefinitions>
         <!--BorderBrush - it's color on IsMouseOver, OpacityMask - it's color on IsPressed-->
-        <TabControl  Grid.Row="2" Background="{x:Null}" BorderBrush="{x:Null}" Foreground="Green" TabStripPlacement="Top" Padding="2,2,2,0" >
-            <TabItem  Header="Node editor"  Style="{DynamicResource StyleTabItem}" Background="{DynamicResource ColorWindowHeader}" Foreground="{DynamicResource ColorWindowHeaderTabItemForeground}"  BorderBrush="{DynamicResource ColorElementMouseOver}" OpacityMask="{DynamicResource ColorElementMouseOver}">
-                <view:ViewNodesCanvas x:Name="NodesCanvas" />
-            </TabItem>
-            <!--<TabItem Header="Transitions table" ToolTip="" Style="{DynamicResource StyleTabItem}" Foreground="{DynamicResource ColorForeground}"/>-->
-            <TabItem Header="Transitions table"  Style="{DynamicResource StyleTabItem}" Background="{DynamicResource ColorWindowHeader}" Foreground="{DynamicResource ColorWindowHeaderTabItemForeground}"  BorderBrush="{DynamicResource ColorElementMouseOver}" OpacityMask="{DynamicResource ColorElementMouseOver}">
-                <Grid Grid.IsSharedSizeScope="True">
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition SharedSizeGroup="StateFrom"/>
-                        <ColumnDefinition Width="*"/>
-                        <ColumnDefinition SharedSizeGroup="TransitionName"/>
-                        <ColumnDefinition Width="*"/>
-                        <ColumnDefinition SharedSizeGroup="StateTo"/>
-                        <ColumnDefinition Width="*"/>
-                    </Grid.ColumnDefinitions>
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="auto"/>
-                        <RowDefinition/>
-                    </Grid.RowDefinitions>
-                    <Label  Grid.Column="0" Style="{DynamicResource StyleLabelWithIcon}" BorderBrush="{DynamicResource IconStateFrom}" OpacityMask="{DynamicResource ColorMessagesForeground}" MinHeight="11" MinWidth="11">State from</Label>
-                    <Label  Grid.Column="2" Style="{DynamicResource StyleLabelWithIcon}" BorderBrush="{DynamicResource IconTransitionName}" OpacityMask="{DynamicResource ColorMessagesForeground}" MinHeight="14" MinWidth="14">Transition name</Label>
-                    <Label  Grid.Column="4" Style="{DynamicResource StyleLabelWithIcon}" BorderBrush="{DynamicResource IconStateTo}" OpacityMask="{DynamicResource ColorMessagesForeground}" MinHeight="11" MinWidth="11">State To</Label>
+        <TabControl  Grid.Column="0"  Background="{x:Null}" BorderBrush="{x:Null}" Foreground="Green" TabStripPlacement="Top" Padding="2,2,2,0" >
+                <TabItem  Header="Node editor"  Style="{DynamicResource StyleTabItem}" Background="{DynamicResource ColorWindowHeader}" Foreground="{DynamicResource ColorWindowHeaderTabItemForeground}"  BorderBrush="{DynamicResource ColorElementMouseOver}" OpacityMask="{DynamicResource ColorElementMouseOver}">
+                    <view:ViewNodesCanvas x:Name="NodesCanvas" />
+                </TabItem>
+            </TabControl>
+            <GridSplitter Grid.Column="1" HorizontalAlignment="Center"  x:Name="TableOfTransitionsSplitter" VerticalAlignment="Stretch" Background="{DynamicResource ColorWindowHeader}"  Width="3"  ShowsPreview="False"  IsEnabled="False" />
+            <Expander Grid.Column="2"  x:Name="TableOfTransitionsExpander" Style="{DynamicResource StyleExpander}"  Grid.Row="4"  HorizontalContentAlignment="Stretch" ExpandDirection="Left" >
+                <Expander.Header>
+                    <Label  Grid.Column="0" Style="{DynamicResource StyleLabelWithIcon}" OpacityMask="{DynamicResource ColorElementMouseOver}">
+                        Table of transitions
+                        <Label.LayoutTransform >
+                            <RotateTransform Angle="90"/>
+                        </Label.LayoutTransform>
+                    </Label>
+                </Expander.Header>
+                <Expander.Content>
+                    <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto" Style="{DynamicResource StyleScrollViewer}">
+                    <Grid Grid.IsSharedSizeScope="True" >
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition SharedSizeGroup="StateFrom"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition SharedSizeGroup="TransitionName"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition SharedSizeGroup="StateTo"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="auto"/>
+                            <RowDefinition/>
+                        </Grid.RowDefinitions>
+                        <Label  Grid.Column="0" Style="{DynamicResource StyleLabelWithIcon}" BorderBrush="{DynamicResource IconStateFrom}" OpacityMask="{DynamicResource ColorMessagesForeground}" MinHeight="11" MinWidth="11">State from</Label>
+                        <Label  Grid.Column="2" Style="{DynamicResource StyleLabelWithIcon}" BorderBrush="{DynamicResource IconTransitionName}" OpacityMask="{DynamicResource ColorMessagesForeground}" MinHeight="14" MinWidth="14">Transition name</Label>
+                        <Label  Grid.Column="4" Style="{DynamicResource StyleLabelWithIcon}" BorderBrush="{DynamicResource IconStateTo}" OpacityMask="{DynamicResource ColorMessagesForeground}" MinHeight="11" MinWidth="11">State To</Label>
 
-                    <ListBox Grid.Row="1" Grid.ColumnSpan="6" x:Name="TableOfTransitions" Template="{DynamicResource TemplateListBox}" Background="{DynamicResource ColorWindowHeader}" BorderBrush="{DynamicResource ColorMessagesBorder}" Foreground="{DynamicResource ColorMessagesForeground}" ItemContainerStyle="{DynamicResource StyleListBoxTransitionsItem}"  AlternationCount="2" 
+                        <ListBox Grid.Row="1" Grid.ColumnSpan="6" x:Name="TableOfTransitions" Template="{DynamicResource TemplateListBox}" Background="{DynamicResource ColorWindowHeader}" BorderBrush="{DynamicResource ColorMessagesBorder}" Foreground="{DynamicResource ColorMessagesForeground}" ItemContainerStyle="{DynamicResource StyleListBoxTransitionsItem}"  AlternationCount="2" 
                          VirtualizingStackPanel.IsVirtualizing="True" 
                           VirtualizingStackPanel.VirtualizationMode="Recycling" 
                           VirtualizingStackPanel.CacheLength="1" 
                           VirtualizingStackPanel.CacheLengthUnit="Page"                           
                           VirtualizingStackPanel.ScrollUnit="Pixel">
-                    <ListBox.ItemTemplate>
-                        <DataTemplate>
-                            <view:ViewTableOfTransitionsItem ViewModel="{Binding}" />
-                        </DataTemplate>
-                    </ListBox.ItemTemplate>
-                </ListBox>
-                </Grid>
-            </TabItem>
-        </TabControl>
+                            <ListBox.ItemTemplate>
+                                <DataTemplate>
+                                    <view:ViewTableOfTransitionsItem ViewModel="{Binding}" />
+                                </DataTemplate>
+                            </ListBox.ItemTemplate>
+                        </ListBox>
+                    </Grid>
+                    </ScrollViewer>
+                </Expander.Content>
+            </Expander>
+        </Grid>
         <!--#endregion Tabs-->   
         
         <!--#region Error List-->
-        <GridSplitter  Grid.Row="3" x:Name="ErrorListSplitter" HorizontalAlignment="Stretch" Background="{DynamicResource ColorWindowHeader}" Height="3"  ShowsPreview="False" IsEnabled="False"/>
+        <GridSplitter  Grid.Row="3" x:Name="ErrorListSplitter" HorizontalAlignment="Stretch" VerticalAlignment="Center" Background="{DynamicResource ColorWindowHeader}" Height="3"  ShowsPreview="False" IsEnabled="False"/>
         <Expander Style="{DynamicResource StyleExpander}"  x:Name="ErrorListExpander" Grid.Row="4"  HorizontalContentAlignment="Stretch" ExpandDirection="Up" Margin="3,0,0,0" >
             <Expander.Header>
                 <Grid >
