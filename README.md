@@ -20,6 +20,10 @@ If you like or are using this project please give it a star. Thanks!
 2. [License](#License)
 
 ## Features
+### Custom Window with Visual Studio design
+![](https://github.com/SimpleStateMachine/SimpleStateMachineNodeEditor/blob/gh-pages/img/Custom%20window.jpg)
+### Two themes
+![](https://github.com/SimpleStateMachine/SimpleStateMachineNodeEditor/blob/gh-pages/img/Themes.jpg)
 ### Two representations for State machine
 * Scheme of nodes
 * Table of transitions
@@ -27,10 +31,6 @@ If you like or are using this project please give it a star. Thanks!
 ### Validating 
 * for unique name for Node/Transition
 * for exists Nodes without connects
-### Custom Window with Visual Studio design
-![](https://github.com/SimpleStateMachine/SimpleStateMachineNodeEditor/blob/gh-pages/img/Custom%20window.jpg)
-### Two themes
-![](https://github.com/SimpleStateMachine/SimpleStateMachineNodeEditor/blob/gh-pages/img/Themes.jpg)
 ### Adding nodes and connections
 ![](https://github.com/SimpleStateMachine/SimpleStateMachineNodeEditor/blob/gh-pages/img/adding.gif)
 ### Undo and redo
