@@ -324,12 +324,35 @@ namespace SimpleStateMachineNodeEditor.ViewModel
 
             #region setup start state
 
-            var startState = stateMachineXElement.Element("StartState")?.Attribute("Name")?.Value;
-
-            if (string.IsNullOrEmpty(startState))
+            var startStateElement = stateMachineXElement.Element("StartState");
+            if (startStateElement == null)
+            {
                 this.SetupStartState();
+            }
             else
-                this.SetAsStart(this.Nodes.Items.Single(x => x.Name == startState));
+            {
+                var startStateAttribute = startStateElement.Attribute("Name");
+                if (startStateAttribute == null)
+                {
+                    Error("Start state element don't has name attribute");
+                    return;
+                }
+                else
+                {
+                    string startStateName = startStateAttribute.Value;
+                    var startNode = this.Nodes.Items.SingleOrDefault(x => x.Name == startStateName);
+                    if (startNode == null)
+                    {
+                        Error(string.Format("Unable to set start state. Node with name \"{0}\" don't exists", startStateName));
+                        return;
+                    }
+                    else
+                    {
+                        this.SetAsStart(startNode);
+                    }
+                }
+
+            }
 
             #endregion  setup start state
 
