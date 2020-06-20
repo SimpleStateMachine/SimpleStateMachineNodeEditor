@@ -1,0 +1,12 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <DrawingBrush x:Key="IconMinimize" >
+        <DrawingBrush.Drawing>
+          <DrawingGroup>
+                <DrawingGroup.Children>
+                  <GeometryDrawing Brush="{DynamicResource ColorWindowHeaderButtonsIcon}" Geometry="F1M3,8L13,8 13,7 3,7z" />
+            </DrawingGroup.Children>
+          </DrawingGroup>
+        </DrawingBrush.Drawing>
+      </DrawingBrush>
+</ResourceDictionary>

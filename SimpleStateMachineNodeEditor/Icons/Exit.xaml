@@ -1,0 +1,12 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <DrawingBrush x:Key="IconExit" >
+        <DrawingBrush.Drawing>
+          <DrawingGroup>
+                <DrawingGroup.Children>
+                    <GeometryDrawing Brush="#FFA1260D" Geometry="F1M12,11L10,11 8,8.999 6,11 4,11 7,7.999 4,4.999 6,4.999 8,6.999 10,4.999 12,4.999 9,7.999z M2,13L14,13 14,2.999 2,2.999z" />
+                </DrawingGroup.Children>
+          </DrawingGroup>
+        </DrawingBrush.Drawing>
+      </DrawingBrush>
+</ResourceDictionary>

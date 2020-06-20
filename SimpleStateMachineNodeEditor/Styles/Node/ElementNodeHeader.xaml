@@ -1,0 +1,31 @@
+﻿<UserControl x:Class="SimpleStateMachineNodeEditor.Styles.Node.ElementNodeHeader"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:SimpleStateMachineNodeEditor.Styles.Node" 
+             xmlns:styles="clr-namespace:SimpleStateMachineNodeEditor.Styles"
+             mc:Ignorable="d"  >
+    <Border CornerRadius="5,5,0,0" VerticalAlignment="Stretch" >
+        <Border.Background>
+            <SolidColorBrush Color="{DynamicResource ColorNodeHeader}" />
+        </Border.Background>
+        <Grid >
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition />
+            </Grid.RowDefinitions>
+            <styles:MyTextBox x:Name="TextBoxElement"  Grid.Column="0" VerticalAlignment="Center" ScrollViewer.CanContentScroll="True" HorizontalAlignment="Center" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Foreground="{DynamicResource ColorNodeHeaderForeground}"  Padding="10,2,0,2"  />
+            <Button Name ="ButtonCollapse" Grid.Column="1" Style="{DynamicResource StyleNodeCollapseButton}"  HorizontalAlignment="Center" VerticalAlignment="Center" Margin="5" >
+                <Button.RenderTransform>
+                    <TransformGroup>
+                        <RotateTransform x:Name="ButtonRotate" Angle="0" CenterX="4" CenterY="2" />
+                    </TransformGroup>
+                </Button.RenderTransform>
+            </Button>
+        </Grid>
+    </Border>
+</UserControl>

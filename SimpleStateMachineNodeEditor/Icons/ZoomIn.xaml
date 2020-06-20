@@ -1,0 +1,13 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <DrawingBrush x:Key="IconZoomIn" >
+        <DrawingBrush.Drawing>
+            <DrawingGroup>
+                <DrawingGroup.Children>
+                    <GeometryDrawing Brush="{DynamicResource ColorIconsMain}" Geometry="F1M6.5,11C4.019,11 2,8.981 2,6.5 2,4.019 4.019,2 6.5,2 8.981,2 11,4.019 11,6.5 11,8.981 8.981,11 6.5,11 M14.854,14.146L10.724,10.017C11.52,9.063 12,7.836 12,6.5 12,3.467 9.532,1 6.5,1 3.467,1 1,3.467 1,6.5 1,9.532 3.467,12 6.5,12 7.836,12 9.063,11.52 10.017,10.724L14.146,14.854C14.244,14.951 14.372,15 14.5,15 14.628,15 14.756,14.951 14.854,14.854 15.049,14.658 15.049,14.342 14.854,14.146" />
+                    <GeometryDrawing Brush="{DynamicResource ColorIconsSecond}" Geometry="F1M9,6L9,7 7,7 7,9 6,9 6,7 4,7 4,6 6,6 6,4 7,4 7,6z" />
+                </DrawingGroup.Children>
+            </DrawingGroup>
+        </DrawingBrush.Drawing>
+    </DrawingBrush>
+</ResourceDictionary>

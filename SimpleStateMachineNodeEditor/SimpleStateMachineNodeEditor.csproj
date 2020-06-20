@@ -5,23 +5,84 @@
     <TargetFramework>netcoreapp3.1</TargetFramework>
     <UseWPF>true</UseWPF>
     <StartupObject>SimpleStateMachineNodeEditor.App</StartupObject>
+    <ApplicationIcon>StateMachine.ico</ApplicationIcon>
+    <SignAssembly>false</SignAssembly>
+    <Version>1.1.0</Version>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <PackageProjectUrl>https://github.com/SimpleStateMachine/SimpleStateMachineNodeEditor</PackageProjectUrl>
+    <PackageIcon>SimpleStateMachine.png</PackageIcon>
+    <RepositoryUrl>https://github.com/SimpleStateMachine/SimpleStateMachineNodeEditor</RepositoryUrl>
+    <PackageTags>statemachine state-machine finite-state-machine</PackageTags>
+    <GeneratePackageOnBuild>false</GeneratePackageOnBuild>
+    <Description>Node editor for SimpleStateMachine</Description>
+    <AssemblyVersion>1.1.0.0</AssemblyVersion>
+    <FileVersion>1.1.0.0</FileVersion>
+    <PackageReleaseNotes>Table of transitions</PackageReleaseNotes>
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="ReactiveUI" Version="11.2.3" />
-    <PackageReference Include="ReactiveUI.Events.WPF" Version="11.2.3" />
-    <PackageReference Include="ReactiveUI.Fody" Version="11.2.3" />
-    <PackageReference Include="ReactiveUI.Validation" Version="1.4.10" />
-    <PackageReference Include="ReactiveUI.WPF" Version="11.2.3" />
-    <PackageReference Include="Splat" Version="9.3.11" />
-    <PackageReference Include="Splat.Drawing" Version="9.3.11" />
+    <None Remove="Icons\ApplicationConnectionDiagram_16x.png" />
+    <None Remove="Icons\ApplicationConnectionDiagram_16x.svg" />
+    <None Remove="Icons\CollapseUp_16x.png" />
+    <None Remove="Icons\CollapseUp_16x.svg" />
+    <None Remove="Icons\DeleteRelationship_16x.png" />
+    <None Remove="Icons\DeleteRelationship_16x.svg" />
+    <None Remove="Icons\ExpandDown_lg_16x.png" />
+    <None Remove="Icons\ExpandDown_lg_16x.svg" />
+    <None Remove="Icons\NewDiagram_16x.png" />
+    <None Remove="Icons\NewDiagram_16x.svg" />
+    <None Remove="Icons\NewRelationshipMenu_16x.png" />
+    <None Remove="Icons\NewRelationshipMenu_16x.svg" />
+    <None Remove="Icons\Redo_16x.png" />
+    <None Remove="Icons\Redo_16x.svg" />
+    <None Remove="Icons\Relationship_16x.svg" />
+    <None Remove="Icons\SaveAs_16x.png" />
+    <None Remove="Icons\SaveAs_16x.svg" />
+    <None Remove="Icons\Save_16x.png" />
+    <None Remove="Icons\Save_16x.svg" />
+    <None Remove="Icons\Undo_16x.png" />
+    <None Remove="Icons\Undo_16x.svg" />
+    <None Remove="Icons\ZoomIn_16x.png" />
+    <None Remove="Icons\ZoomIn_16x.svg" />
+    <None Remove="Icons\ZoomOriginalSize_16x.png" />
+    <None Remove="Icons\ZoomOriginalSize_16x.svg" />
+    <None Remove="Icons\ZoomOut_16x.png" />
+    <None Remove="Icons\ZoomOut_16x.svg" />
+    <None Include="SimpleStateMachine.png">
+      <Pack>True</Pack>
+      <PackagePath></PackagePath>
+    </None>
   </ItemGroup>
 
   <ItemGroup>
-    <Page Update="Styles\Node\RightConnector\RightConnectorEllipseStyle.xaml">
+    <Page Remove="Icons\Relationship_16x.xaml" />
+    <Page Remove="Icons\SaveAs_16x.xaml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="ReactiveUI" Version="11.4.1" />
+    <PackageReference Include="ReactiveUI.Events.WPF" Version="11.4.1" />
+    <PackageReference Include="ReactiveUI.Fody" Version="11.4.1" />
+    <PackageReference Include="ReactiveUI.Validation" Version="1.4.15" />
+    <PackageReference Include="ReactiveUI.WPF" Version="11.4.1" />
+    <PackageReference Include="Splat" Version="9.4.5" />
+    <PackageReference Include="Splat.Drawing" Version="9.4.5" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="README.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Page Update="Icons\SelectedLoop.xaml">
       <SubType>Designer</SubType>
     </Page>
-    <Page Update="Styles\Node\RightConnector\RightConnectorTextBoxStyle.xaml">
+    <Page Update="Icons\TransitionName.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Icons\StateTo.xaml">
       <SubType>Designer</SubType>
     </Page>
   </ItemGroup>

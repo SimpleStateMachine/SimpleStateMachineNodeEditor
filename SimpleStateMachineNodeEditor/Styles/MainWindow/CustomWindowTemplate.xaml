@@ -2,7 +2,16 @@
      x:Class="SimpleStateMachineNodeEditor.Styles.CustomWindowTemplate"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
-
+    
+    <Style x:Key="RectBorderStyle" TargetType="Rectangle">
+        <Setter Property="Focusable" Value="False" />
+        <Setter Property="Fill" Value="Transparent" />
+        <Setter Property="Tag" Value="{Binding RelativeSource={RelativeSource AncestorType=Window}}" />
+        <EventSetter Event="MouseLeftButtonDown" Handler="ResizeStart"/>
+        <EventSetter Event="MouseLeftButtonUp" Handler="ResizeEnd"/>
+        <EventSetter Event="MouseMove" Handler="Resizeing_Form"/>
+    </Style>
+    
     <ControlTemplate x:Key="CustomWindowTemplate" TargetType="{x:Type Window}">
         <Border BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Background="{TemplateBinding Background}">
             <Grid >
@@ -11,17 +20,17 @@
                     <ContentPresenter/>
                 </AdornerDecorator>
                 </Border>
-             
 
-                <Line MouseDown="OnSizeNorth" Name="lnSizeNorth" Stroke="Transparent"  Cursor="SizeNS" X1="10" X2="{TemplateBinding ActualWidth}" Y1="1" Y2="1" StrokeThickness="5" />
-                <Line MouseDown="OnSizeSouth" Name="lnSizeSouth" Stroke="Transparent" VerticalAlignment="Bottom" Cursor="SizeNS" X1="1" X2="{TemplateBinding ActualWidth}" Y1="{TemplateBinding ActualHeight}" Y2="{TemplateBinding ActualHeight}" StrokeThickness="5" />
-                <Line MouseDown="OnSizeWest" Name="lnSizeWest" Stroke="Transparent" Cursor="SizeWE" X1="1" X2="1" Y1="1" Y2="{TemplateBinding ActualHeight}"  StrokeThickness="5" />
-                <Line MouseDown="OnSizeEast" Name="lnSizeEast" Stroke="Transparent" HorizontalAlignment="Right" Cursor="SizeWE" X1="{TemplateBinding ActualWidth}"  X2="{TemplateBinding ActualWidth}" Y1="1" Y2="{TemplateBinding ActualHeight}"  StrokeThickness="5" />
 
-                <Rectangle MouseDown="OnSizeNorthWest" Name="rectSizeNorthWest" Cursor="SizeNWSE" Fill="Transparent" Width="5" Height="5" VerticalAlignment="Top" HorizontalAlignment="Left" />
-                <Rectangle MouseDown="OnSizeNorthEast" Name="rectSizeNorthEast" Cursor="SizeNESW" Fill="Transparent" Width="5" Height="5" VerticalAlignment="Top" HorizontalAlignment="Right" />
-                <Rectangle MouseDown="OnSizeSouthWest" Name="rectSizeSouthWest" Cursor="SizeNESW" Fill="Transparent" Width="5" Height="5" VerticalAlignment="Bottom" HorizontalAlignment="Left" />
-                <!--<Rectangle MouseDown="OnSizeSouthEast" Name="rectSizeSouthEast" Cursor="SizeNWSE" Fill="Transparent" Width="5" Height="5" VerticalAlignment="Bottom" HorizontalAlignment="Right" />-->
+                <Rectangle x:Name="left" Width="7" Margin="0,7,0,7"   HorizontalAlignment="Left" Cursor="SizeWE" Style="{StaticResource RectBorderStyle}"  />
+                <Rectangle x:Name="right" Width="7" Margin="0,7,0,7" HorizontalAlignment="Right" Cursor="SizeWE" Style="{StaticResource RectBorderStyle}" />
+                <Rectangle x:Name="top" Height="7"  Margin="7,0,7,0" VerticalAlignment="Top" Cursor="SizeNS" Style="{StaticResource RectBorderStyle}" />
+                <Rectangle x:Name="bottom" Height="7" Margin="7,0,7,0" VerticalAlignment="Bottom" Cursor="SizeNS" Style="{StaticResource RectBorderStyle}" />
+                <!--  Corners  -->
+                <Rectangle Name="topLeft" Width="7" Height="7" HorizontalAlignment="Left" VerticalAlignment="Top" Cursor="SizeNWSE" Style="{StaticResource RectBorderStyle}" />
+                <Rectangle Name="topRight" Width="7" Height="7" HorizontalAlignment="Right" VerticalAlignment="Top" Cursor="SizeNESW" Style="{StaticResource RectBorderStyle}" />
+                <Rectangle Name="bottomLeft" Width="7" Height="7" HorizontalAlignment="Left" VerticalAlignment="Bottom" Cursor="SizeNESW" Style="{StaticResource RectBorderStyle}" />
+                <!--<Rectangle Name="bottomRight" Width="5" Height="5" HorizontalAlignment="Right" VerticalAlignment="Bottom" Cursor="SizeNWSE" Style="{StaticResource RectBorderStyle}" />-->
 
 
                 <ResizeGrip x:Name="WindowResizeGrip" HorizontalAlignment="Right" IsTabStop="false" Visibility="Collapsed" VerticalAlignment="Bottom"/>
@@ -38,8 +47,8 @@
         </ControlTemplate.Triggers>
     </ControlTemplate>
     <Style x:Key="CustomWindowStyle" TargetType="{x:Type Window}">
-        <Setter Property="Foreground" Value="{DynamicResource {x:Static SystemColors.WindowTextBrushKey}}"/>
-        <Setter Property="Background" Value="{DynamicResource {x:Static SystemColors.WindowBrushKey}}"/>
+        <Setter Property="Foreground" Value="{StaticResource {x:Static SystemColors.WindowTextBrushKey}}"/>
+        <Setter Property="Background" Value="{StaticResource {x:Static SystemColors.WindowBrushKey}}"/>
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type Window}">

@@ -8,11 +8,11 @@
              d:DesignHeight="450" d:DesignWidth="800" HorizontalAlignment="Left" VerticalAlignment="Top">
     <UserControl.RenderTransform>
         <TransformGroup>
-            <ScaleTransform x:Name="Scale" ScaleX="1" ScaleY="1"/>
+            <ScaleTransform x:Name="ScaleTransformElement" ScaleX="1" ScaleY="1"/>
             <SkewTransform/>
             <RotateTransform/>
-            <TranslateTransform x:Name="Translate"/>
+            <TranslateTransform x:Name="TranslateTransformElement"/>
         </TransformGroup>
     </UserControl.RenderTransform>
-    <Line x:Name="Line" Fill="White" Stroke="Red"  HorizontalAlignment="Left" VerticalAlignment="Top" StrokeDashArray="10, 3" StrokeDashCap="Round"/>
+    <Line x:Name="LineElement" Stroke="{DynamicResource ColorCutter}"  HorizontalAlignment="Left" VerticalAlignment="Top" StrokeDashArray="10, 3" StrokeDashCap="Round" StrokeEndLineCap="Round" StrokeStartLineCap="Round"/>
 </UserControl>

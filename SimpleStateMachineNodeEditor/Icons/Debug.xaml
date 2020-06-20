@@ -1,0 +1,16 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <DrawingBrush x:Key="IconDebug" >
+        <DrawingBrush.Drawing>
+            <DrawingGroup>
+                <DrawingGroup.Children>
+                    <GeometryDrawing Brush="#71cf71" Geometry="M20.1,14.4L20.1,14.4l3.7-0.1v-1.4h-3.5l0-0.1c0-0.3,0-0.7,0-1c0-1.8-0.3-3.4-0.9-4.9l0-0.1l2.7-2.7l-1-1
+		L18.3,6h-1.3V5c0-2.8-2.2-5-5-5s-5,2.2-5,5v1H5.5L2.6,3.1l-1,1l2.8,2.8l0,0.1c-0.6,1.5-0.9,3.1-0.9,4.9c0,0.3,0,0.7,0,1l0,0.1H0
+		v1.4h3.7l0,0.1C4,16,4.6,17.5,5.4,18.8l0.1,0.1l-3.4,3.4l1,1L6.3,20l0.1,0.1c1.5,1.7,3.4,2.7,5.6,2.7c2.1,0,4-1,5.5-2.6l0.1-0.1
+		l3.3,3.3l1-1l-3.4-3.4l0.1-0.1C19.2,17.6,19.8,16.1,20.1,14.4z M8.4,5c0-2,1.6-3.6,3.6-3.6c2,0,3.6,1.6,3.6,3.6v1H8.4V5z M16,19.1
+		l-3.8-3.2l-3.5,3.9l-2.2-2L9.9,14l-4.2-3.5l2-2.3l4.3,3.6l3.5-3.9l2.2,2l-3.5,3.8l3.7,3.1L16,19.1z"/>
+                </DrawingGroup.Children>
+            </DrawingGroup>
+        </DrawingBrush.Drawing>
+    </DrawingBrush>
+</ResourceDictionary>

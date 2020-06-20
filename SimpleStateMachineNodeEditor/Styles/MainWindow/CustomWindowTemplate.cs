@@ -3,74 +3,81 @@ using System.Windows;
 using System.Windows.Interop;
 using System.Runtime.InteropServices;
 using System.Windows.Input;
+using System.Windows.Shapes;
 
 namespace SimpleStateMachineNodeEditor.Styles
 {
     public partial class CustomWindowTemplate
     {
-        #region sizing event handlers
-
-        void OnSizeSouth(object sender, MouseButtonEventArgs e) { OnSize(sender, SizingAction.South); }
-
-        void OnSizeNorth(object sender, MouseButtonEventArgs e) { OnSize(sender, SizingAction.North); }
-
-        void OnSizeEast(object sender, MouseButtonEventArgs e) { OnSize(sender, SizingAction.East); }
-
-        void OnSizeWest(object sender, MouseButtonEventArgs e) { OnSize(sender, SizingAction.West); }
-
-        void OnSizeNorthWest(object sender, MouseButtonEventArgs e) { OnSize(sender, SizingAction.NorthWest); }
-
-        void OnSizeNorthEast(object sender, MouseButtonEventArgs e) { OnSize(sender, SizingAction.NorthEast); }
-
-        void OnSizeSouthEast(object sender, MouseButtonEventArgs e) { OnSize(sender, SizingAction.SouthEast); }
-
-        void OnSizeSouthWest(object sender, MouseButtonEventArgs e) { OnSize(sender, SizingAction.SouthWest); }
-
-        void OnSize(object sender, SizingAction action)
+        bool ResizeInProcess = false;
+        int shift = 0;
+        private void ResizeStart(object sender, MouseButtonEventArgs e)
         {
-            if (((FrameworkElement)sender).TemplatedParent is Window wnd)
+            Rectangle senderRect = sender as Rectangle;
+            if (senderRect != null)
             {
-                WindowInteropHelper helper = new WindowInteropHelper(wnd);
-                DragSize(helper.Handle, action);
+                ResizeInProcess = true;
+                senderRect.CaptureMouse();
             }
         }
 
-        #endregion
-
-        #region P/Invoke and helper method
-
-        const int WM_SYSCOMMAND = 0x112;
-        const int SC_SIZE = 0xF000;
-
-
-        [DllImport("user32.dll", CharSet = CharSet.Auto)]
-        static extern IntPtr SendMessage(IntPtr hWnd, uint Msg, IntPtr wParam, IntPtr lParam);
-
-        void DragSize(IntPtr handle, SizingAction sizingAction)
+        private void ResizeEnd(object sender, MouseButtonEventArgs e)
         {
-            if (Mouse.LeftButton == MouseButtonState.Pressed)
+            Rectangle senderRect = sender as Rectangle;
+            if (senderRect != null)
             {
-                SendMessage(handle, WM_SYSCOMMAND, (IntPtr)(SC_SIZE + sizingAction), IntPtr.Zero);
-                SendMessage(handle, 514, IntPtr.Zero, IntPtr.Zero);
+                ResizeInProcess = false; ;
+                senderRect.ReleaseMouseCapture();
             }
         }
 
-        #endregion
-
-        #region helper enum
-
-        public enum SizingAction
+        private void Resizeing_Form(object sender, MouseEventArgs e)
         {
-            North = 3,
-            South = 6,
-            East = 2,
-            West = 1,
-            NorthEast = 5,
-            NorthWest = 4,
-            SouthEast = 8,
-            SouthWest = 7
+            if (ResizeInProcess)
+            {
+                double temp = 0;
+                Rectangle senderRect = sender as Rectangle;
+                Window mainWindow = senderRect.Tag as Window;
+                if (senderRect != null)
+                {
+                    double width = e.GetPosition(mainWindow).X;
+                    double height = e.GetPosition(mainWindow).Y;
+                    senderRect.CaptureMouse();
+                    if (senderRect.Name.Contains("right", StringComparison.OrdinalIgnoreCase))
+                    {
+                        width += shift;
+                        if (width > 0)
+                            mainWindow.Width = width;
+                    }
+                    if (senderRect.Name.Contains("left", StringComparison.OrdinalIgnoreCase))
+                    {
+                        width -= shift;
+                        temp = mainWindow.Width - width;
+                        if ((temp > mainWindow.MinWidth) && (temp < mainWindow.MaxWidth))
+                        {
+                            mainWindow.Width = temp;
+                            mainWindow.Left += width;
+                        }
+                    }
+                    if (senderRect.Name.Contains("bottom", StringComparison.OrdinalIgnoreCase))
+                    {
+                        height += shift;
+                        if (height > 0)
+                            mainWindow.Height = height;
+                    }
+                    if (senderRect.Name.ToLower().Contains("top", StringComparison.OrdinalIgnoreCase))
+                    {
+                        height -= shift;
+                        temp = mainWindow.Height - height;
+                        if ((temp > mainWindow.MinHeight) && (temp < mainWindow.MaxHeight))
+                        {
+                            mainWindow.Height = temp;
+                            mainWindow.Top += height;
+                        }
+                    }
+                }
+            }
         }
 
-        #endregion
     }
 }

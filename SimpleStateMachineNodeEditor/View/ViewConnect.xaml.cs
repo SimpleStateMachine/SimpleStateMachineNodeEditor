@@ -1,10 +1,19 @@
 ﻿using System.Reactive.Disposables;
 using System.Windows;
 using System.Windows.Controls;
-
+using System.Windows.Input;
 using ReactiveUI;
-
+using System;
+using System.Windows.Data;
+using System.Windows.Documents;
+using System.Windows.Media;
+using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
+using System.Windows.Controls.Primitives;
+using System.Reactive.Linq;
+using System.Windows.Markup;
 using SimpleStateMachineNodeEditor.ViewModel;
+using SimpleStateMachineNodeEditor.Helpers;
 
 namespace SimpleStateMachineNodeEditor.View
 {
@@ -31,27 +40,41 @@ namespace SimpleStateMachineNodeEditor.View
         public ViewConnect()
         {
             InitializeComponent();
+            SetupBinding();
+        }
+
+        #region SetupBinding
+        private void SetupBinding()
+        {
             this.WhenActivated(disposable =>
             {
-                // Цвет линии
-                this.OneWayBind(this.ViewModel, x => x.Stroke, x => x.Path.Stroke).DisposeWith(disposable);
+                Canvas.SetZIndex((UIElement)this.VisualParent, 999);
 
-                // Точка, из которой выходит линия
-                this.OneWayBind(this.ViewModel, x => x.StartPoint.Value, x => x.PathFigure.StartPoint).DisposeWith(disposable);
+                this.OneWayBind(this.ViewModel, x => x.Stroke, x => x.PathElement.Stroke).DisposeWith(disposable);
 
-                // Первая промежуточная точка линии 
-                this.OneWayBind(this.ViewModel, x => x.Point1.Value, x => x.BezierSegment.Point1).DisposeWith(disposable);
+                this.OneWayBind(this.ViewModel, x => x.StartPoint, x => x.PathFigureElement.StartPoint).DisposeWith(disposable);
 
-                // Вторая промежуточная точка линии
-                this.OneWayBind(this.ViewModel, x => x.Point2.Value, x => x.BezierSegment.Point2).DisposeWith(disposable);
+                this.OneWayBind(this.ViewModel, x => x.Point1, x => x.BezierSegmentElement.Point1).DisposeWith(disposable);
 
-                // Точка, в которую приходит линия
-                this.OneWayBind(this.ViewModel, x => x.EndPoint.Value, x => x.BezierSegment.Point3).DisposeWith(disposable);
+                this.OneWayBind(this.ViewModel, x => x.Point2, x => x.BezierSegmentElement.Point2).DisposeWith(disposable);
 
-                this.OneWayBind(this.ViewModel, x => x.StrokeDashArray, x => x.Path.StrokeDashArray).DisposeWith(disposable);
+                this.OneWayBind(this.ViewModel, x => x.EndPoint, x => x.BezierSegmentElement.Point3).DisposeWith(disposable);
 
-                this.OneWayBind(this.ViewModel, x => x.StrokeThickness, x => x.Path.StrokeThickness).DisposeWith(disposable);
+                this.OneWayBind(this.ViewModel, x => x.StrokeDashArray, x => x.PathElement.StrokeDashArray).DisposeWith(disposable);
+
+                this.OneWayBind(this.ViewModel, x => x.FromConnector.NodesCanvas.Scale.Value, x => x.PathElement.StrokeThickness).DisposeWith(disposable);
+
+                this.WhenAnyValue(x => x.ViewModel.ToConnector).Where(x=>x!=null).Subscribe(_ => UpdateZindex()).DisposeWith(disposable);
             });
         }
+
+        private void UpdateZindex()
+        {
+            int toIndex = this.ViewModel.ToConnector.Node.Zindex;
+            int fromIndex = this.ViewModel.FromConnector.Node.Zindex;
+           
+            Canvas.SetZIndex((UIElement)this.VisualParent, Math.Min(toIndex, fromIndex));
+        }
+        #endregion SetupBinding
     }
 }

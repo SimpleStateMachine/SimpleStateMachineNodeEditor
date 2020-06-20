@@ -1,0 +1,13 @@
+<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" 
+                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+    <DrawingBrush x:Key="IconWarning">
+        <DrawingBrush.Drawing>
+            <DrawingGroup>
+                <DrawingGroup.Children>
+                    <GeometryDrawing Brush="#FFFFCC00" Geometry="F1M7.997,9L6.997,9 6.997,6 7.997,6z M7.997,11L6.997,11 6.997,10 7.997,10z M7.706,3L7.29,3 3.175,11.842 4.153,13 10.841,13 11.821,11.842z" />
+                </DrawingGroup.Children>
+            </DrawingGroup>
+        </DrawingBrush.Drawing>
+    </DrawingBrush>
+    </ResourceDictionary>

@@ -16,6 +16,8 @@ using ReactiveUI;
 using SimpleStateMachineNodeEditor.Helpers;
 using SimpleStateMachineNodeEditor.ViewModel;
 using SimpleStateMachineNodeEditor.Helpers.Transformations;
+using SimpleStateMachineNodeEditor.Helpers.Enums;
+using SimpleStateMachineNodeEditor.Helpers.Extensions;
 
 namespace SimpleStateMachineNodeEditor.View
 {
@@ -44,148 +46,119 @@ namespace SimpleStateMachineNodeEditor.View
             InitializeComponent();
             SetupBinding();
             SetupEvents();
+            SetupSubcriptions();
 
+       
         }
-
 
         #region SetupBinding
         private void SetupBinding()
         {
             this.WhenActivated(disposable =>
             {
-                // Имя перехода ( вводится в узле)
-                this.OneWayBind(this.ViewModel, x => x.Name, x => x.Text.Text).DisposeWith(disposable);
 
-                // Доступно ли имя перехода для редактирования
-                this.OneWayBind(this.ViewModel, x => x.TextEnable, x => x.Text.IsEnabled).DisposeWith(disposable);
+                Canvas.SetZIndex((UIElement)this.VisualParent, this.ViewModel.Node.Zindex+2);
 
-                // Доступен ли переход для создания соединия
-                this.OneWayBind(this.ViewModel, x => x.FormEnable, x => x.Form.IsEnabled).DisposeWith(disposable);
-
-                // Цвет рамки, вокруг перехода
-                this.OneWayBind(this.ViewModel, x => x.FormStroke, x => x.Form.Stroke).DisposeWith(disposable);
-
-                //Размеры
-                this.WhenAnyValue(v => v.Grid.ActualWidth, v => v.Grid.ActualHeight, (width, height) => new Size(width, height))
-                     .BindTo(this, v => v.ViewModel.Size).DisposeWith(disposable);
-
-                // Цвет перехода
-                this.OneWayBind(this.ViewModel, x => x.FormFill, x => x.Form.Fill).DisposeWith(disposable);
-
-                // Отображается ли переход
                 this.OneWayBind(this.ViewModel, x => x.Visible, x => x.RightConnector.Visibility).DisposeWith(disposable);
 
-                // При изменении размера, позиции или масштаба узла
-                this.WhenAnyValue(x => x.ViewModel.Node.Size, x => x.ViewModel.Node.Point1.Value, x => x.ViewModel.Node.NodesCanvas.Scale.Scales.Value)
-                .Subscribe(_ => { UpdatePositionConnectPoin(); }).DisposeWith(disposable);
+                this.OneWayBind(this.ViewModel, x => x.Name, x => x.TextBoxElement.Text).DisposeWith(disposable);
+
+                this.OneWayBind(this.ViewModel, x => x.TextEnable, x => x.TextBoxElement.IsEnabled).DisposeWith(disposable);
+
+                this.OneWayBind(this.ViewModel, x => x.Foreground, x => x.TextBoxElement.Foreground).DisposeWith(disposable);
+
+                this.OneWayBind(this.ViewModel, x => x.FormEnable, x => x.EllipseElement.IsEnabled).DisposeWith(disposable);
+
+                this.OneWayBind(this.ViewModel, x => x.FormStroke, x => x.EllipseElement.Stroke).DisposeWith(disposable);
+
+                this.OneWayBind(this.ViewModel, x => x.FormFill, x => x.EllipseElement.Fill).DisposeWith(disposable);
+
+                this.OneWayBind(this.ViewModel, x => x.FormStrokeThickness, x => x.EllipseElement.StrokeThickness).DisposeWith(disposable);
+
 
             });
         }
         #endregion SetupBinding
 
+        #region Setup Subcriptions
+        private void SetupSubcriptions()
+        {
+            this.WhenActivated(disposable =>
+            {
+                this.WhenAnyValue(x => x.EllipseElement.IsMouseOver).Subscribe(value => OnEventMouseOver(value)).DisposeWith(disposable);
+            });
+        }
+        #endregion Setup Subcriptions
+
         #region SetupEvents
+
         private void SetupEvents()
         {
             this.WhenActivated(disposable =>
             {
-                this.Form.Events().MouseLeftButtonDown.Subscribe(e => ConnectDrag(e)).DisposeWith(disposable);
-
-                this.Text.Events().LostFocus.Subscribe(e => Validate(e)).DisposeWith(disposable);
-
-                this.Text.Events().PreviewMouseLeftButtonDown.Subscribe(e => TextDrag(e)).DisposeWith(disposable);
-                this.Text.Events().PreviewDrop.Subscribe(e => TextDrop(e)).DisposeWith(disposable);
-                this.Text.Events().PreviewDragOver.Subscribe(e => TextDragOver(e)).DisposeWith(disposable);
-                this.Text.Events().PreviewDragEnter.Subscribe(e => TextDragEnter(e)).DisposeWith(disposable);
-                this.Text.Events().PreviewDragLeave.Subscribe(e => TextDragLeave(e)).DisposeWith(disposable);
-
-                this.Grid.Events().PreviewMouseLeftButtonDown.Subscribe(e => ConnectorDrag(e)).DisposeWith(disposable);
-                this.Grid.Events().PreviewDragEnter.Subscribe(e => ConnectorDragEnter(e)).DisposeWith(disposable);
-                this.Grid.Events().PreviewDragOver.Subscribe(e => ConnectorDragOver(e)).DisposeWith(disposable);
-                this.Grid.Events().PreviewDragLeave.Subscribe(e => ConnectorDragLeave(e)).DisposeWith(disposable);
-                this.Grid.Events().PreviewDrop.Subscribe(e => ConnectorDrop(e)).DisposeWith(disposable);
-               
-
+                this.EllipseElement.Events().MouseLeftButtonDown.Subscribe(e => ConnectDrag(e)).DisposeWith(disposable);
+                this.TextBoxElement.Events().LostFocus.Subscribe(e => Validate(e)).DisposeWith(disposable);
+                this.GridElement.Events().PreviewMouseLeftButtonDown.Subscribe(e => ConnectorDrag(e)).DisposeWith(disposable);
+                this.GridElement.Events().PreviewDragEnter.Subscribe(e => ConnectorDragEnter(e)).DisposeWith(disposable);
+                this.GridElement.Events().PreviewDrop.Subscribe(e => ConnectorDrop(e)).DisposeWith(disposable);
             });
+        }
+        private void OnEventMouseOver(bool value)
+        {
+                this.ViewModel.FormStroke = value ? Application.Current.Resources["ColorConnector"] as SolidColorBrush
+                                                 : Application.Current.Resources["ColorNodesCanvasBackground"] as SolidColorBrush;
         }
         private void Validate(RoutedEventArgs e)
         {
-            ViewModel.CommandValidateName.Execute(Text.Text);
-            if (Text.Text != ViewModel.Name)
-                Text.Text = ViewModel.Name;
+            if (TextBoxElement.Text != ViewModel.Name)
+                ViewModel.CommandValidateName.ExecuteWithSubscribe(TextBoxElement.Text);
+            if (TextBoxElement.Text != ViewModel.Name)
+                TextBoxElement.Text = ViewModel.Name;
         }
 
         private void ConnectDrag(MouseButtonEventArgs e)
         {
-            this.ViewModel.CommandConnectPointDrag.Execute();
-            DataObject data = new DataObject();
-            data.SetData("Node", this.ViewModel.Node);
-            DragDrop.DoDragDrop(this, data, DragDropEffects.Link);
-            this.ViewModel.CommandCheckConnectPointDrop.Execute();
-            e.Handled = true;
-        }
-
-        private void TextDrag(MouseButtonEventArgs e)
-        {
-            ConnectorDrag(e);
-            e.Handled = true;
-        }
-
-        private void TextDragOver(DragEventArgs e)
-        {
-            ConnectorDragOver(e);
-            e.Handled = true;
-        }
-
-        private void TextDragEnter(DragEventArgs e)
-        {
-            ConnectorDragEnter(e);
-            e.Handled = true;
-        }
-
-        private void TextDragLeave(DragEventArgs e)
-        {
-            ConnectorDragLeave(e);
-            e.Handled = true;
-        }
-
-        private void TextDrop(DragEventArgs e)
-        {
-            ConnectorDrop(e);
-            e.Handled = true;
+            if (Keyboard.IsKeyDown(Key.LeftCtrl))
+            {
+                this.ViewModel.CommandSetAsLoop.ExecuteWithSubscribe();
+                this.ViewModel.NodesCanvas.CommandAddConnectorWithConnect.Execute(this.ViewModel);
+            }          
+            else 
+            {
+                this.ViewModel.CommandConnectPointDrag.ExecuteWithSubscribe();
+                DataObject data = new DataObject();
+                data.SetData("Node", this.ViewModel.Node);
+                DragDrop.DoDragDrop(this, data, DragDropEffects.Move);
+                this.ViewModel.CommandCheckConnectPointDrop.ExecuteWithSubscribe();
+                e.Handled = true;
+            }
         }
 
         private void ConnectorDrag(MouseButtonEventArgs e)
-        {
+        {        
             if (!this.ViewModel.TextEnable)
                 return;
-
-            this.ViewModel.CommandConnectorDrag.Execute();
-            DataObject data = new DataObject();
-            data.SetData("Connector", this.ViewModel);
-            DragDrop.DoDragDrop(this, data, DragDropEffects.Link);
-            this.ViewModel?.CommandCheckConnectorDrop.Execute();
+            if (Keyboard.IsKeyDown(Key.LeftAlt))
+            {
+                this.ViewModel.CommandConnectorDrag.ExecuteWithSubscribe();
+                DataObject data = new DataObject();
+                data.SetData("Connector", this.ViewModel);
+                DragDrop.DoDragDrop(this, data, DragDropEffects.Move);
+            }
+            else if (Keyboard.IsKeyDown(Key.LeftShift))
+            {
+                this.ViewModel.CommandSelect.ExecuteWithSubscribe(SelectMode.ClickWithShift);
+            }
+            else if (Keyboard.IsKeyDown(Key.LeftCtrl))
+            {
+                this.ViewModel.CommandSelect.ExecuteWithSubscribe(SelectMode.ClickWithCtrl);              
+            }
+            else
+            {
+                this.ViewModel.CommandSelect.ExecuteWithSubscribe(SelectMode.Click);
+                return;
+            }
             e.Handled = true;
-        }
-
-        private void ConnectorDragOver(DragEventArgs e)
-        {
-            
-
-            //if (this.ViewModel.NodesCanvas.ConnectorPreviewForDrop != this.ViewModel)
-            //{
-            //    this.ViewModel.Node.Point1 += 0.0001;
-
-               
-            //    return;
-            //}
-            //e.Handled = true;
-            //this.UpdatePosition();
-
-            //this.ViewModel.CommandConnectorDragOver.Execute();
-
-            
-
-            return;
         }
 
         private void ConnectorDragEnter(DragEventArgs e)
@@ -195,78 +168,49 @@ namespace SimpleStateMachineNodeEditor.View
 
             if (this.ViewModel.NodesCanvas.ConnectorPreviewForDrop == this.ViewModel)
                 return;
-
-            this.ViewModel.CommandConnectorDragEnter.Execute();
-
+            this.ViewModel.CommandConnectorDragEnter.ExecuteWithSubscribe();
             e.Handled = true;
         }
-
-        private void ConnectorDragLeave(DragEventArgs e)
-        {
-            if (this.ViewModel.NodesCanvas.ConnectorPreviewForDrop != null)
-                return;
-
-            this.ViewModel.CommandConnectorDragLeave.Execute();
-
-            e.Handled = true;
-        }
-
         private void ConnectorDrop(DragEventArgs e)
         {
             if (this.ViewModel.NodesCanvas.ConnectorPreviewForDrop == null)
                 return;
            
-            this.ViewModel.CommandConnectorDrop.Execute();
+            this.ViewModel.CommandConnectorDrop.ExecuteWithSubscribe();
 
             e.Handled = true;
         }
 
         #endregion SetupEvents
 
-        /// <summary>
-        /// Обновить координату центра круга
-        /// </summary>
-        void UpdatePositionConnectPoin()
+
+        private  void UpdatePosition()
         {
-
             Point positionConnectPoint;
-            //Если отображается
-            if (this.IsVisible)
-            {
-                // Координата центра
-                positionConnectPoint = Form.TranslatePoint(new Point(Form.Width / 2, Form.Height / 2), this);
 
-                //Ищем Canvas
+            if((!ViewModel.Node.IsCollapse)||(ViewModel.Node.IsCollapse && this.ViewModel.Name == "Output"))
+            {
+                positionConnectPoint = EllipseElement.TranslatePoint(new Point(EllipseElement.Width/2, EllipseElement.Height / 2), this);
+
                 ViewNodesCanvas NodesCanvas = MyUtils.FindParent<ViewNodesCanvas>(this);
 
-                //Получаем позицию центру на канвасе
                 positionConnectPoint = this.TransformToAncestor(NodesCanvas).Transform(positionConnectPoint);
+
+                positionConnectPoint = positionConnectPoint.Division(this.ViewModel.NodesCanvas.Scale.Value);
 
             }
             else
             {
-                //Позиция выхода
-                positionConnectPoint = this.ViewModel.Node.Output.PositionConnectPoint.Value;
+                positionConnectPoint = this.ViewModel.Node.Output.PositionConnectPoint;
+
             }
 
-            this.ViewModel.PositionConnectPoint.Set(positionConnectPoint);
+            if (this.ViewModel.Name == "Output")
+            {
+                this.ViewModel.NodesCanvas.LogDebug(positionConnectPoint.ToString());
+            }
+            this.ViewModel.PositionConnectPoint = positionConnectPoint;
         }
 
-        //void UpdatePosition()
-        //{
-        //    if (!this.IsVisible)
-        //        return;
-
-        //    Point position = new Point();
-
-        //    //Ищем Canvas
-        //    ViewNodesCanvas NodesCanvas = MyUtils.FindParent<ViewNodesCanvas>(this);
-
-        //    position = this.TransformToAncestor(NodesCanvas).Transform(position);
-
-        //    this.ViewModel.Position.Set(position);
-
-        //    this.ViewModel.NodesCanvas.Text = "UpdatePosition for " + this.ViewModel.Name;
-        //}
     }
 }

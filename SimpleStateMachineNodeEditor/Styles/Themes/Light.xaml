@@ -1,0 +1,98 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <!--#region Selector-->
+    <SolidColorBrush x:Key="ColorIconsSecond"  Color="#005098"/>
+    <SolidColorBrush x:Key="ColorIconsMain"  Color="#414141"/>
+    <SolidColorBrush x:Key="ColorScrollBarBackground"  Color="White"/>
+    <SolidColorBrush x:Key="ColorScrollBarThumb"  Color="#c2c3c9"/>
+
+    <!--#endregion Selector-->
+
+    <SolidColorBrush x:Key="ColorElementMouseOver"  Color="#007acc"/>
+
+    <SolidColorBrush x:Key="ColorSelectedElement"  Color="#D23030"/>
+
+    <SolidColorBrush x:Key="ColorConnect" Color="#414141"/>
+    
+    <!--#98989a-->
+    <SolidColorBrush x:Key="ColorConnector" Color="#414141"/>
+
+    <SolidColorBrush x:Key="ColorConnectorForeground" Color="Black"/>
+
+    <SolidColorBrush x:Key="ColorCutter" Color="#D23030"/>
+    
+
+    <SolidColorBrush x:Key="ColorButtonStroke" Color="#626264"/>
+
+    <SolidColorBrush x:Key="ColorNodesCanvasBackground" Color="#fcfcfd"/>
+    
+
+    <!--#region Selector-->
+
+    <SolidColorBrush x:Key="ColorSelectorFill" Color="#aaccee" />
+    <SolidColorBrush x:Key="ColorSelectorStroke" Color="#8f8f91"/>
+
+    <!--#endregion Selector-->
+
+    <!--#region Messages-->
+
+    <SolidColorBrush x:Key="ColorMessagesBackground" Color="#f5f5f5"/>
+    <SolidColorBrush x:Key="ColorMessagesBorder" Color="#cccedb"/>
+    <SolidColorBrush x:Key="ColorMessagesForeground" Color="Black"/>
+    <SolidColorBrush x:Key="ColorMessagesForegroundSelected" Color="White"/>
+
+    <!--#endregion Messages-->
+
+    <!--#region     Window-->
+    <SolidColorBrush x:Key="ColorWindowBackground" Color="#FF212121"/>
+    <SolidColorBrush x:Key="ColorWindowBorder" Color="LightGray"/>
+    <SolidColorBrush x:Key="ColorWindowHeader" Color="#eeeef2"/>
+    <SolidColorBrush x:Key="ColorWindowHeaderTabItemForeground"  Color="Black"/>
+    <SolidColorBrush x:Key="ColorWindowHeaderTabItemForegroundOnSelect"  Color="White"/>
+
+    <!--#region Header buttons-->
+    <SolidColorBrush x:Key="ColorWindowHeaderButtonsIcon"  Color="#8f8f91"/>
+
+    <SolidColorBrush x:Key="ColorWindowHeaderButtonCloseBackgroundPressed"  Color="#a3232d"/>
+    <SolidColorBrush x:Key="ColorWindowHeaderButtonCloseBackgroundMouseOver" Color="#e81123"/>
+
+    <SolidColorBrush x:Key="ColorWindowHeaderButtonBackgroundPressed"  Color="#007acc"/>
+    <SolidColorBrush x:Key="ColorWindowHeaderButtonBackgroundMouseOver" Color="White"/>
+
+    <SolidColorBrush x:Key="ColorSeparator"             Color="#e0e3e6"/>
+    <SolidColorBrush x:Key="ColorSeparatorBorder"       Color="White"/>
+    <!--#endregion  Header buttons-->
+
+    <!--#endregion  Window-->
+
+    <!--#region     Menu-->
+    <SolidColorBrush x:Key="ColorMenuBorder"                Color="LightGray"/>
+    
+    <SolidColorBrush x:Key="ColorMenuBackground"            Color="#f6f6f6"/>
+    
+    <SolidColorBrush x:Key="ColorMenuForeground"            Color="Black"/>
+
+  
+    <SolidColorBrush x:Key="ColorMenuBackgroundMouseOver"   Color="#c9def5"/>
+    
+    <!--#endregion  Menu-->
+
+    <!--#region     Node-->
+    
+    <Color x:Key="ColorNodeBackground" >#E5eeeef2</Color>
+    
+    <SolidColorBrush x:Key="ColorNodeBorderBrush"  Color="#c2c3c9"/>
+
+    <Color x:Key="ColorNodeHeader" >#414141</Color>
+    
+    <SolidColorBrush x:Key="ColorNodeHeaderForeground" Color="White"/>
+
+
+    <SolidColorBrush x:Key="ColorNodeCollapseButtonBackground"  Color="#c2c3c9"/>
+    <SolidColorBrush x:Key="ColorNodeCollapseButtonBorderBrush"  Color="#c2c3c9"/>
+
+    <SolidColorBrush x:Key="ColorNodeCollapseButtonMouseOverBackground"  Color="#D23030"/>
+    <SolidColorBrush x:Key="ColorNodeCollapseButtonMouseOverBorderBrush"  Color="#D23030"/>
+    <!--#endregion  Node-->
+    
+</ResourceDictionary>

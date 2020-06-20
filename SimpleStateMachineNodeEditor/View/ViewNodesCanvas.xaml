@@ -4,14 +4,23 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:SimpleStateMachineNodeEditor.View"
+             xmlns:View="clr-namespace:SimpleStateMachineNodeEditor.View"
+             xmlns:ViewModel="clr-namespace:SimpleStateMachineNodeEditor.ViewModel"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800" Focusable="True" AllowDrop="True" ClipToBounds="True">
-    <Canvas x:Name="Grid" Background="{StaticResource ColorNodesCanvasBackground}" >
 
+    <Canvas x:Name="Canvas" Background="{DynamicResource ColorNodesCanvasBackground}">
+        
         <local:ViewSelector x:Name="Selector"  Panel.ZIndex="999"/>
         <local:ViewCutter x:Name="Cutter"  Panel.ZIndex="999"/>
 
-        <ItemsControl x:Name="Nodes" >
+        <ItemsControl  x:Name="ElementItemControl" Panel.ZIndex="0" 
+                       VirtualizingPanel.IsVirtualizing="True" 
+                       VirtualizingPanel.VirtualizationMode="Recycling" 
+                       VirtualizingPanel.CacheLength="1"
+                       VirtualizingPanel.CacheLengthUnit="Page"                 
+                       VirtualizingPanel.ScrollUnit="Pixel">
+
             <ItemsControl.RenderTransform>
                 <TransformGroup x:Name="TransformGroup">
                     <ScaleTransform x:Name="Scale" ScaleX="1" ScaleY="1" />
@@ -22,52 +31,59 @@
             </ItemsControl.RenderTransform>
             <ItemsControl.ItemsPanel>
                 <ItemsPanelTemplate>
-                    <Grid Background="{x:Null}">
+                    <Grid x:Name="ElementGrid" Background="{x:Null}">
                     </Grid>
                 </ItemsPanelTemplate>
             </ItemsControl.ItemsPanel>
-            <ItemsControl.ItemTemplate>
-                <DataTemplate>
-                    <local:ViewNode ViewModel="{Binding}" />
+            <ItemsControl.Resources >
+                <DataTemplate DataType="{x:Type ViewModel:ViewModelConnect}">
+                    <View:ViewConnect ViewModel="{Binding}"/>
                 </DataTemplate>
-            </ItemsControl.ItemTemplate>
-        </ItemsControl>
-
-        <ItemsControl x:Name="Connects" >
-            <ItemsControl.ItemsPanel>
-                <ItemsPanelTemplate>
-                    <Grid Background="{x:Null}">
-                    </Grid>
-                </ItemsPanelTemplate>
-            </ItemsControl.ItemsPanel>
-            <ItemsControl.ItemTemplate>
-                <DataTemplate>
-                    <local:ViewConnect ViewModel="{Binding}"/>
+                <DataTemplate DataType="{x:Type ViewModel:ViewModelNode}">
+                    <View:ViewNode ViewModel="{Binding}" />
                 </DataTemplate>
-            </ItemsControl.ItemTemplate>
+            </ItemsControl.Resources>
+            <ItemsControl.ItemsSource>
+                <CompositeCollection>
+                    <CollectionContainer  x:Name="Connects" />
+                    <CollectionContainer x:Name="Nodes"/>
+                </CompositeCollection>
+            </ItemsControl.ItemsSource>
         </ItemsControl>
-
     </Canvas>
     <UserControl.ContextMenu >
-        <ContextMenu Template="{DynamicResource ContextMenuTemplate}" Background="#1b1b1c" OpacityMask="#3e3e40"  Foreground="White" BorderBrush="#333337" BorderThickness="1" HorizontalAlignment="Left" VerticalAlignment="Center" >
-            <MenuItem Header="Add" x:Name="ItemAddNode" InputGestureText="Ctrl + N" Style="{DynamicResource ContextMenuItemStyle}"  />
-            <MenuItem Header="Delete" x:Name="ItemDeleteNode" InputGestureText="Delete" Style="{DynamicResource ContextMenuItemStyle}"/>
+        <ContextMenu Template="{DynamicResource TemplateContextMenu}" Background="{DynamicResource ColorMenuBackground}"  Foreground="{DynamicResource ColorMenuForeground}" BorderBrush="{DynamicResource ColorMenuBorder}" OpacityMask="{DynamicResource ColorMenuBackgroundMouseOver}"  BorderThickness="1" HorizontalAlignment="Left" VerticalAlignment="Center" >
+            <MenuItem Header="Add" x:Name="ItemAddNode" InputGestureText="Ctrl + N" Style="{DynamicResource StyleContextMenuItem}" >
+                <MenuItem.Icon>
+                    <Rectangle Fill="{DynamicResource IconAddNode}" Height="13" Width="13"/>
+                </MenuItem.Icon>
+            </MenuItem>
+            <MenuItem Header="Delete" x:Name="ItemDelete" InputGestureText="Delete" Style="{DynamicResource StyleContextMenuItem}">
+                <MenuItem.Icon>
+                    <Rectangle Fill="{DynamicResource IconDeleteScheme}" Height="15" Width="15"/>
+                </MenuItem.Icon>
+            </MenuItem>
+            <Separator Background="#333337"/>
+            <MenuItem Header="Collaps Up" x:Name="ItemCollapsUp" Style="{DynamicResource StyleContextMenuItem}">
+                <MenuItem.Icon>
+                    <Rectangle Fill="{DynamicResource IconCollapseUp}" Height="13" Width="13"/>
+                </MenuItem.Icon>
+            </MenuItem>
+            <MenuItem Header="Expand Down" x:Name="ItemExpandDown" Style="{DynamicResource StyleContextMenuItem}">
+                <MenuItem.Icon>
+                    <Rectangle Fill="{DynamicResource IconExpandDown}" Height="13" Width="13"/>
+                </MenuItem.Icon>
+            </MenuItem>
         </ContextMenu>
     </UserControl.ContextMenu>
-
-    <UserControl.CommandBindings>
-        <!--<CommandBinding Command="Zoom" Executed="Zoom" />-->
-        <CommandBinding Command="Redo" x:Name="RedoCommand"/>
-
-    </UserControl.CommandBindings>
     <UserControl.InputBindings>
-        <KeyBinding x:Name="BindingUndo" Key="Z" Modifiers="Control" />
-        <KeyBinding x:Name="BindingRedo" Key="Y" Modifiers="Control" />
-        <KeyBinding x:Name="BindingSelectAll" Key="A" Modifiers="Control" />
-        <KeyBinding x:Name="BindingAddNode" Key="N" Modifiers="Control" />
-        <KeyBinding x:Name="BindingDeleteNode" Key="Delete"  />
-        <MouseBinding x:Name="BindingSelect" Gesture="Ctrl+LeftClick" />
-        <MouseBinding x:Name="BindingCut" Gesture="Alt+LeftClick" />
-        <MouseBinding x:Name="BindingZoom" Gesture="WheelClick"/>
+        <KeyBinding x:Name="BindingUndo"        Key="Z" Modifiers="Control" />
+        <KeyBinding x:Name="BindingRedo"        Key="Y" Modifiers="Control" />
+        <KeyBinding x:Name="BindingSelectAll"   Key="A" Modifiers="Control" />
+        <KeyBinding x:Name="BindingAddNode"     Key="N" Modifiers="Control" />
+        <KeyBinding x:Name="BindingDeleteSelectedElements" Key="Delete"/>
+        <KeyBinding x:Name="BindingExportToJPEG"   Gesture="Ctrl+Shift+Alt+J"/>
+        <MouseBinding x:Name="BindingSelect"    Gesture="Ctrl+LeftClick"/>
+        <MouseBinding x:Name="BindingCut"       Gesture="Alt+LeftClick" />
     </UserControl.InputBindings>
 </UserControl>

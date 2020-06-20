@@ -49,50 +49,47 @@ namespace SimpleStateMachineNodeEditor.View
         {
             this.WhenActivated(disposable =>
             {
-                // Отображается ли линия среза
+
                 this.OneWayBind(this.ViewModel, x => x.Visible, x => x.Visibility).DisposeWith(disposable);
-                // Точка из которой выходит линия среза
-                this.OneWayBind(this.ViewModel, x => x.StartPoint.Value.X, x => x.Line.X1).DisposeWith(disposable);
-                // Точка из которой выходит линия среза
-                this.OneWayBind(this.ViewModel, x => x.StartPoint.Value.Y, x => x.Line.Y1).DisposeWith(disposable);
 
-                // Точка в которую приходит линия среза
-                this.OneWayBind(this.ViewModel, x => x.EndPoint.Value.X, x => x.Line.X2).DisposeWith(disposable);
-                // Точка в которую приходит линия среза
-                this.OneWayBind(this.ViewModel, x => x.EndPoint.Value.Y, x => x.Line.Y2).DisposeWith(disposable);
+                this.OneWayBind(this.ViewModel, x => x.StartPoint.X, x => x.LineElement.X1).DisposeWith(disposable);
 
-                this.WhenAnyValue(x => x.Visibility).Subscribe(_ => Update()).DisposeWith(disposable);
+                this.OneWayBind(this.ViewModel, x => x.StartPoint.Y, x => x.LineElement.Y1).DisposeWith(disposable);
+
+                this.OneWayBind(this.ViewModel, x => x.EndPoint.X, x => x.LineElement.X2).DisposeWith(disposable);
+
+                this.OneWayBind(this.ViewModel, x => x.EndPoint.Y, x => x.LineElement.Y2).DisposeWith(disposable);
+
+                this.OneWayBind(this.ViewModel, x => x.StrokeThickness, x => x.LineElement.StrokeThickness).DisposeWith(disposable);
+
+                this.WhenAnyValue(x => x.Visibility).Where(x=>x==Visibility.Visible).Subscribe(_ => Update()).DisposeWith(disposable);
 
             });
+        }
+        private void Update()
+        {
+            Mouse.Capture(this);
+            Keyboard.Focus(this);
         }
 
         #endregion Setup Binding 
 
         #region Setup Events
 
-        private void Update()
-        {
-            if (this.IsVisible)
-            {
-                Mouse.Capture(this);
-                Keyboard.Focus(this);
-            }
-        }
         private void SetupEvents()
         {
             this.WhenActivated(disposable =>
             {
                 this.Events().MouseMove.Subscribe(e => OnMouseMoves(e)).DisposeWith(disposable);
                 this.Events().MouseLeftButtonUp.Subscribe(e => OnMouseLeftButtonUp(e)).DisposeWith(disposable);
-
             });
         }
-
         private void OnMouseMoves(MouseEventArgs e)
         {
-            //Ищем Canvas
             ViewNodesCanvas NodesCanvas = MyUtils.FindParent<ViewNodesCanvas>(this);
-            ViewModel.EndPoint.Set(e.GetPosition(NodesCanvas));
+
+            ViewModel.EndPoint = e.GetPosition(NodesCanvas.Canvas);
+
             e.Handled = true;
 
         }
@@ -100,17 +97,8 @@ namespace SimpleStateMachineNodeEditor.View
         {
             this.ViewModel.Visible = null;
         }
+
         #endregion Setup Events
 
-        #region Setup Commands
-        private void SetupCommands()
-        {
-            this.WhenActivated(disposable =>
-            {
-
-
-            });
-        }
-        #endregion Setup Commands
     }
 }

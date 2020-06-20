@@ -14,7 +14,8 @@ using ReactiveUI;
 
 using SimpleStateMachineNodeEditor.Helpers;
 using SimpleStateMachineNodeEditor.ViewModel;
-
+using System.Windows.Shapes;
+using SimpleStateMachineNodeEditor.Helpers.Extensions;
 
 namespace SimpleStateMachineNodeEditor.View
 {
@@ -50,27 +51,20 @@ namespace SimpleStateMachineNodeEditor.View
         {
             this.WhenActivated(disposable =>
             {
-                // Имя перехода ( вводится в узле)
-                this.OneWayBind(this.ViewModel, x => x.Name, x => x.Text.Text).DisposeWith(disposable);
 
+                this.OneWayBind(this.ViewModel, x => x.Name, x => x.TextBoxElement.Text).DisposeWith(disposable);
 
-                // Доступно ли имя перехода для редактирования
-                this.OneWayBind(this.ViewModel, x => x.TextEnable, x => x.Text.IsEnabled).DisposeWith(disposable);
+                this.OneWayBind(this.ViewModel, x => x.TextEnable, x => x.TextBoxElement.IsEnabled).DisposeWith(disposable);
 
-                // Доступен ли переход для создания соединия
-                this.OneWayBind(this.ViewModel, x => x.FormEnable, x => x.Form.IsEnabled).DisposeWith(disposable);
+                this.OneWayBind(this.ViewModel, x => x.FormEnable, x => x.EllipseElement.IsEnabled).DisposeWith(disposable);
 
-                // Цвет рамки, вокруг перехода
-                this.OneWayBind(this.ViewModel, x => x.FormStroke, x => x.Form.Stroke).DisposeWith(disposable);
+                this.OneWayBind(this.ViewModel, x => x.Foreground, x => x.TextBoxElement.Foreground).DisposeWith(disposable);
 
-                // Цвет перехода
-                this.OneWayBind(this.ViewModel, x => x.FormFill, x => x.Form.Fill).DisposeWith(disposable);
+                this.OneWayBind(this.ViewModel, x => x.FormStroke, x => x.EllipseElement.Stroke).DisposeWith(disposable);
 
-                // Отображается ли переход
+                this.OneWayBind(this.ViewModel, x => x.FormFill, x => x.EllipseElement.Fill).DisposeWith(disposable);
+
                 this.OneWayBind(this.ViewModel, x => x.Visible, x => x.LeftConnector.Visibility).DisposeWith(disposable);
-
-                // При изменении размера, позиции или zoom узла
-                this.WhenAnyValue(x => x.ViewModel.Node.Size, x => x.ViewModel.Node.Point1.Value, x => x.ViewModel.Node.NodesCanvas.Scale.Scales.Value).Subscribe(_ => UpdatePosition()).DisposeWith(disposable);
 
             });
         }
@@ -80,30 +74,41 @@ namespace SimpleStateMachineNodeEditor.View
         private void SetupEvents()
         {
             this.WhenActivated(disposable =>
-            {
-                this.Form.Events().Drop.Subscribe(e => OnEventDrop(e)).DisposeWith(disposable);
+            {               
+                this.EllipseElement.Events().Drop.Subscribe(e => OnEventDrop(e)).DisposeWith(disposable);
+                this.EllipseElement.Events().DragEnter.Subscribe(e => OnEventDragEnter(e)).DisposeWith(disposable);
+                this.EllipseElement.Events().DragLeave.Subscribe(e => OnEventDragLeave(e)).DisposeWith(disposable);
             });
         }
-        #endregion SetupEvents
 
+        #endregion SetupEvents
+        private void OnEventDragEnter(DragEventArgs e)
+        {
+            this.ViewModel.FormStroke = Application.Current.Resources["ColorConnector"] as SolidColorBrush;
+            e.Handled = true;
+        }
+        private void OnEventDragLeave(DragEventArgs e)
+        {
+            this.ViewModel.FormStroke = Application.Current.Resources["ColorNodesCanvasBackground"] as SolidColorBrush;
+            e.Handled = true;
+        }
         private void OnEventDrop(DragEventArgs e)
         {
-            this.ViewModel.CommandConnectPointDrop.Execute();
+            this.ViewModel.FormStroke = Application.Current.Resources["ColorNodesCanvasBackground"] as SolidColorBrush;
+            this.ViewModel.CommandConnectPointDrop.ExecuteWithSubscribe();
             e.Handled = true;
         }
         void UpdatePosition()
         {
-            // Координата центра
-            Point InputCenter = Form.TranslatePoint(new Point(Form.Width / 2, Form.Height / 2), this);
+            Point positionConnectPoint = EllipseElement.TranslatePoint(new Point(EllipseElement.Width/2, EllipseElement.Height / 2), this);
 
-            //Ищем Canvas
             ViewNodesCanvas NodesCanvas = MyUtils.FindParent<ViewNodesCanvas>(this);
             if (NodesCanvas == null)
                 return;
-            //Получаем позицию центру на канвасе
-            Point Position = this.TransformToAncestor(NodesCanvas).Transform(InputCenter);
 
-            this.ViewModel.PositionConnectPoint.Set(Position);
+            positionConnectPoint = this.TransformToAncestor(NodesCanvas).Transform(positionConnectPoint);
+
+            this.ViewModel.PositionConnectPoint = positionConnectPoint.Division(this.ViewModel.NodesCanvas.Scale.Value);
         }
     }
 }

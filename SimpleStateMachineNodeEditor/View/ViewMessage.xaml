@@ -1,0 +1,18 @@
+﻿<UserControl x:Class="SimpleStateMachineNodeEditor.View.ViewMessage"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:SimpleStateMachineNodeEditor.View"
+             mc:Ignorable="d" 
+             d:DesignHeight="50" d:DesignWidth="200">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="auto" SharedSizeGroup="Icons"/>
+            <ColumnDefinition />
+        </Grid.ColumnDefinitions>
+        <Rectangle Grid.Column="0" x:Name="RectangleElement" Height="14" Width="14" VerticalAlignment="Center"  Margin="5,2,0,0"/>
+        <TextBlock Grid.Column="1" x:Name="TextBlockElement" Height="auto" VerticalAlignment="Center" TextWrapping="Wrap" Padding="5,3,3,3" />
+    </Grid>
+   
+</UserControl>
