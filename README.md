@@ -49,7 +49,7 @@ If you like or are using this project please give it a star. Thanks!
 ### Save work space as PNG/JPEG
 ![](https://github.com/SimpleStateMachine/SimpleStateMachineNodeEditor/blob/gh-pages/img/jpg.jpg)
 
-## Getting Started
+## Getting Started📂
 
  **1.** Download the [latest release archive](https://github.com/SimpleStateMachine/SimpleStateMachineNodeEditor)
  
