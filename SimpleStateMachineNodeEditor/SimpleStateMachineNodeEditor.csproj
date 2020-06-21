@@ -17,7 +17,9 @@
     <Description>Node editor for SimpleStateMachine</Description>
     <AssemblyVersion>1.1.0.0</AssemblyVersion>
     <FileVersion>1.1.0.0</FileVersion>
-    <PackageReleaseNotes>Table of transitions</PackageReleaseNotes>
+    <PackageReleaseNotes>Table of transitions
+Fix for read start state
+ReactiveUI 11.4.17</PackageReleaseNotes>
   </PropertyGroup>
 
   <ItemGroup>
