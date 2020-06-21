@@ -49,6 +49,12 @@ If you like or are using this project please give it a star. Thanks!
 ### Save work space as PNG/JPEG
 ![](https://github.com/SimpleStateMachine/SimpleStateMachineNodeEditor/blob/gh-pages/img/jpg.jpg)
 
+## Getting Started
+ **1.** Download the latest release archive
+ **2.** Unzip the downloaded file
+ **3.** Run the exe file
+ 
+
 ## Shortcuts📎
 * **Ctrl + A** = Select All Nodes
 * **Ctrl + S** = Save
