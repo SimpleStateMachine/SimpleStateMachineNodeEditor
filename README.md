@@ -12,12 +12,7 @@
  ## Give a Star! :star:
 If you like or are using this project please give it a star. Thanks!
 
-## Сontent
-1. [Features](#Features)
-2. [Shortcuts](#Shortcuts)
-2. [License](#License)
-
-## Features
+## Features↗️ 
 ### Custom Window with Visual Studio design
 ![](https://github.com/SimpleStateMachine/SimpleStateMachineNodeEditor/blob/gh-pages/img/Custom%20window.jpg)
 ### Two themes
@@ -50,7 +45,7 @@ If you like or are using this project please give it a star. Thanks!
 ### Save work space as PNG/JPEG
 ![](https://github.com/SimpleStateMachine/SimpleStateMachineNodeEditor/blob/gh-pages/img/jpg.jpg)
 
-## Shortcuts
+## Shortcuts📎
 * **Ctrl + A** = Select All Nodes
 * **Ctrl + S** = Save
 * **Ctrl + Shift + S** = Save As
