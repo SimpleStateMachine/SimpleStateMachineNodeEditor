@@ -10,21 +10,11 @@ If you like or are using this project please give it a star. Thanks!
  # Why SimpleStateMachine?
  Create state machine in **three** steps :
  
-**1.** Create scheme in  [this node editor🔗](https://github.com/SimpleStateMachine/SimpleStateMachineNodeEditor) and load it in your project using [library📚](https://github.com/SimpleStateMachine/SimpleStateMachineLibrary)
-```C#
-StateMachine stateMachine = new StateMachine("scheme.xml");
-```
-**2.** Describe your app logic on events⚡
- ```C#
-stateMachine.GetState("State1").OnExit(Action1);
-stateMachine.GetState("State2").OnEntry(Action2);
-stateMachine.GetTransition("Transition1").OnInvoke(Action3);
-stateMachine.OnChangeState(Action4);
-```
-**3.** Run the state machine🚘
- ```C#
-stateMachine.Start();
-```
+ **1.** Create scheme in  [this node editor🔗](https://github.com/SimpleStateMachine/SimpleStateMachineNodeEditor)
+
+**2.** Load scheme in your project using [library📚](https://github.com/SimpleStateMachine/SimpleStateMachineLibrary) 
+
+**3.** Describe your app logic and run the state machin🚘
 
 ## Features💡
 ### Custom Window with Visual Studio design
