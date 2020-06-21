@@ -340,6 +340,12 @@ namespace SimpleStateMachineNodeEditor.ViewModel
                 else
                 {
                     string startStateName = startStateAttribute.Value;
+                    if(string.IsNullOrEmpty(startStateName))
+                    {
+                        Error(string.Format("Name attribute of start state is empty.", startStateName));
+                        return;
+                    }
+
                     var startNode = this.Nodes.Items.SingleOrDefault(x => x.Name == startStateName);
                     if (startNode == null)
                     {

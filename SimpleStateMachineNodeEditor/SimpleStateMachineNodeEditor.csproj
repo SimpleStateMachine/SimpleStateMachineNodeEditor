@@ -60,11 +60,11 @@
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="ReactiveUI" Version="11.4.1" />
-    <PackageReference Include="ReactiveUI.Events.WPF" Version="11.4.1" />
-    <PackageReference Include="ReactiveUI.Fody" Version="11.4.1" />
+    <PackageReference Include="ReactiveUI" Version="11.4.17" />
+    <PackageReference Include="ReactiveUI.Events.WPF" Version="11.4.17" />
+    <PackageReference Include="ReactiveUI.Fody" Version="11.4.17" />
     <PackageReference Include="ReactiveUI.Validation" Version="1.4.15" />
-    <PackageReference Include="ReactiveUI.WPF" Version="11.4.1" />
+    <PackageReference Include="ReactiveUI.WPF" Version="11.4.17" />
     <PackageReference Include="Splat" Version="9.4.5" />
     <PackageReference Include="Splat.Drawing" Version="9.4.5" />
   </ItemGroup>
