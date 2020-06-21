@@ -12,7 +12,7 @@
  ## Give a Star! :star:
 If you like or are using this project please give it a star. Thanks!
 
-## Features↗️ 
+## Features💡
 ### Custom Window with Visual Studio design
 ![](https://github.com/SimpleStateMachine/SimpleStateMachineNodeEditor/blob/gh-pages/img/Custom%20window.jpg)
 ### Two themes
@@ -70,7 +70,7 @@ If you like or are using this project please give it a star. Thanks!
 * **C + Delete** = Delete Selected Connector
 * **N + Delete** = Delete Selected Nodes
 
-## License
+## License📑
 
 Copyright (c) SimpleStateMachine
 
