@@ -3,6 +3,10 @@
 
 # StateMachineNodeEditor [![](https://img.shields.io/github/v/release/SimpleStateMachine/SimpleStateMachineNodeEditor)](https://github.com/SimpleStateMachine/SimpleStateMachineNodeEditor/releases) [![](https://img.shields.io/github/stars/SimpleStateMachine/SimpleStateMachineNodeEditor)](https://github.com/SimpleStateMachine/SimpleStateMachineNodeEditor) [![](https://img.shields.io/github/license/SimpleStateMachine/SimpleStateMachineNodeEditor)](https://github.com/SimpleStateMachine/SimpleStateMachineNodeEditor)
  StateMachineNodeEditor is a WPF node-editor for visual work and editoring  state-machine
+ 
+  ## Give a Star! :star:
+If you like or are using this project please give it a star. Thanks!
+
  # Why SimpleStateMachine?
  Create state machine in **three** steps :
  
@@ -11,8 +15,6 @@
 **2.** Load scheme in your project using [library📚](https://github.com/SimpleStateMachine/SimpleStateMachineLibrary) 
 
 **3.** Describe your app logic and run the state machine🚀
- ## Give a Star! :star:
-If you like or are using this project please give it a star. Thanks!
 
 ## Features💡
 ### Custom Window with Visual Studio design
