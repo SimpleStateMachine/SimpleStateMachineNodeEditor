@@ -18,9 +18,9 @@ If you like or are using this project please give it a star. Thanks!
 
 ## Features💡
 ### Custom Window with Visual Studio design
-![](https://github.com/SimpleStateMachine/SimpleStateMachineNodeEditor/blob/gh-pages/img/Custom%20window.jpg)
+[![](https://github.com/SimpleStateMachine/SimpleStateMachineNodeEditor/blob/gh-pages/img/Custom%20window.jpg)](https://github.com/SimpleStateMachine/SimpleStateMachineNodeEditor)
 ### Two themes
-![](https://github.com/SimpleStateMachine/SimpleStateMachineNodeEditor/blob/gh-pages/img/Themes.jpg)
+[![](https://github.com/SimpleStateMachine/SimpleStateMachineNodeEditor/blob/gh-pages/img/Themes.jpg)](https://github.com/SimpleStateMachine/SimpleStateMachineNodeEditor)
 ### Two representations for State machine
 * Scheme of nodes
 * Table of transitions
@@ -29,25 +29,25 @@ If you like or are using this project please give it a star. Thanks!
 * for unique name for Node/Transition
 * for exists Nodes without connects
 ### Adding nodes and connections
-![](https://github.com/SimpleStateMachine/SimpleStateMachineNodeEditor/blob/gh-pages/img/adding.gif)
+[![](https://github.com/SimpleStateMachine/SimpleStateMachineNodeEditor/blob/gh-pages/img/adding.gif)](https://github.com/SimpleStateMachine/SimpleStateMachineNodeEditor)
 ### Undo and redo
-![](https://github.com/SimpleStateMachine/SimpleStateMachineNodeEditor/blob/gh-pages/img/undo%20and%20redo.gif)
+[![](https://github.com/SimpleStateMachine/SimpleStateMachineNodeEditor/blob/gh-pages/img/undo%20and%20redo.gif)](https://github.com/SimpleStateMachine/SimpleStateMachineNodeEditor)
 ### Collapsing and  moving
-![](https://github.com/SimpleStateMachine/SimpleStateMachineNodeEditor/blob/gh-pages/img/collapsing%20and%20moving.gif)
+[![](https://github.com/SimpleStateMachine/SimpleStateMachineNodeEditor/blob/gh-pages/img/collapsing%20and%20moving.gif)](https://github.com/SimpleStateMachine/SimpleStateMachineNodeEditor)
 ### Scaling
-![](https://github.com/SimpleStateMachine/SimpleStateMachineNodeEditor/blob/gh-pages/img/Scaling.gif)
+[![](https://github.com/SimpleStateMachine/SimpleStateMachineNodeEditor/blob/gh-pages/img/Scaling.gif)](https://github.com/SimpleStateMachine/SimpleStateMachineNodeEditor)
 ### Selection
-![](https://github.com/SimpleStateMachine/SimpleStateMachineNodeEditor/blob/gh-pages/img/selection.gif)
+[![](https://github.com/SimpleStateMachine/SimpleStateMachineNodeEditor/blob/gh-pages/img/selection.gif)](https://github.com/SimpleStateMachine/SimpleStateMachineNodeEditor)
 ### Naming for states and transitions
-![](https://github.com/SimpleStateMachine/SimpleStateMachineNodeEditor/blob/gh-pages/img/naming%20for%20states%20and%20transitions.gif)
+[![](https://github.com/SimpleStateMachine/SimpleStateMachineNodeEditor/blob/gh-pages/img/naming%20for%20states%20and%20transitions.gif)](https://github.com/SimpleStateMachine/SimpleStateMachineNodeEditor)
 ### Moving transitions
-![](https://github.com/SimpleStateMachine/SimpleStateMachineNodeEditor/blob/gh-pages/img/moving%20transitions.gif)
+[![](https://github.com/SimpleStateMachine/SimpleStateMachineNodeEditor/blob/gh-pages/img/moving%20transitions.gif)](https://github.com/SimpleStateMachine/SimpleStateMachineNodeEditor)
 ### Deleting transitions
-![](https://github.com/SimpleStateMachine/SimpleStateMachineNodeEditor/blob/gh-pages/img/deleting%20transitions.gif)
+[![](https://github.com/SimpleStateMachine/SimpleStateMachineNodeEditor/blob/gh-pages/img/deleting%20transitions.gif)](https://github.com/SimpleStateMachine/SimpleStateMachineNodeEditor)
 ### Import/Export scheme from/to xml
-![](https://github.com/SimpleStateMachine/SimpleStateMachineNodeEditor/blob/gh-pages/img/xml.jpg)
+[![](https://github.com/SimpleStateMachine/SimpleStateMachineNodeEditor/blob/gh-pages/img/xml.jpg)](https://github.com/SimpleStateMachine/SimpleStateMachineNodeEditor)
 ### Save work space as PNG/JPEG
-![](https://github.com/SimpleStateMachine/SimpleStateMachineNodeEditor/blob/gh-pages/img/jpg.jpg)
+[![](https://github.com/SimpleStateMachine/SimpleStateMachineNodeEditor/blob/gh-pages/img/jpg.jpg)](https://github.com/SimpleStateMachine/SimpleStateMachineNodeEditor)
 
 ## Getting Started📂
 
