@@ -51,7 +51,7 @@ If you like or are using this project please give it a star. Thanks!
 
 ## Getting Started📂
 
- **1.** Download the [latest release archive](https://github.com/SimpleStateMachine/SimpleStateMachineNodeEditor)
+ **1.** Download the [latest release archive](https://github.com/SimpleStateMachine/SimpleStateMachineNodeEditor/releases)
  
  **2.** Unzip the downloaded file
  
