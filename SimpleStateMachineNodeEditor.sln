@@ -5,6 +5,8 @@ VisualStudioVersion = 16.0.29728.190
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SimpleStateMachineNodeEditor", "SimpleStateMachineNodeEditor\SimpleStateMachineNodeEditor.csproj", "{F405DC54-B579-44A4-B414-3925A236A98D}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SimpleStateMachineNodeEditorAvalonia", "SimpleStateMachineNodeEditorAvalonia\SimpleStateMachineNodeEditorAvalonia.csproj", "{DDB33469-E9BF-4BD7-A4C5-61EEB0CB5881}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{F405DC54-B579-44A4-B414-3925A236A98D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F405DC54-B579-44A4-B414-3925A236A98D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F405DC54-B579-44A4-B414-3925A236A98D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DDB33469-E9BF-4BD7-A4C5-61EEB0CB5881}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DDB33469-E9BF-4BD7-A4C5-61EEB0CB5881}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DDB33469-E9BF-4BD7-A4C5-61EEB0CB5881}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DDB33469-E9BF-4BD7-A4C5-61EEB0CB5881}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
