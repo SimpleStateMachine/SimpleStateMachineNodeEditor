@@ -146,6 +146,15 @@ namespace SimpleStateMachineNodeEditor.View
                 this.LabelSchemeName.ToolTip = newName;
             }
         }
+
+        private void ShowError()
+        {
+            if (!this.ErrorListExpander.IsExpanded)
+            {
+                this.ErrorListExpander.IsExpanded = true;
+                ErrorListExpanded();
+            }
+        }
         #endregion Setup Subscriptions
 
         #region SetupEvents
@@ -206,14 +215,6 @@ namespace SimpleStateMachineNodeEditor.View
             this.TableOfTransitionsSplitter.IsEnabled = true;
             //this.TableOfTransitionsColumn.Width = new GridLength(this.ViewModel.DefaultWidthTransitionsTable);
             this.TableOfTransitionsColumn.MinWidth = 52;
-        }
-        private void ShowError()
-        {
-            if (!this.ErrorListExpander.IsExpanded)
-            {
-                this.ErrorListExpander.IsExpanded = true;
-                ErrorListExpanded();
-            }
         }
 
         private void ButtonMinClick(RoutedEventArgs e)
