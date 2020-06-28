@@ -45,7 +45,21 @@ If you like or are using this project please give it a star. Thanks!
 ### Deleting transitions
 [![](https://github.com/SimpleStateMachine/SimpleStateMachineNodeEditor/blob/gh-pages/img/deleting%20transitions.gif)](https://github.com/SimpleStateMachine/SimpleStateMachineNodeEditor)
 ### Import/Export scheme from/to xml
-[![](https://github.com/SimpleStateMachine/SimpleStateMachineNodeEditor/blob/gh-pages/img/xml.jpg)](https://github.com/SimpleStateMachine/SimpleStateMachineNodeEditor)
+```xml
+<?xml version="1.0" encoding="utf-8"?>
+<StateMachine>
+  <States>
+    <State Name="Start" Position="37, 80" IsCollapse="False" />
+    <State Name="State 1" Position="471, 195.54" IsCollapse="False" />
+    <State Name="State 2" Position="276, 83.03999999999999" IsCollapse="False" />
+  </States>
+  <StartState Name="Start" />
+  <Transitions>
+    <Transition Name="Transition 2" From="State 2" To="State 1" />
+    <Transition Name="Transition 1" From="Start" To="State 2" />
+  </Transitions>
+</StateMachine>
+```
 ### Save work space as PNG/JPEG
 [![](https://github.com/SimpleStateMachine/SimpleStateMachineNodeEditor/blob/gh-pages/img/jpg.jpg)](https://github.com/SimpleStateMachine/SimpleStateMachineNodeEditor)
 
