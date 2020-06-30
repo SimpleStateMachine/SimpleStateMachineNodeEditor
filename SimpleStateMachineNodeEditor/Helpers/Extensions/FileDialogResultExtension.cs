@@ -8,7 +8,7 @@ namespace SimpleStateMachineNodeEditor.Helpers.Extensions
         {
             return fileDialogResult switch
             {
-                System.Windows.Forms.DialogResult.Yes       => Helpers.Enums.DialogResult.None,
+                System.Windows.Forms.DialogResult.Yes       => Helpers.Enums.DialogResult.Yes,
                 System.Windows.Forms.DialogResult.No        => Helpers.Enums.DialogResult.No,
                 System.Windows.Forms.DialogResult.OK        => Helpers.Enums.DialogResult.Ok,
                 System.Windows.Forms.DialogResult.Cancel    => Helpers.Enums.DialogResult.Cancel,

@@ -263,12 +263,15 @@ namespace SimpleStateMachineNodeEditor.View
 
                         if (point.X <= RestoreBounds.Width / 2)
                             Left = 0;
+
                         else if (point.X >= RestoreBounds.Width)
                             Left = point.X - (RestoreBounds.Width - (this.ActualWidth - point.X));
+
                         else
                             Left = point.X - (RestoreBounds.Width / 2);
 
                         Top = point.Y - (this.Header.ActualHeight / 2);
+
                         StateNormal();
                         this.WindowState = WindowState.Normal;
                     }
