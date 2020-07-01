@@ -6,10 +6,14 @@
              xmlns:local="clr-namespace:SimpleStateMachineNodeEditor.View"
              xmlns:View="clr-namespace:SimpleStateMachineNodeEditor.View"
              xmlns:ViewModel="clr-namespace:SimpleStateMachineNodeEditor.ViewModel"
+             xmlns:paz="clr-namespace:Wpf.Controls.PanAndZoom;assembly=Wpf.Controls.PanAndZoom"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800" Focusable="True" AllowDrop="True" ClipToBounds="True">
-
-    <Canvas x:Name="Canvas" Background="{DynamicResource ColorNodesCanvasBackground}">
+    <paz:ZoomBorder Name="zoomBorder" Stretch="None" ZoomSpeed="1.2" 
+                        Background="SlateBlue" ClipToBounds="True" Focusable="True"
+                        VerticalAlignment="Stretch" HorizontalAlignment="Stretch" 
+                        Grid.Row="4" Grid.Column="1" >
+        <Canvas x:Name="Canvas" Background="{DynamicResource ColorNodesCanvasBackground}">
         
         <local:ViewSelector x:Name="Selector"  Panel.ZIndex="999"/>
         <local:ViewCutter x:Name="Cutter"  Panel.ZIndex="999"/>
@@ -51,6 +55,7 @@
             </ItemsControl.ItemsSource>
         </ItemsControl>
     </Canvas>
+    </paz:ZoomBorder>
     <UserControl.ContextMenu >
         <ContextMenu Template="{DynamicResource TemplateContextMenu}" Background="{DynamicResource ColorMenuBackground}"  Foreground="{DynamicResource ColorMenuForeground}" BorderBrush="{DynamicResource ColorMenuBorder}" OpacityMask="{DynamicResource ColorMenuBackgroundMouseOver}"  BorderThickness="1" HorizontalAlignment="Left" VerticalAlignment="Center" >
             <MenuItem Header="Add" x:Name="ItemAddNode" InputGestureText="Ctrl + N" Style="{DynamicResource StyleContextMenuItem}" >
