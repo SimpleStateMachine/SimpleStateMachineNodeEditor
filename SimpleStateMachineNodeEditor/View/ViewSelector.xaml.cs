@@ -97,7 +97,7 @@ namespace SimpleStateMachineNodeEditor.View
             //find canvas
             ViewNodesCanvas NodesCanvas = MyUtils.FindParent<ViewNodesCanvas>(this);
 
-            ViewModel.Point2 = e.GetPosition(NodesCanvas);
+            ViewModel.Point2 = e.GetPosition(NodesCanvas.Canvas);
 
             e.Handled = true;
         }

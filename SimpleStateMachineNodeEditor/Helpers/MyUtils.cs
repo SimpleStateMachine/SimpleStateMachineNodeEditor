@@ -77,7 +77,7 @@ namespace SimpleStateMachineNodeEditor.Helpers
             } while ((parent1 == default(TParent1)) || (parent2 == default(TParent2)));
         }
 
-        public static void PanelToImage(Panel panel, string filename, ImageFormats format)
+        public static void PanelToImage(FrameworkElement panel, string filename, ImageFormats format)
         {
             int width = (int)panel.ActualWidth;
             int height = (int)panel.ActualHeight;

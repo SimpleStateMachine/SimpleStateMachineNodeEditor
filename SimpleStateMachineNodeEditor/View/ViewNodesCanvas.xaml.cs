@@ -62,15 +62,14 @@ namespace SimpleStateMachineNodeEditor.View
         private void SetupBinding()
         {
             this.WhenActivated(disposable =>
-            {
-
+            {               
                 this.OneWayBind(this.ViewModel, x => x.NodesForView, x => x.Nodes.Collection).DisposeWith(disposable);
 
                 this.OneWayBind(this.ViewModel, x => x.Connects, x => x.Connects.Collection).DisposeWith(disposable);
 
-                this.OneWayBind(this.ViewModel, x => x.Scale.Scales.X, x => x.Scale.ScaleX).DisposeWith(disposable);
+                //this.OneWayBind(this.ViewModel, x => x.Scale.Scales.X, x => x.Scale.ScaleX).DisposeWith(disposable);
 
-                this.OneWayBind(this.ViewModel, x => x.Scale.Scales.Y, x => x.Scale.ScaleY).DisposeWith(disposable);
+                //this.OneWayBind(this.ViewModel, x => x.Scale.Scales.Y, x => x.Scale.ScaleY).DisposeWith(disposable);
 
                 this.OneWayBind(this.ViewModel, x => x.Selector, x => x.Selector.ViewModel).DisposeWith(disposable);
 
@@ -114,6 +113,10 @@ namespace SimpleStateMachineNodeEditor.View
                 this.WhenAnyValue(x => x.ViewModel.Selector.Size).WithoutParameter().InvokeCommand(ViewModel, x => x.CommandSelectorIntersect).DisposeWith(disposable);
                 this.WhenAnyValue(x => x.ViewModel.Cutter.EndPoint).WithoutParameter().InvokeCommand(ViewModel, x => x.CommandCutterIntersect).DisposeWith(disposable);
                 this.WhenAnyValue(x => x.ViewModel.ImagePath).Where(x => !string.IsNullOrEmpty(x)).Subscribe(value => SaveCanvasToImage(value, ImageFormats.JPEG)).DisposeWith(disposable);
+                
+                //here need use ZoomIn and ZoomOut
+
+                //this.WhenAnyValue(x=>x.ViewModel.Scale.Value).Subscribe(x=> {this.zoomBorder.ZoomDeltaTo })
             });
         }
 
@@ -128,12 +131,12 @@ namespace SimpleStateMachineNodeEditor.View
                 this.Events().MouseRightButtonDown.Subscribe(e => OnEventMouseRightDown(e)).DisposeWith(disposable);
                 this.Events().MouseUp.Subscribe(e => OnEventMouseUp(e)).DisposeWith(disposable);
                 this.Events().MouseMove.Subscribe(e => OnEventMouseMove(e)).DisposeWith(disposable);
-                this.Events().MouseWheel.Subscribe(e => OnEventMouseWheel(e)).DisposeWith(disposable);
+                this.BorderElement.Events().MouseWheel.Subscribe(e => OnEventMouseWheel(e)).DisposeWith(disposable);
                 this.Events().DragOver.Subscribe(e => OnEventDragOver(e)).DisposeWith(disposable);
                 this.Cutter.Events().MouseLeftButtonUp.InvokeCommand(this.ViewModel.CommandDeleteSelectedConnectors).DisposeWith(disposable);
                 this.Events().PreviewMouseLeftButtonDown.Subscribe(e => OnEventPreviewMouseLeftButtonDown(e)).DisposeWith(disposable);
                 this.Events().PreviewMouseRightButtonDown.Subscribe(e => OnEventPreviewMouseRightButtonDown(e)).DisposeWith(disposable);
-                this.WhenAnyValue(x => x.ViewModel.Scale.Value).Subscribe(value => { this.Canvas.Height /= value; this.Canvas.Width /= value; }).DisposeWith(disposable);
+                //this.WhenAnyValue(x => x.ViewModel.Scale.Value).Subscribe(value => { this.Canvas.Height /= value; this.Canvas.Width /= value; }).DisposeWith(disposable);
             });
         }
         private void OnEventMouseLeftDown(MouseButtonEventArgs e)
@@ -170,7 +173,20 @@ namespace SimpleStateMachineNodeEditor.View
         }
         private void OnEventMouseWheel(MouseWheelEventArgs e)
         {
-            this.ViewModel.CommandZoom.ExecuteWithSubscribe(e.Delta);
+            //this.ElementItemControl.Width = ActualWidth + 100;
+            Point point = e.GetPosition(this.Canvas);
+            //this.Scale.CenterX = point.X;
+            //this.Scale.CenterY = point.Y;
+
+            Matrix value = this.Canvas.RenderTransform.Value;
+            double step = 1.2;
+            double zoom = e.Delta > 0 ? step : 1 / step;
+            value = MatrixExtension.ScaleAtPrepend(value,zoom, zoom, point.X, point.Y);
+            this.Canvas.RenderTransform = new MatrixTransform(value);
+
+            //this.ViewModel.CommandZoom.ExecuteWithSubscribe(e.Delta);
+            //_element.RenderTransform = new MatrixTransform(_matrix);
+
         }
         private void OnEventMouseUp(MouseButtonEventArgs e)
         {
@@ -203,7 +219,7 @@ namespace SimpleStateMachineNodeEditor.View
         }
         private void OnEventDragOver(DragEventArgs e)
         {
-            Point point = e.GetPosition(this);
+            Point point = e.GetPosition(this.Canvas);
             if (this.ViewModel.DraggedConnect != null)
             {
                 point = point.Subtraction(2);
@@ -236,6 +252,7 @@ namespace SimpleStateMachineNodeEditor.View
 
         private void SaveCanvasToImage(string filename, ImageFormats format)
         {
+            //this.zoomBorder.Uniform();
             MyUtils.PanelToImage(this.Canvas, filename, format);
             ViewModel.CommandLogDebug.ExecuteWithSubscribe(String.Format("Scheme was exported to \"{0}\"", filename));
         }

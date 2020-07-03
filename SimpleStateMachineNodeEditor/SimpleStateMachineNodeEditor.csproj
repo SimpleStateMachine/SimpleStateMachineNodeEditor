@@ -69,7 +69,7 @@ ReactiveUI 11.4.17</PackageReleaseNotes>
     <PackageReference Include="ReactiveUI.WPF" Version="11.4.17" />
     <PackageReference Include="Splat" Version="9.4.5" />
     <PackageReference Include="Splat.Drawing" Version="9.4.5" />
-    <PackageReference Include="Wpf.Controls.PanAndZoom" Version="2.3.3" />
+    <PackageReference Include="Wpf.Controls.PanAndZoom" Version="3.0.999-build20200622-01" />
   </ItemGroup>
 
   <ItemGroup>
