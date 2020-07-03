@@ -12,6 +12,9 @@ using System.Reactive.Linq;
 using System.Windows;
 using System.Windows.Input;
 using System.Xml.Linq;
+using Microsoft.Extensions.Configuration;
+using SimpleStateMachineNodeEditor.Helpers.Configuration;
+using Splat;
 
 namespace SimpleStateMachineNodeEditor.ViewModel
 {
@@ -137,7 +140,6 @@ namespace SimpleStateMachineNodeEditor.ViewModel
             CommandChangeNodeName = new Command<(ViewModelNode node, string newName), (ViewModelNode node, string oldName)>(ChangeNodeName, UnChangeNodeName);
             CommandChangeConnectName = new Command<(ViewModelConnector connector, string newName), (ViewModelConnector connector, string oldName)>(ChangeConnectName, UnChangeConnectName);
 
-
             NotSavedSubscrube();
         }
 
@@ -189,6 +191,8 @@ namespace SimpleStateMachineNodeEditor.ViewModel
         }
         private void SetTheme(Themes theme)
         {
+            var configuration = Locator.Current.GetService<IConfiguration>();
+            configuration.GetSection("Appearance:Theme").Set(theme);
             Application.Current.Resources.Clear();
             var uri = new Uri(themesPaths[theme], UriKind.RelativeOrAbsolute);
             ResourceDictionary resourceDict = Application.LoadComponent(uri) as ResourceDictionary;
