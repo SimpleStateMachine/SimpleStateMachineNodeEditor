@@ -15,6 +15,7 @@ using System.Collections.Generic;
 using System.Windows.Controls;
 using System.Windows.Media;
 using DynamicData;
+using Microsoft.Extensions.Configuration;
 
 namespace SimpleStateMachineNodeEditor.ViewModel
 {
@@ -45,10 +46,10 @@ namespace SimpleStateMachineNodeEditor.ViewModel
         /// Flag for close application
         /// </summary>
         [Reactive] public bool NeedExit { get; set; }
-        [Reactive] public string ImagePath{ get; set; }
+        [Reactive] public string ImagePath { get; set; }
         [Reactive] public ImageFormats ImageFormat { get; set; }
         [Reactive] public bool WithoutMessages { get; set; }
-        [Reactive]  public Themes Theme { get; set; } = Themes.Dark;
+        [Reactive] public Themes Theme { get; set; }
 
 
 
@@ -63,10 +64,14 @@ namespace SimpleStateMachineNodeEditor.ViewModel
         public double ScaleMax = 5;
         public double ScaleMin = 0.1;
         public double Scales { get; set; } = 0.05;
-        
+
 
         public ViewModelNodesCanvas()
         {
+            var configuration = Locator.Current.GetService<IConfiguration>();
+            Theme = configuration.GetSection("Appearance:Theme").Get<Themes>();
+            if (Theme == Themes.noCorrect) Theme = Themes.Dark;
+            SetTheme(Theme);
             Cutter = new ViewModelCutter(this);
             Nodes.Connect().ObserveOnDispatcher().Bind(NodesForView).Subscribe();
             SetupCommands();
@@ -107,7 +112,7 @@ namespace SimpleStateMachineNodeEditor.ViewModel
 
         public void LogDebug(string message, params object[] args)
         {
-            if(!WithoutMessages)
+            if (!WithoutMessages)
                 Messages.Add(new ViewModelMessage(TypeMessage.Debug, string.Format(message, args)));
         }
         public void LogError(string message, params object[] args)
@@ -133,7 +138,7 @@ namespace SimpleStateMachineNodeEditor.ViewModel
             if (newValue > oldValue)
             {
                 NodesCount++;
-            }   
+            }
         }
         private string SchemeName()
         {
