@@ -1,0 +1,13 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <DrawingBrush x:Key="IconDeleteNode" >
+        <DrawingBrush.Drawing>
+            <DrawingGroup>
+                <DrawingGroup.Children>
+                    <GeometryDrawing Brush="{DynamicResource ColorIconsMain}" Geometry="F1M15,3L15,15 1,15 1,6 2,6 2,14 14,14 14,6 8,6 8,3z" />
+                    <GeometryDrawing Brush="#FFA1260D" Geometry="F1M7.0605,2.0605L5.9995,0.999499999999999 4.0305,2.9695 2.0605,0.999499999999999 0.9995,2.0605 2.9695,4.0305 0.9995,5.9995 2.0605,7.0605 4.0305,5.0905 5.9995,7.0605 7.0605,5.9995 5.0905,4.0305z" />
+                </DrawingGroup.Children>
+            </DrawingGroup>
+        </DrawingBrush.Drawing>
+    </DrawingBrush>
+</ResourceDictionary>

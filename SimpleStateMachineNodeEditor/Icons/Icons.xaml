@@ -20,6 +20,9 @@
         <ResourceDictionary Source="ExpandDown.xaml"/>
         <ResourceDictionary Source="Theme.xaml"/>
         <ResourceDictionary Source="Restore.xaml"/>
+        <ResourceDictionary Source="Cut.xaml"/>
+        <ResourceDictionary Source="DeleteNode.xaml"/>
+        <ResourceDictionary Source="Select.xaml"/>
         <ResourceDictionary Source="Minimize.xaml"/>
         <ResourceDictionary Source="Maximize.xaml"/>
         <ResourceDictionary Source="Exit.xaml"/>

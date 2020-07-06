@@ -81,6 +81,7 @@ namespace SimpleStateMachineNodeEditor.View
         {
             Mouse.Capture(this);
             Keyboard.Focus(this);
+            Mouse.OverrideCursor = Cursors.Cross;
         }
         private void SetupEvents()
         {
@@ -103,6 +104,7 @@ namespace SimpleStateMachineNodeEditor.View
         private void OnMouseLeftButtonUp(MouseEventArgs e)
         {
             this.ViewModel.Visible = null;
+            Mouse.OverrideCursor = null;
         }
 
         #endregion Setup Events

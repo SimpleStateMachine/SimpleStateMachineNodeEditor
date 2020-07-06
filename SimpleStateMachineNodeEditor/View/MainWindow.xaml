@@ -160,6 +160,22 @@
                     <Button x:Name="ButtonExpandDownAll" ToolTip="Expand Down All" Style="{DynamicResource StyleHeaderButton}" Background="{DynamicResource ColorWindowHeader}" BorderBrush="{DynamicResource ColorWindowHeaderButtonBackgroundMouseOver}">
                         <Rectangle Fill="{DynamicResource IconExpandDownAll}" Height="13" Width="13"/>
                     </Button>
+                    <Separator Grid.Column="5" Style="{DynamicResource TemplateSeparator}" Height="Auto" BorderThickness="0,0,1,0" />
+                    <ToggleButton x:Name="ButtonAddNode" ToolTip="Add node" Style="{DynamicResource TemplateToggleButton}" Background="{DynamicResource ColorWindowHeader}" BorderBrush="{DynamicResource ColorWindowHeaderButtonBackgroundMouseOver}">
+                        <Rectangle Fill="{DynamicResource IconAddNode}" Height="13" Width="13"/>
+                    </ToggleButton>
+                    <ToggleButton Style="{DynamicResource TemplateToggleButton}" Background="{DynamicResource ColorWindowHeader}" BorderBrush="{DynamicResource ColorWindowHeaderButtonBackgroundMouseOver}">
+                        <Rectangle Fill="{DynamicResource IconDeleteNode}" Height="13" Width="13"/>
+                    </ToggleButton>
+                    <ToggleButton x:Name="ButtonDeleteNode" ToolTip="Delete Node" Style="{DynamicResource TemplateToggleButton}" Background="{DynamicResource ColorWindowHeader}" BorderBrush="{DynamicResource ColorWindowHeaderButtonBackgroundMouseOver}">
+                        <Rectangle Fill="{DynamicResource IconDeleteNode}" Height="13" Width="13"/>
+                    </ToggleButton>
+                    <ToggleButton x:Name="ButtonStartSelect" ToolTip="Start select" Style="{DynamicResource TemplateToggleButton}" Background="{DynamicResource ColorWindowHeader}" BorderBrush="{DynamicResource ColorWindowHeaderButtonBackgroundMouseOver}">
+                        <Rectangle Fill="{DynamicResource IconSelect}" Height="13" Width="13"/>
+                    </ToggleButton>
+                    <ToggleButton x:Name="ButtonStartCut" ToolTip="Start cut" Style="{DynamicResource TemplateToggleButton}" Background="{DynamicResource ColorWindowHeader}" BorderBrush="{DynamicResource ColorWindowHeaderButtonBackgroundMouseOver}">
+                        <Rectangle Fill="{DynamicResource IconCut}" Height="13" Width="13"/>
+                    </ToggleButton>
                 </ToolBar>
 
             </ToolBarTray>
