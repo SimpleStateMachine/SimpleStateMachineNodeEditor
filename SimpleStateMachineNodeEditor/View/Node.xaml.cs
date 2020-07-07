@@ -20,6 +20,7 @@ using SimpleStateMachineNodeEditor.Helpers;
 using SimpleStateMachineNodeEditor.Helpers.Transformations;
 using SimpleStateMachineNodeEditor.Helpers.Enums;
 using SimpleStateMachineNodeEditor.Helpers.Extensions;
+using System.Collections.Generic;
 
 namespace SimpleStateMachineNodeEditor.View
 {
@@ -121,8 +122,16 @@ namespace SimpleStateMachineNodeEditor.View
         }
         private void OnEventMouseLeftDowns(MouseButtonEventArgs e)
         {
-            Keyboard.Focus(this);
-            this.ViewModel.CommandSelect.ExecuteWithSubscribe(SelectMode.Click);
+            NodeCanvasClickMode clickMode = this.ViewModel.NodesCanvas.ClickMode;
+            if (clickMode == NodeCanvasClickMode.Delete)
+            {
+                 this.ViewModel.NodesCanvas.CommandDeleteSelectedNodes.Execute(new List<NodeViewModel>() { this.ViewModel });
+            }
+            else
+            {
+                Keyboard.Focus(this);
+                this.ViewModel.CommandSelect.ExecuteWithSubscribe(SelectMode.Click);
+            }
         }
         private void Validate(RoutedEventArgs e)
         {

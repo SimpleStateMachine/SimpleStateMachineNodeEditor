@@ -4,7 +4,7 @@ using System.Windows.Input;
 
 namespace SimpleStateMachineNodeEditor.Helpers.Commands
 {
-    public class Command<TParameter, TResult> : ICommandWithUndoRedo, ICommand, ICloneable 
+    public class Command<TParameter, TResult> : ICommandWithUndoRedo, ICommand, ICloneable
     {
         private readonly Func<TParameter, TResult, TResult> _execute;
         private readonly Func<TParameter, TResult, TResult> _unExecute;
@@ -12,7 +12,7 @@ namespace SimpleStateMachineNodeEditor.Helpers.Commands
         public TParameter Parameters { get; set; }
         public TResult Result { get; set; }
         public object Clone()
-        {         
+        {
             return new Command<TParameter, TResult>(_execute, _unExecute, OnExecute)
             {
                 Parameters = this.Parameters,
@@ -32,7 +32,7 @@ namespace SimpleStateMachineNodeEditor.Helpers.Commands
             return true;
         }
 
-        public void Execute(object parameter)
+        public void Execute(object parameter = default)
         {
             Parameters = parameter.Cast<TParameter>();
 
@@ -49,18 +49,18 @@ namespace SimpleStateMachineNodeEditor.Helpers.Commands
             OnExecute?.Invoke();
         }
 
-        public  void UnExecute()
-        {         
-            this._unExecute(Parameters, Result);
-
-            ICommandWithUndoRedo.AddInRedo(this.Clone() as ICommandWithUndoRedo);
-        }
-
-        public  void ExecuteWithSubscribe()
+        void ICommandWithUndoRedo.ExecuteWithSubscribe()
         {
             this.Result = this._execute(this.Parameters, this.Result);
 
             ICommandWithUndoRedo.AddInUndo(this.Clone() as ICommandWithUndoRedo);
+        }
+
+        void ICommandWithUndoRedo.UnExecute()
+        {
+            this._unExecute(Parameters, Result);
+
+            ICommandWithUndoRedo.AddInRedo(this.Clone() as ICommandWithUndoRedo);
         }
 
         public Command(Func<TParameter, TResult, TResult> ExecuteWithSubscribe, Func<TParameter, TResult, TResult> unExecute, Action onExecute = null)
@@ -69,7 +69,7 @@ namespace SimpleStateMachineNodeEditor.Helpers.Commands
 
             _unExecute = unExecute;
 
-            OnExecute += onExecute;            
+            OnExecute += onExecute;
         }
     }
 }

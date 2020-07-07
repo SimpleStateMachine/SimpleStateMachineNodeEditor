@@ -18,6 +18,7 @@ using SimpleStateMachineNodeEditor.ViewModel;
 using SimpleStateMachineNodeEditor.Helpers.Transformations;
 using SimpleStateMachineNodeEditor.Helpers.Enums;
 using SimpleStateMachineNodeEditor.Helpers.Extensions;
+using System.Collections.Generic;
 
 namespace SimpleStateMachineNodeEditor.View
 {
@@ -46,9 +47,7 @@ namespace SimpleStateMachineNodeEditor.View
             InitializeComponent();
             SetupBinding();
             SetupEvents();
-            SetupSubcriptions();
-
-       
+            SetupSubcriptions(); 
         }
 
         #region SetupBinding
@@ -118,47 +117,62 @@ namespace SimpleStateMachineNodeEditor.View
 
         private void ConnectDrag(MouseButtonEventArgs e)
         {
-            if (Keyboard.IsKeyDown(Key.LeftCtrl))
+            if (this.ViewModel.NodesCanvas.ClickMode == NodeCanvasClickMode.Default)
             {
-                this.ViewModel.CommandSetAsLoop.ExecuteWithSubscribe();
-                this.ViewModel.NodesCanvas.CommandAddConnectorWithConnect.Execute(this.ViewModel);
-            }          
-            else 
-            {
-                this.ViewModel.CommandConnectPointDrag.ExecuteWithSubscribe();
-                DataObject data = new DataObject();
-                data.SetData("Node", this.ViewModel.Node);
-                DragDrop.DoDragDrop(this, data, DragDropEffects.Move);
-                this.ViewModel.CommandCheckConnectPointDrop.ExecuteWithSubscribe();
-                e.Handled = true;
+                if (Keyboard.IsKeyDown(Key.LeftCtrl))
+                {
+                    this.ViewModel.CommandSetAsLoop.ExecuteWithSubscribe();
+                    this.ViewModel.NodesCanvas.CommandAddConnectorWithConnect.Execute(this.ViewModel);
+                }
+                else
+                {
+                    this.ViewModel.CommandConnectPointDrag.ExecuteWithSubscribe();
+                    DataObject data = new DataObject();
+                    data.SetData("Node", this.ViewModel.Node);
+                    DragDrop.DoDragDrop(this, data, DragDropEffects.Move);
+                    this.ViewModel.CommandCheckConnectPointDrop.ExecuteWithSubscribe();
+                    e.Handled = true;
+                }
             }
         }
 
         private void ConnectorDrag(MouseButtonEventArgs e)
-        {        
-            if (!this.ViewModel.TextEnable)
-                return;
-            if (Keyboard.IsKeyDown(Key.LeftAlt))
+        {
+            if (this.ViewModel.NodesCanvas.ClickMode == NodeCanvasClickMode.Default)
             {
-                this.ViewModel.CommandConnectorDrag.ExecuteWithSubscribe();
-                DataObject data = new DataObject();
-                data.SetData("Connector", this.ViewModel);
-                DragDrop.DoDragDrop(this, data, DragDropEffects.Move);
-            }
-            else if (Keyboard.IsKeyDown(Key.LeftShift))
+                if (!this.ViewModel.TextEnable)
+                    return;
+                if (Keyboard.IsKeyDown(Key.LeftAlt))
+                {
+                    this.ViewModel.CommandConnectorDrag.ExecuteWithSubscribe();
+                    DataObject data = new DataObject();
+                    data.SetData("Connector", this.ViewModel);
+                    DragDrop.DoDragDrop(this, data, DragDropEffects.Move);
+                }
+                else if (Keyboard.IsKeyDown(Key.LeftShift))
+                {
+                    this.ViewModel.CommandSelect.ExecuteWithSubscribe(SelectMode.ClickWithShift);
+                }
+                else if (Keyboard.IsKeyDown(Key.LeftCtrl))
+                {
+                    this.ViewModel.CommandSelect.ExecuteWithSubscribe(SelectMode.ClickWithCtrl);
+                }
+                else
+                {
+                    this.ViewModel.CommandSelect.ExecuteWithSubscribe(SelectMode.Click);
+                    return;
+                }
+            } 
+            else if (this.ViewModel.NodesCanvas.ClickMode == NodeCanvasClickMode.Cut)
             {
-                this.ViewModel.CommandSelect.ExecuteWithSubscribe(SelectMode.ClickWithShift);
+                this.ViewModel.NodesCanvas.CommandDeleteSelectedConnectors.Execute(new List<ConnectorViewModel>() {this.ViewModel });
             }
-            else if (Keyboard.IsKeyDown(Key.LeftCtrl))
+            else if (this.ViewModel.NodesCanvas.ClickMode == NodeCanvasClickMode.Select)
             {
-                this.ViewModel.CommandSelect.ExecuteWithSubscribe(SelectMode.ClickWithCtrl);              
+                this.ViewModel.CommandSelect.ExecuteWithSubscribe(SelectMode.ClickWithCtrl);
             }
-            else
-            {
-                this.ViewModel.CommandSelect.ExecuteWithSubscribe(SelectMode.Click);
-                return;
-            }
-            e.Handled = true;
+                e.Handled = true;
+           
         }
 
         private void ConnectorDragEnter(DragEventArgs e)

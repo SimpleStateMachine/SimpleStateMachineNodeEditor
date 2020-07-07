@@ -27,22 +27,22 @@ namespace SimpleStateMachineNodeEditor.Helpers.Commands
             }
         }
 
-        public static ICommandWithUndoRedo AddInRedo(ICommandWithUndoRedo command)
+        protected static ICommandWithUndoRedo AddInRedo(ICommandWithUndoRedo command)
         {
             StackRedo.Push(command);
 
             return command;
         }
 
-        public static ICommandWithUndoRedo AddInUndo(ICommandWithUndoRedo command)
+        protected static ICommandWithUndoRedo AddInUndo(ICommandWithUndoRedo command)
         {
             StackUndo.Push(command);
 
             return command;
         }
 
-        public void ExecuteWithSubscribe();
-        public void UnExecute();
+        protected abstract void ExecuteWithSubscribe();
+        protected abstract void UnExecute();
 
     }
 }

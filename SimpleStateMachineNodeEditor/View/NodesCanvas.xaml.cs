@@ -139,17 +139,34 @@ namespace SimpleStateMachineNodeEditor.View
                 //this.WhenAnyValue(x => x.ViewModel.Scale.Value).Subscribe(value => { this.Canvas.Height /= value; this.Canvas.Width /= value; }).DisposeWith(disposable);
             });
         }
+
+
         private void OnEventMouseLeftDown(MouseButtonEventArgs e)
         {
             PositionMove = Mouse.GetPosition(this.CanvasElement);
 
             if (Mouse.Captured == null)
             {
-                Keyboard.ClearFocus();
-                this.CaptureMouse();
-                Keyboard.Focus(this);
-
-                this.ViewModel.CommandUnSelectAll.ExecuteWithSubscribe();
+                NodeCanvasClickMode clickMode = ViewModel.ClickMode;
+                if (clickMode == NodeCanvasClickMode.Default)
+                {
+                    Keyboard.ClearFocus();
+                    this.CaptureMouse();
+                    Keyboard.Focus(this);
+                    this.ViewModel.CommandUnSelectAll.ExecuteWithSubscribe();
+                }
+                else if (clickMode == NodeCanvasClickMode.AddNode)
+                {                   
+                    this.ViewModel.CommandAddNodeWithUndoRedo.Execute(PositionMove);
+                }
+                else if (clickMode == NodeCanvasClickMode.Select)
+                {
+                    this.ViewModel.CommandSelect.ExecuteWithSubscribe(PositionMove);
+                }
+                else if (clickMode == NodeCanvasClickMode.Cut)
+                {
+                    this.ViewModel.CommandCut.ExecuteWithSubscribe(PositionMove);
+                }
             }
         }
 

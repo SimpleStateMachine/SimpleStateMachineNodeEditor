@@ -171,6 +171,11 @@ namespace SimpleStateMachineNodeEditor.View
                 this.LabelDebug.Events().PreviewMouseLeftButtonDown.Subscribe(e => SetDisplayMessageType(e, TypeMessage.Debug)).DisposeWith(disposable);
                 this.LabelErrorList.Events().PreviewMouseLeftButtonDown.Subscribe(e=> SetDisplayMessageType(e, TypeMessage.All)).DisposeWith(disposable);
                 this.LabelErrorListUpdate.Events().MouseLeftButtonDown.WithoutParameter().InvokeCommand(NodesCanvas.ViewModel.CommandErrorListUpdate).DisposeWith(disposable);
+
+                this.ButtonAddNode.Events().PreviewMouseLeftButtonDown.Subscribe(e=> RadioButtonUnChecked(ButtonAddNode, NodeCanvasClickMode.AddNode, e )).DisposeWith(disposable);
+                this.ButtonDeleteNode.Events().PreviewMouseLeftButtonDown.Subscribe(e => RadioButtonUnChecked(ButtonDeleteNode, NodeCanvasClickMode.Delete, e)).DisposeWith(disposable);
+                this.ButtonStartSelect.Events().PreviewMouseLeftButtonDown.Subscribe(e => RadioButtonUnChecked(ButtonStartSelect, NodeCanvasClickMode.Select, e)).DisposeWith(disposable);
+                this.ButtonStartCut.Events().PreviewMouseLeftButtonDown.Subscribe(e => RadioButtonUnChecked(ButtonStartCut, NodeCanvasClickMode.Cut, e)).DisposeWith(disposable);
             });
         }
 
@@ -180,6 +185,20 @@ namespace SimpleStateMachineNodeEditor.View
                 e.Handled = true;
 
             this.ViewModel.NodesCanvas.DisplayMessageType = typeMessage;
+        }
+        private void RadioButtonUnChecked(RadioButton radioButton, NodeCanvasClickMode clickMode, MouseButtonEventArgs e)
+        {
+            if(radioButton.IsChecked==true)
+            {
+                radioButton.IsChecked = false;
+                e.Handled = true;
+
+                ViewModel.NodesCanvas.ClickMode = NodeCanvasClickMode.Default;
+            }
+            else
+            {
+                ViewModel.NodesCanvas.ClickMode = clickMode;
+            }
         }
         private void ErrorListCollapse()
         {

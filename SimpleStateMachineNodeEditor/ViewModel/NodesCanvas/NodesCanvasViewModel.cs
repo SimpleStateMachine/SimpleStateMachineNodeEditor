@@ -12,6 +12,7 @@ using System.Collections.Generic;
 using System.Windows.Media;
 using DynamicData;
 using Microsoft.Extensions.Configuration;
+using System.Windows.Input;
 
 namespace SimpleStateMachineNodeEditor.ViewModel
 {
@@ -46,7 +47,7 @@ namespace SimpleStateMachineNodeEditor.ViewModel
         [Reactive] public ImageFormats ImageFormat { get; set; }
         [Reactive] public bool WithoutMessages { get; set; }
         [Reactive] public Themes Theme { get; set; }
-
+        [Reactive] public NodeCanvasClickMode ClickMode { get; set; } = NodeCanvasClickMode.Default;
 
 
         static Dictionary<Themes, string> themesPaths = new Dictionary<Themes, string>()
@@ -81,6 +82,7 @@ namespace SimpleStateMachineNodeEditor.ViewModel
         private void SetupSubscriptions()
         {
             this.WhenAnyValue(x => x.NodesForView.Count).Buffer(2, 1).Select(x => (Previous: x[0], Current: x[1])).Subscribe(x => UpdateCount(x.Previous, x.Current));
+            this.WhenAnyValue(x => x.ClickMode).Subscribe(value => ChangeMouseCursor(value));
         }
 
         #endregion Setup Subscriptions
@@ -130,6 +132,19 @@ namespace SimpleStateMachineNodeEditor.ViewModel
         }
 
         #endregion Logging
+        private void ChangeMouseCursor(NodeCanvasClickMode clickMode)
+        {
+            Mouse.OverrideCursor = clickMode switch
+            {
+                //NodeCanvasClickMode.Default => null,
+                //NodeCanvasClickMode.AddNode => null,
+                NodeCanvasClickMode.Delete => Cursors.No,
+                NodeCanvasClickMode.Select => Cursors.Cross,
+                NodeCanvasClickMode.Cut => Cursors.Hand,
+                NodeCanvasClickMode.noCorrect => throw new NotImplementedException(),
+                _ => null
+            };
+        }
         private void UpdateCount(int oldValue, int newValue)
         {
             if (newValue > oldValue)

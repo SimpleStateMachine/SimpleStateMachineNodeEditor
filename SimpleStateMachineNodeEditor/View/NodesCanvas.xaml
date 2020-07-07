@@ -51,23 +51,23 @@
     </Border>
     <UserControl.ContextMenu >
         <ContextMenu Template="{DynamicResource TemplateContextMenu}" Background="{DynamicResource ColorMenuBackground}"  Foreground="{DynamicResource ColorMenuForeground}" BorderBrush="{DynamicResource ColorMenuBorder}" OpacityMask="{DynamicResource ColorMenuBackgroundMouseOver}"  BorderThickness="1" HorizontalAlignment="Left" VerticalAlignment="Center" >
-            <MenuItem Header="Add" x:Name="ItemAddNode" InputGestureText="Ctrl + N" Style="{DynamicResource StyleContextMenuItem}" >
+            <MenuItem Header="Add node" x:Name="ItemAddNode" InputGestureText="Ctrl + N" ToolTip="Add new node on left click position" Style="{DynamicResource StyleContextMenuItem}" >
                 <MenuItem.Icon>
                     <Rectangle Fill="{DynamicResource IconAddNode}" Height="13" Width="13"/>
                 </MenuItem.Icon>
             </MenuItem>
-            <MenuItem Header="Delete" x:Name="ItemDelete" InputGestureText="Delete" Style="{DynamicResource StyleContextMenuItem}">
+            <MenuItem Header="Delete" x:Name="ItemDelete" InputGestureText="Delete" ToolTip="Delete selected elements"  Style="{DynamicResource StyleContextMenuItem}">
                 <MenuItem.Icon>
-                    <Rectangle Fill="{DynamicResource IconDeleteNode}" Height="15" Width="15"/>
+                    <Rectangle Fill="{DynamicResource IconDeleteScheme}" Height="15" Width="15"/>
                 </MenuItem.Icon>
             </MenuItem>
             <Separator Background="#333337"/>
-            <MenuItem Header="Collaps Up" x:Name="ItemCollapsUp" Style="{DynamicResource StyleContextMenuItem}">
+            <MenuItem Header="Collaps Up" x:Name="ItemCollapsUp" ToolTip="Collapse Up selected nodes" Style="{DynamicResource StyleContextMenuItem}">
                 <MenuItem.Icon>
                     <Rectangle Fill="{DynamicResource IconCollapseUp}" Height="13" Width="13"/>
                 </MenuItem.Icon>
             </MenuItem>
-            <MenuItem Header="Expand Down" x:Name="ItemExpandDown" Style="{DynamicResource StyleContextMenuItem}">
+            <MenuItem Header="Expand Down" x:Name="ItemExpandDown" ToolTip="Expand Down selected nodes" Style="{DynamicResource StyleContextMenuItem}">
                 <MenuItem.Icon>
                     <Rectangle Fill="{DynamicResource IconExpandDown}" Height="13" Width="13"/>
                 </MenuItem.Icon>
