@@ -165,7 +165,8 @@ namespace SimpleStateMachineNodeEditor.View
             } 
             else if (this.ViewModel.NodesCanvas.ClickMode == NodeCanvasClickMode.Cut)
             {
-                this.ViewModel.NodesCanvas.CommandDeleteSelectedConnectors.Execute(new List<ConnectorViewModel>() {this.ViewModel });
+                if (this.ViewModel != this.ViewModel.Node.CurrentConnector)
+                    this.ViewModel.NodesCanvas.CommandDeleteSelectedConnectors.Execute(new List<ConnectorViewModel>() {this.ViewModel });
             }
             else if (this.ViewModel.NodesCanvas.ClickMode == NodeCanvasClickMode.Select)
             {

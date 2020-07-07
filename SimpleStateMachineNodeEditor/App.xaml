@@ -50,7 +50,7 @@
                 
                     <!--#region      Header-->
                 <ResourceDictionary Source="Styles/MainWindow/ToolBar/TemplateSeparator.xaml"/>
-                <ResourceDictionary Source="Styles/MainWindow/ToolBar/TemplateCheckBox.xaml"/>
+                <ResourceDictionary Source="Styles/MainWindow/ToolBar/StyleRadioButton.xaml"/>
                 <ResourceDictionary Source="Styles/MainWindow/ToolBarTemplate.xaml"/>
                 <ResourceDictionary Source="Styles/MainWindow/Header/StyleHeaderButton.xaml"/>
                 <!--#endregion   Header-->
