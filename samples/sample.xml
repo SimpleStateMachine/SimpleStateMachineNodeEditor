@@ -1,0 +1,30 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<StateMachine>
+  <States>
+    <State Name="Start" />
+    <State Name="State 1" />
+    <State Name="State 2" />
+    <State Name="State 3" />
+    <State Name="State 4" />
+    <State Name="State 5" />
+  </States>
+  <StartState Name="Start" />
+  <Transitions>
+    <Transition Name="Transition 3" From="Start" To="Start" />
+    <Transition Name="Transition 2" From="Start" To="State 3" />
+    <Transition Name="Transition 1" From="Start" To="State 2" />
+    <Transition Name="Transition 0" From="Start" To="State 1" />
+    <Transition Name="Transition 7" From="State 1" To="State 5" />
+    <Transition Name="Transition 5" From="State 2" To="State 4" />
+    <Transition Name="Transition 4" From="State 3" To="State 4" />
+    <Transition Name="Transition 6" From="State 4" To="State 5" />
+  </Transitions>
+  <Visualization>
+    <State Name="Start" Position="62.5, 129.49999999999997" IsCollapse="False" />
+    <State Name="State 1" Position="414, 363.53999999999996" IsCollapse="False" />
+    <State Name="State 2" Position="413.5, 240.53999999999996" IsCollapse="False" />
+    <State Name="State 3" Position="414.5, 125.03999999999996" IsCollapse="False" />
+    <State Name="State 4" Position="613, 200.03999999999996" IsCollapse="False" />
+    <State Name="State 5" Position="876, 251.03999999999996" IsCollapse="False" />
+  </Visualization>
+</StateMachine>
