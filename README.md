@@ -49,15 +49,20 @@ If you like or are using this project please give it a star. Thanks!
 <?xml version="1.0" encoding="utf-8"?>
 <StateMachine>
   <States>
-    <State Name="Start" Position="37, 80" IsCollapse="False" />
-    <State Name="State 1" Position="471, 195.54" IsCollapse="False" />
-    <State Name="State 2" Position="276, 83.03999999999999" IsCollapse="False" />
+    <State Name="Start"/>
+    <State Name="State 1"/>
+    <State Name="State 2"/>
   </States>
   <StartState Name="Start" />
   <Transitions>
     <Transition Name="Transition 2" From="State 2" To="State 1" />
     <Transition Name="Transition 1" From="Start" To="State 2" />
   </Transitions>
+   <Visualization>
+    <State Name="Start" Position="37, 80" IsCollapse="False" />
+    <State Name="State 1" Position="471, 195.54" IsCollapse="False" />
+    <State Name="State 2" Position="276, 83.03999999999999" IsCollapse="False" />
+  </Visualization>
 </StateMachine>
 ```
 ### Save work space as PNG/JPEG
