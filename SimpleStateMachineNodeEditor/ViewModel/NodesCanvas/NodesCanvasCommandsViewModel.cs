@@ -389,6 +389,61 @@ namespace SimpleStateMachineNodeEditor.ViewModel
             SchemePath = fileName;
 
             #endregion  setup Transitions/connects
+
+            #region setup Visualization
+            XElement Visualization = stateMachineXElement.Element("Visualization");
+
+          
+            if (Visualization != null)
+            {
+                var visualizationStates = Visualization.Elements()?.ToList();
+                if(visualizationStates!=null)
+                {
+                    var nodes = this.Nodes.Items.ToDictionary(x => x.Name, x => x);
+                    Point point;
+                    bool isCollapse;
+                    string name;
+                    string pointAttribute;
+                    string isCollapseAttribute;
+                    foreach (var visualization in visualizationStates)
+                    {
+                        name = visualization.Attribute("Name")?.Value;
+                        if(nodes.TryGetValue(name, out NodeViewModel node))
+                        {
+                            pointAttribute = visualization.Attribute("Position")?.Value;
+                            if (!PointExtensition.TryParseFromString(pointAttribute, out point))
+                            {
+                                Error(String.Format("Error parse attribute \'position\' for state with name \'{0}\'", name));
+                                return;
+                            }
+                            isCollapseAttribute = visualization.Attribute("IsCollapse")?.Value;
+                            if (!bool.TryParse(isCollapseAttribute, out isCollapse))
+                            {
+                                Error(String.Format("Error parse attribute \'isCollapse\' for state with name \'{0}\'", name));
+                                return;
+                            }
+                            node.Point1 = point;
+                            node.IsCollapse = isCollapse;
+                        }
+                        else
+                        {
+                            Error(String.Format("Visualization for state with name \'{0}\' that not exist", name));
+                            return;
+                        }
+                    }
+                }
+                
+            
+                //NodeViewModel nodeViewModel = Nodes.w 
+                //var position = node.Attribute("Position")?.Value;
+                //Point point = string.IsNullOrEmpty(position) ? new Point() : PointExtensition.StringToPoint(position);
+                //var isCollapse = node.Attribute("IsCollapse")?.Value;
+                //if (isCollapse != null)
+                //    viewModelNode.IsCollapse = bool.Parse(isCollapse);
+
+            }
+            #endregion  setup Visualization
+
             Mouse.OverrideCursor = null;
             WithoutMessages = false;
             LogDebug("Scheme was loaded from file \"{0}\"", SchemePath);
@@ -470,6 +525,15 @@ namespace SimpleStateMachineNodeEditor.ViewModel
             {
                 transitions.Add(transition.ToXElement());
             }
+
+
+            XElement visualizationXElement = new XElement("Visualization");
+            stateMachineXElement.Add(visualizationXElement);
+            foreach (var state in Nodes.Items)
+            {
+                visualizationXElement.Add(state.ToVisualizationXElement());
+            }
+
 
             xDocument.Save(fileName);
             ItSaved = true;

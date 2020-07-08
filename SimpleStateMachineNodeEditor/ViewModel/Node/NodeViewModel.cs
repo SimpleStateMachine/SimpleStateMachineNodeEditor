@@ -48,7 +48,7 @@ namespace SimpleStateMachineNodeEditor.ViewModel
         }
 
 
-        public NodeViewModel(NodesCanvasViewModel nodesCanvas, string name, Point point)
+        public NodeViewModel(NodesCanvasViewModel nodesCanvas, string name, Point point = default(Point))
         {
             NodesCanvas = nodesCanvas;
             Name = name;
@@ -128,11 +128,15 @@ namespace SimpleStateMachineNodeEditor.ViewModel
         {
             XElement element = new XElement("State");
             element.Add(new XAttribute("Name", Name));
+            return element;
+        }
+        public XElement ToVisualizationXElement()
+        {
+            XElement element = ToXElement();
             element.Add(new XAttribute("Position", PointExtensition.PointToString(Point1)));
             element.Add(new XAttribute("IsCollapse", IsCollapse.ToString()));
             return element;
         }
-
         public static NodeViewModel FromXElement(NodesCanvasViewModel nodesCanvas, XElement node, out string errorMessage, Func<string, bool> actionForCheck)
         {
             errorMessage = null;
@@ -151,15 +155,7 @@ namespace SimpleStateMachineNodeEditor.ViewModel
                 return viewModelNode;
             }
 
-            var position = node.Attribute("Position")?.Value;
-            Point point = string.IsNullOrEmpty(position) ? new Point() : PointExtensition.StringToPoint(position);
-            viewModelNode = new NodeViewModel(nodesCanvas, name, point);
-            var isCollapse = node.Attribute("IsCollapse")?.Value;
-            if (isCollapse != null)
-                viewModelNode.IsCollapse = bool.Parse(isCollapse);
-
-
-
+            viewModelNode = new NodeViewModel(nodesCanvas, name);
 
             return viewModelNode;
         }
