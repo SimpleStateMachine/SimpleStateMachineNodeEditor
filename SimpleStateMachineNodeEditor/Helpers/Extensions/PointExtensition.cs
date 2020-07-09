@@ -1,5 +1,7 @@
-﻿using System;
+﻿using ReactiveUI;
+using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Runtime.CompilerServices;
 using System.Text;
 using System.Windows;
@@ -321,13 +323,33 @@ namespace SimpleStateMachineNodeEditor.Helpers.Extensions
 
         public static string PointToString(Point point)
         {
-            return string.Format("{0}, {1}", point.X.ToString(System.Globalization.CultureInfo.InvariantCulture), point.Y.ToString(System.Globalization.CultureInfo.InvariantCulture));
+            return string.Format("{0}, {1}", point.X.ToString(CultureInfo.InvariantCulture), point.Y.ToString(CultureInfo.InvariantCulture));
         }
 
-        public static Point StringToPoint(string str)
+        public static bool TryParseFromString(string str, out Point point)
         {
+            point = default(Point);
             string[] parts = str.Split(",");
-            return new Point(double.Parse(parts[0], System.Globalization.CultureInfo.InvariantCulture), double.Parse(parts[1], System.Globalization.CultureInfo.InvariantCulture));
+            if (parts.Length < 2)
+                return false;
+
+            double x, y;
+
+            if (!double.TryParse(parts[0], NumberStyles.Float, CultureInfo.InvariantCulture, out x))
+            {
+                return false;
+            }
+
+            if (!double.TryParse(parts[1], NumberStyles.Float, CultureInfo.InvariantCulture, out y))
+            {
+                return false;
+            }
+
+            point = new Point(x, y);
+
+            return true;
+            //return new Point(double.Parse(parts[0], System.Globalization.CultureInfo.InvariantCulture), double.Parse(parts[1], System.Globalization.CultureInfo.InvariantCulture));
         }
+
     }
 }

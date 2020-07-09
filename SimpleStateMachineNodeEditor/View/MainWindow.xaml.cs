@@ -24,28 +24,28 @@ namespace SimpleStateMachineNodeEditor.View
     /// <summary>
     /// Interaction logic for MainWindow.xaml
     /// </summary>
-    public partial class MainWindow : Window, IViewFor<ViewModelMainWindow>
+    public partial class MainWindow : Window, IViewFor<MainWindowViewModel>
     {
         #region ViewModel
-        public static readonly DependencyProperty ViewModelProperty = DependencyProperty.Register(nameof(ViewModel), typeof(ViewModelMainWindow), typeof(MainWindow), new PropertyMetadata(null));
+        public static readonly DependencyProperty ViewModelProperty = DependencyProperty.Register(nameof(ViewModel), typeof(MainWindowViewModel), typeof(MainWindow), new PropertyMetadata(null));
 
-        public ViewModelMainWindow ViewModel
+        public MainWindowViewModel ViewModel
         {
-            get { return (ViewModelMainWindow)GetValue(ViewModelProperty); }
+            get { return (MainWindowViewModel)GetValue(ViewModelProperty); }
             set { SetValue(ViewModelProperty, value); }
         }
 
         object IViewFor.ViewModel
         {
             get { return ViewModel; }
-            set { ViewModel = (ViewModelMainWindow)value; }
+            set { ViewModel = (MainWindowViewModel)value; }
         }
         #endregion ViewModel
 
         public MainWindow()
         {
             InitializeComponent();
-            ViewModel = new ViewModelMainWindow(this.NodesCanvas.ViewModel);
+            ViewModel = new MainWindowViewModel(this.NodesCanvas.ViewModel);
             SetupSubscriptions();
             SetupBinding();
             SetupEvents();
@@ -61,7 +61,7 @@ namespace SimpleStateMachineNodeEditor.View
             {
                 //this.OneWayBind(this.ViewModel, x => x.Tests, x => x.TableOfTransitions.ItemsSource).DisposeWith(disposable);
 
-                var SelectedItem = this.ObservableForProperty(x => x.MessageList.SelectedItem).Select(x=>(x.Value as ViewModelMessage)?.Text);
+                var SelectedItem = this.ObservableForProperty(x => x.MessageList.SelectedItem).Select(x=>(x.Value as MessageViewModel)?.Text);
                 this.BindCommand(this.ViewModel, x => x.CommandCopyError, x => x.BindingCopyError, SelectedItem).DisposeWith(disposable);
                 this.BindCommand(this.ViewModel, x => x.CommandCopyError, x => x.ItemCopyError, SelectedItem).DisposeWith(disposable);
 
@@ -162,7 +162,7 @@ namespace SimpleStateMachineNodeEditor.View
         {
             this.WhenActivated(disposable =>
             {
-                this.MessageList.Events().MouseDoubleClick.Subscribe(_ => ViewModel.CommandCopyError.ExecuteWithSubscribe((MessageList.SelectedItem as ViewModelMessage)?.Text)).DisposeWith(disposable);
+                this.MessageList.Events().MouseDoubleClick.Subscribe(_ => ViewModel.CommandCopyError.ExecuteWithSubscribe((MessageList.SelectedItem as MessageViewModel)?.Text)).DisposeWith(disposable);
                 this.LabelSchemeName.Events().MouseDoubleClick.WithoutParameter().InvokeCommand(ViewModel.CommandCopySchemeName).DisposeWith(disposable);
                 this.Header.Events().PreviewMouseLeftButtonDown.Subscribe(e => HeaderClick(e)).DisposeWith(disposable);              
                 this.ButtonMin.Events().Click.Subscribe(e => ButtonMinClick(e)).DisposeWith(disposable);
@@ -180,6 +180,11 @@ namespace SimpleStateMachineNodeEditor.View
                 this.LabelDebug.Events().PreviewMouseLeftButtonDown.Subscribe(e => SetDisplayMessageType(e, TypeMessage.Debug)).DisposeWith(disposable);
                 this.LabelErrorList.Events().PreviewMouseLeftButtonDown.Subscribe(e=> SetDisplayMessageType(e, TypeMessage.All)).DisposeWith(disposable);
                 this.LabelErrorListUpdate.Events().MouseLeftButtonDown.WithoutParameter().InvokeCommand(NodesCanvas.ViewModel.CommandErrorListUpdate).DisposeWith(disposable);
+
+                this.ButtonAddNode.Events().PreviewMouseLeftButtonDown.Subscribe(e=> RadioButtonUnChecked(ButtonAddNode, NodeCanvasClickMode.AddNode, e )).DisposeWith(disposable);
+                this.ButtonDeleteNode.Events().PreviewMouseLeftButtonDown.Subscribe(e => RadioButtonUnChecked(ButtonDeleteNode, NodeCanvasClickMode.Delete, e)).DisposeWith(disposable);
+                this.ButtonStartSelect.Events().PreviewMouseLeftButtonDown.Subscribe(e => RadioButtonUnChecked(ButtonStartSelect, NodeCanvasClickMode.Select, e)).DisposeWith(disposable);
+                this.ButtonStartCut.Events().PreviewMouseLeftButtonDown.Subscribe(e => RadioButtonUnChecked(ButtonStartCut, NodeCanvasClickMode.Cut, e)).DisposeWith(disposable);
             });
         }
 
@@ -189,6 +194,20 @@ namespace SimpleStateMachineNodeEditor.View
                 e.Handled = true;
 
             this.ViewModel.NodesCanvas.DisplayMessageType = typeMessage;
+        }
+        private void RadioButtonUnChecked(RadioButton radioButton, NodeCanvasClickMode clickMode, MouseButtonEventArgs e)
+        {
+            if(radioButton.IsChecked==true)
+            {
+                radioButton.IsChecked = false;
+                e.Handled = true;
+
+                ViewModel.NodesCanvas.ClickMode = NodeCanvasClickMode.Default;
+            }
+            else
+            {
+                ViewModel.NodesCanvas.ClickMode = clickMode;
+            }
         }
         private void ErrorListCollapse()
         {
@@ -264,12 +283,15 @@ namespace SimpleStateMachineNodeEditor.View
 
                         if (point.X <= RestoreBounds.Width / 2)
                             Left = 0;
+
                         else if (point.X >= RestoreBounds.Width)
                             Left = point.X - (RestoreBounds.Width - (this.ActualWidth - point.X));
+
                         else
                             Left = point.X - (RestoreBounds.Width / 2);
 
                         Top = point.Y - (this.Header.ActualHeight / 2);
+
                         StateNormal();
                         this.WindowState = WindowState.Normal;
                     }

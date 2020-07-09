@@ -7,7 +7,7 @@
     <StartupObject>SimpleStateMachineNodeEditor.App</StartupObject>
     <ApplicationIcon>StateMachine.ico</ApplicationIcon>
     <SignAssembly>false</SignAssembly>
-    <Version>1.1.0</Version>
+    <Version>2.0.0</Version>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <PackageProjectUrl>https://github.com/SimpleStateMachine/SimpleStateMachineNodeEditor</PackageProjectUrl>
     <PackageIcon>SimpleStateMachine.png</PackageIcon>
@@ -15,11 +15,11 @@
     <PackageTags>statemachine state-machine finite-state-machine</PackageTags>
     <GeneratePackageOnBuild>false</GeneratePackageOnBuild>
     <Description>Node editor for SimpleStateMachine</Description>
-    <AssemblyVersion>1.1.0.0</AssemblyVersion>
-    <FileVersion>1.1.0.0</FileVersion>
-    <PackageReleaseNotes>Table of transitions
-Fix for read start state
-ReactiveUI 11.4.17</PackageReleaseNotes>
+    <AssemblyVersion>2.0.0.0</AssemblyVersion>
+    <FileVersion>2.0.0.0</FileVersion>
+    <PackageReleaseNotes>Correct scaling
+Config for save last selected theme
+New format for xml file with schemes</PackageReleaseNotes>
   </PropertyGroup>
 
   <ItemGroup>
@@ -62,6 +62,9 @@ ReactiveUI 11.4.17</PackageReleaseNotes>
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="Microsoft.Extensions.Configuration.Binder" Version="3.1.5" />
+    <PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="3.1.5" />
+    <PackageReference Include="Newtonsoft.Json" Version="12.0.3" />
     <PackageReference Include="ReactiveUI" Version="11.4.17" />
     <PackageReference Include="ReactiveUI.Events.WPF" Version="11.4.17" />
     <PackageReference Include="ReactiveUI.Fody" Version="11.4.17" />

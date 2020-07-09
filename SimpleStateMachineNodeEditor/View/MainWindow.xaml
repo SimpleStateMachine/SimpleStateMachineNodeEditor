@@ -15,7 +15,7 @@
             <RowDefinition Height="auto"/>
             <RowDefinition Height="auto" x:Name="Fotter" MinHeight="18"/>
         </Grid.RowDefinitions>
-        <view:ViewDialog x:Name="Dialog"/>
+        <view:Dialog x:Name="Dialog"/>
 
         <!--#region Header-->
         <DockPanel x:Name="Header" Grid.Row="0" Background="{DynamicResource ColorWindowHeader}" LastChildFill="False">
@@ -160,6 +160,19 @@
                     <Button x:Name="ButtonExpandDownAll" ToolTip="Expand Down All" Style="{DynamicResource StyleHeaderButton}" Background="{DynamicResource ColorWindowHeader}" BorderBrush="{DynamicResource ColorWindowHeaderButtonBackgroundMouseOver}">
                         <Rectangle Fill="{DynamicResource IconExpandDownAll}" Height="13" Width="13"/>
                     </Button>
+                    <Separator Grid.Column="5" Style="{DynamicResource TemplateSeparator}" Height="Auto" BorderThickness="0,0,1,0" />
+                    <RadioButton x:Name="ButtonAddNode" GroupName="ClickMode" ToolTip="Add node (Ctrl+N)" Style="{DynamicResource StyleRadioButton}" Background="{DynamicResource ColorWindowHeader}" BorderBrush="{DynamicResource ColorWindowHeaderButtonBackgroundMouseOver}" >
+                        <Rectangle Fill="{DynamicResource IconAddNode}" Height="15" Width="15"/>
+                    </RadioButton>
+                    <RadioButton x:Name="ButtonDeleteNode" GroupName="ClickMode" ToolTip="Delete Node (N+Delete)" Style="{DynamicResource StyleRadioButton}" Background="{DynamicResource ColorWindowHeader}" BorderBrush="{DynamicResource ColorWindowHeaderButtonBackgroundMouseOver}">
+                        <Rectangle Fill="{DynamicResource IconDeleteNode}" Height="15" Width="15"/>
+                    </RadioButton>
+                    <RadioButton x:Name="ButtonStartSelect" GroupName="ClickMode" ToolTip="Start select (Ctrl+LMB)" Style="{DynamicResource StyleRadioButton}" Background="{DynamicResource ColorWindowHeader}" BorderBrush="{DynamicResource ColorWindowHeaderButtonBackgroundMouseOver}">
+                        <Rectangle Fill="{DynamicResource IconSelect}" Height="15" Width="15"/>
+                    </RadioButton>
+                    <RadioButton x:Name="ButtonStartCut" GroupName="ClickMode" ToolTip="Start cut (Alt+LMB)" Style="{DynamicResource StyleRadioButton}" Background="{DynamicResource ColorWindowHeader}" BorderBrush="{DynamicResource ColorWindowHeaderButtonBackgroundMouseOver}">
+                        <Rectangle Fill="{DynamicResource IconCut}" Height="15" Width="15"/>
+                    </RadioButton>
                 </ToolBar>
 
             </ToolBarTray>
@@ -181,7 +194,7 @@
         <!--BorderBrush - it's color on IsMouseOver, OpacityMask - it's color on IsPressed-->
         <TabControl  Grid.Column="0"  Background="{x:Null}" BorderBrush="{x:Null}" Foreground="Green" TabStripPlacement="Top" Padding="2,2,2,0" >
                 <TabItem  Header="Node editor"  Style="{DynamicResource StyleTabItem}" Background="{DynamicResource ColorWindowHeader}" Foreground="{DynamicResource ColorWindowHeaderTabItemForeground}"  BorderBrush="{DynamicResource ColorElementMouseOver}" OpacityMask="{DynamicResource ColorElementMouseOver}">
-                    <view:ViewNodesCanvas x:Name="NodesCanvas" />
+                    <view:NodesCanvas x:Name="NodesCanvas" />
                 </TabItem>
             </TabControl>
             <GridSplitter Grid.Column="1" HorizontalAlignment="Center"  x:Name="TableOfTransitionsSplitter" VerticalAlignment="Stretch" Background="{DynamicResource ColorWindowHeader}"  Width="3"  ShowsPreview="False"  IsEnabled="False" />
@@ -221,7 +234,7 @@
                           VirtualizingStackPanel.ScrollUnit="Pixel">
                             <ListBox.ItemTemplate>
                                 <DataTemplate>
-                                    <view:ViewTableOfTransitionsItem ViewModel="{Binding}" />
+                                    <view:TableOfTransitionsItem ViewModel="{Binding}" />
                                 </DataTemplate>
                             </ListBox.ItemTemplate>
                         </ListBox>
@@ -282,7 +295,7 @@
                     </ListBox.ContextMenu>
                     <ListBox.ItemTemplate>
                         <DataTemplate>
-                            <view:ViewMessage ViewModel="{Binding}" />
+                            <view:Message ViewModel="{Binding}" />
                         </DataTemplate>
                     </ListBox.ItemTemplate>
                 </ListBox>

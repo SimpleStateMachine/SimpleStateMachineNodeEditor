@@ -1,7 +1,7 @@
 
 
 
-# StateMachineNodeEditor [![](https://img.shields.io/github/v/release/SimpleStateMachine/SimpleStateMachineNodeEditor)](https://github.com/SimpleStateMachine/SimpleStateMachineNodeEditor/releases) [![](https://img.shields.io/github/stars/SimpleStateMachine/SimpleStateMachineNodeEditor)](https://github.com/SimpleStateMachine/SimpleStateMachineNodeEditor) [![](https://img.shields.io/github/license/SimpleStateMachine/SimpleStateMachineNodeEditor)](https://github.com/SimpleStateMachine/SimpleStateMachineNodeEditor)
+# StateMachineNodeEditor [![](https://img.shields.io/github/v/release/SimpleStateMachine/SimpleStateMachineNodeEditor)](https://github.com/SimpleStateMachine/SimpleStateMachineNodeEditor/releases) [![](https://img.shields.io/github/stars/SimpleStateMachine/SimpleStateMachineNodeEditor)](https://github.com/SimpleStateMachine/SimpleStateMachineNodeEditor) [![](https://img.shields.io/github/license/SimpleStateMachine/SimpleStateMachineNodeEditor)](https://github.com/SimpleStateMachine/SimpleStateMachineNodeEditor) [![](https://img.shields.io/badge/chat-slack-blueviolet.svg)](https://join.slack.com/t/simplestatemachine/shared_invite/zt-fnfhvvsx-fTejcpPn~PPb2ojdG_MQBg)
  StateMachineNodeEditor is a WPF node-editor for visual work and editoring  state-machine
  
   ## Give a Star! :star:
@@ -45,7 +45,26 @@ If you like or are using this project please give it a star. Thanks!
 ### Deleting transitions
 [![](https://github.com/SimpleStateMachine/SimpleStateMachineNodeEditor/blob/gh-pages/img/deleting%20transitions.gif)](https://github.com/SimpleStateMachine/SimpleStateMachineNodeEditor)
 ### Import/Export scheme from/to xml
-[![](https://github.com/SimpleStateMachine/SimpleStateMachineNodeEditor/blob/gh-pages/img/xml.jpg)](https://github.com/SimpleStateMachine/SimpleStateMachineNodeEditor)
+```xml
+<?xml version="1.0" encoding="utf-8"?>
+<StateMachine>
+  <States>
+    <State Name="Start"/>
+    <State Name="State 1"/>
+    <State Name="State 2"/>
+  </States>
+  <StartState Name="Start" />
+  <Transitions>
+    <Transition Name="Transition 2" From="State 2" To="State 1" />
+    <Transition Name="Transition 1" From="Start" To="State 2" />
+  </Transitions>
+   <Visualization>
+    <State Name="Start" Position="37, 80" IsCollapse="False" />
+    <State Name="State 1" Position="471, 195.54" IsCollapse="False" />
+    <State Name="State 2" Position="276, 83.03999999999999" IsCollapse="False" />
+  </Visualization>
+</StateMachine>
+```
 ### Save work space as PNG/JPEG
 [![](https://github.com/SimpleStateMachine/SimpleStateMachineNodeEditor/blob/gh-pages/img/jpg.jpg)](https://github.com/SimpleStateMachine/SimpleStateMachineNodeEditor)
 
@@ -59,29 +78,29 @@ If you like or are using this project please give it a star. Thanks!
  
 
 ## Shortcuts📎
-* **Ctrl + A** = Select All Nodes
-* **Ctrl + S** = Save
-* **Ctrl + Shift + S** = Save As
-* **Ctrl + Shift + O** = Open
-* **Ctrl + Shift + N** = New
-* **Alt + F4** = Exit
-* **Ctrl + Shift + Alt + P** = Export to PNG
-* **Ctrl + Shift + Alt + J** = Export to JPEG
-* **Ctrl + Z** = Undo
-* **Ctrl + Y** = Redo
-* **Ctrl + N** = Add Node
-* **Ctrl + LMB** on Canvas = Start Select
-* **Ctrl + LMB** on Connector = Create Loop
-* **LMB on Node** = Select one Node
-* **Ctrl + LMB** on Node = Select/UnSelect Node 
-* **Ctrl + LMB** on Transition = Select/UnSelect Transition
-* **Shift + LMB** on Transition = Multiple selection
-* **LMB** on Connector = Start create Connect
-* **Alt + LMB** on Connector = Move Connector in Node
-* **Alt + LMB** on Canvas = Start Cut
-* **Delete** = Delete Selected Elements
-* **C + Delete** = Delete Selected Connector
-* **N + Delete** = Delete Selected Nodes
+* <kbd>Ctrl</kbd></kbd> +<kbd>A</kbd> = Select All Nodes
+* <kbd>Ctrl</kbd> + <kbd>S</kbd> = Save
+* <kbd>Ctrl</kbd> + <kbd>Shift</kbd> + <kbd>S</kbd> = Save As
+* <kbd>Ctrl</kbd> + <kbd>Shift</kbd> + <kbd>O</kbd> = Open
+* <kbd>Ctrl</kbd> + <kbd>Shift</kbd> + <kbd>N</kbd> = New
+* <kbd>Alt</kbd> + <kbd>F4</kbd> = Exit
+* <kbd>Ctrl</kbd> + <kbd>Shift</kbd> + <kbd>Alt</kbd> + <kbd>P</kbd> = Export to PNG
+* <kbd>Ctrl</kbd> + <kbd>Shift</kbd> + <kbd>Alt</kbd> + <kbd>J</kbd> = Export to JPEG
+* <kbd>Ctrl</kbd> + <kbd>Z</kbd> = Undo
+* <kbd>Ctrl</kbd> + <kbd>Y</kbd> = Redo
+* <kbd>Ctrl</kbd> + <kbd>N</kbd> = Add Node
+* <kbd>Ctrl</kbd> + <kbd>LMB</kbd> on Canvas = Start Select
+* <kbd>Ctrl</kbd> + <kbd>LMB</kbd> on Connector = Create Loop
+* <kbd>LMB</kbd> on Node = Select one Node
+* <kbd>Ctrl</kbd> + <kbd>LMB</kbd> on Node = Select/UnSelect Node 
+* <kbd>Ctrl</kbd> + <kbd>LMB</kbd> on Transition = Select/UnSelect Transition
+* <kbd>Shift</kbd> + <kbd>LMB</kbd> on Transition = Multiple selection
+* <kbd>LMB</kbd> on Connector = Start create Connect
+* <kbd>Alt</kbd> + <kbd>LMB</kbd> on Connector = Move Connector in Node
+* <kbd>Alt</kbd> + <kbd>LMB</kbd> on Canvas = Start Cut
+* <kbd>Delete</kbd> = Delete Selected Elements
+* <kbd>C</kbd> + <kbd>Delete</kbd> = Delete Selected Connector
+* <kbd>N</kbd> + <kbd>Delete</kbd> = Delete Selected Nodes
 
 ## License📑
 
