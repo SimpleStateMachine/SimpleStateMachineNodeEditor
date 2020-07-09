@@ -1,0 +1,15 @@
+﻿<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+			 xmlns:Views="clr-namespace:SimpleStateMachineNodeEditorAvalonia.Views"
+			 xmlns:NodesCanvasElements="clr-namespace:SimpleStateMachineNodeEditorAvalonia.Views.NodesCanvasElements"
+             x:Class="SimpleStateMachineNodeEditorAvalonia.Views.NodesCanvas">
+	
+ <Canvas x:Name="CanvasNodesCanvas" Background="Black">
+	<Views:Selector x:Name="Selector" />
+	<Views:Cutter x:Name="Cutter" />
+	<!--<NodesCanvasElements:Elements x:Name="ElementsNodesCanvas"  Panel.ZIndex="0"/>-->
+ </Canvas>
+</UserControl>

@@ -7,12 +7,11 @@
              xmlns:View="clr-namespace:SimpleStateMachineNodeEditor.View"
              xmlns:ViewModel="clr-namespace:SimpleStateMachineNodeEditor.ViewModel"
              mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800" Focusable="True" AllowDrop="True" ClipToBounds="True">
-    <Border  Name="BorderElement" Background="{DynamicResource ColorNodesCanvasBackground}">
-        <Canvas x:Name="CanvasElement">
+             d:DesignHeight="450" d:DesignWidth="800" Focusable="True" AllowDrop="True" ClipToBounds="True" x:Name="UserControlElement" Background="{DynamicResource ColorNodesCanvasBackground}">
+    <Canvas x:Name="CanvasElement">
         <local:Selector x:Name="Selector"  Panel.ZIndex="999"/>
-            <local:Cutter x:Name="Cutter"  Panel.ZIndex="999"/>
-            <ItemsControl  x:Name="ItemControlElement" Panel.ZIndex="0" 
+        <local:Cutter x:Name="Cutter"  Panel.ZIndex="999"/>
+        <ItemsControl  x:Name="ItemControlElement" Panel.ZIndex="0" 
                        VirtualizingPanel.IsVirtualizing="True" 
                        VirtualizingPanel.VirtualizationMode="Recycling" 
                        VirtualizingPanel.CacheLength="1"
@@ -48,7 +47,6 @@
             </ItemsControl.ItemsSource>
         </ItemsControl>
     </Canvas>
-    </Border>
     <UserControl.ContextMenu >
         <ContextMenu Template="{DynamicResource TemplateContextMenu}" Background="{DynamicResource ColorMenuBackground}"  Foreground="{DynamicResource ColorMenuForeground}" BorderBrush="{DynamicResource ColorMenuBorder}" OpacityMask="{DynamicResource ColorMenuBackgroundMouseOver}"  BorderThickness="1" HorizontalAlignment="Left" VerticalAlignment="Center" >
             <MenuItem Header="Add node" x:Name="ItemAddNode" InputGestureText="Ctrl + N" ToolTip="Add new node on left click position" Style="{DynamicResource StyleContextMenuItem}" >

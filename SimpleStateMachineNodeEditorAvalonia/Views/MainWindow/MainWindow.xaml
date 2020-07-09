@@ -5,13 +5,16 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
         x:Class="SimpleStateMachineNodeEditorAvalonia.Views.MainWindow"
-        Icon="/Assets/avalonia-logo.ico"
-        Title="SimpleStateMachineNodeEditorAvalonia" ResizeMode="CanResizeWithGrip" WindowStyle="None">
-
+        Icon="/Assets/StateMachine-logo.ico"
+		xmlns:Views="clr-namespace:SimpleStateMachineNodeEditorAvalonia.Views"
+        Title="SimpleStateMachineNodeEditorAvalonia">
     <Design.DataContext>
         <vm:MainWindowViewModel/>
     </Design.DataContext>
-
-    <TextBlock x:Name="TextBlockElement" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+	<Grid>
+		<Views:NodesCanvas/>
+	</Grid>
+    
+    <!--<TextBlock x:Name="TextBlockElement" HorizontalAlignment="Center" VerticalAlignment="Center"/>-->
 
 </Window>

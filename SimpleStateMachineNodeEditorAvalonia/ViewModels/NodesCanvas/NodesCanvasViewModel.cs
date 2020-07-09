@@ -4,8 +4,7 @@ using System.Text;
 
 namespace SimpleStateMachineNodeEditorAvalonia.ViewModels
 {
-    public class MainWindowViewModel : ViewModelBase
+    public class NodesCanvasViewModel: BaseViewModel
     {
-        public string Greeting => "MyTest";
     }
 }

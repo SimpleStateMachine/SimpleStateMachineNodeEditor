@@ -1,0 +1,31 @@
+﻿<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+			 xmlns:Views="clr-namespace:SimpleStateMachineNodeEditorAvalonia.Views"
+			 xmlns:ViewModels="clr-namespace:SimpleStateMachineNodeEditor.ViewModels"
+             x:Class="SimpleStateMachineNodeEditorAvalonia.Views.NodesCanvasElements.Elements">
+	<ItemsControl  x:Name="ItemControlElements" >
+            <ItemsControl.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <Grid>
+                    </Grid>
+                </ItemsPanelTemplate>
+            </ItemsControl.ItemsPanel>
+            <!--<ItemsControl.Resources >
+                --><!--<DataTemplate DataType="{x:Type ViewModels:ConnectViewModel}">
+					<Views:Connect ViewModel="{Binding}"/>
+                </DataTemplate>
+                <DataTemplate DataType="{x:Type ViewModels:NodeViewModel}">
+					<Views:Node ViewModel="{Binding}" />
+                </DataTemplate>--><!--
+            </ItemsControl.Resources>-->
+            <!--<ItemsControl.ItemsSource>
+                <CompositeCollection>
+                    <CollectionContainer  x:Name="Connects" />
+                    <CollectionContainer x:Name="Nodes"/>
+                </CompositeCollection>
+            </ItemsControl.ItemsSource>-->
+        </ItemsControl>
+</UserControl>

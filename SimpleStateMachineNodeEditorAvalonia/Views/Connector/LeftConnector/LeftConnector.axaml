@@ -1,0 +1,12 @@
+﻿<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             x:Class="SimpleStateMachineNodeEditorAvalonia.Views.LeftConnector">
+	<Grid x:Name="GridLeftConnector" ColumnDefinitions="Auto, Auto" Background="#00000000">
+		<!--<styles:MyTextBox x:Name="TextBoxElement" Grid.Row="0" Grid.Column="1" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="5,0,5,3" />
+		<Ellipse Name="EllipseElement" Grid.Row="0" Grid.Column="0"  HorizontalAlignment="Left"  VerticalAlignment="Center"  Margin="-7,0,0,0" Height="12" Width="12"   AllowDrop="True" StrokeThickness="1" />-->
+		<TextBox Name="TextBoxLeftConnector" Grid.Column="1" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="5,0,5,3" Text="Test"/>
+		<Ellipse Name="EllipseLeftConnector" Grid.Column="0"  HorizontalAlignment="Left"  VerticalAlignment="Center"  Margin="-7,0,0,0" Height="12" Width="12" StrokeThickness="1" Fill="Orange" />
+	</Grid>
+</UserControl>
