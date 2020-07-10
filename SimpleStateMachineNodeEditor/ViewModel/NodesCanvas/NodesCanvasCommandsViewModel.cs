@@ -1,4 +1,4 @@
-﻿using DynamicData;
+using DynamicData;
 using ReactiveUI;
 using SimpleStateMachineNodeEditor.Helpers;
 using SimpleStateMachineNodeEditor.Helpers.Commands;
@@ -13,7 +13,6 @@ using System.Windows;
 using System.Windows.Input;
 using System.Xml.Linq;
 using Microsoft.Extensions.Configuration;
-using SimpleStateMachineNodeEditor.Helpers.Configuration;
 using Splat;
 using System.Drawing.Drawing2D;
 using System.Windows.Media;
