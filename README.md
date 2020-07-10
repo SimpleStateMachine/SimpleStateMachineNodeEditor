@@ -3,7 +3,7 @@
  
  [![](https://img.shields.io/badge/chat-slack-blueviolet.svg)](https://join.slack.com/t/simplestatemachine/shared_invite/zt-fnfhvvsx-fTejcpPn~PPb2ojdG_MQBg) [![](https://img.shields.io/badge/chat-telegram-blue.svg)](https://t.me/joinchat/HMLJFkv9do6aDV188rhd0w)
  
- # ![](https://avatars3.githubusercontent.com/u/61209955?s=50&v=4) SimpleStateMachineNodeEditor
+ # SimpleStateMachineNodeEditor
   
  SimpleStateMachineNodeEditor is a WPF node-editor for visual work and editoring  state-machine
  
