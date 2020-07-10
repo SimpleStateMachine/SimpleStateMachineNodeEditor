@@ -102,7 +102,7 @@ If you like or are using this project please give it a star. Thanks!
 * <kbd>C</kbd> + <kbd>Delete</kbd> = Delete Selected Connector
 * <kbd>N</kbd> + <kbd>Delete</kbd> = Delete Selected Nodes
 
- ## FAQ📎
+ ## FAQ❔
  If you think you have found a bug, create a github [issue](https://github.com/SimpleStateMachine/SimpleStateMachineNodeEditor/issues).
  
  But if you just have questions about how to use:
