@@ -1,8 +1,11 @@
 
 
 
-# StateMachineNodeEditor [![](https://img.shields.io/github/v/release/SimpleStateMachine/SimpleStateMachineNodeEditor)](https://github.com/SimpleStateMachine/SimpleStateMachineNodeEditor/releases) [![](https://img.shields.io/github/stars/SimpleStateMachine/SimpleStateMachineNodeEditor)](https://github.com/SimpleStateMachine/SimpleStateMachineNodeEditor) [![](https://img.shields.io/github/license/SimpleStateMachine/SimpleStateMachineNodeEditor)](https://github.com/SimpleStateMachine/SimpleStateMachineNodeEditor) [![](https://img.shields.io/badge/chat-slack-blueviolet.svg)](https://join.slack.com/t/simplestatemachine/shared_invite/zt-fnfhvvsx-fTejcpPn~PPb2ojdG_MQBg) [![](https://img.shields.io/badge/chat-telegram-blue.svg)](https://t.me/joinchat/HMLJFkv9do6aDV188rhd0w)
-
+ [![](https://img.shields.io/github/v/release/SimpleStateMachine/SimpleStateMachineNodeEditor)](https://github.com/SimpleStateMachine/SimpleStateMachineNodeEditor/releases) [![](https://img.shields.io/github/stars/SimpleStateMachine/SimpleStateMachineNodeEditor)](https://github.com/SimpleStateMachine/SimpleStateMachineNodeEditor) [![](https://img.shields.io/github/license/SimpleStateMachine/SimpleStateMachineNodeEditor)](https://github.com/SimpleStateMachine/SimpleStateMachineNodeEditor) [![](https://img.shields.io/github/languages/code-size/SimpleStateMachine/SimpleStateMachineNodeEditor)](https://github.com/SimpleStateMachine/SimpleStateMachineNodeEditor) 
+ [![]( https://img.shields.io/github/last-commit/SimpleStateMachine/SimpleStateMachineNodeEditor)](https://github.com/SimpleStateMachine/SimpleStateMachineNodeEditor) 
+ 
+ [![](https://img.shields.io/badge/chat-slack-blueviolet.svg)](https://join.slack.com/t/simplestatemachine/shared_invite/zt-fnfhvvsx-fTejcpPn~PPb2ojdG_MQBg) [![](https://img.shields.io/badge/chat-telegram-blue.svg)](https://t.me/joinchat/HMLJFkv9do6aDV188rhd0w)
+# StateMachineNodeEditor
  StateMachineNodeEditor is a WPF node-editor for visual work and editoring  state-machine
  
   ## Give a Star! :star:
