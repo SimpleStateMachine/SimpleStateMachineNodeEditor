@@ -4,16 +4,12 @@ using Avalonia.Markup.Xaml;
 
 namespace SimpleStateMachineNodeEditorAvalonia.Views
 {
-    public class RightConnector : Connector
+    public partial class RightConnector : Connector
     {
         public RightConnector()
         {
             this.InitializeComponent();
-        }
 
-        private void InitializeComponent()
-        {
-            AvaloniaXamlLoader.Load(this);
         }
     }
 }

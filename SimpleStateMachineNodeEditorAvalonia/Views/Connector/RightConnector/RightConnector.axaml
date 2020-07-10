@@ -4,5 +4,10 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
              x:Class="SimpleStateMachineNodeEditorAvalonia.Views.RightConnector">
-    RightConnector
+	<Grid x:Name="GridRightConnector" ColumnDefinitions="Auto, Auto" Background="#00000000">
+		<!--<styles:MyTextBox x:Name="TextBoxElement"  Grid.Row="0" Grid.Column="0" HorizontalAlignment="Right" VerticalAlignment="Center"  Margin="5,0,5,3" />
+		<Ellipse Name="EllipseElement" Grid.Row="0" Grid.Column="1" Margin="0,0,-7,0" HorizontalAlignment="Right" VerticalAlignment="Center"  Height="12" Width="12"  AllowDrop="True"  StrokeThickness="1"  />-->
+		<TextBox Name="TextBoxRightConnector" Grid.Column="0" HorizontalAlignment="Right" VerticalAlignment="Center"  Margin="5,0,5,3" Text="Test"/>
+		<Ellipse Name="EllipseRightConnector" Grid.Column="1"  HorizontalAlignment="Right"  VerticalAlignment="Center"  Margin="0,0,-7,0" Height="12" Width="12" StrokeThickness="1" Fill="Orange" />
+	</Grid>
 </UserControl>

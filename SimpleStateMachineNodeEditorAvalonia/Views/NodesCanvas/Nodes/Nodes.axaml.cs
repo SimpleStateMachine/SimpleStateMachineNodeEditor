@@ -4,16 +4,12 @@ using Avalonia.Markup.Xaml;
 
 namespace SimpleStateMachineNodeEditorAvalonia.Views.NodesCanvasElements
 {
-    public class Elements : UserControl
+    public partial class Nodes : UserControl
     {
-        public Elements()
+        public Nodes()
         {
             this.InitializeComponent();
         }
 
-        private void InitializeComponent()
-        {
-            AvaloniaXamlLoader.Load(this);
-        }
     }
 }

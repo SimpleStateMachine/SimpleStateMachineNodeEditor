@@ -8,8 +8,9 @@
              x:Class="SimpleStateMachineNodeEditorAvalonia.Views.NodesCanvas">
 	
  <Canvas x:Name="CanvasNodesCanvas" Background="Black">
-	<Views:Selector x:Name="Selector" />
-	<Views:Cutter x:Name="Cutter" />
-	<!--<NodesCanvasElements:Elements x:Name="ElementsNodesCanvas"  Panel.ZIndex="0"/>-->
+	<Views:Selector x:Name="SelectorNodesCanvas" />
+	<Views:Cutter x:Name="CutterNodesCanvas" />
+	<NodesCanvasElements:Nodes x:Name="NodesNodesCanvas"/>
+	<NodesCanvasElements:Connects x:Name="ConnectsNodesCanvas"/>
  </Canvas>
 </UserControl>

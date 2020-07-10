@@ -2,13 +2,14 @@
 using Avalonia.Controls;
 using Avalonia.Markup.Xaml;
 
-namespace SimpleStateMachineNodeEditorAvalonia.Views.NodesElements
+namespace SimpleStateMachineNodeEditorAvalonia.Views.NodesCanvasElements
 {
-    public partial class Header : BaseView
+    public partial class Connects : UserControl
     {
-        public Header()
+        public Connects()
         {
             this.InitializeComponent();
         }
+
     }
 }

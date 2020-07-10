@@ -1,20 +1,17 @@
 ﻿<Window xmlns="https://github.com/avaloniaui"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:vm="clr-namespace:SimpleStateMachineNodeEditorAvalonia.ViewModels;assembly=SimpleStateMachineNodeEditorAvalonia"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
         x:Class="SimpleStateMachineNodeEditorAvalonia.Views.MainWindow"
         Icon="/Assets/StateMachine-logo.ico"
 		xmlns:Views="clr-namespace:SimpleStateMachineNodeEditorAvalonia.Views"
+		xmlns:ViewModels="clr-namespace:SimpleStateMachineNodeEditorAvalonia.ViewModels"
         Title="SimpleStateMachineNodeEditorAvalonia">
-    <Design.DataContext>
-        <vm:MainWindowViewModel/>
+	<Design.DataContext>
+		<ViewModels:MainWindowViewModel/>
     </Design.DataContext>
 	<Grid>
-		<Views:NodesCanvas/>
+		<Views:NodesCanvas x:Name="NodesCanvasMainWindow"/>
 	</Grid>
-    
-    <!--<TextBlock x:Name="TextBlockElement" HorizontalAlignment="Center" VerticalAlignment="Center"/>-->
-
 </Window>

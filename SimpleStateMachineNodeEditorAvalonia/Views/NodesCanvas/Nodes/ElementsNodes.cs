@@ -4,18 +4,17 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace SimpleStateMachineNodeEditorAvalonia.Views
+namespace SimpleStateMachineNodeEditorAvalonia.Views.NodesCanvasElements
 {
-    public partial class MainWindow
+    public partial class Nodes
     {
-        public NodesCanvas NodesCanvasMainWindow;
+        public ItemsControl ItemsControlNodes;
 
         private void InitializeComponent()
         {
             AvaloniaXamlLoader.Load(this);
 
-            NodesCanvasMainWindow = this.FindControl<NodesCanvas>("NodesCanvasMainWindow");
+            ItemsControlNodes = this.FindControl<ItemsControl>("ItemsControlNodes");
         }
-
     }
 }

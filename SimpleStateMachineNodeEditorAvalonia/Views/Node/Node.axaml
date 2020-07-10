@@ -11,7 +11,7 @@
 				<NodesElements:Header x:Name="HeaderNode" Grid.Row="0"/>
 				<Views:LeftConnector x:Name="InputNode" Grid.Row="1"/>
 				<Views:RightConnector x:Name="OutputNode" Grid.Row="2"/>
-				<NodesElements:Transitions x:Name="Transitions" Grid.Row="3"/>
+				<NodesElements:Transitions x:Name="TransitionsNode" Grid.Row="3"/>
 			</Grid>
 	</Border>
 </UserControl>

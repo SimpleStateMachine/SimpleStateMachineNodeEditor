@@ -4,5 +4,14 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
              x:Class="SimpleStateMachineNodeEditorAvalonia.Views.Connect">
-    Welcome to Avalonia!
+	<Path x:Name="PathConnect" >
+		<!--<Path.Data>
+			<PathGeometry x:Name="PathGeometryConnect">
+				<PathFigure x:Name="PathFigureConnect"  IsClosed="False">
+					<BezierSegment  x:Name="BezierSegmentConnect"/>
+				</PathFigure>
+			</PathGeometry>
+		</Path.Data>-->
+	</Path>
+	<!--StrokeDashCap="Round" StrokeLineJoin="Round" StrokeEndLineCap="Round" StrokeStartLineCap="Round"-->
 </UserControl>
