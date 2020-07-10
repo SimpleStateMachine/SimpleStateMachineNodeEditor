@@ -1,6 +1,6 @@
 ﻿using Avalonia.Controls;
 using Avalonia.Markup.Xaml;
-using SimpleStateMachineNodeEditorAvalonia.Views.NodesElements;
+using SimpleStateMachineNodeEditorAvalonia.Views.NodeElements;
 using System;
 using System.Collections.Generic;
 using System.Text;

@@ -3,7 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace SimpleStateMachineNodeEditorAvalonia.Views.NodesElements
+namespace SimpleStateMachineNodeEditorAvalonia.Views.NodeElements
 {
     public partial class Header
     {
