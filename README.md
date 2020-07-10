@@ -1,7 +1,7 @@
 
 
 
-# StateMachineNodeEditor [![](https://img.shields.io/github/v/release/SimpleStateMachine/SimpleStateMachineNodeEditor)](https://github.com/SimpleStateMachine/SimpleStateMachineNodeEditor/releases) [![](https://img.shields.io/github/stars/SimpleStateMachine/SimpleStateMachineNodeEditor)](https://github.com/SimpleStateMachine/SimpleStateMachineNodeEditor) [![](https://img.shields.io/github/license/SimpleStateMachine/SimpleStateMachineNodeEditor)](https://github.com/SimpleStateMachine/SimpleStateMachineNodeEditor) [![](https://img.shields.io/badge/chat-slack-blueviolet.svg)](https://join.slack.com/t/simplestatemachine/shared_invite/zt-fnfhvvsx-fTejcpPn~PPb2ojdG_MQBg) [![](https://img.shields.io/badge/chat-telegram-blue.svg)](https://t.me/SimpleStateMachine)
+# StateMachineNodeEditor [![](https://img.shields.io/github/v/release/SimpleStateMachine/SimpleStateMachineNodeEditor)](https://github.com/SimpleStateMachine/SimpleStateMachineNodeEditor/releases) [![](https://img.shields.io/github/stars/SimpleStateMachine/SimpleStateMachineNodeEditor)](https://github.com/SimpleStateMachine/SimpleStateMachineNodeEditor) [![](https://img.shields.io/github/license/SimpleStateMachine/SimpleStateMachineNodeEditor)](https://github.com/SimpleStateMachine/SimpleStateMachineNodeEditor) [![](https://img.shields.io/badge/chat-slack-blueviolet.svg)](https://join.slack.com/t/simplestatemachine/shared_invite/zt-fnfhvvsx-fTejcpPn~PPb2ojdG_MQBg) [![](https://img.shields.io/badge/chat-telegram-blue.svg)](https://t.me/joinchat/HMLJFkv9do6aDV188rhd0w)
 
  StateMachineNodeEditor is a WPF node-editor for visual work and editoring  state-machine
  
@@ -77,7 +77,6 @@ If you like or are using this project please give it a star. Thanks!
  
  **3.** Run the exe file
  
-
 ## Shortcuts📎
 * <kbd>Ctrl</kbd></kbd> +<kbd>A</kbd> = Select All Nodes
 * <kbd>Ctrl</kbd> + <kbd>S</kbd> = Save
@@ -102,6 +101,14 @@ If you like or are using this project please give it a star. Thanks!
 * <kbd>Delete</kbd> = Delete Selected Elements
 * <kbd>C</kbd> + <kbd>Delete</kbd> = Delete Selected Connector
 * <kbd>N</kbd> + <kbd>Delete</kbd> = Delete Selected Nodes
+
+ ## FAQ📎
+ If you think you have found a bug, create a github [issue](https://github.com/SimpleStateMachine/SimpleStateMachineNodeEditor/issues).
+ 
+ But if you just have questions about how to use:
+ 
+- [Slack channel](https://join.slack.com/t/simplestatemachine/shared_invite/zt-fnfhvvsx-fTejcpPn~PPb2ojdG_MQBg)
+- [Telegram channel](https://t.me/joinchat/HMLJFkv9do6aDV188rhd0w)
 
 ## License📑
 
