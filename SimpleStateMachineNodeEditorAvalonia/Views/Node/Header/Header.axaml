@@ -4,5 +4,10 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
              x:Class="SimpleStateMachineNodeEditorAvalonia.Views.NodeElements.Header">
-   Node Header
+	<Grid ColumnDefinitions="*, auto">
+		<TextBox x:Name="TextBoxHeader" Text="Header"  Grid.Column="0" Classes="EmptyTextBox"/>
+		<Button x:Name="ButtonHeader" Grid.Column="1"/>
+	</Grid>
 </UserControl>
+
+

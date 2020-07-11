@@ -1,6 +1,7 @@
 ﻿<Styles xmlns="https://github.com/avaloniaui">
-    <!--<StyleInclude Source="EmptyTextBox.xaml"/>-->
+    <StyleInclude Source="/Styles/EmptyTextBox.xaml"/>
 </Styles>
+
 
 <!--AllowDrop="True" IsUndoEnabled="True" 
     TextWrapping="NoWrap" 

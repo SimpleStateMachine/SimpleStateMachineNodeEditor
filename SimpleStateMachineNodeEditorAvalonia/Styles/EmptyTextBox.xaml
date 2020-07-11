@@ -1,7 +1,16 @@
-﻿<Styles xmlns="https://github.com/avaloniaui" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
-    <!--<Style Selector="EmptyTextBox">
-        <Setter Property="Background" Value="{x:Null}" />
-    </Style>-->
+﻿<Styles xmlns="https://github.com/avaloniaui" 
+		xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <Style Selector="TextBox.EmptyTextBox">
+		<Setter Property="Background" Value="{x:Null}"></Setter>
+		<Setter Property="BorderBrush" Value="{x:Null}"></Setter>
+		<!--<Setter Property="TextWrapping" Value="False"></Setter>-->
+    </Style>
+	<Style Selector="TextBox:pointerover.EmptyTextBox /template/ Border#border">
+		<Setter Property="BorderBrush" Value="Blue" />
+	</Style>
+	<Style Selector="TextBox:focus.EmptyTextBox /template/ Border#border">
+		<Setter Property="BorderBrush" Value="Blue"/>
+	</Style>
 </Styles>
 
 

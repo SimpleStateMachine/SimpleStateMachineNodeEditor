@@ -7,11 +7,11 @@
 			 xmlns:Views="clr-namespace:SimpleStateMachineNodeEditorAvalonia.Views"
 			 xmlns:NodeElements="clr-namespace:SimpleStateMachineNodeEditorAvalonia.Views.NodeElements">
 	<Border x:Name="BorderNode" CornerRadius="5,5,5,5" BorderThickness="1,1,1,1" Background="Green" BorderBrush="Red">
-			<Grid RowDefinitions="auto, auto, auto, *">
-				<NodeElements:Header x:Name="HeaderNode" Grid.Row="0" HorizontalAlignment="Center"/>
-				<Views:LeftConnector x:Name="InputNode" Grid.Row="1" HorizontalAlignment="Left"/>
-				<Views:RightConnector x:Name="OutputNode" Grid.Row="2" HorizontalAlignment="Right"/>
-				<NodeElements:Transitions x:Name="TransitionsNode" Grid.Row="3"/>
-			</Grid>
+		<Grid RowDefinitions="auto, auto, auto, *" Margin="0,0,0,5" MinWidth="60" >
+			<NodeElements:Header x:Name="HeaderNode" Grid.Row="0" HorizontalAlignment="Center"/>
+			<Views:LeftConnector x:Name="InputNode" Grid.Row="1" HorizontalAlignment="Left"/>
+			<Views:RightConnector x:Name="OutputNode" Grid.Row="2" HorizontalAlignment="Right"/>
+			<NodeElements:Transitions x:Name="TransitionsNode" Grid.Row="3"/>
+		</Grid>
 	</Border>
 </UserControl>

@@ -15,7 +15,8 @@
         <StackPanel Margin="0,0,0,5">
             <NodeStyles:ElementNodeHeader x:Name="NodeHeaderElement" />
             <!--Grid For Input and Output-->
-            <Grid x:Name="GridElement"  MinWidth="60" >
+            <Grid x:Name="GridElement"  
+                  >
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition />
                 </Grid.ColumnDefinitions>

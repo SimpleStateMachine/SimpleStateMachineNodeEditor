@@ -5,7 +5,6 @@
     <Application.DataTemplates>
         <local:ViewLocator/>
     </Application.DataTemplates>
-
     <Application.Styles>
 		<StyleInclude Source="/Styles/Styles.xaml"/>
         <StyleInclude Source="avares://Avalonia.Themes.Default/DefaultTheme.xaml"/>
