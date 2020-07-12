@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <OutputType>WinExe</OutputType>
     <TargetFramework>netcoreapp3.1</TargetFramework>
@@ -18,13 +18,26 @@
     <EmbeddedResource Remove="Icons\**" />
     <None Remove="Icons\**" />
   </ItemGroup>
+  <!--<ItemGroup>
+    <AvaloniaResource Remove="Views\Connector\LeftConnector\LeftConnector.xaml" />
+    <AvaloniaResource Remove="Views\Connector\RightConnector\RightConnector.xaml" />
+    <AvaloniaResource Remove="Views\Connect\Connect.xaml" />
+    <AvaloniaResource Remove="Views\Cutter\Cutter.xaml" />
+    <AvaloniaResource Remove="Views\NodesCanvas\Connects\Connects.xaml" />
+    <AvaloniaResource Remove="Views\NodesCanvas\NodesCanvas.xaml" />
+    <AvaloniaResource Remove="Views\NodesCanvas\Nodes\Nodes.xaml" />
+    <AvaloniaResource Remove="Views\Node\Header\Header.xaml" />
+    <AvaloniaResource Remove="Views\Node\Node.xaml" />
+    <AvaloniaResource Remove="Views\Node\Transitions\Transitions.xaml" />
+    <AvaloniaResource Remove="Views\Selector\Selector.xaml" />
+  </ItemGroup>-->
   <ItemGroup>
     <None Remove="Styles\Styles.xaml" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="Avalonia" Version="0.9.11" />
-    <PackageReference Include="Avalonia.Desktop" Version="0.9.11" />
-    <PackageReference Include="Avalonia.ReactiveUI" Version="0.9.11" />
+    <PackageReference Include="Avalonia" Version="0.9.7" />
+    <PackageReference Include="Avalonia.Desktop" Version="0.9.7" />
+    <PackageReference Include="Avalonia.ReactiveUI" Version="0.9.7" />
   </ItemGroup>
   <ItemGroup>
     <Page Include="Styles\MyTextBox.xaml">
@@ -40,12 +53,45 @@
     </AvaloniaResource>
   </ItemGroup>
   <ItemGroup>
-    <Compile Update="Views\Node\Header\Header.axaml.cs">
-      <DependentUpon>Header.axaml</DependentUpon>
+    <Compile Update="Views\Node\Header\Header.xaml.cs">
+      <DependentUpon>Header.xaml</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
     <None Update="Styles\EmptyTextBox.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </None>
+    <None Update="Views\Connector\LeftConnector\LeftConnector.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </None>
+    <None Update="Views\Connector\RightConnector\RightConnector.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </None>
+    <None Update="Views\Connect\Connect.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </None>
+    <None Update="Views\Cutter\Cutter.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </None>
+    <None Update="Views\NodesCanvas\Connects\Connects.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </None>
+    <None Update="Views\NodesCanvas\NodesCanvas.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </None>
+    <None Update="Views\NodesCanvas\Nodes\Nodes.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </None>
+    <None Update="Views\Node\Header\Header.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </None>
+    <None Update="Views\Node\Node.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </None>
+    <None Update="Views\Node\Transitions\Transitions.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </None>
+    <None Update="Views\Selector\Selector.xaml">
       <Generator>MSBuild:Compile</Generator>
     </None>
   </ItemGroup>

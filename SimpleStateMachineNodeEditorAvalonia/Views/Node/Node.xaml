@@ -1,0 +1,17 @@
+﻿<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d" d:DesignWidth="200"
+             x:Class="SimpleStateMachineNodeEditorAvalonia.Views.Node"
+			 xmlns:Views="clr-namespace:SimpleStateMachineNodeEditorAvalonia.Views"
+			 xmlns:NodeElements="clr-namespace:SimpleStateMachineNodeEditorAvalonia.Views.NodeElements"  ClipToBounds="False">
+	<Border x:Name="BorderNode" CornerRadius="5,5,5,5" BorderThickness="1,1,1,1" Background="Green" BorderBrush="Red" >
+		<Grid RowDefinitions="auto, auto, auto, *"  MinWidth="60" ClipToBounds="False">
+			<NodeElements:Header x:Name="HeaderNode" Grid.Row="0"/>
+			<Views:LeftConnector x:Name="InputNode" Grid.Row="1"/>
+			<Views:RightConnector x:Name="OutputNode" Grid.Row="2"/>
+			<NodeElements:Transitions x:Name="TransitionsNode" Grid.Row="3"/>
+		</Grid>
+	</Border>
+</UserControl>

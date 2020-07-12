@@ -1,16 +1,17 @@
-﻿<Styles xmlns="https://github.com/avaloniaui" 
+﻿<Styles xmlns="https://github.com/avaloniaui"
 		xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
-    <Style Selector="TextBox.EmptyTextBox">
-		<Setter Property="Background" Value="{x:Null}"></Setter>
-		<Setter Property="BorderBrush" Value="{x:Null}"></Setter>
-		<!--<Setter Property="TextWrapping" Value="False"></Setter>-->
-    </Style>
-	<Style Selector="TextBox:pointerover.EmptyTextBox /template/ Border#border">
-		<Setter Property="BorderBrush" Value="Blue" />
-	</Style>
-	<Style Selector="TextBox:focus.EmptyTextBox /template/ Border#border">
-		<Setter Property="BorderBrush" Value="Blue"/>
-	</Style>
+  <Style Selector="TextBox.EmptyTextBox">
+    <Setter Property="Background" Value="{x:Null}"/>
+    <Setter Property="BorderBrush" Value="{x:Null}"/>
+    <Setter Property="TextWrapping" Value="NoWrap"/>
+    <Setter Property="BorderThickness" Value="0,0,0,0"/>
+  </Style>
+  <Style Selector="TextBox:pointerover.EmptyTextBox /template/ Border#border">
+    <Setter Property="BorderBrush" Value="Blue" />
+  </Style>
+  <Style Selector="TextBox:focus.EmptyTextBox /template/ Border#border">
+    <Setter Property="BorderBrush" Value="Blue"/>
+  </Style>
 </Styles>
 
 
@@ -23,5 +24,4 @@
     Background="{x:Null}"
     BorderBrush="{x:Null}" 
     Style="{DynamicResource StyleEmptyTextBox}"-->
-    
-    
+
