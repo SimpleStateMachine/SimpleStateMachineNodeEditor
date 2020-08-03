@@ -7,7 +7,7 @@ using System.Text;
 
 namespace SimpleStateMachineNodeEditorAvalonia.Views
 {
-    public partial class Node : BaseView
+    public partial class Node
     {
         public Border BorderNode;
         public Header HeaderNode;

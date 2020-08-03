@@ -44,7 +44,6 @@ namespace SimpleStateMachineNodeEditor.ViewModel
         private NodeViewModel()
         {
             SetupCommands();
-            SetupBinding();
         }
 
 
@@ -58,15 +57,8 @@ namespace SimpleStateMachineNodeEditor.ViewModel
             SetupConnectors();
 
             SetupCommands();
-            SetupBinding();
             SetupSubscriptions();
         }
-
-        #region SetupBinding
-        private void SetupBinding()
-        {
-        }
-        #endregion SetupBinding
 
         #region Setup Subscriptions
 

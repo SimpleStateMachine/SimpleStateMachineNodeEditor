@@ -4,8 +4,5 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
              x:Class="SimpleStateMachineNodeEditorAvalonia.Views.Cutter">
-	<Line x:Name="LineCutter" HorizontalAlignment="Left" VerticalAlignment="Top" StrokeDashArray="10, 3"  />
+	<Line x:Name="LineCutter" HorizontalAlignment="Left" StrokeLineCap="Round" StrokeJoin="Round" VerticalAlignment="Top" StrokeDashArray="10, 3"  />
 </UserControl>
-<!--StrokeDashCap="Round"
- StrokeEndLineCap="Round"
- StrokeStartLineCap="Round"-->

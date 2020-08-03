@@ -31,8 +31,6 @@ namespace SimpleStateMachineNodeEditor.ViewModel
         [Reactive] public NodesCanvasViewModel NodesCanvas { get; set; }
         [Reactive] public bool Selected { get; set; }
 
-        [Reactive] public SourceList<string> test { get; set; }
-
         public ConnectorViewModel(NodesCanvasViewModel nodesCanvas, NodeViewModel viewModelNode, string name, Point myPoint)
         {
             Node = viewModelNode;

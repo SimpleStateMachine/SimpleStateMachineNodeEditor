@@ -1,5 +1,7 @@
 ﻿<Styles xmlns="https://github.com/avaloniaui">
     <StyleInclude Source="/Styles/EmptyTextBox.xaml"/>
+	<!--<StyleInclude Source="/Styles/Extensions/CornerRadius.xaml"/>-->
+	<StyleInclude Source="/Styles/CornerRadius.xaml"/>
 </Styles>
 
 

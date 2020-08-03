@@ -2,14 +2,15 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+			 xmlns:Extensions="clr-namespace:SimpleStateMachineNodeEditorAvalonia.Helpers.Extensions"
              mc:Ignorable="d" 
-             x:Class="SimpleStateMachineNodeEditorAvalonia.Views.NodeElements.Header"  ClipToBounds="False" HorizontalAlignment="Stretch">
-	<Border CornerRadius="5,5,0,0" VerticalAlignment="Stretch" MaxWidth="100" MaxHeight="50" Background="Blue" HorizontalAlignment="Stretch">	
+             x:Class="SimpleStateMachineNodeEditorAvalonia.Views.NodeElements.Header" Classes="Test"  Background="Blue" ClipToBounds="False" HorizontalAlignment="Stretch">
 	<Grid ColumnDefinitions="*, auto" HorizontalAlignment="Stretch">
 		<TextBox x:Name="TextBoxHeader"  Classes="EmptyTextBox" Text="Header"  Grid.Column="0" />
 		<!--<Button x:Name="ButtonHeader" Grid.Column="1"/>-->
 	</Grid>
-	</Border>
 </UserControl>
 
+
+<!--xmlns:Extensions="clr-namespace:SimpleStateMachineNodeEditorAvalonia.Helpers.Extensions"-->
 

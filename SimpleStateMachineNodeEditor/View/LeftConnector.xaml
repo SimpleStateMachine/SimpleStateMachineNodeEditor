@@ -2,10 +2,11 @@
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:enums="clr-namespace:SimpleStateMachineNodeEditor.Helpers.Enums"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:local="clr-namespace:SimpleStateMachineNodeEditor.View" 
              xmlns:styles="clr-namespace:SimpleStateMachineNodeEditor.Styles"
-             x:Name="LeftConnectorElement" HorizontalAlignment="Stretch" VerticalAlignment="Top"  AllowDrop="True" >
+             xmlns:local="clr-namespace:SimpleStateMachineNodeEditor.View" 
+             x:Name="LeftConnectorElement" HorizontalAlignment="Stretch" VerticalAlignment="Top"  AllowDrop="True" ClipToBounds="False">
     <Grid x:Name="GridElement" Background="#00000000">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="Auto" />

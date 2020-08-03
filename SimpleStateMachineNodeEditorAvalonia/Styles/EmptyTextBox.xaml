@@ -7,7 +7,7 @@
     <Setter Property="BorderThickness" Value="0,0,0,0"/>
   </Style>
   <Style Selector="TextBox:pointerover.EmptyTextBox /template/ Border#border">
-    <Setter Property="BorderBrush" Value="Blue" />
+    <Setter Property="BorderBrush" Value="Red" />
   </Style>
   <Style Selector="TextBox:focus.EmptyTextBox /template/ Border#border">
     <Setter Property="BorderBrush" Value="Blue"/>

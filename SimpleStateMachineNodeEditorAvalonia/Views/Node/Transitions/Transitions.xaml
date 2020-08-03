@@ -8,7 +8,7 @@
 	<ItemsControl x:Name="ItemsControlTransitions">
 		<ItemsControl.ItemsPanel>
 			<ItemsPanelTemplate>
-				<StackPanel />
+				<ListBox SelectionMode="Multiple" />
 			</ItemsPanelTemplate>
 		</ItemsControl.ItemsPanel>
 		<ItemsControl.DataTemplates>
