@@ -5,21 +5,8 @@ using System.Text;
 
 namespace SimpleStateMachineNodeEditorAvalonia.ViewModels
 {
-    public class BaseViewModel : ReactiveObject, IActivatableViewModel
+    public class BaseViewModel : ReactiveObject
     {
-        public ViewModelActivator Activator { get; }
 
-        public BaseViewModel()
-        {
-            Activator = new ViewModelActivator();
-            //this.WhenActivated(disposables =>
-            //{
-            //    this.Test();
-            //});
-        }
-        public void Test()
-        {
-
-        }
     }
 }

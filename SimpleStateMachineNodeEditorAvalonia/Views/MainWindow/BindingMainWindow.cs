@@ -1,6 +1,7 @@
 ﻿using Avalonia.Controls;
 using Avalonia.Markup.Xaml;
 using ReactiveUI;
+using SimpleStateMachineNodeEditorAvalonia.Helpers;
 using System;
 using System.Collections.Generic;
 using System.Reactive.Disposables;
@@ -12,7 +13,7 @@ namespace SimpleStateMachineNodeEditorAvalonia.Views
     {
         private void SetupBinding()
         {
-            this.WhenActivated(disposable =>
+            this.WhenViewModelAnyValue(disposable =>
             {
                 this.OneWayBind(this.ViewModel, x => x.NodesCanvas, x => x.NodesCanvasMainWindow.ViewModel).DisposeWith(disposable);
             });

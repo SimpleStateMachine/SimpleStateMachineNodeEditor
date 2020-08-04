@@ -5,7 +5,7 @@
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
 			 xmlns:Views="clr-namespace:SimpleStateMachineNodeEditorAvalonia.Views"
 			 xmlns:ViewModels="clr-namespace:SimpleStateMachineNodeEditor.ViewModels"
-             x:Class="SimpleStateMachineNodeEditorAvalonia.Views.NodesCanvasElements.Nodes">
+             x:Class="SimpleStateMachineNodeEditorAvalonia.Views.NodesCanvasElements.Nodes" Background="Green">
 	<ItemsControl  x:Name="ItemsControlNodes" >
 		<ItemsControl.ItemsPanel>
 			<ItemsPanelTemplate>

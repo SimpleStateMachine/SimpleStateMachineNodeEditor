@@ -26,7 +26,7 @@
     <PackageReference Include="Avalonia" Version="0.9.12" />
     <PackageReference Include="Avalonia.Desktop" Version="0.9.12" />
     <PackageReference Include="Avalonia.ReactiveUI" Version="0.9.12" />
-    <PackageReference Include="ReactiveUI.Fody" Version="11.5.6" />
+    <PackageReference Include="ReactiveUI.Fody" Version="11.5.17" />
   </ItemGroup>
   <ItemGroup>
     <AvaloniaResource Update="Styles\CornerRadius.xaml">
