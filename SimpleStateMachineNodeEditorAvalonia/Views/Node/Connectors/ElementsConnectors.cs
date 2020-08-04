@@ -6,15 +6,15 @@ using System.Text;
 
 namespace SimpleStateMachineNodeEditorAvalonia.Views.NodeElements
 {
-    public partial class Transitions
+    public partial class Connectors
     {
-        public ItemsControl ItemsControlTransitions;
+        public ItemsControl ItemsControlConnectors;
 
         private void InitializeComponent()
         {
             AvaloniaXamlLoader.Load(this);
 
-            ItemsControlTransitions = this.FindControl<ItemsControl>("ItemsControlTransitions");
+            ItemsControlConnectors = this.FindControl<ItemsControl>("ItemsControlConnectors");
         }
     }
 }

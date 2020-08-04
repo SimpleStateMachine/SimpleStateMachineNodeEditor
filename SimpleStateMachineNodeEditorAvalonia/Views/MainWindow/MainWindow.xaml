@@ -8,10 +8,11 @@
 		xmlns:Views="clr-namespace:SimpleStateMachineNodeEditorAvalonia.Views"
 		xmlns:ViewModels="clr-namespace:SimpleStateMachineNodeEditorAvalonia.ViewModels"
         Title="SimpleStateMachineNodeEditorAvalonia" MinWidth="200" MinHeight="200">
-	<Design.DataContext>
+	<!--<Design.DataContext>
 		<ViewModels:MainWindowViewModel/>
-    </Design.DataContext>
-	<Grid>
+    </Design.DataContext>-->
+	<Views:NodesCanvas x:Name="NodesCanvasMainWindow"/>
+	<!--<Grid>
 		<Views:NodesCanvas x:Name="NodesCanvasMainWindow"/>
-	</Grid>
+	</Grid>-->
 </Window>

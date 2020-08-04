@@ -19,8 +19,11 @@ namespace SimpleStateMachineNodeEditorAvalonia
             {
                 desktop.MainWindow = new MainWindow
                 {
-                    DataContext = new MainWindowViewModel(),
+                    ViewModel = new MainWindowViewModel(),
                 };
+                //var window = new MainWindow();
+                //window.ViewModel = new MainWindowViewModel();
+                //desktop.MainWindow = window;
             }
 
             base.OnFrameworkInitializationCompleted();

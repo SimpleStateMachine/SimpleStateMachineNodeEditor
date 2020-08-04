@@ -7,7 +7,6 @@ namespace SimpleStateMachineNodeEditorAvalonia.Views
 {
     public partial class LeftConnector : Connector
     {
-
         public LeftConnector()
         {
             this.InitializeComponent();

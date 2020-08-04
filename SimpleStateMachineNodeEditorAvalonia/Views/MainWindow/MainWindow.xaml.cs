@@ -11,20 +11,13 @@ namespace SimpleStateMachineNodeEditorAvalonia.Views
     public partial class MainWindow : ReactiveWindow<MainWindowViewModel>
     {
         public MainWindow()
-        {          
-            InitializeComponent();
+        {
+            SetupBinding();
+            InitializeComponent();            
 #if DEBUG
             this.AttachDevTools();
 #endif
-            SetupBinding();
-        }
-
-        private void SetupBinding()
-        {
-            this.WhenActivated(disposable =>
-            {
-               
-            });
+           
         }
     }
 }

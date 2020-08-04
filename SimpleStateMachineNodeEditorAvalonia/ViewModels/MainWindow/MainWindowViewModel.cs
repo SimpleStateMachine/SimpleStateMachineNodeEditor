@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ReactiveUI.Fody.Helpers;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
@@ -6,6 +7,11 @@ namespace SimpleStateMachineNodeEditorAvalonia.ViewModels
 {
     public class MainWindowViewModel: BaseViewModel
     {
-        public string Greeting => "MyTest";
+        [Reactive] public NodesCanvasViewModel NodesCanvas { get; set; } = new NodesCanvasViewModel();
+
+        public MainWindowViewModel()
+        {
+
+        }
     }
 }

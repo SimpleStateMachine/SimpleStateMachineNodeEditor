@@ -13,7 +13,7 @@ namespace SimpleStateMachineNodeEditorAvalonia.Views
         public Header HeaderNode;
         public LeftConnector InputNode;
         public RightConnector OutputNode;
-        public Transitions TransitionsNode;
+        public Connectors ConnectorsNode;
 
         private void InitializeComponent()
         {
@@ -23,7 +23,7 @@ namespace SimpleStateMachineNodeEditorAvalonia.Views
             HeaderNode      = this.FindControl<Header>("HeaderNode");
             InputNode       = this.FindControl<LeftConnector>("InputNode");
             OutputNode      = this.FindControl<RightConnector>("OutputNode");
-            TransitionsNode = this.FindControl<Transitions>("TransitionsNode");
+            ConnectorsNode = this.FindControl<Connectors>("ConnectorsNode");
         }
     }
 }

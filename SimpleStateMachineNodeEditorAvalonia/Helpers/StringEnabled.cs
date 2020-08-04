@@ -8,7 +8,7 @@ namespace SimpleStateMachineNodeEditorAvalonia.Helpers
 {
     public class StringEnabled:ReactiveObject
     {
-        [Reactive] public string Value { get; set; }
+        [Reactive] public string Value { get; set; } = "Testing";
         [Reactive] public bool Enable { get; set; }
     }
 }

@@ -4,11 +4,12 @@ using Avalonia.Markup.Xaml;
 
 namespace SimpleStateMachineNodeEditorAvalonia.Views.NodeElements
 {
-    public partial class Transitions : UserControl
+    public partial class Connectors : UserControl
     {
-        public Transitions()
+        public Connectors()
         {
             this.InitializeComponent();
+            //this.SetupBinding();
         }
     }
 }

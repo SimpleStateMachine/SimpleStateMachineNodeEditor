@@ -9,15 +9,9 @@ namespace SimpleStateMachineNodeEditorAvalonia.ViewModels
 {
     public class NodesCanvasViewModel: BaseViewModel
     {
-        [Reactive] public NodeViewModel StartState { get; set; }
+        [Reactive] public NodesNodesCanvasViewModel Nodes { get; set; } = new NodesNodesCanvasViewModel();
+        [Reactive] public ConnectsNodesCanvasViewModel Connects { get; set; } = new ConnectsNodesCanvasViewModel();
         [Reactive] public SelectorViewModel Selector { get; set; } = new SelectorViewModel();
-        [Reactive] public CutterViewModel Cutter { get; set; }
-        [Reactive] public ConnectViewModel DraggedConnect { get; set; }
-
-        public SourceList<NodeViewModel> Nodes = new SourceList<NodeViewModel>();
-        public ObservableCollectionExtended<NodeViewModel> NodesForView = new ObservableCollectionExtended<NodeViewModel>();
-
-        public SourceList<ConnectViewModel> Connects = new SourceList<ConnectViewModel>();
-        public ObservableCollectionExtended<ConnectViewModel> ConnectsForView = new ObservableCollectionExtended<ConnectViewModel>();
+        [Reactive] public CutterViewModel Cutter { get; set; } = new CutterViewModel();
     }
 }
