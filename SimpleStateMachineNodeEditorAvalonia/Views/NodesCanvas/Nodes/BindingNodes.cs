@@ -17,8 +17,7 @@ namespace SimpleStateMachineNodeEditorAvalonia.Views.NodesCanvasElements
         {
             this.WhenViewModelAnyValue(disposable =>
             {
-                this.OneWayBind(this.ViewModel, x => x.Nodes, x => x.ItemsControlNodes.Items).DisposeWith(disposable);
-                //this.OneWayBind2(this.ViewModel, x => x.NodesForView, x => x.ItemsControlNodes.Items).DisposeWith(disposable);
+                this.OneWayBind(this.ViewModel, x => x.NodesForView, x => x.ItemsControlNodes.Items).DisposeWith(disposable);
             });
         }
     }

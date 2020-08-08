@@ -9,8 +9,7 @@
 	<ItemsControl  x:Name="ItemsControlNodes" >
 		<ItemsControl.ItemsPanel>
 			<ItemsPanelTemplate>
-				<Grid>
-				</Grid>
+				<Canvas/>
 			</ItemsPanelTemplate>
 		</ItemsControl.ItemsPanel>
 		<ItemsControl.DataTemplates>
