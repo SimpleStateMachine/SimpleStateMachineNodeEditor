@@ -2,6 +2,7 @@
 using Avalonia.Controls.Shapes;
 using Avalonia.Markup.Xaml;
 using Avalonia.Media;
+using SimpleStateMachineNodeEditorAvalonia.Helpers;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -19,10 +20,10 @@ namespace SimpleStateMachineNodeEditorAvalonia.Views
         {
             AvaloniaXamlLoader.Load(this);
 
-            PathConnect = this.FindControl<Path>("PathConnect");
-            PathGeometryConnect = this.Find<PathGeometry>("PathGeometryConnect");
-            PathFigureConnect = this.Find<PathFigure>("PathFigureConnect");
-            BezierSegmentConnect = this.Find<BezierSegment>("BezierSegmentConnect");
+            PathConnect = this.FindControlWithExeption<Path>("PathConnect");
+            PathGeometryConnect = this.FindWithExeption<PathGeometry>("PathGeometryConnect");
+            PathFigureConnect = this.FindWithExeption<PathFigure>("PathFigureConnect");
+            BezierSegmentConnect = this.FindWithExeption<BezierSegment>("BezierSegmentConnect");
         }
     }
 }

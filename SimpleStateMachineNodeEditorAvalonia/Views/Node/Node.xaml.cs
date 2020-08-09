@@ -10,8 +10,8 @@ namespace SimpleStateMachineNodeEditorAvalonia.Views
     {
         public Node()
         {
-            this.InitializeComponent();
             this.SetupBinding();
+            this.InitializeComponent();           
         }
     }
 }

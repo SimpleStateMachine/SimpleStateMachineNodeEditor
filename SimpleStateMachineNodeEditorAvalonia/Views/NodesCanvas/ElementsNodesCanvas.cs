@@ -1,5 +1,6 @@
 ﻿using Avalonia.Controls;
 using Avalonia.Markup.Xaml;
+using SimpleStateMachineNodeEditorAvalonia.Helpers;
 using SimpleStateMachineNodeEditorAvalonia.Views.NodesCanvasElements;
 using System;
 using System.Collections.Generic;
@@ -18,10 +19,10 @@ namespace SimpleStateMachineNodeEditorAvalonia.Views
         {
             AvaloniaXamlLoader.Load(this);
 
-            CanvasNodesCanvas   = this.FindControl<Canvas>("CanvasNodesCanvas");
-            SelectorNodesCanvas = this.FindControl<Selector>("SelectorNodesCanvas");
-            NodesNodesCanvas    = this.FindControl<Nodes>("NodesNodesCanvas");
-            ConnectsNodesCanvas = this.FindControl<Connects>("ConnectsNodesCanvas");
+            CanvasNodesCanvas   = this.FindControlWithExeption<Canvas>("CanvasNodesCanvas");
+            SelectorNodesCanvas = this.FindControlWithExeption<Selector>("SelectorNodesCanvas");
+            NodesNodesCanvas    = this.FindControlWithExeption<Nodes>("NodesNodesCanvas");
+            ConnectsNodesCanvas = this.FindControlWithExeption<Connects>("ConnectsNodesCanvas");
         }
 
     }

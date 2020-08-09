@@ -34,7 +34,7 @@ namespace SimpleStateMachineNodeEditorAvalonia.Helpers.Extensions
             var l = sender as ContentPresenter;
             var j = k.GetVisualChildren();
 
-            var contentPresenter = k.Find<ContentPresenter>("PART_ContentPresenter");
+            var contentPresenter = k.FindWithExeption<ContentPresenter>("PART_ContentPresenter");
         }
     }
 }

@@ -4,17 +4,16 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
 			 xmlns:Views="clr-namespace:SimpleStateMachineNodeEditorAvalonia.Views"
-			 xmlns:ViewModels="clr-namespace:SimpleStateMachineNodeEditor.ViewModels"
+			 xmlns:ViewModels="clr-namespace:SimpleStateMachineNodeEditorAvalonia.ViewModels"
              x:Class="SimpleStateMachineNodeEditorAvalonia.Views.NodesCanvasElements.Connects">
 	<ItemsControl  x:Name="ItemsControlConnects" >
 		<ItemsControl.ItemsPanel>
 			<ItemsPanelTemplate>
-				<Grid>
-				</Grid>
+				<Canvas/>
 			</ItemsPanelTemplate>
 		</ItemsControl.ItemsPanel>
 		<ItemsControl.DataTemplates>
-			<DataTemplate>
+			<DataTemplate DataType="{x:Type ViewModels:ConnectViewModel}">
 				<Views:Connect/>
 			</DataTemplate>
 		</ItemsControl.DataTemplates>

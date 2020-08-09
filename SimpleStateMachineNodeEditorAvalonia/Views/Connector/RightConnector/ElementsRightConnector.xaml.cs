@@ -1,6 +1,7 @@
 ﻿using Avalonia.Controls;
 using Avalonia.Controls.Shapes;
 using Avalonia.Markup.Xaml;
+using SimpleStateMachineNodeEditorAvalonia.Helpers;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -17,9 +18,9 @@ namespace SimpleStateMachineNodeEditorAvalonia.Views
         {
             AvaloniaXamlLoader.Load(this);
 
-            GridRightConnector = this.FindControl<Grid>("GridRightConnector");
-            TextBoxRightConnector = this.FindControl<TextBox>("TextBoxRightConnector");
-            EllipseRightConnector = this.FindControl<Ellipse>("EllipseRightConnector");
+            GridRightConnector = this.FindControlWithExeption<Grid>("GridRightConnector");
+            TextBoxRightConnector = this.FindControlWithExeption<TextBox>("TextBoxRightConnector");
+            EllipseRightConnector = this.FindControlWithExeption<Ellipse>("EllipseRightConnector");
         }
     }
 }

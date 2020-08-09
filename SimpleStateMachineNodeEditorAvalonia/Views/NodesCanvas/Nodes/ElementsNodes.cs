@@ -1,5 +1,6 @@
 ﻿using Avalonia.Controls;
 using Avalonia.Markup.Xaml;
+using SimpleStateMachineNodeEditorAvalonia.Helpers;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -14,7 +15,7 @@ namespace SimpleStateMachineNodeEditorAvalonia.Views.NodesCanvasElements
         {
             AvaloniaXamlLoader.Load(this);
 
-            ItemsControlNodes = this.FindControl<ItemsControl>("ItemsControlNodes");
+            ItemsControlNodes = this.FindControlWithExeption<ItemsControl>("ItemsControlNodes");
         }
     }
 }

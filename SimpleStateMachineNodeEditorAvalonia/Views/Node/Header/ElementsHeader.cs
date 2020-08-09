@@ -1,5 +1,6 @@
 ﻿using Avalonia.Controls;
 using Avalonia.Markup.Xaml;
+using SimpleStateMachineNodeEditorAvalonia.Helpers;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -16,9 +17,9 @@ namespace SimpleStateMachineNodeEditorAvalonia.Views.NodeElements
         {
             AvaloniaXamlLoader.Load(this);
 
-            TextBoxHeader = this.FindControl<TextBox>("TextBoxHeader");
+            TextBoxHeader = this.FindControlWithExeption<TextBox>("TextBoxHeader");
 
-            ButtonHeader = this.FindControl<Button>("ButtonHeader");
+            ButtonHeader = this.FindControlWithExeption<Button>("ButtonHeader");
         }
     }
 }

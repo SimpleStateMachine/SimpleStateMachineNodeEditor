@@ -1,5 +1,6 @@
 ﻿using Avalonia.Controls;
 using Avalonia.Markup.Xaml;
+using SimpleStateMachineNodeEditorAvalonia.Helpers;
 using SimpleStateMachineNodeEditorAvalonia.Views.NodeElements;
 using System;
 using System.Collections.Generic;
@@ -19,11 +20,11 @@ namespace SimpleStateMachineNodeEditorAvalonia.Views
         {
             AvaloniaXamlLoader.Load(this);
 
-            BorderNode      = this.FindControl<Border>("BorderNode");
-            HeaderNode      = this.FindControl<Header>("HeaderNode");
-            InputNode       = this.FindControl<LeftConnector>("InputNode");
-            OutputNode      = this.FindControl<RightConnector>("OutputNode");
-            ConnectorsNode = this.FindControl<Connectors>("ConnectorsNode");
+            BorderNode      = this.FindControlWithExeption<Border>("BorderNode");
+            HeaderNode      = this.FindControlWithExeption<Header>("HeaderNode");
+            InputNode       = this.FindControlWithExeption<LeftConnector>("InputNode");
+            OutputNode      = this.FindControlWithExeption<RightConnector>("OutputNode");
+            ConnectorsNode = this.FindControlWithExeption<Connectors>("ConnectorsNode");
         }
     }
 }
