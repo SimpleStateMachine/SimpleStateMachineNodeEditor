@@ -3,8 +3,8 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              x:Class="SimpleStateMachineNodeEditorAvalonia.Views.LeftConnector" ClipToBounds="False" HorizontalAlignment="Stretch">
-	<Grid x:Name="GridLeftConnector" ColumnDefinitions="Auto, Auto" Background="#00000000" ClipToBounds="False" HorizontalAlignment="Left">
-		<TextBox x:Name="TextBoxLeftConnector" Classes="EmptyTextBox" Grid.Column="1" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="5,0,5,3" Text="Input"/>
-		<Ellipse x:Name="EllipseLeftConnector" Grid.Column="0"  HorizontalAlignment="Left"  VerticalAlignment="Center"  Height="12" Margin="-7,0,0,0" Width="12" StrokeThickness="1" Fill="Orange" />
+	<Grid x:Name="GridConnector" ColumnDefinitions="Auto, Auto" Background="#00000000" ClipToBounds="False" HorizontalAlignment="Left">
+		<TextBox x:Name="TextBoxConnector" Classes="EmptyTextBox" Grid.Column="1" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="5,0,5,3" Text="Input"/>
+		<Ellipse x:Name="EllipseConnector" Grid.Column="0"  HorizontalAlignment="Left"  VerticalAlignment="Center"  Height="12" Margin="-7,0,0,0" Width="12" StrokeThickness="1" Fill="Orange" />
 	</Grid>
 </UserControl>

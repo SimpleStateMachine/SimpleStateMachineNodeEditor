@@ -4,12 +4,12 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d"
              x:Class="SimpleStateMachineNodeEditorAvalonia.Views.RightConnector" Background="Red" ClipToBounds="False" HorizontalAlignment="Stretch" HorizontalContentAlignment="Right">
-	<Grid x:Name="GridRightConnector" ColumnDefinitions="Auto, Auto" ClipToBounds="False" >
+	<Grid x:Name="GridConnector" ColumnDefinitions="Auto, Auto" ClipToBounds="False" >
 		<!--Background="#00000000"-->
-		<TextBox x:Name="TextBoxRightConnector" Classes="EmptyTextBox" Grid.Column="0"
+		<TextBox x:Name="TextBoxConnector" Classes="EmptyTextBox" Grid.Column="0"
 				 HorizontalAlignment="Right" VerticalAlignment="Center" 
 				 Margin="5,0,5,3" Text="Output"/>
-		<Ellipse x:Name="EllipseRightConnector" Grid.Column="1" HorizontalAlignment="Right"
+		<Ellipse x:Name="EllipseConnector" Grid.Column="1" HorizontalAlignment="Right"
 				 VerticalAlignment="Center" Height="12" Width="12" StrokeThickness="1"
 				 Fill="Orange" Margin="0,0,-7,0" /> 
 	</Grid>

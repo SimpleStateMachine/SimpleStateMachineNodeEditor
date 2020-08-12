@@ -16,7 +16,7 @@ namespace SimpleStateMachineNodeEditorAvalonia.Views
         public PathFigure PathFigureConnect;
         public BezierSegment BezierSegmentConnect;
 
-        private void InitializeComponent()
+        protected override void InitializeComponent()
         {
             AvaloniaXamlLoader.Load(this);
 

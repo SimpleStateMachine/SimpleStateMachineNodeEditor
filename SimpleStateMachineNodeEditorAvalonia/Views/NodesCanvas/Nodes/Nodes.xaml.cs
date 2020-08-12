@@ -6,13 +6,12 @@ using SimpleStateMachineNodeEditorAvalonia.ViewModels;
 
 namespace SimpleStateMachineNodeEditorAvalonia.Views.NodesCanvasElements
 {
-    public partial class Nodes : ReactiveUserControl<NodesNodesCanvasViewModel>
+    public partial class Nodes : BaseView<NodesNodesCanvasViewModel>
     {
         public Nodes()
         {
-            this.SetupBinding();
-            this.InitializeComponent();
-           
+            
+                     
         }
 
     }

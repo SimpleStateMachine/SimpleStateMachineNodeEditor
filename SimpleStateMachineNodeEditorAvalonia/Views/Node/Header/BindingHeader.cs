@@ -12,12 +12,12 @@ namespace SimpleStateMachineNodeEditorAvalonia.Views.NodeElements
 {
     public partial class Header
     {
-        private void SetupBinding()
+        protected override void SetupBinding()
         {
             this.WhenViewModelAnyValue(disposable =>
             {
                 this.OneWayBind(this.ViewModel, x => x.Name.Value, x => x.TextBoxHeader.Text).DisposeWith(disposable);
-                this.OneWayBind(this.ViewModel, x => x.Name.Enable, x => x.TextBoxHeader.IsEnabled).DisposeWith(disposable);
+                this.OneWayBind(this.ViewModel, x => x.Name.IsEnabled, x => x.TextBoxHeader.IsEnabled).DisposeWith(disposable);
             });
         }
     }

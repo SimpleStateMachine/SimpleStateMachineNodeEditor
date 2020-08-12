@@ -1,17 +1,17 @@
-﻿using Avalonia.Controls;
-using Avalonia.Markup.Xaml;
-using SimpleStateMachineNodeEditorAvalonia.ViewModels;
-using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using ReactiveUI;
+using SimpleStateMachineNodeEditorAvalonia.Helpers;
+using System.Reactive.Disposables;
 
 namespace SimpleStateMachineNodeEditorAvalonia.Views.NodeElements
 {
     public partial class Connectors
     {
-        public void SetupBinding(NodeViewModel viewModel)
+        protected override void SetupBinding()
         {
-        
+            this.WhenViewModelAnyValue(disposable =>
+            {
+                this.OneWayBind(this.ViewModel, x => x.ConnectsForView, x => x.ItemsControlConnectors.Items).DisposeWith(disposable);
+            });
         }
     }
 }

@@ -1,14 +1,9 @@
-﻿using Avalonia;
-using Avalonia.Controls;
-using Avalonia.Markup.Xaml;
+﻿using Avalonia.ReactiveUI;
+using SimpleStateMachineNodeEditorAvalonia.ViewModels;
 
 namespace SimpleStateMachineNodeEditorAvalonia.Views
 {
-    public partial class Cutter : BaseView
+    public partial class Cutter : BaseView<CutterViewModel>
     {
-        public Cutter()
-        {
-            this.InitializeComponent();
-        }
     }
 }

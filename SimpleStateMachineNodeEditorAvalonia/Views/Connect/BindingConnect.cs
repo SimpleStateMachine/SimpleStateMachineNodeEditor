@@ -1,6 +1,7 @@
 ﻿using Avalonia.Controls;
 using Avalonia.Controls.Shapes;
 using Avalonia.Markup.Xaml;
+using Avalonia.Media;
 using SimpleStateMachineNodeEditorAvalonia.Helpers;
 using System;
 using System.Collections.Generic;
@@ -8,12 +9,11 @@ using System.Text;
 
 namespace SimpleStateMachineNodeEditorAvalonia.Views
 {
-    public partial class LeftConnector
+    public partial class Connect
     {
-        protected override void InitializeComponent()
+        protected override void SetupBinding()
         {
-            AvaloniaXamlLoader.Load(this);
-            base.InitializeComponent();
+
         }
     }
 }

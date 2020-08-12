@@ -11,7 +11,7 @@ namespace SimpleStateMachineNodeEditorAvalonia.Views
     {
         public NodesCanvas NodesCanvasMainWindow;
 
-        private void InitializeComponent()
+        protected virtual void InitializeComponent()
         {
             AvaloniaXamlLoader.Load(this);
 

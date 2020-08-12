@@ -7,11 +7,10 @@
 			 xmlns:NodesCanvasElements="clr-namespace:SimpleStateMachineNodeEditorAvalonia.Views.NodesCanvasElements"
              x:Class="SimpleStateMachineNodeEditorAvalonia.Views.NodesCanvas">
 	
- <Canvas x:Name="CanvasNodesCanvas">
-	 <!--<Views:Node/>-->
-	<Views:Selector x:Name="SelectorNodesCanvas" />
-	<Views:Cutter x:Name="CutterNodesCanvas" />
-	<NodesCanvasElements:Nodes x:Name="NodesNodesCanvas" />
-	<NodesCanvasElements:Connects x:Name="ConnectsNodesCanvas" />
- </Canvas>
+ <Grid x:Name="CanvasNodesCanvas" Background="Green">
+	 <NodesCanvasElements:Nodes x:Name="NodesNodesCanvas" />
+	 <NodesCanvasElements:Connects x:Name="ConnectsNodesCanvas" />
+	 <Views:Selector x:Name="SelectorNodesCanvas" />
+	 <!--<Views:Cutter x:Name="CutterNodesCanvas" />-->
+ </Grid>
 </UserControl>

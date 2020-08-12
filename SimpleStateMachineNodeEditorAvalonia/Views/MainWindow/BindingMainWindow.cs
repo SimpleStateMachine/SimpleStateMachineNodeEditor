@@ -11,7 +11,7 @@ namespace SimpleStateMachineNodeEditorAvalonia.Views
 {
     public partial class MainWindow
     {
-        private void SetupBinding()
+        protected virtual void SetupBinding()
         {
             this.WhenViewModelAnyValue(disposable =>
             {

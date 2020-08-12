@@ -13,7 +13,7 @@ namespace SimpleStateMachineNodeEditorAvalonia.Views.NodeElements
 
         public Button ButtonHeader;
 
-        private void InitializeComponent()
+        protected override void InitializeComponent()
         {
             AvaloniaXamlLoader.Load(this);
 

@@ -11,14 +11,19 @@ namespace SimpleStateMachineNodeEditorAvalonia.ViewModels
 {
     public partial class NodeViewModel:BaseViewModel
     {
-        [Reactive] public HeaderNodeViewModel Header { get; set; } = new HeaderNodeViewModel();
+        [Reactive] public HeaderNodeViewModel Header { get; set; }
         [Reactive] public ConnectorsNodeViewModel Connectors { get; set; } = new ConnectorsNodeViewModel();
-        [Reactive] public ConnectorViewModel Input { get; set; }
-        [Reactive] public ConnectorViewModel Output { get; set; }
+        [Reactive] public ConnectorViewModel Input { get; set; } = new ConnectorViewModel("Input2");
+        [Reactive] public ConnectorViewModel Output { get; set; } = new ConnectorViewModel("Output2");
         [Reactive] public ConnectorViewModel FreeConnector { get; set; }
         [Reactive] public Point Position { get; set; }
         [Reactive] public Size Size { get; set; }
         [Reactive] public bool DeleteEnable { get; set; } = true;
-        [Reactive] public bool IsCollapse { get; set; }       
+        [Reactive] public bool IsCollapse { get; set; }
+
+        public NodeViewModel(string name)
+        {
+            Header = new HeaderNodeViewModel(name);
+        }
     }
 }

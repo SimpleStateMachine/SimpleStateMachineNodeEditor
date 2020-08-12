@@ -13,7 +13,7 @@ namespace SimpleStateMachineNodeEditorAvalonia.Views.NodesCanvasElements
 {
     public partial class Nodes
     {
-        private void SetupBinding()
+        protected override void SetupBinding()
         {
             this.WhenViewModelAnyValue(disposable =>
             {

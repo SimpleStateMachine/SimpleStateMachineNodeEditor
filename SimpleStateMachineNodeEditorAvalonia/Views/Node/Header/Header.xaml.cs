@@ -6,11 +6,12 @@ using SimpleStateMachineNodeEditorAvalonia.ViewModels;
 
 namespace SimpleStateMachineNodeEditorAvalonia.Views.NodeElements
 {
-    public partial class Header : ReactiveUserControl<HeaderNodeViewModel>
+    public partial class Header : BaseView<HeaderNodeViewModel>
     {
         public Header()
         {
-            this.InitializeComponent();
+            
+            
         }
     }
 }

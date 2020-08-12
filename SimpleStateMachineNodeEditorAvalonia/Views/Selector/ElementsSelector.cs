@@ -12,7 +12,7 @@ namespace SimpleStateMachineNodeEditorAvalonia.Views
     {
         public Rectangle RectangleSelector;
 
-        private void InitializeComponent()
+        protected override void InitializeComponent()
         {
             AvaloniaXamlLoader.Load(this);
 

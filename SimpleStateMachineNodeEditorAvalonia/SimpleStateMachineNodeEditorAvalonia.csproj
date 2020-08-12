@@ -28,9 +28,4 @@
     <PackageReference Include="Avalonia.ReactiveUI" Version="0.9.12" />
     <PackageReference Include="ReactiveUI.Fody" Version="11.5.17" />
   </ItemGroup>
-  <ItemGroup>
-    <AvaloniaResource Update="Styles\CornerRadius.xaml">
-      <Generator>MSBuild:Compile</Generator>
-    </AvaloniaResource>
-  </ItemGroup>
 </Project>

@@ -8,6 +8,11 @@ namespace SimpleStateMachineNodeEditorAvalonia.ViewModels
 {
     public partial class HeaderNodeViewModel:BaseViewModel
     {
-        [Reactive] public StringEnabled Name { get; set; } = new StringEnabled();
+        public HeaderNodeViewModel(string name = "")
+        {
+            Name = new StringEnabled(name);
+        }
+
+        [Reactive] public StringEnabled Name { get; set; }
     }
 }

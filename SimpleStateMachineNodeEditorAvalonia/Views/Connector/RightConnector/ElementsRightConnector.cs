@@ -1,21 +1,19 @@
 ﻿using Avalonia.Controls;
+using Avalonia.Controls.Shapes;
 using Avalonia.Markup.Xaml;
 using SimpleStateMachineNodeEditorAvalonia.Helpers;
 using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace SimpleStateMachineNodeEditorAvalonia.Views.NodeElements
+namespace SimpleStateMachineNodeEditorAvalonia.Views
 {
-    public partial class Connectors
+    public partial class RightConnector
     {
-        public ItemsControl ItemsControlConnectors;
-
         protected override void InitializeComponent()
         {
             AvaloniaXamlLoader.Load(this);
-
-            ItemsControlConnectors = this.FindControlWithExeption<ItemsControl>("ItemsControlConnectors");
+            base.InitializeComponent();
         }
     }
 }

@@ -5,17 +5,22 @@
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
 			 xmlns:Views="clr-namespace:SimpleStateMachineNodeEditorAvalonia.Views"
 			 xmlns:ViewModels="clr-namespace:SimpleStateMachineNodeEditorAvalonia.ViewModels"
-             x:Class="SimpleStateMachineNodeEditorAvalonia.Views.NodesCanvasElements.Nodes" Background="Green">
+             x:Class="SimpleStateMachineNodeEditorAvalonia.Views.NodesCanvasElements.Nodes" Background="Green" HorizontalAlignment="Stretch"  VerticalAlignment="Stretch">
 	<ItemsControl  x:Name="ItemsControlNodes" >
 		<ItemsControl.ItemsPanel>
 			<ItemsPanelTemplate>
 				<Canvas/>
 			</ItemsPanelTemplate>
 		</ItemsControl.ItemsPanel>
-		<ItemsControl.DataTemplates>
+		<ItemsControl.ItemTemplate>
 			<DataTemplate DataType="{x:Type ViewModels:NodeViewModel}">
-				<Views:Node/>
+				<Views:Node />
 			</DataTemplate>
-		</ItemsControl.DataTemplates>
+		</ItemsControl.ItemTemplate>
+		<!--<ItemsControl.DataTemplates>
+			<DataTemplate DataType="{x:Type ViewModels:NodeViewModel}">
+				<Views:Node DataContext="{Binding}"/>
+			</DataTemplate>
+		</ItemsControl.DataTemplates>-->
 	</ItemsControl>
 </UserControl>

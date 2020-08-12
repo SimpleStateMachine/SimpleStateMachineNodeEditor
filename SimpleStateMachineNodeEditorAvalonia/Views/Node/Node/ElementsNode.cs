@@ -16,7 +16,7 @@ namespace SimpleStateMachineNodeEditorAvalonia.Views
         public RightConnector OutputNode;
         public Connectors ConnectorsNode;
 
-        private void InitializeComponent()
+        protected override void InitializeComponent()
         {
             AvaloniaXamlLoader.Load(this);
 

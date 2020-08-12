@@ -8,12 +8,11 @@ using System.Text;
 
 namespace SimpleStateMachineNodeEditorAvalonia.Views
 {
-    public partial class LeftConnector
+    public partial class Selector
     {
-        protected override void InitializeComponent()
+        protected override void SetupBinding()
         {
-            AvaloniaXamlLoader.Load(this);
-            base.InitializeComponent();
+
         }
     }
 }

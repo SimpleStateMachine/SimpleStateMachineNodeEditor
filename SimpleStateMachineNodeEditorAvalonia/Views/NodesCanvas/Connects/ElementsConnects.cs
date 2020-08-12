@@ -11,7 +11,7 @@ namespace SimpleStateMachineNodeEditorAvalonia.Views.NodesCanvasElements
     {
         public ItemsControl ItemsControlConnects;
 
-        private void InitializeComponent()
+        protected override void InitializeComponent()
         {
             AvaloniaXamlLoader.Load(this);
 

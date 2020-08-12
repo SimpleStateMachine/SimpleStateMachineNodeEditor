@@ -12,7 +12,7 @@ namespace SimpleStateMachineNodeEditorAvalonia.Views
     {
         public Line LineCutter;
 
-        private void InitializeComponent()
+        protected override void InitializeComponent()
         {
             AvaloniaXamlLoader.Load(this);
 

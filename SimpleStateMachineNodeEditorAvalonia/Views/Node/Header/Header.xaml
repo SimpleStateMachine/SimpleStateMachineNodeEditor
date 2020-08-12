@@ -7,7 +7,7 @@
              x:Class="SimpleStateMachineNodeEditorAvalonia.Views.NodeElements.Header" Classes="Test"  Background="Blue" ClipToBounds="False" HorizontalAlignment="Stretch">
 	<Grid ColumnDefinitions="*, auto" HorizontalAlignment="Stretch">
 		<TextBox x:Name="TextBoxHeader"  Classes="EmptyTextBox" Text="Header"  Grid.Column="0" />
-		<!--<Button x:Name="ButtonHeader" Grid.Column="1"/>-->
+		<Button x:Name="ButtonHeader" Grid.Column="1"/>
 	</Grid>
 </UserControl>
 
