@@ -5,14 +5,16 @@
              mc:Ignorable="d" d:DesignWidth="200"
              x:Class="SimpleStateMachineNodeEditorAvalonia.Views.Node"
 			 xmlns:Views="clr-namespace:SimpleStateMachineNodeEditorAvalonia.Views"
-			 xmlns:NodeElements="clr-namespace:SimpleStateMachineNodeEditorAvalonia.Views.NodeElements" ClipToBounds="False" Padding="50">
+			 xmlns:NodeElements="clr-namespace:SimpleStateMachineNodeEditorAvalonia.Views.NodeElements" ClipToBounds="False">
 	<Border x:Name="BorderNode" CornerRadius="5,5,5,5" BorderThickness="1,1,1,1" Background="Green" BorderBrush="Red">
 		<Grid RowDefinitions="auto, auto, auto, *"  MinWidth="60" ClipToBounds="False">
 			<NodeElements:Header x:Name="HeaderNode" Grid.Row="0" />
 			<Views:LeftConnector x:Name="InputNode" Grid.Row="1"/>
 			<Views:RightConnector x:Name="OutputNode" Grid.Row="2"/>
-			<!--<Button  Grid.Row="2" HorizontalAlignment="Right">Test</Button>-->
 			<NodeElements:Connectors x:Name="ConnectorsNode" Grid.Row="3"/>
 		</Grid>
 	</Border>
+	<UserControl.RenderTransform>
+		<TranslateTransform/>
+	</UserControl.RenderTransform>
 </UserControl>

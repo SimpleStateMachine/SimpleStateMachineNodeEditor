@@ -10,6 +10,11 @@ namespace SimpleStateMachineNodeEditorAvalonia.Views
     {
         public Node()
         {
+    
+
+
+
+
             //
             //           
         }

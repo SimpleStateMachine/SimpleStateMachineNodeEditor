@@ -1,5 +1,6 @@
 ﻿using Avalonia.Controls;
 using Avalonia.Markup.Xaml;
+using Avalonia.Media;
 using SimpleStateMachineNodeEditorAvalonia.Helpers;
 using SimpleStateMachineNodeEditorAvalonia.Views.NodeElements;
 using System;
@@ -16,6 +17,7 @@ namespace SimpleStateMachineNodeEditorAvalonia.Views
         public RightConnector OutputNode;
         public Connectors ConnectorsNode;
 
+        public TranslateTransform TranslateTransformNode;
         protected override void InitializeComponent()
         {
             AvaloniaXamlLoader.Load(this);
@@ -25,6 +27,8 @@ namespace SimpleStateMachineNodeEditorAvalonia.Views
             InputNode       = this.FindControlWithExeption<LeftConnector>("InputNode");
             OutputNode      = this.FindControlWithExeption<RightConnector>("OutputNode");
             ConnectorsNode = this.FindControlWithExeption<Connectors>("ConnectorsNode");
+
+            TranslateTransformNode = this.RenderTransform as TranslateTransform;
         }
     }
 }

@@ -11,7 +11,7 @@ namespace SimpleStateMachineNodeEditorAvalonia.Helpers
         [Reactive] public string Value { get; set; }
         [Reactive] public bool IsEnabled { get; set; }
 
-        public StringEnabled(string value = "", bool isEnabled = false)
+        public StringEnabled(string value = "", bool isEnabled = true)
         {
             Value = value;
             IsEnabled = isEnabled;

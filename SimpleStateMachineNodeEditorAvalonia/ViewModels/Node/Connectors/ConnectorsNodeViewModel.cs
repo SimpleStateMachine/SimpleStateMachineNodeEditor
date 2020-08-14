@@ -12,11 +12,14 @@ namespace SimpleStateMachineNodeEditorAvalonia.ViewModels
     {
         public SourceList<ConnectorViewModel> Connectors { get; set; } = new SourceList<ConnectorViewModel>();
 
-        public ObservableCollectionExtended<ConnectorViewModel> ConnectsForView = new ObservableCollectionExtended<ConnectorViewModel>();
+        public ObservableCollectionExtended<ConnectorViewModel> ConnectorsForView = new ObservableCollectionExtended<ConnectorViewModel>();
 
         public ConnectorsNodeViewModel()
         {
-            Connectors.Connect().ObserveOn(RxApp.MainThreadScheduler).Bind(ConnectsForView).Subscribe();
+            Connectors.Connect().ObserveOn(RxApp.MainThreadScheduler).Bind(ConnectorsForView).Subscribe();
+
+            Connectors.Add(new ConnectorViewModel("Test1"));
+            Connectors.Add(new ConnectorViewModel("Test2"));
         }
     }
 }
