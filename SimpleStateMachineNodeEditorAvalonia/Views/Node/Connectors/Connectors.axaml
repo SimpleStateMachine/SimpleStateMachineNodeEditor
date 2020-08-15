@@ -5,19 +5,36 @@
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"       
 			 xmlns:Views="clr-namespace:SimpleStateMachineNodeEditorAvalonia.Views"
 			 xmlns:ViewModels="clr-namespace:SimpleStateMachineNodeEditorAvalonia.ViewModels"
+			 xmlns:Helpers="clr-namespace:SimpleStateMachineNodeEditorAvalonia.Helpers"
 			 x:Class="SimpleStateMachineNodeEditorAvalonia.Views.NodeElements.Connectors" ClipToBounds="False">
-	<ListBox SelectionMode="Multiple" x:Name="ListBoxConnectors" ClipToBounds="False" Padding="0">
+	
+	<ListBox SelectionMode="Multiple" x:Name="ListBoxConnectors" ClipToBounds="False" Padding="0" BorderThickness="0" Background="Yellow">
 		<ListBox.ItemTemplate>
 			<DataTemplate DataType="{x:Type ViewModels:ConnectorViewModel}"   >
 				<Views:RightConnector />
 			</DataTemplate>
 		</ListBox.ItemTemplate>
-
-		</ListBox>
+		<ListBox.ItemsPanel>
+			<ItemsPanelTemplate>
+				<StackPanel Spacing="2" ClipToBounds="False"/>
+			</ItemsPanelTemplate>
+		</ListBox.ItemsPanel>
+		<ListBox.Styles>
+			<Style Selector="ListBoxItem">
+				<Setter Property="Padding" Value="0"/>
+				<Setter Property="ClipToBounds" Value="False"/>
+				<Setter Property="BorderThickness" Value="0"/>
+			</Style>
+		</ListBox.Styles>
+	</ListBox>
+	
+	
+	
 	<!--<ItemsControl x:Name="ItemsControlConnectors" ClipToBounds="False">
 		<ItemsControl.ItemsPanel>
-			<ItemsPanelTemplate>	
-				<StackPanel SelectionMode="Multiple" />
+			<ItemsPanelTemplate>
+				<Helpers:ListBoxPanel  SelectionMode="Multiple"/>
+				--><!--<StackPanel SelectionMode="Multiple" />--><!--
 			</ItemsPanelTemplate>
 		</ItemsControl.ItemsPanel>
 		<ItemsControl.ItemTemplate>
