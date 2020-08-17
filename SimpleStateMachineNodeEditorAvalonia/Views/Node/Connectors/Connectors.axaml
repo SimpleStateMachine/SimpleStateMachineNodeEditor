@@ -16,7 +16,7 @@
 		</ListBox.ItemTemplate>
 		<ListBox.ItemsPanel>
 			<ItemsPanelTemplate>
-				<StackPanel Spacing="2" ClipToBounds="False"/>
+				<StackPanel Spacing="3" ClipToBounds="False"/>
 			</ItemsPanelTemplate>
 		</ListBox.ItemsPanel>
 		<ListBox.Styles>
@@ -24,23 +24,15 @@
 				<Setter Property="Padding" Value="0"/>
 				<Setter Property="ClipToBounds" Value="False"/>
 				<Setter Property="BorderThickness" Value="0"/>
+				<Setter Property="Background" Value="Orange"/>
+				<Setter Property="HorizontalContentAlignment" Value="Right" />
+			</Style>
+			<Style Selector="ScrollViewer">
+				<Setter Property="ClipToBounds" Value="False"/>
+			</Style>
+			<Style Selector="ScrollContentPresenter">
+				<Setter Property="ClipToBounds" Value="False"/>
 			</Style>
 		</ListBox.Styles>
 	</ListBox>
-	
-	
-	
-	<!--<ItemsControl x:Name="ItemsControlConnectors" ClipToBounds="False">
-		<ItemsControl.ItemsPanel>
-			<ItemsPanelTemplate>
-				<Helpers:ListBoxPanel  SelectionMode="Multiple"/>
-				--><!--<StackPanel SelectionMode="Multiple" />--><!--
-			</ItemsPanelTemplate>
-		</ItemsControl.ItemsPanel>
-		<ItemsControl.ItemTemplate>
-			<DataTemplate DataType="{x:Type ViewModels:ConnectorViewModel}">
-				<Views:RightConnector />
-			</DataTemplate>
-		</ItemsControl.ItemTemplate>
-	</ItemsControl>-->
 </UserControl>

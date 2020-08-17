@@ -11,7 +11,7 @@
 			<NodeElements:Header x:Name="HeaderNode" Grid.Row="0" />
 			<Views:LeftConnector x:Name="InputNode" Grid.Row="1"/>
 			<Views:RightConnector x:Name="OutputNode" Grid.Row="2"/>
-			<NodeElements:Connectors x:Name="ConnectorsNode" Grid.Row="3"/>
+			<NodeElements:Connectors x:Name="ConnectorsNode" Grid.Row="3" Margin="0,3,0,0"/>
 		</Grid>
 	</Border>
 	<UserControl.RenderTransform>
