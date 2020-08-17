@@ -91,6 +91,10 @@ namespace SimpleStateMachineNodeEditor.ViewModel
 
             CommandRedo = ReactiveCommand.Create(ICommandWithUndoRedo.Redo);
             CommandUndo = ReactiveCommand.Create(ICommandWithUndoRedo.Undo);
+
+
+
+
             CommandSelectAll = ReactiveCommand.Create(SelectedAll);
             CommandUnSelectAll = ReactiveCommand.Create(UnSelectedAll);
             CommandSelectorIntersect = ReactiveCommand.Create(SelectNodes);
@@ -133,7 +137,11 @@ namespace SimpleStateMachineNodeEditor.ViewModel
             CommandPartMoveAllSelectedNode = ReactiveCommand.Create<Point>(PartMoveAllSelectedNode);
 
 
-            CommandFullMoveAllNode = new Command<Point, List<NodeViewModel>>(FullMoveAllNode, UnFullMoveAllNode, NotSaved);
+            CommandFullMoveAllNode = new Command<Point, List<NodeViewModel>>(FullMoveAllNode, UnFullMoveAllNode);
+
+
+
+
             CommandFullMoveAllSelectedNode = new Command<Point, List<NodeViewModel>>(FullMoveAllSelectedNode, UnFullMoveAllSelectedNode, NotSaved);
             CommandAddConnectorWithConnect = new Command<ConnectorViewModel, ConnectorViewModel>(AddConnectorWithConnect, DeleteConnectorWithConnect, NotSaved);
             CommandAddNodeWithUndoRedo = new Command<Point, NodeViewModel>(AddNodeWithUndoRedo, DeleteNodetWithUndoRedo, NotSaved);

@@ -6,7 +6,7 @@ using SimpleStateMachineNodeEditorAvalonia.ViewModels;
 
 namespace SimpleStateMachineNodeEditorAvalonia.Views
 {
-    public partial class LeftConnector : BaseView<ConnectorViewModel>
+    public partial class LeftConnector : Connector
     {
         public LeftConnector()
         {

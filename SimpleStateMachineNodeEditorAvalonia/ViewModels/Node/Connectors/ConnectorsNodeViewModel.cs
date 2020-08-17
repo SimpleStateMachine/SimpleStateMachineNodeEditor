@@ -20,6 +20,7 @@ namespace SimpleStateMachineNodeEditorAvalonia.ViewModels
 
             Connectors.Add(new ConnectorViewModel("Test1"));
             Connectors.Add(new ConnectorViewModel("Test2"));
+            Connectors.Add(new ConnectorViewModel("Test3"));
         }
     }
 }
