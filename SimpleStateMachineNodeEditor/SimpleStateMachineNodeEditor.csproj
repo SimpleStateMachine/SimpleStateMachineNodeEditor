@@ -72,6 +72,7 @@ New format for xml file with schemes</PackageReleaseNotes>
     <PackageReference Include="ReactiveUI.WPF" Version="11.4.17" />
     <PackageReference Include="Splat" Version="9.4.5" />
     <PackageReference Include="Splat.Drawing" Version="9.4.5" />
+    <PackageReference Include="System.Reactive" Version="4.4.1" />
     <PackageReference Include="WritableJsonConfiguration" Version="3.1.5" />
   </ItemGroup>
 
