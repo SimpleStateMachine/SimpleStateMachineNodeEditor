@@ -4,11 +4,11 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
 			 xmlns:Extensions="clr-namespace:SimpleStateMachineNodeEditorAvalonia.Helpers.Extensions"
              mc:Ignorable="d" 
-             x:Class="SimpleStateMachineNodeEditorAvalonia.Views.NodeElements.Header" Classes="Test"   ClipToBounds="False" HorizontalAlignment="Stretch">
-	<Border x:Name="BorderHeader" CornerRadius="5,5,0,0" Background="Blue">
+             x:Class="SimpleStateMachineNodeEditorAvalonia.Views.NodeElements.Header" Classes="Test"  ClipToBounds="False" HorizontalAlignment="Stretch">
+	<Border x:Name="BorderHeader" CornerRadius="5,5,0,0" Background="Blue" >
 		<Grid ColumnDefinitions="*, auto" HorizontalAlignment="Stretch">
-			<TextBox x:Name="TextBoxHeader"  Classes="EmptyTextBox" Text="Header"  Grid.Column="0" />
-			<Button x:Name="ButtonHeader" Grid.Column="1"/>
+			<TextBox x:Name="TextBoxHeader"  Classes="EmptyTextBox" Text="Header" Padding="0,3" Grid.Column="0"  Margin="10,0,0,0" />
+			<Button x:Name="ButtonHeader" Grid.Column="1"  Margin="5" />
 		</Grid>
 	</Border>
 </UserControl>

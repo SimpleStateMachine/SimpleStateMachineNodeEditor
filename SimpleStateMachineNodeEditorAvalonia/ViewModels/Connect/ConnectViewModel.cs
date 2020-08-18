@@ -6,5 +6,6 @@ namespace SimpleStateMachineNodeEditorAvalonia.ViewModels
 {
     public class ConnectViewModel : BaseViewModel
     {
+
     }
 }

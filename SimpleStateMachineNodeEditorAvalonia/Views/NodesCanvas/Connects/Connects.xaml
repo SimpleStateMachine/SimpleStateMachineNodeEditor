@@ -13,10 +13,10 @@
 				<Canvas ClipToBounds="False"/>
 			</ItemsPanelTemplate>
 		</ItemsControl.ItemsPanel>
-		<ItemsControl.DataTemplates>
+		<ItemsControl.ItemTemplate>
 			<DataTemplate DataType="{x:Type ViewModels:ConnectViewModel}">
-				<Views:Connect/>
+				<Views:Connect />
 			</DataTemplate>
-		</ItemsControl.DataTemplates>
+		</ItemsControl.ItemTemplate>
 	</ItemsControl>
 </UserControl>

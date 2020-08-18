@@ -1,4 +1,5 @@
-﻿using DynamicData;
+﻿using Avalonia;
+using DynamicData;
 using DynamicData.Binding;
 using ReactiveUI;
 using ReactiveUI.Fody.Helpers;
@@ -19,7 +20,7 @@ namespace SimpleStateMachineNodeEditorAvalonia.ViewModels
         public NodesNodesCanvasViewModel()
         {
             Nodes.Connect().ObserveOn(RxApp.MainThreadScheduler).Bind(NodesForView).Subscribe();
-            Nodes.Add(new NodeViewModel("Тестим"));
+            Nodes.Add(new NodeViewModel("State 3", new Point(100, 100)));
         }
     }
 }

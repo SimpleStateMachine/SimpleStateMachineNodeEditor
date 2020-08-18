@@ -8,9 +8,9 @@
              x:Class="SimpleStateMachineNodeEditorAvalonia.Views.NodesCanvas">
 	
  <Grid x:Name="CanvasNodesCanvas" Background="Green">
-	 <NodesCanvasElements:Nodes x:Name="NodesNodesCanvas" />
+	 <!--<NodesCanvasElements:Nodes x:Name="NodesNodesCanvas" />-->
 	 <NodesCanvasElements:Connects x:Name="ConnectsNodesCanvas" />
-	 <Views:Selector x:Name="SelectorNodesCanvas" />
+	 <!--<Views:Selector x:Name="SelectorNodesCanvas" />-->
 	 <!--<Views:Cutter x:Name="CutterNodesCanvas" />-->
  </Grid>
 </UserControl>

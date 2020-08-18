@@ -5,6 +5,7 @@ using Avalonia.Media;
 using SimpleStateMachineNodeEditorAvalonia.Helpers;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 
 namespace SimpleStateMachineNodeEditorAvalonia.Views
@@ -21,9 +22,9 @@ namespace SimpleStateMachineNodeEditorAvalonia.Views
             AvaloniaXamlLoader.Load(this);
 
             PathConnect = this.FindControlWithExeption<Path>("PathConnect");
-            PathGeometryConnect = this.FindWithExeption<PathGeometry>("PathGeometryConnect");
-            PathFigureConnect = this.FindWithExeption<PathFigure>("PathFigureConnect");
-            BezierSegmentConnect = this.FindWithExeption<BezierSegment>("BezierSegmentConnect");
+            PathGeometryConnect = PathConnect.Data as PathGeometry;
+            PathFigureConnect = PathGeometryConnect.Figures.First();
+            BezierSegmentConnect = PathFigureConnect.Segments.First() as BezierSegment;
         }
     }
 }

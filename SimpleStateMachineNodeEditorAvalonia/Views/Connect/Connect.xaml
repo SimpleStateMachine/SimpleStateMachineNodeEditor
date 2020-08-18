@@ -4,14 +4,18 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
              x:Class="SimpleStateMachineNodeEditorAvalonia.Views.Connect">
-	<Path x:Name="PathConnect" >
-		<!--<Path.Data>
-			<PathGeometry x:Name="PathGeometryConnect">
-				<PathFigure x:Name="PathFigureConnect"  IsClosed="False">
-					<BezierSegment  x:Name="BezierSegmentConnect"/>
+	
+	<Path x:Name="PathConnect" Stroke="Red"  Fill="Orange">
+		<Path.Data>
+			<PathGeometry>
+				<PathFigure IsClosed="False" StartPoint="100,100">
+					<LineSegment Point="399,399"/>
+
 				</PathFigure>
 			</PathGeometry>
-		</Path.Data>-->
+		</Path.Data>
 	</Path>
+
+	<!--<BezierSegment Point3="500,500"  Point2="300,300" Point1="150,150"/>-->
 	<!--StrokeDashCap="Round" StrokeLineJoin="Round" StrokeEndLineCap="Round" StrokeStartLineCap="Round"-->
 </UserControl>

@@ -20,10 +20,10 @@ namespace SimpleStateMachineNodeEditorAvalonia.Views
         {
             AvaloniaXamlLoader.Load(this);
 
-            CanvasNodesCanvas = this.FindControlWithExeption<Grid>("CanvasNodesCanvas");
-            NodesNodesCanvas = this.FindControlWithExeption<Nodes>("NodesNodesCanvas");
+            //CanvasNodesCanvas = this.FindControlWithExeption<Grid>("CanvasNodesCanvas");
+            //NodesNodesCanvas = this.FindControlWithExeption<Nodes>("NodesNodesCanvas");
             ConnectsNodesCanvas = this.FindControlWithExeption<Connects>("ConnectsNodesCanvas");
-            SelectorNodesCanvas = this.FindControlWithExeption<Selector>("SelectorNodesCanvas");
+            //SelectorNodesCanvas = this.FindControlWithExeption<Selector>("SelectorNodesCanvas");
             //CutterNodesCanvas = this.FindControlWithExeption<Cutter>("CutterNodesCanvas");
         }
 

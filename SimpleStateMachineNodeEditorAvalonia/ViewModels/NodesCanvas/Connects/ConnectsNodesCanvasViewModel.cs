@@ -18,6 +18,8 @@ namespace SimpleStateMachineNodeEditorAvalonia.ViewModels
         public ConnectsNodesCanvasViewModel()
         {
             Connects.Connect().ObserveOn(RxApp.MainThreadScheduler).Bind(ConnectsForView).Subscribe();
+
+            Connects.Add(new ConnectViewModel());
         }
     }
 
