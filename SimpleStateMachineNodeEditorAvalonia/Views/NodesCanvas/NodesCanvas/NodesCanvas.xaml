@@ -7,10 +7,38 @@
 			 xmlns:NodesCanvasElements="clr-namespace:SimpleStateMachineNodeEditorAvalonia.Views.NodesCanvasElements"
              x:Class="SimpleStateMachineNodeEditorAvalonia.Views.NodesCanvas">
 	
- <Grid x:Name="CanvasNodesCanvas" Background="Green">
-	 <!--<NodesCanvasElements:Nodes x:Name="NodesNodesCanvas" />-->
-	 <NodesCanvasElements:Connects x:Name="ConnectsNodesCanvas" />
-	 <!--<Views:Selector x:Name="SelectorNodesCanvas" />-->
-	 <!--<Views:Cutter x:Name="CutterNodesCanvas" />-->
- </Grid>
+ <Canvas x:Name="CanvasNodesCanvas" Background="Green">
+	 <Path x:Name="PathConnect" Stroke="Red"  Fill="Orange">
+		 <Path.Data>
+			 <PathGeometry>
+				 <PathFigure IsClosed="False" StartPoint="100,100">
+					 <LineSegment Point="399,399"/>
+				 </PathFigure>
+			 </PathGeometry>
+		 </Path.Data>
+	 </Path>
+ </Canvas>
 </UserControl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--<NodesCanvasElements:Nodes x:Name="NodesNodesCanvas" />-->
+<!--<NodesCanvasElements:Connects x:Name="ConnectsNodesCanvas" />-->
+<!--<Views:Selector x:Name="SelectorNodesCanvas" />-->
+<!--<Views:Cutter x:Name="CutterNodesCanvas" />-->

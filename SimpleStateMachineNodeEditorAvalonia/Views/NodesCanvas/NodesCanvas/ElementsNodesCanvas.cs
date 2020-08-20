@@ -22,7 +22,7 @@ namespace SimpleStateMachineNodeEditorAvalonia.Views
 
             //CanvasNodesCanvas = this.FindControlWithExeption<Grid>("CanvasNodesCanvas");
             //NodesNodesCanvas = this.FindControlWithExeption<Nodes>("NodesNodesCanvas");
-            ConnectsNodesCanvas = this.FindControlWithExeption<Connects>("ConnectsNodesCanvas");
+            //ConnectsNodesCanvas = this.FindControlWithExeption<Connects>("ConnectsNodesCanvas");
             //SelectorNodesCanvas = this.FindControlWithExeption<Selector>("SelectorNodesCanvas");
             //CutterNodesCanvas = this.FindControlWithExeption<Cutter>("CutterNodesCanvas");
         }
