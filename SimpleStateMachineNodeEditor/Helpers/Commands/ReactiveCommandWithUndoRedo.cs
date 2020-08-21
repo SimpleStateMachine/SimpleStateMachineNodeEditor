@@ -43,6 +43,7 @@ namespace SimpleStateMachineNodeEditor.Helpers.Commands
                 throw new ArgumentNullException(nameof(canUnExecute));
             }
 
+            //How create?
             //_command = ReactiveCommand.CreateFromObservable<TParam, IList<TResult>>(execute, canExecute, outputScheduler);
 
             _unExecute = unExecute;
@@ -105,7 +106,8 @@ namespace SimpleStateMachineNodeEditor.Helpers.Commands
         public override IObservable<TResult> Execute(TParam parameter = default(TParam))
         {
             _parameter = parameter;
-            return _command.Execute(parameter);
+            _result = _command.Execute(parameter);
+            return _result;
         }
 
         protected override void Dispose(bool disposing)
