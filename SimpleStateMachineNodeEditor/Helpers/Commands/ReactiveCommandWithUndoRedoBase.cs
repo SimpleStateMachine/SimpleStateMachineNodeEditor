@@ -1,35 +1,83 @@
 ﻿using ReactiveUI;
 using System;
 using System.Collections.Generic;
+using System.Reactive.Linq;
 using System.Text;
+using System.Windows.Media.TextFormatting;
 
 namespace SimpleStateMachineNodeEditor.Helpers.Commands
 {
-    public abstract class ReactiveCommandWithUndoRedoBase<TParam, TResult> : ReactiveCommandBase<TParam, TResult>
+    //public abstract class ReactiveCommandWithUndoRedoBase<TParam, TResult> : ReactiveCommandBase<TParam, TResult>, IReactiveCommandWithUndoRedo
+    //{
+    //    private EventHandler? _canUnExecuteChanged;
+    //    private bool _canUnExecuteValue;
+
+    //    event EventHandler CanUnExecuteChanged
+    //    {
+    //        add => _canUnExecuteChanged += value;
+    //        remove => _canUnExecuteChanged -= value;
+    //    }
+
+    //    public abstract IObservable<bool> CanUnExecute
+    //    {
+    //        get;
+    //    }
+
+    //    public abstract IObservable<bool> IsUnExecuting
+    //    {
+    //        get;
+    //    }
+
+    //    protected void OnCanUnExecuteChanged(bool newValue)
+    //    {
+    //        _canUnExecuteValue = newValue;
+    //        _canUnExecuteChanged?.Invoke(this, EventArgs.Empty);
+    //    }
+    //}
+
+    public abstract class ReactiveCommandWithUndoRedoBase<TParam, TResult> : ReactiveCommandBase<TParam, TResult>, IReactiveCommandWithUndoRedo
     {
-        private EventHandler? _canUnExecuteChanged;
-        private bool _canUnExecuteValue;
-
-        event EventHandler CanUnExecuteChanged
+        public ReactiveCommandWithUndoRedoBase(IReactiveCommandHistory history=null)
         {
-            add => _canUnExecuteChanged += value;
-            remove => _canUnExecuteChanged -= value;
+            _history = history;
         }
 
-        public abstract IObservable<bool> CanUnExecute
+        private IReactiveCommandHistory _history;
+        public IObservable<bool> IsUndoing => throw new NotImplementedException();
+
+        public IObservable<bool> IsRedoing => throw new NotImplementedException();
+
+        public IObservable<bool> CanUndo => throw new NotImplementedException();
+
+        public IObservable<bool> CanRedo => throw new NotImplementedException();
+
+        public override IObservable<TResult> Execute(TParam parameter = default(TParam))
         {
-            get;
+            return null;
         }
 
-        public abstract IObservable<bool> IsUnExecuting
+        void IReactiveCommandWithUndoRedo.Undo()
         {
-            get;
+            IUndoExecute();
         }
 
-        protected void OnCanUnExecuteChanged(bool newValue)
+        void IReactiveCommandWithUndoRedo.Redo()
         {
-            _canUnExecuteValue = newValue;
-            _canUnExecuteChanged?.Invoke(this, EventArgs.Empty);
+            IRedoExecute();
+        }
+
+        public abstract IObservable<TResult> Undo();
+        public abstract IObservable<TResult> Redo();
+
+        protected virtual void IUndoExecute()
+        {
+            Undo().Catch(Observable<TResult>.Empty)
+                .Subscribe();
+        }
+        protected virtual void IRedoExecute()
+        {
+            Redo().Catch(Observable<TResult>.Empty)
+                .Subscribe();
         }
     }
 }

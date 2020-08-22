@@ -5,6 +5,7 @@ using Splat;
 using SimpleStateMachineNodeEditor.Helpers.Converters;
 using WritableJsonConfiguration;
 using Application = System.Windows.Application;
+using SimpleStateMachineNodeEditor.Helpers.Commands;
 
 namespace SimpleStateMachineNodeEditor
 {
@@ -14,7 +15,7 @@ namespace SimpleStateMachineNodeEditor
     public partial class App : Application
     {
         public App()
-        {
+        {    
             Locator.CurrentMutable.RegisterViewsForViewModels(Assembly.GetCallingAssembly());
             Locator.CurrentMutable.RegisterConstant(new ConverterBoolAndVisibility(), typeof(IBindingTypeConverter));
 

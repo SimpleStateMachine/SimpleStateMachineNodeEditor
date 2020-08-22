@@ -11,6 +11,8 @@ namespace SimpleStateMachineNodeEditor.Helpers.Commands
         public Action OnExecute { get; set; }
         public TParameter Parameters { get; set; }
         public TResult Result { get; set; }
+
+
         public object Clone()
         {
             return new Command<TParameter, TResult>(_execute, _unExecute, OnExecute)
