@@ -8,5 +8,9 @@ namespace SimpleStateMachineNodeEditorAvalonia.Views
 {
     public partial class Connect : BaseView<ConnectViewModel>
     {
+        public Connect()
+        {
+            SetupSubscriptions();
+        }
     }
 }

@@ -5,12 +5,11 @@
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
              x:Class="SimpleStateMachineNodeEditorAvalonia.Views.Connect">
 	
-	<Path x:Name="PathConnect" Stroke="Red"  Fill="Orange">
+	<Path x:Name="PathConnect" Stroke="Red" StrokeThickness="2" StrokeJoin="Round">
 		<Path.Data>
 			<PathGeometry>
-				<PathFigure IsClosed="False" StartPoint="100,100">
-					<LineSegment Point="399,399"/>
-
+				<PathFigure IsClosed="False">
+					<BezierSegment/>
 				</PathFigure>
 			</PathGeometry>
 		</Path.Data>

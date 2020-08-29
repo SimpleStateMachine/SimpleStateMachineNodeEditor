@@ -10,7 +10,7 @@ namespace SimpleStateMachineNodeEditorAvalonia.Views
 {
     public partial class NodesCanvas
     {
-        public Grid CanvasNodesCanvas;
+        public Grid GridNodesCanvas;
         public Nodes NodesNodesCanvas;
         public Connects ConnectsNodesCanvas;
         public Selector SelectorNodesCanvas;
@@ -20,11 +20,11 @@ namespace SimpleStateMachineNodeEditorAvalonia.Views
         {
             AvaloniaXamlLoader.Load(this);
 
-            //CanvasNodesCanvas = this.FindControlWithExeption<Grid>("CanvasNodesCanvas");
-            //NodesNodesCanvas = this.FindControlWithExeption<Nodes>("NodesNodesCanvas");
-            //ConnectsNodesCanvas = this.FindControlWithExeption<Connects>("ConnectsNodesCanvas");
-            //SelectorNodesCanvas = this.FindControlWithExeption<Selector>("SelectorNodesCanvas");
-            //CutterNodesCanvas = this.FindControlWithExeption<Cutter>("CutterNodesCanvas");
+            GridNodesCanvas = this.FindControlWithExeption<Grid>("GridNodesCanvas");
+            NodesNodesCanvas = this.FindControlWithExeption<Nodes>("NodesNodesCanvas");
+            ConnectsNodesCanvas = this.FindControlWithExeption<Connects>("ConnectsNodesCanvas");
+            SelectorNodesCanvas = this.FindControlWithExeption<Selector>("SelectorNodesCanvas");
+            CutterNodesCanvas = this.FindControlWithExeption<Cutter>("CutterNodesCanvas");
         }
 
     }

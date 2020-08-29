@@ -17,10 +17,5 @@
 				<Views:Node />
 			</DataTemplate>
 		</ItemsControl.ItemTemplate>
-		<!--<ItemsControl.DataTemplates>
-			<DataTemplate DataType="{x:Type ViewModels:NodeViewModel}">
-				<Views:Node DataContext="{Binding}"/>
-			</DataTemplate>
-		</ItemsControl.DataTemplates>-->
 	</ItemsControl>
 </UserControl>
