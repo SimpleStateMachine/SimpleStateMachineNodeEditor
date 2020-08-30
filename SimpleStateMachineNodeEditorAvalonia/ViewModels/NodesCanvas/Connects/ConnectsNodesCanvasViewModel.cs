@@ -20,7 +20,7 @@ namespace SimpleStateMachineNodeEditorAvalonia.ViewModels
         {
             Connects.Connect().ObserveOn(RxApp.MainThreadScheduler).Bind(ConnectsForView).Subscribe();
 
-            // Connects.Add(new ConnectViewModel() {StartPoint= new Point(10,10), EndPoint = new Point(500,500) });
+/*            Connects.Add(new ConnectViewModel() { StartPoint = new Point(10, 10), EndPoint = new Point(500, 500) })*/;
         }
     }
 

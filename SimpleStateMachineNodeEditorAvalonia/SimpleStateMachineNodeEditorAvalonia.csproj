@@ -13,10 +13,10 @@
     <AvaloniaResource Include="Assets\**" />
     <None Remove="Styles\Connector\LeftConnector\TextBox\TextBoxLeftConnectorDefault.xaml" />
     <None Remove="Styles\Connector\RightConnector\TextBox\TextBoxRightConnectorDefault.xaml" />
+    <None Remove="Styles\Node\Header\Button\NodeHeaderButton.xaml" />
 <!--	<AvaloniaResource Include="Styles\**" />-->
 	  <Folder Include="Styles\Connector\Connector\" />
     <Folder Include="Styles\Connect\" />
-    <Folder Include="Styles\Node\Header\" />
 	<Folder Include="Styles\Extensions\" />
 	<AvaloniaResource Update="Styles\Connector\LeftConnector\EllipseDefault.xaml">
 	  <SubType>Designer</SubType>
@@ -28,6 +28,9 @@
 	  <SubType>Designer</SubType>
 	</AvaloniaResource>
 	<AvaloniaResource Update="Styles\Connector\RightConnector\TextBox\TextBoxRightConnectorDefault.xaml">
+	  <Generator>MSBuild:Compile</Generator>
+	</AvaloniaResource>
+	<AvaloniaResource Update="Styles\Node\Header\Button\NodeHeaderButton.xaml">
 	  <Generator>MSBuild:Compile</Generator>
 	</AvaloniaResource>
   </ItemGroup>

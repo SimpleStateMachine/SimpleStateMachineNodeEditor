@@ -1,0 +1,37 @@
+﻿ <Styles xmlns="https://github.com/avaloniaui"
+		xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+  <Style Selector="ToggleButton.NodeHeaderButton">
+	<Setter Property="Background" Value="{DynamicResource ColorNodeHeaderButton}"/>
+	<Setter Property="BorderBrush" Value="{DynamicResource ColorNodeHeaderButton}"/>
+    <Setter Property="Template">
+      <ControlTemplate>
+		  <Path  Stroke="{TemplateBinding BorderBrush}" Fill="{TemplateBinding Background}" Data="M0,6 L6,0 L12,6 Z" 
+				 HorizontalAlignment="Center" VerticalAlignment="Center">
+			  <Path.RenderTransform>
+				  <RotateTransform Angle="0"/>
+			  </Path.RenderTransform>
+		  </Path>		
+	  </ControlTemplate>
+    </Setter>
+  </Style>
+	 <Style Selector="ToggleButton[IsChecked=true].NodeHeaderButton">
+		 <Setter Property="BorderBrush" Value="{DynamicResource ColorNodeHeaderButtonPointerOver}"/>
+		 <Setter Property="Background" Value="{DynamicResource ColorNodeHeaderButtonPointerOver}"/>
+	 </Style>
+	 <Style Selector="ToggleButton:pointerover.NodeHeaderButton[IsChecked=false]">
+		 <Setter Property="BorderBrush" Value="{DynamicResource ColorNodeHeaderButtonPointerOver}"/>
+		 <Setter Property="Background" Value="{DynamicResource ColorNodeHeaderButtonPointerOver}"/>
+	 </Style>
+
+	 <Style Selector="ToggleButton[IsChecked=true].NodeHeaderButton Path/RotateTransform">
+		 <Setter Property="Angle" Value="180"/>
+	 </Style>
+</Styles>
+
+
+
+<!--<Style Selector="ToggleButton:pointerover.NodeHeaderButton[IsChecked=true]">
+    <Setter Property="BorderBrush" Value="{DynamicResource ColorNodeHeaderButton}"/>
+	<Setter Property="Background" Value="{DynamicResource ColorNodeHeaderButton}"/>
+  </Style>-->

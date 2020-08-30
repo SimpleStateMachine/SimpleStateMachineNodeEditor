@@ -5,7 +5,7 @@
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
              x:Class="SimpleStateMachineNodeEditorAvalonia.Views.Connect">
 	
-	<Path x:Name="PathConnect" Stroke="Red" StrokeThickness="2" StrokeJoin="Round">
+	<Path x:Name="PathConnect" Stroke="{DynamicResource ColorConnectStroke}" StrokeThickness="2" StrokeJoin="Round" StrokeLineCap="Round">
 		<Path.Data>
 			<PathGeometry>
 				<PathFigure IsClosed="False">
@@ -14,7 +14,4 @@
 			</PathGeometry>
 		</Path.Data>
 	</Path>
-
-	<!--<BezierSegment Point3="500,500"  Point2="300,300" Point1="150,150"/>-->
-	<!--StrokeDashCap="Round" StrokeLineJoin="Round" StrokeEndLineCap="Round" StrokeStartLineCap="Round"-->
 </UserControl>

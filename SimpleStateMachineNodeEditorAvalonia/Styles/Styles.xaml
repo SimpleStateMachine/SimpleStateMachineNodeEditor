@@ -13,6 +13,9 @@
     <StyleInclude Source="/Styles/Connector/RightConnector/Ellipse/EllipseRightConnectorPointerOver.xaml"/>
 	<StyleInclude Source="/Styles/Connector/RightConnector/TextBox/TextBoxRightConnectorDefault.xaml"/>
 				  
+	<!--Node-->
+	<StyleInclude Source="/Styles/Node/Header/Button/NodeHeaderButton.xaml"/>
+	
 	<!--Themes-->
 	<StyleInclude Source="/Styles/Themes/Dark.xaml"/>
 </Styles>

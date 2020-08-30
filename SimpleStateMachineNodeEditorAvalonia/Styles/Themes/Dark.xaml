@@ -4,7 +4,7 @@
 	<Style.Resources>
 
 		<!--Connect-->
-		<SolidColorBrush x:Key="ColorConnect" Color="White" />
+		<SolidColorBrush x:Key="ColorConnectStroke" Color="White" />
 
 		<!--LeftConnector-->
 		<SolidColorBrush x:Key="ColorLeftConnectorTextBoxForeground" Color="White"/>
@@ -23,7 +23,8 @@
 		<SolidColorBrush x:Key="ColorNodeBorderBrush"  Color="LightGray"/>
 		<SolidColorBrush x:Key="ColorNodeHeaderBackground"  Color="#123d6a"/>
 		<SolidColorBrush x:Key="ColorNodeHeaderForeground" Color="White"/>
-
+		<SolidColorBrush x:Key="ColorNodeHeaderButton" Color="White"/>
+		<SolidColorBrush x:Key="ColorNodeHeaderButtonPointerOver" Color="Red"/>
 		<!--<Color x:Key="ColorNodeHeader">#90123d6a</Color>
 		<Color x:Key="ColorNodeBackground">#E52D2D2D</Color>-->
 		
