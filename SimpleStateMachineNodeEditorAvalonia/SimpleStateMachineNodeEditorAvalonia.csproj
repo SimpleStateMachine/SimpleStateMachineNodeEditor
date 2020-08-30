@@ -11,17 +11,13 @@
       <SubType>Designer</SubType>
     </AvaloniaResource>
     <AvaloniaResource Include="Assets\**" />
-    <AvaloniaResource Remove="Icons\**" />
-    <AvaloniaXaml Remove="Icons\**" />
-    <Compile Remove="Icons\**" />
-    <EmbeddedResource Remove="Icons\**" />
+	<AvaloniaResource Include="Styles\**" />
     <Folder Include="Styles\Connector\LeftConnector\" />
     <Folder Include="Styles\Connector\RightConnector\" />
     <Folder Include="Styles\Connect\" />
     <Folder Include="Styles\Node\Header\" />
 	<Folder Include="Styles\Extensions\" />
 	<Folder Include="Styles\Themes" />
-    <None Remove="Icons\**" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Avalonia" Version="0.9.12" />
@@ -32,9 +28,4 @@
     <PackageReference Include="Pharmacist.MSBuild" Version="1.8.1" />
     <PackageReference Include="ReactiveUI.Fody" Version="11.5.26" />
   </ItemGroup>
-<!--  <ItemGroup>-->
-<!--    <Reference Include="System.Xaml, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">-->
-<!--      <HintPath>..\..\..\..\..\..\Program Files\dotnet\packs\Microsoft.WindowsDesktop.App.Ref\3.1.0\ref\netcoreapp3.1\System.Xaml.dll</HintPath>-->
-<!--    </Reference>-->
-<!--  </ItemGroup>-->
 </Project>
