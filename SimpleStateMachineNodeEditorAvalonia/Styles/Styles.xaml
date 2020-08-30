@@ -1,15 +1,8 @@
 ﻿<Styles xmlns="https://github.com/avaloniaui">
     <StyleInclude Source="/Styles/EmptyTextBox.xaml"/>
-	<!--<StyleInclude Source="/Styles/Extensions/CornerRadius.xaml"/>-->
 	<StyleInclude Source="/Styles/CornerRadius.xaml"/>
+    <StyleInclude Source="/Styles/Connector/RightConnector/EllipsePointerOver.xaml"/>
 </Styles>
 
-
-<!--AllowDrop="True" IsUndoEnabled="True" 
-    TextWrapping="NoWrap" 
-    BorderThickness="0,0,0,0"
-    Background="{x:Null}"
-    BorderBrush="{x:Null}" 
-    Style="{DynamicResource StyleEmptyTextBox}"-->
     
     

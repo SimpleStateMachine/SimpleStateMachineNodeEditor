@@ -22,7 +22,6 @@ namespace SimpleStateMachineNodeEditorAvalonia.ViewModels
             Nodes.Connect().ObserveOn(RxApp.MainThreadScheduler).Bind(NodesForView).Subscribe();
 
             Nodes.Add(new NodeViewModel("State 3", new Point(100, 100)));
-            Nodes.Add(new NodeViewModel("State 5", new Point(100, 100)));
         }
     }
 }

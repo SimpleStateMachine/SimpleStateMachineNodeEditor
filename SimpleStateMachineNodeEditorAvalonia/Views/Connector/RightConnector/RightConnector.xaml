@@ -9,7 +9,7 @@
 		<TextBox x:Name="TextBoxConnector" Classes="EmptyTextBox" Grid.Column="0"
 				 HorizontalAlignment="Right" VerticalAlignment="Center" 
 				 Margin="5,0" Text="Test"/>
-		<Ellipse x:Name="EllipseConnector" Grid.Column="1" 
+		<Ellipse x:Name="EllipseConnector" Grid.Column="1" Classes="EllipseRightConnector" 
 				 HorizontalAlignment="Right" VerticalAlignment="Center" 
 				 Height="12" Width="12" Margin="0,0,-7,0"
 				 StrokeThickness="1" Fill="Orange" Stroke="Azure"/> 
