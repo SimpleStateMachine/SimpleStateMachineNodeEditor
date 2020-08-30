@@ -5,7 +5,7 @@
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
 			 xmlns:Views="clr-namespace:SimpleStateMachineNodeEditorAvalonia.Views"
 			 xmlns:ViewModels="clr-namespace:SimpleStateMachineNodeEditorAvalonia.ViewModels"
-             x:Class="SimpleStateMachineNodeEditorAvalonia.Views.NodesCanvasElements.Nodes" ClipToBounds="False" Background="Green" HorizontalAlignment="Stretch"  VerticalAlignment="Stretch">
+             x:Class="SimpleStateMachineNodeEditorAvalonia.Views.NodesCanvasElements.Nodes" ClipToBounds="False" HorizontalAlignment="Stretch"  VerticalAlignment="Stretch">
 	<ItemsControl x:Name="ItemsControlNodes">
 		<ItemsControl.ItemsPanel>
 			<ItemsPanelTemplate>

@@ -1,7 +1,20 @@
 ﻿<Styles xmlns="https://github.com/avaloniaui">
+	
+	
     <StyleInclude Source="/Styles/EmptyTextBox.xaml"/>
 	<StyleInclude Source="/Styles/CornerRadius.xaml"/>
-    <StyleInclude Source="/Styles/Connector/RightConnector/EllipsePointerOver.xaml"/>
+
+	<!--LeftConnector-->
+	<StyleInclude Source="/Styles/Connector/LeftConnector/Ellipse/EllipseLeftConnectorDefault.xaml"/>
+	<StyleInclude Source="/Styles/Connector/LeftConnector/TextBox/TextBoxLeftConnectorDefault.xaml"/>
+				  
+	<!--RightConnector-->
+	<StyleInclude Source="/Styles/Connector/RightConnector/Ellipse/EllipseRightConnectorDefault.xaml"/>
+    <StyleInclude Source="/Styles/Connector/RightConnector/Ellipse/EllipseRightConnectorPointerOver.xaml"/>
+	<StyleInclude Source="/Styles/Connector/RightConnector/TextBox/TextBoxRightConnectorDefault.xaml"/>
+				  
+	<!--Themes-->
+	<StyleInclude Source="/Styles/Themes/Dark.xaml"/>
 </Styles>
 
     

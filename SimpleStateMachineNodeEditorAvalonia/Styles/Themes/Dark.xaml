@@ -1,0 +1,76 @@
+﻿<Style xmlns="https://github.com/avaloniaui"
+		xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+		xmlns:sys="clr-namespace:System;assembly=netstandard">
+	<Style.Resources>
+
+		<!--Connect-->
+		<SolidColorBrush x:Key="ColorConnect" Color="White" />
+
+		<!--LeftConnector-->
+		<SolidColorBrush x:Key="ColorLeftConnectorTextBoxForeground" Color="White"/>
+		<SolidColorBrush x:Key="ColorLeftConnectorBackground" Color="#2D2D2D"/>
+		<SolidColorBrush x:Key="ColorLeftConnectorEllipseFill" Color="White"/>
+		<SolidColorBrush x:Key="ColorLeftConnectorEllipseStroke" Color="#1e1e1e"/>
+		
+		<!--RightConnector-->
+		<SolidColorBrush x:Key="ColorRightConnectorTextBoxForeground" Color="White"/>
+		<SolidColorBrush x:Key="ColorRightConnectorBackground" Color="#2D2D2D"/>
+		<SolidColorBrush x:Key="ColorRightConnectorEllipseFill" Color="White"/>
+		<SolidColorBrush x:Key="ColorRightConnectorEllipseStroke" Color="#1e1e1e"/>
+		
+		<!--Node-->
+		<SolidColorBrush x:Key="ColorNodeBackground"  Color="#2D2D2D"/>
+		<SolidColorBrush x:Key="ColorNodeBorderBrush"  Color="LightGray"/>
+		<SolidColorBrush x:Key="ColorNodeHeaderBackground"  Color="#123d6a"/>
+		<SolidColorBrush x:Key="ColorNodeHeaderForeground" Color="White"/>
+
+		<!--<Color x:Key="ColorNodeHeader">#90123d6a</Color>
+		<Color x:Key="ColorNodeBackground">#E52D2D2D</Color>-->
+		
+		<!--NodesCanvas-->
+		<SolidColorBrush x:Key="ColorNodesCanvasBackground" Color="#1e1e1e"/>
+
+		<!--<SolidColorBrush x:Key="ColorIconsSecond"  Color="#7ac0ff"/>
+		<SolidColorBrush x:Key="ColorIconsMain"  Color="LightGray"/>
+		<SolidColorBrush x:Key="ColorScrollBarBackground"  Color="#3e3e42"/>
+		<SolidColorBrush x:Key="ColorScrollBarThumb"  Color="#1e1e1e"/>
+		<SolidColorBrush x:Key="ColorElementMouseOver"  Color="#007acc"/>
+		<SolidColorBrush x:Key="ColorSelectedElement"  Color="#D23030"/>
+
+
+		<SolidColorBrush x:Key="ColorCutter" Color="#D23030"/>
+		<SolidColorBrush x:Key="ColorButtonStroke" Color="LightGray"/>
+
+		<SolidColorBrush x:Key="ColorSelectorFill" Color="#aaccee" />
+		<SolidColorBrush x:Key="ColorSelectorStroke" Color="#0078d7"/>
+		<SolidColorBrush x:Key="ColorMessagesBackground" Color="#2a2a2c"/>
+		<SolidColorBrush x:Key="ColorMessagesBorder" Color="#333337"/>
+		<SolidColorBrush x:Key="ColorMessagesForeground" Color="White"/>
+		<SolidColorBrush x:Key="ColorMessagesForegroundSelected" Color="White"/>
+		<SolidColorBrush x:Key="ColorWindowBackground" Color="#FF212121"/>
+		<SolidColorBrush x:Key="ColorWindowBorder" Color="#FF797979"/>
+		<SolidColorBrush x:Key="ColorWindowHeader" Color="#FF2D2D30"/>
+		<SolidColorBrush x:Key="ColorWindowHeaderTabItemForeground"  Color="White"/>
+		<SolidColorBrush x:Key="ColorWindowHeaderTabItemForegroundOnSelect"  Color="White"/>
+		<SolidColorBrush x:Key="ColorWindowHeaderButtonsIcon"  Color="LightGray"/>
+		<SolidColorBrush x:Key="ColorWindowHeaderButtonCloseBackgroundPressed"  Color="#a3232d"/>
+		<SolidColorBrush x:Key="ColorWindowHeaderButtonCloseBackgroundMouseOver" Color="#e81123"/>
+		<SolidColorBrush x:Key="ColorWindowHeaderButtonBackgroundPressed"  Color="#007acc"/>
+		<SolidColorBrush x:Key="ColorWindowHeaderButtonBackgroundMouseOver" Color="#444549"/>
+		<SolidColorBrush x:Key="ColorSeparator"             Color="#333337"/>
+		<SolidColorBrush x:Key="ColorSeparatorBorder"       Color="#46464a"/>
+		<SolidColorBrush x:Key="ColorMenuBorder"                Color="#333337"/>
+		<SolidColorBrush x:Key="ColorMenuBackground"            Color="#1b1b1c"/>
+		<SolidColorBrush x:Key="ColorMenuForeground"            Color="White"/>
+		<SolidColorBrush x:Key="ColorMenuBackgroundMouseOver"   Color="#444549"/>
+
+	
+	
+	
+		<SolidColorBrush x:Key="ColorNodeCollapseButtonBackground"  Color="White" />
+		<SolidColorBrush x:Key="ColorNodeCollapseButtonBorderBrush"  Color="White" />
+		<SolidColorBrush x:Key="ColorNodeCollapseButtonMouseOverBackground"  Color="#D23030" />
+		<SolidColorBrush x:Key="ColorNodeCollapseButtonMouseOverBorderBrush"  Color="#D23030" />-->
+	</Style.Resources>
+</Style>
+

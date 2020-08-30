@@ -11,13 +11,25 @@
       <SubType>Designer</SubType>
     </AvaloniaResource>
     <AvaloniaResource Include="Assets\**" />
-	<AvaloniaResource Include="Styles\**" />
-    <Folder Include="Styles\Connector\LeftConnector\" />
-    <Folder Include="Styles\Connector\RightConnector\" />
+    <None Remove="Styles\Connector\LeftConnector\TextBox\TextBoxLeftConnectorDefault.xaml" />
+    <None Remove="Styles\Connector\RightConnector\TextBox\TextBoxRightConnectorDefault.xaml" />
+<!--	<AvaloniaResource Include="Styles\**" />-->
+	  <Folder Include="Styles\Connector\Connector\" />
     <Folder Include="Styles\Connect\" />
     <Folder Include="Styles\Node\Header\" />
 	<Folder Include="Styles\Extensions\" />
-	<Folder Include="Styles\Themes" />
+	<AvaloniaResource Update="Styles\Connector\LeftConnector\EllipseDefault.xaml">
+	  <SubType>Designer</SubType>
+	</AvaloniaResource>
+	<AvaloniaResource Update="Styles\Connector\LeftConnector\TextBox\TextBoxLeftConnectorDefault.xaml">
+	  <Generator>MSBuild:Compile</Generator>
+	</AvaloniaResource>
+	<AvaloniaResource Update="Styles\Connector\RightConnector\EllipseDefault.xaml">
+	  <SubType>Designer</SubType>
+	</AvaloniaResource>
+	<AvaloniaResource Update="Styles\Connector\RightConnector\TextBox\TextBoxRightConnectorDefault.xaml">
+	  <Generator>MSBuild:Compile</Generator>
+	</AvaloniaResource>
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Avalonia" Version="0.9.12" />

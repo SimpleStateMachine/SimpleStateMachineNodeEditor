@@ -8,7 +8,7 @@
 			 xmlns:Helpers="clr-namespace:SimpleStateMachineNodeEditorAvalonia.Helpers"
 			 x:Class="SimpleStateMachineNodeEditorAvalonia.Views.NodeElements.Connectors" ClipToBounds="False">
 	
-	<ListBox SelectionMode="Multiple" x:Name="ListBoxConnectors" ClipToBounds="False" Padding="0" BorderThickness="0" Background="Yellow" ScrollViewer.HorizontalScrollBarVisibility="Disabled">
+	<ListBox SelectionMode="Multiple" x:Name="ListBoxConnectors" ClipToBounds="False" Padding="0" BorderThickness="0" Background="{DynamicResource ColorNodeBackground}" ScrollViewer.HorizontalScrollBarVisibility="Disabled">
 		<ListBox.ItemTemplate>
 			<DataTemplate DataType="{x:Type ViewModels:ConnectorViewModel}"   >
 				<Views:RightConnector />
@@ -24,8 +24,7 @@
 				<Setter Property="Padding" Value="0"/>
 				<Setter Property="ClipToBounds" Value="False"/>
 				<Setter Property="BorderThickness" Value="0"/>
-				<Setter Property="Background" Value="Orange"/>
-				<Setter Property="HorizontalContentAlignment" Value="Right" />
+				<Setter Property="HorizontalContentAlignment" Value="Stretch" />
 			</Style>
 			<Style Selector="ScrollViewer">
 				<Setter Property="ClipToBounds" Value="False"/>

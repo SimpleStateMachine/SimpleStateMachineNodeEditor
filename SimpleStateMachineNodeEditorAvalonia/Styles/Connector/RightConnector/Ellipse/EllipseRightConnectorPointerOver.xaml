@@ -1,7 +1,7 @@
 ﻿<Styles xmlns="https://github.com/avaloniaui"
 		xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
     
-    <Style Selector="Ellipse:pointerover">
+    <Style Selector="Ellipse:pointerover.EllipseRightConnector">
         <Setter Property="Fill" Value="Red" />
     </Style>
 </Styles>

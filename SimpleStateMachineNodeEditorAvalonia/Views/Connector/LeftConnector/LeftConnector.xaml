@@ -2,14 +2,14 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-             x:Class="SimpleStateMachineNodeEditorAvalonia.Views.LeftConnector" ClipToBounds="False" HorizontalAlignment="Stretch">
+             x:Class="SimpleStateMachineNodeEditorAvalonia.Views.LeftConnector" ClipToBounds="False" HorizontalAlignment="Stretch" Background="{DynamicResource ColorLeftConnectorBackground}">
 	<Grid x:Name="GridConnector" ColumnDefinitions="Auto, Auto" Background="#00000000" ClipToBounds="False" HorizontalAlignment="Left">
-		<TextBox x:Name="TextBoxConnector" Classes="EmptyTextBox" Grid.Column="1" 
+		<TextBox x:Name="TextBoxConnector"  Grid.Column="1" Classes="EmptyTextBox TextBoxLeftConnector"
 				 HorizontalAlignment="Left" VerticalAlignment="Center" 
 				 Margin="5,0" Text="Test"/>
-		<Ellipse x:Name="EllipseConnector" Grid.Column="0" 
+		<Ellipse x:Name="EllipseConnector" Grid.Column="0" Classes="EllipseConnector EllipseLeftConnector"
 				 HorizontalAlignment="Left"  VerticalAlignment="Center"  
 				 Height="12" Width="12"  Margin="-7,0,0,0" 
-				 StrokeThickness="1" Fill="Orange" Stroke="Azure"/>
+				 StrokeThickness="1"/>
 	</Grid>
 </UserControl>

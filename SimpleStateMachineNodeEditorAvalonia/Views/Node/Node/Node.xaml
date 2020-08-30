@@ -6,7 +6,7 @@
              x:Class="SimpleStateMachineNodeEditorAvalonia.Views.Node"
 			 xmlns:Views="clr-namespace:SimpleStateMachineNodeEditorAvalonia.Views"
 			 xmlns:NodeElements="clr-namespace:SimpleStateMachineNodeEditorAvalonia.Views.NodeElements" ClipToBounds="False">
-	<Border x:Name="BorderNode" CornerRadius="5" BorderThickness="1" Background="Green" BorderBrush="Red" MinWidth="60">
+	<Border x:Name="BorderNode" CornerRadius="5" BorderThickness="1" Background="{DynamicResource ColorNodeBackground}" BorderBrush="{DynamicResource ColorNodeBorderBrush}" MinWidth="60">
 		<Grid RowDefinitions="auto, auto, 5,auto, *"   ClipToBounds="False" Margin="0,0,0,5" >
 			<NodeElements:Header x:Name="HeaderNode" Grid.Row="0" />
 			<Views:LeftConnector x:Name="InputNode" Grid.Row="1"/>
