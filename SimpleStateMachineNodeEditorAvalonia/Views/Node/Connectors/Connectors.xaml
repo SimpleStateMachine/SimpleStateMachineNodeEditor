@@ -24,7 +24,9 @@
 				<Setter Property="Padding" Value="0"/>
 				<Setter Property="ClipToBounds" Value="False"/>
 				<Setter Property="BorderThickness" Value="0"/>
-				<Setter Property="HorizontalContentAlignment" Value="Stretch" />
+				<Setter Property="Background" Value="Orange"/>
+				<Setter Property="HorizontalContentAlignment" Value="Right" />
+				<!--<Setter Property="HorizontalContentAlignment" Value="Stretch" />-->
 			</Style>
 			<Style Selector="ScrollViewer">
 				<Setter Property="ClipToBounds" Value="False"/>

@@ -12,7 +12,13 @@
 		<NodesCanvasElements:Connects x:Name="ConnectsNodesCanvas" />
 		<Views:Selector x:Name="SelectorNodesCanvas" />
 		<Views:Cutter x:Name="CutterNodesCanvas" />
-	</Grid >
+	</Grid>
+	<!--<UserControl.ContextMenu>
+			<MenuItem Header="Add node" />
+			<MenuItem Header="Delete"/>
+			<MenuItem Header="Collaps Up"/>
+			<MenuItem Header="Expand Down"/>
+	</UserControl.ContextMenu>-->
 </UserControl>
 
 

@@ -11,9 +11,14 @@
       <SubType>Designer</SubType>
     </AvaloniaResource>
     <AvaloniaResource Include="Assets\**" />
+    <AvaloniaResource Remove="Views\Node\Connectors\Connectors.xaml" />
     <None Remove="Styles\Connector\LeftConnector\TextBox\TextBoxLeftConnectorDefault.xaml" />
     <None Remove="Styles\Connector\RightConnector\TextBox\TextBoxRightConnectorDefault.xaml" />
     <None Remove="Styles\Node\Header\Button\NodeHeaderButton.xaml" />
+    <None Remove="Views\Node\Connectors\Connectors.xaml" />
+    <AvaloniaXaml Include="Views\Node\Connectors\Connectors.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </AvaloniaXaml>
 <!--	<AvaloniaResource Include="Styles\**" />-->
 	  <Folder Include="Styles\Connector\Connector\" />
     <Folder Include="Styles\Connect\" />
@@ -41,6 +46,11 @@
     <PackageReference Include="Dock.Model" Version="0.9.9" />
     <PackageReference Include="Pharmacist.Common" Version="1.8.1" PrivateAssets="all" />
     <PackageReference Include="Pharmacist.MSBuild" Version="1.8.1" />
-    <PackageReference Include="ReactiveUI.Fody" Version="11.5.26" />
+    <PackageReference Include="ReactiveUI.Fody" Version="11.5.35" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Update="Views\Node\Connectors\Connectors.xaml.cs">
+      <DependentUpon>Connectors.xaml</DependentUpon>
+    </Compile>
   </ItemGroup>
 </Project>

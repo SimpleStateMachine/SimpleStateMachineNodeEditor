@@ -8,30 +8,32 @@
       <ControlTemplate>
 		  <Path  Stroke="{TemplateBinding BorderBrush}" Fill="{TemplateBinding Background}" Data="M0,6 L6,0 L12,6 Z" 
 				 HorizontalAlignment="Center" VerticalAlignment="Center">
-			  <Path.RenderTransform>
-				  <RotateTransform Angle="0"/>
-			  </Path.RenderTransform>
 		  </Path>		
 	  </ControlTemplate>
     </Setter>
   </Style>
-	 <Style Selector="ToggleButton[IsChecked=true].NodeHeaderButton">
-		 <Setter Property="BorderBrush" Value="{DynamicResource ColorNodeHeaderButtonPointerOver}"/>
-		 <Setter Property="Background" Value="{DynamicResource ColorNodeHeaderButtonPointerOver}"/>
+	 
+	 <Style Selector="ToggleButton:pointerover.NodeHeaderButton Path">
+		 <Setter Property="Fill" Value="{DynamicResource ColorNodeHeaderButtonPointerOver}"/>
 	 </Style>
-	 <Style Selector="ToggleButton:pointerover.NodeHeaderButton[IsChecked=false]">
-		 <Setter Property="BorderBrush" Value="{DynamicResource ColorNodeHeaderButtonPointerOver}"/>
-		 <Setter Property="Background" Value="{DynamicResource ColorNodeHeaderButtonPointerOver}"/>
+	 
+	 <Style Selector="ToggleButton[IsChecked=true].NodeHeaderButton Path">
+		 <Style.Animations>
+			 <Animation Duration="0:0:0.3" FillMode="Both">
+				 <KeyFrame Cue="100%">
+					 <Setter Property="RotateTransform.Angle" Value="180"/>
+				 </KeyFrame>
+			 </Animation>
+		 </Style.Animations>
 	 </Style>
 
-	 <Style Selector="ToggleButton[IsChecked=true].NodeHeaderButton Path/RotateTransform">
-		 <Setter Property="Angle" Value="180"/>
+	 <Style Selector="ToggleButton[IsChecked=false].NodeHeaderButton Path">
+		 <Style.Animations>
+			 <Animation Duration="0:0:0.3" FillMode="Both">
+				 <KeyFrame Cue="100%">
+					 <Setter Property="RotateTransform.Angle" Value="0"/>
+				 </KeyFrame>
+			 </Animation>
+		 </Style.Animations>
 	 </Style>
-</Styles>
-
-
-
-<!--<Style Selector="ToggleButton:pointerover.NodeHeaderButton[IsChecked=true]">
-    <Setter Property="BorderBrush" Value="{DynamicResource ColorNodeHeaderButton}"/>
-	<Setter Property="Background" Value="{DynamicResource ColorNodeHeaderButton}"/>
-  </Style>-->
+ </Styles>
