@@ -11,14 +11,18 @@
       <SubType>Designer</SubType>
     </AvaloniaResource>
     <AvaloniaResource Include="Assets\**" />
+    <AvaloniaResource Remove="Views\EmptyTextBox.xaml" />
     <AvaloniaResource Remove="Views\Node\Connectors\Connectors.xaml" />
+    <Compile Remove="Views\EmptyTextBox.xaml.cs" />
     <None Remove="Styles\Connector\LeftConnector\TextBox\TextBoxLeftConnectorDefault.xaml" />
     <None Remove="Styles\Connector\RightConnector\TextBox\TextBoxRightConnectorDefault.xaml" />
     <None Remove="Styles\Node\Header\Button\NodeHeaderButton.xaml" />
+    <None Remove="Views\EmptyTextBox.xaml" />
     <None Remove="Views\Node\Connectors\Connectors.xaml" />
     <AvaloniaXaml Include="Views\Node\Connectors\Connectors.xaml">
       <Generator>MSBuild:Compile</Generator>
     </AvaloniaXaml>
+    <Folder Include="Behaviors\" />
 <!--	<AvaloniaResource Include="Styles\**" />-->
 	  <Folder Include="Styles\Connector\Connector\" />
     <Folder Include="Styles\Connect\" />
@@ -43,7 +47,12 @@
     <PackageReference Include="Avalonia" Version="0.9.12" />
     <PackageReference Include="Avalonia.Desktop" Version="0.9.12" />
     <PackageReference Include="Avalonia.ReactiveUI" Version="0.9.12" />
-    <PackageReference Include="Dock.Model" Version="0.9.9" />
+    <PackageReference Include="Avalonia.Xaml.Behaviors" Version="0.9.12" />
+    <PackageReference Include="Avalonia.Xaml.Interactions" Version="0.9.12" />
+    <PackageReference Include="Avalonia.Xaml.Interactions.Custom" Version="0.9.12" />
+    <PackageReference Include="Avalonia.Xaml.Interactivity" Version="0.9.12" />
+    <PackageReference Include="Dock.Model" Version="0.9.12" />
+    <PackageReference Include="HistoricalReactiveCommand" Version="0.5.0" />
     <PackageReference Include="Pharmacist.Common" Version="1.8.1" PrivateAssets="all" />
     <PackageReference Include="Pharmacist.MSBuild" Version="1.8.1" />
     <PackageReference Include="ReactiveUI.Fody" Version="11.5.35" />

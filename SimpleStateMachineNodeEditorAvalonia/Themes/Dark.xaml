@@ -25,6 +25,7 @@
 		<SolidColorBrush x:Key="ColorNodeHeaderForeground" Color="White"/>
 		<SolidColorBrush x:Key="ColorNodeHeaderButton" Color="White"/>
 		<SolidColorBrush x:Key="ColorNodeHeaderButtonPointerOver" Color="Red"/>
+		
 		<!--<Color x:Key="ColorNodeHeader">#90123d6a</Color>
 		<Color x:Key="ColorNodeBackground">#E52D2D2D</Color>-->
 		

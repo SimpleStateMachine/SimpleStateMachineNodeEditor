@@ -27,7 +27,6 @@ namespace SimpleStateMachineNodeEditorAvalonia.Views
             InputNode       = this.FindControlWithExeption<LeftConnector>("InputNode");
             OutputNode      = this.FindControlWithExeption<RightConnector>("OutputNode");
             ConnectorsNode = this.FindControlWithExeption<Connectors>("ConnectorsNode");
-
             TranslateTransformNode = this.RenderTransform as TranslateTransform;
         }
     }

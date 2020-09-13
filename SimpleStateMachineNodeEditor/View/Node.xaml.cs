@@ -122,6 +122,7 @@ namespace SimpleStateMachineNodeEditor.View
         }
         private void OnEventMouseLeftDowns(MouseButtonEventArgs e)
         {
+           
             NodeCanvasClickMode clickMode = this.ViewModel.NodesCanvas.ClickMode;
             if (clickMode == NodeCanvasClickMode.Delete)
             {

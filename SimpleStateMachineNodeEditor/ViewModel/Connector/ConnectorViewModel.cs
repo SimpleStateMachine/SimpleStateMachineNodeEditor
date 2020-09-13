@@ -43,7 +43,11 @@ namespace SimpleStateMachineNodeEditor.ViewModel
         #region Setup Subscriptions
         private void SetupSubscriptions()
         {
+
+            //this.ObservableForProperty(x=>x.Selected).Subscribe(value => Select(value.Value));
             this.WhenAnyValue(x => x.Selected).Subscribe(value => Select(value));
+
+
             this.WhenAnyValue(x => x.NodesCanvas.Theme).Subscribe(_ => UpdateResources());
 
             if (this.Name!="Input")

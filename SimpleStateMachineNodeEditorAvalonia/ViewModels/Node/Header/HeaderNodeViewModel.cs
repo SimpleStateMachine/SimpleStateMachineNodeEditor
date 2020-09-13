@@ -14,5 +14,6 @@ namespace SimpleStateMachineNodeEditorAvalonia.ViewModels
         }
 
         [Reactive] public StringEnabled Name { get; set; }
+        [Reactive] public bool IsCollapse { get; set; }
     }
 }

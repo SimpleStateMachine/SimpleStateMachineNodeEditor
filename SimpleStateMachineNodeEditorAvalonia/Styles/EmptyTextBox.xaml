@@ -5,7 +5,7 @@
     <Setter Property="BorderBrush" Value="{x:Null}"/>
     <Setter Property="TextWrapping" Value="NoWrap"/>
     <Setter Property="BorderThickness" Value="0"/>
-	  <Setter Property="Padding" Value="0"/>
+    <Setter Property="Padding" Value="0"/>
   </Style>
   <Style Selector="TextBox:pointerover.EmptyTextBox /template/ Border#border">
     <Setter Property="BorderBrush" Value="Red" />

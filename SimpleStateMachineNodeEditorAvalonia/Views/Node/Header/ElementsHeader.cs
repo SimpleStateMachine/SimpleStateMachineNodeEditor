@@ -1,4 +1,5 @@
 ﻿using Avalonia.Controls;
+using Avalonia.Controls.Primitives;
 using Avalonia.Markup.Xaml;
 using SimpleStateMachineNodeEditorAvalonia.Helpers;
 using System;
@@ -11,7 +12,7 @@ namespace SimpleStateMachineNodeEditorAvalonia.Views.NodeElements
     {
         public TextBox TextBoxHeader;
 
-        public Button ButtonHeader;
+        public ToggleButton ToggleButtonHeader;
 
         protected override void InitializeComponent()
         {
@@ -19,7 +20,7 @@ namespace SimpleStateMachineNodeEditorAvalonia.Views.NodeElements
 
             TextBoxHeader = this.FindControlWithExeption<TextBox>("TextBoxHeader");
 
-            ButtonHeader = this.FindControlWithExeption<Button>("ButtonHeader");
+            ToggleButtonHeader = this.FindControlWithExeption<ToggleButton>("ToggleButtonHeader");
         }
     }
 }

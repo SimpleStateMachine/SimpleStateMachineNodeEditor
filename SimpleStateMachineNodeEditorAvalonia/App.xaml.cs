@@ -27,6 +27,7 @@ namespace SimpleStateMachineNodeEditorAvalonia
             }
 
             base.OnFrameworkInitializationCompleted();
+
         }
     }
 }
