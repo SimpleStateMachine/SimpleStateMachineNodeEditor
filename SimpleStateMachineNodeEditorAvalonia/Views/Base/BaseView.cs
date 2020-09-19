@@ -10,12 +10,16 @@ namespace SimpleStateMachineNodeEditorAvalonia.Views
     public abstract class BaseView<TViewModel>: ReactiveUserControl<TViewModel>
     where TViewModel:class
     {
-        protected abstract void  SetupBinding();
+        protected abstract void SetupBinding();
+        protected abstract void SetupEvents();
+        protected abstract void SetupSubscriptions();
         protected abstract void InitializeComponent();
 
         public BaseView()
         {
             SetupBinding();
+            SetupEvents();
+            SetupSubscriptions();
             InitializeComponent();
         }
     }

@@ -6,5 +6,9 @@ namespace SimpleStateMachineNodeEditorAvalonia.ViewModels
 {
     public partial class NodeViewModel
     {
+        protected override void SetupSubscriptions()
+        {
+
+        }
     }
 }

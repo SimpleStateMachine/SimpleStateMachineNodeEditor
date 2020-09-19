@@ -8,7 +8,7 @@ using System.Text;
 
 namespace SimpleStateMachineNodeEditorAvalonia.Views
 {
-    public partial class Connector
+    public partial class Connector<TViewModel>
     {
         public Grid GridConnector;
         public TextBox TextBoxConnector;

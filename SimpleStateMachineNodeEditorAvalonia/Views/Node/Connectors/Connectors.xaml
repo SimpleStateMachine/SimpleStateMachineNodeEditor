@@ -10,7 +10,7 @@
 	
 	<ListBox SelectionMode="Multiple" x:Name="ListBoxConnectors" ClipToBounds="False" Padding="0" BorderThickness="0" Background="{DynamicResource ColorNodeBackground}" ScrollViewer.HorizontalScrollBarVisibility="Disabled">
 		<ListBox.ItemTemplate>
-			<DataTemplate DataType="{x:Type ViewModels:ConnectorViewModel}"   >
+			<DataTemplate DataType="{x:Type ViewModels:RightConnectorViewModel}">
 				<Views:RightConnector />
 			</DataTemplate>
 		</ListBox.ItemTemplate>

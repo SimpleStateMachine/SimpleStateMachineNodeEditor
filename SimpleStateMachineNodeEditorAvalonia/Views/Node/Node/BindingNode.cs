@@ -32,26 +32,6 @@ namespace SimpleStateMachineNodeEditorAvalonia.Views
             });
         }
 
-        protected virtual void SetupEvents()
-        {
-            //var task = Test();
-            //task.Wait();
-            this.WhenViewModelAnyValue(disposable =>
-            {
-              
-                //this.Events().PointerPressed.Subscribe(_=Mou.ca)
-                //this.WhenAnyValue(x => x.IsMouseOver).Subscribe(value => OnEventMouseOver(value)).DisposeWith(disposable);
-                //this.Events().MouseLeftButtonDown.Subscribe(e => OnEventMouseLeftDowns(e)).DisposeWith(disposable);
-                //this.Events().PointerPressed.Subscribe(_= this.ViewModel.Position = this.ViewModel.Position + new Point(10,10)).DisposeWith(disposable);
-                //this.Events().MouseUp.Subscribe(e => OnEventMouseUp(e)).DisposeWith(disposable);
-                //this.Events().MouseMove.Subscribe(e => OnMouseMove(e)).DisposeWith(disposable);
-
-                //this.NodeHeaderElement.ButtonCollapse.Events().Click.Subscribe(_ => ViewModel.IsCollapse = !ViewModel.IsCollapse).DisposeWith(disposable);
-                //this.NodeHeaderElement.Events().LostFocus.Subscribe(e => Validate(e)).DisposeWith(disposable);
-                //this.ViewModel.WhenAnyValue(x => x.IsCollapse).Subscribe(value => OnEventCollapse(value)).DisposeWith(disposable);
-            });
-        }
-
         public async Task Test()
         {
             Subject<bool> _canExecuteSubject = new Subject<bool>();

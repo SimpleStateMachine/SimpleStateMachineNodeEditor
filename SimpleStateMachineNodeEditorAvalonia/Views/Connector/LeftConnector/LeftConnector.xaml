@@ -10,6 +10,6 @@
 		<Ellipse x:Name="EllipseConnector" Grid.Column="0" Classes="EllipseConnector EllipseLeftConnector"
 				 HorizontalAlignment="Left"  VerticalAlignment="Center"  
 				 Height="12" Width="12"  Margin="-7,0,0,0" 
-				 StrokeThickness="1"/>
+				 StrokeThickness="1"  DragDrop.AllowDrop="True"/>
 	</Grid>
 </UserControl>

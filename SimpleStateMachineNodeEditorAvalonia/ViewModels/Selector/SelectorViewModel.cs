@@ -6,11 +6,8 @@ using System.Text;
 
 namespace SimpleStateMachineNodeEditorAvalonia.ViewModels
 {
-    public class SelectorViewModel : BaseViewModel
+    public partial class SelectorViewModel : BaseViewModel
     {
-        [Reactive] public Size Size { get; set; }
-        [Reactive] public bool? Visible { get; set; } = false;
-        [Reactive] public Point Point1 { get; set; }
-        [Reactive] public Point Point2 { get; set; }
+
     }
 }

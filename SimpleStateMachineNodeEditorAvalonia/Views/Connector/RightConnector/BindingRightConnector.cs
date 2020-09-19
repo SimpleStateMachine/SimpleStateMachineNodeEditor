@@ -1,4 +1,5 @@
-﻿using Avalonia.Controls;
+﻿using Avalonia;
+using Avalonia.Controls;
 using Avalonia.Controls.Shapes;
 using Avalonia.Input;
 using Avalonia.Markup.Xaml;
@@ -15,11 +16,20 @@ namespace SimpleStateMachineNodeEditorAvalonia.Views
     {
         protected override void SetupBinding()
         {
+            base.SetupBinding();
             this.WhenViewModelAnyValue(disposable =>
             {
-                base.SetupBinding(disposable);
-                this.TextBoxConnector.Events().PointerPressed.Subscribe(e => e.Handled = true).DisposeWith(disposable);
-               
+                //this.TextBoxConnector.Events().PointerPressed.Subscribe(e => e.Handled = true).DisposeWith(disposable);
+                this.Events().PointerPressed.Subscribe(e =>
+                {
+
+                    if (Keyboard.IsKeyDown(Key.LeftAlt))
+                    {
+                        e.Handled = true;
+                    }
+
+                }).DisposeWith(disposable);
+
             });
          
         }

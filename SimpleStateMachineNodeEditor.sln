@@ -7,8 +7,6 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SimpleStateMachineNodeEdito
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SimpleStateMachineNodeEditorAvalonia", "SimpleStateMachineNodeEditorAvalonia\SimpleStateMachineNodeEditorAvalonia.csproj", "{DDB33469-E9BF-4BD7-A4C5-61EEB0CB5881}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Avalonia.Visuals", "..\Avalonia\src\Avalonia.Visuals\Avalonia.Visuals.csproj", "{4F83E044-640E-4099-ADCF-8D36DC2F35AD}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -23,10 +21,6 @@ Global
 		{DDB33469-E9BF-4BD7-A4C5-61EEB0CB5881}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{DDB33469-E9BF-4BD7-A4C5-61EEB0CB5881}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{DDB33469-E9BF-4BD7-A4C5-61EEB0CB5881}.Release|Any CPU.Build.0 = Release|Any CPU
-		{4F83E044-640E-4099-ADCF-8D36DC2F35AD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{4F83E044-640E-4099-ADCF-8D36DC2F35AD}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{4F83E044-640E-4099-ADCF-8D36DC2F35AD}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{4F83E044-640E-4099-ADCF-8D36DC2F35AD}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

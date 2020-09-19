@@ -3,7 +3,11 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d"
-             x:Class="SimpleStateMachineNodeEditorAvalonia.Views.RightConnector" ClipToBounds="False" HorizontalAlignment="Stretch" HorizontalContentAlignment="Right" Background="{DynamicResource ColorRightConnectorBackground}">
+             x:Class="SimpleStateMachineNodeEditorAvalonia.Views.RightConnector"
+			 ClipToBounds="False" 
+			 HorizontalAlignment="Stretch" 
+			 HorizontalContentAlignment="Right" 
+			 Background="{DynamicResource ColorRightConnectorBackground}">
 	<Grid x:Name="GridConnector" ColumnDefinitions="*, Auto, Auto" ClipToBounds="False" >
 		<!--Background="#00000000"-->
 		<TextBox x:Name="TextBoxConnector" 

@@ -5,7 +5,7 @@ using System.Text;
 
 namespace SimpleStateMachineNodeEditorAvalonia.ViewModels
 {
-    public class MainWindowViewModel: BaseViewModel
+    public partial class MainWindowViewModel: BaseViewModel
     {
         [Reactive] public NodesCanvasViewModel NodesCanvas { get; set; } = new NodesCanvasViewModel();
 

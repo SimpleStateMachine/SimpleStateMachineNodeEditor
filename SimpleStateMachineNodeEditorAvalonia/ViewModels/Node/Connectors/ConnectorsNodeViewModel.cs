@@ -10,17 +10,18 @@ namespace SimpleStateMachineNodeEditorAvalonia.ViewModels
 {
     public partial class ConnectorsNodeViewModel: BaseViewModel
     {
-        public SourceList<ConnectorViewModel> Connectors { get; set; } = new SourceList<ConnectorViewModel>();
+        public SourceList<RightConnectorViewModel> Connectors { get; set; } = new SourceList<RightConnectorViewModel>();
 
-        public ObservableCollectionExtended<ConnectorViewModel> ConnectorsForView = new ObservableCollectionExtended<ConnectorViewModel>();
+        public ObservableCollectionExtended<RightConnectorViewModel> ConnectorsForView = new ObservableCollectionExtended<RightConnectorViewModel>();
 
-        public ConnectorsNodeViewModel()
+        public ConnectorsNodeViewModel(NodeViewModel node)
         {
             Connectors.Connect().ObserveOn(RxApp.MainThreadScheduler).Bind(ConnectorsForView).Subscribe();
 
-            Connectors.Add(new ConnectorViewModel("Test1"));
-            Connectors.Add(new ConnectorViewModel("Test2"));
-            Connectors.Add(new ConnectorViewModel("Test3"));
+            //Connectors.Add(new ConnectorViewModel(nameIsEnable: false));
+            Connectors.Add(new RightConnectorViewModel(node, "Test1"));
+            Connectors.Add(new RightConnectorViewModel(node, "Test2"));
+            Connectors.Add(new RightConnectorViewModel(node, "Test3"));
         }
     }
 }

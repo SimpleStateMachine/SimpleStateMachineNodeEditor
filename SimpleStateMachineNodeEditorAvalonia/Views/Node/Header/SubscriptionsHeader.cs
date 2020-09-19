@@ -12,19 +12,11 @@ namespace SimpleStateMachineNodeEditorAvalonia.Views.NodeElements
 {
     public partial class Header
     {
-        protected virtual void SetupSubscriptions()
+        protected override void SetupSubscriptions()
         {
             this.WhenViewModelAnyValue(disposable =>
             {
 
-
-            });
-        }
-        protected virtual void SetupEvents()
-        {
-            this.WhenViewModelAnyValue(disposable =>
-            {
-                //ToggleButtonHeader.WhenAnyValue(x=>x.is)
             });
         }
     }

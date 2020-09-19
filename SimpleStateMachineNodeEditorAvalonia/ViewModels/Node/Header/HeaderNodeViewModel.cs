@@ -10,10 +10,10 @@ namespace SimpleStateMachineNodeEditorAvalonia.ViewModels
     {
         public HeaderNodeViewModel(string name = "")
         {
-            Name = new StringEnabled(name);
+            Name = new StringWithEnable(name);
         }
 
-        [Reactive] public StringEnabled Name { get; set; }
+        [Reactive] public StringWithEnable Name { get; set; }
         [Reactive] public bool IsCollapse { get; set; }
     }
 }

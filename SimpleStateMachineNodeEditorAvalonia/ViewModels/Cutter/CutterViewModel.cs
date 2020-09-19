@@ -6,7 +6,7 @@ using System.Text;
 
 namespace SimpleStateMachineNodeEditorAvalonia.ViewModels
 {
-    public class CutterViewModel : BaseViewModel
+    public partial class CutterViewModel : BaseViewModel
     {
         [Reactive] public bool? Visible { get; set; } = false;
         [Reactive] public Point StartPoint { get; set; }

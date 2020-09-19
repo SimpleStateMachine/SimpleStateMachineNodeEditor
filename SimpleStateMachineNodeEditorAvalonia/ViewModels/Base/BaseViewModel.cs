@@ -5,8 +5,15 @@ using System.Text;
 
 namespace SimpleStateMachineNodeEditorAvalonia.ViewModels
 {
-    public class BaseViewModel : ReactiveObject
+    public abstract class BaseViewModel : ReactiveObject
     {
+        protected abstract void SetupCommands();
+        protected abstract void SetupSubscriptions();
 
+        public BaseViewModel()
+        {
+            SetupCommands();
+            SetupSubscriptions();
+        }
     }
 }

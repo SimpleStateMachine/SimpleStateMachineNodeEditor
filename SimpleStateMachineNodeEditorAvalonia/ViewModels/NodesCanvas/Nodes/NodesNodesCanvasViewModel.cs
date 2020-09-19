@@ -17,11 +17,11 @@ namespace SimpleStateMachineNodeEditorAvalonia.ViewModels
         public ObservableCollectionExtended<NodeViewModel> NodesForView = new ObservableCollectionExtended<NodeViewModel>();
         [Reactive] public NodeViewModel StartState { get; set; }
 
-        public NodesNodesCanvasViewModel()
+        public NodesNodesCanvasViewModel(NodesCanvasViewModel nodesCanvas)
         {
             Nodes.Connect().ObserveOn(RxApp.MainThreadScheduler).Bind(NodesForView).Subscribe();
 
-            Nodes.Add(new NodeViewModel("State 3", new Point(100, 100)));
+            Nodes.Add(new NodeViewModel(nodesCanvas, "State 3", new Point(100, 100)));
         }
     }
 }

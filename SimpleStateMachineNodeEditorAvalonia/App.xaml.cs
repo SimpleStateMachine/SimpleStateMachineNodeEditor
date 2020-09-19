@@ -1,6 +1,7 @@
 ﻿using Avalonia;
 using Avalonia.Controls.ApplicationLifetimes;
 using Avalonia.Markup.Xaml;
+using SimpleStateMachineNodeEditorAvalonia.Helpers;
 using SimpleStateMachineNodeEditorAvalonia.ViewModels;
 using SimpleStateMachineNodeEditorAvalonia.Views;
 
@@ -10,7 +11,7 @@ namespace SimpleStateMachineNodeEditorAvalonia
     {
         public override void Initialize()
         {
-            
+            Keyboard.Init();
         }
 
         public override void OnFrameworkInitializationCompleted()
