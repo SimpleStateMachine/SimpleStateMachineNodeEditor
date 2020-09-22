@@ -1,10 +1,10 @@
 ﻿using Avalonia;
+using Avalonia.Controls;
 using Avalonia.Input;
 using Avalonia.Interactivity;
-using ReactiveUI;
 using SimpleStateMachineNodeEditorAvalonia.Helpers;
+using System;
 using System.Reactive.Disposables;
-using System.Reactive.Linq;
 
 namespace SimpleStateMachineNodeEditorAvalonia.Views
 {
@@ -15,10 +15,13 @@ namespace SimpleStateMachineNodeEditorAvalonia.Views
          
             this.WhenViewModelAnyValue(disposable =>
             {
-                
+                //this.Events().PointerReleased.Subscribe(e => OnEllipsePointerReleased(e)).DisposeWith(disposable);
             });
         }
+        private void OnEllipsePointerReleased(PointerReleasedEventArgs e)
+        {
 
+        }
         public void OnDragEnter(DragEventArgs e)
         {
 

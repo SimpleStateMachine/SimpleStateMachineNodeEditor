@@ -7,6 +7,7 @@ using ReactiveUI;
 using SimpleStateMachineNodeEditorAvalonia.Helpers;
 using SimpleStateMachineNodeEditorAvalonia.ViewModels;
 using System.Reactive.Disposables;
+using System.Threading;
 
 namespace SimpleStateMachineNodeEditorAvalonia.Views
 {
@@ -20,11 +21,12 @@ namespace SimpleStateMachineNodeEditorAvalonia.Views
      
             //KeyDown += 
 
-            InitializeComponent();            
+            InitializeComponent();
 #if DEBUG
             this.AttachDevTools();
+            //object p = this.AttachDevTools();
 #endif
-           
+
         }
     }
 }

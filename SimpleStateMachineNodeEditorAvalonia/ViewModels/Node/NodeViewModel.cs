@@ -20,6 +20,7 @@ namespace SimpleStateMachineNodeEditorAvalonia.ViewModels
         [Reactive] public Size Size { get; set; }
         [Reactive] public Point Point2 { get; set; }
         [Reactive] public bool DeleteEnable { get; set; } = true;
+        [Reactive] public bool IsSelect { get; set; }
 
         private NodeViewModel(NodesCanvasViewModel nodeCanvas)
         {

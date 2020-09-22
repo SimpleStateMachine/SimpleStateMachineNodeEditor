@@ -20,15 +20,15 @@ namespace SimpleStateMachineNodeEditorAvalonia.Views
             this.WhenViewModelAnyValue(disposable =>
             {
                 //this.TextBoxConnector.Events().PointerPressed.Subscribe(e => e.Handled = true).DisposeWith(disposable);
-                this.Events().PointerPressed.Subscribe(e =>
-                {
+                //this.Events().PointerPressed.Subscribe(e =>
+                //{
 
-                    if (Keyboard.IsKeyDown(Key.LeftAlt))
-                    {
-                        e.Handled = true;
-                    }
+                //    if (Keyboard.IsKeyDown(Key.LeftAlt))
+                //    {
+                //        e.Handled = true;
+                //    }
 
-                }).DisposeWith(disposable);
+                //}).DisposeWith(disposable);
 
             });
          

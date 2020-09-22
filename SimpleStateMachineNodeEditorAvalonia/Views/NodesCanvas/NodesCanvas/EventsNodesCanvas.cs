@@ -1,6 +1,10 @@
-﻿using ReactiveUI;
+﻿using Avalonia;
+using Avalonia.Controls;
+using Avalonia.Input;
 using SimpleStateMachineNodeEditorAvalonia.Helpers;
+using System;
 using System.Reactive.Disposables;
+
 
 namespace SimpleStateMachineNodeEditorAvalonia.Views
 {
@@ -10,7 +14,13 @@ namespace SimpleStateMachineNodeEditorAvalonia.Views
         {
             this.WhenViewModelAnyValue(disposable =>
             {
+                //this.Events().PointerMoved.Subscribe(x => OnEventMouseMove(x)).DisposeWith(disposable);
             });
+        }
+        
+        void OnEventMouseMove(PointerEventArgs e)
+        {
+ 
         }
     }
 }

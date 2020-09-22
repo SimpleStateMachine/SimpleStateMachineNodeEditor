@@ -17,7 +17,7 @@ namespace SimpleStateMachineNodeEditorAvalonia.ViewModels
         public ConnectorViewModel(NodeViewModel node, string name="", bool isEnable = true )
         {
             Node = node;
-            Name = new StringWithEnable(name);
+            Name = new StringWithEnable(name, isEnable);
 
             node.WhenAnyValue(n => n.Point1).Buffer(2, 1).Select(value => value[1] - value[0]).Subscribe(x => Position = Position + x);
         }

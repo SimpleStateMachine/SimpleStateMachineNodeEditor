@@ -210,6 +210,8 @@ namespace SimpleStateMachineNodeEditor.View
             if (!(Mouse.Captured is CanBeMove))
                 return;
 
+
+
             Point delta = GetDeltaMove();
 
             if (delta.IsClear())
