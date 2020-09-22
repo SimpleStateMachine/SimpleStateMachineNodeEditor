@@ -1,31 +1,41 @@
 ﻿using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Input;
-using Avalonia.Markup.Xaml;
 using SimpleStateMachineNodeEditorAvalonia.Helpers;
-using SimpleStateMachineNodeEditorAvalonia.Views.NodeElements;
 using System;
-using System.Collections.Generic;
 using System.Reactive.Disposables;
-using System.Text;
 
 namespace SimpleStateMachineNodeEditorAvalonia.Views
 {
     public partial class Node
     {
+        private Point oldPosition;
         protected override void SetupEvents()
-        {
-         
+        {  
             this.WhenViewModelAnyValue(disposable =>
-            {
-                //this.Events().PointerPressed.Subscribe(e => OnEventPointerMoved(e)).DisposeWith(disposable);
-                //this.BorderNode.Events().PointerMoved.Subscribe(x => OnEventPointerMoved(x)).DisposeWith(disposable);
+            {           
+                this.BorderNode.Events().PointerPressed.Subscribe(e => OnEventBorderPointerPressed(e)).DisposeWith(disposable);
+                this.BorderNode.Events().PointerReleased.Subscribe(x => OnEventBorderPointerReleased(x)).DisposeWith(disposable);
             });
         }
 
-        void OnEventPointerMoved(PointerEventArgs e)
+        void OnEventBorderPointerPressed(PointerPressedEventArgs e)
         {
-        
+            this.ViewModel.SelectCommand.ExecuteWithSubscribe(Keyboard.IsKeyDown(Key.LeftCtrl) ? SelectMode.ClickWithCtrl : SelectMode.Click);
+            oldPosition = e.GetPosition(NodesCanvas.Current);
+            this.PointerMoved += OnEventPointerMoved;
+        }
+
+        void OnEventBorderPointerReleased(PointerReleasedEventArgs e)
+        {
+            this.PointerMoved -= OnEventPointerMoved;
+        }
+
+        void OnEventPointerMoved(object subject, PointerEventArgs e)
+        {
+            var currentPosition = e.GetPosition(NodesCanvas.Current);
+            this.ViewModel.NodesCanvas.Nodes.MoveCommand.ExecuteWithSubscribe(currentPosition - oldPosition);
+            oldPosition = currentPosition;
         }
     }
 }

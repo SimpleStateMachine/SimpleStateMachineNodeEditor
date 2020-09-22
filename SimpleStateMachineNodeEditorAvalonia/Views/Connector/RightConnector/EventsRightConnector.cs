@@ -16,12 +16,9 @@ namespace SimpleStateMachineNodeEditorAvalonia.Views
             base.SetupEvents();
             this.WhenViewModelAnyValue(disposable =>
             {
-             
+                // this.Events().
                 //this.Eve
                 //this.EllipseConnector.Events().PointerPressed.Subscribe(e => OnEllipsePointerPressed(e)).DisposeWith(disposable);
-               //.DisposeWith(disposable);
-                //this.Events().PointerPressed.Subscribe(e=>)
-                // this.Events().PointerCaptureLost
             });
         }
 

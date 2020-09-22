@@ -17,23 +17,17 @@
     <Folder Include="Styles\Extensions\" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="Avalonia" Version="0.10.0-preview5" />
-    <PackageReference Include="Avalonia.Desktop" Version="0.10.0-preview5" />
-    <PackageReference Include="Avalonia.Diagnostics" Version="0.10.0-preview5" />
-    <PackageReference Include="Avalonia.ReactiveUI" Version="0.10.0-preview5" />
+    <PackageReference Include="Avalonia" Version="0.10.999-cibuild0010885-beta" />
+    <PackageReference Include="Avalonia.Desktop" Version="0.10.999-cibuild0010885-beta" />
+    <PackageReference Include="Avalonia.Diagnostics" Version="0.10.999-cibuild0010885-beta" />
+    <PackageReference Include="Avalonia.ReactiveUI" Version="0.10.999-cibuild0010885-beta" />
+	<PackageReference Include="Avalonia.ReactiveUI.Events" Version="0.10.999-cibuild0010885-beta" />
     <PackageReference Include="Avalonia.Xaml.Behaviors" Version="0.10.0-preview5" />
     <PackageReference Include="Avalonia.Xaml.Interactions" Version="0.10.0-preview5" />
     <PackageReference Include="Avalonia.Xaml.Interactions.Custom" Version="0.10.0-preview5" />
     <PackageReference Include="Avalonia.Xaml.Interactivity" Version="0.10.0-preview5" />
     <PackageReference Include="Dock.Model" Version="0.10.0-preview5" />
     <PackageReference Include="HistoricalReactiveCommand" Version="0.5.0" />
-    <PackageReference Include="Pharmacist.Common" Version="1.8.1" />
-    <PackageReference Include="Pharmacist.MSBuild" Version="1.8.1" PrivateAssets="all" />
     <PackageReference Include="ReactiveUI.Fody" Version="11.5.35" />
-  </ItemGroup>
-  <ItemGroup>
-    <Compile Update="Views\Node\Connectors\Connectors.xaml.cs">
-      <DependentUpon>Connectors.xaml</DependentUpon>
-    </Compile>
   </ItemGroup>
 </Project>
