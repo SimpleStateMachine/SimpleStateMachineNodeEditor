@@ -6,13 +6,16 @@
     <Setter Property="TextWrapping" Value="NoWrap"/>
     <Setter Property="BorderThickness" Value="0"/>
     <Setter Property="Padding" Value="0"/>
-  </Style>
-  <Style Selector="TextBox:pointerover.EmptyTextBox /template/ Border#border">
+  </Style>	
+    <Style Selector="TextBox:disabled.EmptyTextBox /template/ Border#border">
+	    <Setter Property="Opacity" Value="1" />
+    </Style>	
+  <!--<Style Selector="TextBox:pointerover.EmptyTextBox /template/ Border#border">
     <Setter Property="BorderBrush" Value="Red" />
   </Style>
   <Style Selector="TextBox:focus.EmptyTextBox /template/ Border#border">
-    <Setter Property="BorderBrush" Value="Blue"/>
-  </Style>
+    <Setter Property="BorderBrush" Value="Red"/>
+  </Style>-->
 </Styles>
 
 

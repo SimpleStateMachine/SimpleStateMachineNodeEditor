@@ -1,4 +1,5 @@
-﻿using ReactiveUI;
+﻿using Avalonia;
+using ReactiveUI;
 using ReactiveUI.Fody.Helpers;
 using System.Reactive;
 
@@ -12,6 +13,7 @@ namespace SimpleStateMachineNodeEditorAvalonia.ViewModels
         {
             base.SetupCommands();
             AddConnectCommand = ReactiveCommand.Create(AddConnect);
+
         }
 
         public void AddConnect()

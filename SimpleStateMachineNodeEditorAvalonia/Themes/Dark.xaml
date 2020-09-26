@@ -15,8 +15,9 @@
 		<!--RightConnector-->
 		<SolidColorBrush x:Key="ColorRightConnectorTextBoxForeground" Color="White"/>
 		<SolidColorBrush x:Key="ColorRightConnectorBackground" Color="#2D2D2D"/>
-		<SolidColorBrush x:Key="ColorRightConnectorEllipseFill" Color="White"/>
+		<SolidColorBrush x:Key="ColorRightConnectorEllipseFill" Color="Red"/>
 		<SolidColorBrush x:Key="ColorRightConnectorEllipseStroke" Color="#1e1e1e"/>
+		<SolidColorBrush x:Key="ColorRightConnectorTextBoxForegroundSelected" Color="Red"/>
 		
 		<!--Node-->
 		<SolidColorBrush x:Key="ColorNodeBackground"  Color="#2D2D2D"/>

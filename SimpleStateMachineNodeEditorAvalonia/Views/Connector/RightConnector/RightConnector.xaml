@@ -7,7 +7,7 @@
 			 ClipToBounds="False" 
 			 HorizontalAlignment="Stretch" 
 			 HorizontalContentAlignment="Right" 
-			 Background="{DynamicResource ColorRightConnectorBackground}">
+			 Background="{DynamicResource ColorRightConnectorBackground}" >
 	<Grid x:Name="GridConnector" ColumnDefinitions="*, Auto, Auto" ClipToBounds="False" >
 		<!--Background="#00000000"-->
 		<TextBox x:Name="TextBoxConnector" 

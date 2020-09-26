@@ -16,9 +16,14 @@ namespace SimpleStateMachineNodeEditorAvalonia.Views
             Current = this;
             AddHandler(DragDrop.DragOverEvent, OnConnectDrop);
         }
+
         public void OnConnectDrop(object sender, DragEventArgs e)
         {
-            Console.WriteLine(e.GetPosition(this).ToString());
+            (e.Data.Get("Connect") as ConnectViewModel).EndPoint = e.GetPosition(this);
+            //e.Data["Connect"] as
+            //DataObject data = new DataObject();
+            //data.Set("Connect", this.ViewModel.Connect);
+            //DragDrop.DoDragDrop(e, data, DragDropEffects.Move);
         }
     }
 }

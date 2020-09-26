@@ -8,19 +8,12 @@ namespace SimpleStateMachineNodeEditorAvalonia.ViewModels
     {
         [Reactive] public Point StartPoint { get; set; }
         [Reactive] public Point EndPoint { get; set; } = new Point(500, 500);
+        [Reactive] public RightConnectorViewModel FromConnector { get; set; }
+        [Reactive] public LeftConnectorViewModel ToConnector { get; set; }
 
-        private ConnectViewModel()
+        public ConnectViewModel(RightConnectorViewModel connectorFrom)
         {
-
-        }
-        public ConnectViewModel(RightConnectorViewModel connectorFrom):this()
-        {
-            StartInit(connectorFrom);
-        }
-
-        public void StartInit(RightConnectorViewModel ConnectorFrom)
-        {
-            ConnectorFrom.WhenAnyValue(cf => cf.Position).BindTo(this, vm=>vm.StartPoint);
+            FromConnector = connectorFrom;
         }
 
         public void EndInit(LeftConnectorViewModel ConnectorTo)

@@ -22,22 +22,24 @@ namespace SimpleStateMachineNodeEditorAvalonia.ViewModels
         [Reactive] public bool DeleteEnable { get; set; } = true;
         [Reactive] public bool IsSelect { get; set; }
 
-        private NodeViewModel(NodesCanvasViewModel nodeCanvas)
+        public NodeViewModel(NodesCanvasViewModel nodeCanvas, string name, Point position)
         {
             NodesCanvas = nodeCanvas;
-            Connectors = new ConnectorsNodeViewModel(this);
-            Input = new LeftConnectorViewModel(this, "Input");
-            Output = new RightConnectorViewModel(this, "Output");
-
-        }
-        public NodeViewModel(NodesCanvasViewModel nodeCanvas, string name, Point position = default):this(nodeCanvas)
-        {
-            Header = new HeaderNodeViewModel(name);
             Point1 = position;
+            Connectors = new ConnectorsNodeViewModel(this);
+            Header = new HeaderNodeViewModel(name);
+            InitConnectors();
         }
         public NodeViewModel(NodesCanvasViewModel nodeCanvas, string name, int x = 0, int y = 0):this(nodeCanvas, name, new Point(x, y))
         {
 
         }
+
+        private void InitConnectors()
+        {
+            Input = new LeftConnectorViewModel(this, "Input", false);
+            Output = new RightConnectorViewModel(this, "Output", false) { Position = Point1 + new Point(70.5, 52) };
+        }
+
     }
 }

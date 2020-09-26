@@ -1,11 +1,9 @@
 ﻿using Avalonia;
 using ReactiveUI;
 using ReactiveUI.Fody.Helpers;
+using System.Reactive.Linq;
 using SimpleStateMachineNodeEditorAvalonia.Helpers;
 using System;
-using System.Collections.Generic;
-using System.Reactive.Linq;
-using System.Text;
 
 namespace SimpleStateMachineNodeEditorAvalonia.ViewModels
 {
@@ -17,9 +15,7 @@ namespace SimpleStateMachineNodeEditorAvalonia.ViewModels
         public ConnectorViewModel(NodeViewModel node, string name="", bool isEnable = true )
         {
             Node = node;
-            Name = new StringWithEnable(name, isEnable);
-
-            node.WhenAnyValue(n => n.Point1).Buffer(2, 1).Select(value => value[1] - value[0]).Subscribe(x => Position = Position + x);
+            Name = new StringWithEnable(name, isEnable);   
         }
     }
 }

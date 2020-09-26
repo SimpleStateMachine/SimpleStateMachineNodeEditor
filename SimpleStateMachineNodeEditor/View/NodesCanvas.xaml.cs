@@ -229,7 +229,8 @@ namespace SimpleStateMachineNodeEditor.View
                 Move = TypeMove.MoveSelected;
             }
         }
-        private void OnEventDragOver(DragEventArgs e)
+
+        public void OnEventDragOver(DragEventArgs e)
         {
             Point point = e.GetPosition(this.CanvasElement);
             if (this.ViewModel.DraggedConnect != null)

@@ -4,6 +4,7 @@ using Avalonia.Input;
 using Avalonia.Interactivity;
 using SimpleStateMachineNodeEditorAvalonia.Helpers;
 using System;
+using System.Diagnostics;
 using System.Reactive.Disposables;
 
 namespace SimpleStateMachineNodeEditorAvalonia.Views
@@ -12,15 +13,17 @@ namespace SimpleStateMachineNodeEditorAvalonia.Views
     {
         protected override void SetupEvents()
         {
-         
             this.WhenViewModelAnyValue(disposable =>
-            {
-                //this.Events().PointerReleased.Subscribe(e => OnEllipsePointerReleased(e)).DisposeWith(disposable);
+            {           
+                //NodesCanvas.Current.PointerMoved += OnEventPointerMoved;
+                //NodesCanvas.Current.PointerPressed += OnDragOver;
             });
         }
-        private void OnEllipsePointerReleased(PointerReleasedEventArgs e)
+        void OnEventPointerMoved(object subject, PointerEventArgs e)
         {
-
+            var point = e.GetPosition(NodesCanvas.Current);
+            this.ViewModel.EndPoint = point;
+            Trace.WriteLine(point);
         }
         public void OnDragEnter(DragEventArgs e)
         {
@@ -32,9 +35,10 @@ namespace SimpleStateMachineNodeEditorAvalonia.Views
 
         }
 
-        public void OnDragOver(object sender, DragEventArgs e)
+        public void OnDragOver(object sender, PointerEventArgs e)
         {
-
+            NodesCanvas.Current.PointerMoved -= OnEventPointerMoved;
+            NodesCanvas.Current.PointerPressed -= OnDragOver;
         }
 
         public void OnDrop(DragEventArgs e)
