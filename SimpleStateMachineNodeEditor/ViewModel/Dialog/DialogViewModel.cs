@@ -5,7 +5,7 @@ using System.Windows;
 
 namespace SimpleStateMachineNodeEditor.ViewModel
 {
-    public class DialogViewModel : ReactiveValidationObject<DialogViewModel>
+    public class DialogViewModel : ReactiveValidationObject
     {
         [Reactive] public bool? Visibility { get; set; }
         [Reactive] public DialogType Type { get; set; }

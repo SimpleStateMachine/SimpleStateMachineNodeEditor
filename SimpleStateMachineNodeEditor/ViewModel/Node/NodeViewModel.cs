@@ -16,7 +16,7 @@ using System.Collections.ObjectModel;
 
 namespace SimpleStateMachineNodeEditor.ViewModel
 {
-    public partial class NodeViewModel : ReactiveValidationObject<NodeViewModel>
+    public partial class NodeViewModel : ReactiveValidationObject
     {
         [Reactive] public Point Point1 { get; set; }
         [Reactive] public Point Point2 { get; set; }
