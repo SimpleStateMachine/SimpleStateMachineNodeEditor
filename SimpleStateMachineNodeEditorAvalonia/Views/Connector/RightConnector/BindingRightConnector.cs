@@ -19,7 +19,6 @@ namespace SimpleStateMachineNodeEditorAvalonia.Views
             base.SetupBinding();
             this.WhenViewModelAnyValue(disposable =>
             {
-              
                 //this.TextBoxConnector.Events().PointerPressed.Subscribe(e => e.Handled = true).DisposeWith(disposable);
                 //this.Events().PointerPressed.Subscribe(e =>
                 //{

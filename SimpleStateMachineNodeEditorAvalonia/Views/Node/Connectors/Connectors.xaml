@@ -26,7 +26,6 @@
 				<Setter Property="ClipToBounds" Value="False"/>
 				<Setter Property="BorderThickness" Value="0"/>
 				<Setter Property="Background" Value="{DynamicResource ColorRightConnectorBackground}"/>
-				<Setter Property="HorizontalContentAlignment" Value="Right" />
 			</Style>
 			
 			<Style Selector="ListBoxItem:selected /template/ContentPresenter">
@@ -36,9 +35,13 @@
 			<Style Selector="ListBoxItem:selected TextBox">
 				<Setter Property="Foreground" Value="{DynamicResource ColorRightConnectorTextBoxForegroundSelected}"/>
 			</Style>
+			
+			<Style Selector="ListBoxItem:pointerover TextBox">
+				<Setter Property="Foreground" Value="{DynamicResource ColorRightConnectorPointerOverBackground}"/>
+			</Style>
 
 			<Style Selector="ListBoxItem:pointerover /template/ContentPresenter">
-				<Setter Property="Background" Value="{DynamicResource ColorRightConnectorBackground}"/>
+				<Setter Property="Background" Value="{DynamicResource ColorRightConnectorMouseOverBackground}"/>
 			</Style>
 			
 			

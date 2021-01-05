@@ -6,10 +6,9 @@
              x:Class="SimpleStateMachineNodeEditorAvalonia.Views.RightConnector"
 			 ClipToBounds="False" 
 			 HorizontalAlignment="Stretch" 
-			 HorizontalContentAlignment="Right" 
              xmlns:Views="clr-namespace:SimpleStateMachineNodeEditorAvalonia.Views"
-			 Background="{DynamicResource ColorRightConnectorBackground}" >
-	<Grid x:Name="GridConnector" ColumnDefinitions="*, Auto, Auto" ClipToBounds="False" >
+			 Background="{DynamicResource ColorRightConnectorBackground}">
+	<Grid x:Name="GridConnector" ColumnDefinitions="*, Auto, Auto" ClipToBounds="False">
 		<!--Background="#00000000"-->
 		<TextBox x:Name="TextBoxConnector" 
 				 Grid.Column="1" 

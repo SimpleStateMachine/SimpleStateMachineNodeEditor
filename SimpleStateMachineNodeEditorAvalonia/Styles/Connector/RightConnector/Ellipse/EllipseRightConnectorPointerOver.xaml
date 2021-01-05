@@ -2,7 +2,8 @@
 		xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
     
     <Style Selector="Ellipse:pointerover.EllipseRightConnector">
-        <Setter Property="Fill" Value="Red" />
+        <Setter Property="Fill" Value="{DynamicResource ColorRightConnectorEllipseFillPointerOver}" />
+        <Setter Property="Stroke" Value="{DynamicResource ColorRightConnectorEllipseStrokePointerOver}" />
     </Style>
 </Styles>
 
