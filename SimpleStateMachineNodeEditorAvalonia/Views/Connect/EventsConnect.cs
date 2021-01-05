@@ -23,7 +23,6 @@ namespace SimpleStateMachineNodeEditorAvalonia.Views
         {
             var point = e.GetPosition(NodesCanvas.Current);
             this.ViewModel.EndPoint = point;
-            Trace.WriteLine(point);
         }
         public void OnDragEnter(DragEventArgs e)
         {

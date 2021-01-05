@@ -25,12 +25,20 @@
 				<Setter Property="Padding" Value="0"/>
 				<Setter Property="ClipToBounds" Value="False"/>
 				<Setter Property="BorderThickness" Value="0"/>
-				<Setter Property="Background" Value="Orange"/>
+				<Setter Property="Background" Value="{DynamicResource ColorRightConnectorBackground}"/>
 				<Setter Property="HorizontalContentAlignment" Value="Right" />
 			</Style>
 			
-			<Style Selector="ListBoxItem:selected /template/ TextBox">
-				<Setter Property="Foreground" Value="Red"/>
+			<Style Selector="ListBoxItem:selected /template/ContentPresenter">
+				<Setter Property="Background" Value="{DynamicResource ColorRightConnectorBackground}"/>
+			</Style>
+			
+			<Style Selector="ListBoxItem:selected TextBox">
+				<Setter Property="Foreground" Value="{DynamicResource ColorRightConnectorTextBoxForegroundSelected}"/>
+			</Style>
+
+			<Style Selector="ListBoxItem:pointerover /template/ContentPresenter">
+				<Setter Property="Background" Value="{DynamicResource ColorRightConnectorBackground}"/>
 			</Style>
 			
 			

@@ -6,6 +6,7 @@ using SimpleStateMachineNodeEditorAvalonia.Helpers;
 using System;
 using System.Diagnostics;
 using System.Reactive.Disposables;
+using Avalonia.Interactivity;
 
 namespace SimpleStateMachineNodeEditorAvalonia.Views
 {
@@ -17,9 +18,18 @@ namespace SimpleStateMachineNodeEditorAvalonia.Views
             this.WhenViewModelAnyValue(disposable =>
             {     
                 this.EllipseConnector.Events().PointerPressed.Subscribe(e => OnEllipsePointerPressed(e)).DisposeWith(disposable);
-                //this.TextBoxConnector.Events().GotFocus.Subscribe(e => OnTextBoxPointerPressed(e)).DisposeWith(disposable);
-                //this.TextBoxConnector.Events().GotFocus
+                this.TextBoxConnector.Events().GotFocus.Subscribe(e => OnTextBoxPointerPressed(e)).DisposeWith(disposable);
             });
+            
+            this.TextBoxConnector.AddHandler(TextBox.PointerPressedEvent, SelectOnTextBoxClick, RoutingStrategies.Bubble,true);
+        }
+        
+        public void SelectOnTextBoxClick(object sender, PointerPressedEventArgs e)
+        {
+            if (Keyboard.IsKeyDownOneOf(Key.LeftShift, Key.RightShift, Key.LeftCtrl, Key.RightCtrl))
+            {
+                e.Handled = false;
+            }
         }
 
 
@@ -43,6 +53,7 @@ namespace SimpleStateMachineNodeEditorAvalonia.Views
 
         private void OnTextBoxPointerPressed(GotFocusEventArgs e)
         {
+            e.Handled = false;
             //TextBoxConnector.IsFocused 
             //if()
         }

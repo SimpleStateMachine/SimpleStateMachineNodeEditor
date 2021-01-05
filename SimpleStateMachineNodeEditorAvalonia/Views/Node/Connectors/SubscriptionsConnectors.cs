@@ -10,7 +10,7 @@ namespace SimpleStateMachineNodeEditorAvalonia.Views.NodeElements
         {
             this.WhenViewModelAnyValue(disposable =>
             {
-
+            
             });
         }
     }

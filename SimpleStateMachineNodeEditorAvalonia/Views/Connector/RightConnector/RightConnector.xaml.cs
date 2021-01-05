@@ -13,8 +13,7 @@ namespace SimpleStateMachineNodeEditorAvalonia.Views
     {
         public RightConnector()
         {
-
-            var t = EllipseConnector.FindAncestorOfType<RightConnector>(true);
+            
         }
 
     }

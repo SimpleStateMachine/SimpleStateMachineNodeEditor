@@ -17,10 +17,11 @@ namespace SimpleStateMachineNodeEditorAvalonia.Views
 
         public BaseView()
         {
+            InitializeComponent();
             SetupBinding();
             SetupEvents();
             SetupSubscriptions();
-            InitializeComponent();
+          
         }
     }
 }

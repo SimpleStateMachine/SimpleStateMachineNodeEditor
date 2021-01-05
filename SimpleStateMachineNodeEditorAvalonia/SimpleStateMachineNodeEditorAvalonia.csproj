@@ -11,9 +11,12 @@
       <SubType>Designer</SubType>
     </AvaloniaResource>
     <AvaloniaResource Include="Assets\**" />
-	<Folder Include="Styles\Connector\Connector\" />
-    <Folder Include="Styles\Connect\" />
-    <Folder Include="Styles\Extensions\" />
+    <AvaloniaResource Remove="Styles\Connect\**" />
+    <Compile Remove="Styles\Connect\**" />
+    <AvaloniaResource Remove="Styles\Extensions\**" />
+    <Compile Remove="Styles\Extensions\**" />
+    <AvaloniaResource Remove="Styles\Connector\Connector\**" />
+    <Compile Remove="Styles\Connector\Connector\**" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Avalonia" Version="0.10.0-rc1" />
@@ -28,5 +31,20 @@
     <PackageReference Include="Dock.Model" Version="0.10.0-rc1" />
     <PackageReference Include="HistoricalReactiveCommand" Version="0.5.0" />
     <PackageReference Include="ReactiveUI.Fody" Version="13.0.27" />
+  </ItemGroup>
+  <ItemGroup>
+    <AvaloniaXaml Remove="Styles\Connect\**" />
+    <AvaloniaXaml Remove="Styles\Extensions\**" />
+    <AvaloniaXaml Remove="Styles\Connector\Connector\**" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Remove="Styles\Connect\**" />
+    <EmbeddedResource Remove="Styles\Extensions\**" />
+    <EmbeddedResource Remove="Styles\Connector\Connector\**" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Remove="Styles\Connect\**" />
+    <None Remove="Styles\Extensions\**" />
+    <None Remove="Styles\Connector\Connector\**" />
   </ItemGroup>
 </Project>

@@ -1,6 +1,5 @@
 ﻿<Styles xmlns="https://github.com/avaloniaui"
-		xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-		xmlns:Views="clr-namespace:SimpleStateMachineNodeEditorAvalonia.Views">   
+		xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">   
     <Style Selector="TextBox.TextBoxRightConnector">
 		<Setter Property="Foreground" Value="{DynamicResource ColorRightConnectorTextBoxForeground}" />
     </Style>

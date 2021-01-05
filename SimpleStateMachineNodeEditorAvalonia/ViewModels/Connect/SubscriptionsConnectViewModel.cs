@@ -12,7 +12,6 @@ namespace SimpleStateMachineNodeEditorAvalonia.ViewModels
         protected override void SetupSubscriptions()
         {
             this.WhenAnyValue(x => x.FromConnector.Node.Header.IsCollapse).Subscribe(value => UpdateSubscriptionForPosition(value));
-            this.WhenAnyValue(x => x.EndPoint).Subscribe(value => Trace.WriteLine("EndPoint: " + value.ToString()));
         }
 
         private void UpdateSubscriptionForPosition(bool nodeIsCollapse)

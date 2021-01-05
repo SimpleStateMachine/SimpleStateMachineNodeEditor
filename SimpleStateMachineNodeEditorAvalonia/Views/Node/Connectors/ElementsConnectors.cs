@@ -4,6 +4,8 @@ using SimpleStateMachineNodeEditorAvalonia.Helpers;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using Avalonia.Input;
+using Avalonia.Interactivity;
 
 namespace SimpleStateMachineNodeEditorAvalonia.Views.NodeElements
 {
@@ -14,10 +16,8 @@ namespace SimpleStateMachineNodeEditorAvalonia.Views.NodeElements
         protected override void InitializeComponent()
         {
             AvaloniaXamlLoader.Load(this);
-
-            //ItemsControlConnectors = this.FindControlWithExeption<ItemsControl>("ItemsControlConnectors");
             ListBoxConnectors = this.FindControlWithExeption<ListBox>("ListBoxConnectors");
         }
-      
+
     }
 }

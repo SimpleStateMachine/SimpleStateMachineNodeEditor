@@ -18,6 +18,19 @@ namespace SimpleStateMachineNodeEditorAvalonia.Helpers
         }
         public static readonly HashSet<Key> Keys = new HashSet<Key>();
         public static bool IsKeyDown(Key key) => Keys.Contains(key);
+
+        public static bool IsKeyDownOneOf(params Key[] keys)
+        {
+            for (int i = 0; i < keys.Length; i++)
+            {
+                if (Keys.Contains(keys[i]))
+                {
+                    return true;
+                }
+            }
+            return false;
+        }
+         
         public static  Dictionary<Key, string> Keyss = new Dictionary<Key, string>();
 
         public static void OnKeyDown(KeyEventArgs e)
