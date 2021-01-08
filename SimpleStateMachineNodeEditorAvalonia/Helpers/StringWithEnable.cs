@@ -16,5 +16,10 @@ namespace SimpleStateMachineNodeEditorAvalonia.Helpers
             Value = value;
             IsEnabled = isEnabled;
         }
+
+        public override string ToString()
+        {
+            return Value;
+        }
     }
 }

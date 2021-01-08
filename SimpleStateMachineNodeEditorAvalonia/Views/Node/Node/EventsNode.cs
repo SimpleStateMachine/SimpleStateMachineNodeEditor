@@ -3,6 +3,7 @@ using Avalonia.Controls;
 using Avalonia.Input;
 using SimpleStateMachineNodeEditorAvalonia.Helpers;
 using System;
+using System.Diagnostics;
 using System.Reactive.Disposables;
 
 namespace SimpleStateMachineNodeEditorAvalonia.Views
@@ -23,12 +24,12 @@ namespace SimpleStateMachineNodeEditorAvalonia.Views
         {
             this.ViewModel.SelectCommand.ExecuteWithSubscribe(Keyboard.IsKeyDown(Key.LeftCtrl) ? SelectMode.ClickWithCtrl : SelectMode.Click);
             oldPosition = e.GetPosition(NodesCanvas.Current);
-            this.PointerMoved += OnEventPointerMoved;
+            this.PointerMoved += this.OnEventPointerMoved;
         }
 
         void OnEventBorderPointerReleased(PointerReleasedEventArgs e)
         {
-            this.PointerMoved -= OnEventPointerMoved;
+            this.PointerMoved -= this.OnEventPointerMoved;
         }
 
         void OnEventPointerMoved(object subject, PointerEventArgs e)

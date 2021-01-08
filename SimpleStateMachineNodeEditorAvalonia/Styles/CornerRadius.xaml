@@ -5,9 +5,9 @@
 		<Setter Property="CornerRadius" Value="25"/>
 	</Style>
 	
-	<Style Selector="UserControl.Test">
-		<Setter Property="Background" Value="White"/>
-	</Style>
+	<!-- <Style Selector="UserControl.Test"> -->
+	<!-- 	<Setter Property="Background" Value="White"/> -->
+	<!-- </Style> -->
 	
 	
 </Styles>

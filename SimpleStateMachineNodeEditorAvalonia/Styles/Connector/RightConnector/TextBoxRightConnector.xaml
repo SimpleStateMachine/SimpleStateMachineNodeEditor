@@ -4,5 +4,5 @@
 	<Style Selector="TextBox.TextBoxRightConnector">
 		<Setter Property="Foreground" Value="{DynamicResource ColorRightConnectorTextBoxForeground}" />
     </Style>
-	
+
 </Styles>

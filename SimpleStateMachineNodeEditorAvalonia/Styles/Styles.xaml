@@ -5,17 +5,18 @@
 	<StyleInclude Source="/Styles/CornerRadius.xaml"/>
 
 	<!--LeftConnector-->
-	<StyleInclude Source="/Styles/Connector/LeftConnector/Ellipse/EllipseLeftConnectorDefault.xaml"/>
-	<StyleInclude Source="/Styles/Connector/LeftConnector/TextBox/TextBoxLeftConnectorDefault.xaml"/>
+	<StyleInclude Source="/Styles/Connector/LeftConnector/EllipseLeftConnector.xaml"/>
+	<StyleInclude Source="/Styles/Connector/LeftConnector/TextBoxLeftConnector.xaml"/>
 				  
 	<!--RightConnector-->
-	<StyleInclude Source="/Styles/Connector/RightConnector/Ellipse/EllipseRightConnectorDefault.xaml"/>
-    <StyleInclude Source="/Styles/Connector/RightConnector/Ellipse/EllipseRightConnectorPointerOver.xaml"/>
-	<StyleInclude Source="/Styles/Connector/RightConnector/TextBox/TextBoxRightConnectorDefault.xaml"/>
-	
+	<StyleInclude Source="/Styles/Connector/RightConnector/EllipseRightConnector.xaml"/>
+    <StyleInclude Source="/Styles/Connector/RightConnector/TextBoxRightConnector.xaml"/>
+    <StyleInclude Source="/Styles/Connector/RightConnector/RightConnector.xaml"/>
+    
 	<!--Node-->
-	<StyleInclude Source="/Styles/Node/Header/Button/NodeHeaderButton.xaml"/>
-
+	<StyleInclude Source="/Styles/Node/Header/ButtonNodeHeader.xaml"/>
+    <StyleInclude Source="/Styles/Node/Header/TextBoxNodeHeader.xaml"/>
+    
 </Styles>
 
     

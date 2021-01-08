@@ -3,32 +3,36 @@
 		xmlns:sys="clr-namespace:System;assembly=netstandard">
 	<Style.Resources>
 
+		
+		
+		<SolidColorBrush x:Key="EmptyColor" Color="#00000000" />
 		<!--Connect-->
 		<SolidColorBrush x:Key="ColorConnectStroke" Color="White" />
 
 		<!--LeftConnector-->
 		<SolidColorBrush x:Key="ColorLeftConnectorTextBoxForeground" Color="White"/>
-		<SolidColorBrush x:Key="ColorLeftConnectorBackground" Color="#2D2D2D"/>
+		<SolidColorBrush x:Key="ColorLeftConnectorBackground" Color="#E52D2D2D"/>
 		<SolidColorBrush x:Key="ColorLeftConnectorEllipseFill" Color="White"/>
 		<SolidColorBrush x:Key="ColorLeftConnectorEllipseStroke" Color="#1e1e1e"/>
 		
 		<!--RightConnector-->
 		<SolidColorBrush x:Key="ColorRightConnectorTextBoxForeground" Color="White"/>
-		<SolidColorBrush x:Key="ColorRightConnectorBackground" Color="#2D2D2D"/>
+		<SolidColorBrush x:Key="ColorRightConnectorBackground" Color="#E52D2D2D"/>
 		<SolidColorBrush x:Key="ColorRightConnectorEllipseFill" Color="White"/>
 		<SolidColorBrush x:Key="ColorRightConnectorEllipseStroke" Color="#1e1e1e"/>
-		<SolidColorBrush x:Key="ColorRightConnectorEllipseFillPointerOver" Color="White"/>
-		<SolidColorBrush x:Key="ColorRightConnectorEllipseStrokePointerOver" Color="White"/>
+		<SolidColorBrush x:Key="ColorRightConnectorEllipseFillPointerOver" Color="Orange"/>
+		<SolidColorBrush x:Key="ColorRightConnectorEllipseStrokePointerOver" Color="Orange"/>
 		<SolidColorBrush x:Key="ColorRightConnectorTextBoxForegroundSelected" Color="Red"/>
-		<SolidColorBrush x:Key="ColorRightConnectorPointerOverBackground" Color="DarkGray"/>
+		<SolidColorBrush x:Key="ColorRightConnectorTextBoxForegroundPointerOver" Color="Orange"/>
 		
 		<!--Node-->
-		<SolidColorBrush x:Key="ColorNodeBackground"  Color="#2D2D2D"/>
+		<SolidColorBrush x:Key="ColorNodeBackground"  Color="#E52D2D2D"/>
 		<SolidColorBrush x:Key="ColorNodeBorderBrush"  Color="LightGray"/>
-		<SolidColorBrush x:Key="ColorNodeHeaderBackground"  Color="#123d6a"/>
+		<SolidColorBrush x:Key="ColorNodeHeaderBackground"  Color="#E5123d6a"/>
 		<SolidColorBrush x:Key="ColorNodeHeaderForeground" Color="White"/>
+		<SolidColorBrush x:Key="ColorNodeHeaderForegroundPointerOver" Color="Orange"/>
 		<SolidColorBrush x:Key="ColorNodeHeaderButton" Color="White"/>
-		<SolidColorBrush x:Key="ColorNodeHeaderButtonPointerOver" Color="DarkGray"/>
+		<SolidColorBrush x:Key="ColorNodeHeaderButtonPointerOver" Color="Orange"/>
 		
 		<!--<Color x:Key="ColorNodeHeader">#90123d6a</Color>
 		<Color x:Key="ColorNodeBackground">#E52D2D2D</Color>-->

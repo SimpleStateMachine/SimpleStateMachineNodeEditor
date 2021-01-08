@@ -17,15 +17,16 @@ namespace SimpleStateMachineNodeEditorAvalonia.ViewModels
 
         private void Select(SelectMode selectMode)
         {
-            if(selectMode == SelectMode.Click)
-            {
-                this.IsSelect = true;
-            }
-            else if (selectMode == SelectMode.ClickWithCtrl)
+            if (selectMode == SelectMode.ClickWithCtrl)
             {
                 this.IsSelect = !this.IsSelect;
             }
-           
+            else if((selectMode == SelectMode.Click)&&(!IsSelect))
+            {
+                NodesCanvas.Nodes.SetIsSelectAllNodesCommand.ExecuteWithSubscribe((false, null));
+                this.IsSelect = true;
+            }
+
         }
     }
 }

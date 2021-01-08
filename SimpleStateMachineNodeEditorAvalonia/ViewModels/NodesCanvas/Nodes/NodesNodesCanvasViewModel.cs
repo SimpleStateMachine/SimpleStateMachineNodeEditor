@@ -28,6 +28,7 @@ namespace SimpleStateMachineNodeEditorAvalonia.ViewModels
             SelectedNodes = Nodes.Connect().AutoRefresh(x=>x.IsSelect).Filter(x => x.IsSelect).AsObservableList();
 
             Nodes.Add(new NodeViewModel(nodesCanvas, "State 3", new Point(100, 100)));
+            Nodes.Add(new NodeViewModel(nodesCanvas, "State 5", new Point(700, 100)));
         }
     }
 }

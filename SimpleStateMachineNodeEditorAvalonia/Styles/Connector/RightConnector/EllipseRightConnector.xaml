@@ -4,4 +4,9 @@
         <Setter Property="Fill" Value="{DynamicResource ColorRightConnectorEllipseFill}" />
 		<Setter Property="Stroke" Value="{DynamicResource ColorRightConnectorEllipseStroke}" />
     </Style>
+	
+	<Style Selector="Ellipse:pointerover.EllipseRightConnector">
+		<Setter Property="Fill" Value="{DynamicResource ColorRightConnectorEllipseFillPointerOver}" />
+		<Setter Property="Stroke" Value="{DynamicResource ColorRightConnectorEllipseStrokePointerOver}" />
+	</Style>
 </Styles>

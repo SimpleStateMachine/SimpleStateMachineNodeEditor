@@ -17,8 +17,6 @@ namespace SimpleStateMachineNodeEditorAvalonia.Views
         {
             this.WhenViewModelAnyValue(disposable =>
             {
-                //this.WhenAnyValue(x => x.Width);
-
             });
         }
     }

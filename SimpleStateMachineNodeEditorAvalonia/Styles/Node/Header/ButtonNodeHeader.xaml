@@ -17,6 +17,7 @@
 		 <Setter Property="Fill" Value="{DynamicResource ColorNodeHeaderButtonPointerOver}"/>
 	 </Style>
 	 
+	 
 	 <Style Selector="ToggleButton[IsChecked=true].NodeHeaderButton Path">
 		 <Style.Animations>
 			 <Animation Duration="0:0:0.3" FillMode="Both">

@@ -7,7 +7,7 @@
              xmlns:styles="clr-namespace:SimpleStateMachineNodeEditor.Styles"
              mc:Ignorable="d" 
              x:Name="RightConnectorElement" HorizontalAlignment="Stretch" VerticalAlignment="Top"  BorderThickness="0" AllowDrop="True">
-    <Grid x:Name="GridElement" Background="Orange" >
+    <Grid x:Name="GridElement">
         <Grid.ColumnDefinitions>
             <ColumnDefinition  />
             <ColumnDefinition Width="Auto" />

@@ -8,7 +8,8 @@
 			 xmlns:Helpers="clr-namespace:SimpleStateMachineNodeEditorAvalonia.Helpers"
 			 x:Class="SimpleStateMachineNodeEditorAvalonia.Views.NodeElements.Connectors" ClipToBounds="False">
 	
-	<ListBox SelectionMode="Multiple" x:Name="ListBoxConnectors" ClipToBounds="False" Padding="0" BorderThickness="0" Background="{DynamicResource ColorNodeBackground}" ScrollViewer.HorizontalScrollBarVisibility="Disabled">
+	<ListBox SelectionMode="Multiple" x:Name="ListBoxConnectors" ClipToBounds="False" Padding="0" BorderThickness="0" Background="{x:Null}"  ScrollViewer.HorizontalScrollBarVisibility="Disabled">
+		
 		<ListBox.ItemTemplate>
 			<DataTemplate DataType="{x:Type ViewModels:RightConnectorViewModel}">
 				<Views:RightConnector />
@@ -20,34 +21,31 @@
 			</ItemsPanelTemplate>
 		</ListBox.ItemsPanel>
 		<ListBox.Styles>
+			
 			<Style Selector="ListBoxItem">
 				<Setter Property="IsSelected" Value="{Binding IsSelected, Mode=TwoWay}"/>
 				<Setter Property="Padding" Value="0"/>
 				<Setter Property="ClipToBounds" Value="False"/>
 				<Setter Property="BorderThickness" Value="0"/>
-				<Setter Property="Background" Value="{DynamicResource ColorRightConnectorBackground}"/>
 			</Style>
 			
 			<Style Selector="ListBoxItem:selected /template/ContentPresenter">
-				<Setter Property="Background" Value="{DynamicResource ColorRightConnectorBackground}"/>
+				<Setter Property="Background" Value="{x:Null}"/>
 			</Style>
 			
 			<Style Selector="ListBoxItem:selected TextBox">
 				<Setter Property="Foreground" Value="{DynamicResource ColorRightConnectorTextBoxForegroundSelected}"/>
 			</Style>
 			
-			<Style Selector="ListBoxItem:pointerover TextBox">
-				<Setter Property="Foreground" Value="{DynamicResource ColorRightConnectorPointerOverBackground}"/>
-			</Style>
-
 			<Style Selector="ListBoxItem:pointerover /template/ContentPresenter">
-				<Setter Property="Background" Value="{DynamicResource ColorRightConnectorMouseOverBackground}"/>
+				<Setter Property="Background" Value="{x:Null}"/>
 			</Style>
 			
-			
+
 			<Style Selector="ScrollViewer">
 				<Setter Property="ClipToBounds" Value="False"/>
 			</Style>
+			
 			<Style Selector="ScrollContentPresenter">
 				<Setter Property="ClipToBounds" Value="False"/>
 			</Style>

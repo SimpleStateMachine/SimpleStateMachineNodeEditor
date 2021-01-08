@@ -14,10 +14,9 @@ namespace SimpleStateMachineNodeEditorAvalonia.Views
     {
         protected override void SetupBinding()
         {
-            base.SetupBinding();
             this.WhenViewModelAnyValue(disposable =>
             {
-                
+                base.SetupBinding();
             });
            
         }

@@ -4,7 +4,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
         x:Class="SimpleStateMachineNodeEditorAvalonia.Views.MainWindow"
-		xmlns:idc="clr-namespace:Dock.Avalonia.Controls;assembly=Dock.Avalonia"
+		xmlns:idc="clr-namespace:Dock.Model.Controls;assembly=Dock.Model"
         Icon="/Assets/StateMachine-logo.ico"
 		xmlns:Views="clr-namespace:SimpleStateMachineNodeEditorAvalonia.Views"
 		xmlns:ViewModels="clr-namespace:SimpleStateMachineNodeEditorAvalonia.ViewModels"

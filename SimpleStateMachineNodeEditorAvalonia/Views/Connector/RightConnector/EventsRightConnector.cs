@@ -6,7 +6,9 @@ using SimpleStateMachineNodeEditorAvalonia.Helpers;
 using System;
 using System.Diagnostics;
 using System.Reactive.Disposables;
+using Avalonia.Controls.Primitives;
 using Avalonia.Interactivity;
+using Avalonia.Layout;
 
 namespace SimpleStateMachineNodeEditorAvalonia.Views
 {
@@ -14,19 +16,20 @@ namespace SimpleStateMachineNodeEditorAvalonia.Views
     {
         protected override void SetupEvents()
         {
-            base.SetupEvents();
             this.WhenViewModelAnyValue(disposable =>
             {     
+                base.SetupEvents();
                 this.EllipseConnector.Events().PointerPressed.Subscribe(e => OnEllipsePointerPressed(e)).DisposeWith(disposable);
+                this.TextBoxConnector.AddHandler(TextBox.PointerPressedEvent, OnTextBoxPointerPressed, RoutingStrategies.Bubble,true);
             });
-            
-            this.TextBoxConnector.AddHandler(TextBox.PointerPressedEvent, OnTextBoxPointerPressed, RoutingStrategies.Bubble,true);
+           
         }
         
         public void OnTextBoxPointerPressed(object sender, PointerPressedEventArgs e)
         {
             //for select connector on texbox click
             e.Handled = false;
+            e.Source = this;
         }
 
 

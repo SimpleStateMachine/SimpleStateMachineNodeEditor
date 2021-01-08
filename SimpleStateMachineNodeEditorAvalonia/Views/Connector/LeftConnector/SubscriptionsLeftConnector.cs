@@ -15,10 +15,10 @@ namespace SimpleStateMachineNodeEditorAvalonia.Views
     {
         protected override void SetupSubscriptions()
         {
-            base.SetupSubscriptions();
+         
             this.WhenViewModelAnyValue(disposable =>
             {
-
+                base.SetupSubscriptions();
             });
         }
     }
