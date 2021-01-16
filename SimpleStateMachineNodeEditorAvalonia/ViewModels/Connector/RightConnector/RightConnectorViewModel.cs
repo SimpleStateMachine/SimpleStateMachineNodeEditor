@@ -11,7 +11,6 @@ namespace SimpleStateMachineNodeEditorAvalonia.ViewModels
 
         public RightConnectorViewModel(NodeViewModel node, string name = "", bool isEnable = true):base(node, name, isEnable)
         {
-            Position = new Point(100, 100);
         }
     }
 }

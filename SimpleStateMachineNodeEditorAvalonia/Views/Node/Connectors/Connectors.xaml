@@ -29,17 +29,17 @@
 				<Setter Property="BorderThickness" Value="0"/>
 			</Style>
 			
-			<Style Selector="ListBoxItem:selected /template/ContentPresenter">
-				<Setter Property="Background" Value="{x:Null}"/>
-			</Style>
+			<!-- <Style Selector="ListBoxItem:selected /template/ContentPresenter"> -->
+			<!-- 	<Setter Property="Background" Value="{x:Null}"/> -->
+			<!-- </Style> -->
 			
 			<Style Selector="ListBoxItem:selected TextBox">
 				<Setter Property="Foreground" Value="{DynamicResource ColorRightConnectorTextBoxForegroundSelected}"/>
 			</Style>
 			
-			<Style Selector="ListBoxItem:pointerover /template/ContentPresenter">
-				<Setter Property="Background" Value="{x:Null}"/>
-			</Style>
+			<!-- <Style Selector="ListBoxItem:pointerover /template/ContentPresenter"> -->
+			<!-- 	<Setter Property="Background" Value="{x:Null}"/> -->
+			<!-- </Style> -->
 			
 
 			<Style Selector="ScrollViewer">

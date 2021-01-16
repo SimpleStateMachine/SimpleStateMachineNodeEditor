@@ -28,6 +28,8 @@
 		<!--Node-->
 		<SolidColorBrush x:Key="ColorNodeBackground"  Color="#E52D2D2D"/>
 		<SolidColorBrush x:Key="ColorNodeBorderBrush"  Color="LightGray"/>
+		<SolidColorBrush x:Key="ColorNodeBorderBrushPointerOver"  Color="Orange"/>
+		<SolidColorBrush x:Key="ColorNodeBorderBrushIsSelect"  Color="Red"/>
 		<SolidColorBrush x:Key="ColorNodeHeaderBackground"  Color="#E5123d6a"/>
 		<SolidColorBrush x:Key="ColorNodeHeaderForeground" Color="White"/>
 		<SolidColorBrush x:Key="ColorNodeHeaderForegroundPointerOver" Color="Orange"/>

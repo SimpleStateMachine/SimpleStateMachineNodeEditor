@@ -1,0 +1,18 @@
+﻿<Styles xmlns="https://github.com/avaloniaui"
+		xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+		xmlns:views="clr-namespace:SimpleStateMachineNodeEditorAvalonia.Views">
+	
+	
+	<Style Selector="views|Node>Border">
+		<Setter Property="BorderBrush" Value="{DynamicResource ColorNodeBorderBrush}" />
+	</Style>
+	
+	<Style Selector="views|Node:pointerover>Border">
+		<Setter Property="BorderBrush" Value="{DynamicResource ColorNodeBorderBrushPointerOver}" />
+	</Style>
+	
+	<Style Selector="views|Node[IsSelect=true]>Border">
+		<Setter Property="BorderBrush" Value="{DynamicResource ColorNodeBorderBrushIsSelect}" />
+	</Style>
+
+</Styles>

@@ -7,9 +7,10 @@
              xmlns:i="clr-namespace:Avalonia.Xaml.Interactivity;assembly=Avalonia.Xaml.Interactivity"
              xmlns:ia="clr-namespace:Avalonia.Xaml.Interactions.Core;assembly=Avalonia.Xaml.Interactions"
              xmlns:iac="clr-namespace:Avalonia.Xaml.Interactions.Custom;assembly=Avalonia.Xaml.Interactions.Custom"
+             Classes="Node"
 			 xmlns:Views="clr-namespace:SimpleStateMachineNodeEditorAvalonia.Views"
 			 xmlns:NodeElements="clr-namespace:SimpleStateMachineNodeEditorAvalonia.Views.NodeElements" ClipToBounds="False">
-	<Border x:Name="BorderNode" CornerRadius="5" BorderThickness="1"  Background="{DynamicResource ColorNodeBackground}" BorderBrush="{DynamicResource ColorNodeBorderBrush}" MinWidth="60">
+	<Border x:Name="BorderNode" CornerRadius="5" BorderThickness="1"  Background="{DynamicResource ColorNodeBackground}"  MinWidth="60">
 		<Grid RowDefinitions="auto, auto, 5,auto, *"   ClipToBounds="False" Margin="0,0,0,5" >
 			<NodeElements:Header x:Name="HeaderNode" Grid.Row="0" />
 			<Views:LeftConnector x:Name="InputNode" Grid.Row="1" />

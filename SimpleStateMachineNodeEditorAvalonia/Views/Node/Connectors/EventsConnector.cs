@@ -20,10 +20,16 @@ namespace SimpleStateMachineNodeEditorAvalonia.Views.NodeElements
         public void OnListBoxPointerPressed(object sender, PointerPressedEventArgs e)
         {
             //for select connector on ListBox click
-            if (!(e.Source is RightConnector))
+            if (e.Source is RightConnector)
             {
                 e.Handled = false;
             }
+            else if (e.Source is TextBox)
+            {
+                e.Handled = true;
+            }
+            
+
         }
     }
 }

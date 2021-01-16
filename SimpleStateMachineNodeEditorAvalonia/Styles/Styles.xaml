@@ -16,6 +16,8 @@
 	<!--Node-->
 	<StyleInclude Source="/Styles/Node/Header/ButtonNodeHeader.xaml"/>
     <StyleInclude Source="/Styles/Node/Header/TextBoxNodeHeader.xaml"/>
+    <StyleInclude Source="/Styles/Node/Node.xaml"/>
+   
     
 </Styles>
 

@@ -15,13 +15,14 @@ namespace SimpleStateMachineNodeEditorAvalonia.Views
         {  
             this.WhenViewModelAnyValue(disposable =>
             {           
-                this.BorderNode.Events().PointerPressed.Subscribe(e => OnEventBorderPointerPressed(e)).DisposeWith(disposable);
-                this.BorderNode.Events().PointerReleased.Subscribe(x => OnEventBorderPointerReleased(x)).DisposeWith(disposable);
+                this.BorderNode.Events().PointerPressed.Subscribe(OnEventBorderPointerPressed).DisposeWith(disposable);
+                this.BorderNode.Events().PointerReleased.Subscribe(OnEventBorderPointerReleased).DisposeWith(disposable);
             });
         }
 
         void OnEventBorderPointerPressed(PointerPressedEventArgs e)
         {
+            
             this.ViewModel.SelectCommand.ExecuteWithSubscribe(Keyboard.IsKeyDown(Key.LeftCtrl) ? SelectMode.ClickWithCtrl : SelectMode.Click);
             oldPosition = e.GetPosition(NodesCanvas.Current);
             this.PointerMoved += this.OnEventPointerMoved;

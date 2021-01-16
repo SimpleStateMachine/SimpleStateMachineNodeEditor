@@ -18,11 +18,12 @@ namespace SimpleStateMachineNodeEditorAvalonia.ViewModels
         public ConnectorsNodeViewModel(NodeViewModel node)
         {
             Connectors.Connect().ObserveOn(RxApp.MainThreadScheduler).Bind(ConnectorsForView).Subscribe();
-
-            //Connectors.Add(new ConnectorViewModel(nameIsEnable: false));
-            Connectors.Add(new RightConnectorViewModel(node, "Transition1") { Position= node.Point1 + new Point(75.5, 52) });
-            Connectors.Add(new RightConnectorViewModel(node, "Test2"));
-            Connectors.Add(new RightConnectorViewModel(node, "Test3"));
+            
+            Connectors.Add(new RightConnectorViewModel(node, "", false) { Position= node.Point1 + new Point(75.5, 52) });
+            
+            Connectors.Add(new RightConnectorViewModel(node, "Transiti") { Position= node.Point1 + new Point(75.5, 52) });
         }
+        
+        
     }
 }

@@ -39,6 +39,7 @@ namespace SimpleStateMachineNodeEditorAvalonia.ViewModels
         {
             Input = new LeftConnectorViewModel(this, "Input", false);
             Output = new RightConnectorViewModel(this, "Output", false) { Position = Point1 + new Point(70.5, 52) };
+            
         }
 
     }

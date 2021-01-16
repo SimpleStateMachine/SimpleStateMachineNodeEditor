@@ -20,7 +20,7 @@ namespace SimpleStateMachineNodeEditorAvalonia.Views
             this.WhenViewModelAnyValue(disposable =>
             {
                 this.OneWayBind(this.ViewModel, x => x.Header, x => x.HeaderNode.ViewModel).DisposeWith(disposable);
-
+                this.OneWayBind(this.ViewModel, x=>x.IsSelect, x=>x.IsSelect).DisposeWith(disposable);
 
 
 

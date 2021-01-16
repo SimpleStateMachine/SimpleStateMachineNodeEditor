@@ -12,7 +12,7 @@ namespace SimpleStateMachineNodeEditorAvalonia.ViewModels
     {
         protected override void SetupSubscriptions()
         {
-
+         
         }
     }
 }
