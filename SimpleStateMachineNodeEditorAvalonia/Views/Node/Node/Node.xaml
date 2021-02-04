@@ -10,7 +10,7 @@
              Classes="Node"
 			 xmlns:Views="clr-namespace:SimpleStateMachineNodeEditorAvalonia.Views"
 			 xmlns:NodeElements="clr-namespace:SimpleStateMachineNodeEditorAvalonia.Views.NodeElements" ClipToBounds="False">
-	<Border x:Name="BorderNode" CornerRadius="5" BorderThickness="1"  Background="{DynamicResource ColorNodeBackground}"  MinWidth="60">
+	<Border x:Name="BorderNode" CornerRadius="5" BorderThickness="1"  Background="{DynamicResource ColorNodeBackground}"  MinWidth="60"  Focusable="True">
 		<Grid RowDefinitions="auto, auto, 5,auto, *"   ClipToBounds="False" Margin="0,0,0,5" >
 			<NodeElements:Header x:Name="HeaderNode" Grid.Row="0" />
 			<Views:LeftConnector x:Name="InputNode" Grid.Row="1" />

@@ -23,9 +23,9 @@ namespace SimpleStateMachineNodeEditorAvalonia.ViewModels
             //Connects.Add(new ConnectViewModel() { StartPoint = new Point(10, 10), EndPoint = new Point(500, 500) });
         }
 
-        public ConnectViewModel GetNewConnect(RightConnectorViewModel connectorFrom)
+        public ConnectViewModel GetNewConnect(RightConnectorViewModel connectorFrom, Point point = default)
         {
-            var newConnect = new ConnectViewModel(connectorFrom);
+            var newConnect = new ConnectViewModel(connectorFrom, point);
             Connects.Add(newConnect);
 
             return newConnect;

@@ -21,5 +21,8 @@ namespace SimpleStateMachineNodeEditorAvalonia.Helpers
         {
             return Value;
         }
+        
+        
+        
     }
 }

@@ -23,7 +23,7 @@
 				 Height="12" 
 				 Width="12" 
 				 Margin="0,0,-7,0"
-				 StrokeThickness="1" />
+				 StrokeThickness="1" Focusable="True" />
 	</Grid>
 	
 		<!--<UserControl.ContextMenu>

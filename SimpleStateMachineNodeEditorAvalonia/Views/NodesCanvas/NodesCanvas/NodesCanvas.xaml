@@ -7,7 +7,7 @@
 			 xmlns:NodesCanvasElements="clr-namespace:SimpleStateMachineNodeEditorAvalonia.Views.NodesCanvasElements"
              x:Class="SimpleStateMachineNodeEditorAvalonia.Views.NodesCanvas" DragDrop.AllowDrop="True">
 
-	<Grid  x:Name="GridNodesCanvas" Background="{DynamicResource ColorNodesCanvasBackground}">
+	<Grid  x:Name="GridNodesCanvas" Background="{DynamicResource ColorNodesCanvasBackground}" Focusable="True">
 		<NodesCanvasElements:Nodes x:Name="NodesNodesCanvas" />
 		<NodesCanvasElements:Connects x:Name="ConnectsNodesCanvas" />
 		<Views:Selector x:Name="SelectorNodesCanvas" />

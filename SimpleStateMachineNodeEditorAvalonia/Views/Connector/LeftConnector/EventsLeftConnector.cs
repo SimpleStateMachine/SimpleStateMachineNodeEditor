@@ -19,7 +19,7 @@ namespace SimpleStateMachineNodeEditorAvalonia.Views
             base.SetupEvents();
             this.WhenViewModelAnyValue(disposable =>
             {
-                AddHandler(DragDrop.DropEvent, OnConnectDrop);
+                // AddHandler(DragDrop.DropEvent, OnConnectDrop);
             });
 
           

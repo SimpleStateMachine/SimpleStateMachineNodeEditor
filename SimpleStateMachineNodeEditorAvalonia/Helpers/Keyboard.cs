@@ -7,7 +7,7 @@ namespace SimpleStateMachineNodeEditorAvalonia.Helpers
 {
     public static class Keyboard
     {
-        public static void Init()
+        public static void  Init()
         {
 
         }

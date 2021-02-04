@@ -5,6 +5,7 @@ using Avalonia.Markup.Xaml;
 using Avalonia.ReactiveUI;
 using SimpleStateMachineNodeEditorAvalonia.ViewModels;
 using System;
+using SimpleStateMachineNodeEditorAvalonia.Helpers;
 
 namespace SimpleStateMachineNodeEditorAvalonia.Views
 {
@@ -14,16 +15,6 @@ namespace SimpleStateMachineNodeEditorAvalonia.Views
         public NodesCanvas()
         {
             Current = this;
-            AddHandler(DragDrop.DragOverEvent, OnConnectDrop);
-        }
-
-        public void OnConnectDrop(object sender, DragEventArgs e)
-        {
-            (e.Data.Get("Connect") as ConnectViewModel).EndPoint = e.GetPosition(this);
-            //e.Data["Connect"] as
-            //DataObject data = new DataObject();
-            //data.Set("Connect", this.ViewModel.Connect);
-            //DragDrop.DoDragDrop(e, data, DragDropEffects.Move);
         }
     }
 }

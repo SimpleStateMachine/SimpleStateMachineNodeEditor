@@ -14,13 +14,19 @@ namespace SimpleStateMachineNodeEditorAvalonia.Views
         {
             this.WhenViewModelAnyValue(disposable =>
             {
-                //this.Events().PointerMoved.Subscribe(x => OnEventMouseMove(x)).DisposeWith(disposable);
+                AddHandler(DragDrop.DragOverEvent, OnNodesCanvasDragOver);
+                AddHandler(DragDrop.DropEvent, OnNodesCanvasDrop);
             });
         }
         
-        void OnEventMouseMove(PointerEventArgs e)
+        void OnNodesCanvasDragOver(object handler, DragEventArgs e)
         {
- 
+            e.GetDraggable().DragOver(e.GetPosition(this));
+        }
+        
+        void OnNodesCanvasDrop(object handler, DragEventArgs e)
+        {
+            e.GetDraggable().Drop(false);
         }
     }
 }

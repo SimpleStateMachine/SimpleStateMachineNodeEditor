@@ -22,7 +22,6 @@ namespace SimpleStateMachineNodeEditorAvalonia.Views
 
         void OnEventBorderPointerPressed(PointerPressedEventArgs e)
         {
-            
             this.ViewModel.SelectCommand.ExecuteWithSubscribe(Keyboard.IsKeyDown(Key.LeftCtrl) ? SelectMode.ClickWithCtrl : SelectMode.Click);
             oldPosition = e.GetPosition(NodesCanvas.Current);
             this.PointerMoved += this.OnEventPointerMoved;

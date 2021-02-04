@@ -28,8 +28,6 @@ namespace SimpleStateMachineNodeEditorAvalonia.Views.NodeElements
             {
                 e.Handled = true;
             }
-            
-
         }
     }
 }

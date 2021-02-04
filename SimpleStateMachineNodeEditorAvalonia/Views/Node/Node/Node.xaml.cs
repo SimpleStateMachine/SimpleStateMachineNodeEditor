@@ -1,7 +1,10 @@
-﻿using Avalonia;
+﻿using System;
+using Avalonia;
 using Avalonia.Controls;
+using Avalonia.Input;
 using Avalonia.Markup.Xaml;
 using Avalonia.ReactiveUI;
+using SimpleStateMachineNodeEditorAvalonia.Helpers;
 using SimpleStateMachineNodeEditorAvalonia.ViewModels;
 
 namespace SimpleStateMachineNodeEditorAvalonia.Views
@@ -19,6 +22,12 @@ namespace SimpleStateMachineNodeEditorAvalonia.Views
         
         public Node()
         {
+            this.WhenViewModelAnyValue(disposable =>
+            {
+                Console.WriteLine($"Node {ViewModel.Header.Name} are created");
+            });
+   
         }
+
     }
 }

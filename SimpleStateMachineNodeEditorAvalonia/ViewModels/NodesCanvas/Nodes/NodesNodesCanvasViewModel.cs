@@ -20,7 +20,7 @@ namespace SimpleStateMachineNodeEditorAvalonia.ViewModels
 
         IObservableList<NodeViewModel> SelectedNodes;
 
-        public ObservableCollectionExtended<NodeViewModel> NodesForView { get; } = new ObservableCollectionExtended<NodeViewModel>();
+        // public ObservableCollectionExtended<NodeViewModel> NodesForView { get; } = new ObservableCollectionExtended<NodeViewModel>();
         
 
       
@@ -31,32 +31,22 @@ namespace SimpleStateMachineNodeEditorAvalonia.ViewModels
         
         SourceList<NodeViewModel> Nodes = new SourceList<NodeViewModel>();
         
-        // public ReadOnlyObservableCollection<NodeViewModel> NodesForView;
+        public ReadOnlyObservableCollection<NodeViewModel> NodesForView;
         
         public NodesNodesCanvasViewModel(NodesCanvasViewModel nodesCanvas)
         {
-         
-            // var propertyChanges = Nodes.Connect().WhenPropertyChanged(p => p.Point1)
-            //     .Select(_ => Unit.Default);
-            //
-            // var comparer = SortExpressionComparer<NodeViewModel>.Ascending(l => l.Point1.X);
-            //
-            // Nodes.Connect()
-            //     .Sort(SortExpressionComparer<NodeViewModel>.Descending(t => t.Point1.X))
-            //     .TreatMovesAsRemoveAdd()
-            //     .ObserveOn(RxApp.MainThreadScheduler)
-            //     .Bind(Models)
-            //     .Subscribe();
-            //
-            SelectedNodes = Nodes.Connect().AutoRefresh(x=>x.IsSelect).Filter(x => x.IsSelect).AsObservableList();
+
+            var comparer = SortExpressionComparer<NodeViewModel>.Ascending(l => l.Point1.X);
             
-            // var myOperation = Nodes.Connect().AutoRefresh(x=>x.Point1)
+            // Nodes.Connect().AutoRefresh(x=>x.Point1)
             //     .Sort(SortExpressionComparer<NodeViewModel>.Descending(t => t.Point1.X))
             //     .ObserveOn(RxApp.MainThreadScheduler)
             //     .Bind(out NodesForView)
             //     .Subscribe();
-            //
-            Nodes.Connect().ObserveOn(RxApp.MainThreadScheduler).Bind(NodesForView).Subscribe();
+            
+            SelectedNodes = Nodes.Connect().AutoRefresh(x=>x.IsSelect).Filter(x => x.IsSelect).AsObservableList();
+            
+            Nodes.Connect().ObserveOn(RxApp.MainThreadScheduler).Bind(out NodesForView).Subscribe();
             Nodes.Add(new NodeViewModel(nodesCanvas, "State 5", new Point(150, 100)));
             Nodes.Add(new NodeViewModel(nodesCanvas, "State 3", new Point(100, 100)));
            

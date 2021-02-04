@@ -7,18 +7,18 @@ namespace SimpleStateMachineNodeEditorAvalonia.ViewModels
 {
     public partial class RightConnectorViewModel
     {
-        public ReactiveCommand<Unit, Unit> AddConnectCommand { get; set; }
+        public ReactiveCommand<Point, Unit> AddConnectCommand { get; set; }
 
         protected override void SetupCommands()
         {
             base.SetupCommands();
-            AddConnectCommand = ReactiveCommand.Create(AddConnect);
+            AddConnectCommand = ReactiveCommand.Create<Point>(AddConnect);
 
         }
 
-        public void AddConnect()
+        public void AddConnect(Point point)
         {
-            Connect = Node.NodesCanvas.Connects.GetNewConnect(this);
+            Connect = Node.NodesCanvas.Connects.GetNewConnect(this, point);
         }
 
 

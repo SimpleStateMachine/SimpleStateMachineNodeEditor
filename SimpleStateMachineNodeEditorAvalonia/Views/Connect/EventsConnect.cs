@@ -14,9 +14,9 @@ namespace SimpleStateMachineNodeEditorAvalonia.Views
         protected override void SetupEvents()
         {
             this.WhenViewModelAnyValue(disposable =>
-            {           
-                //NodesCanvas.Current.PointerMoved += OnEventPointerMoved;
-                //NodesCanvas.Current.PointerPressed += OnDragOver;
+            {
+                // NodesCanvas.Current.PointerMoved += OnEventPointerMoved;
+                // NodesCanvas.Current.PointerReleased += OnDragOver;
             });
         }
         void OnEventPointerMoved(object subject, PointerEventArgs e)
@@ -24,6 +24,7 @@ namespace SimpleStateMachineNodeEditorAvalonia.Views
             var point = e.GetPosition(NodesCanvas.Current);
             this.ViewModel.EndPoint = point;
         }
+        
         public void OnDragEnter(DragEventArgs e)
         {
 
