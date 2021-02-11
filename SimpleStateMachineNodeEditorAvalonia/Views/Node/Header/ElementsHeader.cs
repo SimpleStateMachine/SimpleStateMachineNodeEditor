@@ -10,17 +10,9 @@ namespace SimpleStateMachineNodeEditorAvalonia.Views.NodeElements
 {
     public partial class Header
     {
-        public TextBox TextBoxHeader;
-
-        public ToggleButton ToggleButtonHeader;
-
         protected override void InitializeComponent()
         {
             AvaloniaXamlLoader.Load(this);
-
-            TextBoxHeader = this.FindControlWithExeption<TextBox>("TextBoxHeader");
-
-            ToggleButtonHeader = this.FindControlWithExeption<ToggleButton>("ToggleButtonHeader");
         }
     }
 }

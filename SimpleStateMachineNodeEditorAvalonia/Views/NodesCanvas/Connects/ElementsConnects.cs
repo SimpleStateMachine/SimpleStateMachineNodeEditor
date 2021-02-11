@@ -9,13 +9,9 @@ namespace SimpleStateMachineNodeEditorAvalonia.Views.NodesCanvasElements
 {
     public partial class Connects
     {
-        public ItemsControl ItemsControlConnects;
-
         protected override void InitializeComponent()
         {
             AvaloniaXamlLoader.Load(this);
-
-            ItemsControlConnects = this.FindControlWithExeption<ItemsControl>("ItemsControlConnects");
         }
     }
 }

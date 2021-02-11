@@ -10,13 +10,9 @@ namespace SimpleStateMachineNodeEditorAvalonia.Views
 {
     public partial class Selector
     {
-        public Rectangle RectangleSelector;
-
         protected override void InitializeComponent()
         {
             AvaloniaXamlLoader.Load(this);
-
-            RectangleSelector = this.FindControlWithExeption<Rectangle>("RectangleSelector");
         }
     }
 }
