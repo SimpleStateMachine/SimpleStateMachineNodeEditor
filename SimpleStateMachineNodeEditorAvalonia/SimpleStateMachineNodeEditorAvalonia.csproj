@@ -20,18 +20,19 @@
     <Compile Remove="Styles\Connector\Connector\**" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="Avalonia" Version="0.10.0-rc1" />
-    <PackageReference Include="Avalonia.Desktop" Version="0.10.0-rc1" />
-    <PackageReference Include="Avalonia.Diagnostics" Version="0.10.0-rc1" />
-    <PackageReference Include="Avalonia.ReactiveUI" Version="0.10.0-rc1" />
-	<PackageReference Include="Avalonia.ReactiveUI.Events" Version="0.10.0-rc1" />
-    <PackageReference Include="Avalonia.Xaml.Behaviors" Version="0.10.0-rc1" />
-    <PackageReference Include="Avalonia.Xaml.Interactions" Version="0.10.0-rc1" />
-    <PackageReference Include="Avalonia.Xaml.Interactions.Custom" Version="0.10.0-rc1" />
-    <PackageReference Include="Avalonia.Xaml.Interactivity" Version="0.10.0-rc1" />
-    <PackageReference Include="Dock.Model" Version="0.10.0-rc1" />
+    <PackageReference Include="Avalonia" Version="0.10.0" />
+    <PackageReference Include="Avalonia.Desktop" Version="0.10.0" />
+    <PackageReference Include="Avalonia.Diagnostics" Version="0.10.0" />
+    <PackageReference Include="Avalonia.ReactiveUI" Version="0.10.0" />
+    <PackageReference Include="Avalonia.ReactiveUI.Events" Version="0.10.0" />
+    <PackageReference Include="Avalonia.Xaml.Behaviors" Version="0.10.0" />
+    <PackageReference Include="Avalonia.Xaml.Interactions" Version="0.10.0" />
+    <PackageReference Include="Avalonia.Xaml.Interactions.Custom" Version="0.10.0" />
+    <PackageReference Include="Avalonia.Xaml.Interactivity" Version="0.10.0" />
+    <PackageReference Include="Dock.Model" Version="0.10.0" />
     <PackageReference Include="HistoricalReactiveCommand" Version="0.5.0" />
     <PackageReference Include="ReactiveUI.Fody" Version="13.0.27" />
+    <PackageReference Include="XamlNameReferenceGenerator" Version="0.2.1-preview" />
   </ItemGroup>
   <ItemGroup>
     <AvaloniaXaml Remove="Styles\Connect\**" />
@@ -47,5 +48,9 @@
     <None Remove="Styles\Connect\**" />
     <None Remove="Styles\Extensions\**" />
     <None Remove="Styles\Connector\Connector\**" />
+  </ItemGroup>
+  <ItemGroup>
+    <!-- Required by XamlNameReferenceGenerator -->
+    <AdditionalFiles Include="**\*.xaml"/>
   </ItemGroup>
 </Project>

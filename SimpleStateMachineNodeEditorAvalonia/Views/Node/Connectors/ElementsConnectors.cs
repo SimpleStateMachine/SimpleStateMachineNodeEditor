@@ -11,13 +11,9 @@ namespace SimpleStateMachineNodeEditorAvalonia.Views.NodeElements
 {
     public partial class Connectors
     {
-        public ItemsControl ItemsControlConnectors;
-        public ListBox ListBoxConnectors;
         protected override void InitializeComponent()
         {
             AvaloniaXamlLoader.Load(this);
-            ListBoxConnectors = this.FindControlWithExeption<ListBox>("ListBoxConnectors");
         }
-
     }
 }

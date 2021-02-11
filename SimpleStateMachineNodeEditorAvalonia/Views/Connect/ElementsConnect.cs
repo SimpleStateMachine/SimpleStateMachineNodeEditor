@@ -12,7 +12,6 @@ namespace SimpleStateMachineNodeEditorAvalonia.Views
 {
     public partial class Connect
     {
-        public Path PathConnect;
         public PathGeometry PathGeometryConnect;
         public PathFigure PathFigureConnect;
         public BezierSegment BezierSegmentConnect;
@@ -21,7 +20,6 @@ namespace SimpleStateMachineNodeEditorAvalonia.Views
         {
             AvaloniaXamlLoader.Load(this);
 
-            PathConnect = this.FindControlWithExeption<Path>("PathConnect");
             PathGeometryConnect = PathConnect.Data as PathGeometry;
             PathFigureConnect = PathGeometryConnect.Figures.First();
             BezierSegmentConnect = PathFigureConnect.Segments.First() as BezierSegment;

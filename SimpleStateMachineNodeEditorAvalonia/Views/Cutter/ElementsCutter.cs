@@ -10,13 +10,9 @@ namespace SimpleStateMachineNodeEditorAvalonia.Views
 {
     public partial class Cutter
     {
-        public Line LineCutter;
-
         protected override void InitializeComponent()
         {
             AvaloniaXamlLoader.Load(this);
-
-            LineCutter = this.FindControlWithExeption<Line>("LineCutter");
         }
     }
 }

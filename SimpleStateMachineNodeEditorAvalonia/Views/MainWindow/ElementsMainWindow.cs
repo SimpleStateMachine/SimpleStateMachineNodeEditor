@@ -9,14 +9,9 @@ namespace SimpleStateMachineNodeEditorAvalonia.Views
 {
     public partial class MainWindow
     {
-        public NodesCanvas NodesCanvasMainWindow;
-
         protected virtual void InitializeComponent()
         {
             AvaloniaXamlLoader.Load(this);
-
-            NodesCanvasMainWindow = this.FindControlWithExeption<NodesCanvas>("NodesCanvasMainWindow");
         }
-
     }
 }
