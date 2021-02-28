@@ -5,12 +5,6 @@ using System;
 using System.Reactive.Disposables;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
 
 namespace SimpleStateMachineNodeEditor.View
 {
@@ -46,12 +40,12 @@ namespace SimpleStateMachineNodeEditor.View
         {
             this.WhenActivated(disposable =>
             {
-                this.OneWayBind(this.ViewModel, x => x.Node.Name, x => x.TextBoxElementStateFrom.Text).DisposeWith(disposable);
-                this.OneWayBind(this.ViewModel, x => x.Name, x => x.TextBoxElementTransitionName.Text).DisposeWith(disposable);
-                if (this.ViewModel.ItsLoop)
-                    this.OneWayBind(this.ViewModel, x => x.Node.Name, x => x.TextBoxElementStateTo.Text).DisposeWith(disposable);
+                this.OneWayBind(ViewModel, x => x.Node.Name, x => x.TextBoxElementStateFrom.Text).DisposeWith(disposable);
+                this.OneWayBind(ViewModel, x => x.Name, x => x.TextBoxElementTransitionName.Text).DisposeWith(disposable);
+                if (ViewModel.ItsLoop)
+                    this.OneWayBind(ViewModel, x => x.Node.Name, x => x.TextBoxElementStateTo.Text).DisposeWith(disposable);
                 else
-                    this.OneWayBind(this.ViewModel, x => x.Connect.ToConnector.Node.Name, x => x.TextBoxElementStateTo.Text).DisposeWith(disposable);
+                    this.OneWayBind(ViewModel, x => x.Connect.ToConnector.Node.Name, x => x.TextBoxElementStateTo.Text).DisposeWith(disposable);
             });
 
         }
@@ -63,9 +57,9 @@ namespace SimpleStateMachineNodeEditor.View
         {
             this.WhenActivated(disposable =>
             {
-                this.TextBoxElementTransitionName.Events().LostFocus.Subscribe(e => ValidateTransitionName(e)).DisposeWith(disposable);
-                this.TextBoxElementStateFrom.Events().LostFocus.Subscribe(e => ValidateStateFrom(e)).DisposeWith(disposable);
-                this.TextBoxElementStateTo.Events().LostFocus.Subscribe(e => ValidateStateTo(e)).DisposeWith(disposable);
+                TextBoxElementTransitionName.Events().LostFocus.Subscribe(e => ValidateTransitionName(e)).DisposeWith(disposable);
+                TextBoxElementStateFrom.Events().LostFocus.Subscribe(e => ValidateStateFrom(e)).DisposeWith(disposable);
+                TextBoxElementStateTo.Events().LostFocus.Subscribe(e => ValidateStateTo(e)).DisposeWith(disposable);
             });
         }
         private void ValidateTransitionName(RoutedEventArgs e)
@@ -84,7 +78,7 @@ namespace SimpleStateMachineNodeEditor.View
         }
         private void ValidateStateTo(RoutedEventArgs e)
         {
-            if (this.ViewModel.ItsLoop)
+            if (ViewModel.ItsLoop)
                 ValidateStateToLoop();
             else
                 ValidateStateTo();
@@ -92,16 +86,16 @@ namespace SimpleStateMachineNodeEditor.View
         private void ValidateStateToLoop()
         {
             if (TextBoxElementStateTo.Text != ViewModel.Node.Name)
-                this.ViewModel.Node.CommandValidateName.ExecuteWithSubscribe(TextBoxElementStateTo.Text);
+                ViewModel.Node.CommandValidateName.ExecuteWithSubscribe(TextBoxElementStateTo.Text);
             if (TextBoxElementStateTo.Text != ViewModel.Node.Name)
                 TextBoxElementStateTo.Text = ViewModel.Node.Name;
         }
         private void ValidateStateTo()
         {
-            if (TextBoxElementStateTo.Text != this.ViewModel.Connect.ToConnector.Node.Name)
-                this.ViewModel.Connect.ToConnector.Node.CommandValidateName.ExecuteWithSubscribe(TextBoxElementStateTo.Text);
-            if (TextBoxElementStateTo.Text != this.ViewModel.Connect.ToConnector.Node.Name)
-                TextBoxElementStateTo.Text = this.ViewModel.Connect.ToConnector.Node.Name;
+            if (TextBoxElementStateTo.Text != ViewModel.Connect.ToConnector.Node.Name)
+                ViewModel.Connect.ToConnector.Node.CommandValidateName.ExecuteWithSubscribe(TextBoxElementStateTo.Text);
+            if (TextBoxElementStateTo.Text != ViewModel.Connect.ToConnector.Node.Name)
+                TextBoxElementStateTo.Text = ViewModel.Connect.ToConnector.Node.Name;
         }
         #endregion SetupEvents
     }

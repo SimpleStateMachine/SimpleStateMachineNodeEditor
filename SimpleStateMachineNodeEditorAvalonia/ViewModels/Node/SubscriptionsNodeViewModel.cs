@@ -1,11 +1,4 @@
-﻿using Avalonia.X11;
-using ReactiveUI;
-using System;
-using System.Collections.Generic;
-using System.Reactive.Linq;
-using System.Text;
-
-namespace SimpleStateMachineNodeEditorAvalonia.ViewModels
+﻿namespace SimpleStateMachineNodeEditorAvalonia.ViewModels
 {
     public partial class NodeViewModel
     {

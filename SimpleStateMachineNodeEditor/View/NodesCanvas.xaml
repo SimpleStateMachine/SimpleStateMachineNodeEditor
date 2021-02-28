@@ -27,8 +27,7 @@
             </ItemsControl.RenderTransform>
             <ItemsControl.ItemsPanel>
                 <ItemsPanelTemplate>
-                    <Grid x:Name="ElementGrid" >
-                    </Grid>
+                    <Grid x:Name="ElementGrid" />
                 </ItemsPanelTemplate>
             </ItemsControl.ItemsPanel>
             <ItemsControl.Resources >

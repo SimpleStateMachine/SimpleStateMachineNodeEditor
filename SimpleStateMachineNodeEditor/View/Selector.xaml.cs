@@ -1,12 +1,7 @@
 ﻿using System;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
 using System.Reactive.Linq;
 using System.Reactive.Disposables;
 
@@ -55,19 +50,19 @@ namespace SimpleStateMachineNodeEditor.View
         {
             this.WhenActivated(disposable =>
             {
-                this.OneWayBind(this.ViewModel, x => x.Visible, x => x.Visibility).DisposeWith(disposable);
+                this.OneWayBind(ViewModel, x => x.Visible, x => x.Visibility).DisposeWith(disposable);
 
-                this.OneWayBind(this.ViewModel, x => x.Size.Width, x => x.Rectangle.Width).DisposeWith(disposable);
+                this.OneWayBind(ViewModel, x => x.Size.Width, x => x.Rectangle.Width).DisposeWith(disposable);
 
-                this.OneWayBind(this.ViewModel, x => x.Size.Height, x => x.Rectangle.Height).DisposeWith(disposable);
+                this.OneWayBind(ViewModel, x => x.Size.Height, x => x.Rectangle.Height).DisposeWith(disposable);
 
-                this.OneWayBind(this.ViewModel, x => x.Point1.X, x => x.TranslateTransformElement.X).DisposeWith(disposable);
+                this.OneWayBind(ViewModel, x => x.Point1.X, x => x.TranslateTransformElement.X).DisposeWith(disposable);
 
-                this.OneWayBind(this.ViewModel, x => x.Point1.Y, x => x.TranslateTransformElement.Y).DisposeWith(disposable);
+                this.OneWayBind(ViewModel, x => x.Point1.Y, x => x.TranslateTransformElement.Y).DisposeWith(disposable);
 
-                this.OneWayBind(this.ViewModel, x => x.Scale.Scales.X, x => x.ScaleTransformElement.ScaleX).DisposeWith(disposable);
+                this.OneWayBind(ViewModel, x => x.Scale.Scales.X, x => x.ScaleTransformElement.ScaleX).DisposeWith(disposable);
 
-                this.OneWayBind(this.ViewModel, x => x.Scale.Scales.Y, x => x.ScaleTransformElement.ScaleY).DisposeWith(disposable);
+                this.OneWayBind(ViewModel, x => x.Scale.Scales.Y, x => x.ScaleTransformElement.ScaleY).DisposeWith(disposable);
 
                 this.WhenAnyValue(x => x.Visibility).Where(IsVisible => IsVisible==Visibility.Visible).Subscribe(_ => Update()).DisposeWith(disposable);
             });
@@ -102,7 +97,7 @@ namespace SimpleStateMachineNodeEditor.View
         }
         private void OnMouseLeftButtonUp(MouseEventArgs e)
         {
-            this.ViewModel.Visible = null;
+            ViewModel.Visible = null;
         }
 
         #endregion Setup Events

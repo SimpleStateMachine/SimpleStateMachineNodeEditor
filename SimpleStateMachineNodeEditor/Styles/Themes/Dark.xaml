@@ -67,7 +67,7 @@
     <!--#endregion  Window-->
 
     <!--#region     Menu-->  
-    <SolidColorBrush x:Key="ColorMenuBorder"                Color="#333337"/>
+    <SolidColorBrush x:Key="ColorMenuBorder"                Color="LightSlateGray"/>
     
     <SolidColorBrush x:Key="ColorMenuBackground"            Color="#1b1b1c"/>
     

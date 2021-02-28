@@ -1,13 +1,11 @@
 ﻿using DynamicData;
 using ReactiveUI;
-using SimpleStateMachineNodeEditor.Helpers;
 using SimpleStateMachineNodeEditor.Helpers.Enums;
 using SimpleStateMachineNodeEditor.Helpers.Extensions;
 using System;
 using System.Linq;
 using System.Reactive;
 using System.Windows;
-using System.Windows.Input;
 using System.Windows.Media;
 
 namespace SimpleStateMachineNodeEditor.ViewModel
@@ -65,8 +63,8 @@ namespace SimpleStateMachineNodeEditor.ViewModel
         }
         private void ToLoop()
         {            
-            this.FormStrokeThickness = 0;
-            this.FormFill = Application.Current.Resources["IconLoop"] as DrawingBrush;
+            FormStrokeThickness = 0;
+            FormFill = Application.Current.Resources["IconLoop"] as DrawingBrush;
         }
         private void ConnectPointDrag()
         {
@@ -76,7 +74,7 @@ namespace SimpleStateMachineNodeEditor.ViewModel
         private void ConnectPointDrop()
         {
             var connect = NodesCanvas.DraggedConnect;
-            if (connect.FromConnector.Node != this.Node)
+            if (connect.FromConnector.Node != Node)
             {              
                 connect.ToConnector = this;
             }
@@ -113,20 +111,20 @@ namespace SimpleStateMachineNodeEditor.ViewModel
             int indexTo = Node.Transitions.Items.IndexOf(this);
             if (indexTo == 0)
                 return;
-            int count = this.Node.Transitions.Count;
-            int indexFrom = this.Node.Transitions.Items.IndexOf(this.NodesCanvas.ConnectorPreviewForDrop);
+            int count = Node.Transitions.Count;
+            int indexFrom = Node.Transitions.Items.IndexOf(NodesCanvas.ConnectorPreviewForDrop);
 
             if ((indexFrom > -1) && (indexTo > -1) && (indexFrom < count) && (indexTo < count))
             {
-                Point positionTo = this.Node.Transitions.Items.ElementAt(indexTo).PositionConnectPoint;
+                Point positionTo = Node.Transitions.Items.ElementAt(indexTo).PositionConnectPoint;
                 Point position;
                 //shift down
                 if (indexTo > indexFrom)
                 {
                     for (int i = indexTo; i >= indexFrom + 1; i--)
                     {
-                        position = this.Node.Transitions.Items.ElementAt(i - 1).PositionConnectPoint;
-                        this.Node.Transitions.Items.ElementAt(i).PositionConnectPoint = position;
+                        position = Node.Transitions.Items.ElementAt(i - 1).PositionConnectPoint;
+                        Node.Transitions.Items.ElementAt(i).PositionConnectPoint = position;
                     }
                 }
                 //shift up
@@ -134,17 +132,17 @@ namespace SimpleStateMachineNodeEditor.ViewModel
                 {
                     for (int i = indexTo; i <= indexFrom - 1; i++)
                     {
-                        position = this.Node.Transitions.Items.ElementAt(i + 1).PositionConnectPoint;
-                        this.Node.Transitions.Items.ElementAt(i).PositionConnectPoint = position;
+                        position = Node.Transitions.Items.ElementAt(i + 1).PositionConnectPoint;
+                        Node.Transitions.Items.ElementAt(i).PositionConnectPoint = position;
                     }
                 }
-                this.Node.Transitions.Items.ElementAt(indexFrom).PositionConnectPoint = positionTo;
-                this.Node.Transitions.Move(indexFrom, indexTo);
+                Node.Transitions.Items.ElementAt(indexFrom).PositionConnectPoint = positionTo;
+                Node.Transitions.Move(indexFrom, indexTo);
             }
         }
         private void ConnectorDrop()
         {
-            this.NodesCanvas.ConnectorPreviewForDrop = null;
+            NodesCanvas.ConnectorPreviewForDrop = null;
         }
         private void ValidateName(string newName)
         {
@@ -154,12 +152,12 @@ namespace SimpleStateMachineNodeEditor.ViewModel
 
         private void Select(bool value)
         {
-            this.FormStroke = Application.Current.Resources["ColorNodesCanvasBackground"] as SolidColorBrush;
-            this.Foreground = Application.Current.Resources[this.Selected ? "ColorSelectedElement" : "ColorConnectorForeground"] as SolidColorBrush;
-            if (!this.ItsLoop)
-                this.FormFill = Application.Current.Resources[this.Selected ? "ColorSelectedElement" : "ColorConnector"] as SolidColorBrush;
+            FormStroke = Application.Current.Resources["ColorNodesCanvasBackground"] as SolidColorBrush;
+            Foreground = Application.Current.Resources[Selected ? "ColorSelectedElement" : "ColorConnectorForeground"] as SolidColorBrush;
+            if (!ItsLoop)
+                FormFill = Application.Current.Resources[Selected ? "ColorSelectedElement" : "ColorConnector"] as SolidColorBrush;
             else
-                this.FormFill = Application.Current.Resources[this.Selected ? "IconSelectedLoop" : "IconLoop"] as DrawingBrush;
+                FormFill = Application.Current.Resources[Selected ? "IconSelectedLoop" : "IconLoop"] as DrawingBrush;
 
         }
         private void Select(SelectMode selectMode)
@@ -168,21 +166,21 @@ namespace SimpleStateMachineNodeEditor.ViewModel
             {
                 case SelectMode.Click:
                     {
-                        if (!this.Selected)
+                        if (!Selected)
                         {
-                            this.Node.CommandSetConnectorAsStartSelect.ExecuteWithSubscribe(this);
+                            Node.CommandSetConnectorAsStartSelect.ExecuteWithSubscribe(this);
                         }
 
                         break;
                     }
                 case SelectMode.ClickWithCtrl:
                     {
-                        this.Selected = !this.Selected;
+                        Selected = !Selected;
                         break;
                     }
                 case SelectMode.ClickWithShift:
                     {
-                        this.Node.CommandSelectWithShiftForConnectors.ExecuteWithSubscribe(this);
+                        Node.CommandSelectWithShiftForConnectors.ExecuteWithSubscribe(this);
                         break;
                     }
             }

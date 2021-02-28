@@ -7,7 +7,7 @@ namespace SimpleStateMachineNodeEditor.Helpers.Configuration
     {
         public override IConfigurationProvider Build(IConfigurationBuilder builder)
         {
-            this.EnsureDefaults(builder);
+            EnsureDefaults(builder);
             return (IConfigurationProvider)new WritableJsonConfigurationProvider(this);
         }
     }

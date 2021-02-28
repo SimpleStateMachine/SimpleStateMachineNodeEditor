@@ -1,9 +1,6 @@
 ﻿using ReactiveUI;
 using SimpleStateMachineNodeEditorAvalonia.Helpers;
-using System;
-using System.Collections.Generic;
 using System.Reactive;
-using System.Text;
 
 namespace SimpleStateMachineNodeEditorAvalonia.ViewModels
 {
@@ -19,12 +16,12 @@ namespace SimpleStateMachineNodeEditorAvalonia.ViewModels
         {
             if (selectMode == SelectMode.ClickWithCtrl)
             {
-                this.IsSelect = !this.IsSelect;
+                IsSelect = !IsSelect;
             }
             else if((selectMode == SelectMode.Click)&&(!IsSelect))
             {
                 NodesCanvas.Nodes.SetIsSelectAllNodesCommand.ExecuteWithSubscribe((false, null));
-                this.IsSelect = true;
+                IsSelect = true;
             }
 
         }

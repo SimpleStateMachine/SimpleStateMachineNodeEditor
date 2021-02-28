@@ -1,8 +1,6 @@
-﻿using Avalonia;
-using ReactiveUI;
+﻿using ReactiveUI;
 using SimpleStateMachineNodeEditorAvalonia.Helpers;
 using System.Reactive.Disposables;
-using System.Reactive.Linq;
 
 namespace SimpleStateMachineNodeEditorAvalonia.Views
 {
@@ -12,8 +10,8 @@ namespace SimpleStateMachineNodeEditorAvalonia.Views
         {
             this.WhenViewModelAnyValue(disposable =>
             {
-                this.OneWayBind(this.ViewModel, x => x.StartPoint, x=>x.PathFigureConnect.StartPoint).DisposeWith(disposable);
-                this.OneWayBind(this.ViewModel, x => x.EndPoint, x => x.BezierSegmentConnect.Point3).DisposeWith(disposable);
+                this.OneWayBind(ViewModel, x => x.StartPoint, x=>x.PathFigureConnect.StartPoint).DisposeWith(disposable);
+                this.OneWayBind(ViewModel, x => x.EndPoint, x => x.BezierSegmentConnect.Point3).DisposeWith(disposable);
             });
         }
     }

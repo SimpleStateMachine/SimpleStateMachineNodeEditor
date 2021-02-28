@@ -1,9 +1,4 @@
-﻿using Avalonia.Controls;
-using Avalonia.Markup.Xaml;
-using Avalonia.ReactiveUI;
-using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using Avalonia.ReactiveUI;
 
 namespace SimpleStateMachineNodeEditorAvalonia.Views
 {
@@ -13,11 +8,9 @@ namespace SimpleStateMachineNodeEditorAvalonia.Views
         protected abstract void SetupBinding();
         protected abstract void SetupEvents();
         protected abstract void SetupSubscriptions();
-        protected abstract void InitializeComponent();
 
         public BaseView()
         {
-            InitializeComponent();
             SetupBinding();
             SetupEvents();
             SetupSubscriptions();

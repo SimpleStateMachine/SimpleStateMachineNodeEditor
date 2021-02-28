@@ -1,9 +1,5 @@
 ﻿using ReactiveUI;
 using ReactiveUI.Fody.Helpers;
-
-
-using System;
-using System.Reactive.Linq;
 using System.Windows;
 
 namespace SimpleStateMachineNodeEditor.ViewModel

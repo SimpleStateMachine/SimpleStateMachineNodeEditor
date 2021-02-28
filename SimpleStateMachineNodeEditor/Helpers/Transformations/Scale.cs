@@ -1,9 +1,7 @@
 ﻿using ReactiveUI;
 using ReactiveUI.Fody.Helpers;
 using SimpleStateMachineNodeEditor.Helpers.Extensions;
-using Splat;
 using System;
-using System.Reactive.Linq;
 using System.Windows;
 
 namespace SimpleStateMachineNodeEditor.Helpers.Transformations

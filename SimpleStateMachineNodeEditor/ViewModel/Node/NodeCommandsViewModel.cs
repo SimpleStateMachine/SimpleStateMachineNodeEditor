@@ -3,10 +3,8 @@ using ReactiveUI;
 using SimpleStateMachineNodeEditor.Helpers.Enums;
 using SimpleStateMachineNodeEditor.Helpers.Extensions;
 using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Reactive;
-using System.Text;
 using System.Windows;
 
 namespace SimpleStateMachineNodeEditor.ViewModel
@@ -75,13 +73,13 @@ namespace SimpleStateMachineNodeEditor.ViewModel
         {
             if (selectMode == SelectMode.ClickWithCtrl)
             {
-                this.Selected = !this.Selected;
+                Selected = !Selected;
                 return;
             }
             else if ((selectMode == SelectMode.Click) && (!Selected))
             {
                 NodesCanvas.CommandUnSelectAll.ExecuteWithSubscribe();
-                this.Selected = true;
+                Selected = true;
             }
         }
         private void Move(Point delta)
@@ -131,7 +129,7 @@ namespace SimpleStateMachineNodeEditor.ViewModel
             if (viewModelConnector == null)
                 return;
 
-            var transitions = this.Transitions.Items.Skip(1);
+            var transitions = Transitions.Items.Skip(1);
             int indexCurrent = transitions.IndexOf(viewModelConnector);
             int indexStart = IndexStartSelectConnectors;
             UnSelectedAllConnectors();

@@ -1,11 +1,4 @@
-﻿using Avalonia;
-using Avalonia.Controls;
-using Avalonia.Input;
-using Avalonia.Markup.Xaml;
-using Avalonia.ReactiveUI;
-using SimpleStateMachineNodeEditorAvalonia.ViewModels;
-using System;
-using SimpleStateMachineNodeEditorAvalonia.Helpers;
+﻿using SimpleStateMachineNodeEditorAvalonia.ViewModels;
 
 namespace SimpleStateMachineNodeEditorAvalonia.Views
 {
@@ -14,6 +7,7 @@ namespace SimpleStateMachineNodeEditorAvalonia.Views
         public static NodesCanvas Current { get; private set; }
         public NodesCanvas()
         {
+            InitializeComponent();
             Current = this;
         }
     }

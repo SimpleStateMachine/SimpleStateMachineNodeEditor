@@ -1,8 +1,9 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <OutputType>WinExe</OutputType>
-    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <TargetFramework>net5.0</TargetFramework>
     <LangVersion>9</LangVersion>
+    <AvaloniaNameGeneratorBehavior>InitializeComponent</AvaloniaNameGeneratorBehavior>
   </PropertyGroup>
   <ItemGroup>
     <Compile Update="**\*.xaml.cs">
@@ -12,12 +13,6 @@
       <SubType>Designer</SubType>
     </AvaloniaResource>
     <AvaloniaResource Include="Assets\**" />
-    <AvaloniaResource Remove="Styles\Connect\**" />
-    <Compile Remove="Styles\Connect\**" />
-    <AvaloniaResource Remove="Styles\Extensions\**" />
-    <Compile Remove="Styles\Extensions\**" />
-    <AvaloniaResource Remove="Styles\Connector\Connector\**" />
-    <Compile Remove="Styles\Connector\Connector\**" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Avalonia" Version="0.10.0" />
@@ -31,26 +26,11 @@
     <PackageReference Include="Avalonia.Xaml.Interactivity" Version="0.10.0" />
     <PackageReference Include="Dock.Model" Version="0.10.0" />
     <PackageReference Include="HistoricalReactiveCommand" Version="0.5.0" />
-    <PackageReference Include="ReactiveUI.Fody" Version="13.0.27" />
-    <PackageReference Include="XamlNameReferenceGenerator" Version="0.2.1-preview" />
+    <PackageReference Include="ReactiveUI.Fody" Version="13.1.1" />
+    <PackageReference Include="XamlNameReferenceGenerator" Version="1.0.1" />
   </ItemGroup>
   <ItemGroup>
-    <AvaloniaXaml Remove="Styles\Connect\**" />
-    <AvaloniaXaml Remove="Styles\Extensions\**" />
-    <AvaloniaXaml Remove="Styles\Connector\Connector\**" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Remove="Styles\Connect\**" />
-    <EmbeddedResource Remove="Styles\Extensions\**" />
-    <EmbeddedResource Remove="Styles\Connector\Connector\**" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Remove="Styles\Connect\**" />
-    <None Remove="Styles\Extensions\**" />
-    <None Remove="Styles\Connector\Connector\**" />
-  </ItemGroup>
-  <ItemGroup>
-    <!-- Required by XamlNameReferenceGenerator -->
-    <AdditionalFiles Include="**\*.xaml"/>
+    <!-- Note this AdditionalFiles directive. -->
+    <AdditionalFiles Include="**\*.xaml" />
   </ItemGroup>
 </Project>

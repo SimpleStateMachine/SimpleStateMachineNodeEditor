@@ -1,7 +1,5 @@
 ﻿using Avalonia.Input;
-using System;
 using System.Collections.Generic;
-using System.Text;
 
 namespace SimpleStateMachineNodeEditorAvalonia.Helpers
 {
@@ -13,8 +11,8 @@ namespace SimpleStateMachineNodeEditorAvalonia.Helpers
         }
         static Keyboard()
         {        
-            InputElement.KeyDownEvent.AddClassHandler<InputElement>((x, e) => Keyboard.OnKeyDown(e));
-            InputElement.KeyUpEvent.AddClassHandler<InputElement>((x, e) => Keyboard.OnKeyUp(e));
+            InputElement.KeyDownEvent.AddClassHandler<InputElement>((x, e) => OnKeyDown(e));
+            InputElement.KeyUpEvent.AddClassHandler<InputElement>((x, e) => OnKeyUp(e));
         }
         public static readonly HashSet<Key> Keys = new HashSet<Key>();
         public static bool IsKeyDown(Key key) => Keys.Contains(key);

@@ -7,9 +7,8 @@
     <Setter Property="Template">
       <ControlTemplate>
 		  <Path  Stroke="{TemplateBinding BorderBrush}" Fill="{TemplateBinding Background}" Data="M0,6 L6,0 L12,6 Z" 
-				 HorizontalAlignment="Center" VerticalAlignment="Center">
-		  </Path>		
-	  </ControlTemplate>
+				 HorizontalAlignment="Center" VerticalAlignment="Center" />
+      </ControlTemplate>
     </Setter>
   </Style>
 	 

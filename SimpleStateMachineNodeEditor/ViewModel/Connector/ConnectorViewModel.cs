@@ -3,8 +3,6 @@ using System.Windows;
 
 using ReactiveUI.Fody.Helpers;
 using ReactiveUI;
-
-using SimpleStateMachineNodeEditor.Helpers;
 using System;
 using System.Xml.Linq;
 using System.Linq;
@@ -50,10 +48,10 @@ namespace SimpleStateMachineNodeEditor.ViewModel
 
             this.WhenAnyValue(x => x.NodesCanvas.Theme).Subscribe(_ => UpdateResources());
 
-            if (this.Name!="Input")
+            if (Name!="Input")
             {
                 this.WhenAnyValue(x => x.Node.HeaderWidth).Buffer(2, 1).Subscribe(x => UpdatePositionOnWidthChange(x[1] - x[0]));
-                if (this.Name != "Output")
+                if (Name != "Output")
                 {
                     this.WhenAnyValue(x => x.Node.TransitionsForView.Count).Subscribe(x => UpdatePositionOnTransitionCountChange());                   
                 }
@@ -68,17 +66,17 @@ namespace SimpleStateMachineNodeEditor.ViewModel
             if (!string.IsNullOrEmpty(Name))
             {
                 int index = Node.Transitions.Items.IndexOf(this);
-                this.PositionConnectPoint = Node.CurrentConnector.PositionConnectPoint.Addition(0, index*19);
+                PositionConnectPoint = Node.CurrentConnector.PositionConnectPoint.Addition(0, index*19);
             }
         }
         private void UpdatePositionOnWidthChange(double value)
         {
-            this.PositionConnectPoint = this.PositionConnectPoint.Addition(value, 0);
+            PositionConnectPoint = PositionConnectPoint.Addition(value, 0);
         }
         private void UpdateResources()
         {
-           Select(this.Selected);
-            if (this.ItsLoop)
+           Select(Selected);
+            if (ItsLoop)
             {
                 ToLoop();
             }
@@ -91,7 +89,7 @@ namespace SimpleStateMachineNodeEditor.ViewModel
             XElement element = new XElement("Transition");
             element.Add(new XAttribute("Name", Name));
             element.Add(new XAttribute("From", Node.Name));
-            var ToConnectorName = this.Connect?.ToConnector?.Node.Name;
+            var ToConnectorName = Connect?.ToConnector?.Node.Name;
             element.Add(new XAttribute("To", ToConnectorName?? Node.Name));
 
             return element;

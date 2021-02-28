@@ -14,7 +14,7 @@ namespace SimpleStateMachineNodeEditor.Helpers.Configuration
 
         private void Save(dynamic jsonObj)
         {
-            var fileFullPath = base.Source.FileProvider.GetFileInfo(base.Source.Path).PhysicalPath;
+            var fileFullPath = Source.FileProvider.GetFileInfo(Source.Path).PhysicalPath;
             string output = JsonConvert.SerializeObject(jsonObj, Formatting.Indented);
             File.WriteAllText(fileFullPath, output);
         }
@@ -45,7 +45,7 @@ namespace SimpleStateMachineNodeEditor.Helpers.Configuration
 
         private dynamic GetJsonObj()
         {
-            var fileFullPath = base.Source.FileProvider.GetFileInfo(base.Source.Path).PhysicalPath;
+            var fileFullPath = Source.FileProvider.GetFileInfo(Source.Path).PhysicalPath;
             var json = File.Exists(fileFullPath) ? File.ReadAllText(fileFullPath) : "{}";
             return JsonConvert.DeserializeObject(json);
         }

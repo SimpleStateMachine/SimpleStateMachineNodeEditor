@@ -3,9 +3,7 @@ using DynamicData;
 using DynamicData.Binding;
 using ReactiveUI;
 using System;
-using System.Collections.Generic;
 using System.Reactive.Linq;
-using System.Text;
 using SimpleStateMachineNodeEditorAvalonia.Helpers.Extensions;
 
 namespace SimpleStateMachineNodeEditorAvalonia.ViewModels

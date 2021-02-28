@@ -1,10 +1,4 @@
-﻿using Avalonia.Controls;
-using Avalonia.Controls.Shapes;
-using Avalonia.Markup.Xaml;
-using SimpleStateMachineNodeEditorAvalonia.Helpers;
-using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using SimpleStateMachineNodeEditorAvalonia.Helpers;
 
 namespace SimpleStateMachineNodeEditorAvalonia.Views
 {

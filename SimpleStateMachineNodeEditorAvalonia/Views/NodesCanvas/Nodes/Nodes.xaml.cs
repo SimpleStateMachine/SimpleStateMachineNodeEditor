@@ -1,8 +1,4 @@
-﻿using Avalonia;
-using Avalonia.Controls;
-using Avalonia.Markup.Xaml;
-using Avalonia.ReactiveUI;
-using SimpleStateMachineNodeEditorAvalonia.ViewModels;
+﻿using SimpleStateMachineNodeEditorAvalonia.ViewModels;
 
 namespace SimpleStateMachineNodeEditorAvalonia.Views.NodesCanvasElements
 {
@@ -10,8 +6,7 @@ namespace SimpleStateMachineNodeEditorAvalonia.Views.NodesCanvasElements
     {
         public Nodes()
         {
-            
-                     
+            InitializeComponent();
         }
 
     }

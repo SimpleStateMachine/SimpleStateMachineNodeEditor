@@ -1,19 +1,10 @@
 ﻿using System.Reactive.Disposables;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Input;
 using ReactiveUI;
 using System;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Controls.Primitives;
 using System.Reactive.Linq;
-using System.Windows.Markup;
 using SimpleStateMachineNodeEditor.ViewModel;
-using SimpleStateMachineNodeEditor.Helpers;
 
 namespace SimpleStateMachineNodeEditor.View
 {
@@ -48,19 +39,19 @@ namespace SimpleStateMachineNodeEditor.View
         {
             this.WhenActivated(disposable =>
             {
-                Canvas.SetZIndex((UIElement)this.VisualParent, 999);
+                Panel.SetZIndex((UIElement)VisualParent, 999);
 
-                this.OneWayBind(this.ViewModel, x => x.Stroke, x => x.PathElement.Stroke).DisposeWith(disposable);
+                this.OneWayBind(ViewModel, x => x.Stroke, x => x.PathElement.Stroke).DisposeWith(disposable);
 
-                this.OneWayBind(this.ViewModel, x => x.StartPoint, x => x.PathFigureElement.StartPoint).DisposeWith(disposable);
+                this.OneWayBind(ViewModel, x => x.StartPoint, x => x.PathFigureElement.StartPoint).DisposeWith(disposable);
 
-                this.OneWayBind(this.ViewModel, x => x.Point1, x => x.BezierSegmentElement.Point1).DisposeWith(disposable);
+                this.OneWayBind(ViewModel, x => x.Point1, x => x.BezierSegmentElement.Point1).DisposeWith(disposable);
 
-                this.OneWayBind(this.ViewModel, x => x.Point2, x => x.BezierSegmentElement.Point2).DisposeWith(disposable);
+                this.OneWayBind(ViewModel, x => x.Point2, x => x.BezierSegmentElement.Point2).DisposeWith(disposable);
 
-                this.OneWayBind(this.ViewModel, x => x.EndPoint, x => x.BezierSegmentElement.Point3).DisposeWith(disposable);
+                this.OneWayBind(ViewModel, x => x.EndPoint, x => x.BezierSegmentElement.Point3).DisposeWith(disposable);
 
-                this.OneWayBind(this.ViewModel, x => x.StrokeDashArray, x => x.PathElement.StrokeDashArray).DisposeWith(disposable);
+                this.OneWayBind(ViewModel, x => x.StrokeDashArray, x => x.PathElement.StrokeDashArray).DisposeWith(disposable);
 
                 //this.OneWayBind(this.ViewModel, x => x.FromConnector.NodesCanvas.Scale.Value, x => x.PathElement.StrokeThickness).DisposeWith(disposable);
 
@@ -70,10 +61,13 @@ namespace SimpleStateMachineNodeEditor.View
 
         private void UpdateZindex()
         {
-            int toIndex = this.ViewModel.ToConnector.Node.Zindex;
-            int fromIndex = this.ViewModel.FromConnector.Node.Zindex;
-           
-            Canvas.SetZIndex((UIElement)this.VisualParent, Math.Min(toIndex, fromIndex));
+            ViewModel.WhenAnyValue(
+                    x => x.FromConnector.Node.Point1.X, 
+                    x=>x.ToConnector.Node.Point1.X)
+                    .Subscribe(x => 
+                    Panel.SetZIndex((UIElement) VisualParent,  (int)Math.Min(
+                        ViewModel.FromConnector.Node.Point1.X, 
+                        ViewModel.ToConnector.Node.Point1.X)));
         }
         #endregion SetupBinding
     }

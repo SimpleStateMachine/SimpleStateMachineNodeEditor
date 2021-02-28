@@ -2,10 +2,6 @@
 using Avalonia.Controls;
 using Avalonia.Controls.Presenters;
 using Avalonia.VisualTree;
-using System;
-using System.Collections.Generic;
-using System.Runtime.CompilerServices;
-using System.Text;
 
 namespace SimpleStateMachineNodeEditorAvalonia.Helpers.Extensions
 {

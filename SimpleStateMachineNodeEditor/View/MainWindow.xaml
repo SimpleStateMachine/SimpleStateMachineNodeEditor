@@ -3,15 +3,15 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    xmlns:view="clr-namespace:SimpleStateMachineNodeEditor.View" xmlns:styles="clr-namespace:SimpleStateMachineNodeEditor.Styles"
-    x:Class="SimpleStateMachineNodeEditor.View.MainWindow"
+    xmlns:view="clr-namespace:SimpleStateMachineNodeEditor.View"
+        x:Class="SimpleStateMachineNodeEditor.View.MainWindow"
         mc:Ignorable="d"
         Title="SimpleStateMachineNodeEditor"  d:DesignWidth="550" Height="738.592" MinWidth="570" MinHeight="400"  BorderThickness="1" Padding="7,0,7,7" ResizeMode="CanResizeWithGrip" BorderBrush="{DynamicResource ColorWindowBorder}" Background="{DynamicResource ColorWindowHeader}" Foreground="{x:Null}" WindowStyle="None" AllowsTransparency="True" Style="{DynamicResource CustomWindowStyle}">
     <Grid Background="{DynamicResource ColorWindowHeader}" >
         <Grid.RowDefinitions>
             <RowDefinition Height="auto" />
             <RowDefinition Height="auto"/>
-            <RowDefinition x:Name="MainColumn" MinHeight="50"></RowDefinition>
+            <RowDefinition x:Name="MainColumn" MinHeight="50" />
             <RowDefinition Height="auto"/>
             <RowDefinition Height="auto" x:Name="Fotter" MinHeight="18"/>
         </Grid.RowDefinitions>

@@ -1,8 +1,5 @@
 ﻿using ReactiveUI;
-using System.Reactive.Linq;
 using System;
-using Avalonia.X11;
-using System.Diagnostics;
 
 namespace SimpleStateMachineNodeEditorAvalonia.ViewModels
 {

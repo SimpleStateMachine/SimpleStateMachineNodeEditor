@@ -5,10 +5,11 @@
              mc:Ignorable="d"
              x:Class="SimpleStateMachineNodeEditorAvalonia.Views.RightConnector"
 			 ClipToBounds="False" 
-			 HorizontalAlignment="Stretch" 
-             xmlns:Views="clr-namespace:SimpleStateMachineNodeEditorAvalonia.Views" 
+			 HorizontalAlignment="Stretch"
              Background="{DynamicResource EmptyColor}">
-	<Grid x:Name="GridConnector" ColumnDefinitions="*, Auto, Auto" ClipToBounds="False">
+	<Grid x:Name="GridConnector" 
+	      ColumnDefinitions="*, Auto, Auto" 
+	      ClipToBounds="False">
 		<TextBox x:Name="TextBoxConnector" 
 		         Grid.Column="1" 
 		         Classes="EmptyTextBox TextBoxRightConnector"
@@ -23,12 +24,6 @@
 				 Height="12" 
 				 Width="12" 
 				 Margin="0,0,-7,0"
-				 StrokeThickness="1" Focusable="True" />
+				 StrokeThickness="1" />
 	</Grid>
-	
-		<!--<UserControl.ContextMenu>
-			<ContextMenu>
-				<MenuItem Header="Copy" />
-			</ContextMenu>
-		</UserControl.ContextMenu>-->
 </UserControl>

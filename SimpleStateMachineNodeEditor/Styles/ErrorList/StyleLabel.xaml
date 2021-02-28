@@ -1,7 +1,5 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-                    xmlns:local="clr-namespace:SimpleStateMachineNodeEditor.Styles.ErrorList"
-                    xmlns:Icons="clr-namespace:SimpleStateMachineNodeEditor.Icons">
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
 
     <!--OpacityMask - Foreground on Mouse Over-->
     <Style x:Key="StyleLabel" TargetType="{x:Type Label}">

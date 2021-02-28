@@ -8,15 +8,12 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reactive;
-using System.Reactive.Linq;
 using System.Windows;
 using System.Windows.Input;
 using System.Xml.Linq;
 using Microsoft.Extensions.Configuration;
 using SimpleStateMachineNodeEditor.Helpers.Configuration;
 using Splat;
-using System.Drawing.Drawing2D;
-using System.Windows.Media;
 using Matrix = System.Windows.Media.Matrix;
 
 namespace SimpleStateMachineNodeEditor.ViewModel
@@ -297,18 +294,18 @@ namespace SimpleStateMachineNodeEditor.ViewModel
             if (!WithoutSaving())
                 return;
             ClearScheme();
-            this.SetupStartState();
+            SetupStartState();
         }
         private void ClearScheme()
         {
-            this.Nodes.Clear();
-            this.Connects.Clear();
-            this.NodesCount = 0;
-            this.TransitionsCount = 0;
-            this.SchemePath = "";
-            this.ImagePath = "";
+            Nodes.Clear();
+            Connects.Clear();
+            NodesCount = 0;
+            TransitionsCount = 0;
+            SchemePath = "";
+            ImagePath = "";
             WithoutMessages = false;
-            this.Messages.Clear();
+            Messages.Clear();
             ItSaved = true;
         }
         private void Open()
@@ -346,7 +343,7 @@ namespace SimpleStateMachineNodeEditor.ViewModel
             var startStateElement = stateMachineXElement.Element("StartState");
             if (startStateElement == null)
             {
-                this.SetupStartState();
+                SetupStartState();
             }
             else
             {
@@ -365,7 +362,7 @@ namespace SimpleStateMachineNodeEditor.ViewModel
                         return;
                     }
 
-                    var startNode = this.Nodes.Items.SingleOrDefault(x => x.Name == startStateName);
+                    var startNode = Nodes.Items.SingleOrDefault(x => x.Name == startStateName);
                     if (startNode == null)
                     {
                         Error(string.Format("Unable to set start state. Node with name \"{0}\" don't exists", startStateName));
@@ -373,7 +370,7 @@ namespace SimpleStateMachineNodeEditor.ViewModel
                     }
                     else
                     {
-                        this.SetAsStart(startNode);
+                        SetAsStart(startNode);
                     }
                 }
 
@@ -407,7 +404,7 @@ namespace SimpleStateMachineNodeEditor.ViewModel
                 var visualizationStates = Visualization.Elements()?.ToList();
                 if(visualizationStates!=null)
                 {
-                    var nodes = this.Nodes.Items.ToDictionary(x => x.Name, x => x);
+                    var nodes = Nodes.Items.ToDictionary(x => x.Name, x => x);
                     Point point;
                     bool isCollapse;
                     string name;
@@ -460,7 +457,7 @@ namespace SimpleStateMachineNodeEditor.ViewModel
             {
                 if (string.IsNullOrEmpty(errorMessage))
                 {
-                    if (!object.Equals(obj, default(T)))
+                    if (!Equals(obj, default(T)))
                         action.Invoke(obj);
                 }
                 else
@@ -474,7 +471,7 @@ namespace SimpleStateMachineNodeEditor.ViewModel
             {              
                 ClearScheme();
                 LogError("File is not valid. " + errorMessage);
-                this.SetupStartState();
+                SetupStartState();
                 Mouse.OverrideCursor = null;
             }
         }
@@ -496,7 +493,7 @@ namespace SimpleStateMachineNodeEditor.ViewModel
         {
             if (!WithoutSaving())
                 return;
-            this.NeedExit = true;
+            NeedExit = true;
         }
         private void SaveAs()
         {
@@ -946,7 +943,7 @@ namespace SimpleStateMachineNodeEditor.ViewModel
         }
         private IEnumerable<ConnectorViewModel> GetAllConnectors()
         {
-            return this.Nodes.Items.SelectMany(x => x.Transitions.Items);
+            return Nodes.Items.SelectMany(x => x.Transitions.Items);
         }
 
         private bool ConnectsExist(string nameConnect)

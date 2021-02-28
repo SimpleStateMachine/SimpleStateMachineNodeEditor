@@ -95,7 +95,7 @@ namespace SimpleStateMachineNodeEditor.ViewModel
             StartState = new NodeViewModel(this, name, new Point());
             SetAsStart(StartState);
             Nodes.Add(StartState);
-            this.ItSaved = true;
+            ItSaved = true;
         }
         private void SetAsStart(NodeViewModel node)
         {
@@ -154,9 +154,9 @@ namespace SimpleStateMachineNodeEditor.ViewModel
         }
         private string SchemeName()
         {
-            if (!string.IsNullOrEmpty(this.SchemePath))
+            if (!string.IsNullOrEmpty(SchemePath))
             {
-                return Path.GetFileNameWithoutExtension(this.SchemePath);
+                return Path.GetFileNameWithoutExtension(SchemePath);
             }
             else
             {

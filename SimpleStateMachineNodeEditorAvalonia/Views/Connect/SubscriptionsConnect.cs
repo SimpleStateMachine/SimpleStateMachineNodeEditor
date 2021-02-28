@@ -1,5 +1,4 @@
-﻿using System.Diagnostics;
-using Avalonia;
+﻿using Avalonia;
 using ReactiveUI;
 using SimpleStateMachineNodeEditorAvalonia.Helpers;
 using System.Reactive.Disposables;
@@ -13,9 +12,9 @@ namespace SimpleStateMachineNodeEditorAvalonia.Views
         {
             this.WhenViewModelAnyValue(disposable =>
             {
-                var points = this.ViewModel.WhenAnyValue(x => x.StartPoint, x => x.EndPoint).Select(points => UpdateMediumPoints(points.Item1, points.Item2));
-                points.Select(x => x.Point1).BindTo(this.BezierSegmentConnect, x => x.Point1).DisposeWith(disposable);
-                points.Select(x => x.Point2).BindTo(this.BezierSegmentConnect, x => x.Point2).DisposeWith(disposable);
+                var points = ViewModel.WhenAnyValue(x => x.StartPoint, x => x.EndPoint).Select(points => UpdateMediumPoints(points.Item1, points.Item2));
+                points.Select(x => x.Point1).BindTo(BezierSegmentConnect, x => x.Point1).DisposeWith(disposable);
+                points.Select(x => x.Point2).BindTo(BezierSegmentConnect, x => x.Point2).DisposeWith(disposable);
             });
         }
 

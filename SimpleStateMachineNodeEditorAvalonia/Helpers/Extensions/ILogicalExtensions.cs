@@ -1,8 +1,5 @@
-﻿using Avalonia.Controls;
-using Avalonia.LogicalTree;
-using System;
+﻿using Avalonia.LogicalTree;
 using System.Collections.Generic;
-using System.Text;
 
 namespace SimpleStateMachineNodeEditorAvalonia.Helpers
 {

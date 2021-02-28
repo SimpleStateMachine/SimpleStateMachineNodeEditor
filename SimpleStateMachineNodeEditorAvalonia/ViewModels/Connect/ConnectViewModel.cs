@@ -26,7 +26,7 @@ namespace SimpleStateMachineNodeEditorAvalonia.ViewModels
         
         public void DragOver(Point currentPosition)
         {
-            this.EndPoint = currentPosition;
+            EndPoint = currentPosition;
         }
 
         public void Drop(bool success)

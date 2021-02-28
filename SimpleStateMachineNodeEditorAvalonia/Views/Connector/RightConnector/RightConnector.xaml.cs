@@ -1,10 +1,4 @@
-﻿using Avalonia;
-using Avalonia.Controls;
-using Avalonia.Controls.Metadata;
-using Avalonia.Input;
-using Avalonia.Markup.Xaml;
-using Avalonia.VisualTree;
-using SimpleStateMachineNodeEditorAvalonia.ViewModels;
+﻿using SimpleStateMachineNodeEditorAvalonia.ViewModels;
 
 namespace SimpleStateMachineNodeEditorAvalonia.Views
 {
@@ -13,7 +7,8 @@ namespace SimpleStateMachineNodeEditorAvalonia.Views
     {
         public RightConnector()
         {
-            
+            InitializeComponent();
+            base.InitializeComponent();
         }
 
     }

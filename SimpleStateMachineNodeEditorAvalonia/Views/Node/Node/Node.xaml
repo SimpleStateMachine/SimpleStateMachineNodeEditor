@@ -4,9 +4,6 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d" d:DesignWidth="200"
              x:Class="SimpleStateMachineNodeEditorAvalonia.Views.Node"
-             xmlns:i="clr-namespace:Avalonia.Xaml.Interactivity;assembly=Avalonia.Xaml.Interactivity"
-             xmlns:ia="clr-namespace:Avalonia.Xaml.Interactions.Core;assembly=Avalonia.Xaml.Interactions"
-             xmlns:iac="clr-namespace:Avalonia.Xaml.Interactions.Custom;assembly=Avalonia.Xaml.Interactions.Custom"
              Classes="Node"
 			 xmlns:Views="clr-namespace:SimpleStateMachineNodeEditorAvalonia.Views"
 			 xmlns:NodeElements="clr-namespace:SimpleStateMachineNodeEditorAvalonia.Views.NodeElements" ClipToBounds="False">

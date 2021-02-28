@@ -1,11 +1,6 @@
-﻿using Avalonia;
-using Avalonia.Controls;
-using Avalonia.Input;
+﻿using Avalonia.Input;
 using Avalonia.Interactivity;
 using SimpleStateMachineNodeEditorAvalonia.Helpers;
-using System;
-using System.Diagnostics;
-using System.Reactive.Disposables;
 
 namespace SimpleStateMachineNodeEditorAvalonia.Views
 {
@@ -22,7 +17,7 @@ namespace SimpleStateMachineNodeEditorAvalonia.Views
         void OnEventPointerMoved(object subject, PointerEventArgs e)
         {
             var point = e.GetPosition(NodesCanvas.Current);
-            this.ViewModel.EndPoint = point;
+            ViewModel.EndPoint = point;
         }
         
         public void OnDragEnter(DragEventArgs e)

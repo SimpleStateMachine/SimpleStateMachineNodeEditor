@@ -1,9 +1,6 @@
 ﻿using System;
 using Avalonia;
-using Avalonia.Controls;
-using Avalonia.Input;
-using Avalonia.Markup.Xaml;
-using Avalonia.ReactiveUI;
+using Avalonia.Media;
 using SimpleStateMachineNodeEditorAvalonia.Helpers;
 using SimpleStateMachineNodeEditorAvalonia.ViewModels;
 
@@ -17,11 +14,13 @@ namespace SimpleStateMachineNodeEditorAvalonia.Views
         public bool IsSelect
         {
             get => this.GetValue<bool>(IsSelectProperty);
-            set => this.SetValue(IsSelectProperty, value);
+            set => SetValue(IsSelectProperty, value);
         }
-        
+        public TranslateTransform TranslateTransformNode;
         public Node()
         {
+            InitializeComponent();
+            TranslateTransformNode = RenderTransform as TranslateTransform;
             this.WhenViewModelAnyValue(disposable =>
             {
                 Console.WriteLine($"Node {ViewModel.Header.Name} are created");

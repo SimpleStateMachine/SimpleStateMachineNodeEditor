@@ -1,7 +1,5 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-                    xmlns:local="clr-namespace:SimpleStateMachineNodeEditor.Icons"
-                    xmlns:theme="clr-namespace:SimpleStateMachineNodeEditor.Styles.Themes">
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
     <DrawingBrush x:Key="IconLoop" TileMode="Tile">
         <DrawingBrush.Drawing>
             <GeometryDrawing Brush="{DynamicResource ColorConnector}" >

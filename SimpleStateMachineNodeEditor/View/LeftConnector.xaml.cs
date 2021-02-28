@@ -1,20 +1,13 @@
 ﻿using System;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
 using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Reactive.Linq;
 using System.Reactive.Disposables;
 
 using ReactiveUI;
 
 using SimpleStateMachineNodeEditor.Helpers;
 using SimpleStateMachineNodeEditor.ViewModel;
-using System.Windows.Shapes;
 using SimpleStateMachineNodeEditor.Helpers.Extensions;
 
 namespace SimpleStateMachineNodeEditor.View
@@ -52,19 +45,19 @@ namespace SimpleStateMachineNodeEditor.View
             this.WhenActivated(disposable =>
             {
 
-                this.OneWayBind(this.ViewModel, x => x.Name, x => x.TextBoxElement.Text).DisposeWith(disposable);
+                this.OneWayBind(ViewModel, x => x.Name, x => x.TextBoxElement.Text).DisposeWith(disposable);
 
-                this.OneWayBind(this.ViewModel, x => x.TextEnable, x => x.TextBoxElement.IsEnabled).DisposeWith(disposable);
+                this.OneWayBind(ViewModel, x => x.TextEnable, x => x.TextBoxElement.IsEnabled).DisposeWith(disposable);
 
-                this.OneWayBind(this.ViewModel, x => x.FormEnable, x => x.EllipseElement.IsEnabled).DisposeWith(disposable);
+                this.OneWayBind(ViewModel, x => x.FormEnable, x => x.EllipseElement.IsEnabled).DisposeWith(disposable);
 
-                this.OneWayBind(this.ViewModel, x => x.Foreground, x => x.TextBoxElement.Foreground).DisposeWith(disposable);
+                this.OneWayBind(ViewModel, x => x.Foreground, x => x.TextBoxElement.Foreground).DisposeWith(disposable);
 
-                this.OneWayBind(this.ViewModel, x => x.FormStroke, x => x.EllipseElement.Stroke).DisposeWith(disposable);
+                this.OneWayBind(ViewModel, x => x.FormStroke, x => x.EllipseElement.Stroke).DisposeWith(disposable);
 
-                this.OneWayBind(this.ViewModel, x => x.FormFill, x => x.EllipseElement.Fill).DisposeWith(disposable);
+                this.OneWayBind(ViewModel, x => x.FormFill, x => x.EllipseElement.Fill).DisposeWith(disposable);
 
-                this.OneWayBind(this.ViewModel, x => x.Visible, x => x.LeftConnectorElement.Visibility).DisposeWith(disposable);
+                this.OneWayBind(ViewModel, x => x.Visible, x => x.LeftConnectorElement.Visibility).DisposeWith(disposable);
 
             });
         }
@@ -75,27 +68,27 @@ namespace SimpleStateMachineNodeEditor.View
         {
             this.WhenActivated(disposable =>
             {               
-                this.EllipseElement.Events().Drop.Subscribe(e => OnEventDrop(e)).DisposeWith(disposable);
-                this.EllipseElement.Events().DragEnter.Subscribe(e => OnEventDragEnter(e)).DisposeWith(disposable);
-                this.EllipseElement.Events().DragLeave.Subscribe(e => OnEventDragLeave(e)).DisposeWith(disposable);
+                EllipseElement.Events().Drop.Subscribe(e => OnEventDrop(e)).DisposeWith(disposable);
+                EllipseElement.Events().DragEnter.Subscribe(e => OnEventDragEnter(e)).DisposeWith(disposable);
+                EllipseElement.Events().DragLeave.Subscribe(e => OnEventDragLeave(e)).DisposeWith(disposable);
             });
         }
 
         #endregion SetupEvents
         private void OnEventDragEnter(DragEventArgs e)
         {
-            this.ViewModel.FormStroke = Application.Current.Resources["ColorConnector"] as SolidColorBrush;
+            ViewModel.FormStroke = Application.Current.Resources["ColorConnector"] as SolidColorBrush;
             e.Handled = true;
         }
         private void OnEventDragLeave(DragEventArgs e)
         {
-            this.ViewModel.FormStroke = Application.Current.Resources["ColorNodesCanvasBackground"] as SolidColorBrush;
+            ViewModel.FormStroke = Application.Current.Resources["ColorNodesCanvasBackground"] as SolidColorBrush;
             e.Handled = true;
         }
         private void OnEventDrop(DragEventArgs e)
         {
-            this.ViewModel.FormStroke = Application.Current.Resources["ColorNodesCanvasBackground"] as SolidColorBrush;
-            this.ViewModel.CommandConnectPointDrop.ExecuteWithSubscribe();
+            ViewModel.FormStroke = Application.Current.Resources["ColorNodesCanvasBackground"] as SolidColorBrush;
+            ViewModel.CommandConnectPointDrop.ExecuteWithSubscribe();
             e.Handled = true;
         }
         void UpdatePosition()
@@ -106,10 +99,10 @@ namespace SimpleStateMachineNodeEditor.View
             if (NodesCanvas == null)
                 return;
 
-            positionConnectPoint = this.TransformToAncestor(NodesCanvas).Transform(positionConnectPoint);
+            positionConnectPoint = TransformToAncestor(NodesCanvas).Transform(positionConnectPoint);
 
             //this.ViewModel.PositionConnectPoint = positionConnectPoint.Division(this.ViewModel.NodesCanvas.Scale.Value);
-            this.ViewModel.PositionConnectPoint = positionConnectPoint;
+            ViewModel.PositionConnectPoint = positionConnectPoint;
         }
     }
 }

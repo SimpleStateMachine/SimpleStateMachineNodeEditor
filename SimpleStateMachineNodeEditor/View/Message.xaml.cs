@@ -1,19 +1,11 @@
 ﻿using System.Reactive.Disposables;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Input;
 using ReactiveUI;
 using System;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Controls.Primitives;
 using System.Reactive.Linq;
-using System.Windows.Markup;
 using SimpleStateMachineNodeEditor.ViewModel;
-using SimpleStateMachineNodeEditor.Helpers;
 using SimpleStateMachineNodeEditor.Helpers.Enums;
 using SimpleStateMachineNodeEditor.Helpers.Extensions;
 
@@ -51,7 +43,7 @@ namespace SimpleStateMachineNodeEditor.View
         {
             this.WhenActivated(disposable =>
             {
-                this.OneWayBind(this.ViewModel, x => x.Text, x => x.TextBlockElement.Text).DisposeWith(disposable);
+                this.OneWayBind(ViewModel, x => x.Text, x => x.TextBlockElement.Text).DisposeWith(disposable);
             });
         }
         #endregion SetupBinding
@@ -67,7 +59,7 @@ namespace SimpleStateMachineNodeEditor.View
         }
         private void UpdateIcon(TypeMessage type)
         {
-            this.RectangleElement.Fill = Application.Current.Resources["Icon" + type.Name()] as DrawingBrush;
+            RectangleElement.Fill = Application.Current.Resources["Icon" + type.Name()] as DrawingBrush;
         }
         #endregion Setup Subscriptions
     }

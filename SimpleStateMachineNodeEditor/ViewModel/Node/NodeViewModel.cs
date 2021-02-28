@@ -8,11 +8,9 @@ using ReactiveUI.Fody.Helpers;
 using ReactiveUI.Validation.Helpers;
 
 using DynamicData.Binding;
-using System.Linq;
 using System.Xml.Linq;
 using SimpleStateMachineNodeEditor.Helpers.Extensions;
 using DynamicData;
-using System.Collections.ObjectModel;
 
 namespace SimpleStateMachineNodeEditor.ViewModel
 {
@@ -39,7 +37,6 @@ namespace SimpleStateMachineNodeEditor.ViewModel
 
         public SourceList<ConnectorViewModel> Transitions { get; set; } = new SourceList<ConnectorViewModel>();
         public ObservableCollectionExtended<ConnectorViewModel> TransitionsForView = new ObservableCollectionExtended<ConnectorViewModel>();
-        public int Zindex { get; private set; }
 
         private NodeViewModel()
         {
@@ -51,7 +48,6 @@ namespace SimpleStateMachineNodeEditor.ViewModel
         {
             NodesCanvas = nodesCanvas;
             Name = name;
-            Zindex = nodesCanvas.Nodes.Count;
             Point1 = point;
             Transitions.Connect().ObserveOnDispatcher().Bind(TransitionsForView).Subscribe();
             SetupConnectors();
@@ -64,7 +60,7 @@ namespace SimpleStateMachineNodeEditor.ViewModel
 
         private void SetupSubscriptions()
         {
-            this.WhenAnyValue(x => x.Selected).Subscribe(value => { this.BorderBrush = value ? Application.Current.Resources["ColorSelectedElement"] as SolidColorBrush : Brushes.LightGray; });
+            this.WhenAnyValue(x => x.Selected).Subscribe(value => { BorderBrush = value ? Application.Current.Resources["ColorSelectedElement"] as SolidColorBrush : Brushes.LightGray; });
             this.WhenAnyValue(x => x.TransitionsForView.Count).Buffer(2, 1).Select(x => (Previous: x[0], Current: x[1])).Subscribe(x => UpdateCount(x.Previous, x.Current));
             this.WhenAnyValue(x => x.Point1, x => x.Size).Subscribe(_ => UpdatePoint2());
             this.WhenAnyValue(x => x.IsCollapse).Subscribe(value => Collapse(value));

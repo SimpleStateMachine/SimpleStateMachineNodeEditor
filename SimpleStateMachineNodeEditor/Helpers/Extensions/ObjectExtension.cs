@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace SimpleStateMachineNodeEditor.Helpers.Extensions
+﻿namespace SimpleStateMachineNodeEditor.Helpers.Extensions
 {
     public static class ObjectExtension
     {

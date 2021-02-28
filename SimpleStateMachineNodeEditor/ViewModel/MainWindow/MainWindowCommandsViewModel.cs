@@ -1,8 +1,5 @@
 ﻿using ReactiveUI;
-using System;
-using System.Collections.Generic;
 using System.Reactive;
-using System.Text;
 using System.Windows;
 
 namespace SimpleStateMachineNodeEditor.ViewModel
@@ -25,7 +22,7 @@ namespace SimpleStateMachineNodeEditor.ViewModel
         }
         private void CopySchemeName()
         {
-            Clipboard.SetText(this.NodesCanvas.SchemePath);
+            Clipboard.SetText(NodesCanvas.SchemePath);
         }
     }
 }

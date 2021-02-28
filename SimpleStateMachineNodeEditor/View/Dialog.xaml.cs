@@ -40,7 +40,7 @@ namespace SimpleStateMachineNodeEditor.View
         {
             this.WhenActivated(disposable =>
             {
-                this.Bind(this.ViewModel, x=>x.Visibility, x=>x.Visibility).DisposeWith(disposable);
+                this.Bind(ViewModel, x=>x.Visibility, x=>x.Visibility).DisposeWith(disposable);
             });
         }
         private void SetupSubcriptions()
@@ -53,7 +53,7 @@ namespace SimpleStateMachineNodeEditor.View
         private void Show()
         {
             GetAction().Invoke();
-            this.Visibility = Visibility.Collapsed;
+            Visibility = Visibility.Collapsed;
         }
 
         private Action GetAction()

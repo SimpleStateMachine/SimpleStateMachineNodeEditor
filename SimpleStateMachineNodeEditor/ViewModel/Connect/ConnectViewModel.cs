@@ -1,13 +1,10 @@
 ﻿using System;
-using System.Linq;
 using System.Windows;
 using System.Windows.Media;
 using System.Reactive.Linq;
 
 using ReactiveUI;
 using ReactiveUI.Fody.Helpers;
-
-using SimpleStateMachineNodeEditor.Helpers;
 using SimpleStateMachineNodeEditor.Helpers.Extensions;
 
 namespace SimpleStateMachineNodeEditor.ViewModel
@@ -47,7 +44,7 @@ namespace SimpleStateMachineNodeEditor.ViewModel
             this.WhenAnyValue(x => x.FromConnector.Node.IsCollapse).Subscribe(value => UpdateSubscriptionForPosition(value));           
             this.WhenAnyValue(x => x.ToConnector.PositionConnectPoint).Subscribe(value => EndPointUpdate(value));
             this.WhenAnyValue(x => x.FromConnector.Selected).Subscribe(value => Select(value));
-            this.WhenAnyValue(x => x.NodesCanvas.Theme).Subscribe(_ => Select(this.FromConnector.Selected));
+            this.WhenAnyValue(x => x.NodesCanvas.Theme).Subscribe(_ => Select(FromConnector.Selected));
             this.WhenAnyValue(x => x.ToConnector).Where(x => x != null).Subscribe(_ => StrokeDashArray = null);
         }
         private void UpdateSubscriptionForPosition(bool nodeIsCollapse)
@@ -69,11 +66,11 @@ namespace SimpleStateMachineNodeEditor.ViewModel
             NodesCanvas = viewModelNodesCanvas;
             FromConnector = fromConnector;
             FromConnector.Connect = this;
-            this.EndPoint = fromConnector.PositionConnectPoint;
+            EndPoint = fromConnector.PositionConnectPoint;
         }
         private void Select(bool value)
         {
-            this.Stroke =  Application.Current.Resources[value ? "ColorSelectedElement": "ColorConnect"] as SolidColorBrush;
+            Stroke =  Application.Current.Resources[value ? "ColorSelectedElement": "ColorConnect"] as SolidColorBrush;
         }
         private void StartPointUpdate(Point point)
         {

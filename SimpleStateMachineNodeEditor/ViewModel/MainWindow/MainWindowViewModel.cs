@@ -6,7 +6,6 @@ using System;
 using SimpleStateMachineNodeEditor.Helpers.Enums;
 using System.Reactive.Linq;
 using System.Linq;
-using DynamicData.Alias;
 
 namespace SimpleStateMachineNodeEditor.ViewModel
 {
@@ -55,13 +54,13 @@ namespace SimpleStateMachineNodeEditor.ViewModel
             Messages.Clear();
 
             bool debugEnable = DebugEnable.HasValue && DebugEnable.Value;
-            bool displayAll = this.NodesCanvas.DisplayMessageType == TypeMessage.All;
+            bool displayAll = NodesCanvas.DisplayMessageType == TypeMessage.All;
 
-            ConnectToMessages = this.NodesCanvas.Messages.ToObservableChangeSet().Filter(x => CheckForDisplay(x.TypeMessage)).ObserveOnDispatcher().Bind(Messages).DisposeMany().Subscribe();
+            ConnectToMessages = NodesCanvas.Messages.ToObservableChangeSet().Filter(x => CheckForDisplay(x.TypeMessage)).ObserveOnDispatcher().Bind(Messages).DisposeMany().Subscribe();
 
             bool CheckForDisplay(TypeMessage typeMessage)
             {
-                if (typeMessage == this.NodesCanvas.DisplayMessageType)
+                if (typeMessage == NodesCanvas.DisplayMessageType)
                 {
                     return true;
                 }

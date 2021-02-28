@@ -1,6 +1,4 @@
-﻿using System.Windows;
-using System.Windows.Media;
-using static System.Math;
+﻿using System.Windows.Media;
 
 namespace SimpleStateMachineNodeEditor.Helpers.Extensions
 {

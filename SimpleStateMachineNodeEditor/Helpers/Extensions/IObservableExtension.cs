@@ -1,8 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Reactive;
 using System.Reactive.Linq;
-using System.Text;
 
 namespace SimpleStateMachineNodeEditor.Helpers.Extensions
 {

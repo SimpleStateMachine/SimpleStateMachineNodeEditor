@@ -1,13 +1,8 @@
 ﻿using System;
-using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
 using System.Reactive.Linq;
 using System.Reactive.Disposables;
 
@@ -17,7 +12,6 @@ using SimpleStateMachineNodeEditor.Helpers;
 using SimpleStateMachineNodeEditor.Helpers.Transformations;
 using SimpleStateMachineNodeEditor.Helpers.Enums;
 using SimpleStateMachineNodeEditor.Helpers.Extensions;
-using ReactiveUI.Fody.Helpers;
 using SimpleStateMachineNodeEditor.ViewModel;
 
 namespace SimpleStateMachineNodeEditor.View
@@ -63,17 +57,17 @@ namespace SimpleStateMachineNodeEditor.View
         {
             this.WhenActivated(disposable =>
             {               
-                this.OneWayBind(this.ViewModel, x => x.NodesForView, x => x.Nodes.Collection).DisposeWith(disposable);
+                this.OneWayBind(ViewModel, x => x.NodesForView, x => x.Nodes.Collection).DisposeWith(disposable);
 
-                this.OneWayBind(this.ViewModel, x => x.Connects, x => x.Connects.Collection).DisposeWith(disposable);
+                this.OneWayBind(ViewModel, x => x.Connects, x => x.Connects.Collection).DisposeWith(disposable);
 
                 //this.OneWayBind(this.ViewModel, x => x.Scale.Scales.X, x => x.Scale.ScaleX).DisposeWith(disposable);
 
                 //this.OneWayBind(this.ViewModel, x => x.Scale.Scales.Y, x => x.Scale.ScaleY).DisposeWith(disposable);
 
-                this.OneWayBind(this.ViewModel, x => x.Selector, x => x.Selector.ViewModel).DisposeWith(disposable);
+                this.OneWayBind(ViewModel, x => x.Selector, x => x.Selector.ViewModel).DisposeWith(disposable);
 
-                this.OneWayBind(this.ViewModel, x => x.Cutter, x => x.Cutter.ViewModel).DisposeWith(disposable);
+                this.OneWayBind(ViewModel, x => x.Cutter, x => x.Cutter.ViewModel).DisposeWith(disposable);
             });
         }
         #endregion Setup Binding
@@ -84,23 +78,23 @@ namespace SimpleStateMachineNodeEditor.View
             this.WhenActivated(disposable =>
             {
 
-                this.BindCommand(this.ViewModel, x => x.CommandSelect,              x => x.BindingSelect, x => x.PositionRight).DisposeWith(disposable);
-                this.BindCommand(this.ViewModel, x => x.CommandCut,                 x => x.BindingCut, x => x.PositionRight).DisposeWith(disposable);
-                this.BindCommand(this.ViewModel, x => x.CommandAddNodeWithUndoRedo, x => x.BindingAddNode, x => x.PositionRight).DisposeWith(disposable);
-                this.BindCommand(this.ViewModel, x => x.CommandAddNodeWithUndoRedo, x => x.ItemAddNode, x => x.PositionLeft).DisposeWith(disposable);
+                this.BindCommand(ViewModel, x => x.CommandSelect,              x => x.BindingSelect, x => x.PositionRight).DisposeWith(disposable);
+                this.BindCommand(ViewModel, x => x.CommandCut,                 x => x.BindingCut, x => x.PositionRight).DisposeWith(disposable);
+                this.BindCommand(ViewModel, x => x.CommandAddNodeWithUndoRedo, x => x.BindingAddNode, x => x.PositionRight).DisposeWith(disposable);
+                this.BindCommand(ViewModel, x => x.CommandAddNodeWithUndoRedo, x => x.ItemAddNode, x => x.PositionLeft).DisposeWith(disposable);
 
-                this.BindCommand(this.ViewModel, x => x.CommandRedo,                x => x.BindingRedo).DisposeWith(disposable);
-                this.BindCommand(this.ViewModel, x => x.CommandUndo,                x => x.BindingUndo).DisposeWith(disposable);
-                this.BindCommand(this.ViewModel, x => x.CommandSelectAll,           x => x.BindingSelectAll).DisposeWith(disposable);
+                this.BindCommand(ViewModel, x => x.CommandRedo,                x => x.BindingRedo).DisposeWith(disposable);
+                this.BindCommand(ViewModel, x => x.CommandUndo,                x => x.BindingUndo).DisposeWith(disposable);
+                this.BindCommand(ViewModel, x => x.CommandSelectAll,           x => x.BindingSelectAll).DisposeWith(disposable);
 
-                this.BindCommand(this.ViewModel, x => x.CommandUndo,                x => x.ItemCollapsUp).DisposeWith(disposable);
-                this.BindCommand(this.ViewModel, x => x.CommandSelectAll,           x => x.ItemExpandDown).DisposeWith(disposable);
+                this.BindCommand(ViewModel, x => x.CommandUndo,                x => x.ItemCollapsUp).DisposeWith(disposable);
+                this.BindCommand(ViewModel, x => x.CommandSelectAll,           x => x.ItemExpandDown).DisposeWith(disposable);
 
-                this.BindCommand(this.ViewModel, x => x.CommandDeleteSelectedElements, x => x.BindingDeleteSelectedElements).DisposeWith(disposable);
-                this.BindCommand(this.ViewModel, x => x.CommandDeleteSelectedElements, x => x.ItemDelete).DisposeWith(disposable);
+                this.BindCommand(ViewModel, x => x.CommandDeleteSelectedElements, x => x.BindingDeleteSelectedElements).DisposeWith(disposable);
+                this.BindCommand(ViewModel, x => x.CommandDeleteSelectedElements, x => x.ItemDelete).DisposeWith(disposable);
 
-                this.BindCommand(this.ViewModel, x => x.CommandCollapseUpSelected,  x => x.ItemCollapsUp).DisposeWith(disposable);
-                this.BindCommand(this.ViewModel, x => x.CommandExpandDownSelected,  x => x.ItemExpandDown).DisposeWith(disposable);
+                this.BindCommand(ViewModel, x => x.CommandCollapseUpSelected,  x => x.ItemCollapsUp).DisposeWith(disposable);
+                this.BindCommand(ViewModel, x => x.CommandExpandDownSelected,  x => x.ItemExpandDown).DisposeWith(disposable);
             });
         }
         #endregion Setup Commands
@@ -113,7 +107,7 @@ namespace SimpleStateMachineNodeEditor.View
                 this.WhenAnyValue(x => x.ViewModel.Selector.Size).WithoutParameter().InvokeCommand(ViewModel, x => x.CommandSelectorIntersect).DisposeWith(disposable);
                 this.WhenAnyValue(x => x.ViewModel.Cutter.EndPoint).WithoutParameter().InvokeCommand(ViewModel, x => x.CommandCutterIntersect).DisposeWith(disposable);
                 this.WhenAnyValue(x => x.ViewModel.ImagePath).Where(x => !string.IsNullOrEmpty(x)).Subscribe(value => SaveCanvasToImage(value, ImageFormats.JPEG)).DisposeWith(disposable);
-                this.WhenAnyValue(x=>x.ViewModel.RenderTransformMatrix).Subscribe(value=>this.CanvasElement.RenderTransform = new MatrixTransform(value)).DisposeWith(disposable);
+                this.WhenAnyValue(x=>x.ViewModel.RenderTransformMatrix).Subscribe(value=>CanvasElement.RenderTransform = new MatrixTransform(value)).DisposeWith(disposable);
                 //here need use ZoomIn and ZoomOut
 
                 //this.WhenAnyValue(x=>x.ViewModel.Scale.Value).Subscribe(x=> {this.zoomBorder.ZoomDeltaTo })
@@ -131,9 +125,9 @@ namespace SimpleStateMachineNodeEditor.View
                 this.Events().MouseRightButtonDown.Subscribe(e => OnEventMouseRightDown(e)).DisposeWith(disposable);
                 this.Events().MouseUp.Subscribe(e => OnEventMouseUp(e)).DisposeWith(disposable);
                 this.Events().MouseMove.Subscribe(e => OnEventMouseMove(e)).DisposeWith(disposable);
-                this.UserControlElement.Events().MouseWheel.Subscribe(e => OnEventMouseWheel(e)).DisposeWith(disposable);
+                UserControlElement.Events().MouseWheel.Subscribe(e => OnEventMouseWheel(e)).DisposeWith(disposable);
                 this.Events().DragOver.Subscribe(e => OnEventDragOver(e)).DisposeWith(disposable);
-                this.Cutter.Events().MouseLeftButtonUp.InvokeCommand(this.ViewModel.CommandDeleteSelectedConnectors).DisposeWith(disposable);
+                Cutter.Events().MouseLeftButtonUp.InvokeCommand(ViewModel.CommandDeleteSelectedConnectors).DisposeWith(disposable);
                 this.Events().PreviewMouseLeftButtonDown.Subscribe(e => OnEventPreviewMouseLeftButtonDown(e)).DisposeWith(disposable);
                 this.Events().PreviewMouseRightButtonDown.Subscribe(e => OnEventPreviewMouseRightButtonDown(e)).DisposeWith(disposable);
                 //this.WhenAnyValue(x => x.ViewModel.Scale.Value).Subscribe(value => { this.Canvas.Height /= value; this.Canvas.Width /= value; }).DisposeWith(disposable);
@@ -143,7 +137,7 @@ namespace SimpleStateMachineNodeEditor.View
 
         private void OnEventMouseLeftDown(MouseButtonEventArgs e)
         {
-            PositionMove = Mouse.GetPosition(this.CanvasElement);
+            PositionMove = Mouse.GetPosition(CanvasElement);
 
             if (Mouse.Captured == null)
             {
@@ -151,21 +145,21 @@ namespace SimpleStateMachineNodeEditor.View
                 if (clickMode == NodeCanvasClickMode.Default)
                 {
                     Keyboard.ClearFocus();
-                    this.CaptureMouse();
+                    CaptureMouse();
                     Keyboard.Focus(this);
-                    this.ViewModel.CommandUnSelectAll.ExecuteWithSubscribe();
+                    ViewModel.CommandUnSelectAll.ExecuteWithSubscribe();
                 }
                 else if (clickMode == NodeCanvasClickMode.AddNode)
                 {                   
-                    this.ViewModel.CommandAddNodeWithUndoRedo.Execute(PositionMove);
+                    ViewModel.CommandAddNodeWithUndoRedo.Execute(PositionMove);
                 }
                 else if (clickMode == NodeCanvasClickMode.Select)
                 {
-                    this.ViewModel.CommandSelect.ExecuteWithSubscribe(PositionMove);
+                    ViewModel.CommandSelect.ExecuteWithSubscribe(PositionMove);
                 }
                 else if (clickMode == NodeCanvasClickMode.Cut)
                 {
-                    this.ViewModel.CommandCut.ExecuteWithSubscribe(PositionMove);
+                    ViewModel.CommandCut.ExecuteWithSubscribe(PositionMove);
                 }
             }
         }
@@ -176,9 +170,9 @@ namespace SimpleStateMachineNodeEditor.View
                 return;
 
             if (Move == TypeMove.MoveAll)
-                this.ViewModel.CommandFullMoveAllNode.Execute(SumMove);
+                ViewModel.CommandFullMoveAllNode.Execute(SumMove);
             else if (Move == TypeMove.MoveSelected)
-                this.ViewModel.CommandFullMoveAllSelectedNode.Execute(SumMove);
+                ViewModel.CommandFullMoveAllSelectedNode.Execute(SumMove);
 
             Move = TypeMove.None;
             SumMove = new Point();
@@ -190,17 +184,17 @@ namespace SimpleStateMachineNodeEditor.View
         }
         private void OnEventMouseWheel(MouseWheelEventArgs e)
         {
-            Point point = e.GetPosition(this.CanvasElement);
+            Point point = e.GetPosition(CanvasElement);
             //Matrix value = this.CanvasElement.RenderTransform.Value;
             //double step = 1.2;
             //double zoom = e.Delta > 0 ? step : 1 / step;
             //value = MatrixExtension.ScaleAtPrepend(value,zoom, zoom, point.X, point.Y);
             //this.CanvasElement.RenderTransform = new MatrixTransform(value);
-            this.ViewModel.CommandZoom.ExecuteWithSubscribe((point, e.Delta));
+            ViewModel.CommandZoom.ExecuteWithSubscribe((point, e.Delta));
         }
         private void OnEventMouseUp(MouseButtonEventArgs e)
         {
-            this.ReleaseMouseCapture();
+            ReleaseMouseCapture();
             PositionMove = new Point();
             Keyboard.Focus(this);
         }
@@ -218,7 +212,7 @@ namespace SimpleStateMachineNodeEditor.View
                 return;
 
             SumMove = SumMove.Addition(delta);
-            if (this.IsMouseCaptured)
+            if (IsMouseCaptured)
             {
                 ViewModel.CommandPartMoveAllNode.ExecuteWithSubscribe(delta);
                 Move = TypeMove.MoveAll;
@@ -232,27 +226,27 @@ namespace SimpleStateMachineNodeEditor.View
 
         public void OnEventDragOver(DragEventArgs e)
         {
-            Point point = e.GetPosition(this.CanvasElement);
-            if (this.ViewModel.DraggedConnect != null)
+            Point point = e.GetPosition(CanvasElement);
+            if (ViewModel.DraggedConnect != null)
             {
                 point = point.Subtraction(2);
                 //this.ViewModel.DraggedConnect.EndPoint = point.Division(this.ViewModel.Scale.Value);
-                this.ViewModel.DraggedConnect.EndPoint = point;
+                ViewModel.DraggedConnect.EndPoint = point;
             }
         }
         private void OnEventPreviewMouseLeftButtonDown(MouseButtonEventArgs e)
         {
-            this.ViewModel.PositionRight = e.GetPosition(this.CanvasElement);
+            ViewModel.PositionRight = e.GetPosition(CanvasElement);
         }
         private void OnEventPreviewMouseRightButtonDown(MouseButtonEventArgs e)
         {
-            this.ViewModel.PositionLeft = e.GetPosition(this.CanvasElement);
+            ViewModel.PositionLeft = e.GetPosition(CanvasElement);
         }
 
         #endregion Setup Events
         private Point GetDeltaMove()
         {
-            Point CurrentPosition = Mouse.GetPosition(this.CanvasElement);
+            Point CurrentPosition = Mouse.GetPosition(CanvasElement);
             Point result = new Point();
 
             if (!PositionMove.IsClear())
@@ -267,7 +261,7 @@ namespace SimpleStateMachineNodeEditor.View
         private void SaveCanvasToImage(string filename, ImageFormats format)
         {
             //this.zoomBorder.Uniform();
-            MyUtils.PanelToImage(this.CanvasElement, filename, format);
+            MyUtils.PanelToImage(CanvasElement, filename, format);
             ViewModel.CommandLogDebug.ExecuteWithSubscribe(String.Format("Scheme was exported to \"{0}\"", filename));
         }
 

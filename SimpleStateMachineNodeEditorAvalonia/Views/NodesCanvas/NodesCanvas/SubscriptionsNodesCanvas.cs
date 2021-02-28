@@ -1,6 +1,4 @@
-﻿using ReactiveUI;
-using SimpleStateMachineNodeEditorAvalonia.Helpers;
-using System.Reactive.Disposables;
+﻿using SimpleStateMachineNodeEditorAvalonia.Helpers;
 
 namespace SimpleStateMachineNodeEditorAvalonia.Views
 {

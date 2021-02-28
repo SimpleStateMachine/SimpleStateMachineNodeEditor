@@ -1,6 +1,4 @@
-﻿using ReactiveUI;
-using SimpleStateMachineNodeEditorAvalonia.Helpers;
-using System.Reactive.Disposables;
+﻿using SimpleStateMachineNodeEditorAvalonia.Helpers;
 using Avalonia.Controls;
 using Avalonia.Input;
 using Avalonia.Interactivity;
@@ -13,7 +11,7 @@ namespace SimpleStateMachineNodeEditorAvalonia.Views.NodeElements
         {
             this.WhenViewModelAnyValue(disposable =>
             {
-                this.ListBoxConnectors.AddHandler(ListBox.PointerPressedEvent, OnListBoxPointerPressed, RoutingStrategies.Bubble,true);
+                ListBoxConnectors.AddHandler(PointerPressedEvent, OnListBoxPointerPressed, RoutingStrategies.Bubble,true);
             });
         }
         

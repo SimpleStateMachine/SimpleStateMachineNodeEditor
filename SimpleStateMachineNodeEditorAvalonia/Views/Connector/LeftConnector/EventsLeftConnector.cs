@@ -1,14 +1,5 @@
-﻿using Avalonia;
-using Avalonia.Controls;
-using Avalonia.Controls.Shapes;
-using Avalonia.Input;
-using Avalonia.Markup.Xaml;
-using ReactiveUI;
+﻿using Avalonia.Input;
 using SimpleStateMachineNodeEditorAvalonia.Helpers;
-using System;
-using System.Collections.Generic;
-using System.Reactive.Disposables;
-using System.Text;
 
 namespace SimpleStateMachineNodeEditorAvalonia.Views
 {
@@ -16,13 +7,10 @@ namespace SimpleStateMachineNodeEditorAvalonia.Views
     {
         protected override void SetupEvents()
         {
-            base.SetupEvents();
             this.WhenViewModelAnyValue(disposable =>
             {
-                // AddHandler(DragDrop.DropEvent, OnConnectDrop);
-            });
 
-          
+            });
         }
 
         public void OnConnectDrop(object sender, DragEventArgs e)

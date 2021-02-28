@@ -1,15 +1,11 @@
 ﻿using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Input;
-using Avalonia.VisualTree;
 using SimpleStateMachineNodeEditorAvalonia.Helpers;
 using System;
-using System.Diagnostics;
 using System.Reactive.Disposables;
 using Avalonia.Controls.Primitives;
 using Avalonia.Interactivity;
-using Avalonia.Layout;
-using Avalonia.LogicalTree;
 using SimpleStateMachineNodeEditorAvalonia.Helpers.Extensions;
 
 namespace SimpleStateMachineNodeEditorAvalonia.Views
@@ -20,11 +16,10 @@ namespace SimpleStateMachineNodeEditorAvalonia.Views
         {
             this.WhenViewModelAnyValue(disposable =>
             {
-                base.SetupEvents();
                 this.Events().PointerPressed.Subscribe(OnRightConnectorPointerPressed).DisposeWith(disposable);
-                this.EllipseConnector.Events().PointerPressed.Subscribe(OnEllipsePointerPressed).DisposeWith(disposable);
-                this.EllipseConnector.Events().PointerReleased.Subscribe(OnEllipsePointerReleased).DisposeWith(disposable);
-                this.TextBoxConnector.AddHandler(TextBox.PointerPressedEvent, OnTextBoxPointerPressed, RoutingStrategies.Bubble,true);
+                EllipseConnector.Events().PointerPressed.Subscribe(OnEllipsePointerPressed).DisposeWith(disposable);
+                EllipseConnector.Events().PointerReleased.Subscribe(OnEllipsePointerReleased).DisposeWith(disposable);
+                TextBoxConnector.AddHandler(PointerPressedEvent, OnTextBoxPointerPressed, RoutingStrategies.Bubble,true);
             });
            
         }
@@ -35,7 +30,7 @@ namespace SimpleStateMachineNodeEditorAvalonia.Views
                 e.Source = this;
             }
             
-            if (this.ViewModel.Name.IsNullOrEmpty())
+            if (ViewModel.Name.IsNullOrEmpty())
             {
                 e.Handled = true;
             }
@@ -49,13 +44,13 @@ namespace SimpleStateMachineNodeEditorAvalonia.Views
 
         protected virtual void OnEllipsePointerPressed(PointerPressedEventArgs e)
         {
-            var positionConnectPoint = this.EllipseConnector.TranslatePoint(new Point(EllipseConnector.Width / 2, EllipseConnector.Height / 2), this);
+            var positionConnectPoint = EllipseConnector.TranslatePoint(new Point(EllipseConnector.Width / 2, EllipseConnector.Height / 2), this);
             positionConnectPoint = this.TranslatePoint(positionConnectPoint.Value, NodesCanvas.Current);
             
             e.Handled = true;
-            this.ViewModel.AddConnectCommand.ExecuteWithSubscribe(positionConnectPoint.Value);
+            ViewModel.AddConnectCommand.ExecuteWithSubscribe(positionConnectPoint.Value);
             DataObject data = new DataObject();
-            data.SetDraggable(this.ViewModel.Connect);
+            data.SetDraggable(ViewModel.Connect);
             DragDrop.DoDragDrop(e, data, DragDropEffects.Move);
         }
         protected virtual void OnEllipsePointerReleased(PointerEventArgs e)

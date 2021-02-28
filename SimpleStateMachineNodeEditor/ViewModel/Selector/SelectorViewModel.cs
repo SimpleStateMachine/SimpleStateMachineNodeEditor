@@ -1,11 +1,7 @@
 ﻿using System;
 using System.Windows;
-using System.Reactive.Linq;
-
 using ReactiveUI;
 using ReactiveUI.Fody.Helpers;
-
-using SimpleStateMachineNodeEditor.Helpers;
 using SimpleStateMachineNodeEditor.Helpers.Transformations;
 using System.Reactive;
 using SimpleStateMachineNodeEditor.Helpers.Extensions;

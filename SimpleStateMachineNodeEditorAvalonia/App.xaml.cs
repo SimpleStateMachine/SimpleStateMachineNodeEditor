@@ -1,6 +1,5 @@
 ﻿using Avalonia;
 using Avalonia.Controls.ApplicationLifetimes;
-using Avalonia.Markup.Xaml;
 using SimpleStateMachineNodeEditorAvalonia.Helpers;
 using SimpleStateMachineNodeEditorAvalonia.ViewModels;
 using SimpleStateMachineNodeEditorAvalonia.Views;

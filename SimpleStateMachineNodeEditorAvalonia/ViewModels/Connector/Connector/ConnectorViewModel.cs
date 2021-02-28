@@ -1,9 +1,6 @@
 ﻿using Avalonia;
-using ReactiveUI;
 using ReactiveUI.Fody.Helpers;
-using System.Reactive.Linq;
 using SimpleStateMachineNodeEditorAvalonia.Helpers;
-using System;
 
 namespace SimpleStateMachineNodeEditorAvalonia.ViewModels
 {

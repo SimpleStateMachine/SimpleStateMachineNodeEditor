@@ -1,12 +1,7 @@
 ﻿using System;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
 using System.Reactive.Linq;
 using System.Reactive.Disposables;
 
@@ -50,17 +45,17 @@ namespace SimpleStateMachineNodeEditor.View
             this.WhenActivated(disposable =>
             {
 
-                this.OneWayBind(this.ViewModel, x => x.Visible, x => x.Visibility).DisposeWith(disposable);
+                this.OneWayBind(ViewModel, x => x.Visible, x => x.Visibility).DisposeWith(disposable);
 
-                this.OneWayBind(this.ViewModel, x => x.StartPoint.X, x => x.LineElement.X1).DisposeWith(disposable);
+                this.OneWayBind(ViewModel, x => x.StartPoint.X, x => x.LineElement.X1).DisposeWith(disposable);
 
-                this.OneWayBind(this.ViewModel, x => x.StartPoint.Y, x => x.LineElement.Y1).DisposeWith(disposable);
+                this.OneWayBind(ViewModel, x => x.StartPoint.Y, x => x.LineElement.Y1).DisposeWith(disposable);
 
-                this.OneWayBind(this.ViewModel, x => x.EndPoint.X, x => x.LineElement.X2).DisposeWith(disposable);
+                this.OneWayBind(ViewModel, x => x.EndPoint.X, x => x.LineElement.X2).DisposeWith(disposable);
 
-                this.OneWayBind(this.ViewModel, x => x.EndPoint.Y, x => x.LineElement.Y2).DisposeWith(disposable);
+                this.OneWayBind(ViewModel, x => x.EndPoint.Y, x => x.LineElement.Y2).DisposeWith(disposable);
 
-                this.OneWayBind(this.ViewModel, x => x.StrokeThickness, x => x.LineElement.StrokeThickness).DisposeWith(disposable);
+                this.OneWayBind(ViewModel, x => x.StrokeThickness, x => x.LineElement.StrokeThickness).DisposeWith(disposable);
 
                 this.WhenAnyValue(x => x.Visibility).Where(x=>x==Visibility.Visible).Subscribe(_ => Update()).DisposeWith(disposable);
 
@@ -94,7 +89,7 @@ namespace SimpleStateMachineNodeEditor.View
         }
         private void OnMouseLeftButtonUp(MouseEventArgs e)
         {
-            this.ViewModel.Visible = null;
+            ViewModel.Visible = null;
         }
 
         #endregion Setup Events

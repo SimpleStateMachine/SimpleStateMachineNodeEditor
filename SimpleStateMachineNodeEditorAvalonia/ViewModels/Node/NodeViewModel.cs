@@ -1,11 +1,5 @@
 ﻿using Avalonia;
-using DynamicData;
-using DynamicData.Binding;
 using ReactiveUI.Fody.Helpers;
-using SimpleStateMachineNodeEditorAvalonia.Helpers;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace SimpleStateMachineNodeEditorAvalonia.ViewModels
 {

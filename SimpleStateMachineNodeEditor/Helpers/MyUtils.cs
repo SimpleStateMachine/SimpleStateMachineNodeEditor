@@ -2,7 +2,6 @@
 using System.Windows.Media;
 using System;
 using System.Collections.Generic;
-using System.Windows.Controls;
 using SimpleStateMachineNodeEditor.Helpers.Enums;
 using System.Windows.Media.Imaging;
 using System.IO;

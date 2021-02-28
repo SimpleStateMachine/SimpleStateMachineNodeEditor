@@ -1,9 +1,5 @@
-﻿using Avalonia;
-using Avalonia.Controls;
-using Avalonia.Input;
+﻿using Avalonia.Input;
 using SimpleStateMachineNodeEditorAvalonia.Helpers;
-using System;
-using System.Reactive.Disposables;
 
 
 namespace SimpleStateMachineNodeEditorAvalonia.Views
