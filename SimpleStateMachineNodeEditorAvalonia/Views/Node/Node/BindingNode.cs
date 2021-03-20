@@ -2,6 +2,13 @@
 using SimpleStateMachineNodeEditorAvalonia.Helpers;
 using System.Reactive.Disposables;
 using Avalonia.Controls;
+using Avalonia;
+using ReactiveUI;
+using System;
+using SimpleStateMachineNodeEditorAvalonia.Helpers;
+using System.Reactive.Disposables;
+using System.Reactive.Linq;
+
 
 namespace SimpleStateMachineNodeEditorAvalonia.Views
 {
@@ -14,7 +21,7 @@ namespace SimpleStateMachineNodeEditorAvalonia.Views
             {
                 this.OneWayBind(ViewModel, 
                     x => x.Header, 
-                    x => x.HeaderNode.ViewModel)
+                    x => x.Header.ViewModel)
                     .DisposeWith(disposable);
                 
                 this.OneWayBind(ViewModel, 
@@ -24,27 +31,27 @@ namespace SimpleStateMachineNodeEditorAvalonia.Views
 
                 this.OneWayBind(ViewModel, 
                     x => x.Connectors,
-                    x => x.ConnectorsNode.ViewModel)
+                    x => x.Connectors.ViewModel)
                     .DisposeWith(disposable);
                 
                 this.OneWayBind(ViewModel, 
                     x => x.Input, 
-                    x => x.InputNode.ViewModel)
+                    x => x.InputConnector.ViewModel)
                     .DisposeWith(disposable);
                 
                 this.OneWayBind(ViewModel, 
                     x => x.Output, 
-                    x => x.OutputNode.ViewModel)
+                    x => x.OutputConnector.ViewModel)
                     .DisposeWith(disposable);
                 
                 this.OneWayBind(ViewModel, 
                     x => x.Header.IsCollapse, 
-                    x => x.ConnectorsNode.IsVisible, 
+                    x => x.Connectors.IsVisible, 
                     x=>!x).DisposeWith(disposable);
                 
                 this.OneWayBind(ViewModel, 
                     x => x.Header.IsCollapse, 
-                    x => x.OutputNode.IsVisible)
+                    x => x.OutputConnector.IsVisible)
                     .DisposeWith(disposable);
 
                 this.OneWayBind(ViewModel, 
@@ -57,10 +64,19 @@ namespace SimpleStateMachineNodeEditorAvalonia.Views
                     x => x.TranslateTransformNode.Y)
                     .DisposeWith(disposable);
                 
+                
                 ViewModel.WhenAnyValue(x => x.Point1.X)
                     .BindTo(this, x => x.Parent.ZIndex)
                     .DisposeWith(disposable);
             });
         }
+
+        // void InputConnectUpdateClasses(bool magnetDragOver)
+        // {
+        //     if(magnetDragOver)
+        //         this.InputConnector.Classes.Add("MagnetDragOver");
+        //     else
+        //         this.InputConnector.Classes.Remove("MagnetDragOver");
+        // }
     }
 }

@@ -4,7 +4,18 @@
         <Setter Property="Fill" Value="{DynamicResource ColorLeftConnectorEllipseFill}" />
 		<Setter Property="Stroke" Value="{DynamicResource ColorLeftConnectorEllipseStroke}" />
     </Style>
-
-	<!-- <Style Selector="ListBoxItem:" -->
-	<!-- 	></Style> -->
+	
+	<!-- <Style Selector="Ellipse:pointerover.EllipseRightConnector"> -->
+	<!-- 	<Setter Property="Fill" Value="{DynamicResource ColorRightConnectorEllipseFillPointerOver}" /> -->
+	<!-- 	<Setter Property="Stroke" Value="{DynamicResource ColorRightConnectorEllipseStrokePointerOver}" /> -->
+	<!-- </Style> -->
+	<!-- <Style Selector="Border:pointerover#"> -->
+	<!-- 	<Setter Property="Fill" Value="{DynamicResource ColorLeftConnectorEllipseFillPointerOver}" /> -->
+	<!-- 	<Setter Property="Stroke" Value="{DynamicResource ColorLeftConnectorEllipseStrokePointerOver}" /> -->
+	<!-- </Style> -->
+	
+	<Style Selector="Ellipse.MagnetDragOver">
+		<Setter Property="Fill" Value="{DynamicResource ColorLeftConnectorEllipseFillPointerOver}" />
+		<Setter Property="Stroke" Value="{DynamicResource ColorLeftConnectorEllipseStrokePointerOver}" />
+	</Style>
 </Styles>

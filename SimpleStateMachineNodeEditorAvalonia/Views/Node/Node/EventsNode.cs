@@ -3,6 +3,8 @@ using Avalonia.Input;
 using SimpleStateMachineNodeEditorAvalonia.Helpers;
 using System;
 using System.Reactive.Disposables;
+using Avalonia.VisualTree;
+using SimpleStateMachineNodeEditor.Helpers.Extensions;
 
 namespace SimpleStateMachineNodeEditorAvalonia.Views
 {
@@ -15,24 +17,26 @@ namespace SimpleStateMachineNodeEditorAvalonia.Views
             {           
                 BorderNode.Events().PointerPressed.Subscribe(OnEventBorderPointerPressed).DisposeWith(disposable);
                 BorderNode.Events().PointerReleased.Subscribe(OnEventBorderPointerReleased).DisposeWith(disposable);
+                // AddHandler();
+                // InputConnectorMagnetBorder.AddHandler(DragDrop.);
             });
         }
 
-        void OnEventBorderPointerPressed(PointerPressedEventArgs e)
+        private void OnEventBorderPointerPressed(PointerPressedEventArgs e)
         {
-            ViewModel.SelectCommand.ExecuteWithSubscribe(Keyboard.IsKeyDown(Key.LeftCtrl) ? SelectMode.ClickWithCtrl : SelectMode.Click);
-            oldPosition = e.GetPosition(NodesCanvas.Current);
+            ViewModel.SelectCommand.ExecuteWithSubscribe((e.KeyModifiers & KeyModifiers.Control)!= 0 ? SelectMode.ClickWithCtrl : SelectMode.Click);
+            oldPosition = e.GetPosition(_canvas);
             PointerMoved += OnEventPointerMoved;
         }
 
-        void OnEventBorderPointerReleased(PointerReleasedEventArgs e)
+        private void OnEventBorderPointerReleased(PointerReleasedEventArgs e)
         {
             PointerMoved -= OnEventPointerMoved;
         }
 
-        void OnEventPointerMoved(object subject, PointerEventArgs e)
+        private void OnEventPointerMoved(object subject, PointerEventArgs e)
         {
-            var currentPosition = e.GetPosition(NodesCanvas.Current);
+            var currentPosition = e.GetPosition(_canvas);
             ViewModel.NodesCanvas.Nodes.MoveCommand.ExecuteWithSubscribe(currentPosition - oldPosition);
             oldPosition = currentPosition;
         }

@@ -17,7 +17,7 @@ namespace SimpleStateMachineNodeEditorAvalonia.ViewModels
 
         public void AddConnect(Point point)
         {
-            Connect = Node.NodesCanvas.Connects.GetNewConnect(this, point);
+            // Connect = Node.NodesCanvas.Connects.GetNewConnect(this, point);
         }
 
 

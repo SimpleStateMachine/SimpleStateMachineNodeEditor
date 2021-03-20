@@ -7,12 +7,12 @@ namespace SimpleStateMachineNodeEditorAvalonia.Helpers
     {
         public static void SetDraggable(this DataObject dataObject, IDraggable draggable)
         {
-            dataObject.Set(String.Empty, draggable);
+            dataObject.Set(nameof(IDraggable), draggable);
         }
         
         public static IDraggable GetDraggable(this DataObject dataObject)
         {
-            return dataObject.Get(String.Empty) as IDraggable;
+            return dataObject.Get(nameof(IDraggable)) as IDraggable;
         }
     }
 }

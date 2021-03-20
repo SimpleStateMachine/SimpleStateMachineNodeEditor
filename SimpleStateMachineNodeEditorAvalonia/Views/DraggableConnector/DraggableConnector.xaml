@@ -1,0 +1,21 @@
+﻿<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+			 xmlns:Views="clr-namespace:SimpleStateMachineNodeEditorAvalonia.Views"
+			 xmlns:ViewModels="clr-namespace:SimpleStateMachineNodeEditorAvalonia.ViewModels"
+             x:Class="SimpleStateMachineNodeEditorAvalonia.Views.DraggableConnector" ClipToBounds="False" >
+	<Path x:Name="PathConnect" Stroke="{DynamicResource ColorConnectStroke}" 
+	      StrokeThickness="2" 
+	      StrokeJoin="Round" 
+	      StrokeLineCap="Round">
+		<Path.Data>
+			<PathGeometry>
+				<PathFigure IsClosed="False">
+					<BezierSegment/>
+				</PathFigure>
+			</PathGeometry>
+		</Path.Data>
+	</Path>
+</UserControl>

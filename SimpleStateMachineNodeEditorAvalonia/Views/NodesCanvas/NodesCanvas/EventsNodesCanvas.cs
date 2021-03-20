@@ -10,20 +10,12 @@ namespace SimpleStateMachineNodeEditorAvalonia.Views
         {
             this.WhenViewModelAnyValue(disposable =>
             {
-                AddHandler(DragDrop.DragOverEvent, OnNodesCanvasDragOver);
-                AddHandler(DragDrop.DropEvent, OnNodesCanvasDrop);
+                AddHandler(DragDrop.DragOverEvent, HelperDragDrop.DragDraggableOverDelegate);
+                AddHandler(DragDrop.DropEvent, HelperDragDrop.DropDraggableDelegate);
             });
         }
-        
-        void OnNodesCanvasDragOver(object handler, DragEventArgs e)
-        {
-            e.GetDraggable().DragOver(e.GetPosition(this));
-        }
-        
-        void OnNodesCanvasDrop(object handler, DragEventArgs e)
-        {
-            e.GetDraggable().Drop(false);
-        }
+
+
     }
 }
 

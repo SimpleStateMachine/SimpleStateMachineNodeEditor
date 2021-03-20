@@ -8,6 +8,7 @@ namespace SimpleStateMachineNodeEditorAvalonia.ViewModels
         [Reactive] public bool IsSelect { get; set; }
         public RightConnectorViewModel(NodeViewModel node, string name = "", bool isEnable = true):base(node, name, isEnable)
         {
+
         }
     }
 }

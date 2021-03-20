@@ -13,6 +13,8 @@
 		<SolidColorBrush x:Key="ColorLeftConnectorBackground" Color="#E52D2D2D"/>
 		<SolidColorBrush x:Key="ColorLeftConnectorEllipseFill" Color="White"/>
 		<SolidColorBrush x:Key="ColorLeftConnectorEllipseStroke" Color="#1e1e1e"/>
+		<SolidColorBrush x:Key="ColorLeftConnectorEllipseFillPointerOver" Color="Orange"/>
+		<SolidColorBrush x:Key="ColorLeftConnectorEllipseStrokePointerOver" Color="Orange"/>
 		
 		<!--RightConnector-->
 		<SolidColorBrush x:Key="ColorRightConnectorTextBoxForeground" Color="White"/>

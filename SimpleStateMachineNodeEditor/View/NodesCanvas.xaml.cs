@@ -184,6 +184,7 @@ namespace SimpleStateMachineNodeEditor.View
         }
         private void OnEventMouseWheel(MouseWheelEventArgs e)
         {
+         
             Point point = e.GetPosition(CanvasElement);
             //Matrix value = this.CanvasElement.RenderTransform.Value;
             //double step = 1.2;
@@ -203,9 +204,7 @@ namespace SimpleStateMachineNodeEditor.View
         {
             if (!(Mouse.Captured is CanBeMove))
                 return;
-
-
-
+            
             Point delta = GetDeltaMove();
 
             if (delta.IsClear())

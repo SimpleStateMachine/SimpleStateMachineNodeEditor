@@ -1,6 +1,8 @@
-﻿using Avalonia.Input;
-using Avalonia.Interactivity;
+﻿using System.Reactive.Disposables;
+using Avalonia.Input;
 using SimpleStateMachineNodeEditorAvalonia.Helpers;
+using System;
+using Avalonia;
 
 namespace SimpleStateMachineNodeEditorAvalonia.Views
 {
@@ -10,35 +12,25 @@ namespace SimpleStateMachineNodeEditorAvalonia.Views
         {
             this.WhenViewModelAnyValue(disposable =>
             {
-                // NodesCanvas.Current.PointerMoved += OnEventPointerMoved;
-                // NodesCanvas.Current.PointerReleased += OnDragOver;
+                
+                var t = Application.Current;
+                // Avalonia.Application.Current.InputManager
+                // NodesCanvas.Current.Events().PointerMoved.Subscribe(OnEventPointerMoved).DisposeWith(disposable);
             });
         }
-        void OnEventPointerMoved(object subject, PointerEventArgs e)
+        
+        void OnEventPointerMoved(PointerEventArgs e)
         {
-            var point = e.GetPosition(NodesCanvas.Current);
-            ViewModel.EndPoint = point;
+            // var point = e.GetPosition(NodesCanvas.Current);
+            // ViewModel.EndPoint = point;
         }
         
-        public void OnDragEnter(DragEventArgs e)
-        {
 
-        }
+        // public void OnDragOver(object sender, PointerEventArgs e)
+        // {
+        //     NodesCanvas.Current.PointerMoved -= OnEventPointerMoved;
+        //     NodesCanvas.Current.PointerPressed -= OnDragOver;
+        // }
 
-        public void OnDragLeave(RoutedEventArgs e)
-        {
-
-        }
-
-        public void OnDragOver(object sender, PointerEventArgs e)
-        {
-            NodesCanvas.Current.PointerMoved -= OnEventPointerMoved;
-            NodesCanvas.Current.PointerPressed -= OnDragOver;
-        }
-
-        public void OnDrop(DragEventArgs e)
-        {
-
-        }
     }
 }

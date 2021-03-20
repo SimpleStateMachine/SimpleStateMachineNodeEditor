@@ -1,4 +1,5 @@
-﻿using ReactiveUI.Fody.Helpers;
+﻿using ReactiveUI;
+using ReactiveUI.Fody.Helpers;
 
 namespace SimpleStateMachineNodeEditorAvalonia.ViewModels
 {
@@ -8,7 +9,6 @@ namespace SimpleStateMachineNodeEditorAvalonia.ViewModels
 
         public MainWindowViewModel()
         {
-
         }
     }
 }

@@ -5,33 +5,15 @@ using SimpleStateMachineNodeEditorAvalonia.Helpers;
 
 namespace SimpleStateMachineNodeEditorAvalonia.ViewModels
 {
-    public partial class ConnectViewModel : BaseViewModel, IDraggable
+    public partial class ConnectViewModel : BaseViewModel
     {
-        [Reactive] public Point StartPoint { get; set; }
-        [Reactive] public Point EndPoint { get; set; }
         [Reactive] public RightConnectorViewModel FromConnector { get; set; }
         [Reactive] public LeftConnectorViewModel ToConnector { get; set; }
 
-        public ConnectViewModel(RightConnectorViewModel connectorFrom, Point point = default)
+        public ConnectViewModel(RightConnectorViewModel connectorFrom, LeftConnectorViewModel connectorTo)
         {
             FromConnector = connectorFrom;
-            StartPoint = point;
-            EndPoint = point;
-        }
-
-        public void EndInit(LeftConnectorViewModel ConnectorTo)
-        {
-            ConnectorTo.WhenAnyValue(ct => ct.Position).BindTo(this, vm => vm.EndPoint);
-        }
-        
-        public void DragOver(Point currentPosition)
-        {
-            EndPoint = currentPosition;
-        }
-
-        public void Drop(bool success)
-        {
-          
+            ToConnector = connectorTo;
         }
     }
 }

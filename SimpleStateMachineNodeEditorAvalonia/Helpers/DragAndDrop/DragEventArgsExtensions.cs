@@ -2,7 +2,7 @@
 
 namespace SimpleStateMachineNodeEditorAvalonia.Helpers
 {
-    public static class DragEventArgsExtenstions
+    public static class DragEventArgsExtensions
     {
         public static IDraggable GetDraggable(this DragEventArgs dragEventArgs)
         {

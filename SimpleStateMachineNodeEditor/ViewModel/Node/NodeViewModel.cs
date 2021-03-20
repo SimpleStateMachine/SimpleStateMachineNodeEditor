@@ -63,7 +63,7 @@ namespace SimpleStateMachineNodeEditor.ViewModel
             this.WhenAnyValue(x => x.Selected).Subscribe(value => { BorderBrush = value ? Application.Current.Resources["ColorSelectedElement"] as SolidColorBrush : Brushes.LightGray; });
             this.WhenAnyValue(x => x.TransitionsForView.Count).Buffer(2, 1).Select(x => (Previous: x[0], Current: x[1])).Subscribe(x => UpdateCount(x.Previous, x.Current));
             this.WhenAnyValue(x => x.Point1, x => x.Size).Subscribe(_ => UpdatePoint2());
-            this.WhenAnyValue(x => x.IsCollapse).Subscribe(value => Collapse(value));
+            this.WhenAnyValue(x => x.IsCollapse).Subscribe(Collapse);
 
             //this.WhenAnyValue(x => x.Transitions.Count).Subscribe(value => UpdateCount(value));
         }

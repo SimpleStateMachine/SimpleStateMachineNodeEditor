@@ -14,7 +14,7 @@ namespace SimpleStateMachineNodeEditorAvalonia.ViewModels
         public IObservableList<RightConnectorViewModel> SelectedConnectors;
 
 
-        public ObservableCollectionExtended<RightConnectorViewModel> ConnectorsForView = new ObservableCollectionExtended<RightConnectorViewModel>();
+        public readonly ObservableCollectionExtended<RightConnectorViewModel> ConnectorsForView = new ObservableCollectionExtended<RightConnectorViewModel>();
 
         public ConnectorsNodeViewModel(NodeViewModel node)
         {
@@ -25,7 +25,8 @@ namespace SimpleStateMachineNodeEditorAvalonia.ViewModels
             
             Connectors.Add(new RightConnectorViewModel(node, "", false) {Position= node.Point1 + new Point(75.5, 52) });
             
-            Connectors.Add(new RightConnectorViewModel(node, "Transition") { Position= node.Point1 + new Point(75.5, 52) });
+            Connectors.Add(new RightConnectorViewModel(node, "Transition1") { Position= node.Point1 + new Point(75.5, 52) });
+            Connectors.Add(new RightConnectorViewModel(node, "Transition2") { Position= node.Point1 + new Point(75.5, 52) });
         }
         
         

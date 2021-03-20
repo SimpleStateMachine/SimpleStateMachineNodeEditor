@@ -8,6 +8,7 @@ namespace SimpleStateMachineNodeEditorAvalonia.ViewModels
         [Reactive] public ConnectsNodesCanvasViewModel Connects { get; set; } = new();
         [Reactive] public SelectorViewModel Selector { get; set; } = new();
         [Reactive] public CutterViewModel Cutter { get; set; } = new();
+        [Reactive] public DraggableConnectorViewModel DraggableConnector { get; set; }
 
         public NodesCanvasViewModel()
         {

@@ -8,11 +8,13 @@
 			 xmlns:Views="clr-namespace:SimpleStateMachineNodeEditorAvalonia.Views"
 			 xmlns:NodeElements="clr-namespace:SimpleStateMachineNodeEditorAvalonia.Views.NodeElements" ClipToBounds="False">
 	<Border x:Name="BorderNode" CornerRadius="5" BorderThickness="1"  Background="{DynamicResource ColorNodeBackground}"  MinWidth="60"  Focusable="True">
-		<Grid RowDefinitions="auto, auto, 5,auto, *"   ClipToBounds="False" Margin="0,0,0,5" >
-			<NodeElements:Header x:Name="HeaderNode" Grid.Row="0" />
-			<Views:LeftConnector x:Name="InputNode" Grid.Row="1" />
-			<Views:RightConnector x:Name="OutputNode" Margin="0,0,0,5" Grid.Row="3"/>
-			<NodeElements:Connectors x:Name="ConnectorsNode" Grid.Row="4"/>
+		<Grid RowDefinitions="auto, 16, 5,auto, *" ClipToBounds="False" Margin="0,0,0,5" >
+			<NodeElements:Header x:Name="Header" Grid.Row="0" />
+			<Border Background="Transparent" x:Name="InputConnectorMagnetBorder" Grid.Row="1"  Height="30" Width="30" HorizontalAlignment="Left" CornerRadius="15" Margin="-17">
+			</Border>
+			<Views:LeftConnector x:Name="InputConnector" Grid.Row="1" />
+			<Views:RightConnector x:Name="OutputConnector" Grid.Row="3"/>
+			<NodeElements:Connectors x:Name="Connectors" Grid.Row="4"/>
 		</Grid>
 	</Border>
 	<UserControl.RenderTransform>

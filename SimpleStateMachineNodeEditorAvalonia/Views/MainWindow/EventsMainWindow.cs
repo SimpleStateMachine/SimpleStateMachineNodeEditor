@@ -2,11 +2,11 @@
 {
     public partial class MainWindow
     {
-        //protected override void SetupEvents()
-        //{
-        //    this.WhenViewModelAnyValue(disposable =>
-        //    {
-        //    });
-        //}
+        // protected override void SetupEvents()
+        // {
+        //     this.WhenViewModelAnyValue(disposable =>
+        //     {
+        //     });
+        // }
     }
 }

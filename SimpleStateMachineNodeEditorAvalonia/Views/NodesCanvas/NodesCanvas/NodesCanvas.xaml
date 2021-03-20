@@ -5,14 +5,18 @@
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
 			 xmlns:Views="clr-namespace:SimpleStateMachineNodeEditorAvalonia.Views"
 			 xmlns:NodesCanvasElements="clr-namespace:SimpleStateMachineNodeEditorAvalonia.Views.NodesCanvasElements"
-             x:Class="SimpleStateMachineNodeEditorAvalonia.Views.NodesCanvas" DragDrop.AllowDrop="True">
+             x:Class="SimpleStateMachineNodeEditorAvalonia.Views.NodesCanvas" 
+             DragDrop.AllowDrop="True">
 
-	<Grid  x:Name="GridNodesCanvas" Background="{DynamicResource ColorNodesCanvasBackground}" Focusable="True">
+	<Grid x:Name="GridNodesCanvas" Background="{DynamicResource ColorNodesCanvasBackground}" Focusable="True">
 		<NodesCanvasElements:Nodes x:Name="NodesNodesCanvas" />
 		<NodesCanvasElements:Connects x:Name="ConnectsNodesCanvas" />
 		<Views:Selector x:Name="SelectorNodesCanvas" />
 		<Views:Cutter x:Name="CutterNodesCanvas" />
+		<Views:DraggableConnector x:Name="DraggableConnector" />
 	</Grid>
+	
+	
 	<!--<UserControl.ContextMenu>
 			<MenuItem Header="Add node" />
 			<MenuItem Header="Delete"/>

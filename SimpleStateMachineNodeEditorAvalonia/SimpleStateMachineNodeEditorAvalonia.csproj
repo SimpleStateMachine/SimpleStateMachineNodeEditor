@@ -13,6 +13,9 @@
       <SubType>Designer</SubType>
     </AvaloniaResource>
     <AvaloniaResource Include="Assets\**" />
+    <Compile Update="Views\DragPanel\DraggableConnector.xaml.cs">
+      <DependentUpon>DraggableConnector.xaml</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Avalonia" Version="0.10.0" />
@@ -26,8 +29,9 @@
     <PackageReference Include="Avalonia.Xaml.Interactivity" Version="0.10.0" />
     <PackageReference Include="Dock.Model" Version="0.10.0" />
     <PackageReference Include="HistoricalReactiveCommand" Version="0.5.0" />
+    <PackageReference Include="Live.Avalonia" Version="1.2.1" />
     <PackageReference Include="ReactiveUI.Fody" Version="13.1.1" />
-    <PackageReference Include="XamlNameReferenceGenerator" Version="1.0.1" />
+    <PackageReference Include="XamlNameReferenceGenerator" Version="1.1.2" />
   </ItemGroup>
   <ItemGroup>
     <!-- Note this AdditionalFiles directive. -->

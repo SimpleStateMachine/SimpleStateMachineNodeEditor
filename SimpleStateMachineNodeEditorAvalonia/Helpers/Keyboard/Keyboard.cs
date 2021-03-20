@@ -28,8 +28,6 @@ namespace SimpleStateMachineNodeEditorAvalonia.Helpers
             }
             return false;
         }
-         
-        public static  Dictionary<Key, string> Keyss = new Dictionary<Key, string>();
 
         public static void OnKeyDown(KeyEventArgs e)
         {

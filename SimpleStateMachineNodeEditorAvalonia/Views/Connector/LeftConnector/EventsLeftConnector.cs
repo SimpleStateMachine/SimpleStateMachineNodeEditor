@@ -1,4 +1,6 @@
-﻿using Avalonia.Input;
+﻿using System;
+using System.Reactive.Disposables;
+using Avalonia.Input;
 using SimpleStateMachineNodeEditorAvalonia.Helpers;
 
 namespace SimpleStateMachineNodeEditorAvalonia.Views
@@ -9,11 +11,14 @@ namespace SimpleStateMachineNodeEditorAvalonia.Views
         {
             this.WhenViewModelAnyValue(disposable =>
             {
-
+                this.Events().PointerMoved.Subscribe(OnRightConnectorPointerPressed).DisposeWith(disposable);
+                this.EllipseConnector.AddHandler(DragDrop.DropEvent, HelperDragDrop.DropDraggableDelegate);
             });
         }
-
-        public void OnConnectDrop(object sender, DragEventArgs e)
+        private void OnRightConnectorPointerPressed(PointerEventArgs e)
+        {
+        }
+        public void OnConnectDrop(object sender, PointerEventArgs e)
         {
 
         }
