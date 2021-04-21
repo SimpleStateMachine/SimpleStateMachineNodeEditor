@@ -13,7 +13,7 @@
 		<NodesCanvasElements:Connects x:Name="ConnectsNodesCanvas" />
 		<Views:Selector x:Name="SelectorNodesCanvas" />
 		<Views:Cutter x:Name="CutterNodesCanvas" />
-		<Views:DraggableConnector x:Name="DraggableConnector" />
+		<Views:DraggableConnect x:Name="DraggableConnect" />
 	</Grid>
 	
 	

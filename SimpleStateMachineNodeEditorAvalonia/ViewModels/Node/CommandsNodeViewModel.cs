@@ -23,7 +23,6 @@ namespace SimpleStateMachineNodeEditorAvalonia.ViewModels
                 NodesCanvas.Nodes.SetIsSelectAllNodesCommand.ExecuteWithSubscribe((false, null));
                 IsSelect = true;
             }
-
         }
     }
 }

@@ -11,7 +11,7 @@ namespace SimpleStateMachineNodeEditorAvalonia.Helpers
         
         public static void DropDraggableDelegate(object handler, DragEventArgs e)
         {
-            e.GetDraggable()?.DragOver(handler, e);
+            e.GetDraggable()?.Drop(handler, e);
         }
     }
 }

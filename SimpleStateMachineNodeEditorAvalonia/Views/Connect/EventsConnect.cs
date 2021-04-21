@@ -12,25 +12,8 @@ namespace SimpleStateMachineNodeEditorAvalonia.Views
         {
             this.WhenViewModelAnyValue(disposable =>
             {
-                
-                var t = Application.Current;
-                // Avalonia.Application.Current.InputManager
-                // NodesCanvas.Current.Events().PointerMoved.Subscribe(OnEventPointerMoved).DisposeWith(disposable);
+
             });
         }
-        
-        void OnEventPointerMoved(PointerEventArgs e)
-        {
-            // var point = e.GetPosition(NodesCanvas.Current);
-            // ViewModel.EndPoint = point;
-        }
-        
-
-        // public void OnDragOver(object sender, PointerEventArgs e)
-        // {
-        //     NodesCanvas.Current.PointerMoved -= OnEventPointerMoved;
-        //     NodesCanvas.Current.PointerPressed -= OnDragOver;
-        // }
-
     }
 }

@@ -11,7 +11,7 @@ namespace SimpleStateMachineNodeEditorAvalonia.Views
             base.SetupBinding();
             this.WhenViewModelAnyValue(disposable =>
             {
-               
+
             });
            
         }

@@ -19,12 +19,31 @@ namespace SimpleStateMachineNodeEditorAvalonia.Views
         {
             this.WhenViewModelAnyValue(disposable =>
             {
-                this.Events().PointerPressed.Subscribe(OnRightConnectorPointerPressed).DisposeWith(disposable);
+                this.Events().DoubleTapped.Subscribe(OnTextBoxHeaderDoubleTappedEvent).DisposeWith(disposable);
+                this.TextBoxConnector.Events().LostFocus.Subscribe(OnLostFocusEvent).DisposeWith(disposable);
+                // this.Events().PointerPressed.Subscribe(OnRightConnectorPointerPressed).DisposeWith(disposable);
                 EllipseConnector.Events().PointerPressed.Subscribe(OnEllipsePointerPressed).DisposeWith(disposable);
-                TextBoxConnector.AddHandler(PointerPressedEvent, OnTextBoxPointerPressed, RoutingStrategies.Bubble,true);
+                // TextBoxConnector.AddHandler(PointerPressedEvent, OnTextBoxPointerPressed, RoutingStrategies.Bubble,true);
             });
            
         }
+        protected virtual void OnTextBoxHeaderDoubleTappedEvent(RoutedEventArgs e)
+        {
+            if(!TextBoxConnector.IsEnabled)
+                return;
+            TextBoxConnector.IsHitTestVisible = true;
+            TextBoxConnector.Focus();
+            TextBoxConnector.CaretIndex = TextBoxConnector.Text.Length;
+            TextBoxConnector.ClearSelection();
+        }
+        
+        protected virtual void OnLostFocusEvent(RoutedEventArgs e)
+        {
+            TextBoxConnector.IsHitTestVisible = false;
+        }
+        
+        
+        
         protected virtual void OnRightConnectorPointerPressed(PointerPressedEventArgs e)
         {
             if (e.Source is not TextBox)

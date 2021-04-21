@@ -7,7 +7,7 @@ using SimpleStateMachineNodeEditorAvalonia.ViewModels;
 
 namespace SimpleStateMachineNodeEditorAvalonia.Views
 {
-    public partial class DraggableConnector
+    public partial class DraggableConnect
     {
         protected override void SetupSubscriptions()
         {

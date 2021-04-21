@@ -5,7 +5,7 @@
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
 			 xmlns:Views="clr-namespace:SimpleStateMachineNodeEditorAvalonia.Views"
 			 xmlns:ViewModels="clr-namespace:SimpleStateMachineNodeEditorAvalonia.ViewModels"
-             x:Class="SimpleStateMachineNodeEditorAvalonia.Views.DraggableConnector" ClipToBounds="False" >
+             x:Class="SimpleStateMachineNodeEditorAvalonia.Views.DraggableConnect" ClipToBounds="False" >
 	<Path x:Name="PathConnect" Stroke="{DynamicResource ColorConnectStroke}" 
 	      StrokeThickness="2" 
 	      StrokeJoin="Round" 

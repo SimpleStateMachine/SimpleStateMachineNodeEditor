@@ -4,7 +4,7 @@ using System.Reactive.Disposables;
 
 namespace SimpleStateMachineNodeEditorAvalonia.Views
 {
-    public partial class DraggableConnector
+    public partial class DraggableConnect
     {
         protected override void SetupBinding()
         {

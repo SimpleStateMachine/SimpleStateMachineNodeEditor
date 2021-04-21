@@ -15,7 +15,6 @@ namespace SimpleStateMachineNodeEditorAvalonia.Views
             PathGeometryConnect = PathConnect.Data as PathGeometry;
             PathFigureConnect = PathGeometryConnect.Figures.First();
             BezierSegmentConnect = PathFigureConnect.Segments.First() as BezierSegment;
-            
         }
     }
 }

@@ -9,7 +9,7 @@ namespace SimpleStateMachineNodeEditorAvalonia.Views
 {
     public partial class Node : BaseView<NodeViewModel>
     {
-        private readonly NodesCanvas _canvas;
+        private NodesCanvas _canvas;
         
         #region IsSelectProperty
 
@@ -28,8 +28,6 @@ namespace SimpleStateMachineNodeEditorAvalonia.Views
         {
             InitializeComponent();
             TranslateTransformNode = RenderTransform as TranslateTransform;
-            
-            _canvas = this.FindAncestorOfType<NodesCanvas>();
         }
 
     }

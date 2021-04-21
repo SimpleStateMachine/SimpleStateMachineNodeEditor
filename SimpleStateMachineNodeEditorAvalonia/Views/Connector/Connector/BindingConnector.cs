@@ -10,9 +10,17 @@ namespace SimpleStateMachineNodeEditorAvalonia.Views
         {
             this.WhenViewModelAnyValue(disposable =>
             {
-                this.OneWayBind(this.ViewModel, x => x.Name.Value, x => x.textBox.Text).DisposeWith(disposable);
-                this.OneWayBind(this.ViewModel, x => x.Name.IsEnabled, x => x.textBox.IsEnabled).DisposeWith(disposable);
+                this.OneWayBind(this.ViewModel, 
+                    x => x.Name.Value, 
+                    x => x.textBox.Text)
+                    .DisposeWith(disposable);
+                
+                this.OneWayBind(this.ViewModel, 
+                    x => x.Name.IsEnabled, 
+                    x => x.textBox.IsEnabled)
+                    .DisposeWith(disposable);
             });
+            
           
         }
     }

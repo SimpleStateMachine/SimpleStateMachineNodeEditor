@@ -14,7 +14,6 @@ namespace SimpleStateMachineNodeEditorAvalonia.Views
             SetupBinding();
             SetupEvents();
             SetupSubscriptions();
-          
         }
     }
 }

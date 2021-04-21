@@ -12,6 +12,16 @@ namespace SimpleStateMachineNodeEditorAvalonia.Views
             {
                 // this.OneWayBind(ViewModel, x => x.StartPoint, x=>x.PathFigureConnect.StartPoint).DisposeWith(disposable);
                 // this.OneWayBind(ViewModel, x => x.EndPoint, x => x.BezierSegmentConnect.Point3).DisposeWith(disposable);
+                
+                this.OneWayBind(ViewModel, 
+                        x => x.FromConnector.Position, 
+                        x=>x.PathFigureConnect.StartPoint)
+                    .DisposeWith(disposable);
+                
+                this.OneWayBind(ViewModel, 
+                        x => x.ToConnector.Position, 
+                        x => x.BezierSegmentConnect.Point3)
+                    .DisposeWith(disposable);
             });
         }
     }

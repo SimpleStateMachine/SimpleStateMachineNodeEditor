@@ -4,7 +4,7 @@
 
 		
 		
-		<SolidColorBrush x:Key="EmptyColor" Color="#00000000" />
+		<SolidColorBrush x:Key="EmptyColor" Color="Transparent" />
 		<!--Connect-->
 		<SolidColorBrush x:Key="ColorConnectStroke" Color="White" />
 

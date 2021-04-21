@@ -8,6 +8,7 @@ using System;
 using SimpleStateMachineNodeEditorAvalonia.Helpers;
 using System.Reactive.Disposables;
 using System.Reactive.Linq;
+using Avalonia.VisualTree;
 
 
 namespace SimpleStateMachineNodeEditorAvalonia.Views
@@ -19,6 +20,7 @@ namespace SimpleStateMachineNodeEditorAvalonia.Views
      
             this.WhenViewModelAnyValue(disposable =>
             {
+                _canvas = this.FindAncestorOfType<NodesCanvas>();
                 this.OneWayBind(ViewModel, 
                     x => x.Header, 
                     x => x.Header.ViewModel)

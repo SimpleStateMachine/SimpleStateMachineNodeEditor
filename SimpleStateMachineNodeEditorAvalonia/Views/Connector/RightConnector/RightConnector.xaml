@@ -5,19 +5,20 @@
              mc:Ignorable="d"
              x:Class="SimpleStateMachineNodeEditorAvalonia.Views.RightConnector"
 			 ClipToBounds="False" 
-			 HorizontalAlignment="Stretch"
-             Background="{DynamicResource EmptyColor}">
+             DragDrop.AllowDrop="True"
+             Background="{DynamicResource EmptyColor}" x:Name="Control">
 	<Grid x:Name="GridConnector" 
-	      ColumnDefinitions="*, Auto, Auto" 
+	      ColumnDefinitions="*, Auto" 
 	      ClipToBounds="False">
 		<TextBox x:Name="TextBoxConnector" 
-		         Grid.Column="1" 
+		         Grid.Column="0" 
+		         IsHitTestVisible="False"
 		         Classes="EmptyTextBox TextBoxRightConnector"
-		         HorizontalAlignment="Right" 
+		         TextAlignment="Right"
 		         VerticalAlignment="Center" 
 		         Margin="5,0"/>
 		<Ellipse x:Name="EllipseConnector" 
-				 Grid.Column="2" 
+				 Grid.Column="1" 
 				 Classes="EllipseConnector EllipseRightConnector" 
 				 HorizontalAlignment="Right" 
 				 VerticalAlignment="Center" 

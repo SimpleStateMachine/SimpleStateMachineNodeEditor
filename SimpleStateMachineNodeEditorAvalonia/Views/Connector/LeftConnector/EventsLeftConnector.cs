@@ -11,16 +11,8 @@ namespace SimpleStateMachineNodeEditorAvalonia.Views
         {
             this.WhenViewModelAnyValue(disposable =>
             {
-                this.Events().PointerMoved.Subscribe(OnRightConnectorPointerPressed).DisposeWith(disposable);
                 this.EllipseConnector.AddHandler(DragDrop.DropEvent, HelperDragDrop.DropDraggableDelegate);
             });
-        }
-        private void OnRightConnectorPointerPressed(PointerEventArgs e)
-        {
-        }
-        public void OnConnectDrop(object sender, PointerEventArgs e)
-        {
-
         }
     }
 }

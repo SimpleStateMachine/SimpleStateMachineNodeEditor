@@ -28,7 +28,7 @@ namespace SimpleStateMachineNodeEditorAvalonia.Views
                 
                 this.OneWayBind(ViewModel, 
                     x => x.DraggableConnector, 
-                    x => x.DraggableConnector.ViewModel).DisposeWith(disposable);
+                    x => x.DraggableConnect.ViewModel).DisposeWith(disposable);
             });
         }
 

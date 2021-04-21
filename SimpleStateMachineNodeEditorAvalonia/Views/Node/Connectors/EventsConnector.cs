@@ -1,5 +1,6 @@
 ﻿using SimpleStateMachineNodeEditorAvalonia.Helpers;
 using Avalonia.Controls;
+using Avalonia.Controls.Presenters;
 using Avalonia.Input;
 using Avalonia.Interactivity;
 
@@ -17,14 +18,10 @@ namespace SimpleStateMachineNodeEditorAvalonia.Views.NodeElements
         
         public void OnListBoxPointerPressed(object sender, PointerPressedEventArgs e)
         {
-            //for select connector on ListBox click
-            if (e.Source is RightConnector)
+            //If is not textbox - can be moved
+            if (e.Source is not TextPresenter)
             {
                 e.Handled = false;
-            }
-            else if (e.Source is TextBox)
-            {
-                e.Handled = true;
             }
         }
     }
