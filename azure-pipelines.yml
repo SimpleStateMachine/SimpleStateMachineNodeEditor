@@ -1,17 +1,3 @@
-jobs:
-- job: Linux
-  pool:
-    vmImage: 'ubuntu-18.04'
-  variables:
-    buildConfiguration: 'Release'
-  steps:
-  - script: cd $(Build.SourcesDirectory) && dotnet build
-    displayName: 'Linux Build and Tests'
-  - task: PublishTestResults@2
-    inputs:
-      testRunner: VSTest
-      testResultsFiles: '**/*.trx'
-
 - job: Windows
   pool:
     vmImage: 'windows-2019'
